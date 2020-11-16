@@ -1,655 +1,655 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
      <loc>https://dubbo.apache.org/en-us/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/preface/background/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/preface/background/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/preface/architecture/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/preface/usage/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/quick-start/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/dependencies/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/maturity/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/configuration/xml/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/configuration/properties/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/configuration/api/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/configuration/annotation/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/preflight-check/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/fault-tolerent-strategy/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/loadbalance/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/thread-model/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/explicit-target/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/subscribe-only/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/registry-only/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/static-service/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/multi-protocols/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/multi-registry/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/service-group/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/multi-versions/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/group-merger/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/parameter-validation/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/result-cache/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/generic-reference/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/generic-service/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/echo-service/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/context/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/attachment/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/async-call/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/local-call/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/callback-parameter/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/events-notify/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/local-stub/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/local-mock/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/delay-publish/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/concurrency-control/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/config-connections/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/lazy-connect/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/stickiness/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/token-authorization/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/routing-rule/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/config-rule/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/service-downgrade/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/graceful-shutdown/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/hostname-binding/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/logger-strategy/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/accesslog/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/service-container/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/distributed-transaction/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/dump/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/netty4/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/demos/serialization/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/references/xml/introduction/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/references/xml/dubbo-service/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/references/xml/dubbo-reference/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/references/xml/dubbo-protocol/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/references/xml/dubbo-registry/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/references/xml/dubbo-monitor/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/references/xml/dubbo-application/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/references/xml/dubbo-module/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/references/xml/dubbo-provider/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/references/xml/dubbo-consumer/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/references/xml/dubbo-method/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/references/xml/dubbo-argument/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/references/xml/dubbo-parameter/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/references/xml/dubbo-config-center/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/references/protocol/dubbo/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/references/protocol/rmi/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/references/protocol/hessian/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/references/protocol/http/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/references/protocol/thrift/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/references/protocol/rest/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/references/registry/multicast/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/references/registry/zookeeper/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/references/registry/redis/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/references/registry/simple/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/references/telnet/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/references/maven/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/best-practice/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/recommend/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/capacity-plan/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/perf-test/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/user/coveragence/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/build/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/design/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/SPI/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/implementation/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/impls/protocol/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/impls/filter/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/impls/invoker-listener/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/impls/exporter-listener/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/impls/cluster/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/impls/router/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/impls/load-balance/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/impls/merger/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/impls/registry/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/impls/monitor/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/impls/extension-factory/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/impls/proxy-factory/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/impls/compiler/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/impls/dispatcher/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/impls/threadpool/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/impls/serialize/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/impls/remoting/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/impls/exchanger/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/impls/networker/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/impls/telnet-handler/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/impls/status-checker/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/impls/container/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/impls/page/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/impls/cache/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/impls/validation/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/impls/logger-adapter/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/contract/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/coding/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/release/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/contribution/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/checklist/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/code-smell/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/dev/TCK/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/admin/introduction/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/admin/serviceSearch/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/admin/serviceGovernance/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/2.7/admin/serviceTest/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/docs/3.0/user/preface/background/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/blog/dubbo-101/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/blog/service-test/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/blog/dubboAsync_server/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/blog/dubboAsync_client/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/blog/dubbo-fescar/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/blog/prepare-an-apache-release/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/blog/dubbo-protocol/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/blog/first-dubbo-filter/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/blog/dubbo-zk/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/blog/dubbo-annotation/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/blog/introduction-to-dubbo-spi/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/blog/spring-boot-dubbo-start-stop-analysis/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/blog/introduction-to-dubbo-spi-2/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/blog/introduction-to-dubbo-qos/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/blog/dubbo-loadbalance/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/blog/sentinel-introduction-for-dubbo/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/blog/pinpoint/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/developers/guide_dev/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/developers/developers_dev/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/developers/user-guide/faq_dev/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/developers/contributor-guide/new-contributor-guide_dev/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/developers/contributor-guide/software-donation-guide_dev/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/developers/contributor-guide/test-coverage-guide_dev/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/developers/contributor-guide/mailing-list-subscription-guide_dev/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/developers/contributor-guide/cla-signing-guide_dev/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/developers/contributor-guide/dubbo-extension-guide_dev/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/developers/contributor-guide/become-a-committer_dev/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/developers/contributor-guide/reporting-security-issues_dev/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/developers/committer-guide/new-committer-guide_dev/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/developers/committer-guide/label-an-issue-guide_dev/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/developers/committer-guide/website-guide_dev/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/developers/committer-guide/apache-dubbo-page_dev/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/developers/committer-guide/release-guide_dev/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dubbo.apache.org/en-us/blog/download/</loc>
-     <lastmod>2020-11-15</lastmod>
+     <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
