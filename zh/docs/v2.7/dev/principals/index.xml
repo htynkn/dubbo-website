@@ -1,7 +1,4 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – 设计原则</title><link>https://dubbo.apache.org/zh/docs/v2.7/dev/principals/</link><description>Recent content in 设计原则 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/docs/v2.7/dev/principals/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: 魔鬼在细节</title><link>https://dubbo.apache.org/zh/docs/v2.7/dev/principals/code-detail/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v2.7/dev/principals/code-detail/</guid><description>
-&lt;blockquote>
-&lt;p>&lt;a href="http://javatar.iteye.com/blog/1056664">http://javatar.iteye.com/blog/1056664&lt;/a>&lt;/p>
-&lt;/blockquote>
 &lt;p>最近一直担心如果 Dubbo 分布式服务框架维护人员增多或变更，会出现质量的下降的问题， 我在想，有没有什么规则是需要大家共同遵守的。根据平时写代码时的一习惯，总结了以下在写代码过程中，尤其是框架代码，要时刻牢记的细节。可能下面要讲的这些，大家都会觉得很简单，很基础，但要做到时刻牢记。在每一行代码中都考虑这些因素，是需要很大耐心的， 大家经常说，魔鬼在细节中，确实如此。&lt;/p>
 &lt;h2 id="防止空指针和下标越界">防止空指针和下标越界&lt;/h2>
 &lt;p>这是我最不喜欢看到的异常，尤其在核心框架中，我更愿看到信息详细的参数不合法异常。这也是一个编写健壮程序的开发人员，在写每一行代码都应在潜意识中防止的异常。基本上要能确保每一次写完的代码，在不测试的情况下，都不会出现这两个异常才算合格。&lt;/p>
@@ -19,9 +16,6 @@
 &lt;p>前面不停的提到代码被其他人修改，这也开发人员要随时紧记的。这个其他人包括未来的自己，你要总想着这个代码可能会有人去改它。我应该给修改的人一点什么提示，让他知道我现在的设计意图，而不要在程序里面加潜规则，或埋一些容易忽视的雷，比如：你用 null 表示不可用，size 等于 0 表示黑名单，这就是一个雷，下一个修改者，包括你自己，都不会记得有这样的约定，可能后面为了改某个其它 BUG，不小心改到了这里，直接引爆故障。对于这个例子，一个原则就是永远不要区分 null 引用和 empty 值。&lt;/p>
 &lt;h2 id="提高代码的可测性">提高代码的可测性&lt;/h2>
 &lt;p>这里的可测性主要指 Mock 的容易程度，和测试的隔离性。至于测试的自动性，可重复性，非偶然性，无序性，完备性(全覆盖)，轻量性(可快速执行)，一般开发人员，加上 JUnit 等工具的辅助基本都能做到，也能理解它的好处，只是工作量问题。这里要特别强调的是测试用例的单一性(只测目标类本身)和隔离性(不传染失败)。现在的测试代码，过于强调完备性，大量重复交叉测试，看起来没啥坏处，但测试代码越多，维护代价越高。经常出现的问题是，修改一行代码或加一个判断条件，引起 100 多个测试用例不通过。时间一紧，谁有这个闲功夫去改这么多形态各异的测试用例？久而久之，这个测试代码就已经不能真实反应代码现在的状况，很多时候会被迫绕过。最好的情况是，修改一行代码，有且只有一行测试代码不通过。如果修改了代码而测试用例还能通过，那也不行，表示测试没有覆盖到。另外，可 Mock 性是隔离的基础，把间接依赖的逻辑屏蔽掉。可 Mock 性的一个最大的杀手就是静态方法，尽量少用。&lt;/p></description></item><item><title>Docs: 配置设计</title><link>https://dubbo.apache.org/zh/docs/v2.7/dev/principals/configuration/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v2.7/dev/principals/configuration/</guid><description>
-&lt;blockquote>
-&lt;p>&lt;a href="http://javatar.iteye.com/blog/949527">http://javatar.iteye.com/blog/949527&lt;/a>&lt;/p>
-&lt;/blockquote>
 &lt;p>Dubbo 现在的设计是完全无侵入，也就是使用者只依赖于配置契约。经过多个版本的发展，为了满足各种需求场景，配置越来越多。为了保持兼容，配置只增不减，里面潜伏着各种风格，约定，规则。新版本也将配置做了一次调整，将想到的一些记在这，备忘。&lt;/p>
 &lt;h2 id="配置分类">配置分类&lt;/h2>
 &lt;p>首先，配置的用途是有多种的，大致可以分为：&lt;/p>
@@ -79,9 +73,6 @@ dubbo.registry.address=N/A
 &lt;h2 id="配置向后兼容">配置向后兼容&lt;/h2>
 &lt;p>向前兼容很好办，你只要保证配置只增不减，就基本上能保证向前兼容。但向后兼容，也是要注意的，要为后续加入新的配置项做好准备。如果配置出现一个特殊配置，就应该为这个“特殊”情况约定一个兼容规则，因为这个特殊情况，很有可能在以后还会发生。比如：有一个配置文件是保存“服务=地址”映射关系的，其中有一行特殊，保存的是“注册中心=地址”。现在程序加载时，约定“注册中心”这个Key是特殊的，做特别处理，其它的都是“服务”。然而，新版本发现，要加一项“监控中心=地址”，这时，旧版本的程序会把“监控中心”做为“服务”处理，因为旧代码是不能改的，兼容性就很会很麻烦。如果先前约定“特殊标识+XXX”为特殊处理，后续就会方便很多。&lt;/p>
 &lt;p>向后兼容性，可以多向HTML5学习，参见：&lt;a href="http://javatar.iteye.com/blog/949390">HTML5设计原理&lt;/a>&lt;/p></description></item><item><title>Docs: 防痴呆设计</title><link>https://dubbo.apache.org/zh/docs/v2.7/dev/principals/dummy/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v2.7/dev/principals/dummy/</guid><description>
-&lt;blockquote>
-&lt;p>&lt;a href="http://javatar.iteye.com/blog/804187">http://javatar.iteye.com/blog/804187&lt;/a>&lt;/p>
-&lt;/blockquote>
 &lt;p>最近有点痴呆，因为解决了太多的痴呆问题。服务框架实施面越来越广，已有 50 多个项目在使用，每天都要去帮应用查问题，来来回回，发现大部分都是配置错误，或者重复的文件或类，或者网络不通等，所以准备在新版本中加入防痴呆设计。估且这么叫吧，可能很简单，但对排错速度还是有点帮助，希望能抛砖引玉，也希望大家多给力，想出更多的防范措施共享出来。&lt;/p>
 &lt;h2 id="检查重复的jar包">检查重复的jar包&lt;/h2>
 &lt;p>最痴呆的问题，就是有多个版本的相同jar包，会出现新版本的 A 类，调用了旧版本的 B 类，而且和JVM加载顺序有关，问题带有偶然性，误导性，遇到这种莫名其妙的问题，最头疼，所以，第一条，先把它防住，在每个 jar 包中挑一个一定会加载的类，加上重复类检查，给个示例：&lt;/p>
@@ -236,9 +227,6 @@ mkdir &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>
 &lt;span style="color:#719e07">fi&lt;/span>
 &lt;span style="color:#b58900">echo&lt;/span> &lt;span style="color:#2aa198">&amp;#34;OK!&amp;#34;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: 谈谈扩充式扩展与增量式扩展</title><link>https://dubbo.apache.org/zh/docs/v2.7/dev/principals/expansibility/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v2.7/dev/principals/expansibility/</guid><description>
-&lt;blockquote>
-&lt;p>&lt;a href="http://javatar.iteye.com/blog/690845">http://javatar.iteye.com/blog/690845&lt;/a>&lt;/p>
-&lt;/blockquote>
 &lt;p>我们平台的产品越来越多，产品的功能也越来越多。平台的产品为了适应各 BU 和部门以及产品线的需求，势必会将很多不相干的功能凑在一起，客户可以选择性的使用。为了兼容更多的需求，每个产品，每个框架，都在不停的扩展，而我们经常会选择一些扩展的扩展方式，也就是将新旧功能扩展成一个通用实现。我想讨论是，有些情况下也可以考虑增量式的扩展方式，也就是保留原功能的简单性，新功能独立实现。我最近一直做分布式服务框架的开发，就拿我们项目中的问题开涮吧。&lt;/p>
 &lt;p>比如：远程调用框架，肯定少不了序列化功能，功能很简单，就是把流转成对象，对象转成流。但因有些地方可能会使用 osgi，这样序列化时，IO 所在的 ClassLoader 可能和业务方的 ClassLoader 是隔离的。需要将流转换成 byte[] 数组，然后传给业务方的 ClassLoader 进行序列化。为了适应 osgi 需求，把原来非 osgi 与 osgi 的场景扩展了一下，这样，不管是不是 osgi 环境，都先将流转成 byte[] 数组，拷贝一次。然而，大部分场景都用不上 osgi，却为 osgi 付出了代价。而如果采用增量式扩展方式，非 osgi 的代码原封不动，再加一个 osgi 的实现，要用 osgi 的时候，直接依赖 osgi 实现即可。&lt;/p>
 &lt;p>再比如：最开始，远程服务都是基于接口方法，进行透明化调用的。这样，扩展接口就是， invoke(Method method, Object[] args)，后来，有了无接口调用的需求，就是没有接口方法也能调用，并将 POJO 对象都转换成 Map 表示。因为 Method 对象是不能直接 new 出来的，我们不自觉选了一个扩展式扩展，把扩展接口改成了 invoke(String methodName, String[] parameterTypes, String returnTypes, Object[] args)，导致不管是不是无接口调用，都得把 parameterTypes 从 Class[] 转成 String[]。如果选用增量式扩展，应该是保持原有接口不变，增加一个 GeneralService 接口，里面有一个通用的 invoke() 方法，和其它正常业务上的接口一样的调用方式，扩展接口也不用变，只是 GeneralServiceImpl 的 invoke() 实现会将收到的调用转给目标接口，这样就能将新功能增量到旧功能上，并保持原来结构的简单性。&lt;/p>
@@ -246,9 +234,6 @@ mkdir &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/dev/open-expand.jpg" alt="open-expand">&lt;/p>
 &lt;p>如果采用增量式扩展，无状态消息发送原封不动，同步消息发送，在无状态消息基础上加一个 Request/Response 处理，会话消息发送，再加一个 SessionRequest/SessionResponse 处理。&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/dev/close-expand.jpg" alt="close-expand">&lt;/p></description></item><item><title>Docs: 扩展点重构</title><link>https://dubbo.apache.org/zh/docs/v2.7/dev/principals/extension/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v2.7/dev/principals/extension/</guid><description>
-&lt;blockquote>
-&lt;p>&lt;a href="http://javatar.iteye.com/blog/1041832">http://javatar.iteye.com/blog/1041832&lt;/a>&lt;/p>
-&lt;/blockquote>
 &lt;p>随着服务化的推广，网站对Dubbo服务框架的需求逐渐增多，Dubbo 的现有开发人员能实现的需求有限，很多需求都被 delay，而网站的同学也希望参与进来，加上领域的推动，所以平台计划将部分项目对公司内部开放，让大家一起来实现，Dubbo 为试点项目之一。&lt;/p>
 &lt;p>既然要开放，那 Dubbo 就要留一些扩展点，让参与者尽量黑盒扩展，而不是白盒的修改代码，否则分支，质量，合并，冲突都会很难管理。&lt;/p>
 &lt;p>先看一下 Dubbo 现有的设计：&lt;/p>
@@ -316,9 +301,6 @@ createExporter&lt;span style="color:#719e07">(&lt;/span>URL url&lt;span style="c
 &lt;h2 id="第六步整理梳理关系">第六步，整理，梳理关系&lt;/h2>
 &lt;p>整理后，设计如下：&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/dev/design-step4.png" alt="design-step-4">&lt;/p></description></item><item><title>Docs: 一些设计上的基本常识</title><link>https://dubbo.apache.org/zh/docs/v2.7/dev/principals/general-knowledge/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v2.7/dev/principals/general-knowledge/</guid><description>
-&lt;blockquote>
-&lt;p>&lt;a href="http://javatar.iteye.com/blog/706098">http://javatar.iteye.com/blog/706098&lt;/a>&lt;/p>
-&lt;/blockquote>
 &lt;p>最近给团队新人讲了一些设计上的常识，可能会对其它的新人也有些帮助，把暂时想到的几条，先记在这里。&lt;/p>
 &lt;h2 id="api-与-spi-分离">API 与 SPI 分离&lt;/h2>
 &lt;p>框架或组件通常有两类客户，一个是使用者，一个是扩展者。API (Application Programming Interface) 是给使用者用的，而 SPI (Service Provide Interface) 是给扩展者用的。在设计时，尽量把它们隔离开，而不要混在一起。也就是说，使用者是看不到扩展者写的实现的。&lt;/p>
@@ -351,9 +333,6 @@ createExporter&lt;span style="color:#719e07">(&lt;/span>URL url&lt;span style="c
 &lt;p>这个是契约式设计的一部分，尽量遵守有返回值的方法是查询方法，void 返回的方法是命令。查询方法通常是幂等性的，无副作用的，也就是不改变任何状态，调 n 次结果都是一样的，比如 get 某个属性值，或查询一条数据库记录。命令是指有副作用的，也就是会修改状态，比如 set 某个值，或 update 某条数据库记录。如果你的方法即做了修改状态的操作，又做了查询返回，如果可能，将其拆成写读分离的两个方法，比如：User deleteUser(id)，删除用户并返回被删除的用户，考虑改为 getUser() 和 void 的 deleteUser()。 另外，每个方法都尽量前置断言传入参数的合法性，后置断言返回结果的合法性，并文档化。&lt;/p>
 &lt;h2 id="增量式扩展而不要扩充原始核心概念">增量式扩展，而不要扩充原始核心概念&lt;/h2>
 &lt;p>参见：&lt;a href="../expansibility">谈谈扩充式扩展与增量式扩展&lt;/a>&lt;/p></description></item><item><title>Docs: 设计实现的健壮性</title><link>https://dubbo.apache.org/zh/docs/v2.7/dev/principals/robustness/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v2.7/dev/principals/robustness/</guid><description>
-&lt;blockquote>
-&lt;p>&lt;a href="http://oldratlee.com/380/tech/java/robustness-of-implement.html">http://oldratlee.com/380/tech/java/robustness-of-implement.html&lt;/a>&lt;/p>
-&lt;/blockquote>
 &lt;p>Dubbo 作为远程服务暴露、调用和治理的解决方案，是应用运转的经络，其本身实现健壮性的重要程度是不言而喻的。&lt;/p>
 &lt;p>这里列出一些 Dubbo 用到的原则和方法。&lt;/p>
 &lt;h2 id="日志">日志&lt;/h2>
