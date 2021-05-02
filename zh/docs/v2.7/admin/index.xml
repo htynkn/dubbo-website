@@ -9,7 +9,7 @@
 &lt;hr>
 &lt;ol>
 &lt;li id="fn:1" role="doc-endnote">
-&lt;p>注意：multicast 地址不能配成 127.0.0.1，也不能配成机器的 IP 地址，必须是 D 段广播地址，也就是：224.0.0.0 到 239.255.255.255 之间的任意地址 &lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>注意：multicast 地址不能配成 127.0.0.1，也不能配成机器的 IP 地址，必须是 D 段广播地址，也就是：224.0.0.0 到 239.255.255.255 之间的任意地址&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;/section></description></item></channel></rss>

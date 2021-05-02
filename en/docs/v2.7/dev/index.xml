@@ -251,10 +251,10 @@ Client &lt;span style="color:#268bd2">connect&lt;/span>&lt;span style="color:#71
 &lt;hr>
 &lt;ol>
 &lt;li id="fn:1" role="doc-endnote">
-&lt;p>Note: The config file here is in you own jar file, not in dubbo release jar file, Dubbo will scan all jar files with the same filename in classpath and then merge them together &lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>Note: The config file here is in you own jar file, not in dubbo release jar file, Dubbo will scan all jar files with the same filename in classpath and then merge them together&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:2" role="doc-endnote">
-&lt;p>Note: SPI will be loaded in singleton pattern(Please ensure thread safety), cached in &lt;code>ExtensionLoader&lt;/code> &lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>Note: SPI will be loaded in singleton pattern(Please ensure thread safety), cached in &lt;code>ExtensionLoader&lt;/code>&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;/section></description></item><item><title>Docs: Implementation details</title><link>https://dubbo.apache.org/en/docs/v2.7/dev/implementation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/dev/implementation/</guid><description>
@@ -339,19 +339,19 @@ String hello &lt;span style="color:#719e07">=&lt;/span> demoService&lt;span styl
 &lt;hr>
 &lt;ol>
 &lt;li id="fn:1" role="doc-endnote">
-&lt;p>is &lt;code>&amp;lt;dubbo:service regisrty=&amp;quot;N/A&amp;quot; /&amp;gt;&lt;/code> or &lt;code>&amp;lt;dubbo:registry address=&amp;quot;N/A&amp;quot; /&amp;gt;&lt;/code> &lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>is &lt;code>&amp;lt;dubbo:service regisrty=&amp;quot;N/A&amp;quot; /&amp;gt;&lt;/code> or &lt;code>&amp;lt;dubbo:registry address=&amp;quot;N/A&amp;quot; /&amp;gt;&lt;/code>&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:2" role="doc-endnote">
-&lt;p>is &lt;code>&amp;lt;dubbo:registry address=&amp;quot;zookeeper://10.20.153.10:2181&amp;quot; /&amp;gt;&lt;/code> &lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>is &lt;code>&amp;lt;dubbo:registry address=&amp;quot;zookeeper://10.20.153.10:2181&amp;quot; /&amp;gt;&lt;/code>&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:3" role="doc-endnote">
-&lt;p>is &lt;code>&amp;lt;dubbo:reference url=&amp;quot;dubbo://service-host/com.foo.FooService?version=1.0.0&amp;quot; /&amp;gt;&lt;/code> &lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>is &lt;code>&amp;lt;dubbo:reference url=&amp;quot;dubbo://service-host/com.foo.FooService?version=1.0.0&amp;quot; /&amp;gt;&lt;/code>&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:4" role="doc-endnote">
-&lt;p>is &lt;code>&amp;lt;dubbo:registry address=&amp;quot;zookeeper://10.20.153.10:2181&amp;quot; /&amp;gt;&lt;/code> &lt;a href="#fnref:4" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>is &lt;code>&amp;lt;dubbo:registry address=&amp;quot;zookeeper://10.20.153.10:2181&amp;quot; /&amp;gt;&lt;/code>&amp;#160;&lt;a href="#fnref:4" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:5" role="doc-endnote">
-&lt;p>is one of &lt;code>DubboInvoker&lt;/code>, &lt;code>HessianRpcInvoker&lt;/code>, &lt;code>InjvmInvoker&lt;/code>, &lt;code>RmiInvoker&lt;/code>, &lt;code>WebServiceInvoker&lt;/code> &lt;a href="#fnref:5" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>is one of &lt;code>DubboInvoker&lt;/code>, &lt;code>HessianRpcInvoker&lt;/code>, &lt;code>InjvmInvoker&lt;/code>, &lt;code>RmiInvoker&lt;/code>, &lt;code>WebServiceInvoker&lt;/code>&amp;#160;&lt;a href="#fnref:5" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;/section></description></item><item><title>Docs: Dubbo Design Principals</title><link>https://dubbo.apache.org/en/docs/v2.7/dev/principals/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/dev/principals/</guid><description>
@@ -577,13 +577,13 @@ Invoke the method using the spi and &lt;span style="color:#719e07">return&lt;/sp
 &lt;hr>
 &lt;ol>
 &lt;li id="fn:1" role="doc-endnote">
-&lt;p>Java convention &lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>Java convention&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:2" role="doc-endnote">
-&lt;p>Spring convention &lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>Spring convention&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:3" role="doc-endnote">
-&lt;p>Dubbo convention &lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>Dubbo convention&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;/section></description></item><item><title>Docs: Compatibility Test</title><link>https://dubbo.apache.org/en/docs/v2.7/dev/tck/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/dev/tck/</guid><description>

@@ -153,7 +153,7 @@ Such as: &lt;code>nacos://10.20.153.10:8848?preserved.heart.beat.timeout=15000&a
 &lt;hr>
 &lt;ol>
 &lt;li id="fn:1" role="doc-endnote">
-&lt;p>Suggest to use &lt;code>2.3.3&lt;/code> or above for zookeeper registry client &lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>Suggest to use &lt;code>2.3.3&lt;/code> or above for zookeeper registry client&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;/section></description></item><item><title>Docs: Multicast Registry</title><link>https://dubbo.apache.org/en/docs/v2.7/user/references/registry/multicast/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/references/registry/multicast/</guid><description>
@@ -231,13 +231,13 @@ Such as: &lt;code>nacos://10.20.153.10:8848?preserved.heart.beat.timeout=15000&a
 &lt;hr>
 &lt;ol>
 &lt;li id="fn:1" role="doc-endnote">
-&lt;p>Support since &lt;code>2.1.0&lt;/code> &lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>Support since &lt;code>2.1.0&lt;/code>&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:2" role="doc-endnote">
-&lt;p>&lt;a href="http://redis.io">Redis&lt;/a> is a high performance KV cache server &lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>&lt;a href="http://redis.io">Redis&lt;/a> is a high performance KV cache server&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:3" role="doc-endnote">
-&lt;p>Heartbeat mechanism is used to detect the dirty data in redis. It requires time among servers must be sync in advanced, otherwise expiration check may inaccurate, plus, heartbeats may add extra pressure on servers. &lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>Heartbeat mechanism is used to detect the dirty data in redis. It requires time among servers must be sync in advanced, otherwise expiration check may inaccurate, plus, heartbeats may add extra pressure on servers.&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;/section></description></item><item><title>Docs: Simple Registry Server</title><link>https://dubbo.apache.org/en/docs/v2.7/user/references/registry/simple/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/references/registry/simple/</guid><description>
