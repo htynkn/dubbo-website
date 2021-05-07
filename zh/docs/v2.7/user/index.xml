@@ -1279,7 +1279,7 @@ executes=&lt;span style="color:#2aa198">&amp;#34;200&amp;#34;&lt;/span> &lt;span
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/200kres.png" alt="200kres.png">&lt;/p>
 &lt;h2 id="测试分析">测试分析&lt;/h2>
 &lt;h3 id="性能分析评估">性能分析评估&lt;/h3>
-&lt;p>Dubbo 2.0 的性能测试结论为通过，从性能、内存占用和稳定性上都有了提高和改进。由其是内存管理由于将 mina 换成netty，大大减少了 1.0 版本在高并发大数据下的内存大锯齿。&lt;/p>
+&lt;p>Dubbo 2.0 的性能测试结论为通过，从性能、内存占用和稳定性上都有了提高和改进。由于将内存管理从 mina 换成netty，大大减少了 1.0 版本在高并发大数据下的内存大锯齿。&lt;/p>
 &lt;h3 id="性能对比分析新旧环境不同数据量级等">性能对比分析(新旧环境、不同数据量级等)&lt;/h3>
 &lt;p>Dubbo 2.0 相比较Dubbo 1.0（默认使用的都是 hessian2 序列化）性能均有提升（除了50k String），详见第五章的性能数据。&lt;/p>
 &lt;p>出于兼容性考虑默认的序列化方式和 1.0 保持一致使用 hessian2，如对性能有更高要求可以使用 dubbo 序列化，由其是在处理复杂对象时，在大数据量下能获得 50% 的提升（但此时已不建议使用 Dubbo 协议）。&lt;/p>
