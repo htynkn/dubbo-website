@@ -1036,7 +1036,7 @@ logger&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e
 &lt;td>可选&lt;/td>
 &lt;td>false&lt;/td>
 &lt;td>服务治理&lt;/td>
-&lt;td>设置true 该接口上的所有方法使用同一个provider.如果需要更复杂的规则，请使用用路由&lt;/td>
+&lt;td>设置true 该接口上的所有方法使用同一个provider.如果需要更复杂的规则，请使用路由&lt;/td>
 &lt;td>2.0.6以上版本&lt;/td>
 &lt;/tr>
 &lt;tr>
