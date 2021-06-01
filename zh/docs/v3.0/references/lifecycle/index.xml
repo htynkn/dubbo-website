@@ -1,0 +1,134 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – Kubernetes 生命周期对齐探针</title><link>https://dubbo.apache.org/zh/docs/v3.0/references/lifecycle/</link><description>Recent content in Kubernetes 生命周期对齐探针 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/docs/v3.0/references/lifecycle/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: 使用方法</title><link>https://dubbo.apache.org/zh/docs/v3.0/references/lifecycle/brief/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/references/lifecycle/brief/</guid><description>
+&lt;p>&lt;a href="https://kubernetes.io/zh/docs/concepts/workloads/pods/pod-lifecycle/">Pod 的生命周期&lt;/a> 与服务调度息息相关，通过对 Kubernetes 官方探针的实现，能够使 Dubbo 乃至整个应用的生命周期与 Pod 的生命周期对齐。&lt;/p>
+&lt;p>通过 Dubbo 的 SPI 机制，在内部实现多种“探针”，基于 Dubbo QOS 运维模块的 HTTP 服务，使容器探针能够获取到应用内对应探针的状态。另外，SPI 的实现机制也利于用户自行拓展内部“探针”，使整个应用的生命周期更有效的进行管控。&lt;/p>
+&lt;h2 id="使用方法">使用方法&lt;/h2>
+&lt;p>参考配置（具体可以参考 dubbo-samples 中 Kubernetes 注册中心的配置文件）&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#268bd2">livenessProbe&lt;/span>:
+&lt;span style="color:#268bd2">httpGet&lt;/span>:
+&lt;span style="color:#268bd2">path&lt;/span>: /live
+&lt;span style="color:#268bd2">port&lt;/span>: &lt;span style="color:#2aa198">22222&lt;/span>
+&lt;span style="color:#268bd2">initialDelaySeconds&lt;/span>: &lt;span style="color:#2aa198">5&lt;/span>
+&lt;span style="color:#268bd2">periodSeconds&lt;/span>: &lt;span style="color:#2aa198">5&lt;/span>
+&lt;span style="color:#268bd2">readinessProbe&lt;/span>:
+&lt;span style="color:#268bd2">httpGet&lt;/span>:
+&lt;span style="color:#268bd2">path&lt;/span>: /ready
+&lt;span style="color:#268bd2">port&lt;/span>: &lt;span style="color:#2aa198">22222&lt;/span>
+&lt;span style="color:#268bd2">initialDelaySeconds&lt;/span>: &lt;span style="color:#2aa198">5&lt;/span>
+&lt;span style="color:#268bd2">periodSeconds&lt;/span>: &lt;span style="color:#2aa198">5&lt;/span>
+&lt;span style="color:#268bd2">startupProbe&lt;/span>:
+&lt;span style="color:#268bd2">httpGet&lt;/span>:
+&lt;span style="color:#268bd2">path&lt;/span>: /startup
+&lt;span style="color:#268bd2">port&lt;/span>: &lt;span style="color:#2aa198">22222&lt;/span>
+&lt;span style="color:#268bd2">failureThreshold&lt;/span>: &lt;span style="color:#2aa198">30&lt;/span>
+&lt;span style="color:#268bd2">periodSeconds&lt;/span>: &lt;span style="color:#2aa198">10&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>目前三种探针均有对应的接口，路径为 QOS 中的命令，端口信息请根据 QOS 配置进行对应修改（默认端口为 22222）。其他参数请参考&lt;a href="https://kubernetes.io/zh/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/">官方文档说明&lt;/a>。&lt;/p>
+&lt;p>注：为了使 Kubernetes 集群能够正常访问到探针，需要开启 QOS 允许远程访问，此操作有可能带来安全风险，请仔细评估后再打开。&lt;/p>
+&lt;h2 id="实现细节">实现细节&lt;/h2>
+&lt;p>三种探针对应的 SPI 接口如下：&lt;/p>
+&lt;ul>
+&lt;li>livenessProbe: &lt;code>org.apache.dubbo.qos.probe.LivenessProbe&lt;/code>&lt;/li>
+&lt;li>readinessProbe: &lt;code>org.apache.dubbo.qos.probe.ReadinessProbe&lt;/code>&lt;/li>
+&lt;li>startupProbe: &lt;code>org.apache.dubbo.qos.probe.StartupProbe&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>接口将自动获取当前应用所有 SPI 的实现，对应接口的 SPI 实现均成功就绪则接口返回成功。&lt;/p>
+&lt;h4 id="存活检测">存活检测&lt;/h4>
+&lt;p>对于 livenessProbe 存活检测，由于 Dubbo 框架本身无法获取到应用的存活状态，因此本接口无默认实现，且默认返回成功。开发者可以根据 SPI 定义对此 SPI 接口进行拓展，从应用层次对是否存活进行判断。&lt;/p>
+&lt;h4 id="就绪检测">就绪检测&lt;/h4>
+&lt;p>对于 readinessProbe 就绪检测，目前 Dubbo 默认提供了两个检测维度，一是对 Dubbo 服务自身是否启停做判断，另外是对所有服务是否存在已注册接口，如果所有服务均已从注册中心下线（可以通过 QOS 运维进行操作）将返回未就绪的状态。&lt;/p>
+&lt;h4 id="启动检测">启动检测&lt;/h4>
+&lt;p>对于 startupProbe 启动检测，目前Dubbo 默认提供了一个检测维度，即是在所有启动流程（接口暴露、注册中心写入等）均结束后返回已就绪状态。&lt;/p></description></item><item><title>Docs: Startup 启动探针</title><link>https://dubbo.apache.org/zh/docs/v3.0/references/lifecycle/startup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/references/lifecycle/startup/</guid><description>
+&lt;h2 id="扩展说明">扩展说明&lt;/h2>
+&lt;p>拓展应用启动的检测点。&lt;/p>
+&lt;h2 id="扩展接口">扩展接口&lt;/h2>
+&lt;p>&lt;code>org.apache.dubbo.qos.probe.StartupProbe&lt;/code>&lt;/p>
+&lt;h2 id="扩展配置">扩展配置&lt;/h2>
+&lt;p>Dubbo QOS &lt;code>startup&lt;/code>   命令自动发现&lt;/p>
+&lt;h2 id="已知扩展">已知扩展&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>org.apache.dubbo.qos.probe.impl.BootstrapLivenessProbe&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h2 id="扩展示例">扩展示例&lt;/h2>
+&lt;p>Maven 项目结构：&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">src
+|-main
+|-java
+|-com
+|-xxx
+|-XxxStartupProbe.java (实现StartupProbe接口)
+|-resources
+|-META-INF
+|-dubbo
+|-org.apache.dubbo.qos.probe.StartupProbe (纯文本文件，内容为：xxx=com.xxx.XxxStartupProbe)
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>XxxStartupProbee.java：&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">package&lt;/span> com.xxx&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">XxxStartupProbe&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> StartupProbe &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">boolean&lt;/span> &lt;span style="color:#268bd2">check&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#586e75">// ...
+&lt;/span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>META-INF/dubbo/org.apache.dubbo.qos.probe.StartupProbe：&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">xxx=com.xxx.XxxStartupProbe
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Liveness 存活探针</title><link>https://dubbo.apache.org/zh/docs/v3.0/references/lifecycle/liveness/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/references/lifecycle/liveness/</guid><description>
+&lt;h2 id="扩展说明">扩展说明&lt;/h2>
+&lt;p>拓展应用存活的检测点。&lt;/p>
+&lt;h2 id="扩展接口">扩展接口&lt;/h2>
+&lt;p>&lt;code>org.apache.dubbo.qos.probe.LivenessProbe&lt;/code>&lt;/p>
+&lt;h2 id="扩展配置">扩展配置&lt;/h2>
+&lt;p>Dubbo QOS &lt;code>live&lt;/code> 命令自动发现&lt;/p>
+&lt;h2 id="已知扩展">已知扩展&lt;/h2>
+&lt;p>暂无默认实现&lt;/p>
+&lt;h2 id="扩展示例">扩展示例&lt;/h2>
+&lt;p>Maven 项目结构：&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">src
+|-main
+|-java
+|-com
+|-xxx
+|-XxxLivenessProbe.java (实现LivenessProbe接口)
+|-resources
+|-META-INF
+|-dubbo
+|-org.apache.dubbo.qos.probe.LivenessProbe (纯文本文件，内容为：xxx=com.xxx.XxxLivenessProbe)
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>XxxLivenessProbe.java：&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">package&lt;/span> com.xxx&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">XxxLivenessProbe&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> LivenessProbe &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">boolean&lt;/span> &lt;span style="color:#268bd2">check&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#586e75">// ...
+&lt;/span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>META-INF/dubbo/org.apache.dubbo.qos.probe.LivenessProbe：&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">xxx=com.xxx.XxxLivenessProbe
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Readiness 就绪探针</title><link>https://dubbo.apache.org/zh/docs/v3.0/references/lifecycle/readiness/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/references/lifecycle/readiness/</guid><description>
+&lt;h2 id="扩展说明">扩展说明&lt;/h2>
+&lt;p>拓展应用就绪的检测点。&lt;/p>
+&lt;h2 id="扩展接口">扩展接口&lt;/h2>
+&lt;p>&lt;code>org.apache.dubbo.qos.probe.ReadinessProbe&lt;/code>&lt;/p>
+&lt;h2 id="扩展配置">扩展配置&lt;/h2>
+&lt;p>Dubbo QOS &lt;code>ready&lt;/code>  命令自动发现&lt;/p>
+&lt;h2 id="已知扩展">已知扩展&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>org.apache.dubbo.qos.probe.impl.BootstrapReadinessProbe&lt;/code>&lt;/li>
+&lt;li>&lt;code>org.apache.dubbo.qos.probe.impl.ProviderReadinessProbe&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h2 id="扩展示例">扩展示例&lt;/h2>
+&lt;p>Maven 项目结构：&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">src
+|-main
+|-java
+|-com
+|-xxx
+|-XxxReadinessProbe.java (实现ReadinessProbe接口)
+|-resources
+|-META-INF
+|-dubbo
+|-org.apache.dubbo.qos.probe.ReadinessProbe (纯文本文件，内容为：xxx=com.xxx.XxxReadinessProbe)
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>XxxReadinessProbe.java：&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">package&lt;/span> com.xxx&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">XxxReadinessProbe&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> ReadinessProbe &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">boolean&lt;/span> &lt;span style="color:#268bd2">check&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#586e75">// ...
+&lt;/span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>META-INF/dubbo/org.apache.dubbo.qos.probe.ReadinessProbe：&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">xxx=com.xxx.XxxReadinessProbe
+&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
