@@ -1,4 +1,262 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – Apache Dubbo</title><link>https://dubbo.apache.org/zh/</link><description>Recent content on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: dubbo-go 白话文</title><link>https://dubbo.apache.org/zh/blog/2021/02/20/dubbo-go-%E7%99%BD%E8%AF%9D%E6%96%87/</link><pubDate>Sat, 20 Feb 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/02/20/dubbo-go-%E7%99%BD%E8%AF%9D%E6%96%87/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – Apache Dubbo</title><link>https://dubbo.apache.org/zh/</link><description>Recent content on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: Dubbo3 应用级服务发现</title><link>https://dubbo.apache.org/zh/blog/2021/06/02/dubbo3-%E5%BA%94%E7%94%A8%E7%BA%A7%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0/</link><pubDate>Wed, 02 Jun 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/06/02/dubbo3-%E5%BA%94%E7%94%A8%E7%BA%A7%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0/</guid><description>
+&lt;h2 id="1-服务发现service-discovery-概述">1 服务发现（Service Discovery） 概述&lt;/h2>
+&lt;p>从 Internet 刚开始兴起，如何动态感知后端服务的地址变化就是一个必须要面对的问题，为此人们定义了 DNS 协议，基于此协议，调用方只需要记住由固定字符串组成的域名，就能轻松完成对后端服务的访问，而不用担心流量最终会访问到哪些机器 IP，因为有代理组件会基于 DNS 地址解析后的地址列表，将流量透明的、均匀的分发到不同的后端机器上。&lt;/p>
+&lt;p>在使用微服务构建复杂的分布式系统时，如何感知 backend 服务实例的动态上下线，也是微服务框架最需要关心并解决的问题之一。业界将这个问题称之为 - 微服务的地址发现（Service Discovery），业界比较有代表性的微服务框架如 SpringCloud、Microservices、Dubbo 等都抽象了强大的动态地址发现能力，并且为了满足微服务业务场景的需求，绝大多数框架的地址发现都是基于自己设计的一套机制来实现，因此在能力、灵活性上都要比传统 DNS 丰富得多。如 SpringCloud 中常用的 Eureka， Dubbo 中常用的 Zookeeper、Nacos 等，这些注册中心实现不止能够传递地址（IP + Port），还包括一些微服务的 Metadata 信息，如实例序列化类型、实例方法列表、各个方法级的定制化配置等。&lt;/p>
+&lt;p>下图是微服务中 Service Discovery 的基本工作原理图，微服务体系中的实例大概可分为三种角色：服务提供者（Provider）、服务消费者（Consumer）和注册中心（Registry）。而不同框架实现间最主要的区别就体现在注册中心数据的组织：地址如何组织、以什么粒度组织、除地址外还同步哪些数据？&lt;/p>
+&lt;p>&lt;img src="https://intranetproxy.alipay.com/skylark/lark/0/2020/png/54037/1590152557149-ea956a69-f303-4c0e-b098-89ed61caf30b.png" alt="undefined">&lt;/p>
+&lt;p>我们今天这篇文章就是围绕这三个角色展开，重点看下 Dubbo 中对于服务发现方案的设计，包括之前老的服务发现方案的优势和缺点，以及 Dubbo 3.0 中正在设计、开发中的全新的&lt;strong>面向应用粒度的地址发现方案&lt;/strong>，我们期待这个新的方案能做到：&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>支持几十万/上百万级集群实例的地址发现&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>与不同的微服务体系（如 Spring Cloud）实现在地址发现层面的互通&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;h2 id="2-dubbo-地址发现机制解析">2 Dubbo 地址发现机制解析&lt;/h2>
+&lt;p>我们先以一个 DEMO 应用为例，来快速的看一下 Dubbo “接口粒度”服务发现与“应用粒度”服务发现体现出来的区别。这里我们重点关注 Provider 实例是如何向注册中心注册的，并且，为了体现注册中心数据量变化，我们观察的是两个 Provider 实例的场景。&lt;/p>
+&lt;p>&lt;strong>应用 DEMO 提供的服务列表如下：&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.basic.api.DemoService&amp;#34;&lt;/span> ref=&lt;span style="color:#2aa198">&amp;#34;demoService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.basic.api.GreetingService&amp;#34;&lt;/span> ref=&lt;span style="color:#2aa198">&amp;#34;greetingService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>我们示例注册中心实现采用的是 Zookeeper ，启动 192.168.0.103 和 192.168.0.104 两个实例后，以下是两种模式下注册中心的实际数据&lt;/p>
+&lt;p>&lt;strong>1. “接口粒度” 服务发现&lt;/strong>&lt;/p>
+&lt;p>192.168.0.103 实例注册的数据&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">dubbo://192.168.0.103:20880/org.apache.dubbo.samples.basic.api.DemoService?anyhost=true&amp;amp;application=demo-provider&amp;amp;default=true&amp;amp;deprecated=false&amp;amp;dubbo=2.0.2&amp;amp;dynamic=true&amp;amp;generic=false&amp;amp;interface=org.apache.dubbo.samples.basic.api.DemoService&amp;amp;methods=testVoid,sayHello&amp;amp;pid=995&amp;amp;release=2.7.7&amp;amp;side=provider&amp;amp;timestamp=1596988171266
+dubbo://192.168.0.103:20880/org.apache.dubbo.samples.basic.api.GreetingService?anyhost=true&amp;amp;application=demo-provider&amp;amp;default=true&amp;amp;deprecated=false&amp;amp;dubbo=2.0.2&amp;amp;dynamic=true&amp;amp;generic=false&amp;amp;interface=org.apache.dubbo.samples.basic.api.GreetingService&amp;amp;methods=greeting&amp;amp;pid=995&amp;amp;release=2.7.7&amp;amp;side=provider&amp;amp;timestamp=1596988170816
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>192.168.0.104 实例注册的数据&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">dubbo://192.168.0.104:20880/org.apache.dubbo.samples.basic.api.DemoService?anyhost=true&amp;amp;application=demo-provider&amp;amp;default=true&amp;amp;deprecated=false&amp;amp;dubbo=2.0.2&amp;amp;dynamic=true&amp;amp;generic=false&amp;amp;interface=org.apache.dubbo.samples.basic.api.DemoService&amp;amp;methods=testVoid,sayHello&amp;amp;pid=995&amp;amp;release=2.7.7&amp;amp;side=provider&amp;amp;timestamp=1596988171266
+dubbo://192.168.0.104:20880/org.apache.dubbo.samples.basic.api.GreetingService?anyhost=true&amp;amp;application=demo-provider&amp;amp;default=true&amp;amp;deprecated=false&amp;amp;dubbo=2.0.2&amp;amp;dynamic=true&amp;amp;generic=false&amp;amp;interface=org.apache.dubbo.samples.basic.api.GreetingService&amp;amp;methods=greeting&amp;amp;pid=995&amp;amp;release=2.7.7&amp;amp;side=provider&amp;amp;timestamp=1596988170816
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>2. “应用粒度” 服务发现&lt;/strong>&lt;/p>
+&lt;p>192.168.0.103 与 192.168.0.104 两个实例共享一份注册中心数据，如下：&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">{
+&amp;#34;name&amp;#34;: &amp;#34;demo-provider&amp;#34;,
+&amp;#34;id&amp;#34;: &amp;#34;192.168.0.103:20880&amp;#34;,
+&amp;#34;address&amp;#34;: &amp;#34;192.168.0.103&amp;#34;,
+&amp;#34;port&amp;#34;: 20880,
+&amp;#34;metadata&amp;#34;: {
+&amp;#34;dubbo.endpoints&amp;#34;: &amp;#34;[{\&amp;#34;port\&amp;#34;:20880,\&amp;#34;protocol\&amp;#34;:\&amp;#34;dubbo\&amp;#34;}]&amp;#34;,
+&amp;#34;dubbo.metadata.storage-type&amp;#34;: &amp;#34;local&amp;#34;,
+&amp;#34;dubbo.revision&amp;#34;: &amp;#34;6785535733750099598&amp;#34;
+},
+&amp;#34;time&amp;#34;: 1583461240877
+}
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>{
+&amp;ldquo;name&amp;rdquo;: &amp;ldquo;demo-provider&amp;rdquo;,
+&amp;ldquo;id&amp;rdquo;: &amp;ldquo;192.168.0.104:20880&amp;rdquo;,
+&amp;ldquo;address&amp;rdquo;: &amp;ldquo;192.168.0.104&amp;rdquo;,
+&amp;ldquo;port&amp;rdquo;: 20880,
+&amp;ldquo;metadata&amp;rdquo;: {
+&amp;ldquo;dubbo.endpoints&amp;rdquo;: &amp;ldquo;[{&amp;quot;port&amp;quot;:20880,&amp;quot;protocol&amp;quot;:&amp;quot;dubbo&amp;quot;}]&amp;rdquo;,
+&amp;ldquo;dubbo.metadata.storage-type&amp;rdquo;: &amp;ldquo;local&amp;rdquo;,
+&amp;ldquo;dubbo.revision&amp;rdquo;: &amp;ldquo;7829635812370099387&amp;rdquo;
+},
+&amp;ldquo;time&amp;rdquo;: 1583461240877
+}&lt;/p>
+&lt;p>对比以上两种不同粒度的服务发现模式，从 “接口粒度” 升级到 “应用粒度” 后我们可以总结出最大的区别是：注册中心数据量不再与接口数成正比，不论应用提供有多少接口，注册中心只有一条实例数据。&lt;/p>
+&lt;p>那么接下来我们详细看下这个变化给 Dubbo 带来了哪些好处。&lt;/p>
+&lt;h2 id="3-dubbo-应用级服务发现的意义">3 Dubbo 应用级服务发现的意义&lt;/h2>
+&lt;p>我们先说结论，应用级服务发现给 Dubbo 带来以下优势：&lt;/p>
+&lt;ol>
+&lt;li>与业界主流微服务模型对齐，比如 SpringCloud、Kubernetes Native Service等。&lt;/li>
+&lt;li>提升性能与可伸缩性。注册中心数据的重新组织（减少），能最大幅度的减轻注册中心的存储、推送压力，进而减少 Dubbo Consumer 侧的地址计算压力；集群规模也开始变得可预测、可评估（与 RPC 接口数量无关，只与实例部署规模相关）。&lt;/li>
+&lt;/ol>
+&lt;h3 id="31-对齐主流微服务模型">3.1 对齐主流微服务模型&lt;/h3>
+&lt;p>自动、透明的实例地址发现（负载均衡）是所有微服务框架需要解决的事情，这能让后端的部署结构对上游微服务透明，上游服务只需要从收到的地址列表中选取一个，发起调用就可以了。要实现以上目标，涉及两个关键点的自动同步：&lt;/p>
+&lt;ul>
+&lt;li>实例地址，服务消费方需要知道地址以建立链接&lt;/li>
+&lt;li>RPC 方法定义，服务消费方需要知道 RPC 服务的具体定义，不论服务类型是 rest 或 rmi 等。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://intranetproxy.alipay.com/skylark/lark/0/2020/png/54037/1583499778138-76fbb607-b351-47f4-ae18-2cd89b3f225b.png" alt="undefined">&lt;/p>
+&lt;p>对于 RPC 实例间借助注册中心的数据同步，REST 定义了一套非常有意思的成熟度模型，感兴趣的朋友可以参考这里的链接 &lt;a href="https://www.martinfowler.com/articles/richardsonMaturityModel.html">https://www.martinfowler.com/articles/richardsonMaturityModel.html&lt;/a>， 按照文章中的 4 级成熟度定义，Dubbo 当前基于接口粒度的模型可以对应到 L4 级别。&lt;/p>
+&lt;p>接下来，我们看看 Dubbo、SpringCloud 以及 Kubernetes 分别是怎么围绕自动化的实例地址发现这个目标设计的。&lt;/p>
+&lt;p>&lt;strong>1. Spring Cloud&lt;/strong>&lt;/p>
+&lt;p>Spring Cloud 通过注册中心只同步了应用与实例地址，消费方可以基于实例地址与服务提供方建立链接，但是消费方对于如何发起 http 调用（SpringCloud 基于 rest 通信）一无所知，比如对方有哪些 http endpoint，需要传入哪些参数等。&lt;/p>
+&lt;p>RPC 服务这部分信息目前都是通过线下约定或离线的管理系统来协商的。这种架构的优缺点总结如下。
+优势：部署结构清晰、地址推送量小；
+缺点：地址订阅需要指定应用名， provider 应用变更（拆分）需消费端感知；RPC 调用无法全自动同步。&lt;/p>
+&lt;p>&lt;img src="https://intranetproxy.alipay.com/skylark/lark/0/2020/png/54037/1583499797278-bfd6d8dc-229f-441a-af53-1d07174406ff.png" alt="undefined">&lt;/p>
+&lt;p>&lt;strong>2. Dubbo&lt;/strong>&lt;/p>
+&lt;p>Dubbo 通过注册中心同时同步了实例地址和 RPC 方法，因此其能实现 RPC 过程的自动同步，面向 RPC 编程、面向 RPC 治理，对后端应用的拆分消费端无感知，其缺点则是地址推送数量变大，和 RPC 方法成正比。&lt;/p>
+&lt;p>&lt;img src="https://intranetproxy.alipay.com/skylark/lark/0/2020/png/54037/1583499805538-758023d3-1f26-4d39-9705-74549f91f6ab.png" alt="undefined">&lt;/p>
+&lt;p>&lt;strong>3. Dubbo + Kubernetes&lt;/strong>&lt;/p>
+&lt;p>Dubbo 要支持 Kubernetes native service，相比之前自建注册中心的服务发现体系来说，在工作机制上主要有两点变化：&lt;/p>
+&lt;ul>
+&lt;li>服务注册由平台接管，provider 不再需要关心服务注册&lt;/li>
+&lt;li>consumer 端服务发现将是 Dubbo 关注的重点，通过对接平台层的 API-Server、DNS 等，Dubbo client 可以通过一个 &lt;a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service Name&lt;/a>（通常对应到 Application Name）查询到一组 &lt;a href="">Endpoints&lt;/a>（一组运行 provider 的 pod），通过将 Endpoints 映射到 Dubbo 内部地址列表，以驱动 Dubbo 内置的负载均衡机制工作。&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>Kubernetes Service 作为一个抽象概念，怎么映射到 Dubbo 是一个值得讨论的点&lt;/p>
+&lt;ul>
+&lt;li>Service Name - &amp;gt; Application Name，Dubbo 应用和 Kubernetes 服务一一对应，对于微服务运维和建设环节透明，与开发阶段解耦。&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#268bd2">apiVersion&lt;/span>: v1
+&lt;span style="color:#268bd2">kind&lt;/span>: Service
+&lt;span style="color:#268bd2">metadata&lt;/span>:
+&lt;span style="color:#268bd2">name&lt;/span>: provider-app-name
+&lt;span style="color:#268bd2">spec&lt;/span>:
+&lt;span style="color:#268bd2">selector&lt;/span>:
+&lt;span style="color:#268bd2">app&lt;/span>: provider-app-name
+&lt;span style="color:#268bd2">ports&lt;/span>:
+- &lt;span style="color:#268bd2">protocol&lt;/span>: TCP
+&lt;span style="color:#268bd2">port&lt;/span>:
+&lt;span style="color:#268bd2">targetPort&lt;/span>: &lt;span style="color:#2aa198">9376&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>Service Name - &amp;gt; Dubbo RPC Service，Kubernetes 要维护调度的服务与应用内建 RPC 服务绑定，维护的服务数量变多。&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">---
+&lt;span style="color:#268bd2">apiVersion&lt;/span>: v1
+&lt;span style="color:#268bd2">kind&lt;/span>: Service
+&lt;span style="color:#268bd2">metadata&lt;/span>:
+&lt;span style="color:#268bd2">name&lt;/span>: rpc-service-1
+&lt;span style="color:#268bd2">spec&lt;/span>:
+&lt;span style="color:#268bd2">selector&lt;/span>:
+&lt;span style="color:#268bd2">app&lt;/span>: provider-app-name
+&lt;span style="color:#268bd2">ports&lt;/span>: &lt;span style="color:#586e75">##&lt;/span>
+...
+---
+&lt;span style="color:#268bd2">apiVersion&lt;/span>: v1
+&lt;span style="color:#268bd2">kind&lt;/span>: Service
+&lt;span style="color:#268bd2">metadata&lt;/span>:
+&lt;span style="color:#268bd2">name&lt;/span>: rpc-service-2
+&lt;span style="color:#268bd2">spec&lt;/span>:
+&lt;span style="color:#268bd2">selector&lt;/span>:
+&lt;span style="color:#268bd2">app&lt;/span>: provider-app-name
+&lt;span style="color:#268bd2">ports&lt;/span>: &lt;span style="color:#586e75">##&lt;/span>
+...
+---
+&lt;span style="color:#268bd2">apiVersion&lt;/span>: v1
+&lt;span style="color:#268bd2">kind&lt;/span>: Service
+&lt;span style="color:#268bd2">metadata&lt;/span>:
+&lt;span style="color:#268bd2">name&lt;/span>: rpc-service-N
+&lt;span style="color:#268bd2">spec&lt;/span>:
+&lt;span style="color:#268bd2">selector&lt;/span>:
+&lt;span style="color:#268bd2">app&lt;/span>: provider-app-name
+&lt;span style="color:#268bd2">ports&lt;/span>: &lt;span style="color:#586e75">##&lt;/span>
+...
+&lt;/code>&lt;/pre>&lt;/div>&lt;/blockquote>
+&lt;p>&lt;img src="https://intranetproxy.alipay.com/skylark/lark/0/2020/png/54037/1583499823484-641d2e54-2833-40fc-8c17-8fbd5e9cd4da.png" alt="undefined">&lt;/p>
+&lt;p>结合以上几种不同微服务框架模型的分析，我们可以发现，Dubbo 与 SpringCloud、Kubernetes 等不同产品在微服务的抽象定义上还是存在很大不同的。SpringCloud 和 Kubernetes 在微服务的模型抽象上还是比较接近的，两者基本都只关心实例地址的同步，如果我们去关心其他的一些服务框架产品，会发现它们绝大多数也是这么设计的；&lt;/p>
+&lt;blockquote>
+&lt;p>即 REST 成熟度模型中的 L3 级别。&lt;/p>
+&lt;/blockquote>
+&lt;p>对比起来 Dubbo 则相对是比较特殊的存在，更多的是从 RPC 服务的粒度去设计的。&lt;/p>
+&lt;blockquote>
+&lt;p>对应 REST 成熟度模型中的 L4 级别。&lt;/p>
+&lt;/blockquote>
+&lt;p>如我们上面针对每种模型做了详细的分析，每种模型都有其优势和不足。而我们最初决定 Dubbo 要做出改变，往其他的微服务发现模型上的对齐，是我们最早在确定 Dubbo 的云原生方案时，我们发现要让 Dubbo 去支持 Kubernetes Native Service，模型对齐是一个基础条件；另一点是来自用户侧对 Dubbo 场景化的一些工程实践的需求，得益于 Dubbo 对多注册、多协议能力的支持，使得 Dubbo 联通不同的微服务体系成为可能，而服务发现模型的不一致成为其中的一个障碍，这部分的场景描述请参见以下文章：https://www.atatech.org/articles/157719&lt;/p>
+&lt;h3 id="32-更大规模的微服务集群---解决性能瓶颈">3.2 更大规模的微服务集群 - 解决性能瓶颈&lt;/h3>
+&lt;p>这部分涉及到和注册中心、配置中心的交互，关于不同模型下注册中心数据的变化，之前原理部分我们简单分析过。为更直观的对比服务模型变更带来的推送效率提升，我们来通过一个示例看一下不同模型注册中心的对比：&lt;/p>
+&lt;p>&lt;img src="https://intranetproxy.alipay.com/skylark/lark/0/2020/png/54037/1590139913555-1673facd-87d0-4f89-b5e9-fef62745b7bb.png" alt="undefined">&lt;/p>
+&lt;p>图中左边是微服务框架的一个典型工作流程，Provider 和 Consumer 通过注册中心实现自动化的地址通知。其中，Provider 实例的信息如图中表格所示：
+应用 DEMO 包含三个接口 DemoService 1 2 3，当前实例的 ip 地址为 10.210.134.30。&lt;/p>
+&lt;ul>
+&lt;li>对于 Spring Cloud 和 Kubernetes 模型，注册中心只会存储一条 &lt;code>DEMO - 10.210.134.30+metadata&lt;/code> 的数据；&lt;/li>
+&lt;li>对于老的 Dubbo 模型，注册中心存储了三条接口粒度的数据，分别对应三个接口 DemoService 1 2 3，并且很多的址数据都是重复的；&lt;/li>
+&lt;/ul>
+&lt;p>可以总结出，基于应用粒度的模型所存储和推送的数据量是和应用、实例数成正比的，只有当我们的应用数增多或应用的实例数增长时，地址推送压力才会上涨。
+而对于基于接口粒度的模型，数据量是和接口数量正相关的，鉴于一个应用通常发布多个接口的现状，这个数量级本身比应用粒度是要乘以倍数的；另外一个关键点在于，接口粒度导致的集群规模评估的不透明，相对于实i例、应用增长都通常是在运维侧的规划之中，接口的定义更多的是业务侧的内部行为，往往可以绕过评估给集群带来压力。&lt;/p>
+&lt;p>以 Consumer 端服务订阅举例，根据我对社区部分 Dubbo 中大规模头部用户的粗略统计，根据受统计公司的实际场景，一个 Consumer 应用要消费（订阅）的 Provier 应用数量往往要超过 10 个，而具体到其要消费（订阅）的的接口数量则通常要达到 30 个，平均情况下 Consumer 订阅的 3 个接口来自同一个 Provider 应用，如此计算下来，如果以应用粒度为地址通知和选址基本单位，则平均地址推送和计算量将下降 60% 还要多，
+而在极端情况下，也就是当 Consumer 端消费的接口更多的来自同一个应用时，这个地址推送与内存消耗的占用将会进一步得到降低，甚至可以超过 80% 以上。&lt;/p>
+&lt;p>一个典型的几段场景即是 Dubbo 体系中的网关型应用，有些网关应用消费（订阅）达 100+ 应用，而消费（订阅）的服务有 1000+ ，平均有 10 个接口来自同一个应用，如果我们把地址推送和计算的粒度改为应用，则地址推送量从原来的 n * 1000 变为 n * 100，地址数量降低可达近 90%。&lt;/p>
+&lt;h2 id="4-应用级服务发现工作原理">4 应用级服务发现工作原理&lt;/h2>
+&lt;h3 id="41-设计原则">4.1 设计原则&lt;/h3>
+&lt;p>上面一节我们从&lt;strong>服务模型&lt;/strong>及&lt;strong>支撑大规模集群&lt;/strong>的角度分别给出了 Dubbo 往应用级服务发现靠拢的好处或原因，但这么做的同时接口粒度的服务治理能力还是要继续保留，这是 Dubbo 框架编程模型易用性、服务治理能力优势的基础。
+以下是我认为我们做服务模型迁移仍要坚持的设计原则&lt;/p>
+&lt;ul>
+&lt;li>新的服务发现模型要实现对原有 Dubbo 消费端开发者的无感知迁移，即 Dubbo 继续面向 RPC 服务编程、面向 RPC 服务治理，做到对用户侧完全无感知。&lt;/li>
+&lt;li>建立 Consumer 与 Provider 间的自动化 RPC 服务元数据协调机制，解决传统微服务模型无法同步 RPC 级接口配置的缺点。&lt;/li>
+&lt;/ul>
+&lt;h3 id="42-基本原理详解">4.2 基本原理详解&lt;/h3>
+&lt;p>应用级服务发现作为一种新的服务发现机制，和以前 Dubbo 基于 RPC 服务粒度的服务发现在核心流程上基本上是一致的：即服务提供者往注册中心注册地址信息，服务消费者从注册中心拉取&amp;amp;订阅地址信息。&lt;/p>
+&lt;p>这里主要的不同有以下两点：&lt;/p>
+&lt;h4 id="421-注册中心数据以应用---实例列表格式组织不再包含-rpc-服务信息">4.2.1 注册中心数据以“应用 - 实例列表”格式组织，不再包含 RPC 服务信息&lt;/h4>
+&lt;p>&lt;img src="https://intranetproxy.alipay.com/skylark/lark/0/2020/png/54037/1583499855399-61759d90-3d83-4957-9ea7-4d5a79ae8d96.png" alt="undefined">&lt;/p>
+&lt;p>以下是每个 Instance metadata 的示例数据，总的原则是 metadata 只包含当前 instance 节点相关的信息，不涉及 RPC 服务粒度的信息。&lt;/p>
+&lt;p>总体信息概括如下：实例地址、实例各种环境标、metadata service 元数据、其他少量必要属性。&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
+&lt;span style="color:#268bd2">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;provider-app-name&amp;#34;&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;id&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;192.168.0.102:20880&amp;#34;&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;address&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;192.168.0.102&amp;#34;&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;port&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">20880&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;sslPort&amp;#34;&lt;/span>: &lt;span style="color:#cb4b16">null&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;payload&amp;#34;&lt;/span>: {
+&lt;span style="color:#268bd2">&amp;#34;id&amp;#34;&lt;/span>: &lt;span style="color:#cb4b16">null&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;provider-app-name&amp;#34;&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;metadata&amp;#34;&lt;/span>: {
+&lt;span style="color:#268bd2">&amp;#34;metadataService&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;{\&amp;#34;dubbo\&amp;#34;:{\&amp;#34;version\&amp;#34;:\&amp;#34;1.0.0\&amp;#34;,\&amp;#34;dubbo\&amp;#34;:\&amp;#34;2.0.2\&amp;#34;,\&amp;#34;release\&amp;#34;:\&amp;#34;2.7.5\&amp;#34;,\&amp;#34;port\&amp;#34;:\&amp;#34;20881\&amp;#34;}}&amp;#34;&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;endpoints&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;[{\&amp;#34;port\&amp;#34;:20880,\&amp;#34;protocol\&amp;#34;:\&amp;#34;dubbo\&amp;#34;}]&amp;#34;&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;storage-type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;local&amp;#34;&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;revision&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;6785535733750099598&amp;#34;&lt;/span>,
+}
+},
+&lt;span style="color:#268bd2">&amp;#34;registrationTimeUTC&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">1583461240877&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;serviceType&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;DYNAMIC&amp;#34;&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;uriSpec&amp;#34;&lt;/span>: &lt;span style="color:#cb4b16">null&lt;/span>
+}
+&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="422-client--server-自行协商-rpc-方法信息">4.2.2 Client – Server 自行协商 RPC 方法信息&lt;/h4>
+&lt;p>在注册中心不再同步 RPC 服务信息后，服务自省在服务消费端和提供端之间建立了一条内置的 RPC 服务信息协商机制，这也是“服务自省”这个名字的由来。服务端实例会暴露一个预定义的 MetadataService RPC 服务，消费端通过调用 MetadataService 获取每个实例 RPC 方法相关的配置信息。&lt;/p>
+&lt;p>&lt;img src="https://intranetproxy.alipay.com/skylark/lark/0/2020/png/54037/1583499880399-1c9c6209-4fd9-404d-ada7-60f55077e788.png" alt="undefined">&lt;/p>
+&lt;p>当前 MetadataService 返回的数据格式如下，&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">[
+&lt;span style="color:#2aa198">&amp;#34;dubbo://192.168.0.102:20880/org.apache.dubbo.demo.DemoService?anyhost=true&amp;amp;application=demo-provider&amp;amp;deprecated=false&amp;amp;dubbo=2.0.2&amp;amp;dynamic=true&amp;amp;generic=false&amp;amp;interface=org.apache.dubbo.demo.DemoService&amp;amp;methods=sayHello&amp;amp;pid=9585&amp;amp;release=2.7.5&amp;amp;side=provider&amp;amp;timestamp=1583469714314&amp;#34;&lt;/span>,
+&lt;span style="color:#2aa198">&amp;#34;dubbo://192.168.0.102:20880/org.apache.dubbo.demo.HelloService?anyhost=true&amp;amp;application=demo-provider&amp;amp;deprecated=false&amp;amp;dubbo=2.0.2&amp;amp;dynamic=true&amp;amp;generic=false&amp;amp;interface=org.apache.dubbo.demo.DemoService&amp;amp;methods=sayHello&amp;amp;pid=9585&amp;amp;release=2.7.5&amp;amp;side=provider&amp;amp;timestamp=1583469714314&amp;#34;&lt;/span>,
+&lt;span style="color:#2aa198">&amp;#34;dubbo://192.168.0.102:20880/org.apache.dubbo.demo.WorldService?anyhost=true&amp;amp;application=demo-provider&amp;amp;deprecated=false&amp;amp;dubbo=2.0.2&amp;amp;dynamic=true&amp;amp;generic=false&amp;amp;interface=org.apache.dubbo.demo.DemoService&amp;amp;methods=sayHello&amp;amp;pid=9585&amp;amp;release=2.7.5&amp;amp;side=provider&amp;amp;timestamp=1583469714314&amp;#34;&lt;/span>
+]
+&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>熟悉 Dubbo 基于 RPC 服务粒度的服务发现模型的开发者应该能看出来，服务自省机制机制将以前注册中心传递的 URL 一拆为二：&lt;/p>
+&lt;ul>
+&lt;li>一部分和实例相关的数据继续保留在注册中心，如 ip、port、机器标识等。&lt;/li>
+&lt;li>另一部分和 RPC 方法相关的数据从注册中心移除，转而通过 MetadataService 暴露给消费端。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>理想情况下是能达到数据按照实例、RPC 服务严格区分开来，但明显可以看到以上实现版本还存在一些数据冗余，有些也数据还未合理划分。尤其是 MetadataService 部分，其返回的数据还只是简单的 URL 列表组装，这些 URL其实是包含了全量的数据。&lt;/strong>&lt;/p>
+&lt;/blockquote>
+&lt;p>以下是服务自省的一个完整工作流程图，详细描述了服务注册、服务发现、MetadataService、RPC 调用间的协作流程。&lt;/p>
+&lt;p>&lt;img src="https://intranetproxy.alipay.com/skylark/lark/0/2020/png/54037/1583499901394-e5d282e9-14d1-40fa-be73-a6f08b9f37ff.png" alt="undefined">&lt;/p>
+&lt;ul>
+&lt;li>服务提供者启动，首先解析应用定义的“普通服务”并依次注册为 RPC 服务，紧接着注册内建的 MetadataService 服务，最后打开 TCP 监听端口。&lt;/li>
+&lt;li>启动完成后，将实例信息注册到注册中心（仅限 ip、port 等实例相关数据），提供者启动完成。&lt;/li>
+&lt;li>服务消费者启动，首先依据其要“消费的 provider 应用名”到注册中心查询地址列表，并完成订阅（以实现后续地址变更自动通知）。&lt;/li>
+&lt;li>消费端拿到地址列表后，紧接着对 MetadataService 发起调用，返回结果中包含了所有应用定义的“普通服务”及其相关配置信息。&lt;/li>
+&lt;li>至此，消费者可以接收外部流量，并对提供者发起 Dubbo RPC 调用&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>在以上流程中，我们只考虑了一切顺利的情况，但在更详细的设计或编码实现中，我们还需要严格约定一些异常场景下的框架行为。比如，如果消费者 MetadataService 调用失败，则在重试知道成功之前，消费者将不可以接收外部流量。&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="43-服务自省中的关键机制">4.3 服务自省中的关键机制&lt;/h3>
+&lt;h4 id="431-元数据同步机制">4.3.1 元数据同步机制&lt;/h4>
+&lt;p>Client 与 Server 间在收到地址推送后的配置同步是服务自省的关键环节，目前针对元数据同步有两种具体的可选方案，分别是：&lt;/p>
+&lt;ul>
+&lt;li>内建 MetadataService。&lt;/li>
+&lt;li>独立的元数据中心，通过中细化的元数据集群协调数据。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>1. 内建 MetadataService&lt;/strong>
+MetadataService 通过标准的 Dubbo 协议暴露，根据查询条件，会将内存中符合条件的“普通服务”配置返回给消费者。这一步发生在消费端选址和调用前。&lt;/p>
+&lt;p>&lt;strong>元数据中心&lt;/strong>
+复用 2.7 版本中引入的元数据中心，provider 实例启动后，会尝试将内部的 RPC 服务组织成元数据的格式到元数据中心，而 consumer 则在每次收到注册中心推送更新后，主动查询元数据中心。&lt;/p>
+&lt;blockquote>
+&lt;p>注意 consumer 端查询元数据中心的时机，是等到注册中心的地址更新通知之后。也就是通过注册中心下发的数据，我们能明确的知道何时某个实例的元数据被更新了，此时才需要去查元数据中心。&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;img src="https://intranetproxy.alipay.com/skylark/lark/0/2020/png/54037/1583499932997-1da7a8ef-ccd1-4bb5-8ac6-daab62b26a92.png" alt="undefined">&lt;/p>
+&lt;h4 id="432-rpc-服务-----应用映射关系">4.3.2 RPC 服务 &amp;lt; - &amp;gt; 应用映射关系&lt;/h4>
+&lt;p>回顾上文讲到的注册中心关于“应用 - 实例列表”结构的数据组织形式，这个变动目前对开发者并不是完全透明的，业务开发侧会感知到查询/订阅地址列表的机制的变化。具体来说，相比以往我们基于 RPC 服务来检索地址，现在 consumer 需要通过指定 provider 应用名才能实现地址查询或订阅。&lt;/p>
+&lt;p>老的 Consumer 开发与配置示例：&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#586e75">&amp;lt;!-- 框架直接通过 RPC Service 1/2/N 去注册中心查询或订阅地址列表 --&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://127.0.0.1:2181&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;RPC Service 1&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;RPC Service 2&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;RPC Service N&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>新的 Consumer 开发与配置示例：&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#586e75">&amp;lt;!-- 框架需要通过额外的 provided-by=&amp;#34;provider-app-x&amp;#34; 才能在注册中心查询或订阅到地址列表 --&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://127.0.0.1:2181?registry-type=service&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;RPC Service 1&amp;#34;&lt;/span> provided-by=&lt;span style="color:#2aa198">&amp;#34;provider-app-x&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;RPC Service 2&amp;#34;&lt;/span> provided-by=&lt;span style="color:#2aa198">&amp;#34;provider-app-x&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;RPC Service N&amp;#34;&lt;/span> provided-by=&lt;span style="color:#2aa198">&amp;#34;provider-app-y&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>以上指定 provider 应用名的方式是 Spring Cloud 当前的做法，需要 consumer 端的开发者显示指定其要消费的 provider 应用。&lt;/p>
+&lt;p>以上问题的根源在于注册中心不知道任何 RPC 服务相关的信息，因此只能通过应用名来查询。&lt;/p>
+&lt;p>为了使整个开发流程对老的 Dubbo 用户更透明，同时避免指定 provider 对可扩展性带来的影响（参见下方说明），我们设计了一套 &lt;code>RPC 服务到应用名&lt;/code>的映射关系，以尝试在 consumer 自动完成 RPC 服务到 provider 应用名的转换。&lt;/p>
+&lt;p>&lt;img src="https://intranetproxy.alipay.com/skylark/lark/0/2020/png/54037/1583499946918-83bbb6a2-3847-45a1-9b28-d2e34cca6634.png" alt="undefined">&lt;/p>
+&lt;blockquote>
+&lt;p>Dubbo 之所以选择建立一套“接口-应用”的映射关系，主要是考虑到 service - app 映射关系的不确定性。一个典型的场景即是应用/服务拆分，如上面提到的配置&lt;code>&amp;lt;dubbo:reference interface=&amp;quot;RPC Service 2&amp;quot; provided-by=&amp;quot;provider-app-x&amp;quot; /&amp;gt;&lt;/code>，PC Service 2 是定义于 provider-app-x 中的一个服务，未来它随时可能会被开发者分拆到另外一个新的应用如 provider-app-x-1 中，这个拆分要被所有的 PC Service 2 消费方感知到，并对应用进行修改升级，如改为&lt;code>&amp;lt;dubbo:reference interface=&amp;quot;RPC Service 2&amp;quot; provided-by=&amp;quot;provider-app-x-1&amp;quot; /&amp;gt;&lt;/code>，这样的升级成本不可否认还是挺高的。
+到底是 Dubbo 框架帮助开发者透明的解决这个问题，还是交由开发者自己去解决，当然这只是个策略选择问题，并且 Dubbo 2.7.5+ 版本目前是都提供了的。其实我个人更倾向于交由业务开发者通过组织上的约束来做，这样也可进一步降低 Dubbo 框架的复杂度，提升运行态的稳定性。&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="5-总结与展望">5 总结与展望&lt;/h2>
+&lt;p>应用级服务发现机制是 Dubbo 面向云原生走出的重要一步，它帮 Dubbo 打通了与其他微服务体系之间在地址发现层面的鸿沟，也成为 Dubbo 适配 Kubernetes Native Service 等基础设施的基础。我们期望 Dubbo 在新模型基础上，能继续保留在编程易用性、服务治理能力等方面强大的优势。但是我们也应该看到应用粒度的模型一方面带来了新的复杂性，需要我们继续去优化与增强；另一方面，除了地址存储与推送之外，应用粒度在帮助 Dubbo 选址层面也有进一步挖掘的潜力。&lt;/p></description></item><item><title>Blog: dubbo-go 白话文</title><link>https://dubbo.apache.org/zh/blog/2021/02/20/dubbo-go-%E7%99%BD%E8%AF%9D%E6%96%87/</link><pubDate>Sat, 20 Feb 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/02/20/dubbo-go-%E7%99%BD%E8%AF%9D%E6%96%87/</guid><description>
 &lt;h2 id="一前言">一、前言&lt;/h2>
 &lt;blockquote>
 &lt;p>本文基于 dubbogo &lt;a href="https://github.com/apache/dubbo-go/releases/tag/v1.5.4">1.5.4&lt;/a> 版本&lt;/p>
@@ -8671,202 +8929,4 @@ layout&lt;span style="color:#719e07">:&lt;/span> &lt;span style="color:#2aa198">
 &lt;p>&lt;a href="https://www.webjars.org/documentation#servlet3">https://www.webjars.org/documentation#servlet3&lt;/a>&amp;#160;&lt;a href="#fnref:5" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Blog: 使用 Dubbo 连接异构微服务体系</title><link>https://dubbo.apache.org/zh/blog/2019/06/22/%E4%BD%BF%E7%94%A8-dubbo-%E8%BF%9E%E6%8E%A5%E5%BC%82%E6%9E%84%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%BD%93%E7%B3%BB/</link><pubDate>Sat, 22 Jun 2019 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2019/06/22/%E4%BD%BF%E7%94%A8-dubbo-%E8%BF%9E%E6%8E%A5%E5%BC%82%E6%9E%84%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%BD%93%E7%B3%BB/</guid><description>
-&lt;p>从编程开发的角度来说，Dubbo 首先是一款 RPC 服务框架，它最大的优势在于提供了面向接口代理的服务编程模型，对开发者屏蔽了底层的远程通信细节。同时 Dubbo 也是一款服务治理框架，它为分布式部署的微服务提供了服务发现、流量调度等服务治理解决方案。&lt;/p>
-&lt;p>在这篇文章中，我们将以以上基础能力为背景，尝试突破 Dubbo 体系自身，探索如何利用 Dubbo 对多协议、多服务发现模型的支持，来实现异构微服务体系间的互联互通。在实际业务场景中，这可以用来解决异构技术体系共存场景下的通信问题，帮助公司实现在异构技术体系间作平滑迁移，解决大规模跨区域、多集群部署场景的地址发现及流量调度等问题。&lt;/p>
-&lt;h2 id="面向接口代理的透明服务开发框架">面向接口代理的透明服务开发框架&lt;/h2>
-&lt;p>我们还是从 &lt;strong>Dubbo 是一个微服务开发框架&lt;/strong> 这个大家熟知的概念开始。就像 Spring 是开发 Java 应用的基础框架一样，我们经常会选用 Dubbo 作为开发微服务业的基础框架。 Dubbo 框架的最大优势我认为就在其面向接口的编程模型，使得开发远程服务调用就像开发本地服务一样（以 Java 语言为例）：&lt;/p>
-&lt;ol>
-&lt;li>服务定义&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">GreetingsService&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-String &lt;span style="color:#268bd2">sayHi&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String name&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
-&lt;li>消费方调用服务&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#586e75">// 和调用本地服务一样，完全透明。
-&lt;/span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#268bd2">@Reference&lt;/span>
-&lt;span style="color:#268bd2">private&lt;/span> GreetingService greetingService&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">doSayHello&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String name&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-greetingService&lt;span style="color:#719e07">.&lt;/span>sayHi&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Hello world!&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>下图是 Dubbo 的基本工作原理图，服务提供者与服务消费者之间通过注册中心协调地址，通过约定的协议实现数据交换。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/architecture.png" alt="Dubbo basic work flow">&lt;/p>
-&lt;h2 id="同构异构微服务体系面临的问题">同构/异构微服务体系面临的问题&lt;/h2>
-&lt;p>关于 Dubbo 协议本身及其服务治理相关功能细节并不是本文的重点，我们今天将从一个更高的层次，来看看公司内部构建微服务体系所面的挑战，以及 Dubbo 能为架构选型和迁移等提供哪些解决思路。&lt;/p>
-&lt;p>一个公司内部的微服务可能都是基于某一个相同的服务框架开发的，比如说 Dubbo，对于这样的架构，我们称之为是&lt;strong>同构的微服务体系&lt;/strong>；而有些公司的微服务可能是使用多个不同的服务框架所建设，我们称之为&lt;strong>异构的微服务体系&lt;/strong>，多个不同技术栈微服务体系的共存在大型组织内还是非常普遍的，造成这种局面可能有很多原因。比如，可能是遗留系统带来的，也可能是公司正在做技术栈迁移，或者就是不同业务部门为了满足各自特殊需求而做的独立选型（这也意味着异构微服务体系的长期共存）。&lt;/p>
-&lt;p>&lt;strong>1. 异构微服务体系共存&lt;/strong>&lt;/p>
-&lt;p>我们很容易想到的一个挑战是：**不同的体系间通常是使用不同的 RPC 通信协议、部署独立的注册中心集群，面对这种多协议、多注册中心集群的场景，要如何实现相互之间透明的地址发现和透明的 RPC 调用？**如果我们什么都不做，那么每个微服务体系就只能感知到自己体系内的服务状态，流量也在各自的体系内封闭。而要做到从体系 A 平滑的迁移到体系 B，或者想长期的保持公司内部多个体系的共存，则解决不同体系间的互联互通，实现流量的透明调度将是非常重要的环节。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/microservices.png" alt="2">&lt;/p>
-&lt;p>&lt;strong>2. Dubbo 体系内部&lt;/strong>&lt;/p>
-&lt;p>&lt;strong>多协议、多注册中心集群的问题在同构的微服务体系中也可能存在，尤其是当一个组织内部的微服务规模增长到一定量级的时候。&lt;/strong>&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>我们可能要在不同的服务之间采用不同的通信协议，因为不同的服务面临不同的业务场景，而这也进一步导致了数据传输特点的不同，我们需要分别采用更适合各类业务特点的协议。比如典型的场景：我们可能对于普通的业务服务采用 Dubbo 协议，对于和 FrontEnd 交互的服务需要 HTTP 协议，而对于需要流式数据传输的业务则采用 gRPC 协议等等。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Dubbo 体系内部另一个常出现的问题是，在大规模分布式部署的场景下，微服务系统会做跨区域、跨注册中心的部署，这个时候就会出现多集群间地址同步和流量调度的问题。&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;p>总结起来，**不论是同构体系还是异构体系，都面临对多协议通信、多注册中心集群地址发现的问题。**Dubbo 目前是支持多协议、多注册中心的，可以说就是为解决我们上面分析的 Dubbo 同构体系内的场景而设计的，因此下面我们从同构体系的多协议、多注册中心场景讲起，先了解 Dubbo 多协议、多注册中心的基本支持情况以及它们是如何工作的。而在后面的一章再进一步探索怎么扩展这个能力来支持异构微服务体系的互联互通。&lt;/p>
-&lt;h2 id="dubbo-体系内的多协议多注册中心机制">Dubbo 体系内的多协议、多注册中心机制&lt;/h2>
-&lt;p>我们将通过两个场景示例，来分别具体的讲一下 Dubbo 的多协议、多注册中心机制的使用方式和工作原理。&lt;/p>
-&lt;h3 id="多协议">多协议&lt;/h3>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/multiregistries.png" alt="multiregistries.png">&lt;/p>
-&lt;p>以上是使用 Dubbo 开发的一套微服务，服务间通信使用到了不同的协议，根据我们的调研发现，公司内部启用多协议其实是非常普遍需求，具体场景在此我们暂不做解释。&lt;/p>
-&lt;p>应用 B 作为服务提供者，发布了 5 个服务，其中：&lt;/p>
-&lt;ul>
-&lt;li>&lt;code>DemoService1&lt;/code> &lt;code>DemoService2&lt;/code> 通过 &lt;code>dubbo&lt;/code> 协议发布&lt;/li>
-&lt;li>&lt;code>DemoService3&lt;/code> &lt;code>DemoService4&lt;/code> 通过 &lt;code>gRPC&lt;/code> 协议发布&lt;/li>
-&lt;li>&lt;code>DemoService0&lt;/code> 通过 &lt;code>dubbo&lt;/code> 、&lt;code>gRPC&lt;/code> 双协议发布&lt;/li>
-&lt;/ul>
-&lt;p>应用 A 作为消费者，使用 dubbo 协议消费 &lt;code>DemoService1&lt;/code> &lt;code>DemoService2&lt;/code>，使用 gRPC 协议消费 &lt;code>DemoService0&lt;/code>。&lt;/p>
-&lt;p>应用 B 作为消费者，使用 gRPC 协议消费 &lt;code>DemoService2&lt;/code> &lt;code>DemoService4&lt;/code>，使用 dubbo 协议消费 &lt;code>DemoService0&lt;/code>。&lt;/p>
-&lt;p>以下是具体的代码配置：&lt;/p>
-&lt;ol>
-&lt;li>提供端应用 B&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.basic.api.DemoService1&amp;#34;&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.basic.api.DemoService2&amp;#34;&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.basic.api.DemoService3&amp;#34;&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;grpc&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.basic.api.DemoService4&amp;#34;&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;grpc&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.basic.api.DemoService0&amp;#34;&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;dubbo, grpc&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
-&lt;li>消费端应用 A&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.basic.api.DemoService1&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.basic.api.DemoService2&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;grpc&amp;#34;&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.basic.api.DemoService0&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
-&lt;li>消费端应用 C&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;grpc&amp;#34;&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.basic.api.DemoService3&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span> &lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;grpc&amp;#34;&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.basic.api.DemoService4&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.basic.api.DemoService0&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="dubbo-多协议支持现状">Dubbo 多协议支持现状&lt;/h4>
-&lt;p>Dubbo 目前所支持的协议包括 Dubbo、REST、Thrift、gRPC、JsonRPC、Hessian 等，基本涵盖了业界大多数主流的 RPC 通信协议。需要注意的是，这些协议的支持都是以直接集成官方 Release 实现的形式来做的，我认为这是一个很好的选择，既保证了协议解析自身的稳定性，又能使 Dubbo 社区更专注的将更多的精力放在 Dubbo 外围服务治理能力的改善上。试想如果 Dubbo 社区自己为每个协议提供实现，那是要花费多少精力和时间才能使每种协议达到稳定的生产可用。&lt;/p>
-&lt;p>除了以上官方提供支持的协议之外，得益于 Dubbo 灵活的扩展机制，想要为 Dubbo 扩展协议非常容易，开发者可以随时为 Dubbo 增加更多的协议支持，包括自有协议扩展。&lt;/p>
-&lt;p>关于对 gRPC (HTTP/2) 协议的支持，请参阅上期文档&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-screen.png" alt="dubbo-screen.png">&lt;/p>
-&lt;h4 id="多协议能解决的问题">多协议能解决的问题&lt;/h4>
-&lt;ul>
-&lt;li>
-&lt;p>将 RPC 框架无缝地接入 Dubbo 的服务治理体系。&lt;/p>
-&lt;p>通过协议扩展将 RPC 协议纳入 Dubbo 服务开发体系，从而复用 Dubbo 的编程模型和服务发现、流量管控等能力。比如 gRPC，其服务治理体系相对比较弱、编程 API 不够友好，很难直接用于微服务开发。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>满足不同场景的调用需求。&lt;/p>
-&lt;p>各个服务可能是为了满足不同业务需求而开发，同时外围消费端应用的技术栈也可能多种多样，通过启用不同的通信协议，可以最优化不同场景的通信需求。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>实现协议间的迁移。&lt;/p>
-&lt;p>通过支持多种协议，借助注册中心的协调，可以快速满足公司内协议迁移的需求。如从自有协议升级到 Dubbo 协议，Dubbo 协议自身升级，从 Dubbo 协议迁移到 gRPC，从 REST 迁移到 Dubbo 协议等。&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;h3 id="多注册中心">多注册中心&lt;/h3>
-&lt;p>当服务集群规模小的时候，一个中心化的集群部署方案能很好的解决我们的业务问题。但是随着应用规模的增长、用户流量的增加，我们就不得不考虑要为业务系统引入跨区域、多集群的部署方案，而此时同业务系统密切相关的注册中心集群也面临部署方案的选型：&lt;/p>
-&lt;ol>
-&lt;li>
-&lt;p>继续维持全局共享的注册中心集群。这种架构方案的优点是简单；缺点是注册中心集群由于要保存全量的地址数据，存储和推送压力会变得很大，另外对于一些注册中心产品（如 Zookeeper 等）在跨集群网络部署的场景下稳定性和性能可能都会面临挑战。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>每个业务集群部署独立的注册中心集群。多注册中心集群的优点是能解决跨集群网络可用性的问题，同时也能够减轻注册中心的存储和推送压力；缺点则是要求服务框架（如 Dubbo 等）能有同时发布/监听多个注册中心集群的能力。&lt;/p>
-&lt;/li>
-&lt;/ol>
-&lt;p>下面我们具体看一下，Dubbo 为多注册中心集群场景提供的解决方案。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/multisubscribe.png" alt="multisubscribe.png">&lt;/p>
-&lt;p>上图有两个业务集群，分别部署在北京和上海，每个业务集群有自己独立的注册中心集群，要解决两个业务集群间服务的透明 RPC 通信问题。&lt;/p>
-&lt;ol>
-&lt;li>服务提供端，双注册中心发布&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;beijingRegistry&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://${zookeeper.address1}&amp;#34;&lt;/span> default=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span> &lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;shanghaiRegistry&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://${zookeeper.address2}&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.multi.registry.api.HelloService&amp;#34;&lt;/span> ref=&lt;span style="color:#2aa198">&amp;#34;helloService&amp;#34;&lt;/span> registry=&lt;span style="color:#2aa198">&amp;#34;shanghaiRegistry,beijingRegistry&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.multi.registry.api.DemoService&amp;#34;&lt;/span> ref=&lt;span style="color:#2aa198">&amp;#34;demoService&amp;#34;&lt;/span> registry=&lt;span style="color:#2aa198">&amp;#34;shanghaiRegistry,beijingRegistry&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
-&lt;li>服务消费端，根据消费需求做单/双注册中心订阅&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;beijingRegistry&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://${zookeeper.address1}&amp;#34;&lt;/span> default=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> preferred=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> weight=&lt;span style="color:#2aa198">&amp;#34;100&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span> &lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;shanghaiRegistry&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://${zookeeper.address2}&amp;#34;&lt;/span> default=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> weight=&lt;span style="color:#2aa198">&amp;#34;20&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.multi.registry.api.DemoService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.multi.registry.api.DemoService&amp;#34;&lt;/span> registry=&lt;span style="color:#2aa198">&amp;#34;beijingRegistry, shanghaiRegistry&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.multi.registry.api.HelloService&amp;#34;&lt;/span> registry=&lt;span style="color:#2aa198">&amp;#34;beijingRegistry&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.multi.registry.api.HelloService&amp;#34;&lt;/span> registry=&lt;span style="color:#2aa198">&amp;#34;shanghaiRegistry,shanghaiRegistry&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="dubbo-对异构注册中心集群的支持">Dubbo 对异构注册中心集群的支持&lt;/h4>
-&lt;p>虽然我们会做多注册中心集群部署，但通常情况下，我们部署的都是相同的注册中心产品，如都是 Zookeeper、Nacos；而对于注册中心迁移的场景，则要求 Dubbo 能提供对更多的注册中心产品的支持，或者最重要的要有很好的扩展能力。Dubbo 官方目前支持的注册中心实现有：&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-screen2.png" alt="dubbo-screen2.png">&lt;/p>
-&lt;p>这里需要特别提到的一点是，当前 Dubbo 的服务注册/发现模型是以接口为粒度的，而从 2.7.5 版本开始，Dubbo 新引入了应用粒度的服务注册/发现模型。这一方面有助于优化 Dubbo 当前服务发现机制、提升服务容量，另一方面对于联通以 SpringCloud 为代表的微服务体系也非常重要（关于这点在下一章中有进一步提及）。更多关于《应用粒度服务发现：服务自省》的介绍，我们将在接下来的文章或文档中予以补充，请持续关注。&lt;/p>
-&lt;h4 id="多订阅带来的流量调度问题">多订阅带来的流量调度问题&lt;/h4>
-&lt;p>在引入多注册中心集群后，Dubbo 在流量选址时的多了一层注册中心集群间的负载均衡：&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/cluster-lb.png" alt="cluster-lb.png">&lt;/p>
-&lt;p>在 Cluster Invoker 这一级，我们支持的选址策略有（2.7.5+ 版本，具体使用请参见文档）：&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>指定优先级&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#586e75">&amp;lt;!-- 来自 preferred=“true” 注册中心的地址将被优先选择，只有该中心无可用地址时才 Fallback 到其他注册中心 --&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://${zookeeper.address1}&amp;#34;&lt;/span> preferred=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;li>
-&lt;p>同 zone 优先&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#586e75">&amp;lt;!-- 选址时会和流量中的 zone key 做匹配，流量会优先派发到相同 zone 的地址 --&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://${zookeeper.address1}&amp;#34;&lt;/span> zone=&lt;span style="color:#2aa198">&amp;#34;beijing&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;li>
-&lt;p>权重轮询&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#586e75">&amp;lt;!-- 来自北京和上海集群的地址，将以 10:1 的比例来分配流量 --&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;beijing&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://${zookeeper.address1}&amp;#34;&lt;/span> weight=&lt;span style="color:#2aa198">”100“&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;shanghai&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://${zookeeper.address2}&amp;#34;&lt;/span> weight=&lt;span style="color:#2aa198">”10“&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;li>
-&lt;p>默认，stick to 任意可用&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;h4 id="多注册中心适用的场景">多注册中心适用的场景&lt;/h4>
-&lt;ul>
-&lt;li>
-&lt;p>同区域流量优先调度&lt;/p>
-&lt;p>出于容灾或者服务伸缩性需求，服务/应用往往需要部署在多个独立的机房/区域，在每个区域有独立注册中心集群的场景下，实现同区域的流量优先调度就能很好的解决延迟和可用性问题。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>注册中心迁移&lt;/p>
-&lt;p>公司的服务一直以来可能是存储在某一个注册中心，如 Zookeeper，但到了某个时间节点，因为各种各样的原因，当我们要迁移到另外的注册中心时，多注册中心模型能够保证平滑的迁移。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>异构系统互通&lt;/p>
-&lt;p>不同微服务体系开发的服务，都封闭在各自的服务发现体系中，而通过统一的多注册中心模型，可以实现不同体系的服务互相发现。&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;h2 id="借助-dubbo-联通异构的微服务体系">借助 Dubbo 联通异构的微服务体系&lt;/h2>
-&lt;p>上文我们提到了在组织内存在异构微服务体系的各种合理可能性，现在我们来具体看一下异构微服务体系的实际场景，以及使用 Dubbo 实现互联互通的解决方法。首先我们先通过一张图来看一下，联通异构的微服务体系具体是一个什么样的场景。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/heterogeneous.png" alt="heterogeneous.png">&lt;/p>
-&lt;p>如上图所示，我们有部分微服务可以是基于 SpringCloud、gRPC、K8S 或者是自建体系构建的，他们各自之间默认是相互隔离无法联通的。当我们再构建一套基于 Dubbo 的微服务体系时，则利用 Dubbo 的多协议、多服务发现模型，我们就可以做到和各个微服务体系间的两两之间的互联互通。进一步的，如图中橙色箭头所示，依赖 Dubbo 体系作为桥接层，我们还可以实现两个异构微服务体系间的打通。&lt;/p>
-&lt;p>对于以下几个示例场景，由于在地址发现层面目前没有统一的标准，我们暂且假设地址发现层面不同的体系建是没有障碍的，我们将重点关注迁移的基本流程以及通信协议环节。（关于地址发现部分，我们将在后续《服务自省：基于应用粒度的服务发现》之后再深入探讨）&lt;/p>
-&lt;h3 id="dubbo-体系内的协议迁移共存">Dubbo 体系内的协议迁移（共存）&lt;/h3>
-&lt;p>绝大多数开发者对 Dubbo 有这么一个固有认知：使用 Dubbo 开发微服务系统，则就要用 Dubbo 协议来作为服务间的通信协议才是最优方案。实际上，我们完全没有必要只束缚在 Dubbo RPC 协议上。Dubbo 作为微服务开发框架和 Dubbo 作为 RPC 协议这是两个概念，其实是完全可以分开来看待的，比如我们用 Dubbo 框架开发的业务系统，选用 rest、gRPC 通信是完全没有问题的（参加 Dubbo 支持的协议列表），具体用什么协议根据业务特点和技术规划才是最适合的。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/grpcrest.png" alt="grpcrest.png">&lt;/p>
-&lt;p>当前在云原生、Mesh 的大背景下， HTTP1/2、gRPC 协议开始受到越来越多的关注，一方面原因自然是因为它们在标准化方面做的更好，得到的更多的网络设备和基础设施的支持，具备更好的通用性和穿透性。对于很多有云原生迁移意愿的企业来说，往此类协议迁移无疑将对之后的架构升级有更多的帮助。&lt;/p>
-&lt;p>下图演示了在 Dubbo 体系内，从 Dubbo 协议向 gRPC 协议迁移的一个中间状态。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/migrate.png" alt="migrate.png">&lt;/p>
-&lt;ul>
-&lt;li>最左边的代表尚未迁移的老应用，这类应用在迁移过程中仍然要消费和提供 Dubbo 协议的服务。&lt;/li>
-&lt;li>中间的代表处于迁移中的应用，他们中间可能有些是服务提供者，既要为左边的老系统提供提供 Dubbo 协议服务；又要为右边的新系统提供 gRPC 服务；因此他们都是双协议暴露服务。&lt;/li>
-&lt;li>最右边则代表是新开发的或者已经迁移完成的应用，这个体系内已能完全用 gRPC 协议通信。&lt;/li>
-&lt;li>最终度过中间态后，我们期望所有的应用都达到最左边应用的状态，实现完全的 gRPC 协议通信。&lt;/li>
-&lt;/ul>
-&lt;h3 id="spring-cloud-体系迁移到-dubbo-体系共存">Spring Cloud 体系迁移到 Dubbo 体系（共存）&lt;/h3>
-&lt;p>如前文所述，由于 SpringCloud 和 Dubbo 间服务发现模型的问题，要两个体系间的地址互通需要 Dubbo 侧作相应的适配，关于这部分内容将在接下来的 2.7.5 版本《服务自省》部分发布，在此我们暂且认为已经打通。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/migrate-final.png" alt="migrate-final.png">&lt;/p>
-&lt;p>Dubbo 体系内的部分应用作为透明的联通两个体系的关键节点，部分服务提供者应用要双协议发布、部分消费者应用要做到选定协议消费。由于老的 Spring Cloud 体系不允许做任何改动，因此联通两套体系的关键是 REST 协议，对 Dubbo 侧的应用来说：&lt;/p>
-&lt;ul>
-&lt;li>部分应用可能要以 REST 协议消费 SpringCloud 的服务；&lt;/li>
-&lt;li>部分应用可能要暴露 REST 协议共 SpringCloud 消费；&lt;/li>
-&lt;li>Dubbo 自有体系内则通过自己选定的协议通信，这里就比较灵活了，可以是 Dubbo、REST、gRPC 等其中的任一种。而如果选定 REST 协议则对于与 SpringCloud 体系的联通就变得更加自然了，因为两端的协议都是统一的。&lt;/li>
-&lt;/ul>
-&lt;p>对于消费 Spring Cloud 服务的应用，要配置服务 ：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface =&lt;span style="color:#2aa198">&amp;#34;xxx.SpringService&amp;#34;&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;rest&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>对于提供服务给 Spring Cloud 侧消费的应用，则指定服务暴露为 rest 协议，或者双协议暴露（因如果这个服务还要被新体系内的应用调用到）：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;xxx.NewService&amp;#34;&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;rest,dubbo&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>作为 Dubbo 的维护者，虽然我们这里有明显的偏向性，讲的是从如何从 SpringCloud 体系迁移到 Dubbo 体系。但是反过来考虑，如果你已经或者即将选型 Dubbo 来开发微服务，则未来从 Dubbo 迁移到 SpringCloud 也是同样的思路，Dubbo 的多协议、多注册模型为双向迁移都提供了同样的灵活性。&lt;/p>
-&lt;h3 id="自建体系迁移到-dubbo-体系共存">自建体系迁移到 Dubbo 体系（共存）&lt;/h3>
-&lt;p>这个场景和上一节中讲到的的 SpringCloud 迁移有些类似，最大的区别在于 rest 协议是 Dubbo 官方默认提供支持的，而对于已有的微服务体系内的私有通信协议，则需要先要自己去扩展 Dubbo Protocol 来提供协议层面的支持，关于 Protocol 如何扩展请参见以下官方文档：&lt;/p>
-&lt;p>&lt;a href="http://dubbo.apache.org/zh-cn/docs/dev/impls/protocol.html">http://dubbo.apache.org/zh-cn/docs/dev/impls/protocol.html&lt;/a>&lt;/p>
-&lt;h2 id="总结与展望">总结与展望&lt;/h2>
-&lt;p>要实现异构微服务体系间的共存或迁移，关键点在打通异构体系间的&lt;code>协议&lt;/code>与&lt;code>服务发现&lt;/code>，得益于 Dubbo 自身对多协议、多注册模型的支持，我们可以很容易的使 Dubbo 成为桥接异构微服务体系的中间层。熟悉 Dubbo 多协议实现细节的同学，可能会担心在服务数量较多的场景下，多协议注册会导致地址数量翻倍从而影响地址推送性能；另外在文中《借助 Dubbo 联通异构的微服务体系》一节，关于如何实现异构体系间的透明服务发现部分我们没有做详细的说明。关于涉及服务发现的这部分，我们将在接下来的文章中做具体阐述，看看 Dubbo 2.7.5 版本引入新的服务发现机制是如何解决这个问题的，请持续关注后续文章及 Dubbo 官方文档。&lt;/p></description></item></channel></rss>
+&lt;/section></description></item></channel></rss>

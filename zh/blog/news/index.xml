@@ -1,4 +1,262 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – 技术分享</title><link>https://dubbo.apache.org/zh/blog/news/</link><description>Recent content in 技术分享 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/blog/news/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: dubbo-go 白话文</title><link>https://dubbo.apache.org/zh/blog/2021/02/20/dubbo-go-%E7%99%BD%E8%AF%9D%E6%96%87/</link><pubDate>Sat, 20 Feb 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/02/20/dubbo-go-%E7%99%BD%E8%AF%9D%E6%96%87/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – 技术分享</title><link>https://dubbo.apache.org/zh/blog/news/</link><description>Recent content in 技术分享 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/blog/news/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: Dubbo3 应用级服务发现</title><link>https://dubbo.apache.org/zh/blog/2021/06/02/dubbo3-%E5%BA%94%E7%94%A8%E7%BA%A7%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0/</link><pubDate>Wed, 02 Jun 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/06/02/dubbo3-%E5%BA%94%E7%94%A8%E7%BA%A7%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0/</guid><description>
+&lt;h2 id="1-服务发现service-discovery-概述">1 服务发现（Service Discovery） 概述&lt;/h2>
+&lt;p>从 Internet 刚开始兴起，如何动态感知后端服务的地址变化就是一个必须要面对的问题，为此人们定义了 DNS 协议，基于此协议，调用方只需要记住由固定字符串组成的域名，就能轻松完成对后端服务的访问，而不用担心流量最终会访问到哪些机器 IP，因为有代理组件会基于 DNS 地址解析后的地址列表，将流量透明的、均匀的分发到不同的后端机器上。&lt;/p>
+&lt;p>在使用微服务构建复杂的分布式系统时，如何感知 backend 服务实例的动态上下线，也是微服务框架最需要关心并解决的问题之一。业界将这个问题称之为 - 微服务的地址发现（Service Discovery），业界比较有代表性的微服务框架如 SpringCloud、Microservices、Dubbo 等都抽象了强大的动态地址发现能力，并且为了满足微服务业务场景的需求，绝大多数框架的地址发现都是基于自己设计的一套机制来实现，因此在能力、灵活性上都要比传统 DNS 丰富得多。如 SpringCloud 中常用的 Eureka， Dubbo 中常用的 Zookeeper、Nacos 等，这些注册中心实现不止能够传递地址（IP + Port），还包括一些微服务的 Metadata 信息，如实例序列化类型、实例方法列表、各个方法级的定制化配置等。&lt;/p>
+&lt;p>下图是微服务中 Service Discovery 的基本工作原理图，微服务体系中的实例大概可分为三种角色：服务提供者（Provider）、服务消费者（Consumer）和注册中心（Registry）。而不同框架实现间最主要的区别就体现在注册中心数据的组织：地址如何组织、以什么粒度组织、除地址外还同步哪些数据？&lt;/p>
+&lt;p>&lt;img src="https://intranetproxy.alipay.com/skylark/lark/0/2020/png/54037/1590152557149-ea956a69-f303-4c0e-b098-89ed61caf30b.png" alt="undefined">&lt;/p>
+&lt;p>我们今天这篇文章就是围绕这三个角色展开，重点看下 Dubbo 中对于服务发现方案的设计，包括之前老的服务发现方案的优势和缺点，以及 Dubbo 3.0 中正在设计、开发中的全新的&lt;strong>面向应用粒度的地址发现方案&lt;/strong>，我们期待这个新的方案能做到：&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>支持几十万/上百万级集群实例的地址发现&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>与不同的微服务体系（如 Spring Cloud）实现在地址发现层面的互通&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;h2 id="2-dubbo-地址发现机制解析">2 Dubbo 地址发现机制解析&lt;/h2>
+&lt;p>我们先以一个 DEMO 应用为例，来快速的看一下 Dubbo “接口粒度”服务发现与“应用粒度”服务发现体现出来的区别。这里我们重点关注 Provider 实例是如何向注册中心注册的，并且，为了体现注册中心数据量变化，我们观察的是两个 Provider 实例的场景。&lt;/p>
+&lt;p>&lt;strong>应用 DEMO 提供的服务列表如下：&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.basic.api.DemoService&amp;#34;&lt;/span> ref=&lt;span style="color:#2aa198">&amp;#34;demoService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.basic.api.GreetingService&amp;#34;&lt;/span> ref=&lt;span style="color:#2aa198">&amp;#34;greetingService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>我们示例注册中心实现采用的是 Zookeeper ，启动 192.168.0.103 和 192.168.0.104 两个实例后，以下是两种模式下注册中心的实际数据&lt;/p>
+&lt;p>&lt;strong>1. “接口粒度” 服务发现&lt;/strong>&lt;/p>
+&lt;p>192.168.0.103 实例注册的数据&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">dubbo://192.168.0.103:20880/org.apache.dubbo.samples.basic.api.DemoService?anyhost=true&amp;amp;application=demo-provider&amp;amp;default=true&amp;amp;deprecated=false&amp;amp;dubbo=2.0.2&amp;amp;dynamic=true&amp;amp;generic=false&amp;amp;interface=org.apache.dubbo.samples.basic.api.DemoService&amp;amp;methods=testVoid,sayHello&amp;amp;pid=995&amp;amp;release=2.7.7&amp;amp;side=provider&amp;amp;timestamp=1596988171266
+dubbo://192.168.0.103:20880/org.apache.dubbo.samples.basic.api.GreetingService?anyhost=true&amp;amp;application=demo-provider&amp;amp;default=true&amp;amp;deprecated=false&amp;amp;dubbo=2.0.2&amp;amp;dynamic=true&amp;amp;generic=false&amp;amp;interface=org.apache.dubbo.samples.basic.api.GreetingService&amp;amp;methods=greeting&amp;amp;pid=995&amp;amp;release=2.7.7&amp;amp;side=provider&amp;amp;timestamp=1596988170816
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>192.168.0.104 实例注册的数据&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">dubbo://192.168.0.104:20880/org.apache.dubbo.samples.basic.api.DemoService?anyhost=true&amp;amp;application=demo-provider&amp;amp;default=true&amp;amp;deprecated=false&amp;amp;dubbo=2.0.2&amp;amp;dynamic=true&amp;amp;generic=false&amp;amp;interface=org.apache.dubbo.samples.basic.api.DemoService&amp;amp;methods=testVoid,sayHello&amp;amp;pid=995&amp;amp;release=2.7.7&amp;amp;side=provider&amp;amp;timestamp=1596988171266
+dubbo://192.168.0.104:20880/org.apache.dubbo.samples.basic.api.GreetingService?anyhost=true&amp;amp;application=demo-provider&amp;amp;default=true&amp;amp;deprecated=false&amp;amp;dubbo=2.0.2&amp;amp;dynamic=true&amp;amp;generic=false&amp;amp;interface=org.apache.dubbo.samples.basic.api.GreetingService&amp;amp;methods=greeting&amp;amp;pid=995&amp;amp;release=2.7.7&amp;amp;side=provider&amp;amp;timestamp=1596988170816
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>2. “应用粒度” 服务发现&lt;/strong>&lt;/p>
+&lt;p>192.168.0.103 与 192.168.0.104 两个实例共享一份注册中心数据，如下：&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">{
+&amp;#34;name&amp;#34;: &amp;#34;demo-provider&amp;#34;,
+&amp;#34;id&amp;#34;: &amp;#34;192.168.0.103:20880&amp;#34;,
+&amp;#34;address&amp;#34;: &amp;#34;192.168.0.103&amp;#34;,
+&amp;#34;port&amp;#34;: 20880,
+&amp;#34;metadata&amp;#34;: {
+&amp;#34;dubbo.endpoints&amp;#34;: &amp;#34;[{\&amp;#34;port\&amp;#34;:20880,\&amp;#34;protocol\&amp;#34;:\&amp;#34;dubbo\&amp;#34;}]&amp;#34;,
+&amp;#34;dubbo.metadata.storage-type&amp;#34;: &amp;#34;local&amp;#34;,
+&amp;#34;dubbo.revision&amp;#34;: &amp;#34;6785535733750099598&amp;#34;
+},
+&amp;#34;time&amp;#34;: 1583461240877
+}
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>{
+&amp;ldquo;name&amp;rdquo;: &amp;ldquo;demo-provider&amp;rdquo;,
+&amp;ldquo;id&amp;rdquo;: &amp;ldquo;192.168.0.104:20880&amp;rdquo;,
+&amp;ldquo;address&amp;rdquo;: &amp;ldquo;192.168.0.104&amp;rdquo;,
+&amp;ldquo;port&amp;rdquo;: 20880,
+&amp;ldquo;metadata&amp;rdquo;: {
+&amp;ldquo;dubbo.endpoints&amp;rdquo;: &amp;ldquo;[{&amp;quot;port&amp;quot;:20880,&amp;quot;protocol&amp;quot;:&amp;quot;dubbo&amp;quot;}]&amp;rdquo;,
+&amp;ldquo;dubbo.metadata.storage-type&amp;rdquo;: &amp;ldquo;local&amp;rdquo;,
+&amp;ldquo;dubbo.revision&amp;rdquo;: &amp;ldquo;7829635812370099387&amp;rdquo;
+},
+&amp;ldquo;time&amp;rdquo;: 1583461240877
+}&lt;/p>
+&lt;p>对比以上两种不同粒度的服务发现模式，从 “接口粒度” 升级到 “应用粒度” 后我们可以总结出最大的区别是：注册中心数据量不再与接口数成正比，不论应用提供有多少接口，注册中心只有一条实例数据。&lt;/p>
+&lt;p>那么接下来我们详细看下这个变化给 Dubbo 带来了哪些好处。&lt;/p>
+&lt;h2 id="3-dubbo-应用级服务发现的意义">3 Dubbo 应用级服务发现的意义&lt;/h2>
+&lt;p>我们先说结论，应用级服务发现给 Dubbo 带来以下优势：&lt;/p>
+&lt;ol>
+&lt;li>与业界主流微服务模型对齐，比如 SpringCloud、Kubernetes Native Service等。&lt;/li>
+&lt;li>提升性能与可伸缩性。注册中心数据的重新组织（减少），能最大幅度的减轻注册中心的存储、推送压力，进而减少 Dubbo Consumer 侧的地址计算压力；集群规模也开始变得可预测、可评估（与 RPC 接口数量无关，只与实例部署规模相关）。&lt;/li>
+&lt;/ol>
+&lt;h3 id="31-对齐主流微服务模型">3.1 对齐主流微服务模型&lt;/h3>
+&lt;p>自动、透明的实例地址发现（负载均衡）是所有微服务框架需要解决的事情，这能让后端的部署结构对上游微服务透明，上游服务只需要从收到的地址列表中选取一个，发起调用就可以了。要实现以上目标，涉及两个关键点的自动同步：&lt;/p>
+&lt;ul>
+&lt;li>实例地址，服务消费方需要知道地址以建立链接&lt;/li>
+&lt;li>RPC 方法定义，服务消费方需要知道 RPC 服务的具体定义，不论服务类型是 rest 或 rmi 等。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://intranetproxy.alipay.com/skylark/lark/0/2020/png/54037/1583499778138-76fbb607-b351-47f4-ae18-2cd89b3f225b.png" alt="undefined">&lt;/p>
+&lt;p>对于 RPC 实例间借助注册中心的数据同步，REST 定义了一套非常有意思的成熟度模型，感兴趣的朋友可以参考这里的链接 &lt;a href="https://www.martinfowler.com/articles/richardsonMaturityModel.html">https://www.martinfowler.com/articles/richardsonMaturityModel.html&lt;/a>， 按照文章中的 4 级成熟度定义，Dubbo 当前基于接口粒度的模型可以对应到 L4 级别。&lt;/p>
+&lt;p>接下来，我们看看 Dubbo、SpringCloud 以及 Kubernetes 分别是怎么围绕自动化的实例地址发现这个目标设计的。&lt;/p>
+&lt;p>&lt;strong>1. Spring Cloud&lt;/strong>&lt;/p>
+&lt;p>Spring Cloud 通过注册中心只同步了应用与实例地址，消费方可以基于实例地址与服务提供方建立链接，但是消费方对于如何发起 http 调用（SpringCloud 基于 rest 通信）一无所知，比如对方有哪些 http endpoint，需要传入哪些参数等。&lt;/p>
+&lt;p>RPC 服务这部分信息目前都是通过线下约定或离线的管理系统来协商的。这种架构的优缺点总结如下。
+优势：部署结构清晰、地址推送量小；
+缺点：地址订阅需要指定应用名， provider 应用变更（拆分）需消费端感知；RPC 调用无法全自动同步。&lt;/p>
+&lt;p>&lt;img src="https://intranetproxy.alipay.com/skylark/lark/0/2020/png/54037/1583499797278-bfd6d8dc-229f-441a-af53-1d07174406ff.png" alt="undefined">&lt;/p>
+&lt;p>&lt;strong>2. Dubbo&lt;/strong>&lt;/p>
+&lt;p>Dubbo 通过注册中心同时同步了实例地址和 RPC 方法，因此其能实现 RPC 过程的自动同步，面向 RPC 编程、面向 RPC 治理，对后端应用的拆分消费端无感知，其缺点则是地址推送数量变大，和 RPC 方法成正比。&lt;/p>
+&lt;p>&lt;img src="https://intranetproxy.alipay.com/skylark/lark/0/2020/png/54037/1583499805538-758023d3-1f26-4d39-9705-74549f91f6ab.png" alt="undefined">&lt;/p>
+&lt;p>&lt;strong>3. Dubbo + Kubernetes&lt;/strong>&lt;/p>
+&lt;p>Dubbo 要支持 Kubernetes native service，相比之前自建注册中心的服务发现体系来说，在工作机制上主要有两点变化：&lt;/p>
+&lt;ul>
+&lt;li>服务注册由平台接管，provider 不再需要关心服务注册&lt;/li>
+&lt;li>consumer 端服务发现将是 Dubbo 关注的重点，通过对接平台层的 API-Server、DNS 等，Dubbo client 可以通过一个 &lt;a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service Name&lt;/a>（通常对应到 Application Name）查询到一组 &lt;a href="">Endpoints&lt;/a>（一组运行 provider 的 pod），通过将 Endpoints 映射到 Dubbo 内部地址列表，以驱动 Dubbo 内置的负载均衡机制工作。&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>Kubernetes Service 作为一个抽象概念，怎么映射到 Dubbo 是一个值得讨论的点&lt;/p>
+&lt;ul>
+&lt;li>Service Name - &amp;gt; Application Name，Dubbo 应用和 Kubernetes 服务一一对应，对于微服务运维和建设环节透明，与开发阶段解耦。&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#268bd2">apiVersion&lt;/span>: v1
+&lt;span style="color:#268bd2">kind&lt;/span>: Service
+&lt;span style="color:#268bd2">metadata&lt;/span>:
+&lt;span style="color:#268bd2">name&lt;/span>: provider-app-name
+&lt;span style="color:#268bd2">spec&lt;/span>:
+&lt;span style="color:#268bd2">selector&lt;/span>:
+&lt;span style="color:#268bd2">app&lt;/span>: provider-app-name
+&lt;span style="color:#268bd2">ports&lt;/span>:
+- &lt;span style="color:#268bd2">protocol&lt;/span>: TCP
+&lt;span style="color:#268bd2">port&lt;/span>:
+&lt;span style="color:#268bd2">targetPort&lt;/span>: &lt;span style="color:#2aa198">9376&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>Service Name - &amp;gt; Dubbo RPC Service，Kubernetes 要维护调度的服务与应用内建 RPC 服务绑定，维护的服务数量变多。&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">---
+&lt;span style="color:#268bd2">apiVersion&lt;/span>: v1
+&lt;span style="color:#268bd2">kind&lt;/span>: Service
+&lt;span style="color:#268bd2">metadata&lt;/span>:
+&lt;span style="color:#268bd2">name&lt;/span>: rpc-service-1
+&lt;span style="color:#268bd2">spec&lt;/span>:
+&lt;span style="color:#268bd2">selector&lt;/span>:
+&lt;span style="color:#268bd2">app&lt;/span>: provider-app-name
+&lt;span style="color:#268bd2">ports&lt;/span>: &lt;span style="color:#586e75">##&lt;/span>
+...
+---
+&lt;span style="color:#268bd2">apiVersion&lt;/span>: v1
+&lt;span style="color:#268bd2">kind&lt;/span>: Service
+&lt;span style="color:#268bd2">metadata&lt;/span>:
+&lt;span style="color:#268bd2">name&lt;/span>: rpc-service-2
+&lt;span style="color:#268bd2">spec&lt;/span>:
+&lt;span style="color:#268bd2">selector&lt;/span>:
+&lt;span style="color:#268bd2">app&lt;/span>: provider-app-name
+&lt;span style="color:#268bd2">ports&lt;/span>: &lt;span style="color:#586e75">##&lt;/span>
+...
+---
+&lt;span style="color:#268bd2">apiVersion&lt;/span>: v1
+&lt;span style="color:#268bd2">kind&lt;/span>: Service
+&lt;span style="color:#268bd2">metadata&lt;/span>:
+&lt;span style="color:#268bd2">name&lt;/span>: rpc-service-N
+&lt;span style="color:#268bd2">spec&lt;/span>:
+&lt;span style="color:#268bd2">selector&lt;/span>:
+&lt;span style="color:#268bd2">app&lt;/span>: provider-app-name
+&lt;span style="color:#268bd2">ports&lt;/span>: &lt;span style="color:#586e75">##&lt;/span>
+...
+&lt;/code>&lt;/pre>&lt;/div>&lt;/blockquote>
+&lt;p>&lt;img src="https://intranetproxy.alipay.com/skylark/lark/0/2020/png/54037/1583499823484-641d2e54-2833-40fc-8c17-8fbd5e9cd4da.png" alt="undefined">&lt;/p>
+&lt;p>结合以上几种不同微服务框架模型的分析，我们可以发现，Dubbo 与 SpringCloud、Kubernetes 等不同产品在微服务的抽象定义上还是存在很大不同的。SpringCloud 和 Kubernetes 在微服务的模型抽象上还是比较接近的，两者基本都只关心实例地址的同步，如果我们去关心其他的一些服务框架产品，会发现它们绝大多数也是这么设计的；&lt;/p>
+&lt;blockquote>
+&lt;p>即 REST 成熟度模型中的 L3 级别。&lt;/p>
+&lt;/blockquote>
+&lt;p>对比起来 Dubbo 则相对是比较特殊的存在，更多的是从 RPC 服务的粒度去设计的。&lt;/p>
+&lt;blockquote>
+&lt;p>对应 REST 成熟度模型中的 L4 级别。&lt;/p>
+&lt;/blockquote>
+&lt;p>如我们上面针对每种模型做了详细的分析，每种模型都有其优势和不足。而我们最初决定 Dubbo 要做出改变，往其他的微服务发现模型上的对齐，是我们最早在确定 Dubbo 的云原生方案时，我们发现要让 Dubbo 去支持 Kubernetes Native Service，模型对齐是一个基础条件；另一点是来自用户侧对 Dubbo 场景化的一些工程实践的需求，得益于 Dubbo 对多注册、多协议能力的支持，使得 Dubbo 联通不同的微服务体系成为可能，而服务发现模型的不一致成为其中的一个障碍，这部分的场景描述请参见以下文章：https://www.atatech.org/articles/157719&lt;/p>
+&lt;h3 id="32-更大规模的微服务集群---解决性能瓶颈">3.2 更大规模的微服务集群 - 解决性能瓶颈&lt;/h3>
+&lt;p>这部分涉及到和注册中心、配置中心的交互，关于不同模型下注册中心数据的变化，之前原理部分我们简单分析过。为更直观的对比服务模型变更带来的推送效率提升，我们来通过一个示例看一下不同模型注册中心的对比：&lt;/p>
+&lt;p>&lt;img src="https://intranetproxy.alipay.com/skylark/lark/0/2020/png/54037/1590139913555-1673facd-87d0-4f89-b5e9-fef62745b7bb.png" alt="undefined">&lt;/p>
+&lt;p>图中左边是微服务框架的一个典型工作流程，Provider 和 Consumer 通过注册中心实现自动化的地址通知。其中，Provider 实例的信息如图中表格所示：
+应用 DEMO 包含三个接口 DemoService 1 2 3，当前实例的 ip 地址为 10.210.134.30。&lt;/p>
+&lt;ul>
+&lt;li>对于 Spring Cloud 和 Kubernetes 模型，注册中心只会存储一条 &lt;code>DEMO - 10.210.134.30+metadata&lt;/code> 的数据；&lt;/li>
+&lt;li>对于老的 Dubbo 模型，注册中心存储了三条接口粒度的数据，分别对应三个接口 DemoService 1 2 3，并且很多的址数据都是重复的；&lt;/li>
+&lt;/ul>
+&lt;p>可以总结出，基于应用粒度的模型所存储和推送的数据量是和应用、实例数成正比的，只有当我们的应用数增多或应用的实例数增长时，地址推送压力才会上涨。
+而对于基于接口粒度的模型，数据量是和接口数量正相关的，鉴于一个应用通常发布多个接口的现状，这个数量级本身比应用粒度是要乘以倍数的；另外一个关键点在于，接口粒度导致的集群规模评估的不透明，相对于实i例、应用增长都通常是在运维侧的规划之中，接口的定义更多的是业务侧的内部行为，往往可以绕过评估给集群带来压力。&lt;/p>
+&lt;p>以 Consumer 端服务订阅举例，根据我对社区部分 Dubbo 中大规模头部用户的粗略统计，根据受统计公司的实际场景，一个 Consumer 应用要消费（订阅）的 Provier 应用数量往往要超过 10 个，而具体到其要消费（订阅）的的接口数量则通常要达到 30 个，平均情况下 Consumer 订阅的 3 个接口来自同一个 Provider 应用，如此计算下来，如果以应用粒度为地址通知和选址基本单位，则平均地址推送和计算量将下降 60% 还要多，
+而在极端情况下，也就是当 Consumer 端消费的接口更多的来自同一个应用时，这个地址推送与内存消耗的占用将会进一步得到降低，甚至可以超过 80% 以上。&lt;/p>
+&lt;p>一个典型的几段场景即是 Dubbo 体系中的网关型应用，有些网关应用消费（订阅）达 100+ 应用，而消费（订阅）的服务有 1000+ ，平均有 10 个接口来自同一个应用，如果我们把地址推送和计算的粒度改为应用，则地址推送量从原来的 n * 1000 变为 n * 100，地址数量降低可达近 90%。&lt;/p>
+&lt;h2 id="4-应用级服务发现工作原理">4 应用级服务发现工作原理&lt;/h2>
+&lt;h3 id="41-设计原则">4.1 设计原则&lt;/h3>
+&lt;p>上面一节我们从&lt;strong>服务模型&lt;/strong>及&lt;strong>支撑大规模集群&lt;/strong>的角度分别给出了 Dubbo 往应用级服务发现靠拢的好处或原因，但这么做的同时接口粒度的服务治理能力还是要继续保留，这是 Dubbo 框架编程模型易用性、服务治理能力优势的基础。
+以下是我认为我们做服务模型迁移仍要坚持的设计原则&lt;/p>
+&lt;ul>
+&lt;li>新的服务发现模型要实现对原有 Dubbo 消费端开发者的无感知迁移，即 Dubbo 继续面向 RPC 服务编程、面向 RPC 服务治理，做到对用户侧完全无感知。&lt;/li>
+&lt;li>建立 Consumer 与 Provider 间的自动化 RPC 服务元数据协调机制，解决传统微服务模型无法同步 RPC 级接口配置的缺点。&lt;/li>
+&lt;/ul>
+&lt;h3 id="42-基本原理详解">4.2 基本原理详解&lt;/h3>
+&lt;p>应用级服务发现作为一种新的服务发现机制，和以前 Dubbo 基于 RPC 服务粒度的服务发现在核心流程上基本上是一致的：即服务提供者往注册中心注册地址信息，服务消费者从注册中心拉取&amp;amp;订阅地址信息。&lt;/p>
+&lt;p>这里主要的不同有以下两点：&lt;/p>
+&lt;h4 id="421-注册中心数据以应用---实例列表格式组织不再包含-rpc-服务信息">4.2.1 注册中心数据以“应用 - 实例列表”格式组织，不再包含 RPC 服务信息&lt;/h4>
+&lt;p>&lt;img src="https://intranetproxy.alipay.com/skylark/lark/0/2020/png/54037/1583499855399-61759d90-3d83-4957-9ea7-4d5a79ae8d96.png" alt="undefined">&lt;/p>
+&lt;p>以下是每个 Instance metadata 的示例数据，总的原则是 metadata 只包含当前 instance 节点相关的信息，不涉及 RPC 服务粒度的信息。&lt;/p>
+&lt;p>总体信息概括如下：实例地址、实例各种环境标、metadata service 元数据、其他少量必要属性。&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
+&lt;span style="color:#268bd2">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;provider-app-name&amp;#34;&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;id&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;192.168.0.102:20880&amp;#34;&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;address&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;192.168.0.102&amp;#34;&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;port&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">20880&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;sslPort&amp;#34;&lt;/span>: &lt;span style="color:#cb4b16">null&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;payload&amp;#34;&lt;/span>: {
+&lt;span style="color:#268bd2">&amp;#34;id&amp;#34;&lt;/span>: &lt;span style="color:#cb4b16">null&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;provider-app-name&amp;#34;&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;metadata&amp;#34;&lt;/span>: {
+&lt;span style="color:#268bd2">&amp;#34;metadataService&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;{\&amp;#34;dubbo\&amp;#34;:{\&amp;#34;version\&amp;#34;:\&amp;#34;1.0.0\&amp;#34;,\&amp;#34;dubbo\&amp;#34;:\&amp;#34;2.0.2\&amp;#34;,\&amp;#34;release\&amp;#34;:\&amp;#34;2.7.5\&amp;#34;,\&amp;#34;port\&amp;#34;:\&amp;#34;20881\&amp;#34;}}&amp;#34;&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;endpoints&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;[{\&amp;#34;port\&amp;#34;:20880,\&amp;#34;protocol\&amp;#34;:\&amp;#34;dubbo\&amp;#34;}]&amp;#34;&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;storage-type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;local&amp;#34;&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;revision&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;6785535733750099598&amp;#34;&lt;/span>,
+}
+},
+&lt;span style="color:#268bd2">&amp;#34;registrationTimeUTC&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">1583461240877&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;serviceType&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;DYNAMIC&amp;#34;&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;uriSpec&amp;#34;&lt;/span>: &lt;span style="color:#cb4b16">null&lt;/span>
+}
+&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="422-client--server-自行协商-rpc-方法信息">4.2.2 Client – Server 自行协商 RPC 方法信息&lt;/h4>
+&lt;p>在注册中心不再同步 RPC 服务信息后，服务自省在服务消费端和提供端之间建立了一条内置的 RPC 服务信息协商机制，这也是“服务自省”这个名字的由来。服务端实例会暴露一个预定义的 MetadataService RPC 服务，消费端通过调用 MetadataService 获取每个实例 RPC 方法相关的配置信息。&lt;/p>
+&lt;p>&lt;img src="https://intranetproxy.alipay.com/skylark/lark/0/2020/png/54037/1583499880399-1c9c6209-4fd9-404d-ada7-60f55077e788.png" alt="undefined">&lt;/p>
+&lt;p>当前 MetadataService 返回的数据格式如下，&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">[
+&lt;span style="color:#2aa198">&amp;#34;dubbo://192.168.0.102:20880/org.apache.dubbo.demo.DemoService?anyhost=true&amp;amp;application=demo-provider&amp;amp;deprecated=false&amp;amp;dubbo=2.0.2&amp;amp;dynamic=true&amp;amp;generic=false&amp;amp;interface=org.apache.dubbo.demo.DemoService&amp;amp;methods=sayHello&amp;amp;pid=9585&amp;amp;release=2.7.5&amp;amp;side=provider&amp;amp;timestamp=1583469714314&amp;#34;&lt;/span>,
+&lt;span style="color:#2aa198">&amp;#34;dubbo://192.168.0.102:20880/org.apache.dubbo.demo.HelloService?anyhost=true&amp;amp;application=demo-provider&amp;amp;deprecated=false&amp;amp;dubbo=2.0.2&amp;amp;dynamic=true&amp;amp;generic=false&amp;amp;interface=org.apache.dubbo.demo.DemoService&amp;amp;methods=sayHello&amp;amp;pid=9585&amp;amp;release=2.7.5&amp;amp;side=provider&amp;amp;timestamp=1583469714314&amp;#34;&lt;/span>,
+&lt;span style="color:#2aa198">&amp;#34;dubbo://192.168.0.102:20880/org.apache.dubbo.demo.WorldService?anyhost=true&amp;amp;application=demo-provider&amp;amp;deprecated=false&amp;amp;dubbo=2.0.2&amp;amp;dynamic=true&amp;amp;generic=false&amp;amp;interface=org.apache.dubbo.demo.DemoService&amp;amp;methods=sayHello&amp;amp;pid=9585&amp;amp;release=2.7.5&amp;amp;side=provider&amp;amp;timestamp=1583469714314&amp;#34;&lt;/span>
+]
+&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>熟悉 Dubbo 基于 RPC 服务粒度的服务发现模型的开发者应该能看出来，服务自省机制机制将以前注册中心传递的 URL 一拆为二：&lt;/p>
+&lt;ul>
+&lt;li>一部分和实例相关的数据继续保留在注册中心，如 ip、port、机器标识等。&lt;/li>
+&lt;li>另一部分和 RPC 方法相关的数据从注册中心移除，转而通过 MetadataService 暴露给消费端。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>理想情况下是能达到数据按照实例、RPC 服务严格区分开来，但明显可以看到以上实现版本还存在一些数据冗余，有些也数据还未合理划分。尤其是 MetadataService 部分，其返回的数据还只是简单的 URL 列表组装，这些 URL其实是包含了全量的数据。&lt;/strong>&lt;/p>
+&lt;/blockquote>
+&lt;p>以下是服务自省的一个完整工作流程图，详细描述了服务注册、服务发现、MetadataService、RPC 调用间的协作流程。&lt;/p>
+&lt;p>&lt;img src="https://intranetproxy.alipay.com/skylark/lark/0/2020/png/54037/1583499901394-e5d282e9-14d1-40fa-be73-a6f08b9f37ff.png" alt="undefined">&lt;/p>
+&lt;ul>
+&lt;li>服务提供者启动，首先解析应用定义的“普通服务”并依次注册为 RPC 服务，紧接着注册内建的 MetadataService 服务，最后打开 TCP 监听端口。&lt;/li>
+&lt;li>启动完成后，将实例信息注册到注册中心（仅限 ip、port 等实例相关数据），提供者启动完成。&lt;/li>
+&lt;li>服务消费者启动，首先依据其要“消费的 provider 应用名”到注册中心查询地址列表，并完成订阅（以实现后续地址变更自动通知）。&lt;/li>
+&lt;li>消费端拿到地址列表后，紧接着对 MetadataService 发起调用，返回结果中包含了所有应用定义的“普通服务”及其相关配置信息。&lt;/li>
+&lt;li>至此，消费者可以接收外部流量，并对提供者发起 Dubbo RPC 调用&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>在以上流程中，我们只考虑了一切顺利的情况，但在更详细的设计或编码实现中，我们还需要严格约定一些异常场景下的框架行为。比如，如果消费者 MetadataService 调用失败，则在重试知道成功之前，消费者将不可以接收外部流量。&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="43-服务自省中的关键机制">4.3 服务自省中的关键机制&lt;/h3>
+&lt;h4 id="431-元数据同步机制">4.3.1 元数据同步机制&lt;/h4>
+&lt;p>Client 与 Server 间在收到地址推送后的配置同步是服务自省的关键环节，目前针对元数据同步有两种具体的可选方案，分别是：&lt;/p>
+&lt;ul>
+&lt;li>内建 MetadataService。&lt;/li>
+&lt;li>独立的元数据中心，通过中细化的元数据集群协调数据。&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>1. 内建 MetadataService&lt;/strong>
+MetadataService 通过标准的 Dubbo 协议暴露，根据查询条件，会将内存中符合条件的“普通服务”配置返回给消费者。这一步发生在消费端选址和调用前。&lt;/p>
+&lt;p>&lt;strong>元数据中心&lt;/strong>
+复用 2.7 版本中引入的元数据中心，provider 实例启动后，会尝试将内部的 RPC 服务组织成元数据的格式到元数据中心，而 consumer 则在每次收到注册中心推送更新后，主动查询元数据中心。&lt;/p>
+&lt;blockquote>
+&lt;p>注意 consumer 端查询元数据中心的时机，是等到注册中心的地址更新通知之后。也就是通过注册中心下发的数据，我们能明确的知道何时某个实例的元数据被更新了，此时才需要去查元数据中心。&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;img src="https://intranetproxy.alipay.com/skylark/lark/0/2020/png/54037/1583499932997-1da7a8ef-ccd1-4bb5-8ac6-daab62b26a92.png" alt="undefined">&lt;/p>
+&lt;h4 id="432-rpc-服务-----应用映射关系">4.3.2 RPC 服务 &amp;lt; - &amp;gt; 应用映射关系&lt;/h4>
+&lt;p>回顾上文讲到的注册中心关于“应用 - 实例列表”结构的数据组织形式，这个变动目前对开发者并不是完全透明的，业务开发侧会感知到查询/订阅地址列表的机制的变化。具体来说，相比以往我们基于 RPC 服务来检索地址，现在 consumer 需要通过指定 provider 应用名才能实现地址查询或订阅。&lt;/p>
+&lt;p>老的 Consumer 开发与配置示例：&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#586e75">&amp;lt;!-- 框架直接通过 RPC Service 1/2/N 去注册中心查询或订阅地址列表 --&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://127.0.0.1:2181&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;RPC Service 1&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;RPC Service 2&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;RPC Service N&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>新的 Consumer 开发与配置示例：&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#586e75">&amp;lt;!-- 框架需要通过额外的 provided-by=&amp;#34;provider-app-x&amp;#34; 才能在注册中心查询或订阅到地址列表 --&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://127.0.0.1:2181?registry-type=service&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;RPC Service 1&amp;#34;&lt;/span> provided-by=&lt;span style="color:#2aa198">&amp;#34;provider-app-x&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;RPC Service 2&amp;#34;&lt;/span> provided-by=&lt;span style="color:#2aa198">&amp;#34;provider-app-x&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;RPC Service N&amp;#34;&lt;/span> provided-by=&lt;span style="color:#2aa198">&amp;#34;provider-app-y&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>以上指定 provider 应用名的方式是 Spring Cloud 当前的做法，需要 consumer 端的开发者显示指定其要消费的 provider 应用。&lt;/p>
+&lt;p>以上问题的根源在于注册中心不知道任何 RPC 服务相关的信息，因此只能通过应用名来查询。&lt;/p>
+&lt;p>为了使整个开发流程对老的 Dubbo 用户更透明，同时避免指定 provider 对可扩展性带来的影响（参见下方说明），我们设计了一套 &lt;code>RPC 服务到应用名&lt;/code>的映射关系，以尝试在 consumer 自动完成 RPC 服务到 provider 应用名的转换。&lt;/p>
+&lt;p>&lt;img src="https://intranetproxy.alipay.com/skylark/lark/0/2020/png/54037/1583499946918-83bbb6a2-3847-45a1-9b28-d2e34cca6634.png" alt="undefined">&lt;/p>
+&lt;blockquote>
+&lt;p>Dubbo 之所以选择建立一套“接口-应用”的映射关系，主要是考虑到 service - app 映射关系的不确定性。一个典型的场景即是应用/服务拆分，如上面提到的配置&lt;code>&amp;lt;dubbo:reference interface=&amp;quot;RPC Service 2&amp;quot; provided-by=&amp;quot;provider-app-x&amp;quot; /&amp;gt;&lt;/code>，PC Service 2 是定义于 provider-app-x 中的一个服务，未来它随时可能会被开发者分拆到另外一个新的应用如 provider-app-x-1 中，这个拆分要被所有的 PC Service 2 消费方感知到，并对应用进行修改升级，如改为&lt;code>&amp;lt;dubbo:reference interface=&amp;quot;RPC Service 2&amp;quot; provided-by=&amp;quot;provider-app-x-1&amp;quot; /&amp;gt;&lt;/code>，这样的升级成本不可否认还是挺高的。
+到底是 Dubbo 框架帮助开发者透明的解决这个问题，还是交由开发者自己去解决，当然这只是个策略选择问题，并且 Dubbo 2.7.5+ 版本目前是都提供了的。其实我个人更倾向于交由业务开发者通过组织上的约束来做，这样也可进一步降低 Dubbo 框架的复杂度，提升运行态的稳定性。&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="5-总结与展望">5 总结与展望&lt;/h2>
+&lt;p>应用级服务发现机制是 Dubbo 面向云原生走出的重要一步，它帮 Dubbo 打通了与其他微服务体系之间在地址发现层面的鸿沟，也成为 Dubbo 适配 Kubernetes Native Service 等基础设施的基础。我们期望 Dubbo 在新模型基础上，能继续保留在编程易用性、服务治理能力等方面强大的优势。但是我们也应该看到应用粒度的模型一方面带来了新的复杂性，需要我们继续去优化与增强；另一方面，除了地址存储与推送之外，应用粒度在帮助 Dubbo 选址层面也有进一步挖掘的潜力。&lt;/p></description></item><item><title>Blog: dubbo-go 白话文</title><link>https://dubbo.apache.org/zh/blog/2021/02/20/dubbo-go-%E7%99%BD%E8%AF%9D%E6%96%87/</link><pubDate>Sat, 20 Feb 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/02/20/dubbo-go-%E7%99%BD%E8%AF%9D%E6%96%87/</guid><description>
 &lt;h2 id="一前言">一、前言&lt;/h2>
 &lt;blockquote>
 &lt;p>本文基于 dubbogo &lt;a href="https://github.com/apache/dubbo-go/releases/tag/v1.5.4">1.5.4&lt;/a> 版本&lt;/p>
@@ -9079,163 +9337,4 @@ userServiceImpl &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color
 &lt;p>可以看到，Apache Way就是在整个开发过程中，不断地与社区交互，最大发挥社区的功能，汲取众人之力，这才是所谓&lt;strong>社区&lt;/strong>以及所谓&lt;strong>开源&lt;/strong>的含义。&lt;/p>
 &lt;h2 id="结尾">结尾&lt;/h2>
 &lt;p>Dubbo目前还在孵化阶段，整个Dubbo社区还不完善，我们也在跟着Dubbo一起成长，我们非常希望更多的Dubbo爱好者深度参与到Dubbo中，为你的代码生涯树一个里程碑。&lt;/p>
-&lt;p>相信过程，收获结果；天道酬勤，功不唐捐！&lt;/p></description></item><item><title>Blog: 如何使用Seata保证Dubbo微服务间的一致性</title><link>https://dubbo.apache.org/zh/blog/2019/01/17/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8seata%E4%BF%9D%E8%AF%81dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%97%B4%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7/</link><pubDate>Thu, 17 Jan 2019 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2019/01/17/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8seata%E4%BF%9D%E8%AF%81dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%97%B4%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7/</guid><description>
-&lt;h2 id="案例">案例&lt;/h2>
-&lt;p>用户采购商品业务，整个业务包含3个微服务:&lt;/p>
-&lt;ul>
-&lt;li>库存服务: 扣减给定商品的库存数量。&lt;/li>
-&lt;li>订单服务: 根据采购请求生成订单。&lt;/li>
-&lt;li>账户服务: 用户账户金额扣减。&lt;/li>
-&lt;/ul>
-&lt;h3 id="业务结构图">业务结构图&lt;/h3>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/fescar/fescar-1.png" alt="Architecture">&lt;/p>
-&lt;h3 id="storageservice">StorageService&lt;/h3>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">StorageService&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#586e75">/**
-&lt;/span>&lt;span style="color:#586e75"> * 扣除存储数量
-&lt;/span>&lt;span style="color:#586e75"> */&lt;/span>
-&lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">deduct&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String commodityCode&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#dc322f">int&lt;/span> count&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="orderservice">OrderService&lt;/h3>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">OrderService&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#586e75">/**
-&lt;/span>&lt;span style="color:#586e75"> * 创建订单
-&lt;/span>&lt;span style="color:#586e75"> */&lt;/span>
-Order &lt;span style="color:#268bd2">create&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String userId&lt;span style="color:#719e07">,&lt;/span> String commodityCode&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#dc322f">int&lt;/span> orderCount&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="accountservice">AccountService&lt;/h3>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">AccountService&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#586e75">/**
-&lt;/span>&lt;span style="color:#586e75"> * 从用户账户中借出
-&lt;/span>&lt;span style="color:#586e75"> */&lt;/span>
-&lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">debit&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String userId&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#dc322f">int&lt;/span> money&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="主要的业务逻辑">主要的业务逻辑：&lt;/h3>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">BusinessServiceImpl&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> BusinessService &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#268bd2">private&lt;/span> StorageService storageService&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#268bd2">private&lt;/span> OrderService orderService&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#586e75">/**
-&lt;/span>&lt;span style="color:#586e75"> * 采购
-&lt;/span>&lt;span style="color:#586e75"> */&lt;/span>
-&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">purchase&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String userId&lt;span style="color:#719e07">,&lt;/span> String commodityCode&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#dc322f">int&lt;/span> orderCount&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-storageService&lt;span style="color:#719e07">.&lt;/span>deduct&lt;span style="color:#719e07">(&lt;/span>commodityCode&lt;span style="color:#719e07">,&lt;/span> orderCount&lt;span style="color:#719e07">);&lt;/span>
-orderService&lt;span style="color:#719e07">.&lt;/span>create&lt;span style="color:#719e07">(&lt;/span>userId&lt;span style="color:#719e07">,&lt;/span> commodityCode&lt;span style="color:#719e07">,&lt;/span> orderCount&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">StorageServiceImpl&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> StorageService &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#268bd2">private&lt;/span> StorageDAO storageDAO&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#268bd2">@Override&lt;/span>
-&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">deduct&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String commodityCode&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#dc322f">int&lt;/span> count&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-Storage storage &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> Storage&lt;span style="color:#719e07">();&lt;/span>
-storage&lt;span style="color:#719e07">.&lt;/span>setCount&lt;span style="color:#719e07">(&lt;/span>count&lt;span style="color:#719e07">);&lt;/span>
-storage&lt;span style="color:#719e07">.&lt;/span>setCommodityCode&lt;span style="color:#719e07">(&lt;/span>commodityCode&lt;span style="color:#719e07">);&lt;/span>
-storageDAO&lt;span style="color:#719e07">.&lt;/span>update&lt;span style="color:#719e07">(&lt;/span>storage&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">OrderServiceImpl&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> OrderService &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#268bd2">private&lt;/span> OrderDAO orderDAO&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#268bd2">private&lt;/span> AccountService accountService&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#268bd2">public&lt;/span> Order &lt;span style="color:#268bd2">create&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String userId&lt;span style="color:#719e07">,&lt;/span> String commodityCode&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#dc322f">int&lt;/span> orderCount&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#dc322f">int&lt;/span> orderMoney &lt;span style="color:#719e07">=&lt;/span> calculate&lt;span style="color:#719e07">(&lt;/span>commodityCode&lt;span style="color:#719e07">,&lt;/span> orderCount&lt;span style="color:#719e07">);&lt;/span>
-accountService&lt;span style="color:#719e07">.&lt;/span>debit&lt;span style="color:#719e07">(&lt;/span>userId&lt;span style="color:#719e07">,&lt;/span> orderMoney&lt;span style="color:#719e07">);&lt;/span>
-Order order &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> Order&lt;span style="color:#719e07">();&lt;/span>
-order&lt;span style="color:#719e07">.&lt;/span>userId &lt;span style="color:#719e07">=&lt;/span> userId&lt;span style="color:#719e07">;&lt;/span>
-order&lt;span style="color:#719e07">.&lt;/span>commodityCode &lt;span style="color:#719e07">=&lt;/span> commodityCode&lt;span style="color:#719e07">;&lt;/span>
-order&lt;span style="color:#719e07">.&lt;/span>count &lt;span style="color:#719e07">=&lt;/span> orderCount&lt;span style="color:#719e07">;&lt;/span>
-order&lt;span style="color:#719e07">.&lt;/span>money &lt;span style="color:#719e07">=&lt;/span> orderMoney&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">return&lt;/span> orderDAO&lt;span style="color:#719e07">.&lt;/span>insert&lt;span style="color:#719e07">(&lt;/span>order&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="seata-分布式事务解决方案">Seata 分布式事务解决方案&lt;/h2>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/fescar/fescar-2.png" alt="undefined">&lt;/p>
-&lt;p>此处仅仅需要一行注解 &lt;code>@GlobalTransactional&lt;/code> 写在业务发起方的方法上:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">
-&lt;span style="color:#268bd2">@GlobalTransactional&lt;/span>
-&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">purchase&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String userId&lt;span style="color:#719e07">,&lt;/span> String commodityCode&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#dc322f">int&lt;/span> orderCount&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#719e07">......&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="dubbo-与-seata-结合的例子">Dubbo 与 Seata 结合的例子&lt;/h2>
-&lt;h3 id="step-1-安装数据库">Step 1: 安装数据库&lt;/h3>
-&lt;ul>
-&lt;li>要求: MySQL (InnoDB 存储引擎)。&lt;/li>
-&lt;/ul>
-&lt;p>&lt;strong>提示:&lt;/strong> 事实上例子中3个微服务需要3个独立的数据库，但为了方便我们使用同一物理库并配置3个逻辑连接串。&lt;/p>
-&lt;p>更改以下xml文件中的数据库url、username和password&lt;/p>
-&lt;p>dubbo-account-service.xml
-dubbo-order-service.xml
-dubbo-storage-service.xml&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml"> &lt;span style="color:#268bd2">&amp;lt;property&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;url&amp;#34;&lt;/span> value=&lt;span style="color:#2aa198">&amp;#34;jdbc:mysql://x.x.x.x:3306/xxx&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;property&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;username&amp;#34;&lt;/span> value=&lt;span style="color:#2aa198">&amp;#34;xxx&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;property&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;password&amp;#34;&lt;/span> value=&lt;span style="color:#2aa198">&amp;#34;xxx&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="step-2-为-seata-创建-undo_log-表">Step 2: 为 Seata 创建 undo_log 表&lt;/h3>
-&lt;p>&lt;code>UNDO_LOG&lt;/code> 此表用于 Seata 的AT模式。&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sql" data-lang="sql">&lt;span style="color:#586e75">-- 注意当 Seata 版本升级至 0.3.0+ 将由之前的普通索引变更为唯一索引。
-&lt;/span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">CREATE&lt;/span> &lt;span style="color:#719e07">TABLE&lt;/span> &lt;span style="color:#719e07">`&lt;/span>undo_log&lt;span style="color:#719e07">`&lt;/span> (
-&lt;span style="color:#719e07">`&lt;/span>id&lt;span style="color:#719e07">`&lt;/span> &lt;span style="color:#b58900">bigint&lt;/span>(&lt;span style="color:#2aa198">20&lt;/span>) &lt;span style="color:#719e07">NOT&lt;/span> &lt;span style="color:#719e07">NULL&lt;/span> AUTO_INCREMENT,
-&lt;span style="color:#719e07">`&lt;/span>branch_id&lt;span style="color:#719e07">`&lt;/span> &lt;span style="color:#b58900">bigint&lt;/span>(&lt;span style="color:#2aa198">20&lt;/span>) &lt;span style="color:#719e07">NOT&lt;/span> &lt;span style="color:#719e07">NULL&lt;/span>,
-&lt;span style="color:#719e07">`&lt;/span>xid&lt;span style="color:#719e07">`&lt;/span> &lt;span style="color:#b58900">varchar&lt;/span>(&lt;span style="color:#2aa198">100&lt;/span>) &lt;span style="color:#719e07">NOT&lt;/span> &lt;span style="color:#719e07">NULL&lt;/span>,
-&lt;span style="color:#719e07">`&lt;/span>context&lt;span style="color:#719e07">`&lt;/span> &lt;span style="color:#b58900">varchar&lt;/span>(&lt;span style="color:#2aa198">128&lt;/span>) &lt;span style="color:#719e07">NOT&lt;/span> &lt;span style="color:#719e07">NULL&lt;/span>,
-&lt;span style="color:#719e07">`&lt;/span>rollback_info&lt;span style="color:#719e07">`&lt;/span> longblob &lt;span style="color:#719e07">NOT&lt;/span> &lt;span style="color:#719e07">NULL&lt;/span>,
-&lt;span style="color:#719e07">`&lt;/span>log_status&lt;span style="color:#719e07">`&lt;/span> &lt;span style="color:#b58900">int&lt;/span>(&lt;span style="color:#2aa198">11&lt;/span>) &lt;span style="color:#719e07">NOT&lt;/span> &lt;span style="color:#719e07">NULL&lt;/span>,
-&lt;span style="color:#719e07">`&lt;/span>log_created&lt;span style="color:#719e07">`&lt;/span> datetime &lt;span style="color:#719e07">NOT&lt;/span> &lt;span style="color:#719e07">NULL&lt;/span>,
-&lt;span style="color:#719e07">`&lt;/span>log_modified&lt;span style="color:#719e07">`&lt;/span> datetime &lt;span style="color:#719e07">NOT&lt;/span> &lt;span style="color:#719e07">NULL&lt;/span>,
-&lt;span style="color:#719e07">`&lt;/span>ext&lt;span style="color:#719e07">`&lt;/span> &lt;span style="color:#b58900">varchar&lt;/span>(&lt;span style="color:#2aa198">100&lt;/span>) &lt;span style="color:#719e07">DEFAULT&lt;/span> &lt;span style="color:#719e07">NULL&lt;/span>,
-&lt;span style="color:#719e07">PRIMARY&lt;/span> &lt;span style="color:#719e07">KEY&lt;/span> (&lt;span style="color:#719e07">`&lt;/span>id&lt;span style="color:#719e07">`&lt;/span>),
-&lt;span style="color:#719e07">UNIQUE&lt;/span> &lt;span style="color:#719e07">KEY&lt;/span> &lt;span style="color:#719e07">`&lt;/span>ux_undo_log&lt;span style="color:#719e07">`&lt;/span> (&lt;span style="color:#719e07">`&lt;/span>xid&lt;span style="color:#719e07">`&lt;/span>,&lt;span style="color:#719e07">`&lt;/span>branch_id&lt;span style="color:#719e07">`&lt;/span>)
-) ENGINE&lt;span style="color:#719e07">=&lt;/span>InnoDB AUTO_INCREMENT&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">1&lt;/span> &lt;span style="color:#719e07">DEFAULT&lt;/span> CHARSET&lt;span style="color:#719e07">=&lt;/span>utf8;
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="step-3-创建相关业务表">Step 3: 创建相关业务表&lt;/h3>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sql" data-lang="sql">
-&lt;span style="color:#719e07">DROP&lt;/span> &lt;span style="color:#719e07">TABLE&lt;/span> &lt;span style="color:#719e07">IF&lt;/span> &lt;span style="color:#719e07">EXISTS&lt;/span> &lt;span style="color:#719e07">`&lt;/span>storage_tbl&lt;span style="color:#719e07">`&lt;/span>;
-&lt;span style="color:#719e07">CREATE&lt;/span> &lt;span style="color:#719e07">TABLE&lt;/span> &lt;span style="color:#719e07">`&lt;/span>storage_tbl&lt;span style="color:#719e07">`&lt;/span> (
-&lt;span style="color:#719e07">`&lt;/span>id&lt;span style="color:#719e07">`&lt;/span> &lt;span style="color:#b58900">int&lt;/span>(&lt;span style="color:#2aa198">11&lt;/span>) &lt;span style="color:#719e07">NOT&lt;/span> &lt;span style="color:#719e07">NULL&lt;/span> AUTO_INCREMENT,
-&lt;span style="color:#719e07">`&lt;/span>commodity_code&lt;span style="color:#719e07">`&lt;/span> &lt;span style="color:#b58900">varchar&lt;/span>(&lt;span style="color:#2aa198">255&lt;/span>) &lt;span style="color:#719e07">DEFAULT&lt;/span> &lt;span style="color:#719e07">NULL&lt;/span>,
-&lt;span style="color:#719e07">`&lt;/span>&lt;span style="color:#719e07">count&lt;/span>&lt;span style="color:#719e07">`&lt;/span> &lt;span style="color:#b58900">int&lt;/span>(&lt;span style="color:#2aa198">11&lt;/span>) &lt;span style="color:#719e07">DEFAULT&lt;/span> &lt;span style="color:#2aa198">0&lt;/span>,
-&lt;span style="color:#719e07">PRIMARY&lt;/span> &lt;span style="color:#719e07">KEY&lt;/span> (&lt;span style="color:#719e07">`&lt;/span>id&lt;span style="color:#719e07">`&lt;/span>),
-&lt;span style="color:#719e07">UNIQUE&lt;/span> &lt;span style="color:#719e07">KEY&lt;/span> (&lt;span style="color:#719e07">`&lt;/span>commodity_code&lt;span style="color:#719e07">`&lt;/span>)
-) ENGINE&lt;span style="color:#719e07">=&lt;/span>InnoDB &lt;span style="color:#719e07">DEFAULT&lt;/span> CHARSET&lt;span style="color:#719e07">=&lt;/span>utf8;
-&lt;span style="color:#719e07">DROP&lt;/span> &lt;span style="color:#719e07">TABLE&lt;/span> &lt;span style="color:#719e07">IF&lt;/span> &lt;span style="color:#719e07">EXISTS&lt;/span> &lt;span style="color:#719e07">`&lt;/span>order_tbl&lt;span style="color:#719e07">`&lt;/span>;
-&lt;span style="color:#719e07">CREATE&lt;/span> &lt;span style="color:#719e07">TABLE&lt;/span> &lt;span style="color:#719e07">`&lt;/span>order_tbl&lt;span style="color:#719e07">`&lt;/span> (
-&lt;span style="color:#719e07">`&lt;/span>id&lt;span style="color:#719e07">`&lt;/span> &lt;span style="color:#b58900">int&lt;/span>(&lt;span style="color:#2aa198">11&lt;/span>) &lt;span style="color:#719e07">NOT&lt;/span> &lt;span style="color:#719e07">NULL&lt;/span> AUTO_INCREMENT,
-&lt;span style="color:#719e07">`&lt;/span>user_id&lt;span style="color:#719e07">`&lt;/span> &lt;span style="color:#b58900">varchar&lt;/span>(&lt;span style="color:#2aa198">255&lt;/span>) &lt;span style="color:#719e07">DEFAULT&lt;/span> &lt;span style="color:#719e07">NULL&lt;/span>,
-&lt;span style="color:#719e07">`&lt;/span>commodity_code&lt;span style="color:#719e07">`&lt;/span> &lt;span style="color:#b58900">varchar&lt;/span>(&lt;span style="color:#2aa198">255&lt;/span>) &lt;span style="color:#719e07">DEFAULT&lt;/span> &lt;span style="color:#719e07">NULL&lt;/span>,
-&lt;span style="color:#719e07">`&lt;/span>&lt;span style="color:#719e07">count&lt;/span>&lt;span style="color:#719e07">`&lt;/span> &lt;span style="color:#b58900">int&lt;/span>(&lt;span style="color:#2aa198">11&lt;/span>) &lt;span style="color:#719e07">DEFAULT&lt;/span> &lt;span style="color:#2aa198">0&lt;/span>,
-&lt;span style="color:#719e07">`&lt;/span>money&lt;span style="color:#719e07">`&lt;/span> &lt;span style="color:#b58900">int&lt;/span>(&lt;span style="color:#2aa198">11&lt;/span>) &lt;span style="color:#719e07">DEFAULT&lt;/span> &lt;span style="color:#2aa198">0&lt;/span>,
-&lt;span style="color:#719e07">PRIMARY&lt;/span> &lt;span style="color:#719e07">KEY&lt;/span> (&lt;span style="color:#719e07">`&lt;/span>id&lt;span style="color:#719e07">`&lt;/span>)
-) ENGINE&lt;span style="color:#719e07">=&lt;/span>InnoDB &lt;span style="color:#719e07">DEFAULT&lt;/span> CHARSET&lt;span style="color:#719e07">=&lt;/span>utf8;
-&lt;span style="color:#719e07">DROP&lt;/span> &lt;span style="color:#719e07">TABLE&lt;/span> &lt;span style="color:#719e07">IF&lt;/span> &lt;span style="color:#719e07">EXISTS&lt;/span> &lt;span style="color:#719e07">`&lt;/span>account_tbl&lt;span style="color:#719e07">`&lt;/span>;
-&lt;span style="color:#719e07">CREATE&lt;/span> &lt;span style="color:#719e07">TABLE&lt;/span> &lt;span style="color:#719e07">`&lt;/span>account_tbl&lt;span style="color:#719e07">`&lt;/span> (
-&lt;span style="color:#719e07">`&lt;/span>id&lt;span style="color:#719e07">`&lt;/span> &lt;span style="color:#b58900">int&lt;/span>(&lt;span style="color:#2aa198">11&lt;/span>) &lt;span style="color:#719e07">NOT&lt;/span> &lt;span style="color:#719e07">NULL&lt;/span> AUTO_INCREMENT,
-&lt;span style="color:#719e07">`&lt;/span>user_id&lt;span style="color:#719e07">`&lt;/span> &lt;span style="color:#b58900">varchar&lt;/span>(&lt;span style="color:#2aa198">255&lt;/span>) &lt;span style="color:#719e07">DEFAULT&lt;/span> &lt;span style="color:#719e07">NULL&lt;/span>,
-&lt;span style="color:#719e07">`&lt;/span>money&lt;span style="color:#719e07">`&lt;/span> &lt;span style="color:#b58900">int&lt;/span>(&lt;span style="color:#2aa198">11&lt;/span>) &lt;span style="color:#719e07">DEFAULT&lt;/span> &lt;span style="color:#2aa198">0&lt;/span>,
-&lt;span style="color:#719e07">PRIMARY&lt;/span> &lt;span style="color:#719e07">KEY&lt;/span> (&lt;span style="color:#719e07">`&lt;/span>id&lt;span style="color:#719e07">`&lt;/span>)
-) ENGINE&lt;span style="color:#719e07">=&lt;/span>InnoDB &lt;span style="color:#719e07">DEFAULT&lt;/span> CHARSET&lt;span style="color:#719e07">=&lt;/span>utf8;
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="step-4-启动-seata-server-服务">Step 4: 启动 Seata-Server 服务&lt;/h3>
-&lt;ul>
-&lt;li>下载&lt;a href="https://github.com/seata/seata/releases">服务器软件包&lt;/a>，将其解压缩。&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">Usage: sh seata-server.sh&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">for&lt;/span> linux and mac&lt;span style="color:#719e07">)&lt;/span> or cmd seata-server.bat&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">for&lt;/span> windows&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">[&lt;/span>options&lt;span style="color:#719e07">]&lt;/span>
-Options:
---host, -h
-The host to bind.
-Default: 0.0.0.0
---port, -p
-The port to listen.
-Default: &lt;span style="color:#2aa198">8091&lt;/span>
---storeMode, -m
-log store mode : file、db
-Default: file
---help
-e.g.
-sh seata-server.sh -p &lt;span style="color:#2aa198">8091&lt;/span> -h 127.0.0.1 -m file
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="step-5-运行例子">Step 5: 运行例子&lt;/h3>
-&lt;ul>
-&lt;li>启动账户服务 (&lt;a href="https://github.com/seata/seata-samples/blob/master/dubbo/src/main/java/io/seata/samples/dubbo/starter/DubboAccountServiceStarter.java">DubboAccountServiceStarter&lt;/a>)。&lt;/li>
-&lt;li>启动库存服务 (&lt;a href="https://github.com/seata/seata-samples/blob/master/dubbo/src/main/java/io/seata/samples/dubbo/starter/DubboStorageServiceStarter.java">DubboStorageServiceStarter&lt;/a>)。&lt;/li>
-&lt;li>启动订单服务 (&lt;a href="https://github.com/seata/seata-samples/blob/master/dubbo/src/main/java/io/seata/samples/dubbo/starter/DubboOrderServiceStarter.java">DubboOrderServiceStarter&lt;/a>)。&lt;/li>
-&lt;li>运行BusinessService入口 (&lt;a href="https://github.com/seata/seata-samples/blob/master/dubbo/src/main/java/io/seata/samples/dubbo/starter/DubboBusinessTester.java">DubboBusinessTester&lt;/a>)。&lt;/li>
-&lt;/ul>
-&lt;h3 id="相关项目">相关项目&lt;/h3>
-&lt;ul>
-&lt;li>Seata: &lt;a href="https://github.com/seata/seata">https://github.com/seata/seata&lt;/a>&lt;/li>
-&lt;li>Seata Samples : &lt;a href="https://github.com/seata/seata-samples">https://github.com/seata/seata-samples&lt;/a>&lt;/li>
-&lt;/ul></description></item></channel></rss>
+&lt;p>相信过程，收获结果；天道酬勤，功不唐捐！&lt;/p></description></item></channel></rss>
