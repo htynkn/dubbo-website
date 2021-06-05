@@ -23,7 +23,17 @@ java -Ddubbo.registry.check&lt;span style="color:#719e07">=&lt;/span>&lt;span st
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="配置的含义">配置的含义&lt;/h2>
 &lt;p>&lt;code>dubbo.reference.check=false&lt;/code>，强制改变所有 reference 的 check 值，就算配置中有声明，也会被覆盖。&lt;/p>
 &lt;p>&lt;code>dubbo.consumer.check=false&lt;/code>，是设置 check 的缺省值，如果配置中有显式的声明，如：&lt;code>&amp;lt;dubbo:reference check=&amp;quot;true&amp;quot;/&amp;gt;&lt;/code>，不会受影响。&lt;/p>
-&lt;p>&lt;code>dubbo.registry.check=false&lt;/code>，前面两个都是指订阅成功，但提供者列表是否为空是否报错，如果注册订阅失败时，也允许启动，需使用此选项，将在后台定时重试。&lt;/p></description></item><item><title>Docs: 集群容错</title><link>https://dubbo.apache.org/zh/docs/v2.7/user/examples/fault-tolerent-strategy/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v2.7/user/examples/fault-tolerent-strategy/</guid><description>
+&lt;p>&lt;code>dubbo.registry.check=false&lt;/code>，前面两个都是指订阅成功，但提供者列表是否为空是否报错，如果注册订阅失败时，也允许启动，需使用此选项，将在后台定时重试。&lt;/p></description></item><item><title>Docs: 重试次数配置</title><link>https://dubbo.apache.org/zh/docs/v2.7/user/examples/%E9%87%8D%E8%AF%95%E6%AC%A1%E6%95%B0%E9%85%8D%E7%BD%AE/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v2.7/user/examples/%E9%87%8D%E8%AF%95%E6%AC%A1%E6%95%B0%E9%85%8D%E7%BD%AE/</guid><description>
+&lt;p>Dubbo 服务在尝试调用一次之后，如出现非业务异常(服务突然不可用、超时等)，Dubbo 默认会进行额外的最多2次重试.&lt;/p>
+&lt;p>重试次数支持两种自定义配置: 1.通过注解/xml进行固定配置；2.通过上下文进行运行时动态配置&lt;/p>
+&lt;h2 id="示例">示例&lt;/h2>
+&lt;p>通过注解/xml进行固定配置&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:consumer&lt;/span> retries=&lt;span style="color:#2aa198">&amp;#34;2&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&amp;lt;/dubbo:consumer&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>通过RpcContext进行运行时动态配置，优先级高于注解/xml进行的固定配置(两者都配置的情况下，以RpcContext配置为准).&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-Java" data-lang="Java">&lt;span style="color:#586e75">// dubbo服务调用前，通过RpcContext动态设置本次调用的重试次数
+&lt;/span>&lt;span style="color:#586e75">&lt;/span>RpcContext rpcContext &lt;span style="color:#719e07">=&lt;/span> RpcContext&lt;span style="color:#719e07">.&lt;/span>getContext&lt;span style="color:#719e07">();&lt;/span>
+rpcContext&lt;span style="color:#719e07">.&lt;/span>setAttachment&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;retries&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> 5&lt;span style="color:#719e07">);&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: 集群容错</title><link>https://dubbo.apache.org/zh/docs/v2.7/user/examples/fault-tolerent-strategy/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v2.7/user/examples/fault-tolerent-strategy/</guid><description>
 &lt;p>在集群调用失败时，Dubbo 提供了多种容错方案，缺省为 failover 重试。&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/cluster.jpg" alt="cluster">&lt;/p>
 &lt;p>各节点关系：&lt;/p>
@@ -2449,12 +2459,4 @@ cache&lt;span style="color:#719e07">.&lt;/span>destroy&lt;span style="color:#719
 &lt;p>可以修改这个策略，在 &lt;code>ReferenceConfigCache.getCache&lt;/code> 时，传一个 &lt;code>KeyGenerator&lt;/code>。详见 &lt;code>ReferenceConfigCache&lt;/code> 类的方法。&lt;/p>
 &lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">KeyGenerator keyGenerator &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> &lt;span style="color:#719e07">...&lt;/span>
 ReferenceConfigCache cache &lt;span style="color:#719e07">=&lt;/span> ReferenceConfigCache&lt;span style="color:#719e07">.&lt;/span>getCache&lt;span style="color:#719e07">(&lt;/span>keyGenerator &lt;span style="color:#719e07">);&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: 只注册</title><link>https://dubbo.apache.org/zh/docs/v2.7/user/examples/registry-only/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v2.7/user/examples/registry-only/</guid><description>
-&lt;p>如果有两个镜像环境，两个注册中心，有一个服务只在其中一个注册中心有部署，另一个注册中心还没来得及部署，而两个注册中心的其它应用都需要依赖此服务。这个时候，可以让服务提供者方只注册服务到另一注册中心，而不从另一注册中心订阅服务。&lt;/p>
-&lt;p>禁用订阅配置&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;hzRegistry&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.153.10:9090&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;qdRegistry&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.141.150:9090&amp;#34;&lt;/span> subscribe=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;hzRegistry&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.153.10:9090&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;qdRegistry&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.141.150:9090?subscribe=false&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
