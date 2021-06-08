@@ -502,7 +502,226 @@ System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07
 &lt;h4 class="alert-heading">提示&lt;/h4>
 &lt;p>自 &lt;code>2.1.0&lt;/code> 版本开始支持, 如何使用可以参考 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/java/dubbo-samples-validation">dubbo 项目中的示例代码&lt;/a>&lt;/p>
 &lt;p>验证方式可扩展，扩展方式参见开发者手册中的&lt;a href="../../../dev/impls/validation">验证扩展&lt;/a>&lt;/p>
-&lt;/div></description></item><item><title>Docs: 结果缓存</title><link>https://dubbo.apache.org/zh/docs/v2.7/user/examples/result-cache/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v2.7/user/examples/result-cache/</guid><description>
+&lt;/div></description></item><item><title>Docs: provider超时打断</title><link>https://dubbo.apache.org/zh/docs/v2.7/user/examples/provider-timeout-release/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v2.7/user/examples/provider-timeout-release/</guid><description>
+&lt;p>支持provider根据超时时间进行业务打断&lt;/p>
+&lt;p>适用场景：对于一个provider，如果某个操作执行超时，则打断(释放)该执行线程，而不是仅仅打印超时日志。&lt;/p>
+&lt;div class="alert alert-primary" role="alert">
+&lt;h4 class="alert-heading">提示&lt;/h4>
+支持版本：&lt;code>2.7.12&lt;/code> 之后
+&lt;/div>
+&lt;h2 id="核心处理逻辑">核心处理逻辑&lt;/h2>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">AllChannelHandler2&lt;/span> &lt;span style="color:#268bd2">extends&lt;/span> AllChannelHandler &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#268bd2">final&lt;/span> Timer TIME_OUT_TIMER &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> HashedWheelTimer&lt;span style="color:#719e07">(&lt;/span>
+&lt;span style="color:#719e07">new&lt;/span> NamedThreadFactory&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;dubbo-server-future-timeout&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#cb4b16">true&lt;/span>&lt;span style="color:#719e07">),&lt;/span>
+30&lt;span style="color:#719e07">,&lt;/span>
+TimeUnit&lt;span style="color:#719e07">.&lt;/span>MILLISECONDS&lt;span style="color:#719e07">);&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">AllChannelHandler2&lt;/span>&lt;span style="color:#719e07">(&lt;/span>ChannelHandler handler&lt;span style="color:#719e07">,&lt;/span> URL url&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#268bd2">super&lt;/span>&lt;span style="color:#719e07">(&lt;/span>handler&lt;span style="color:#719e07">,&lt;/span> url&lt;span style="color:#719e07">);&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;span style="color:#268bd2">@Override&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">received&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Channel channel&lt;span style="color:#719e07">,&lt;/span> Object message&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RemotingException &lt;span style="color:#719e07">{&lt;/span>
+ExecutorService executor &lt;span style="color:#719e07">=&lt;/span> getPreferredExecutorService&lt;span style="color:#719e07">(&lt;/span>message&lt;span style="color:#719e07">);&lt;/span>
+&lt;span style="color:#719e07">try&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+Future&lt;span style="color:#719e07">&amp;lt;?&amp;gt;&lt;/span> future &lt;span style="color:#719e07">=&lt;/span> executor&lt;span style="color:#719e07">.&lt;/span>submit&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">new&lt;/span> ChannelEventRunnable&lt;span style="color:#719e07">(&lt;/span>channel&lt;span style="color:#719e07">,&lt;/span> handler&lt;span style="color:#719e07">,&lt;/span> ChannelState&lt;span style="color:#719e07">.&lt;/span>RECEIVED&lt;span style="color:#719e07">,&lt;/span> message&lt;span style="color:#719e07">));&lt;/span>
+&lt;span style="color:#dc322f">long&lt;/span> timeout &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">this&lt;/span>&lt;span style="color:#719e07">.&lt;/span>url&lt;span style="color:#719e07">.&lt;/span>getParameter&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;timeout&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> 1000&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">+&lt;/span> 90&lt;span style="color:#719e07">;&lt;/span>
+TIME_OUT_TIMER&lt;span style="color:#719e07">.&lt;/span>newTimeout&lt;span style="color:#719e07">(&lt;/span>t &lt;span style="color:#719e07">-&amp;gt;&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(!&lt;/span>future&lt;span style="color:#719e07">.&lt;/span>isDone&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#719e07">(!&lt;/span>future&lt;span style="color:#719e07">.&lt;/span>isCancelled&lt;span style="color:#719e07">()))&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#719e07">try&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+future&lt;span style="color:#719e07">.&lt;/span>cancel&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#cb4b16">true&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">catch&lt;/span> &lt;span style="color:#719e07">(&lt;/span>Throwable ex&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#586e75">//ignore
+&lt;/span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;span style="color:#719e07">},&lt;/span> timeout&lt;span style="color:#719e07">,&lt;/span> TimeUnit&lt;span style="color:#719e07">.&lt;/span>MILLISECONDS&lt;span style="color:#719e07">);&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">catch&lt;/span> &lt;span style="color:#719e07">(&lt;/span>Throwable t&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>message &lt;span style="color:#719e07">instanceof&lt;/span> Request &lt;span style="color:#719e07">&amp;amp;&amp;amp;&lt;/span> t &lt;span style="color:#719e07">instanceof&lt;/span> RejectedExecutionException&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+sendFeedback&lt;span style="color:#719e07">(&lt;/span>channel&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#719e07">(&lt;/span>Request&lt;span style="color:#719e07">)&lt;/span> message&lt;span style="color:#719e07">,&lt;/span> t&lt;span style="color:#719e07">);&lt;/span>
+&lt;span style="color:#719e07">return&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;span style="color:#719e07">throw&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ExecutionException&lt;span style="color:#719e07">(&lt;/span>message&lt;span style="color:#719e07">,&lt;/span> channel&lt;span style="color:#719e07">,&lt;/span> getClass&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34; error when process received event .&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> t&lt;span style="color:#719e07">);&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="使用示例">使用示例&lt;/h2>
+&lt;ul>
+&lt;li>设置Dubbo ProtocolConfig 线程分发策略为&amp;quot;all2&amp;quot;。&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java"> &lt;span style="color:#586e75">/**
+&lt;/span>&lt;span style="color:#586e75"> * 配置协议
+&lt;/span>&lt;span style="color:#586e75"> */&lt;/span>
+&lt;span style="color:#268bd2">@Bean&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> ProtocolConfig &lt;span style="color:#268bd2">protocolConfig&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+ProtocolConfig protocolConfig &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ProtocolConfig&lt;span style="color:#719e07">();&lt;/span>
+protocolConfig&lt;span style="color:#719e07">.&lt;/span>setName&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+protocolConfig&lt;span style="color:#719e07">.&lt;/span>setPort&lt;span style="color:#719e07">(-&lt;/span>1&lt;span style="color:#719e07">);&lt;/span>
+protocolConfig&lt;span style="color:#719e07">.&lt;/span>setTransporter&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;netty4&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+protocolConfig&lt;span style="color:#719e07">.&lt;/span>setThreadpool&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;fixed&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+&lt;span style="color:#586e75">// 设置线程分发策略
+&lt;/span>&lt;span style="color:#586e75">&lt;/span> protocolConfig&lt;span style="color:#719e07">.&lt;/span>setDispatcher&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;all2&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+protocolConfig&lt;span style="color:#719e07">.&lt;/span>setThreads&lt;span style="color:#719e07">(&lt;/span>200&lt;span style="color:#719e07">);&lt;/span>
+&lt;span style="color:#719e07">return&lt;/span> protocolConfig&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>provider demo&lt;/li>
+&lt;/ul>
+&lt;p>执行超时，直接对业务线程进行打断。即如果provider不能及时返回给counsumer执行结果，则对执行线程进行打断。&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#586e75">// 设置provider执行超时时间为1000ms
+&lt;/span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#268bd2">@Service&lt;/span>&lt;span style="color:#719e07">(&lt;/span>interfaceClass &lt;span style="color:#719e07">=&lt;/span> TestService&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">,&lt;/span>timeout &lt;span style="color:#719e07">=&lt;/span> 1000&lt;span style="color:#719e07">)&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">TestServiceImpl&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> TestService &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#268bd2">@Override&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> Integer &lt;span style="color:#268bd2">sum&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#dc322f">int&lt;/span> a&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#dc322f">int&lt;/span> b&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+CountDownLatch latch &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> CountDownLatch&lt;span style="color:#719e07">(&lt;/span>2&lt;span style="color:#719e07">);&lt;/span>
+AtomicInteger i &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> AtomicInteger&lt;span style="color:#719e07">();&lt;/span>
+&lt;span style="color:#719e07">new&lt;/span> Thread&lt;span style="color:#719e07">(()-&amp;gt;{&lt;/span>
+i&lt;span style="color:#719e07">.&lt;/span>incrementAndGet&lt;span style="color:#719e07">();&lt;/span>
+latch&lt;span style="color:#719e07">.&lt;/span>countDown&lt;span style="color:#719e07">();&lt;/span>
+&lt;span style="color:#719e07">}).&lt;/span>start&lt;span style="color:#719e07">();&lt;/span>
+&lt;span style="color:#719e07">new&lt;/span> Thread&lt;span style="color:#719e07">(()-&amp;gt;{&lt;/span>
+&lt;span style="color:#719e07">try&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+TimeUnit&lt;span style="color:#719e07">.&lt;/span>MILLISECONDS&lt;span style="color:#719e07">.&lt;/span>sleep&lt;span style="color:#719e07">(&lt;/span>2000&lt;span style="color:#719e07">);&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>&lt;span style="color:#719e07">catch&lt;/span> &lt;span style="color:#719e07">(&lt;/span>InterruptedException e&lt;span style="color:#719e07">){&lt;/span>
+e&lt;span style="color:#719e07">.&lt;/span>printStackTrace&lt;span style="color:#719e07">();&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+i&lt;span style="color:#719e07">.&lt;/span>incrementAndGet&lt;span style="color:#719e07">();&lt;/span>
+latch&lt;span style="color:#719e07">.&lt;/span>countDown&lt;span style="color:#719e07">();&lt;/span>
+&lt;span style="color:#719e07">}).&lt;/span>start&lt;span style="color:#719e07">();&lt;/span>
+&lt;span style="color:#719e07">try&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+latch&lt;span style="color:#719e07">.&lt;/span>await&lt;span style="color:#719e07">();&lt;/span>
+&lt;span style="color:#719e07">return&lt;/span> i&lt;span style="color:#719e07">.&lt;/span>get&lt;span style="color:#719e07">();&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>&lt;span style="color:#719e07">catch&lt;/span> &lt;span style="color:#719e07">(&lt;/span>InterruptedException e&lt;span style="color:#719e07">){&lt;/span>
+&lt;span style="color:#586e75">// 业务执行超时，并且被打断，走入此逻辑
+&lt;/span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">throw&lt;/span> &lt;span style="color:#719e07">new&lt;/span> RuntimeException&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;call sum timeout&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>即对于上述provider demo，执行最后一个try catch时，如果业务线程被超时释放，则捕获InterruptedException异常进入catch块，返回&amp;quot;call sum timeout&amp;quot;。&lt;/p>
+&lt;ul>
+&lt;li>consumer demo&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java"> &lt;span style="color:#586e75">// 设置consumer超时时间大于服务端执行时间2000
+&lt;/span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#268bd2">@Reference&lt;/span>&lt;span style="color:#719e07">(&lt;/span>check &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#cb4b16">false&lt;/span>&lt;span style="color:#719e07">,&lt;/span>interfaceClass &lt;span style="color:#719e07">=&lt;/span> TestService&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">,&lt;/span>timeout &lt;span style="color:#719e07">=&lt;/span> 3000&lt;span style="color:#719e07">)&lt;/span>
+&lt;span style="color:#268bd2">private&lt;/span> TestService testService&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#268bd2">@GetMapping&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;/sum&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> String &lt;span style="color:#268bd2">consumeSum&lt;/span>&lt;span style="color:#719e07">(){&lt;/span>
+Integer ret &lt;span style="color:#719e07">=&lt;/span> 0&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">try&lt;/span>&lt;span style="color:#719e07">{&lt;/span>
+ret &lt;span style="color:#719e07">=&lt;/span> testService&lt;span style="color:#719e07">.&lt;/span>sum&lt;span style="color:#719e07">(&lt;/span>1&lt;span style="color:#719e07">,&lt;/span>1&lt;span style="color:#719e07">);&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>&lt;span style="color:#719e07">catch&lt;/span> &lt;span style="color:#719e07">(&lt;/span>Exception e&lt;span style="color:#719e07">){&lt;/span>
+&lt;span style="color:#719e07">return&lt;/span> e&lt;span style="color:#719e07">.&lt;/span>getMessage&lt;span style="color:#719e07">();&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;span style="color:#719e07">return&lt;/span> String&lt;span style="color:#719e07">.&lt;/span>valueOf&lt;span style="color:#719e07">(&lt;/span>ret&lt;span style="color:#719e07">);&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>执行结果&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">curl http://localhost:8081/sum
+&amp;gt;call sum timeout
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: 指定Ip Port调用Provider</title><link>https://dubbo.apache.org/zh/docs/v2.7/user/examples/invoke-with-specified-ip/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v2.7/user/examples/invoke-with-specified-ip/</guid><description>
+&lt;p>当多个Provider注册到注册中心时，可以通过在RpcContext中动态的指定其中一个实例的Ip，Port进行Dubbo调用。&lt;/p>
+&lt;div class="alert alert-primary" role="alert">
+&lt;h4 class="alert-heading">提示&lt;/h4>
+支持版本：&lt;code>2.7.12&lt;/code> 之后
+&lt;/div>
+&lt;h2 id="用法示例">用法示例&lt;/h2>
+&lt;ul>
+&lt;li>provider demo&lt;/li>
+&lt;/ul>
+&lt;p>假定提供2个provider注册于注册中心，分别为10.220.47.253:20880;10.220.47.253:20881;&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#586e75">// 10.220.47.253:20880
+&lt;/span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#268bd2">@Service&lt;/span>&lt;span style="color:#719e07">(&lt;/span>interfaceClass &lt;span style="color:#719e07">=&lt;/span> TestService&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">)&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">TestServiceImpl&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> TestService &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#268bd2">@Override&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> String &lt;span style="color:#268bd2">sayHello&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String name&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#2aa198">&amp;#34;Hello &amp;#34;&lt;/span>&lt;span style="color:#719e07">+&lt;/span>name&lt;span style="color:#719e07">+&lt;/span>&lt;span style="color:#2aa198">&amp;#34; i am provider1&amp;#34;&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;span style="color:#586e75">// 10.220.47.253:20881
+&lt;/span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#268bd2">@Service&lt;/span>&lt;span style="color:#719e07">(&lt;/span>interfaceClass &lt;span style="color:#719e07">=&lt;/span> TestService&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">)&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">TestServiceImpl&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> TestService &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#268bd2">@Override&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> String &lt;span style="color:#268bd2">sayHello&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String name&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#2aa198">&amp;#34;Hello &amp;#34;&lt;/span>&lt;span style="color:#719e07">+&lt;/span>name&lt;span style="color:#719e07">+&lt;/span>&lt;span style="color:#2aa198">&amp;#34; i am provider2&amp;#34;&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>consumer demo&lt;/li>
+&lt;/ul>
+&lt;p>@DubboReference引入provider，其中设定parameters = {&amp;ldquo;router&amp;rdquo;,&amp;ldquo;address&amp;rdquo;},指定address路由方式。&lt;/p>
+&lt;p>对于要调用的实例，指定Ip，Port构造Address对象，并设置RpcContext键为&amp;quot;address&amp;quot;，value为该对象。&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#586e75">// 需要依赖的class
+&lt;/span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.RpcContext&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.cluster.router.address.Address&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#268bd2">@RestController&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">TestServiceConsumer&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#268bd2">@DubboReference&lt;/span>&lt;span style="color:#719e07">(&lt;/span>interfaceClass &lt;span style="color:#719e07">=&lt;/span> TestService&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">,&lt;/span>group &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;dev&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span>parameters &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">{&lt;/span>&lt;span style="color:#2aa198">&amp;#34;router&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span>&lt;span style="color:#2aa198">&amp;#34;address&amp;#34;&lt;/span>&lt;span style="color:#719e07">})&lt;/span>
+&lt;span style="color:#268bd2">private&lt;/span> TestService testService&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#268bd2">@GetMapping&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;/invokeByIpPortSpecified&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> String &lt;span style="color:#268bd2">invokeByIp&lt;/span>&lt;span style="color:#719e07">(){&lt;/span>
+&lt;span style="color:#719e07">try&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#586e75">// 根据provider的ip,port创建Address实例
+&lt;/span>&lt;span style="color:#586e75">&lt;/span> Address address &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> Address&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;10.220.47.253&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> 20880&lt;span style="color:#719e07">);&lt;/span>
+RpcContext&lt;span style="color:#719e07">.&lt;/span>getContext&lt;span style="color:#719e07">().&lt;/span>setObjectAttachment&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;address&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> address&lt;span style="color:#719e07">);&lt;/span>
+&lt;span style="color:#719e07">return&lt;/span> testService&lt;span style="color:#719e07">.&lt;/span>sayHello&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Tom&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>&lt;span style="color:#719e07">catch&lt;/span> &lt;span style="color:#719e07">(&lt;/span>Throwable ex&lt;span style="color:#719e07">){&lt;/span>
+&lt;span style="color:#719e07">return&lt;/span> ex&lt;span style="color:#719e07">.&lt;/span>getMessage&lt;span style="color:#719e07">();&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>执行结果&lt;/li>
+&lt;/ul>
+&lt;p>可以看到，多次执行，始终返回&amp;quot;Hello Tom i am provider1&amp;quot;,即始终路由到20880端口所在实例。&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">&amp;gt;curl http://localhost:8081/invokeByIpPortSpecified
+&amp;gt;Hello Tom i am provider1
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: 收集Dubbo广播响应</title><link>https://dubbo.apache.org/zh/docs/v2.7/user/examples/broadcast-resp-collect/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v2.7/user/examples/broadcast-resp-collect/</guid><description>
+&lt;p>适用场景：对于一个dubbo消费者，广播调用多个dubbo 提供者，该消费者可以收集所有服务提供者的响应结果。&lt;/p>
+&lt;div class="alert alert-primary" role="alert">
+&lt;h4 class="alert-heading">提示&lt;/h4>
+支持版本：&lt;code>2.7.12&lt;/code> 之后
+&lt;/div>
+&lt;h2 id="使用示例">使用示例&lt;/h2>
+&lt;ul>
+&lt;li>consumer demo&lt;/li>
+&lt;/ul>
+&lt;p>@Reference引入服务提供者，其中，令cluster=&amp;ldquo;broadcast2&amp;rdquo;，代表进行一个收集响应结果的广播调用。&lt;/p>
+&lt;p>广播调用所有服务提供者，逐个调用，并且可以完整的返回所有服务提供者的执行结果(正确或异常)，并将所有服务提供者的响应结果存于RpcContext。&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">@RestController&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">TestServiceConsumer&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#268bd2">@Reference&lt;/span>&lt;span style="color:#719e07">(&lt;/span>interfaceClass &lt;span style="color:#719e07">=&lt;/span> DubboHealthService&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">,&lt;/span>cluster &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;broadcast2&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
+&lt;span style="color:#268bd2">private&lt;/span> DubboHealthService dubboHealthService&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#268bd2">@GetMapping&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;/health&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> String &lt;span style="color:#268bd2">broadCast&lt;/span>&lt;span style="color:#719e07">(){&lt;/span>
+&lt;span style="color:#719e07">try&lt;/span>&lt;span style="color:#719e07">{&lt;/span>
+dubboHealthService&lt;span style="color:#719e07">.&lt;/span>health&lt;span style="color:#719e07">();&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>&lt;span style="color:#719e07">catch&lt;/span> &lt;span style="color:#719e07">(&lt;/span>Exception e&lt;span style="color:#719e07">){&lt;/span>
+Map&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">,&lt;/span> String&lt;span style="color:#719e07">&amp;gt;&lt;/span> m &lt;span style="color:#719e07">=&lt;/span> RpcContext&lt;span style="color:#719e07">.&lt;/span>getServerContext&lt;span style="color:#719e07">().&lt;/span>getAttachments&lt;span style="color:#719e07">();&lt;/span>
+&lt;span style="color:#719e07">return&lt;/span> m&lt;span style="color:#719e07">.&lt;/span>toString&lt;span style="color:#719e07">()+&lt;/span>&lt;span style="color:#2aa198">&amp;#34;|&amp;#34;&lt;/span>&lt;span style="color:#719e07">+&lt;/span>&lt;span style="color:#2aa198">&amp;#34;fail&amp;#34;&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+Map&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">,&lt;/span> String&lt;span style="color:#719e07">&amp;gt;&lt;/span> m &lt;span style="color:#719e07">=&lt;/span> RpcContext&lt;span style="color:#719e07">.&lt;/span>getServerContext&lt;span style="color:#719e07">().&lt;/span>getAttachments&lt;span style="color:#719e07">();&lt;/span>
+&lt;span style="color:#719e07">return&lt;/span> m&lt;span style="color:#719e07">.&lt;/span>toString&lt;span style="color:#719e07">()+&lt;/span>&lt;span style="color:#2aa198">&amp;#34;|&amp;#34;&lt;/span>&lt;span style="color:#719e07">+&lt;/span>&lt;span style="color:#2aa198">&amp;#34;success&amp;#34;&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>provider demo&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">@Service&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">DubboHealthServiceImpl&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> DubboHealthService &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#268bd2">@Override&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> String &lt;span style="color:#268bd2">health&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#586e75">// int i = 1/0;
+&lt;/span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#2aa198">&amp;#34;i am provider2&amp;#34;&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>执行结果&lt;/li>
+&lt;/ul>
+&lt;p>所有provider全部成功：&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">&amp;gt;curl http://localhost:8081/health
+&amp;gt;{broadcast.results=[{&amp;#34;ip&amp;#34;:&amp;#34;10.220.47.253&amp;#34;,&amp;#34;port&amp;#34;:20880,&amp;#34;data&amp;#34;:&amp;#34;i am provider1&amp;#34;},{&amp;#34;ip&amp;#34;:&amp;#34;10.220.47.253&amp;#34;,&amp;#34;port&amp;#34;:20881,&amp;#34;data&amp;#34;:&amp;#34;i am provider2&amp;#34;}]}|success%
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>令其中一个provider执行除以零：&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">&amp;gt;curl http://localhost:8081/health
+&amp;gt;{broadcast.results=[{&amp;#34;ip&amp;#34;:&amp;#34;10.220.47.253&amp;#34;,&amp;#34;port&amp;#34;:20880,&amp;#34;data&amp;#34;:&amp;#34;i am provider1&amp;#34;},{&amp;#34;ip&amp;#34;:&amp;#34;10.220.47.253&amp;#34;,&amp;#34;port&amp;#34;:20881,&amp;#34;exceptionMsg&amp;#34;:&amp;#34;/ by zero&amp;#34;}]}|success%
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: 结果缓存</title><link>https://dubbo.apache.org/zh/docs/v2.7/user/examples/result-cache/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v2.7/user/examples/result-cache/</guid><description>
 &lt;p>结果缓存，用于加速热门数据的访问速度，Dubbo 提供声明式缓存，以减少用户加缓存的工作量。&lt;/p>
 &lt;h2 id="缓存类型">缓存类型&lt;/h2>
 &lt;ul>
@@ -2386,77 +2605,4 @@ registryConfig&lt;span style="color:#719e07">.&lt;/span>setSimplified&lt;span st
 &lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml"> &lt;span style="color:#268bd2">&amp;lt;dubbo:application&lt;/span> logger=&lt;span style="color:#2aa198">&amp;#34;log4j&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;/ol>
-&lt;p>[1]: 自定义扩展可以参考 &lt;a href="../../../dev/impls/logger-adapter">日志适配扩展&lt;/a>&lt;/p></description></item><item><title>Docs: 访问日志</title><link>https://dubbo.apache.org/zh/docs/v2.7/user/examples/accesslog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v2.7/user/examples/accesslog/</guid><description>
-&lt;p>如果你想记录每一次请求信息，可开启访问日志，类似于apache的访问日志。&lt;strong>注意&lt;/strong>：此日志量比较大，请注意磁盘容量。&lt;/p>
-&lt;p>将访问日志输出到当前应用的log4j日志：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> accesslog=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>将访问日志输出到指定文件：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> accesslog=&lt;span style="color:#2aa198">&amp;#34;http://10.20.160.198/wiki/display/dubbo/foo/bar.log&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: 服务容器</title><link>https://dubbo.apache.org/zh/docs/v2.7/user/examples/service-container/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v2.7/user/examples/service-container/</guid><description>
-&lt;p>服务容器是一个 standalone 的启动程序，因为后台服务不需要 Tomcat 或 JBoss 等 Web 容器的功能，如果硬要用 Web 容器去加载服务提供方，增加复杂性，也浪费资源。&lt;/p>
-&lt;p>服务容器只是一个简单的 Main 方法，并加载一个简单的 Spring 容器，用于暴露服务。&lt;/p>
-&lt;p>服务容器的加载内容可以扩展，内置了 spring, jetty, log4j 等加载，可通过&lt;a href="../../../dev/impls/container">容器扩展点&lt;/a>进行扩展。配置配在 java 命令的 -D 参数或者 &lt;code>dubbo.properties&lt;/code> 中。&lt;/p>
-&lt;h2 id="容器类型">容器类型&lt;/h2>
-&lt;h3 id="spring-container">Spring Container&lt;/h3>
-&lt;ul>
-&lt;li>
-&lt;p>自动加载 &lt;code>META-INF/spring&lt;/code> 目录下的所有 Spring 配置。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>配置 spring 配置加载位置：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">dubbo.spring.config=classpath*:META-INF/spring/*.xml
-&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;/ul>
-&lt;h3 id="jetty-container">Jetty Container&lt;/h3>
-&lt;ul>
-&lt;li>启动一个内嵌 Jetty，用于汇报状态。&lt;/li>
-&lt;li>配置：
-&lt;ul>
-&lt;li>&lt;code>dubbo.jetty.port=8080&lt;/code>：配置 jetty 启动端口&lt;/li>
-&lt;li>&lt;code>dubbo.jetty.directory=/foo/bar&lt;/code>：配置可通过 jetty 直接访问的目录，用于存放静态文件&lt;/li>
-&lt;li>&lt;code>dubbo.jetty.page=log,status,system&lt;/code>：配置显示的页面，缺省加载所有页面&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;h3 id="log4j-container">Log4j Container&lt;/h3>
-&lt;ul>
-&lt;li>自动配置 log4j 的配置，在多进程启动时，自动给日志文件按进程分目录。&lt;/li>
-&lt;li>配置：
-&lt;ul>
-&lt;li>&lt;code>dubbo.log4j.file=/foo/bar.log&lt;/code>：配置日志文件路径&lt;/li>
-&lt;li>&lt;code>dubbo.log4j.level=WARN&lt;/code>：配置日志级别&lt;/li>
-&lt;li>&lt;code>dubbo.log4j.subdirectory=20880&lt;/code>：配置日志子目录，用于多进程启动，避免冲突&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;h2 id="容器启动">容器启动&lt;/h2>
-&lt;p>缺省只加载 spring&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">java org.apache.dubbo.container.Main
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>通过 main 函数参数传入要加载的容器&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">java org.apache.dubbo.container.Main spring jetty log4j
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>通过 JVM 启动参数传入要加载的容器&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">java org.apache.dubbo.container.Main -Ddubbo.container&lt;span style="color:#719e07">=&lt;/span>spring,jetty,log4j
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>通过 classpath 下的 &lt;code>dubbo.properties&lt;/code> 配置传入要加载的容器&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">dubbo.container=spring,jetty,log4j
-&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: ReferenceConfig 缓存</title><link>https://dubbo.apache.org/zh/docs/v2.7/user/examples/reference-config-cache/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v2.7/user/examples/reference-config-cache/</guid><description>
-&lt;p>&lt;code>ReferenceConfig&lt;/code> 实例很重，封装了与注册中心的连接以及与提供者的连接，需要缓存。否则重复生成 &lt;code>ReferenceConfig&lt;/code> 可能造成性能问题并且会有内存和连接泄漏。在 API 方式编程时，容易忽略此问题。&lt;/p>
-&lt;p>因此，自 &lt;code>2.4.0&lt;/code> 版本开始， dubbo 提供了简单的工具类 &lt;code>ReferenceConfigCache&lt;/code>用于缓存 &lt;code>ReferenceConfig&lt;/code> 实例。&lt;/p>
-&lt;p>使用方式如下：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">ReferenceConfig&lt;span style="color:#719e07">&amp;lt;&lt;/span>XxxService&lt;span style="color:#719e07">&amp;gt;&lt;/span> reference &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ReferenceConfig&lt;span style="color:#719e07">&amp;lt;&lt;/span>XxxService&lt;span style="color:#719e07">&amp;gt;();&lt;/span>
-reference&lt;span style="color:#719e07">.&lt;/span>setInterface&lt;span style="color:#719e07">(&lt;/span>XxxService&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">);&lt;/span>
-reference&lt;span style="color:#719e07">.&lt;/span>setVersion&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;1.0.0&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">......&lt;/span>
-ReferenceConfigCache cache &lt;span style="color:#719e07">=&lt;/span> ReferenceConfigCache&lt;span style="color:#719e07">.&lt;/span>getCache&lt;span style="color:#719e07">();&lt;/span>
-&lt;span style="color:#586e75">// cache.get方法中会缓存 Reference对象，并且调用ReferenceConfig.get方法启动ReferenceConfig
-&lt;/span>&lt;span style="color:#586e75">&lt;/span>XxxService xxxService &lt;span style="color:#719e07">=&lt;/span> cache&lt;span style="color:#719e07">.&lt;/span>get&lt;span style="color:#719e07">(&lt;/span>reference&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#586e75">// 注意！ Cache会持有ReferenceConfig，不要在外部再调用ReferenceConfig的destroy方法，导致Cache内的ReferenceConfig失效！
-&lt;/span>&lt;span style="color:#586e75">// 使用xxxService对象
-&lt;/span>&lt;span style="color:#586e75">&lt;/span>xxxService&lt;span style="color:#719e07">.&lt;/span>sayHello&lt;span style="color:#719e07">();&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>消除 Cache 中的 &lt;code>ReferenceConfig&lt;/code>，将销毁 &lt;code>ReferenceConfig&lt;/code> 并释放对应的资源。&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">ReferenceConfigCache cache &lt;span style="color:#719e07">=&lt;/span> ReferenceConfigCache&lt;span style="color:#719e07">.&lt;/span>getCache&lt;span style="color:#719e07">();&lt;/span>
-cache&lt;span style="color:#719e07">.&lt;/span>destroy&lt;span style="color:#719e07">(&lt;/span>reference&lt;span style="color:#719e07">);&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>缺省 &lt;code>ReferenceConfigCache&lt;/code> 把相同服务 Group、接口、版本的 &lt;code>ReferenceConfig&lt;/code> 认为是相同，缓存一份。即以服务 Group、接口、版本为缓存的 Key。&lt;/p>
-&lt;p>可以修改这个策略，在 &lt;code>ReferenceConfigCache.getCache&lt;/code> 时，传一个 &lt;code>KeyGenerator&lt;/code>。详见 &lt;code>ReferenceConfigCache&lt;/code> 类的方法。&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">KeyGenerator keyGenerator &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> &lt;span style="color:#719e07">...&lt;/span>
-ReferenceConfigCache cache &lt;span style="color:#719e07">=&lt;/span> ReferenceConfigCache&lt;span style="color:#719e07">.&lt;/span>getCache&lt;span style="color:#719e07">(&lt;/span>keyGenerator &lt;span style="color:#719e07">);&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+&lt;p>[1]: 自定义扩展可以参考 &lt;a href="../../../dev/impls/logger-adapter">日志适配扩展&lt;/a>&lt;/p></description></item></channel></rss>
