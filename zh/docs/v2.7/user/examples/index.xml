@@ -502,7 +502,163 @@ System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07
 &lt;h4 class="alert-heading">提示&lt;/h4>
 &lt;p>自 &lt;code>2.1.0&lt;/code> 版本开始支持, 如何使用可以参考 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/java/dubbo-samples-validation">dubbo 项目中的示例代码&lt;/a>&lt;/p>
 &lt;p>验证方式可扩展，扩展方式参见开发者手册中的&lt;a href="../../../dev/impls/validation">验证扩展&lt;/a>&lt;/p>
-&lt;/div></description></item><item><title>Docs: provider超时打断</title><link>https://dubbo.apache.org/zh/docs/v2.7/user/examples/provider-timeout-release/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v2.7/user/examples/provider-timeout-release/</guid><description>
+&lt;/div></description></item><item><title>Docs: json泛化调用</title><link>https://dubbo.apache.org/zh/docs/v2.7/user/examples/generic-invoke-with-json/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v2.7/user/examples/generic-invoke-with-json/</guid><description>
+&lt;div class="alert alert-primary" role="alert">
+&lt;h4 class="alert-heading">提示&lt;/h4>
+支持版本：&lt;code>2.7.12&lt;/code> 之后
+&lt;/div>
+&lt;p>对于Dubbo泛化调用，提供一种新的方式：直接传递字符串来完成一次调用。即用户可以直接传递参数对象的json字符串来完成一次Dubbo泛化调用。&lt;/p>
+&lt;h2 id="通过api方式使用json泛化调用">通过API方式使用json泛化调用&lt;/h2>
+&lt;p>对于以下provider：&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> User &lt;span style="color:#268bd2">setUser&lt;/span>&lt;span style="color:#719e07">(&lt;/span>User user&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#719e07">return&lt;/span> user&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>用到的实体类：&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">@Data&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">User&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+String name&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#dc322f">int&lt;/span> age&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>进行一次泛化调用：&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">GenericInvoke&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">main&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String&lt;span style="color:#719e07">[]&lt;/span> args&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+ApplicationConfig app &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ApplicationConfig&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;ConsumerTest&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+RegistryConfig reg &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> RegistryConfig&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;nacos://localhost:8848&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+DubboBootstrap bootstrap &lt;span style="color:#719e07">=&lt;/span> DubboBootstrap&lt;span style="color:#719e07">.&lt;/span>getInstance&lt;span style="color:#719e07">();&lt;/span>
+bootstrap&lt;span style="color:#719e07">.&lt;/span>application&lt;span style="color:#719e07">(&lt;/span>app&lt;span style="color:#719e07">);&lt;/span>
+bootstrap&lt;span style="color:#719e07">.&lt;/span>registry&lt;span style="color:#719e07">(&lt;/span>reg&lt;span style="color:#719e07">);&lt;/span>
+bootstrap&lt;span style="color:#719e07">.&lt;/span>start&lt;span style="color:#719e07">();&lt;/span>
+&lt;span style="color:#719e07">try&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#586e75">// 引用远程服务
+&lt;/span>&lt;span style="color:#586e75">&lt;/span> ReferenceConfig&lt;span style="color:#719e07">&amp;lt;&lt;/span>GenericService&lt;span style="color:#719e07">&amp;gt;&lt;/span> reference &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ReferenceConfig&lt;span style="color:#719e07">&amp;lt;&amp;gt;();&lt;/span>
+&lt;span style="color:#586e75">// 弱类型接口名
+&lt;/span>&lt;span style="color:#586e75">&lt;/span> reference&lt;span style="color:#719e07">.&lt;/span>setInterface&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;com.xxx.api.service.TestService&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+reference&lt;span style="color:#719e07">.&lt;/span>setGroup&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;dev&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+reference&lt;span style="color:#719e07">.&lt;/span>setVersion&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;1.0&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+reference&lt;span style="color:#719e07">.&lt;/span>setRetries&lt;span style="color:#719e07">(&lt;/span>0&lt;span style="color:#719e07">);&lt;/span>
+&lt;span style="color:#586e75">// RpcContext中设置generic=gson
+&lt;/span>&lt;span style="color:#586e75">&lt;/span> RpcContext&lt;span style="color:#719e07">.&lt;/span>getContext&lt;span style="color:#719e07">().&lt;/span>setAttachment&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;generic&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span>&lt;span style="color:#2aa198">&amp;#34;gson&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+&lt;span style="color:#586e75">// 声明为泛化接口
+&lt;/span>&lt;span style="color:#586e75">&lt;/span> reference&lt;span style="color:#719e07">.&lt;/span>setGeneric&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#cb4b16">true&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+reference&lt;span style="color:#719e07">.&lt;/span>setCheck&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#cb4b16">false&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+GenericService genericService &lt;span style="color:#719e07">=&lt;/span> ReferenceConfigCache&lt;span style="color:#719e07">.&lt;/span>getCache&lt;span style="color:#719e07">().&lt;/span>get&lt;span style="color:#719e07">(&lt;/span>reference&lt;span style="color:#719e07">);&lt;/span>
+&lt;span style="color:#586e75">// 传递参数对象的json字符串进行一次调用
+&lt;/span>&lt;span style="color:#586e75">&lt;/span> Object res &lt;span style="color:#719e07">=&lt;/span> genericService&lt;span style="color:#719e07">.&lt;/span>$invoke&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;setUser&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#719e07">new&lt;/span> String&lt;span style="color:#719e07">[]{&lt;/span>&lt;span style="color:#2aa198">&amp;#34;com.xxx.api.service.User&amp;#34;&lt;/span>&lt;span style="color:#719e07">},&lt;/span> &lt;span style="color:#719e07">new&lt;/span> Object&lt;span style="color:#719e07">[]{&lt;/span>&lt;span style="color:#2aa198">&amp;#34;{&amp;#39;name&amp;#39;:&amp;#39;Tom&amp;#39;,&amp;#39;age&amp;#39;:24}&amp;#34;&lt;/span>&lt;span style="color:#719e07">});&lt;/span>
+System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;result[setUser]：&amp;#34;&lt;/span>&lt;span style="color:#719e07">+&lt;/span>res&lt;span style="color:#719e07">);&lt;/span> &lt;span style="color:#586e75">// 响应结果:result[setUser]：{name=Tom, class=com.xxx.api.service.User, age=24}
+&lt;/span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">catch&lt;/span> &lt;span style="color:#719e07">(&lt;/span>Throwable ex&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+ex&lt;span style="color:#719e07">.&lt;/span>printStackTrace&lt;span style="color:#719e07">();&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: msgpack序列化</title><link>https://dubbo.apache.org/zh/docs/v2.7/user/examples/msgpack-serialization/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v2.7/user/examples/msgpack-serialization/</guid><description>
+&lt;p>MessagePack是一种高效的二进制序列化格式。它允许您在多种语言(如JSON)之间交换数据。但它更快更小。短整型被编码成一个字节，而典型的短字符串除了字符串本身只需要一个额外的字节。&lt;/p>
+&lt;div class="alert alert-primary" role="alert">
+&lt;h4 class="alert-heading">提示&lt;/h4>
+支持版本：&lt;code>2.7.12&lt;/code> 之后
+&lt;/div>
+&lt;h2 id="msgpack使用示例">msgpack使用示例&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;ol>
+&lt;li>provider与consumer引入msgpack依赖&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml"> &lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.msgpack&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>msgpack-core&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>0.8.22&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.msgpack&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>jackson-dataformat-msgpack&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>0.8.22&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>
+&lt;ol start="2">
+&lt;li>provider示例demo&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ul>
+&lt;p>dubbo 配置类增加如下协议配置：&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">...&lt;/span>
+&lt;span style="color:#268bd2">@Bean&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> ProtocolConfig &lt;span style="color:#268bd2">msgpackProtocol&lt;/span>&lt;span style="color:#719e07">(){&lt;/span>
+ProtocolConfig protocolConfig &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ProtocolConfig&lt;span style="color:#719e07">();&lt;/span>
+protocolConfig&lt;span style="color:#719e07">.&lt;/span>setName&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+protocolConfig&lt;span style="color:#719e07">.&lt;/span>setId&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;msgpack&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+protocolConfig&lt;span style="color:#719e07">.&lt;/span>setSerialization&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;msgpack&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+&lt;span style="color:#719e07">return&lt;/span> protocolConfig&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>dubbo provider:&lt;/p>
+&lt;p>dubbo provider 接口实现的@Service注解添加:protocol = {&amp;ldquo;msgpackProtocol&amp;rdquo;}协议声明。&lt;/p>
+&lt;p>dubbo provider 接口:&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">MsgpackService&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#dc322f">int&lt;/span> &lt;span style="color:#268bd2">tint&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#dc322f">int&lt;/span> i&lt;span style="color:#719e07">);&lt;/span>
+&lt;span style="color:#dc322f">long&lt;/span> &lt;span style="color:#268bd2">tlong&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#dc322f">long&lt;/span> i&lt;span style="color:#719e07">);&lt;/span>
+List&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">tlist&lt;/span>&lt;span style="color:#719e07">(&lt;/span>List&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">&amp;gt;&lt;/span> l&lt;span style="color:#719e07">);&lt;/span>
+String &lt;span style="color:#268bd2">multiParams&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String str&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#dc322f">int&lt;/span> i&lt;span style="color:#719e07">,&lt;/span> MyParam myParam&lt;span style="color:#719e07">);&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>dubbo provider 接口实现:&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">@Service&lt;/span>&lt;span style="color:#719e07">(&lt;/span>interfaceClass &lt;span style="color:#719e07">=&lt;/span> MsgpackService&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">,&lt;/span>protocol &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">{&lt;/span>&lt;span style="color:#2aa198">&amp;#34;msgpackProtocol&amp;#34;&lt;/span>&lt;span style="color:#719e07">})&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">MsgpackServiceImpl&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> MsgpackService &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#268bd2">@Override&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">int&lt;/span> &lt;span style="color:#268bd2">tint&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#dc322f">int&lt;/span> i&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#719e07">return&lt;/span> i&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;span style="color:#268bd2">@Override&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">long&lt;/span> &lt;span style="color:#268bd2">tlong&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#dc322f">long&lt;/span> i&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#719e07">return&lt;/span> i&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;span style="color:#268bd2">@Override&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> List&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">tlist&lt;/span>&lt;span style="color:#719e07">(&lt;/span>List&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">&amp;gt;&lt;/span> l&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#719e07">return&lt;/span> l&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;span style="color:#268bd2">@Override&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> String &lt;span style="color:#268bd2">multiParams&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String str&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#dc322f">int&lt;/span> i&lt;span style="color:#719e07">,&lt;/span> MyParam myParam&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#719e07">return&lt;/span> str &lt;span style="color:#719e07">+&lt;/span> i &lt;span style="color:#719e07">+&lt;/span> myParam&lt;span style="color:#719e07">.&lt;/span>getName&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">+&lt;/span> myParam&lt;span style="color:#719e07">.&lt;/span>getAge&lt;span style="color:#719e07">();&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>用到的实体类：&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">@Data&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">MyParam&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#268bd2">private&lt;/span> String name&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#dc322f">int&lt;/span> age&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">MyParam&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String name&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#dc322f">int&lt;/span> age&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#719e07">this&lt;/span>&lt;span style="color:#719e07">.&lt;/span>name &lt;span style="color:#719e07">=&lt;/span> name&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">this&lt;/span>&lt;span style="color:#719e07">.&lt;/span>age &lt;span style="color:#719e07">=&lt;/span> age&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;span style="color:#586e75">// 需要提供无参构造函数
+&lt;/span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">MyParam&lt;/span>&lt;span style="color:#719e07">(){}&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>
+&lt;ol start="3">
+&lt;li>consumer 示例demo&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java"> &lt;span style="color:#268bd2">@DubboReference&lt;/span>&lt;span style="color:#719e07">(&lt;/span>interfaceClass &lt;span style="color:#719e07">=&lt;/span> MsgpackService&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">)&lt;/span>
+&lt;span style="color:#268bd2">private&lt;/span> MsgpackService msgPackService&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#268bd2">@GetMapping&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;/msgpack&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> String &lt;span style="color:#268bd2">testMsgpack&lt;/span>&lt;span style="color:#719e07">(){&lt;/span>
+&lt;span style="color:#dc322f">int&lt;/span> v1 &lt;span style="color:#719e07">=&lt;/span> msgPackService&lt;span style="color:#719e07">.&lt;/span>tint&lt;span style="color:#719e07">(&lt;/span>1&lt;span style="color:#719e07">);&lt;/span>
+&lt;span style="color:#dc322f">long&lt;/span> v2 &lt;span style="color:#719e07">=&lt;/span> msgPackService&lt;span style="color:#719e07">.&lt;/span>tlong&lt;span style="color:#719e07">(&lt;/span>2&lt;span style="color:#719e07">);&lt;/span>
+List&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">&amp;gt;&lt;/span> v3 &lt;span style="color:#719e07">=&lt;/span> msgPackService&lt;span style="color:#719e07">.&lt;/span>tlist&lt;span style="color:#719e07">(&lt;/span>Lists&lt;span style="color:#719e07">.&lt;/span>newArrayList&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;1&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span>&lt;span style="color:#2aa198">&amp;#34;2&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span>&lt;span style="color:#2aa198">&amp;#34;3&amp;#34;&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
+String v4 &lt;span style="color:#719e07">=&lt;/span> msgPackService&lt;span style="color:#719e07">.&lt;/span>multiParams&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;hello&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> 3&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#719e07">new&lt;/span> MyParam&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Tom&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> 24&lt;span style="color:#719e07">));&lt;/span>
+&lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#2aa198">&amp;#34;msgpack&amp;#34;&lt;/span>&lt;span style="color:#719e07">+&lt;/span>v1&lt;span style="color:#719e07">+&lt;/span>&lt;span style="color:#2aa198">&amp;#34; &amp;#34;&lt;/span>&lt;span style="color:#719e07">+&lt;/span>v2&lt;span style="color:#719e07">+&lt;/span>&lt;span style="color:#2aa198">&amp;#34; &amp;#34;&lt;/span>&lt;span style="color:#719e07">+&lt;/span>v3&lt;span style="color:#719e07">+&lt;/span>&lt;span style="color:#2aa198">&amp;#34; &amp;#34;&lt;/span>&lt;span style="color:#719e07">+&lt;/span>v4&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>
+&lt;ol start="4">
+&lt;li>调用执行&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">&amp;gt; curl http://localhost:8081/msgpack
+&amp;gt; msgpack1 2 [1, 2, 3] hello3Tom24
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: provider超时打断</title><link>https://dubbo.apache.org/zh/docs/v2.7/user/examples/provider-timeout-release/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v2.7/user/examples/provider-timeout-release/</guid><description>
 &lt;p>支持provider根据超时时间进行业务打断&lt;/p>
 &lt;p>适用场景：对于一个provider，如果某个操作执行超时，则打断(释放)该执行线程，而不是仅仅打印超时日志。&lt;/p>
 &lt;div class="alert alert-primary" role="alert">
@@ -2301,308 +2457,4 @@ dubbo 支持多协议，如果一个应用同时暴露多个不同协议服务�
 &lt;ol>
 &lt;li>&lt;a href="https://github.com/apache/dubbo/issues/2043">Proposal: support hostname or domain in service discovery.&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://github.com/dubbo/dubbo-samples/tree/master/dubbo-samples-docker">dubbo通过环境变量设置host&lt;/a>&lt;/li>
-&lt;/ol></description></item><item><title>Docs: 注册信息简化</title><link>https://dubbo.apache.org/zh/docs/v2.7/user/examples/simplify-registry-data/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v2.7/user/examples/simplify-registry-data/</guid><description>
-&lt;h2 id="背景">背景&lt;/h2>
-&lt;p>Dubbo provider 中的服务配置项有接近 &lt;a href="http://dubbo.apache.org/en-us/docs/user/references/xml/dubbo-service.html">30 个配置项&lt;/a>。 排除注册中心服务治理需要之外，很大一部分配置项是 provider 自己使用，不需要透传给消费者。这部分数据不需要进入注册中心，而只需要以 key-value 形式持久化存储。&lt;/p>
-&lt;p>Dubbo consumer 中的配置项也有 &lt;a href="http://dubbo.apache.org/en-us/docs/user/references/xml/dubbo-reference.html">20+个配置项&lt;/a>。在注册中心之中，服务消费者列表中只需要关注 application，version，group，ip，dubbo 版本等少量配置，其他配置也可以以 key-value 形式持久化存储。&lt;/p>
-&lt;p>这些数据是以服务为维度注册进入注册中心，导致了数据量的膨胀，进而引发注册中心(如 zookeeper)的网络开销增大，性能降低。&lt;/p>
-&lt;h2 id="现有功能-sample">现有功能 sample&lt;/h2>
-&lt;p>当前现状一个简单展示。通过这个展示，分析下为什么需要做简化配置。&lt;/p>
-&lt;p>参考 sample 子工程： dubbo-samples-simplified-registry/dubbo-samples-simplified-registry-nosimple （跑 sample 前，先跑下 ZKClean 进行配置项清理）&lt;/p>
-&lt;p>dubbo-provider.xml配置&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">&amp;lt;dubbo:application name=&amp;#34;simplified-registry-nosimple-provider&amp;#34;/&amp;gt;
-&amp;lt;dubbo:registry address=&amp;#34;zookeeper://127.0.0.1:2181&amp;#34;/&amp;gt;
-&amp;lt;bean id=&amp;#34;demoService&amp;#34; class=&amp;#34;org.apache.dubbo.samples.simplified.registry.nosimple.impl.DemoServiceImpl&amp;#34;/&amp;gt;
-&amp;lt;dubbo:service async=&amp;#34;true&amp;#34; interface=&amp;#34;org.apache.dubbo.samples.simplified.registry.nosimple.api.DemoService&amp;#34;
-version=&amp;#34;1.2.3&amp;#34; group=&amp;#34;dubbo-simple&amp;#34; ref=&amp;#34;demoService&amp;#34;
-executes=&amp;#34;4500&amp;#34; retries=&amp;#34;7&amp;#34; owner=&amp;#34;vict&amp;#34; timeout=&amp;#34;5300&amp;#34;/&amp;gt;
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动 provider 的 main 方法之后，查看 zookeeper 的叶子节点（路径为：/dubbo/org.apache.dubbo.samples.simplified.registry.nosimple.api.DemoService/providers 目录下）的内容如下：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">dubbo%3A%2F%2F30.5.124.158%3A20880%2Forg.apache.dubbo.samples.simplified.registry.nosimple.api.DemoService
-%3Fanyhost%3Dtrue%26application%3Dsimplified-registry-xml-provider%26async%3Dtrue%26dubbo%3D
-2.0.2%26**executes**%3D4500%26generic%3Dfalse%26group%3Ddubbo-simple%26interface%3D
-org.apache.dubbo.samples.simplified.registry.nosimple.api.DemoService%26methods%3D
-sayHello%26**owner**%3Dvict%26pid%3D2767%26**retries**%3D7%26revision%3D1.2.3%26side%3D
-provider%26**timeout**%3D5300%26timestamp%3D1542361152795%26valid%3Dtrue%26version%3D1.2.3
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>从加粗字体中能看到有：executes, retries, owner, timeout。但是这些字段不是每个都需要传递给 dubbo ops 或者 dubbo consumer。 同样的，consumer 也有这个问题，可以在例子中启动 Consumer 的 main 方法进行查看。&lt;/p>
-&lt;h2 id="设计目标和宗旨">设计目标和宗旨&lt;/h2>
-&lt;p>期望简化进入注册中心的 provider 和 consumer 配置数量。
-期望将部分配置项以其他形式存储。这些配置项需要满足：不在服务调用链路上，同时这些配置项不在注册中心的核心链路上(服务查询，服务列表)。&lt;/p>
-&lt;h2 id="配置">配置&lt;/h2>
-&lt;p>简化注册中心的配置，只在 2.7 之后的版本中进行支持。
-开启 provider 或者 consumer 简化配置之后，默认保留的配置项如下：&lt;/p>
-&lt;p>provider：&lt;/p>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Constant Key&lt;/th>
-&lt;th>Key&lt;/th>
-&lt;th>remark&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>APPLICATION_KEY&lt;/td>
-&lt;td>application&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>CODEC_KEY&lt;/td>
-&lt;td>codec&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>EXCHANGER_KEY&lt;/td>
-&lt;td>exchanger&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>SERIALIZATION_KEY&lt;/td>
-&lt;td>serialization&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>CLUSTER_KEY&lt;/td>
-&lt;td>cluster&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>CONNECTIONS_KEY&lt;/td>
-&lt;td>connections&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>DEPRECATED_KEY&lt;/td>
-&lt;td>deprecated&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>GROUP_KEY&lt;/td>
-&lt;td>group&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>LOADBALANCE_KEY&lt;/td>
-&lt;td>loadbalance&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>MOCK_KEY&lt;/td>
-&lt;td>mock&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>PATH_KEY&lt;/td>
-&lt;td>path&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>TIMEOUT_KEY&lt;/td>
-&lt;td>timeout&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>TOKEN_KEY&lt;/td>
-&lt;td>token&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>VERSION_KEY&lt;/td>
-&lt;td>version&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>WARMUP_KEY&lt;/td>
-&lt;td>warmup&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>WEIGHT_KEY&lt;/td>
-&lt;td>weight&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>TIMESTAMP_KEY&lt;/td>
-&lt;td>timestamp&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>DUBBO_VERSION_KEY&lt;/td>
-&lt;td>dubbo&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>SPECIFICATION_VERSION_KEY&lt;/td>
-&lt;td>&lt;strong>specVersion&lt;/strong>&lt;/td>
-&lt;td>新增，用于表述dubbo版本，如2.7.0&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;p>consumer：&lt;/p>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Constant Key&lt;/th>
-&lt;th>Key&lt;/th>
-&lt;th>remark&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>APPLICATION_KEY&lt;/td>
-&lt;td>application&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>VERSION_KEY&lt;/td>
-&lt;td>version&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>GROUP_KEY&lt;/td>
-&lt;td>group&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>DUBBO_VERSION_KEY&lt;/td>
-&lt;td>dubbo&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>SPECIFICATION_VERSION_KEY&lt;/td>
-&lt;td>&lt;strong>specVersion&lt;/strong>&lt;/td>
-&lt;td>新增，用于表述dubbo版本，如2.7.0&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;p>Constant Key 表示来自于类 org.apache.dubbo.common.Constants 的字段。&lt;/p>
-&lt;p>下面介绍几种常用的使用方式。所有的 sample，都可以查看&lt;a href="https://github.com/dubbo/dubbo-samples/tree/master">sample-2.7&lt;/a>&lt;/p>
-&lt;h3 id="方式1-配置dubboproperties">方式1. 配置dubbo.properties&lt;/h3>
-&lt;p>sample 在 dubbo-samples-simplified-registry/dubbo-samples-simplified-registry-xml 工程下 （跑 sample 前，先跑下ZKClean 进行配置项清理）&lt;/p>
-&lt;p>dubbo.properties&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">
-dubbo.registry.simplified=true
-dubbo.registry.extra-keys=retries,owner
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>怎么去验证呢？&lt;/p>
-&lt;h5 id="provider端验证">provider端验证&lt;/h5>
-&lt;p>provider端配置&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> xmlns:xsi=&lt;span style="color:#2aa198">&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span>
-xmlns:dubbo=&lt;span style="color:#2aa198">&amp;#34;http://dubbo.apache.org/schema/dubbo&amp;#34;&lt;/span>
-xmlns=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans&amp;#34;&lt;/span>
-xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
-&lt;/span>&lt;span style="color:#2aa198"> http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
-&lt;span style="color:#586e75">&amp;lt;!-- optional --&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:application&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;simplified-registry-xml-provider&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://127.0.0.1:2181&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;bean&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;demoService&amp;#34;&lt;/span> class=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.simplified.registry.nosimple.impl.DemoServiceImpl&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> async=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.simplified.registry.nosimple.api.DemoService&amp;#34;&lt;/span> version=&lt;span style="color:#2aa198">&amp;#34;1.2.3&amp;#34;&lt;/span> group=&lt;span style="color:#2aa198">&amp;#34;dubbo-simple&amp;#34;&lt;/span>
-ref=&lt;span style="color:#2aa198">&amp;#34;demoService&amp;#34;&lt;/span> executes=&lt;span style="color:#2aa198">&amp;#34;4500&amp;#34;&lt;/span> retries=&lt;span style="color:#2aa198">&amp;#34;7&amp;#34;&lt;/span> owner=&lt;span style="color:#2aa198">&amp;#34;vict&amp;#34;&lt;/span> timeout=&lt;span style="color:#2aa198">&amp;#34;5300&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;/beans&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>得到的 zookeeper 的叶子节点的值如下：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">dubbo%3A%2F%2F30.5.124.149%3A20880%2Forg.apache.dubbo.samples.simplified.registry.nosimple.api.DemoService%3F
-application%3Dsimplified-registry-xml-provider%26dubbo%3D2.0.2%26group%3Ddubbo-simple%26**owner**%3D
-vict%26**retries**%3D7%26**timeout**%3D5300%26timestamp%3D1542594503305%26version%3D1.2.3
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>和上面的&lt;strong>现有功能 sample&lt;/strong>进行对比，上面的 sample 中，executes, retries, owner, timeout 四个配置项都进入了注册中心。但是本实例不是：&lt;/p>
-&lt;ul>
-&lt;li>配置了：dubbo.registry.simplified=true， 默认情况下，timeout 在默认的配置项列表，所以还是会进入注册中心；&lt;/li>
-&lt;li>配置了：dubbo.registry.extra-keys=retries,owner ， 所以 retries，owner 也会进入注册中心。&lt;/li>
-&lt;/ul>
-&lt;p>总结：timeout，retries,owner 进入了注册中心，而 executes 没有进入。&lt;/p>
-&lt;p>consumer 端配置&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">
-&lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> xmlns:xsi=&lt;span style="color:#2aa198">&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span>
-xmlns:dubbo=&lt;span style="color:#2aa198">&amp;#34;http://dubbo.apache.org/schema/dubbo&amp;#34;&lt;/span>
-xmlns=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans&amp;#34;&lt;/span>
-xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
-&lt;/span>&lt;span style="color:#2aa198"> http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
-&lt;span style="color:#586e75">&amp;lt;!-- optional --&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:application&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;simplified-registry-xml-consumer&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://127.0.0.1:2181&amp;#34;&lt;/span> username=&lt;span style="color:#2aa198">&amp;#34;xxx&amp;#34;&lt;/span> password=&lt;span style="color:#2aa198">&amp;#34;yyy&amp;#34;&lt;/span> check=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;demoService&amp;#34;&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.simplified.registry.nosimple.api.DemoService&amp;#34;&lt;/span>
-owner=&lt;span style="color:#2aa198">&amp;#34;vvv&amp;#34;&lt;/span> retries=&lt;span style="color:#2aa198">&amp;#34;4&amp;#34;&lt;/span> actives=&lt;span style="color:#2aa198">&amp;#34;6&amp;#34;&lt;/span> timeout=&lt;span style="color:#2aa198">&amp;#34;4500&amp;#34;&lt;/span> version=&lt;span style="color:#2aa198">&amp;#34;1.2.3&amp;#34;&lt;/span> group=&lt;span style="color:#2aa198">&amp;#34;dubbo-simple&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;/beans&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>得到的 zookeeper 的叶子节点的值如下：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">consumer%3A%2F%2F30.5.124.149%2Forg.apache.dubbo.samples.simplified.registry.nosimple.api.DemoService%3F
-actives%3D6%26application%3Dsimplified-registry-xml-consumer%26category%3D
-consumers%26check%3Dfalse%26dubbo%3D2.0.2%26group%3Ddubbo-simple%26owner%3Dvvv%26version%3D1.2.3
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>配置了：dubbo.registry.simplified=true ， 默认情况下，application,version,group,dubbo 在默认的配置项列表，所以还是会进入注册中心；&lt;/li>
-&lt;/ul>
-&lt;h3 id="方式2-声明spring-bean">方式2. 声明spring bean&lt;/h3>
-&lt;p>sample在dubbo-samples-simplified-registry/dubbo-samples-simplified-registry-annotation 工程下 （跑 sample 前，先跑下ZKClean 进行配置项清理）&lt;/p>
-&lt;h5 id="provider配置">Provider配置&lt;/h5>
-&lt;p>privide 端 bean 配置：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#586e75">// 等同于dubbo.properties配置，用@Bean形式进行配置
-&lt;/span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#268bd2">@Bean&lt;/span>
-&lt;span style="color:#268bd2">public&lt;/span> RegistryConfig &lt;span style="color:#268bd2">registryConfig&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-RegistryConfig registryConfig &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> RegistryConfig&lt;span style="color:#719e07">();&lt;/span>
-registryConfig&lt;span style="color:#719e07">.&lt;/span>setAddress&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;zookeeper://127.0.0.1:2181&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-registryConfig&lt;span style="color:#719e07">.&lt;/span>setSimplified&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#cb4b16">true&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-registryConfig&lt;span style="color:#719e07">.&lt;/span>setExtraKeys&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;retries,owner&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">return&lt;/span> registryConfig&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#586e75">// 暴露服务
-&lt;/span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#268bd2">@Service&lt;/span>&lt;span style="color:#719e07">(&lt;/span>version &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;1.1.8&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> group &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;d-test&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> executes &lt;span style="color:#719e07">=&lt;/span> 4500&lt;span style="color:#719e07">,&lt;/span> retries &lt;span style="color:#719e07">=&lt;/span> 7&lt;span style="color:#719e07">,&lt;/span> owner &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;victanno&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> timeout &lt;span style="color:#719e07">=&lt;/span> 5300&lt;span style="color:#719e07">)&lt;/span>
-&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">AnnotationServiceImpl&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> AnnotationService &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#268bd2">@Override&lt;/span>
-&lt;span style="color:#268bd2">public&lt;/span> String &lt;span style="color:#268bd2">sayHello&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String name&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;async provider received: &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> name&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#2aa198">&amp;#34;annotation: hello, &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> name&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>和上面 sample 中的 dubbo.properties 的效果是一致的。结果如下：&lt;/p>
-&lt;ul>
-&lt;li>默认情况下，timeout 在默认的配置项列表，所以还是会进入注册中心；&lt;/li>
-&lt;li>配置了 retries,owner 作为额外的 key 进入注册中心 ， 所以 retries，owner 也会进入注册中心。&lt;/li>
-&lt;/ul>
-&lt;p>总结：timeout，retries,owner 进入了注册中心，而 executes 没有进入。&lt;/p>
-&lt;h5 id="consumer配置">Consumer配置&lt;/h5>
-&lt;p>consumer 端 bean 配置：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">@Bean&lt;/span>
-&lt;span style="color:#268bd2">public&lt;/span> RegistryConfig &lt;span style="color:#268bd2">registryConfig&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-RegistryConfig registryConfig &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> RegistryConfig&lt;span style="color:#719e07">();&lt;/span>
-registryConfig&lt;span style="color:#719e07">.&lt;/span>setAddress&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;zookeeper://127.0.0.1:2181&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-registryConfig&lt;span style="color:#719e07">.&lt;/span>setSimplified&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#cb4b16">true&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">return&lt;/span> registryConfig&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>消费服务：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">@Component&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;annotationAction&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
-&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">AnnotationAction&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#268bd2">@Reference&lt;/span>&lt;span style="color:#719e07">(&lt;/span>version &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;1.1.8&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> group &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;d-test&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> owner &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;vvvanno&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> retries &lt;span style="color:#719e07">=&lt;/span> 4&lt;span style="color:#719e07">,&lt;/span> actives &lt;span style="color:#719e07">=&lt;/span> 6&lt;span style="color:#719e07">,&lt;/span> timeout &lt;span style="color:#719e07">=&lt;/span> 4500&lt;span style="color:#719e07">)&lt;/span>
-&lt;span style="color:#268bd2">private&lt;/span> AnnotationService annotationService&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#268bd2">public&lt;/span> String &lt;span style="color:#268bd2">doSayHello&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String name&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#719e07">return&lt;/span> annotationService&lt;span style="color:#719e07">.&lt;/span>sayHello&lt;span style="color:#719e07">(&lt;/span>name&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>和上面 sample 中 consumer 端的配置是一样的。结果如下：&lt;/p>
-&lt;ul>
-&lt;li>默认情况下，application,version,group,dubbo 在默认的配置项列表，所以还是会进入注册中心。&lt;/li>
-&lt;/ul>
-&lt;h6 id="注意">注意：&lt;/h6>
-&lt;p>如果一个应用中既有provider又有consumer，那么配置需要合并成：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">@Bean&lt;/span>
-&lt;span style="color:#268bd2">public&lt;/span> RegistryConfig &lt;span style="color:#268bd2">registryConfig&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-RegistryConfig registryConfig &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> RegistryConfig&lt;span style="color:#719e07">();&lt;/span>
-registryConfig&lt;span style="color:#719e07">.&lt;/span>setAddress&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;zookeeper://127.0.0.1:2181&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-registryConfig&lt;span style="color:#719e07">.&lt;/span>setSimplified&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#cb4b16">true&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#586e75">//只对provider生效
-&lt;/span>&lt;span style="color:#586e75">&lt;/span> registryConfig&lt;span style="color:#719e07">.&lt;/span>setExtraKeys&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;retries,owner&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">return&lt;/span> registryConfig&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="后续规划">后续规划&lt;/h2>
-&lt;p>本版本还保留了大量的配置项，接下来的版本中，会逐渐删除所有的配置项。&lt;/p></description></item><item><title>Docs: 日志适配</title><link>https://dubbo.apache.org/zh/docs/v2.7/user/examples/logger-strategy/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v2.7/user/examples/logger-strategy/</guid><description>
-&lt;p>自 &lt;code>2.2.1&lt;/code> 开始，dubbo 开始内置 log4j、slf4j、jcl、jdk 这些日志框架的适配[1]，也可以通过以下方式显式配置日志输出策略：&lt;/p>
-&lt;ol start="0">
-&lt;li>
-&lt;p>命令行&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh"> java -Ddubbo.application.logger&lt;span style="color:#719e07">=&lt;/span>log4j
-&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;li>
-&lt;p>在 &lt;code>dubbo.properties&lt;/code> 中指定&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback"> dubbo.application.logger=log4j
-&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;li>
-&lt;p>在 &lt;code>dubbo.xml&lt;/code> 中配置&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml"> &lt;span style="color:#268bd2">&amp;lt;dubbo:application&lt;/span> logger=&lt;span style="color:#2aa198">&amp;#34;log4j&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;/ol>
-&lt;p>[1]: 自定义扩展可以参考 &lt;a href="../../../dev/impls/logger-adapter">日志适配扩展&lt;/a>&lt;/p></description></item></channel></rss>
+&lt;/ol></description></item></channel></rss>

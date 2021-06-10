@@ -6776,9 +6776,11 @@ String suffix &lt;span style="color:#719e07">=&lt;/span> pattern&lt;span style="
 mvn clean package
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>配置 &lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>:&lt;/p>
 &lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">配置文件为：
-dubbo-admin-backend/src/main/resources/application.properties
+dubbo-admin-server/src/main/resources/application.properties
 主要的配置有：
-dubbo.registry.address&lt;span style="color:#719e07">=&lt;/span>zookeeper://127.0.0.1:2181
+admin.registry.address&lt;span style="color:#719e07">=&lt;/span>zookeeper://127.0.0.1:2181
+admin.config-center&lt;span style="color:#719e07">=&lt;/span>zookeeper://127.0.0.1:2181
+admin.metadata-report.address&lt;span style="color:#719e07">=&lt;/span>zookeeper://127.0.0.1:2181
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>启动:&lt;/p>
 &lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">mvn --projects dubbo-admin-server spring-boot:run
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>其他配置请访问 github 中的文档:&lt;/p>
