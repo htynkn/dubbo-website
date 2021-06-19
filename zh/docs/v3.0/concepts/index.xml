@@ -1,5 +1,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – 概念与架构</title><link>https://dubbo.apache.org/zh/docs/v3.0/concepts/</link><description>Recent content in 概念与架构 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/docs/v3.0/concepts/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: 服务发现</title><link>https://dubbo.apache.org/zh/docs/v3.0/concepts/service-discovery/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/concepts/service-discovery/</guid><description>
-&lt;p>服务发现，即消费端自动发现服务之地列表的能力，是微服务框架需要具备的关键能力。Dubbo 提供了基于消费端的自动服务发现能力，其基本工作原理如下图：&lt;/p>
+&lt;p>服务发现，即消费端自动发现服务之地列表的能力，是微服务框架需要具备的关键能力，借助于自动化的服务发现，微服务之间可以在无需感知对端部署位置与 IP 地址的情况下实现通信。&lt;/p>
+&lt;p>实现服务发现的方式有很多种，Dubbo 提供的是一种 Client-Based 的服务发现机制，通常还需要部署额外的第三方注册中心组件来协调服务发现过程，如常用的 Nacos、Consul、Zookeeper 等，Dubbo 自身也提供了对多种注册中心组件的对接，用户可以灵活选择。&lt;/p>
+&lt;p>Dubbo 基于消费端的自动服务发现能力，其基本工作原理如下图：&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/architecture.png" alt="//imgs/architecture.png">&lt;/p>
 &lt;p>服务发现的一个核心组件是注册中心，Provider 注册地址到注册中心，Consumer 从注册中心读取和订阅 Provider 地址列表。
 因此，要启用服务发现，需要为 Dubbo 增加注册中心配置：&lt;/p>
@@ -8,7 +10,7 @@
 dubbo
 registry
 address: zookeeper://127.0.0.1:2181
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="服务发现dubbo3-vs-dubbo2">服务发现（Dubbo3 vs Dubbo2）&lt;/h2>
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="whats-new-in-dubbo3">What&amp;rsquo;s New in Dubbo3&lt;/h2>
 &lt;p>就使用方式上而言，Dubbo3 与 Dubbo2 的服务发现配置是完全一致的，不需要改动什么内容。但就实现原理上而言，Dubbo3 引入了全新的服务发现模型 - 应用级服务发现，
 在工作原理、数据格式上已完全不能兼容老版本服务发现。&lt;/p>
 &lt;ul>
@@ -21,12 +23,11 @@ address: zookeeper://127.0.0.1:2181
 &lt;li>对于老用户，要面临如何平滑迁移到应用级服务发现的问题，考虑到老用户的规则如此之大，Dubbo3 默认保持了接口级地址发现的行为，这保证了老用户可以直接无感升级到 Dubbo3。
 而如果要开启应用级服务发现，则需要通过配置显示开启（双注册、双订阅），具体开启与平滑迁移过程，可参见《migration/地址发现迁移指南》。&lt;/li>
 &lt;/ul>
-&lt;h2 id="应用级服务发现">应用级服务发现&lt;/h2>
+&lt;h2 id="应用级服务发现简介">应用级服务发现简介&lt;/h2>
 &lt;p>概括来说，Dubbo3 引入的应用级服务发现主要有以下优势&lt;/p>
 &lt;ul>
 &lt;li>适配云原生微服务变革。云原生时代的基础设施能力不断向上释放，像 Kubernetes 等平台都集成了微服务概念抽象，Dubbo3 的应用级服务发现是适配各种微服务体系的通用模型。&lt;/li>
-&lt;li>提升性能与可伸缩性。支持超大规模集群的服务治理一直以来都是 Dubbo 的优势，通过引入应用级服务发现模型，从本质上解决了注册中心地址数据的存储与推送压力，相应的 Consumer 侧的地址计算压力也成数量级下降；
-集群规模也开始变得可预测、可评估（与 RPC 接口数量无关，只与实例部署规模相关）。&lt;/li>
+&lt;li>提升性能与可伸缩性。支持超大规模集群的服务治理一直以来都是 Dubbo 的优势，通过引入应用级服务发现模型，从本质上解决了注册中心地址数据的存储与推送压力，相应的 Consumer 侧的地址计算压力也成数量级下降；集群规模也开始变得可预测、可评估（与 RPC 接口数量无关，只与实例部署规模相关）。&lt;/li>
 &lt;/ul>
 &lt;p>下图是 Dubbo2 的服务发现模型：Provider 注册服务地址，Consumer 经过注册中心协调并发现服务地址，进而对地址发起通信，这是被绝大多数微服务框架的经典服务发现流程。而 Dubbo2 的特殊之处在于，它把 “RPC 接口”的信息也融合在了地址发现过程中，而这部分信息往往是和具体的业务定义密切相关的。&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/concepts/servicediscovery_old.png" alt="//imgs/v3/concepts/servicediscovery_old.png">&lt;/p>

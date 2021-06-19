@@ -863,6 +863,9 @@ future&lt;span style="color:#719e07">.&lt;/span>get&lt;span style="color:#719e07
 String &lt;span style="color:#268bd2">sayHi&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String name&lt;span style="color:#719e07">);&lt;/span>
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>那还有一种方式，就是利用 Java 8 提供的 default 接口实现，重载一个带有 CompletableFuture 签名的方法。&lt;/p>
+&lt;blockquote>
+&lt;p>CompletableFuture 签名的方法目前只支持 Dubbo 协议，其他协议由于第三方实现问题，需要视具体情况而定。&lt;/p>
+&lt;/blockquote>
 &lt;p>有两种方式来实现：&lt;/p>
 &lt;ol>
 &lt;li>提供方或消费方自己修改接口签名&lt;/li>
