@@ -98,7 +98,7 @@ DemoService demoService &lt;span style="color:#719e07">=&lt;/span> &lt;span styl
 [INFO] | +- org.springframework:spring-context:jar:4.3.10.RELEASE:compile
 [INFO] | +- org.javassist:javassist:jar:3.21.0-GA:compile
 [INFO] | \- org.jboss.netty:netty:jar:3.2.5.Final:compile
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>这里所有依赖都是换照 Dubbo 缺省配置选的，这些缺省值是基于稳定性和性能考虑的。&lt;/p>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>这里所有依赖都是按照 Dubbo 缺省配置选的，这些缺省值是基于稳定性和性能考虑的。&lt;/p>
 &lt;ul>
 &lt;li>javassist.jar &lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>: 如果 &lt;code>&amp;lt;dubbo:provider proxy=&amp;quot;jdk&amp;quot; /&amp;gt;&lt;/code> 或 &lt;code>&amp;lt;dubbo:consumer proxy=&amp;quot;jdk&amp;quot; /&amp;gt;&lt;/code>，以及 &lt;code>&amp;lt;dubbo:application compiler=&amp;quot;jdk&amp;quot; /&amp;gt;&lt;/code>，则不需要。&lt;/li>
 &lt;li>spring-context.jar &lt;sup id="fnref:3">&lt;a href="#fn:3" class="footnote-ref" role="doc-noteref">3&lt;/a>&lt;/sup>: 如果用 &lt;code>ServiceConfig&lt;/code> 和 &lt;code>ReferenceConfig&lt;/code> 的 API 调用，则不需要。&lt;/li>
