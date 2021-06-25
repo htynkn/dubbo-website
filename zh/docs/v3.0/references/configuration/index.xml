@@ -157,7 +157,7 @@ dubbo.application.qos.port=33333
 &lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>作用域&lt;/p>
-&lt;p>外部化配置有全局和应用两个级别，全局配置是所有应用共享的，应用级配置是由每个应用自己维护且只对自身可见的。当前已支持的扩展实现有Zookeeper、Apollo。&lt;/p>
+&lt;p>外部化配置有全局和应用两个级别，全局配置是所有应用共享的，应用级配置是由每个应用自己维护且只对自身可见的。当前已支持的扩展实现有Zookeeper、Apollo、Nacos。&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;h4 id="zookeeper">Zookeeper&lt;/h4>
@@ -183,6 +183,15 @@ dubbo.application.qos.port=33333
 &lt;p>关于文件配置托管，相当于是把 &lt;code>dubbo.properties&lt;/code> 配置文件的内容存储在了 Apollo 中，应用通过关联共享的 &lt;code>dubbo&lt;/code> namespace 继承公共配置,
 应用也可以按照 Apollo 的做法来覆盖个别配置项。&lt;/p>
 &lt;/blockquote>
+&lt;h4 id="nacos">Nacos&lt;/h4>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:config-center&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;nacos://127.0.0.1:8848?username=nacos&amp;amp;password=nacos&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;/dubbo:config-center&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Nacos虽然也存在命名空间 - namespace 的概念，但在 namespace 之下，还存在 group 概念。即通过 namespace 和 group 以及 dataId 去定位一个配置项，在不指定 namespace 的情况下，默认使用 &lt;code>public&lt;/code> 作为默认的命名空间。&lt;/p>
+&lt;p>在默认情况下，全局配置会读取 namespace : &lt;code>public&lt;/code>，dataId: &lt;code>dubbo.properties&lt;/code>，group: &lt;code>dubbo&lt;/code> 配置项中的内容作为全局配置。应用级别的 group 和全局级别的 group 存在一点差异， 应用级别会读取 namespace: &lt;code>public&lt;/code>，dataId: &lt;code>dubbo.properties&lt;/code>，group: &lt;code>your application name&lt;/code> 作为应用级别的配置。&lt;/p>
+&lt;p>全局：
+&lt;img src="https://dubbo.apache.org/imgs/user/nacos-configcenter-global-properties.png" alt="nacos-configcenter-global-properties.png">&lt;/p>
+&lt;p>应用级别：
+&lt;img src="https://dubbo.apache.org/imgs/user/nacos-configcenter-application-properties.png" alt="nacos-configcenter-application-properties.png">&lt;/p>
 &lt;h4 id="自己加载外部化配置">自己加载外部化配置&lt;/h4>
 &lt;p>所谓 Dubbo 对配置中心的支持，本质上就是把 &lt;code>.properties&lt;/code> 从远程拉取到本地，然后和本地的配置做一次融合。理论上只要 Dubbo 框架能拿到需要的配置就可以正常的启动，它并不关心这些配置是自己加载到的还是应用直接塞给它的，所以Dubbo还提供了以下API，让用户将自己组织好的配置塞给 Dubbo 框架（配置加载的过程是用户要完成的），这样 Dubbo 框架就不再直接和 Apollo 或 Zookeeper 做读取配置交互。&lt;/p>
 &lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#586e75">// 应用自行加载配置
@@ -200,7 +209,7 @@ configCenter&lt;span style="color:#719e07">.&lt;/span>setExternalConfig&lt;span 
 &lt;li>namespace，用于不同配置的环境隔离。&lt;/li>
 &lt;li>config，Dubbo 约定的固定节点，不可更改，所有配置和服务治理规则都存储在此节点下。&lt;/li>
 &lt;li>dubbo，所有服务治理规则都是全局性的，dubbo 为默认节点&lt;/li>
-&lt;li>configurators/tag-router/condition-router，不同的服务治理规则类型，node value 存储具体规则内容&lt;/li>
+&lt;li>configurators/tag-router/condition-router/migration，不同的服务治理规则类型，node value 存储具体规则内容&lt;/li>
 &lt;/ul>
 &lt;h4 id="apollo-1">Apollo&lt;/h4>
 &lt;p>所有的服务治理规则都是全局性的，默认从公共命名空间 &lt;code>dubbo&lt;/code> 读取和订阅：&lt;/p>
@@ -209,7 +218,18 @@ configCenter&lt;span style="color:#719e07">.&lt;/span>setExternalConfig&lt;span 
 &lt;ul>
 &lt;li>configurators，&lt;a href="../../examples/config-rule">覆盖规则&lt;/a>&lt;/li>
 &lt;li>tag-router，&lt;a href="../../examples/routing-rule">标签路由&lt;/a>&lt;/li>
-&lt;li>condition-router，&lt;a href="../../examples/routing-rule">条件路由&lt;/a>&lt;/li>
+&lt;li>condition-router，&lt;a href="../../examples/condition-router">条件路由&lt;/a>&lt;/li>
+&lt;li>migration, &lt;a href="../../examples/todo">迁移规则&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="nacos-1">Nacos&lt;/h4>
+&lt;p>所有的服务治理规则都是全局的，默认从 namespace: &lt;code>public&lt;/code> 下进行读取， 通过 dataId: &lt;code>interface name&lt;/code> 以及 group: &lt;code>dubbo&lt;/code> 去读取和订阅：&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/nacos-configcenter-governance.png" alt="nacos-configcenter-governance.jpg">&lt;/p>
+&lt;p>不同的规则以 dataId 的后缀区分：&lt;/p>
+&lt;ul>
+&lt;li>configurators，&lt;a href="../../examples/config-rule">覆盖规则&lt;/a>&lt;/li>
+&lt;li>tag-router，&lt;a href="../../examples/routing-rule">标签路由&lt;/a>&lt;/li>
+&lt;li>condition-router，&lt;a href="../../examples/condition-router">条件路由&lt;/a>&lt;/li>
+&lt;li>migration, &lt;a href="../../examples/todo">迁移规则&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Docs: 属性配置</title><link>https://dubbo.apache.org/zh/docs/v3.0/references/configuration/properties/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/references/configuration/properties/</guid><description>
 &lt;p>如果你的应用足够简单，例如，不需要多注册中心或多协议，并且需要在spring容器中共享配置，那么，我们可以直接使用 &lt;code>dubbo.properties&lt;/code> 作为默认配置。&lt;/p>
 &lt;p>Dubbo 可以自动加载 classpath 根目录下的 dubbo.properties，但是你同样可以使用 JVM 参数来指定路径：&lt;code>-Ddubbo.properties.file=xxx.properties&lt;/code>。&lt;/p>

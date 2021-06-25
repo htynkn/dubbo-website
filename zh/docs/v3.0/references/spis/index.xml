@@ -738,7 +738,7 @@ List&lt;span style="color:#719e07">&amp;lt;&lt;/span>URL&lt;span style="color:#7
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>META-INF/dubbo/org.apache.dubbo.common.compiler.Compiler：&lt;/p>
 &lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">xxx=com.xxx.XxxCompiler
-&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Dubbo 配置中心扩展</title><link>https://dubbo.apache.org/zh/docs/v3.0/references/spis/config-center/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/references/spis/config-center/</guid><description>
+&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: 配置中心扩展</title><link>https://dubbo.apache.org/zh/docs/v3.0/references/spis/config-center/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/references/spis/config-center/</guid><description>
 &lt;h2 id="设计目的">设计目的&lt;/h2>
 &lt;p>配置中心的核心功能是作为 Key-Value 存储，Dubbo 框架告知配置中心其关心的 key，配置中心返回该key对应的 value 值。&lt;/p>
 &lt;p>按照应用场景划分，配置中心在 Dubbo 框架中主要承担以下职责：&lt;/p>
