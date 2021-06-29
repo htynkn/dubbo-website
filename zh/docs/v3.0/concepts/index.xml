@@ -54,7 +54,7 @@ Dubbo3 特有的业务接口同步机制，是 Dubbo3 需要保留的优势，�
 &lt;h2 id="dubbo2">Dubbo2&lt;/h2>
 &lt;h2 id="其他协议">其他协议&lt;/h2></description></item><item><title>Docs: 服务流量管理</title><link>https://dubbo.apache.org/zh/docs/v3.0/concepts/traffic-management/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/concepts/traffic-management/</guid><description>
 &lt;h3 id="流量管理">流量管理&lt;/h3>
-&lt;p>&lt;code>Dubbo&lt;/code>提供了强大的流量管理能力。流量管理的本质是将请求根据制定好的路由规则分发到应用服务上，如下图所示：&lt;/p>
+&lt;p>流量管理的本质是将请求根据制定好的路由规则分发到应用服务上，如下图所示：&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/concepts/what-is-traffic-control.png" alt="What is traffic control">&lt;/p>
 &lt;p>其中：&lt;/p>
 &lt;ul>
@@ -64,14 +64,17 @@ Dubbo3 特有的业务接口同步机制，是 Dubbo3 需要保留的优势，�
 &lt;li>路由规则也可以不路由到任何应用服务。如：Router(m)没有路由到任何一个Service上，所有命中Router(m)的请求都会因为没有对应的应用服务处理而导致报错&lt;/li>
 &lt;li>应用服务可以是单个的实例，也可以是一个应用集群。&lt;/li>
 &lt;/ul>
-&lt;h3 id="应用场景">应用场景&lt;/h3>
-&lt;p>&lt;code>Dubbo&lt;/code>支持生产上常用的流量应用场景。&lt;/p>
-&lt;h5 id="蓝绿部署">蓝绿部署&lt;/h5>
-&lt;p>蓝绿部署是让线上的老版本继续运行，直接部署新版本然后进行测试，当新版本测试通过以后，将流量切到新版本，最后将老版本同时也升级到新版本。整个过程无需停机，风险较小且可控。&lt;/p>
-&lt;h5 id="ab测试">AB测试&lt;/h5>
-&lt;p>AB测试是用来测试应用功能的一种方案。通过科学的实验设计、样本采样、流量分割和校验等方式来获得具有代表性的实验结论，并确信该结论再推广到全部流量可信。&lt;/p>
-&lt;h5 id="金丝雀部署">金丝雀部署&lt;/h5>
-&lt;p>金丝雀部署是在原有版本可用的情况下，同时部署一个新版本应用作为“金丝雀”，测试新版本的性能和表现，在保障整体系统稳定的前提下，尽早发现、及时调整。&lt;/p></description></item><item><title>Docs: 配置管理</title><link>https://dubbo.apache.org/zh/docs/v3.0/concepts/configuration/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/concepts/configuration/</guid><description/></item><item><title>Docs: 部署架构（注册中心 配置中心 元数据中心）</title><link>https://dubbo.apache.org/zh/docs/v3.0/concepts/registry-configcenter-metadata/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/concepts/registry-configcenter-metadata/</guid><description>
+&lt;h3 id="dubbo流量管理介绍">Dubbo流量管理介绍&lt;/h3>
+&lt;p>Dubbo提供了支持mesh方式的流量管理策略，可以很容易实现 &lt;a href="../../examples/routing/ab-testing-deployment/">A/B测试&lt;/a>、&lt;a href="../../examples/routing/canary-deployment/">金丝雀发布&lt;/a>、&lt;a href="../../examples/routing/blue-green-deployment/">蓝绿发布&lt;/a>等能力。&lt;/p>
+&lt;p>Dubbo将整个流量管理分成&lt;a href="../../references/routers/virtualservice/">VirtualService&lt;/a>和&lt;a href="../../references/routers/destination-rule/">DestinationRule&lt;/a>两部分。当Consumer接收到一个请求时，会根据&lt;a href="../../references/routers/virtualservice/">VirtualService&lt;/a>中定义的&lt;a href="../../references/routers/virtualservice/#dubboroute">DubboRoute&lt;/a>和&lt;a href="../../references/routers/virtualservice/#dubboroutedetail">DubboRouteDetail&lt;/a>匹配到对应的&lt;a href="../../references/routers/virtualservice/#dubbodestination">DubboDestination&lt;/a>中的&lt;a href="../../references/routers/destination-rule/#subset">subnet&lt;/a>，最后根据&lt;a href="../../references/routers/destination-rule/">DestinationRule&lt;/a>中配置的&lt;a href="../../references/routers/destination-rule/#subset">subnet&lt;/a>信息中的labels找到对应需要具体路由的Provider集群。其中：&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="../../references/routers/virtualservice/">VirtualService&lt;/a>主要处理入站流量分流的规则，支持服务级别和方法级别的分流。&lt;/li>
+&lt;li>&lt;a href="../../references/routers/virtualservice/#dubboroute">DubboRoute&lt;/a>主要解决服务级别的分流问题。同时，还提供的重试机制、超时、故障注入、镜像流量等能力。&lt;/li>
+&lt;li>&lt;a href="../../references/routers/virtualservice/#dubboroutedetail">DubboRouteDetail&lt;/a>主要解决某个服务中方法级别的分流问题。支持方法名、方法参数、参数个数、参数类型、header等各种维度的分流能力。同时也支持方法级的重试机制、超时、故障注入、镜像流量等能力。&lt;/li>
+&lt;li>&lt;a href="../../references/routers/virtualservice/#dubbodestination">DubboDestination&lt;/a>用来描述路由流量的目标地址，支持host、port、subnet等方式。&lt;/li>
+&lt;li>&lt;a href="../../references/routers/destination-rule/">DestinationRule&lt;/a>主要处理目标地址规则，可以通过hosts、&lt;a href="../../references/routers/destination-rule/#subset">subnet&lt;/a>等方式关联到Provider集群。同时可以通过&lt;a href="../../references/routers/destination-rule/#trafficpolicy">trafficPolicy&lt;/a>来实现负载均衡。&lt;/li>
+&lt;/ul>
+&lt;p>这种设计理念很好的解决流量分流和目标地址之间的耦合问题。不仅将配置规则进行了简化有效避免配置冗余的问题，还支持&lt;a href="../../references/routers/virtualservice/">VirtualService&lt;/a>和&lt;a href="../../references/routers/destination-rule/">DestinationRule&lt;/a>的任意组合，可以非常灵活的支持各种业务使用场景。&lt;/p></description></item><item><title>Docs: 配置管理</title><link>https://dubbo.apache.org/zh/docs/v3.0/concepts/configuration/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/concepts/configuration/</guid><description/></item><item><title>Docs: 部署架构（注册中心 配置中心 元数据中心）</title><link>https://dubbo.apache.org/zh/docs/v3.0/concepts/registry-configcenter-metadata/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/concepts/registry-configcenter-metadata/</guid><description>
 &lt;p>作为一个微服务框架，Dubbo sdk 跟随着微服务组件被部署在分布式集群各个位置，为了在分布式环境下实现各个微服务组件间的协作，
 Dubbo 定义了一些中心化组件，这包括：&lt;/p>
 &lt;ul>
@@ -103,4 +106,68 @@ Dubbo 定义了一些中心化组件，这包括：&lt;/p>
 &lt;p>类比 Spring Cloud Config同
 &lt;img src="https://dubbo.apache.org/imgs/v3/concepts/centers-config.png" alt="//imgs/v3/concepts/centers-config.png">&lt;/p>
 &lt;h2 id="元数据中心">元数据中心&lt;/h2>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/concepts/centers-metadata.png" alt="//imgs/v3/concepts/centers-metadata.png">&lt;/p></description></item><item><title>Docs: 如何扩展 Dubbo</title><link>https://dubbo.apache.org/zh/docs/v3.0/concepts/extensibility/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/concepts/extensibility/</guid><description/></item></channel></rss>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/concepts/centers-metadata.png" alt="//imgs/v3/concepts/centers-metadata.png">&lt;/p></description></item><item><title>Docs: 如何扩展 Dubbo</title><link>https://dubbo.apache.org/zh/docs/v3.0/concepts/extensibility/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/concepts/extensibility/</guid><description>
+&lt;h2 id="扩展设计理念">扩展设计理念&lt;/h2>
+&lt;p>可扩展性是任何一个系统所追求的，对于 Dubbo 来说是同样适用。&lt;/p>
+&lt;h3 id="什么是可扩展性">什么是可扩展性&lt;/h3>
+&lt;p>可扩展性是一种设计理念，代表了我们对未来的一种预想，我们希望在现有的架构或设计基础上，当未来某些方面发生变化的时候，我们能够以最小的改动来适应这种变化。&lt;/p>
+&lt;h3 id="可扩展性的优点">可扩展性的优点&lt;/h3>
+&lt;p>可扩展性的优点主要表现模块之间解耦，它符合开闭原则，对扩展开放，对修改关闭。当系统增加新功能时，不需要对现有系统的结构和代码进行修改，仅仅新增一个扩展即可。&lt;/p>
+&lt;h3 id="扩展实现方式">扩展实现方式&lt;/h3>
+&lt;p>一般来说，系统会采用 Factory、IoC、OSGI 等方式管理扩展(插件)生命周期。考虑到 Dubbo 的适用面，不想强依赖 Spring 等 IoC 容器。
+而自己造一个小的 IoC 容器，也觉得有点过度设计，所以选择最简单的 Factory 方式管理扩展(插件)。在 Dubbo 中，所有内部实现和第三方实现都是平等的。&lt;/p>
+&lt;h3 id="dubbo-中的可扩展性">Dubbo 中的可扩展性&lt;/h3>
+&lt;ul>
+&lt;li>平等对待第三方的实现。在 Dubbo 中，所有内部实现和第三方实现都是平等的，用户可以基于自身业务需求，替换 Dubbo 提供的原生实现。&lt;/li>
+&lt;li>每个扩展点只封装一个变化因子，最大化复用。每个扩展点的实现者，往往都只是关心一件事。如果用户有需求需要进行扩展，那么只需要对其关注的扩展点进行扩展就好，极大的减少用户的工作量。&lt;/li>
+&lt;/ul>
+&lt;h2 id="dubbo-扩展的特性">Dubbo 扩展的特性&lt;/h2>
+&lt;p>Dubbo 中的扩展能力是从 JDK 标准的 SPI 扩展点发现机制加强而来，它改进了 JDK 标准的 SPI 以下问题：&lt;/p>
+&lt;ul>
+&lt;li>JDK 标准的 SPI 会一次性实例化扩展点所有实现，如果有扩展实现初始化很耗时，但如果没用上也加载，会很浪费资源。&lt;/li>
+&lt;li>如果扩展点加载失败，连扩展点的名称都拿不到了。比如：JDK 标准的 ScriptEngine，通过 getName() 获取脚本类型的名称，但如果 RubyScriptEngine 因为所依赖的 jruby.jar 不存在，导致 RubyScriptEngine 类加载失败，这个失败原因被吃掉了，和 ruby 对应不起来，当用户执行 ruby 脚本时，会报不支持 ruby，而不是真正失败的原因。&lt;/li>
+&lt;/ul>
+&lt;p>用户能够基于 Dubbo 提供的扩展能力，很方便基于自身需求扩展其他协议、过滤器、路由等。下面介绍下 Dubbo 扩展能力的特性。&lt;/p>
+&lt;ul>
+&lt;li>按需加载。Dubbo 的扩展能力不会一次性实例化所有实现，而是用那个扩展类则实例化那个扩展类，减少资源浪费。&lt;/li>
+&lt;li>增加扩展类的 IOC 能力。Dubbo 的扩展能力并不仅仅只是发现扩展服务实现类，而是在此基础上更进一步，如果该扩展类的属性依赖其他对象，则 Dubbo 会自动的完成该依赖对象的注入功能。&lt;/li>
+&lt;li>增加扩展类的 AOP 能力。Dubbo 扩展能力会自动的发现扩展类的包装类，完成包装类的构造，增强扩展类的功能。&lt;/li>
+&lt;li>具备动态选择扩展实现的能力。Dubbo 扩展会基于参数，在运行时动态选择对应的扩展类，提高了 Dubbo 的扩展能力。&lt;/li>
+&lt;li>可以对扩展实现进行排序。能够基于用户需求，指定扩展实现的执行顺序。&lt;/li>
+&lt;li>提供扩展点的 Adaptive 能力。该能力可以使的一些扩展类在 consumer 端生效，一些扩展类在 provider 端生效。&lt;/li>
+&lt;/ul>
+&lt;p>从 Dubbo 扩展的设计目标可以看出，Dubbo 实现的一些例如动态选择扩展实现、IOC、AOP 等特性，能够为用户提供非常灵活的扩展能力。&lt;/p>
+&lt;h2 id="dubbo-扩展加载流程">Dubbo 扩展加载流程&lt;/h2>
+&lt;p>Dubbo 加载扩展的整个流程如下：&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/concepts/extension-load.png" alt="//imgs/v3/concepts/extension-load.png">&lt;/p>
+&lt;p>主要步骤为 4 个：&lt;/p>
+&lt;ul>
+&lt;li>读取并解析配置文件&lt;/li>
+&lt;li>缓存所有扩展实现&lt;/li>
+&lt;li>基于用户执行的扩展名，实例化对应的扩展实现&lt;/li>
+&lt;li>进行扩展实例属性的 IOC 注入以及实例化扩展的包装类，实现 AOP 特性&lt;/li>
+&lt;/ul>
+&lt;h2 id="如何使用-dubbo-扩展能力进行扩展">如何使用 Dubbo 扩展能力进行扩展&lt;/h2>
+&lt;p>下面以扩展注册中心为例进行说明如何利用 Dubbo 提供的扩展能力扩展 Triple 协议。&lt;/p>
+&lt;p>(1) 在协议的实现 jar 包内放置文本文件：META-INF/dubbo/org.apache.dubbo.remoting.api.WireProtocol&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">tri=org.apache.dubbo.remoting.api.WireProtocol
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>(2) 实现类内容&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">@Activate&lt;/span>
+&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">TripleHttp2Protocol&lt;/span> &lt;span style="color:#268bd2">extends&lt;/span> Http2WireProtocol &lt;span style="color:#719e07">{&lt;/span>
+&lt;span style="color:#586e75">// ...
+&lt;/span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>说明下：Http2WireProtocol 实现了 WireProtocol 接口&lt;/p>
+&lt;p>(3) Dubbo 配置模块中，扩展点均有对应配置属性或标签，通过配置指定使用哪个扩展实现。比如：&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">&amp;lt;dubbo:protocol name=&amp;#34;tri&amp;#34; /&amp;gt;
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>从上面的扩展步骤可以看出，用户基本在黑盒下就完成了扩展。&lt;/p>
+&lt;h2 id="dubbo-扩展的应用">Dubbo 扩展的应用&lt;/h2>
+&lt;p>Dubbo 的扩展能力非常灵活，在自身功能的实现上无处不在。&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/concepts/extension-use.png" alt="//imgs/v3/concepts/extension-use.png">&lt;/p>
+&lt;p>Dubbo 扩展能力使得 Dubbo 项目很方便的切分成一个一个的子模块，实现热插拔特性。用户完全可以基于自身需求，替换 Dubbo 原生实现，来满足自身业务需求。&lt;/p>
+&lt;h2 id="使用场景">使用场景&lt;/h2>
+&lt;ul>
+&lt;li>如果你需要自定义负载均衡策略，你可以使用 Dubbo 扩展能力。&lt;/li>
+&lt;li>如果你需要实现自定义的注册中心，你可以使用 Dubbo 扩展能力。&lt;/li>
+&lt;li>如果你需要实现自定义的过滤器，你可以使用 Dubbo 扩展能力。&lt;/li>
+&lt;/ul>
+&lt;p>Dubbo 扩展平等的对待内部实现和第三方实现。更多使用场景，参见 &lt;a href="../references/">SPI 扩展实现&lt;/a>&lt;/p></description></item></channel></rss>
