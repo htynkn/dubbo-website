@@ -1,5 +1,5 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – 概念与架构</title><link>https://dubbo.apache.org/zh/docs/v3.0/concepts/</link><description>Recent content in 概念与架构 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/docs/v3.0/concepts/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: 服务发现</title><link>https://dubbo.apache.org/zh/docs/v3.0/concepts/service-discovery/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/concepts/service-discovery/</guid><description>
-&lt;p>服务发现，即消费端自动发现服务之地列表的能力，是微服务框架需要具备的关键能力，借助于自动化的服务发现，微服务之间可以在无需感知对端部署位置与 IP 地址的情况下实现通信。&lt;/p>
+&lt;p>服务发现，即消费端自动发现服务地址列表的能力，是微服务框架需要具备的关键能力，借助于自动化的服务发现，微服务之间可以在无需感知对端部署位置与 IP 地址的情况下实现通信。&lt;/p>
 &lt;p>实现服务发现的方式有很多种，Dubbo 提供的是一种 Client-Based 的服务发现机制，通常还需要部署额外的第三方注册中心组件来协调服务发现过程，如常用的 Nacos、Consul、Zookeeper 等，Dubbo 自身也提供了对多种注册中心组件的对接，用户可以灵活选择。&lt;/p>
 &lt;p>Dubbo 基于消费端的自动服务发现能力，其基本工作原理如下图：&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/architecture.png" alt="//imgs/architecture.png">&lt;/p>
@@ -20,7 +20,7 @@ address: zookeeper://127.0.0.1:2181
 &lt;p>Dubbo3 格式的 Provider 地址不能被 Dubbo2 的 Consumer 识别到，反之 Dubbo2 的消费者也不能订阅到 Dubbo3 Provider。&lt;/p>
 &lt;ul>
 &lt;li>对于新用户，我们提倡直接启用 Dubbo3 的默认行为，即启用应用级服务发现，参见《samples/应用级服务发现》；&lt;/li>
-&lt;li>对于老用户，要面临如何平滑迁移到应用级服务发现的问题，考虑到老用户的规则如此之大，Dubbo3 默认保持了接口级地址发现的行为，这保证了老用户可以直接无感升级到 Dubbo3。
+&lt;li>对于老用户，要面临如何平滑迁移到应用级服务发现的问题，考虑到老用户的规模如此之大，Dubbo3 默认保持了接口级地址发现的行为，这保证了老用户可以直接无感升级到 Dubbo3。
 而如果要开启应用级服务发现，则需要通过配置显示开启（双注册、双订阅），具体开启与平滑迁移过程，可参见《migration/地址发现迁移指南》。&lt;/li>
 &lt;/ul>
 &lt;h2 id="应用级服务发现简介">应用级服务发现简介&lt;/h2>

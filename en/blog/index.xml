@@ -1,4 +1,34 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – Apache Dubbo Blog</title><link>https://dubbo.apache.org/en/blog/</link><description>Recent content in Apache Dubbo Blog on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/en/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: Past Releases</title><link>https://dubbo.apache.org/en/blog/2020/05/18/past-releases/</link><pubDate>Mon, 18 May 2020 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/blog/2020/05/18/past-releases/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – Apache Dubbo Blog</title><link>https://dubbo.apache.org/en/blog/</link><description>Recent content in Apache Dubbo Blog on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/en/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: 3.0.1 Release Note</title><link>https://dubbo.apache.org/en/blog/2021/07/02/3.0.1-release-note/</link><pubDate>Fri, 02 Jul 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/blog/2021/07/02/3.0.1-release-note/</guid><description>
+&lt;h2 id="optimization">Optimization&lt;/h2>
+&lt;ul>
+&lt;li>Refactor NameMapping to Metadata, Support application field in MigrationRule&lt;/li>
+&lt;li>Add cache for scan result&lt;/li>
+&lt;li>Improve config overrides of method and argument&lt;/li>
+&lt;li>Support servlet takeover mode&lt;/li>
+&lt;li>Add ServiceListener for ServiceConfig&lt;/li>
+&lt;li>Improve method callback&lt;/li>
+&lt;/ul>
+&lt;h2 id="bugfixs">BugFixs&lt;/h2>
+&lt;ul>
+&lt;li>Add force check&lt;/li>
+&lt;li>Fix multi-registry will destroy unavailable clusters&lt;/li>
+&lt;li>Remove needless toString convert &amp;amp; Enable checking by default&lt;/li>
+&lt;li>Ignore invalid MetadataReportConfig&lt;/li>
+&lt;li>Fix NPE when consumer start&lt;/li>
+&lt;li>Fix some compatiable issues&lt;/li>
+&lt;li>Optimize Service related issues&lt;/li>
+&lt;li>Opt Migration &amp;amp; Fix reSubscribe for ServiceDiscovery&lt;/li>
+&lt;li>Fix NPE in MetadataInfo&lt;/li>
+&lt;li>Fix customizer not changed&lt;/li>
+&lt;/ul>
+&lt;h2 id="code-improvement">Code Improvement&lt;/h2>
+&lt;p>Thanks for these contribution to improve stability of Apache Dubbo.&lt;/p>
+&lt;p>&lt;a href="https://github.com/apache/dubbo/pull/8043">#8043&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8044">#8044&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8048">#8048&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8071">#8071&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8119">#8119&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8132">#8132&lt;/a>&lt;/p></description></item><item><title>Blog: Past Releases</title><link>https://dubbo.apache.org/en/blog/2020/05/18/past-releases/</link><pubDate>Mon, 18 May 2020 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/blog/2020/05/18/past-releases/</guid><description>
 &lt;h2 id="verification">Verification&lt;/h2>
 &lt;p>you can follow these &lt;a href="https://www.apache.org/info/verification">procedures&lt;/a> and the &lt;a href="https://www.apache.org/dist/dubbo/KEYS">KEYS&lt;/a> file to verify the download files&lt;/p>
 &lt;h2 id="apache-dubbo">Apache Dubbo&lt;/h2>
@@ -6,6 +36,12 @@
 &lt;p>GitHub: &lt;a href="https://github.com/apache/dubbo">https://github.com/apache/dubbo&lt;/a>&lt;br>
 Release Notes: &lt;a href="https://github.com/apache/dubbo/releases">https://github.com/apache/dubbo/releases&lt;/a>&lt;/p>
 &lt;/blockquote>
+&lt;h3 id="301-2021-07-02">3.0.1 (2021-07-02)&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://www.apache.org/dyn/closer.cgi?path=dubbo/3.0.1/apache-dubbo-3.0.1-src.zip">source&lt;/a> |
+&lt;a href="https://www.apache.org/dist/dubbo/3.0.1/apache-dubbo-3.0.1-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://www.apache.org/dist/dubbo/3.0.1/apache-dubbo-3.0.1-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;/ul>
 &lt;h3 id="300-2021-06-16">3.0.0 (2021-06-16)&lt;/h3>
 &lt;ul>
 &lt;li>&lt;a href="https://www.apache.org/dyn/closer.cgi?path=dubbo/3.0.0/apache-dubbo-3.0.0-src.zip">source&lt;/a> |
