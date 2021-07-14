@@ -341,7 +341,7 @@ $ shasum -c apache-dubbo-&lt;span style="color:#2aa198">${&lt;/span>&lt;span sty
 &lt;p>If it&amp;rsquo;s your first time verify a release candidte, you should import public keys first.&lt;/p>
 &lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh"> $ curl https://dist.apache.org/repos/dist/dev/dubbo/KEYS &amp;gt;&amp;gt; KEYS &lt;span style="color:#586e75"># download public keys to local directory&lt;/span>
 $ gpg --import KEYS &lt;span style="color:#586e75"># import keys&lt;/span>
-$ gpg —edit-key liujun
+$ gpg -—edit-key liujun
 &amp;gt; trust &lt;span style="color:#586e75"># type trust command&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>Now, you can verify signature with command&lt;/p>
 &lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">gpg --verify apache-dubbo-2.6.3-source-release.zip.asc apache-dubbo-2.6.3-source-release.zip

@@ -447,7 +447,8 @@ org.apache.dubbo.rpc.RpcException
 org.apache.dubbo.rpc.service.GenericException
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>详细参见：&lt;a href="../../examples/generic-reference">泛化引用&lt;/a> &amp;amp; &lt;a href="../../examples/generic-service">泛化实现&lt;/a>&lt;/p>
 &lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">org.apache.dubbo.rpc.service.EchoService
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>详细参见：&lt;a href="../../examples/echo-service">回声测试&lt;/a>&lt;/p></description></item><item><title>Docs: Kubernetes 生命周期对齐探针</title><link>https://dubbo.apache.org/zh/docs/v3.0/references/lifecycle/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/references/lifecycle/</guid><description/></item><item><title>Docs: 在线运维命令参考手册</title><link>https://dubbo.apache.org/zh/docs/v3.0/references/qos/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/references/qos/</guid><description>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>详细参见：&lt;a href="../../examples/echo-service">回声测试&lt;/a>&lt;/p></description></item><item><title>Docs: Kubernetes 生命周期对齐探针</title><link>https://dubbo.apache.org/zh/docs/v3.0/references/lifecycle/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/references/lifecycle/</guid><description>
+&lt;p>和 Kubernetes 生命周期对齐的一些扩展点&lt;/p></description></item><item><title>Docs: 在线运维命令参考手册</title><link>https://dubbo.apache.org/zh/docs/v3.0/references/qos/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/references/qos/</guid><description>
 &lt;p>dubbo &lt;code>2.5.8&lt;/code> 新版本增加了 QOS 模块，提供了新的 telnet 命令支持。&lt;/p>
 &lt;h2 id="端口">端口&lt;/h2>
 &lt;p>新版本的 telnet 端口 与 dubbo 协议的端口是不同的端口，默认为 &lt;code>22222&lt;/code>，可通过配置文件&lt;code>dubbo.properties&lt;/code> 修改:&lt;/p>
@@ -726,7 +727,8 @@ dubbo.application.qosAcceptForeignIp=false
 &lt;p>如果端口不指定，默认端口为 9090&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Docs: RPC协议</title><link>https://dubbo.apache.org/zh/docs/v3.0/references/protocols/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/references/protocols/</guid><description/></item><item><title>Docs: 序列化协议</title><link>https://dubbo.apache.org/zh/docs/v3.0/references/serializations/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/references/serializations/</guid><description/></item><item><title>Docs: 路由规则</title><link>https://dubbo.apache.org/zh/docs/v3.0/references/routers/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/references/routers/</guid><description>
+&lt;/section></description></item><item><title>Docs: RPC协议</title><link>https://dubbo.apache.org/zh/docs/v3.0/references/protocols/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/references/protocols/</guid><description>
+&lt;p>Dubbo 中目前支持的RPC协议&lt;/p></description></item><item><title>Docs: 路由规则</title><link>https://dubbo.apache.org/zh/docs/v3.0/references/routers/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/references/routers/</guid><description>
 &lt;h3 id="基本思想">基本思想&lt;/h3>
 &lt;p>基于路由链，采用Pipeline的处理方式，如下图所示：&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/route-rule1.png" alt="route-rule1.png">&lt;/p>

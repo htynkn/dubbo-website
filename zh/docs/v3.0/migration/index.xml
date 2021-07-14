@@ -40,14 +40,14 @@
 &lt;h2 id="1-快速升级步骤">1 快速升级步骤&lt;/h2>
 &lt;p>简单的修改 pom.xml 到最新版本就可以完成升级，如果要迁移到应用级地址，只需要调整开关控制 3.x 版本的默认行为。&lt;/p>
 &lt;ol>
-&lt;li>升级 Provider 应用到最新 3.x 版本依赖，配置双注册开关&lt;code>dubbo.application.register-mode=all&lt;/code>（建议通过全局配置中心设置），完成应用发布。&lt;/li>
-&lt;li>升级 Consumer 应用到最新 3.x 版本依赖，配置双订阅开关&lt;code>dubbo.application.service-discovery.migration=APPLICATION_FIRST&lt;/code>（建议通过全局配置中心设置），完成应用发布。&lt;/li>
+&lt;li>升级 Provider 应用到最新 3.x 版本依赖，配置双注册开关&lt;code>dubbo.application.register-mode=all&lt;/code>（建议通过全局配置中心设置，默认已自动开启），完成应用发布。&lt;/li>
+&lt;li>升级 Consumer 应用到最新 3.x 版本依赖，配置双订阅开关&lt;code>dubbo.application.service-discovery.migration=APPLICATION_FIRST&lt;/code>（建议通过全局配置中心设置，默认已自动开启），完成应用发布。&lt;/li>
 &lt;li>在确认 Provider 的上有 Consumer 全部完成应用级地址迁移后，Provider 切到应用级地址单注册。完成升级&lt;/li>
 &lt;/ol>
 &lt;p>以下是关于迁移流程的详细描述。&lt;/p>
 &lt;h2 id="2-provider-端升级过程详解">2 Provider 端升级过程详解&lt;/h2>
-&lt;p>在不改变任何 Dubbo 配置的情况下，可以将一个应用或实例升级到 3.x 版本，升级后的 Dubbo 实例会默保持与 2.x 版本完全一致的行为，即会正常注册 2.x 格式的地址到注册中心，因此升级后的实例仍会对整个集群仍保持可见状态。&lt;/p>
-&lt;p>如果要启用新的地址发现模型（注册应用级别的地址），则需要考虑配置双注册参数，让 3.x 实例在启动阶段实现新、老地址的双注册。&lt;/p>
+&lt;p>在不改变任何 Dubbo 配置的情况下，可以将一个应用或实例升级到 3.x 版本，升级后的 Dubbo 实例会默保保证与 2.x 版本的兼容性，即会正常注册 2.x 格式的地址到注册中心，因此升级后的实例仍会对整个集群仍保持可见状态。&lt;/p>
+&lt;p>同时新的地址发现模型（注册应用级别的地址）也将会自动注册。&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/migration/provider-registration.png" alt="//imgs/v3/migration/provider-registration.png">&lt;/p>
 &lt;p>通过 -D 参数，可以指定 provider 启动时的注册行为&lt;/p>
 &lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">-Ddubbo.application.register-mode=all
@@ -63,10 +63,10 @@
 &lt;p>​ 双注册后仅仅增加了 48M 的数据量。&lt;/p>
 &lt;h2 id="3-consumer-端升级过程">3 Consumer 端升级过程&lt;/h2>
 &lt;p>对于 2.x 的消费者实例，它们看到的自然都是 2.x 版本的提供者地址列表；&lt;/p>
-&lt;p>对于 3.x 的消费者，它具备同时发现 2.x 与 3.x 提供者地址列表的能力。在默认情况下，升级到 3.x 的消费者仍将消费 2.x 的提供者地址。Dubbo3 提供了开关来控制这个行为：&lt;/p>
+&lt;p>对于 3.x 的消费者，它具备同时发现 2.x 与 3.x 提供者地址列表的能力。在默认情况下，如果集群中存在可以消费的 3.x 的地址，将自动消费 3.x 的地址，如果不存在新地址则自动消费 2.x 的地址。Dubbo3 提供了开关来控制这个行为：&lt;/p>
 &lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">dubbo.application.service-discovery.migration=APPLICATION_FIRST
 # 可选值
-# INTERFACE_FIRST，只消费接口级地址，如无地址则报错，单订阅 2.x 地址
+# FORCE_INTERFACE，只消费接口级地址，如无地址则报错，单订阅 2.x 地址
 # APPLICATION_FIRST，智能决策接口级/应用级地址，双订阅
 # FORCE_APPLICATION，只消费应用级地址，如无地址则报错，单订阅 3.x 地址
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>dubbo.application.service-discovery.migration &lt;/code> 支持通过 &lt;code>-D&lt;/code> 以及 &lt;code>全局配置中心&lt;/code> 两种方式进行配置。&lt;/p>
@@ -84,7 +84,7 @@
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/migration/migration-cluster-invoker.png" alt="//imgs/v3/migration/migration-cluster-item.png">&lt;/p>
 &lt;p>ClusterInvoker 筛选的依据，可以通过 MigrationAddressComparator SPI 自行定义，目前官方提供了一个简单的地址数量比对策略，即当 &lt;code>应用级地址数量 == 接口级地址数量&lt;/code> 满足时则进行迁移。&lt;/p>
 &lt;blockquote>
-&lt;p>其实 INTERFACE_FIRST、APPLICATION_FIRST、FORCE_APPLICATION 控制的都是这里的 ClusterInvoker 类型的筛选策略&lt;/p>
+&lt;p>其实 FORCE_INTERFACE、APPLICATION_FIRST、FORCE_APPLICATION 控制的都是这里的 ClusterInvoker 类型的筛选策略&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="31-双订阅带来的资源消耗">3.1 双订阅带来的资源消耗&lt;/h3>
 &lt;p>双订阅不可避免的会增加消费端的内存消耗，但由于应用级地址发现在地址总量方面的优势，这个过程通常是可接受的，我们从两个方面进行分析：&lt;/p>
@@ -102,7 +102,7 @@
 &lt;span style="color:#268bd2">step&lt;/span>: FORCE_APPLICATION
 &lt;span style="color:#268bd2">services&lt;/span>:
 - &lt;span style="color:#268bd2">serviceKey&lt;/span>: org.apache.dubbo.config.api.DemoService:1.0.0
-&lt;span style="color:#268bd2">step&lt;/span>: INTERFACE_FIRST
+&lt;span style="color:#268bd2">step&lt;/span>: FORCE_INTERFACE
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>使用这种方式能做到比较精细迁移控制，但是当下及后续的改造成本会比较高，除了一些特别场景，我们不太推荐启用这种配置方式。&lt;strong>官方推荐使用的全局的开关式的迁移策略，让消费端实例在启动阶段自行决策使用哪份可用的地址列表。&lt;/strong>&lt;/p>
 &lt;h2 id="4-迁移状态的收敛">4 迁移状态的收敛&lt;/h2>
 &lt;p>为了同时兼容 2.x 版本，升级到 3.x 版本的应用在一段时间内要么处在双注册状态，要么处在双订阅状态。&lt;/p>
