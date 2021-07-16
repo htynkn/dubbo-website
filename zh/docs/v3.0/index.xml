@@ -96,7 +96,96 @@
 &lt;h2 id="了解更多">了解更多&lt;/h2>
 &lt;p>What&amp;rsquo;s New in Dubbo3&lt;/p>
 &lt;p>体验 Dubbo3&lt;/p>
-&lt;p>迁移到 Dubbo3&lt;/p></description></item><item><title>Docs: What's New in Dubbo3</title><link>https://dubbo.apache.org/zh/docs/v3.0/new-in-dubbo3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/new-in-dubbo3/</guid><description/></item><item><title>Docs: 概念与架构</title><link>https://dubbo.apache.org/zh/docs/v3.0/concepts/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/concepts/</guid><description>
+&lt;p>迁移到 Dubbo3&lt;/p></description></item><item><title>Docs: What's New in Dubbo3</title><link>https://dubbo.apache.org/zh/docs/v3.0/new-in-dubbo3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/new-in-dubbo3/</guid><description>
+&lt;h2 id="全新服务发现模型">全新服务发现模型&lt;/h2>
+&lt;p>相比于 2.x 版本中的基于&lt;code>接口&lt;/code>粒度的服务发现机制，3.x 引入了全新的&lt;a href="../concepts/service-discovery">基于应用粒度的服务发现机制&lt;/a>，
+新模型带来两方面的巨大优势：&lt;/p>
+&lt;ul>
+&lt;li>进一步提升了 Dubbo3 在大规模集群实践中的性能与稳定性。新模型可大幅提高系统资源利用率，降低 Dubbo 地址的单机内存消耗（50%），降低注册中心集群的存储与推送压力（90%），
+Dubbo 可支持集群规模步入百万实例层次。&lt;/li>
+&lt;li>打通与其他异构微服务体系的地址互发现障碍。新模型使得 Dubbo3 能实现与异构微服务体系如Spring Cloud、Kubernetes Service、gRPC 等，在地址发现层面的互通，
+为连通 Dubbo 与其他微服务体系提供可行方案。&lt;/li>
+&lt;/ul>
+&lt;p>在 Dubbo3 前期版本将会同时提供对两套地址发现模型的支持，以最大程度保证业务升级的兼容性。&lt;/p>
+&lt;h2 id="下一代-rpc-通信协议">下一代 RPC 通信协议&lt;/h2>
+&lt;p>定义了全新的 RPC 通信协议 &amp;ndash; Triple，一句话概括 Triple：它是基于 HTTP/2 上构建的 RPC 协议，完全兼容 gRPC，并在此基础上扩展出了更丰富的语义。
+使用 Triple 协议，用户将获得以下能力&lt;/p>
+&lt;ul>
+&lt;li>更容易到适配网关、Mesh架构，Triple 协议让 Dubbo 更方便的与各种网关、Sidecar 组件配合工作。&lt;/li>
+&lt;li>多语言友好，推荐配合 Protobuf 使用 Triple 协议，使用 IDL 定义服务，使用 Protobuf 编码业务数据。&lt;/li>
+&lt;li>流式通信支持。Triple 协议支持 Request Stream、Response Stream、Bi-direction Stream&lt;/li>
+&lt;/ul>
+&lt;h2 id="云原生">云原生&lt;/h2>
+&lt;p>Dubbo3 构建的业务应用可直接部署在 VM、Container、Kubernetes 等平台，Dubbo3 很好的解决了 Dubbo 服务与调度平台之间的声明周期对齐，Dubbo 服务发现地址
+与容器平台绑定的问题。&lt;/p>
+&lt;p>在服务发现层面，Dubbo3 支持与 &lt;a href="">Kubernetes Native Service&lt;/a> 的融合，目前限于 Headless Service。&lt;/p>
+&lt;p>Dubbo3 规划了两种形态的 Service Mesh 方案，在不同的业务场景、不同的迁移阶段、不同的基础设施保障情况下，Dubbo 都会有 Mesh 方案可供选择，
+而这进一步的都可以通过统一的控制面进行治理。&lt;/p>
+&lt;ul>
+&lt;li>经典的基于 Sidecar 的 Service Mesh&lt;/li>
+&lt;li>无 Sidecar 的 Proxyless Mesh&lt;/li>
+&lt;/ul>
+&lt;p>用户在 Dubbo2 中熟知的路由规则，在 3.x 中将被一套&lt;a href="">&lt;code>统一的流量治理规则&lt;/code>&lt;/a>取代，这套统一流量规则将覆盖未来 Dubbo3 的 Service Mesh、SDK 等多种部署形态，
+实现对整套微服务体系的治理。&lt;/p>
+&lt;h2 id="扩展点分离">扩展点分离&lt;/h2>
+&lt;p>Dubbo3 的 maven 也发生了一些变化，&lt;code>org.apache.dubbo:dubbo:3.0.0&lt;/code> 将不再是包含所有资源的 all-in-one 包，一些可选的依赖已经作为独立组件单独发布，
+因此如果用户使用了不在 &lt;code>dubbo&lt;/code> 核心依赖包中的独立组件，如 registry-etcd、rpc-hessian 等，需要为这些组件在 pom.xml 中单独增加依赖包。&lt;/p>
+&lt;p>Zookeeper 扩展实现仍在核心依赖包中，依赖保持不变&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;properties&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dubbo.version&amp;gt;&lt;/span>3.0.0&lt;span style="color:#268bd2">&amp;lt;/dubbo.version&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;/properties&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dependencies&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.dubbo&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>${dubbo.version}&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.dubbo&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo-dependencies-zookeeper&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>${dubbo.version}&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;type&amp;gt;&lt;/span>pom&lt;span style="color:#268bd2">&amp;lt;/type&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;/dependencies&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Redis 扩展实现已经不在核心依赖包中，如启用了 Redis 相关功能，需单独增加依赖包&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;properties&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dubbo.version&amp;gt;&lt;/span>3.0.0&lt;span style="color:#268bd2">&amp;lt;/dubbo.version&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;/properties&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dependencies&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.dubbo&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>${dubbo.version}&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.dubbo&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo-dependencies-zookeeper&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>${dubbo.version}&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;type&amp;gt;&lt;/span>pom&lt;span style="color:#268bd2">&amp;lt;/type&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.dubbo&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo-registry-redis&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>${dubbo.version}&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;/dependencies&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>详情请参见扩展点实现列表&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="服务柔性">服务柔性&lt;/h2>
+&lt;blockquote>
+&lt;p>尚未发布&lt;/p>
+&lt;/blockquote>
+&lt;p>Dubbo3.0 的柔性增强以面向失败设计为理念，提供包括精准容量评估、自适应限流、自适应负载均衡的支持，自底向上的分步构建大规模可靠应用。
+从单一服务的视角看，服务是压不垮的，稳定的。从分布式视角看，复杂的拓扑不会带来性能的下降，分布式负载均衡能够以最优的方式动态分配流量，保证异构系统能够根据运行时的准确服务容量合理分配请求，从而达到性能最优。&lt;/p>
+&lt;h2 id="全面的性能提升">全面的性能提升&lt;/h2>
+&lt;blockquote>
+&lt;p>更多官方压测数据&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="native-image">Native Image&lt;/h2>
+&lt;blockquote>
+&lt;p>尚未发布&lt;/p>
+&lt;/blockquote></description></item><item><title>Docs: 概念与架构</title><link>https://dubbo.apache.org/zh/docs/v3.0/concepts/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/concepts/</guid><description>
 &lt;p>这篇文档阐述了 Dubbo3 产生的背景及其核心架构，此部分对 Dubbo3 中的一些重要概念做了进一步的解释，不论你是 Dubbo2 的老用户还是新接触 Dubbo 的用户，
 如果想更深入的理解 Dubbo3 的运作原理，我们建议阅读这部分文档。如果你想快速体验 Dubbo3 的新功能，请参考示例一栏。&lt;/p></description></item><item><title>Docs: 基本功能介绍与示例</title><link>https://dubbo.apache.org/zh/docs/v3.0/examples/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/examples/</guid><description/></item><item><title>Docs: 高级用法</title><link>https://dubbo.apache.org/zh/docs/v3.0/advanced/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/advanced/</guid><description/></item><item><title>Docs: 升级与兼容性</title><link>https://dubbo.apache.org/zh/docs/v3.0/migration/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/migration/</guid><description>
 &lt;div class="pageinfo pageinfo-primary">
