@@ -79,8 +79,8 @@ System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="golang-1">Golang&lt;/h3>
 &lt;h2 id="查看完整示例">查看完整示例&lt;/h2>
 &lt;ul>
-&lt;li>&lt;a href="../../languages/java/quick-start">Java Quick Start&lt;/a>&lt;/li>
-&lt;li>&lt;a href="../../languages/golang/quick-start">Golang Quick Start&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../languages/java/quick-start">Java IDL Quick Start&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../languages/golang/quick-start">Golang IDL Quick Start&lt;/a>&lt;/li>
 &lt;li>&lt;a href="../../languages/java/java-specific">Java 语言特定用法&lt;/a>&lt;/li>
 &lt;li>&lt;a href="../../languages/golang/go-specific">Golang 语言特定用法&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Docs: 路由规则</title><link>https://dubbo.apache.org/zh/docs/v3.0/examples/routing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/examples/routing/</guid><description/></item><item><title>Docs: 应用级服务发现</title><link>https://dubbo.apache.org/zh/docs/v3.0/examples/service-discovery/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/examples/service-discovery/</guid><description/></item><item><title>Docs: 动态修改运行态配置项</title><link>https://dubbo.apache.org/zh/docs/v3.0/examples/configuration-override/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/examples/configuration-override/</guid><description/></item></channel></rss>
