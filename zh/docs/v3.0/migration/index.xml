@@ -1,7 +1,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – 升级与兼容性</title><link>https://dubbo.apache.org/zh/docs/v3.0/migration/</link><description>Recent content in 升级与兼容性 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/docs/v3.0/migration/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: 3.x 升级与兼容性指南</title><link>https://dubbo.apache.org/zh/docs/v3.0/migration/migration-and-compatibility-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/migration/migration-and-compatibility-guide/</guid><description>
 &lt;p>&lt;strong>无需改动任何代码，直接升级到 Dubbo 3.0。&lt;/strong>&lt;/p>
 &lt;p>在 3.0 版本的设计与开发之初，我们就定下了兼容老版本 Dubbo 用户（2.5、2.6、2.7）的目标。因此，往 3.0 版本的升级过程将会是完全透明的，用户无需做任何业务改造，升级 3.x 后的框架行为将保持与 2.x 版本完全一致。&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.dubbo&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>3.0.0&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
@@ -50,7 +50,7 @@
 &lt;p>同时新的地址发现模型（注册应用级别的地址）也将会自动注册。&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/migration/provider-registration.png" alt="//imgs/v3/migration/provider-registration.png">&lt;/p>
 &lt;p>通过 -D 参数，可以指定 provider 启动时的注册行为&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">-Ddubbo.application.register-mode=all
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">-Ddubbo.application.register-mode=all
 # 可选值 interface、instance、all，默认是 interface，即只注册接口级地址
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>另外，可以在配置中心修改全局默认行为，来控制所有 3.x 实例注册行为。其中，全局性开关的优先级低于 -D 参数。&lt;/p>
 &lt;p>为了保证平滑迁移，即升级到 3.x 的实例能同时被 2.x 与 3.x 的消费者实例发现，3.x 实例需要开启双注册；当所有上游的消费端都迁移到 3.x 的地址模型后，提供端就可以切换到 instance 模式（只注册应用级地址）。对于如何升级消费端到 3.x 请参见下一小节。&lt;/p>
@@ -64,7 +64,7 @@
 &lt;h2 id="3-consumer-端升级过程">3 Consumer 端升级过程&lt;/h2>
 &lt;p>对于 2.x 的消费者实例，它们看到的自然都是 2.x 版本的提供者地址列表；&lt;/p>
 &lt;p>对于 3.x 的消费者，它具备同时发现 2.x 与 3.x 提供者地址列表的能力。在默认情况下，如果集群中存在可以消费的 3.x 的地址，将自动消费 3.x 的地址，如果不存在新地址则自动消费 2.x 的地址。Dubbo3 提供了开关来控制这个行为：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">dubbo.application.service-discovery.migration=APPLICATION_FIRST
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">dubbo.application.service-discovery.migration=APPLICATION_FIRST
 # 可选值
 # FORCE_INTERFACE，只消费接口级地址，如无地址则报错，单订阅 2.x 地址
 # APPLICATION_FIRST，智能决策接口级/应用级地址，双订阅
@@ -95,7 +95,7 @@
 &lt;h3 id="32-消费端更细粒度的控制">3.2 消费端更细粒度的控制&lt;/h3>
 &lt;p>除了全局的迁移策略之外，Dubbo 在消费端提供了更细粒度的迁移策略支持。控制单位可以是某一个消费者应用，它消费的服务A、服务B可以有各自独立的迁移策略，具体是用方式是在消费端配置迁移规则：&lt;/p>
 &lt;p>在 classpath 下增加 dubbo-migration.yml 配置&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#268bd2">key&lt;/span>: demo-consumer
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#268bd2">key&lt;/span>: demo-consumer
 &lt;span style="color:#268bd2">step&lt;/span>: APPLICATION_FIRST
 &lt;span style="color:#268bd2">applications&lt;/span>:
 - &lt;span style="color:#268bd2">name&lt;/span>: demo-provider

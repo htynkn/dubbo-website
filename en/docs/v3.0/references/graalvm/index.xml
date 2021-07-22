@@ -29,14 +29,14 @@ To install native-image, run &amp;lsquo;gu install native-image&amp;rsquo;.&lt;/
 &lt;ol start="4">
 &lt;li>
 &lt;p>Execute &amp;lsquo;install&amp;rsquo; under the root directory&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-ruby" data-lang="ruby">&lt;span style="color:#cb4b16">MacdeMacBook&lt;/span>&lt;span style="color:#719e07">-&lt;/span>pro&lt;span style="color:#719e07">-&lt;/span>&lt;span style="color:#2aa198">3&lt;/span>&lt;span style="color:#2aa198">:incubator&lt;/span>&lt;span style="color:#719e07">-&lt;/span>dubbo mac$ pwd
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-ruby" data-lang="ruby">&lt;span style="color:#cb4b16">MacdeMacBook&lt;/span>&lt;span style="color:#719e07">-&lt;/span>pro&lt;span style="color:#719e07">-&lt;/span>&lt;span style="color:#2aa198">3&lt;/span>&lt;span style="color:#2aa198">:incubator&lt;/span>&lt;span style="color:#719e07">-&lt;/span>dubbo mac$ pwd
 &lt;span style="color:#dc322f">/Users/m&lt;/span>ac&lt;span style="color:#719e07">/&lt;/span>&lt;span style="color:#cb4b16">Documents&lt;/span>&lt;span style="color:#719e07">/&lt;/span>&lt;span style="color:#cb4b16">Mi&lt;/span>&lt;span style="color:#719e07">/&lt;/span>project&lt;span style="color:#719e07">/&lt;/span>incubator&lt;span style="color:#719e07">-&lt;/span>dubbo
 &lt;span style="color:#cb4b16">MacdeMacBook&lt;/span>&lt;span style="color:#719e07">-&lt;/span>pro&lt;span style="color:#719e07">-&lt;/span>&lt;span style="color:#2aa198">3&lt;/span>&lt;span style="color:#2aa198">:incubator&lt;/span>&lt;span style="color:#719e07">-&lt;/span>dubbo mac$ mvn clean package install &lt;span style="color:#719e07">-&lt;/span>&lt;span style="color:#cb4b16">Dmaven&lt;/span>&lt;span style="color:#719e07">.&lt;/span>test&lt;span style="color:#719e07">.&lt;/span>skip&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#719e07">true&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>Compile the project demo&lt;/p>
 &lt;p>Here we provide a demo project that can be directly compiled: dubbo-demo / dubbo-demo-native. After installation, first go to the provider in dubbo-demo-native and execute native-image compilation:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java"> mvn clean &lt;span style="color:#719e07">package&lt;/span> -P &lt;span style="color:#268bd2">native&lt;/span> &lt;span style="color:#719e07">-&lt;/span>Dmaven&lt;span style="color:#719e07">.&lt;/span>test&lt;span style="color:#719e07">.&lt;/span>skip&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#cb4b16">true&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java"> mvn clean &lt;span style="color:#719e07">package&lt;/span> -P &lt;span style="color:#268bd2">native&lt;/span> &lt;span style="color:#719e07">-&lt;/span>Dmaven&lt;span style="color:#719e07">.&lt;/span>test&lt;span style="color:#719e07">.&lt;/span>skip&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#cb4b16">true&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>Since we have imported native-image plugin in maven, here we can use &amp;lsquo;-P native&amp;rsquo; to execute the plugin.&lt;/p>
 &lt;/li>
 &lt;/ol>
@@ -50,7 +50,7 @@ To install native-image, run &amp;lsquo;gu install native-image&amp;rsquo;.&lt;/
 &lt;ul>
 &lt;li>
 &lt;p>Import dependency dubbo-native&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-html" data-lang="html">&amp;lt;&lt;span style="color:#268bd2">dependency&lt;/span>&amp;gt;
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-html" data-lang="html">&amp;lt;&lt;span style="color:#268bd2">dependency&lt;/span>&amp;gt;
 &amp;lt;&lt;span style="color:#268bd2">groupId&lt;/span>&amp;gt;org.apache.dubbo&amp;lt;/&lt;span style="color:#268bd2">groupId&lt;/span>&amp;gt;
 &amp;lt;&lt;span style="color:#268bd2">artifactId&lt;/span>&amp;gt;dubbo-native&amp;lt;/&lt;span style="color:#268bd2">artifactId&lt;/span>&amp;gt;
 &amp;lt;&lt;span style="color:#268bd2">version&lt;/span>&amp;gt;${project.version}&amp;lt;/&lt;span style="color:#268bd2">version&lt;/span>&amp;gt;
@@ -59,7 +59,7 @@ To install native-image, run &amp;lsquo;gu install native-image&amp;rsquo;.&lt;/
 &lt;/li>
 &lt;li>
 &lt;p>Import native-image plug-in&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-Lua" data-lang="Lua">&lt;span style="color:#719e07">&amp;lt;&lt;/span>plugin&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-Lua" data-lang="Lua">&lt;span style="color:#719e07">&amp;lt;&lt;/span>plugin&lt;span style="color:#719e07">&amp;gt;&lt;/span>
 &lt;span style="color:#719e07">&amp;lt;&lt;/span>groupId&lt;span style="color:#719e07">&amp;gt;&lt;/span>org.graalvm.nativeimage&lt;span style="color:#719e07">&amp;lt;/&lt;/span>groupId&lt;span style="color:#719e07">&amp;gt;&lt;/span>
 &lt;span style="color:#719e07">&amp;lt;&lt;/span>artifactId&lt;span style="color:#719e07">&amp;gt;&lt;/span>native&lt;span style="color:#719e07">-&lt;/span>image&lt;span style="color:#719e07">-&lt;/span>maven&lt;span style="color:#719e07">-&lt;/span>plugin&lt;span style="color:#719e07">&amp;lt;/&lt;/span>artifactId&lt;span style="color:#719e07">&amp;gt;&lt;/span>
 &lt;span style="color:#719e07">&amp;lt;&lt;/span>version&lt;span style="color:#719e07">&amp;gt;&lt;/span>&lt;span style="color:#2aa198">21.0.0.2&lt;/span>&lt;span style="color:#719e07">&amp;lt;/&lt;/span>version&lt;span style="color:#719e07">&amp;gt;&lt;/span>
@@ -115,7 +115,7 @@ To install native-image, run &amp;lsquo;gu install native-image&amp;rsquo;.&lt;/
 &lt;p>Mount native-image-agent&lt;/p>
 &lt;p>Since some classes, including reflection and JNI, need to be assigned, we have to use the agent to run the json information that generate these classes.&lt;/p>
 &lt;p>Add the following to startup parameters:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">-agentlib:native-image-agent=config-output-dir=/tmp/config/,config-write-period-secs=300,config-write-initial-delay-secs=5
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">-agentlib:native-image-agent=config-output-dir=/tmp/config/,config-write-period-secs=300,config-write-initial-delay-secs=5
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>Launch in conventional way, create folder &amp;lsquo;META-INF.native-image&amp;rsquo; under the resources folder and paste the generated files in the local directory into the folder.&lt;/p>
 &lt;/li>
 &lt;/ul>

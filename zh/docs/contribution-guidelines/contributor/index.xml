@@ -48,10 +48,10 @@
 &lt;p>以下以贡献dubbo(主干仓库)为例，详细说明贡献流程。&lt;/p>
 &lt;h5 id="1-fork-apachedubbo-项目到您的github帐号下">1. &lt;strong>fork Apache/Dubbo 项目到您的github帐号下&lt;/strong>&lt;/h5>
 &lt;h5 id="2-克隆您fork的dubbo代码仓库到您本地">2. &lt;strong>克隆您fork的Dubbo代码仓库到您本地&lt;/strong>&lt;/h5>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">git clone &lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">your&lt;/span> fork dubbo repo address，for example：https://github.com/&lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">your&lt;/span> github id&lt;span style="color:#2aa198">}&lt;/span>/dubbo.git&lt;span style="color:#2aa198">}&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">git clone &lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">your&lt;/span> fork dubbo repo address，for example：https://github.com/&lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">your&lt;/span> github id&lt;span style="color:#2aa198">}&lt;/span>/dubbo.git&lt;span style="color:#2aa198">}&lt;/span>
 &lt;span style="color:#b58900">cd&lt;/span> dubbo
 &lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="3-添加apachedubbo仓库为upstream仓库">3. &lt;strong>添加Apache/Dubbo仓库为upstream仓库&lt;/strong>&lt;/h5>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">git remote add upstream https://github.com/apache/dubbo.git
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">git remote add upstream https://github.com/apache/dubbo.git
 git remote -v
 origin &lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">your&lt;/span> fork dubbo repo address&lt;span style="color:#2aa198">}&lt;/span> &lt;span style="color:#719e07">(&lt;/span>fetch&lt;span style="color:#719e07">)&lt;/span>
 origin &lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">your&lt;/span> fork dubbo repo address&lt;span style="color:#2aa198">}&lt;/span> &lt;span style="color:#719e07">(&lt;/span>push&lt;span style="color:#719e07">)&lt;/span>
@@ -63,7 +63,7 @@ git fetch upstream
 &lt;p>新人推荐标记为： &lt;code>good first issue&lt;/code> 的 issue&lt;/p>
 &lt;h5 id="5-选择一个开发的基础分支通常是-upstreammaster-并基于此创建一个新的本地分支">5. &lt;strong>选择一个开发的基础分支，通常是 upstream/master， 并基于此创建一个新的本地分支&lt;/strong>&lt;/h5>
 &lt;p>upstream/master 分支是目前 2.7.x 版本的开发分支&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">&lt;span style="color:#586e75"># 从远程仓库创建分支到本地&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">&lt;span style="color:#586e75"># 从远程仓库创建分支到本地&lt;/span>
 git checkout -b up-dev-issue#&lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">issue&lt;/span>-number&lt;span style="color:#2aa198">}&lt;/span> upstream/master
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>为了避免一些不必要的麻烦，我们推荐以 &amp;ldquo;upstream&amp;rdquo; 中的分支为基础创建新的本地分支。
 可以以要做的事情的简单描述作为分支名(只要你能看懂就行)，通常情况下我们会把issue号包含到分支名中，例如上面的 checkout 命令中的。&lt;/p>
@@ -72,7 +72,7 @@ git checkout -b up-dev-issue#&lt;span style="color:#2aa198">${&lt;/span>&lt;span
 &lt;p>修改时请保证该本地分支上的修改仅和issue相关，并尽量细化，做到一个分支只修改一件事，一个PR只修改一件事。&lt;/p>
 &lt;p>可以在提交注释中添加&amp;quot;#issue号&amp;quot;，将该提交与issue关联。&lt;/p>
 &lt;h5 id="7-将您开发完成后的分支上传到您fork的仓库">7. &lt;strong>将您开发完成后的分支，上传到您fork的仓库&lt;/strong>&lt;/h5>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">git push origin up-dev-issue#&lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">issue&lt;/span>-number&lt;span style="color:#2aa198">}&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">git push origin up-dev-issue#&lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">issue&lt;/span>-number&lt;span style="color:#2aa198">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="8-创建-pull-request">8. &lt;strong>创建 pull request&lt;/strong>&lt;/h5>
 &lt;ul>
 &lt;li>参考&lt;a href="https://github.com/apache/dubbo/blob/master/PULL_REQUEST_TEMPLATE.md">pull request template&lt;/a>中的检查列表&lt;/li>
@@ -135,7 +135,7 @@ git checkout -b up-dev-issue#&lt;span style="color:#2aa198">${&lt;/span>&lt;span
 &lt;ol>
 &lt;li>发一封邮件到 &lt;a href="mailto:dev-subscribe@dubbo.apache.org">dev-subscribe@dubbo.apache.org&lt;/a>，其内容和标题均可为空。随后，您会收到一封邮件，其内容如下：&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">from: dev-help@dubbo.apache.org
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">from: dev-help@dubbo.apache.org
 reply-to: dev-sc.xxxxxxx.xxxxxxxx-hello=example.com@dubbo.apache.org
 to: hello@example.com
 date: Sat, Feb 24, 2018 at 3:12 PM
@@ -159,7 +159,7 @@ mailto:dev-sc.xxxxxxx.xxxxxxxx-hello=example.com@dubbo.apache.org
 &lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
 &lt;li>直接回复邮件，其内容和标题仍然可以为空，随后，您将再次收到一封邮件，其内容如下：&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">from: dev-help@dubbo.apache.org
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">from: dev-help@dubbo.apache.org
 to: hello@example.com
 date: Sat, Feb 24, 2018 at 3:14 PM
 subject: WELCOME to dev@dubbo.apache.org
@@ -214,7 +214,7 @@ subscription address.
 &lt;/ol>
 &lt;h3 id="示例">示例&lt;/h3>
 &lt;p>下边是一个文本示例，原始文本可以在&lt;a href="https://www.apache.org/licenses/software-grant.txt">这里&lt;/a>找到&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">License Agreement
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">License Agreement
 This License Agreement is entered into as of the _12th_ day of
 ___April____, __2018__ by ___ABC Software Co., Ltd.____ (&amp;#34;Licensor&amp;#34;),
 in favor of The Apache Software Foundation, a Delaware nonstock
@@ -281,7 +281,7 @@ List of software and other intellectual property covered by this agreement:
 &lt;p>我们建议您将扩展加入到 Dubbo 生态系统。使用这种模式，可以使 Dubbo 的核心仓库更干净，并且可以减少维护工作。更少的代码也可以提高核心仓库的构建速度。&lt;/p>
 &lt;h3 id="依赖">依赖&lt;/h3>
 &lt;p>要实现您自己的 Dubbo 扩展，通常只需依赖 API jar 就可以满足您的需求。例如：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.dubbo&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo-serialization-api&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>${dubbo.version}&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>

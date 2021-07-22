@@ -80,7 +80,7 @@
 &lt;ul>
 &lt;li>原始pb代码&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">enum TrafficLightColor {
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">enum TrafficLightColor {
 TRAFFIC_LIGHT_COLOR_INVALID = 0;
 TRAFFIC_LIGHT_COLOR_UNSET = 1;
 TRAFFIC_LIGHT_COLOR_GREEN = 2;
@@ -98,7 +98,7 @@ TRAFFIC_LIGHT_COLOR_RED = 4;
 &lt;ul>
 &lt;li>原始pb代码&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">message VipIDToRidReq &lt;span style="color:#719e07">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">message VipIDToRidReq &lt;span style="color:#719e07">{&lt;/span>
 repeated uint32 vipID &lt;span style="color:#719e07">=&lt;/span> 1&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;ul>
@@ -114,7 +114,7 @@ repeated uint32 vipID &lt;span style="color:#719e07">=&lt;/span> 1&lt;span style
 &lt;ul>
 &lt;li>原始pb代码&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">message BatchOnlineRes &lt;span style="color:#719e07">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">message BatchOnlineRes &lt;span style="color:#719e07">{&lt;/span>
 map&lt;span style="color:#719e07">&amp;lt;&lt;/span>uint32&lt;span style="color:#719e07">,&lt;/span> uint32&lt;span style="color:#719e07">&amp;gt;&lt;/span> onlineMap &lt;span style="color:#719e07">=&lt;/span> 1&lt;span style="color:#719e07">;&lt;/span>&lt;span style="color:#586e75">//在线状态
 &lt;/span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;ul>
@@ -125,7 +125,7 @@ map&lt;span style="color:#719e07">&amp;lt;&lt;/span>uint32&lt;span style="color:
 &lt;ul>
 &lt;li>原始pb代码&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">message BatchAnchorInfoRes &lt;span style="color:#719e07">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">message BatchAnchorInfoRes &lt;span style="color:#719e07">{&lt;/span>
 map&lt;span style="color:#719e07">&amp;lt;&lt;/span>uint32&lt;span style="color:#719e07">,&lt;/span> AnchorInfo&lt;span style="color:#719e07">&amp;gt;&lt;/span> list &lt;span style="color:#719e07">=&lt;/span> 1&lt;span style="color:#719e07">;&lt;/span> &lt;span style="color:#586e75">//用户信息map列表
 &lt;/span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;span style="color:#586e75">/*
@@ -252,7 +252,7 @@ APPLICATION_FIRST：开启接口级、应用级双订阅，运行时根据阈值
 FORCE_APPLICATION：只启用新模式下应用级服务发现的注册中心逻辑，调用流量 100% 走应用级订阅的地址&lt;/p>
 &lt;h2 id="规则体说明">规则体说明&lt;/h2>
 &lt;p>规则采用 yaml 格式配置，具体配置下参考如下：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#268bd2">key&lt;/span>: 消费者应用名（必填）
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#268bd2">key&lt;/span>: 消费者应用名（必填）
 &lt;span style="color:#268bd2">step&lt;/span>: 状态名（必填）
 &lt;span style="color:#268bd2">threshold&lt;/span>: 决策阈值（默认1.0）
 &lt;span style="color:#268bd2">proportion&lt;/span>: 灰度比例（默认100）
@@ -284,7 +284,7 @@ FORCE_APPLICATION：只启用新模式下应用级服务发现的注册中心逻
 &lt;li>interfaces: 接口粒度配置&lt;/li>
 &lt;/ul>
 &lt;p>参考配置示例如下：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#268bd2">key&lt;/span>: demo-consumer
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#268bd2">key&lt;/span>: demo-consumer
 &lt;span style="color:#268bd2">step&lt;/span>: APPLICATION_FIRST
 &lt;span style="color:#268bd2">threshold&lt;/span>: &lt;span style="color:#2aa198">1.0&lt;/span>
 &lt;span style="color:#268bd2">proportion&lt;/span>: &lt;span style="color:#2aa198">60&lt;/span>
@@ -345,7 +345,7 @@ FORCE_APPLICATION：只启用新模式下应用级服务发现的注册中心逻
 &lt;h3 id="1-阈值探测">1. 阈值探测&lt;/h3>
 &lt;p>阈值机制旨在进行流量切换前的地址数检查，如果应用级的可使用地址数与接口级的可用地址数对比后没达到阈值将检查失败。&lt;/p>
 &lt;p>核心代码如下：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(((&lt;/span>&lt;span style="color:#dc322f">float&lt;/span>&lt;span style="color:#719e07">)&lt;/span> newAddressSize &lt;span style="color:#719e07">/&lt;/span> &lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#dc322f">float&lt;/span>&lt;span style="color:#719e07">)&lt;/span> oldAddressSize&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">&amp;gt;=&lt;/span> threshold&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(((&lt;/span>&lt;span style="color:#dc322f">float&lt;/span>&lt;span style="color:#719e07">)&lt;/span> newAddressSize &lt;span style="color:#719e07">/&lt;/span> &lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#dc322f">float&lt;/span>&lt;span style="color:#719e07">)&lt;/span> oldAddressSize&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">&amp;gt;=&lt;/span> threshold&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#cb4b16">true&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#cb4b16">false&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
@@ -358,7 +358,7 @@ FORCE_APPLICATION：只启用新模式下应用级服务发现的注册中心逻
 调用阶段
 &lt;img src="https://dubbo.apache.org/imgs/v3/migration/migration-3.png" alt="//imgs/v3/migration/migration-3.png">&lt;/p>
 &lt;p>核心代码如下：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#586e75">// currentAvailableInvoker is based on MigrationAddressComparator&amp;#39;s result
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#586e75">// currentAvailableInvoker is based on MigrationAddressComparator&amp;#39;s result
 &lt;/span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>currentAvailableInvoker &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span>&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>step &lt;span style="color:#719e07">==&lt;/span> APPLICATION_FIRST&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#586e75">// call ratio calculation based on random value

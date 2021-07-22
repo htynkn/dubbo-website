@@ -131,7 +131,7 @@ Dubbo 可支持集群规模步入百万实例层次。&lt;/li>
 &lt;p>Dubbo3 的 maven 也发生了一些变化，&lt;code>org.apache.dubbo:dubbo:3.0.0&lt;/code> 将不再是包含所有资源的 all-in-one 包，一些可选的依赖已经作为独立组件单独发布，
 因此如果用户使用了不在 &lt;code>dubbo&lt;/code> 核心依赖包中的独立组件，如 registry-etcd、rpc-hessian 等，需要为这些组件在 pom.xml 中单独增加依赖包。&lt;/p>
 &lt;p>Zookeeper 扩展实现仍在核心依赖包中，依赖保持不变&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;properties&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;properties&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo.version&amp;gt;&lt;/span>3.0.0&lt;span style="color:#268bd2">&amp;lt;/dubbo.version&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;/properties&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dependencies&amp;gt;&lt;/span>
@@ -148,7 +148,7 @@ Dubbo 可支持集群规模步入百万实例层次。&lt;/li>
 &lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;/dependencies&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>Redis 扩展实现已经不在核心依赖包中，如启用了 Redis 相关功能，需单独增加依赖包&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;properties&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;properties&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo.version&amp;gt;&lt;/span>3.0.0&lt;span style="color:#268bd2">&amp;lt;/dubbo.version&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;/properties&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dependencies&amp;gt;&lt;/span>

@@ -5,11 +5,11 @@
 &lt;h2 id="2spi-示例">2.SPI 示例&lt;/h2>
 &lt;h3 id="21--java-spi-示例">2.1 Java SPI 示例&lt;/h3>
 &lt;p>前面简单介绍了 SPI 机制的原理，本节通过一个示例演示 Java SPI 的使用方法。首先，我们定义一个接口，名称为 Robot。&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">Robot&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">Robot&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">sayHello&lt;/span>&lt;span style="color:#719e07">();&lt;/span>
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>接下来定义两个实现类，分别为 OptimusPrime 和 Bumblebee。&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">OptimusPrime&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> Robot &lt;span style="color:#719e07">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">OptimusPrime&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> Robot &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#268bd2">@Override&lt;/span>
 &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">sayHello&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Hello, I am Optimus Prime.&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
@@ -22,10 +22,10 @@ System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>接下来 META-INF/services 文件夹下创建一个文件，名称为 Robot 的全限定名 org.apache.spi.Robot。文件内容为实现类的全限定的类名，如下：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">org.apache.spi.OptimusPrime
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">org.apache.spi.OptimusPrime
 org.apache.spi.Bumblebee
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>做好所需的准备工作，接下来编写代码进行测试。&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">JavaSPITest&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">JavaSPITest&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#268bd2">@Test&lt;/span>
 &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">sayHello&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> Exception &lt;span style="color:#719e07">{&lt;/span>
 ServiceLoader&lt;span style="color:#719e07">&amp;lt;&lt;/span>Robot&lt;span style="color:#719e07">&amp;gt;&lt;/span> serviceLoader &lt;span style="color:#719e07">=&lt;/span> ServiceLoader&lt;span style="color:#719e07">.&lt;/span>load&lt;span style="color:#719e07">(&lt;/span>Robot&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">);&lt;/span>
@@ -38,10 +38,10 @@ serviceLoader&lt;span style="color:#719e07">.&lt;/span>forEach&lt;span style="co
 &lt;p>从测试结果可以看出，我们的两个实现类被成功的加载，并输出了相应的内容。关于 Java SPI 的演示先到这里，接下来演示 Dubbo SPI。&lt;/p>
 &lt;h3 id="22-dubbo-spi-示例">2.2 Dubbo SPI 示例&lt;/h3>
 &lt;p>Dubbo 并未使用 Java SPI，而是重新实现了一套功能更强的 SPI 机制。Dubbo SPI 的相关逻辑被封装在了 ExtensionLoader 类中，通过 ExtensionLoader，我们可以加载指定的实现类。Dubbo SPI 所需的配置文件需放置在 META-INF/dubbo 路径下，配置内容如下。&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">optimusPrime = org.apache.spi.OptimusPrime
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">optimusPrime = org.apache.spi.OptimusPrime
 bumblebee = org.apache.spi.Bumblebee
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>与 Java SPI 实现类配置不同，Dubbo SPI 是通过键值对的方式进行配置，这样我们可以按需加载指定的实现类。另外，在测试 Dubbo SPI 时，需要在 Robot 接口上标注 @SPI 注解。下面来演示 Dubbo SPI 的用法：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">DubboSPITest&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">DubboSPITest&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#268bd2">@Test&lt;/span>
 &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">sayHello&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> Exception &lt;span style="color:#719e07">{&lt;/span>
 ExtensionLoader&lt;span style="color:#719e07">&amp;lt;&lt;/span>Robot&lt;span style="color:#719e07">&amp;gt;&lt;/span> extensionLoader &lt;span style="color:#719e07">=&lt;/span>
@@ -57,7 +57,7 @@ bumblebee&lt;span style="color:#719e07">.&lt;/span>sayHello&lt;span style="color
 &lt;p>Dubbo SPI 除了支持按需加载接口实现类，还增加了 IOC 和 AOP 等特性，这些特性将会在接下来的源码分析章节中一一进行介绍。&lt;/p>
 &lt;h2 id="3-dubbo-spi-源码分析">3. Dubbo SPI 源码分析&lt;/h2>
 &lt;p>上一章简单演示了 Dubbo SPI 的使用方法。我们首先通过 ExtensionLoader 的 getExtensionLoader 方法获取一个 ExtensionLoader 实例，然后再通过 ExtensionLoader 的 getExtension 方法获取拓展类对象。这其中，getExtensionLoader 方法用于从缓存中获取与拓展类对应的 ExtensionLoader，若缓存未命中，则创建一个新的实例。该方法的逻辑比较简单，本章就不进行分析了。下面我们从 ExtensionLoader 的 getExtension 方法作为入口，对拓展类对象的获取过程进行详细的分析。&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> T &lt;span style="color:#268bd2">getExtension&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String name&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> T &lt;span style="color:#268bd2">getExtension&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String name&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>name &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span> &lt;span style="color:#719e07">||&lt;/span> name&lt;span style="color:#719e07">.&lt;/span>length&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">==&lt;/span> 0&lt;span style="color:#719e07">)&lt;/span>
 &lt;span style="color:#719e07">throw&lt;/span> &lt;span style="color:#719e07">new&lt;/span> IllegalArgumentException&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Extension name == null&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
 &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>&lt;span style="color:#719e07">.&lt;/span>equals&lt;span style="color:#719e07">(&lt;/span>name&lt;span style="color:#719e07">))&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
@@ -86,7 +86,7 @@ instance &lt;span style="color:#719e07">=&lt;/span> holder&lt;span style="color:
 &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#719e07">(&lt;/span>T&lt;span style="color:#719e07">)&lt;/span> instance&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>上面代码的逻辑比较简单，首先检查缓存，缓存未命中则创建拓展对象。下面我们来看一下创建拓展对象的过程是怎样的。&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">private&lt;/span> T &lt;span style="color:#268bd2">createExtension&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String name&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">private&lt;/span> T &lt;span style="color:#268bd2">createExtension&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String name&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#586e75">// 从配置文件中加载所有的拓展类，可得到“配置项名称”到“配置类”的映射关系表
 &lt;/span>&lt;span style="color:#586e75">&lt;/span> Class&lt;span style="color:#719e07">&amp;lt;?&amp;gt;&lt;/span> clazz &lt;span style="color:#719e07">=&lt;/span> getExtensionClasses&lt;span style="color:#719e07">().&lt;/span>get&lt;span style="color:#719e07">(&lt;/span>name&lt;span style="color:#719e07">);&lt;/span>
 &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>clazz &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span>&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
@@ -126,7 +126,7 @@ Set&lt;span style="color:#719e07">&amp;lt;&lt;/span>Class&lt;span style="color:#
 &lt;p>以上步骤中，第一个步骤是加载拓展类的关键，第三和第四个步骤是 Dubbo IOC 与 AOP 的具体实现。在接下来的章节中，将会重点分析 getExtensionClasses 方法的逻辑，以及简单介绍 Dubbo IOC 的具体实现。&lt;/p>
 &lt;h3 id="31-获取所有的拓展类">3.1 获取所有的拓展类&lt;/h3>
 &lt;p>我们在通过名称获取拓展类之前，首先需要根据配置文件解析出拓展项名称到拓展类的映射关系表（Map&amp;lt;名称, 拓展类&amp;gt;），之后再根据拓展项名称从映射关系表中取出相应的拓展类即可。相关过程的代码分析如下：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">private&lt;/span> Map&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">,&lt;/span> Class&lt;span style="color:#719e07">&amp;lt;?&amp;gt;&amp;gt;&lt;/span> getExtensionClasses&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">private&lt;/span> Map&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">,&lt;/span> Class&lt;span style="color:#719e07">&amp;lt;?&amp;gt;&amp;gt;&lt;/span> getExtensionClasses&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#586e75">// 从缓存中获取已加载的拓展类
 &lt;/span>&lt;span style="color:#586e75">&lt;/span> Map&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">,&lt;/span> Class&lt;span style="color:#719e07">&amp;lt;?&amp;gt;&amp;gt;&lt;/span> classes &lt;span style="color:#719e07">=&lt;/span> cachedClasses&lt;span style="color:#719e07">.&lt;/span>get&lt;span style="color:#719e07">();&lt;/span>
 &lt;span style="color:#586e75">// 双重检查
@@ -143,7 +143,7 @@ cachedClasses&lt;span style="color:#719e07">.&lt;/span>set&lt;span style="color:
 &lt;span style="color:#719e07">return&lt;/span> classes&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>这里也是先检查缓存，若缓存未命中，则通过 synchronized 加锁。加锁后再次检查缓存，并判空。此时如果 classes 仍为 null，则通过 loadExtensionClasses 加载拓展类。下面分析 loadExtensionClasses 方法的逻辑。&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">private&lt;/span> Map&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">,&lt;/span> Class&lt;span style="color:#719e07">&amp;lt;?&amp;gt;&amp;gt;&lt;/span> loadExtensionClasses&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">private&lt;/span> Map&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">,&lt;/span> Class&lt;span style="color:#719e07">&amp;lt;?&amp;gt;&amp;gt;&lt;/span> loadExtensionClasses&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#586e75">// 获取 SPI 注解，这里的 type 变量是在调用 getExtensionLoader 方法时传入的
 &lt;/span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#268bd2">final&lt;/span> SPI defaultAnnotation &lt;span style="color:#719e07">=&lt;/span> type&lt;span style="color:#719e07">.&lt;/span>getAnnotation&lt;span style="color:#719e07">(&lt;/span>SPI&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">);&lt;/span>
 &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>defaultAnnotation &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span>&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
@@ -169,7 +169,7 @@ loadDirectory&lt;span style="color:#719e07">(&lt;/span>extensionClasses&lt;span 
 &lt;span style="color:#719e07">return&lt;/span> extensionClasses&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>loadExtensionClasses 方法总共做了两件事情，一是对 SPI 注解进行解析，二是调用 loadDirectory 方法加载指定文件夹配置文件。SPI 注解解析过程比较简单，无需多说。下面我们来看一下 loadDirectory 做了哪些事情。&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">loadDirectory&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Map&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">,&lt;/span> Class&lt;span style="color:#719e07">&amp;lt;?&amp;gt;&amp;gt;&lt;/span> extensionClasses&lt;span style="color:#719e07">,&lt;/span> String dir&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">loadDirectory&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Map&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">,&lt;/span> Class&lt;span style="color:#719e07">&amp;lt;?&amp;gt;&amp;gt;&lt;/span> extensionClasses&lt;span style="color:#719e07">,&lt;/span> String dir&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#586e75">// fileName = 文件夹路径 + type 全限定名
 &lt;/span>&lt;span style="color:#586e75">&lt;/span> String fileName &lt;span style="color:#719e07">=&lt;/span> dir &lt;span style="color:#719e07">+&lt;/span> type&lt;span style="color:#719e07">.&lt;/span>getName&lt;span style="color:#719e07">();&lt;/span>
 &lt;span style="color:#719e07">try&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
@@ -193,7 +193,7 @@ logger&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>loadDirectory 方法先通过 classLoader 获取所有资源链接，然后再通过 loadResource 方法加载资源。我们继续跟下去，看一下 loadResource 方法的实现。&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">loadResource&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Map&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">,&lt;/span> Class&lt;span style="color:#719e07">&amp;lt;?&amp;gt;&amp;gt;&lt;/span> extensionClasses&lt;span style="color:#719e07">,&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">loadResource&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Map&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">,&lt;/span> Class&lt;span style="color:#719e07">&amp;lt;?&amp;gt;&amp;gt;&lt;/span> extensionClasses&lt;span style="color:#719e07">,&lt;/span>
 ClassLoader classLoader&lt;span style="color:#719e07">,&lt;/span> java&lt;span style="color:#719e07">.&lt;/span>net&lt;span style="color:#719e07">.&lt;/span>URL resourceURL&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#719e07">try&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 BufferedReader reader &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> BufferedReader&lt;span style="color:#719e07">(&lt;/span>
@@ -236,7 +236,7 @@ logger&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>loadResource 方法用于读取和解析配置文件，并通过反射加载类，最后调用 loadClass 方法进行其他操作。loadClass 方法用于主要用于操作缓存，该方法的逻辑如下：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">loadClass&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Map&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">,&lt;/span> Class&lt;span style="color:#719e07">&amp;lt;?&amp;gt;&amp;gt;&lt;/span> extensionClasses&lt;span style="color:#719e07">,&lt;/span> java&lt;span style="color:#719e07">.&lt;/span>net&lt;span style="color:#719e07">.&lt;/span>URL resourceURL&lt;span style="color:#719e07">,&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">loadClass&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Map&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">,&lt;/span> Class&lt;span style="color:#719e07">&amp;lt;?&amp;gt;&amp;gt;&lt;/span> extensionClasses&lt;span style="color:#719e07">,&lt;/span> java&lt;span style="color:#719e07">.&lt;/span>net&lt;span style="color:#719e07">.&lt;/span>URL resourceURL&lt;span style="color:#719e07">,&lt;/span>
 Class&lt;span style="color:#719e07">&amp;lt;?&amp;gt;&lt;/span> clazz&lt;span style="color:#719e07">,&lt;/span> String name&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> NoSuchMethodException &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(!&lt;/span>type&lt;span style="color:#719e07">.&lt;/span>isAssignableFrom&lt;span style="color:#719e07">(&lt;/span>clazz&lt;span style="color:#719e07">))&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#719e07">throw&lt;/span> &lt;span style="color:#719e07">new&lt;/span> IllegalStateException&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;...&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
@@ -298,7 +298,7 @@ Class&lt;span style="color:#719e07">&amp;lt;?&amp;gt;&lt;/span> c &lt;span style
 &lt;p>到此，关于缓存类加载的过程就分析完了。整个过程没什么特别复杂的地方，大家按部就班的分析即可，不懂的地方可以调试一下。接下来，我们来聊聊 Dubbo IOC 方面的内容。&lt;/p>
 &lt;h3 id="32-dubbo-ioc">3.2 Dubbo IOC&lt;/h3>
 &lt;p>Dubbo IOC 是通过 setter 方法注入依赖。Dubbo 首先会通过反射获取到实例的所有方法，然后再遍历方法列表，检测方法名是否具有 setter 方法特征。若有，则通过 ObjectFactory 获取依赖对象，最后通过反射调用 setter 方法将依赖设置到目标对象中。整个过程对应的代码如下：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">private&lt;/span> T &lt;span style="color:#268bd2">injectExtension&lt;/span>&lt;span style="color:#719e07">(&lt;/span>T instance&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">private&lt;/span> T &lt;span style="color:#268bd2">injectExtension&lt;/span>&lt;span style="color:#719e07">(&lt;/span>T instance&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#719e07">try&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>objectFactory &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span>&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#586e75">// 遍历目标类的所有方法
@@ -403,19 +403,19 @@ logger&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e
 &lt;p>总结：服务器端和客户端对领域对象并不需要完全一致，而是按照最大匹配原则。&lt;/p>
 &lt;h2 id="配置">配置&lt;/h2>
 &lt;p>配置协议：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;20880&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;20880&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>设置默认协议：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:provider&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:provider&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>设置服务协议：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>多端口：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;dubbo1&amp;#34;&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;20880&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;dubbo1&amp;#34;&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;20880&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;dubbo2&amp;#34;&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;20881&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>配置协议选项：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">“dubbo”&lt;/span> port=&lt;span style="color:#2aa198">“9090”&lt;/span> server=&lt;span style="color:#2aa198">“netty”&lt;/span> client=&lt;span style="color:#2aa198">“netty”&lt;/span> codec=&lt;span style="color:#2aa198">“dubbo”&lt;/span> serialization=&lt;span style="color:#2aa198">“hessian2”&lt;/span> charset=&lt;span style="color:#2aa198">“UTF-8”&lt;/span> threadpool=&lt;span style="color:#2aa198">“fixed”&lt;/span> threads=&lt;span style="color:#2aa198">“100”&lt;/span> queues=&lt;span style="color:#2aa198">“0”&lt;/span> iothreads=&lt;span style="color:#2aa198">“9”&lt;/span> buffer=&lt;span style="color:#2aa198">“8192”&lt;/span> accepts=&lt;span style="color:#2aa198">“1000”&lt;/span> payload=&lt;span style="color:#2aa198">“8388608”&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">“dubbo”&lt;/span> port=&lt;span style="color:#2aa198">“9090”&lt;/span> server=&lt;span style="color:#2aa198">“netty”&lt;/span> client=&lt;span style="color:#2aa198">“netty”&lt;/span> codec=&lt;span style="color:#2aa198">“dubbo”&lt;/span> serialization=&lt;span style="color:#2aa198">“hessian2”&lt;/span> charset=&lt;span style="color:#2aa198">“UTF-8”&lt;/span> threadpool=&lt;span style="color:#2aa198">“fixed”&lt;/span> threads=&lt;span style="color:#2aa198">“100”&lt;/span> queues=&lt;span style="color:#2aa198">“0”&lt;/span> iothreads=&lt;span style="color:#2aa198">“9”&lt;/span> buffer=&lt;span style="color:#2aa198">“8192”&lt;/span> accepts=&lt;span style="color:#2aa198">“1000”&lt;/span> payload=&lt;span style="color:#2aa198">“8388608”&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>多连接配置：&lt;/p>
 &lt;p>Dubbo 协议缺省每服务每提供者每消费者使用单一长连接，如果数据量较大，可以使用多个连接。&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> connections=&lt;span style="color:#2aa198">&amp;#34;1&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> connections=&lt;span style="color:#2aa198">&amp;#34;1&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> connections=&lt;span style="color:#2aa198">&amp;#34;1&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>&lt;code>&amp;lt;dubbo:service connections=&amp;quot;0&amp;quot;&amp;gt;&lt;/code> 或 &lt;code>&amp;lt;dubbo:reference connections=&amp;quot;0&amp;quot;&amp;gt;&lt;/code> 表示该服务使用 JVM 共享长连接。&lt;strong>缺省&lt;/strong>&lt;/li>
@@ -423,9 +423,9 @@ logger&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e
 &lt;li>&lt;code>&amp;lt;dubbo:service connections=&amp;quot;2&amp;quot;&amp;gt;&lt;/code> 或&lt;code>&amp;lt;dubbo:reference connections=&amp;quot;2&amp;quot;&amp;gt;&lt;/code> 表示该服务使用独立两条长连接。&lt;/li>
 &lt;/ul>
 &lt;p>为防止被大量连接撑挂，可在服务提供方限制大接收连接数，以实现服务提供方自我保护。&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> accepts=&lt;span style="color:#2aa198">&amp;#34;1000&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> accepts=&lt;span style="color:#2aa198">&amp;#34;1000&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>dubbo.properties&lt;/code> 配置：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">dubbo.service.protocol&lt;span style="color:#719e07">=&lt;/span>dubbo
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">dubbo.service.protocol&lt;span style="color:#719e07">=&lt;/span>dubbo
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="常见问题">常见问题&lt;/h2>
 &lt;h4 id="为什么要消费者比提供者个数多">为什么要消费者比提供者个数多?&lt;/h4>
 &lt;p>因 dubbo 协议采用单一长连接，假设网络为千兆网卡 &lt;sup id="fnref:3">&lt;a href="#fn:3" class="footnote-ref" role="doc-noteref">3&lt;/a>&lt;/sup>，根据测试经验数据每条连接最多只能压满 7MByte(不同的环境可能不一样，供参考)，理论上 1 个服务提供者需要 20 个服务消费者才能压满网卡。&lt;/p>
@@ -514,19 +514,19 @@ logger&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e
 &lt;p>总结：服务器端和客户端对领域对象并不需要完全一致，而是按照最大匹配原则。&lt;/p>
 &lt;h2 id="配置">配置&lt;/h2>
 &lt;p>配置协议：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;20880&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;20880&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>设置默认协议：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:provider&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:provider&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>设置服务协议：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>多端口：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;dubbo1&amp;#34;&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;20880&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;dubbo1&amp;#34;&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;20880&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;dubbo2&amp;#34;&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;20881&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>配置协议选项：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">“dubbo”&lt;/span> port=&lt;span style="color:#2aa198">“9090”&lt;/span> server=&lt;span style="color:#2aa198">“netty”&lt;/span> client=&lt;span style="color:#2aa198">“netty”&lt;/span> codec=&lt;span style="color:#2aa198">“dubbo”&lt;/span> serialization=&lt;span style="color:#2aa198">“hessian2”&lt;/span> charset=&lt;span style="color:#2aa198">“UTF-8”&lt;/span> threadpool=&lt;span style="color:#2aa198">“fixed”&lt;/span> threads=&lt;span style="color:#2aa198">“100”&lt;/span> queues=&lt;span style="color:#2aa198">“0”&lt;/span> iothreads=&lt;span style="color:#2aa198">“9”&lt;/span> buffer=&lt;span style="color:#2aa198">“8192”&lt;/span> accepts=&lt;span style="color:#2aa198">“1000”&lt;/span> payload=&lt;span style="color:#2aa198">“8388608”&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">“dubbo”&lt;/span> port=&lt;span style="color:#2aa198">“9090”&lt;/span> server=&lt;span style="color:#2aa198">“netty”&lt;/span> client=&lt;span style="color:#2aa198">“netty”&lt;/span> codec=&lt;span style="color:#2aa198">“dubbo”&lt;/span> serialization=&lt;span style="color:#2aa198">“hessian2”&lt;/span> charset=&lt;span style="color:#2aa198">“UTF-8”&lt;/span> threadpool=&lt;span style="color:#2aa198">“fixed”&lt;/span> threads=&lt;span style="color:#2aa198">“100”&lt;/span> queues=&lt;span style="color:#2aa198">“0”&lt;/span> iothreads=&lt;span style="color:#2aa198">“9”&lt;/span> buffer=&lt;span style="color:#2aa198">“8192”&lt;/span> accepts=&lt;span style="color:#2aa198">“1000”&lt;/span> payload=&lt;span style="color:#2aa198">“8388608”&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>多连接配置：&lt;/p>
 &lt;p>Dubbo 协议缺省每服务每提供者每消费者使用单一长连接，如果数据量较大，可以使用多个连接。&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> connections=&lt;span style="color:#2aa198">&amp;#34;1&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> connections=&lt;span style="color:#2aa198">&amp;#34;1&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> connections=&lt;span style="color:#2aa198">&amp;#34;1&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>&lt;code>&amp;lt;dubbo:service connections=&amp;quot;0&amp;quot;&amp;gt;&lt;/code> 或 &lt;code>&amp;lt;dubbo:reference connections=&amp;quot;0&amp;quot;&amp;gt;&lt;/code> 表示该服务使用 JVM 共享长连接。&lt;strong>缺省&lt;/strong>&lt;/li>
@@ -534,9 +534,9 @@ logger&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e
 &lt;li>&lt;code>&amp;lt;dubbo:service connections=&amp;quot;2&amp;quot;&amp;gt;&lt;/code> 或&lt;code>&amp;lt;dubbo:reference connections=&amp;quot;2&amp;quot;&amp;gt;&lt;/code> 表示该服务使用独立两条长连接。&lt;/li>
 &lt;/ul>
 &lt;p>为防止被大量连接撑挂，可在服务提供方限制大接收连接数，以实现服务提供方自我保护。&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> accepts=&lt;span style="color:#2aa198">&amp;#34;1000&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> accepts=&lt;span style="color:#2aa198">&amp;#34;1000&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>dubbo.properties&lt;/code> 配置：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">dubbo.service.protocol&lt;span style="color:#719e07">=&lt;/span>dubbo
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">dubbo.service.protocol&lt;span style="color:#719e07">=&lt;/span>dubbo
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="常见问题">常见问题&lt;/h2>
 &lt;h4 id="为什么要消费者比提供者个数多">为什么要消费者比提供者个数多?&lt;/h4>
 &lt;p>因 dubbo 协议采用单一长连接，假设网络为千兆网卡 &lt;sup id="fnref:3">&lt;a href="#fn:3" class="footnote-ref" role="doc-noteref">3&lt;/a>&lt;/sup>，根据测试经验数据每条连接最多只能压满 7MByte(不同的环境可能不一样，供参考)，理论上 1 个服务提供者需要 20 个服务消费者才能压满网卡。&lt;/p>
@@ -753,7 +753,7 @@ logger&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e
 &lt;/tbody>
 &lt;/table></description></item><item><title>Docs: dubbo:argument</title><link>https://dubbo.apache.org/zh/docs/v2.7/user/references/xml/dubbo-argument/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v2.7/user/references/xml/dubbo-argument/</guid><description>
 &lt;p>方法参数配置。对应的配置类： &lt;code>org.apache.dubbo.config.ArgumentConfig&lt;/code>。该标签为 &lt;code>&amp;lt;dubbo:method&amp;gt;&lt;/code> 的子标签，用于方法参数的特征描述，比如：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:method&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;findXxx&amp;#34;&lt;/span> timeout=&lt;span style="color:#2aa198">&amp;#34;3000&amp;#34;&lt;/span> retries=&lt;span style="color:#2aa198">&amp;#34;2&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:method&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;findXxx&amp;#34;&lt;/span> timeout=&lt;span style="color:#2aa198">&amp;#34;3000&amp;#34;&lt;/span> retries=&lt;span style="color:#2aa198">&amp;#34;2&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo:argument&lt;/span> index=&lt;span style="color:#2aa198">&amp;#34;0&amp;#34;&lt;/span> callback=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;/dubbo:method&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;table>
@@ -803,7 +803,7 @@ logger&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e
 &lt;/tbody>
 &lt;/table></description></item><item><title>Docs: dubbo:argument</title><link>https://dubbo.apache.org/zh/docs/v3.0/references/xml/dubbo-argument/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/references/xml/dubbo-argument/</guid><description>
 &lt;p>方法参数配置。对应的配置类： &lt;code>org.apache.dubbo.config.ArgumentConfig&lt;/code>。该标签为 &lt;code>&amp;lt;dubbo:method&amp;gt;&lt;/code> 的子标签，用于方法参数的特征描述，比如：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:method&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;findXxx&amp;#34;&lt;/span> timeout=&lt;span style="color:#2aa198">&amp;#34;3000&amp;#34;&lt;/span> retries=&lt;span style="color:#2aa198">&amp;#34;2&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:method&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;findXxx&amp;#34;&lt;/span> timeout=&lt;span style="color:#2aa198">&amp;#34;3000&amp;#34;&lt;/span> retries=&lt;span style="color:#2aa198">&amp;#34;2&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo:argument&lt;/span> index=&lt;span style="color:#2aa198">&amp;#34;0&amp;#34;&lt;/span> callback=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;/dubbo:method&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;table>
@@ -1690,7 +1690,7 @@ logger&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e
 &lt;/tbody>
 &lt;/table>
 &lt;p>比如:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.xxx.XxxService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.xxx.XxxService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo:method&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;findXxx&amp;#34;&lt;/span> timeout=&lt;span style="color:#2aa198">&amp;#34;3000&amp;#34;&lt;/span> retries=&lt;span style="color:#2aa198">&amp;#34;2&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;/dubbo:reference&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: dubbo:method</title><link>https://dubbo.apache.org/zh/docs/v3.0/references/xml/dubbo-method/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/references/xml/dubbo-method/</guid><description>
@@ -1872,7 +1872,7 @@ logger&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e
 &lt;/tbody>
 &lt;/table>
 &lt;p>比如:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.xxx.XxxService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.xxx.XxxService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo:method&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;findXxx&amp;#34;&lt;/span> timeout=&lt;span style="color:#2aa198">&amp;#34;3000&amp;#34;&lt;/span> retries=&lt;span style="color:#2aa198">&amp;#34;2&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;/dubbo:reference&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: dubbo:module</title><link>https://dubbo.apache.org/zh/docs/v2.7/user/references/xml/dubbo-module/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v2.7/user/references/xml/dubbo-module/</guid><description>
@@ -2102,11 +2102,11 @@ logger&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e
 &lt;/tbody>
 &lt;/table>
 &lt;p>比如：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;napoli&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;napoli&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo:parameter&lt;/span> key=&lt;span style="color:#2aa198">&amp;#34;http://10.20.160.198/wiki/display/dubbo/napoli.queue.name&amp;#34;&lt;/span> value=&lt;span style="color:#2aa198">&amp;#34;xxx&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;/dubbo:protocol&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>也可以：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;jms&amp;#34;&lt;/span> p:queue=&lt;span style="color:#2aa198">&amp;#34;xxx&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;jms&amp;#34;&lt;/span> p:queue=&lt;span style="color:#2aa198">&amp;#34;xxx&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: dubbo:parameter</title><link>https://dubbo.apache.org/zh/docs/v3.0/references/xml/dubbo-parameter/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/references/xml/dubbo-parameter/</guid><description>
 &lt;p>选项参数配置。对应的配置类：&lt;code>java.util.Map&lt;/code>。同时该标签为&lt;code>&amp;lt;dubbo:protocol&amp;gt;&lt;/code>或&lt;code>&amp;lt;dubbo:service&amp;gt;&lt;/code>或&lt;code>&amp;lt;dubbo:provider&amp;gt;&lt;/code>或&lt;code>&amp;lt;dubbo:reference&amp;gt;&lt;/code>或&lt;code>&amp;lt;dubbo:consumer&amp;gt;&lt;/code>的子标签，用于配置自定义参数，该配置项将作为扩展点设置自定义参数使用。&lt;/p>
 &lt;table>
@@ -2146,11 +2146,11 @@ logger&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e
 &lt;/tbody>
 &lt;/table>
 &lt;p>比如：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;napoli&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;napoli&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo:parameter&lt;/span> key=&lt;span style="color:#2aa198">&amp;#34;http://10.20.160.198/wiki/display/dubbo/napoli.queue.name&amp;#34;&lt;/span> value=&lt;span style="color:#2aa198">&amp;#34;xxx&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;/dubbo:protocol&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>也可以：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;jms&amp;#34;&lt;/span> p:queue=&lt;span style="color:#2aa198">&amp;#34;xxx&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;jms&amp;#34;&lt;/span> p:queue=&lt;span style="color:#2aa198">&amp;#34;xxx&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: dubbo:protocol</title><link>https://dubbo.apache.org/zh/docs/v2.7/user/references/xml/dubbo-protocol/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v2.7/user/references/xml/dubbo-protocol/</guid><description>
 &lt;p>服务提供者协议配置。对应的配置类： &lt;code>org.apache.dubbo.config.ProtocolConfig&lt;/code>。同时，如果需要支持多协议，可以声明多个 &lt;code>&amp;lt;dubbo:protocol&amp;gt;&lt;/code> 标签，并在 &lt;code>&amp;lt;dubbo:service&amp;gt;&lt;/code> 中通过 &lt;code>protocol&lt;/code> 属性指定使用的协议。&lt;/p>
 &lt;table>
@@ -5209,7 +5209,7 @@ logger&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e
 &lt;p>Dubbo 融合 Nacos 成为注册中心的操作步骤非常简单，大致步骤可分为“增加 Maven 依赖”以及“配置注册中心“。&lt;/p>
 &lt;h3 id="增加-maven-依赖">增加 Maven 依赖&lt;/h3>
 &lt;p>首先，您需要将 &lt;code>dubbo-registry-nacos&lt;/code> 的 Maven 依赖添加到您的项目 &lt;code>pom.xml&lt;/code> 文件中，并且强烈地推荐您使用 Dubbo &lt;code>2.6.5&lt;/code>：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dependencies&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dependencies&amp;gt;&lt;/span>
 ...
 &lt;span style="color:#586e75">&amp;lt;!-- Dubbo Nacos registry dependency --&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
@@ -5246,7 +5246,7 @@ logger&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e
 &lt;/blockquote>
 &lt;p>Dubbo Spring 外部化配置是由 Dubbo &lt;code>2.5.8&lt;/code> 引入的新特性，可通过 Spring &lt;code>Environment&lt;/code> 属性自动地生成并绑定 Dubbo 配置 Bean，实现配置简化，并且降低微服务开发门槛。&lt;/p>
 &lt;p>假设您的 Nacos Server 同样运行在服务器 &lt;code>10.20.153.10&lt;/code> 上，并使用默认 Nacos 服务端口 &lt;code>8848&lt;/code>，您只需将 &lt;code>dubbo.registry.address&lt;/code> 属性调整如下：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">## 其他属性保持不变
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">## 其他属性保持不变
 ## Nacos registry address
 dubbo.registry.address = nacos://10.20.153.10:8848
 ...
@@ -5257,7 +5257,7 @@ dubbo.registry.address = nacos://10.20.153.10:8848
 &lt;p>如果您正在使用 Spring XML 配置文件装配 Dubbo 注册中心的话，请参考下一节。&lt;/p>
 &lt;h3 id="spring-xml-配置文件">Spring XML 配置文件&lt;/h3>
 &lt;p>与 &lt;a href="https://mercyblitz.github.io/2018/01/18/Dubbo-%E5%A4%96%E9%83%A8%E5%8C%96%E9%85%8D%E7%BD%AE/">Dubbo Spring 外部化配置&lt;/a> 配置类似，只需要调整 &lt;code>address&lt;/code> 属性配置即可：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#719e07">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#719e07">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> xmlns=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans&amp;#34;&lt;/span>
 xmlns:xsi=&lt;span style="color:#2aa198">&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span>
 xmlns:dubbo=&lt;span style="color:#2aa198">&amp;#34;http://dubbo.apache.org/schema/dubbo&amp;#34;&lt;/span>
@@ -5286,7 +5286,7 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;p>Dubbo 融合 Nacos 成为注册中心的操作步骤非常简单，大致步骤可分为“增加 Maven 依赖”以及“配置注册中心“。&lt;/p>
 &lt;h3 id="增加-maven-依赖">增加 Maven 依赖&lt;/h3>
 &lt;p>首先，您需要将 &lt;code>dubbo-registry-nacos&lt;/code> 的 Maven 依赖添加到您的项目 &lt;code>pom.xml&lt;/code> 文件中，并且强烈地推荐您使用 Dubbo &lt;code>2.6.5&lt;/code>：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dependencies&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dependencies&amp;gt;&lt;/span>
 ...
 &lt;span style="color:#586e75">&amp;lt;!-- Dubbo Nacos registry dependency --&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
@@ -5323,7 +5323,7 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;/blockquote>
 &lt;p>Dubbo Spring 外部化配置是由 Dubbo &lt;code>2.5.8&lt;/code> 引入的新特性，可通过 Spring &lt;code>Environment&lt;/code> 属性自动地生成并绑定 Dubbo 配置 Bean，实现配置简化，并且降低微服务开发门槛。&lt;/p>
 &lt;p>假设您的 Nacos Server 同样运行在服务器 &lt;code>10.20.153.10&lt;/code> 上，并使用默认 Nacos 服务端口 &lt;code>8848&lt;/code>，您只需将 &lt;code>dubbo.registry.address&lt;/code> 属性调整如下：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">## 其他属性保持不变
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">## 其他属性保持不变
 ## Nacos registry address
 dubbo.registry.address = nacos://10.20.153.10:8848
 ...
@@ -5334,7 +5334,7 @@ dubbo.registry.address = nacos://10.20.153.10:8848
 &lt;p>如果您正在使用 Spring XML 配置文件装配 Dubbo 注册中心的话，请参考下一节。&lt;/p>
 &lt;h3 id="spring-xml-配置文件">Spring XML 配置文件&lt;/h3>
 &lt;p>与 &lt;a href="https://mercyblitz.github.io/2018/01/18/Dubbo-%E5%A4%96%E9%83%A8%E5%8C%96%E9%85%8D%E7%BD%AE/">Dubbo Spring 外部化配置&lt;/a> 配置类似，只需要调整 &lt;code>address&lt;/code> 属性配置即可：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#719e07">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#719e07">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> xmlns=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans&amp;#34;&lt;/span>
 xmlns:xsi=&lt;span style="color:#2aa198">&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span>
 xmlns:dubbo=&lt;span style="color:#2aa198">&amp;#34;http://dubbo.apache.org/schema/dubbo&amp;#34;&lt;/span>
@@ -5359,7 +5359,7 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;p>有关 XML 的详细配置项，请参见：&lt;a href="../../references/xml">配置参考手册&lt;/a>。如果不想使用 Spring 配置，而希望通过 API 的方式进行调用，请参见：&lt;a href="../api">API配置&lt;/a>。想知道如何使用配置，请参见：&lt;a href="../../quick-start">快速启动&lt;/a>。&lt;/p>
 &lt;p>请在此查看文档描述的&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-basic">完整示例&lt;/a>&lt;/p>
 &lt;h2 id="providerxml-示例">provider.xml 示例&lt;/h2>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> xmlns:xsi=&lt;span style="color:#2aa198">&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> xmlns:xsi=&lt;span style="color:#2aa198">&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span>
 xmlns:dubbo=&lt;span style="color:#2aa198">&amp;#34;http://dubbo.apache.org/schema/dubbo&amp;#34;&lt;/span>
 xmlns=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans&amp;#34;&lt;/span>
 xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -5371,7 +5371,7 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.basic.api.DemoService&amp;#34;&lt;/span> ref=&lt;span style="color:#2aa198">&amp;#34;demoService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;/beans&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="consumerxml示例">consumer.xml示例&lt;/h2>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> xmlns:xsi=&lt;span style="color:#2aa198">&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> xmlns:xsi=&lt;span style="color:#2aa198">&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span>
 xmlns:dubbo=&lt;span style="color:#2aa198">&amp;#34;http://dubbo.apache.org/schema/dubbo&amp;#34;&lt;/span>
 xmlns=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans&amp;#34;&lt;/span>
 xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -5381,11 +5381,11 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;demoService&amp;#34;&lt;/span> check=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.basic.api.DemoService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;/beans&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>所有标签都支持自定义参数，用于不同扩展点实现的特殊配置，如：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;jms&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;jms&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo:parameter&lt;/span> key=&lt;span style="color:#2aa198">&amp;#34;queue&amp;#34;&lt;/span> value=&lt;span style="color:#2aa198">&amp;#34;your_queue&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;/dubbo:protocol&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>或： &lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> xmlns=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans&amp;#34;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> xmlns=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans&amp;#34;&lt;/span>
 xmlns:xsi=&lt;span style="color:#2aa198">&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span>
 xmlns:dubbo=&lt;span style="color:#2aa198">&amp;#34;http://dubbo.apache.org/schema/dubbo&amp;#34;&lt;/span>
 xmlns:p=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/p&amp;#34;&lt;/span>
@@ -5484,7 +5484,7 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;p>有关 XML 的详细配置项，请参见：&lt;a href="../../references/xml">配置参考手册&lt;/a>。如果不想使用 Spring 配置，而希望通过 API 的方式进行调用，请参见：&lt;a href="../api">API配置&lt;/a>。想知道如何使用配置，请参见：&lt;a href="../../quick-start">快速启动&lt;/a>。&lt;/p>
 &lt;p>请在此查看文档描述的&lt;a href="https://github.com/apache/dubbo-samples/tree/master/java/dubbo-samples-basic">完整示例&lt;/a>&lt;/p>
 &lt;h2 id="providerxml-示例">provider.xml 示例&lt;/h2>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> xmlns:xsi=&lt;span style="color:#2aa198">&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> xmlns:xsi=&lt;span style="color:#2aa198">&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span>
 xmlns:dubbo=&lt;span style="color:#2aa198">&amp;#34;http://dubbo.apache.org/schema/dubbo&amp;#34;&lt;/span>
 xmlns=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans&amp;#34;&lt;/span>
 xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -5496,7 +5496,7 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.basic.api.DemoService&amp;#34;&lt;/span> ref=&lt;span style="color:#2aa198">&amp;#34;demoService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;/beans&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="consumerxml示例">consumer.xml示例&lt;/h2>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> xmlns:xsi=&lt;span style="color:#2aa198">&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> xmlns:xsi=&lt;span style="color:#2aa198">&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span>
 xmlns:dubbo=&lt;span style="color:#2aa198">&amp;#34;http://dubbo.apache.org/schema/dubbo&amp;#34;&lt;/span>
 xmlns=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans&amp;#34;&lt;/span>
 xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -5506,11 +5506,11 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;demoService&amp;#34;&lt;/span> check=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.basic.api.DemoService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;/beans&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>所有标签都支持自定义参数，用于不同扩展点实现的特殊配置，如：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;jms&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;jms&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo:parameter&lt;/span> key=&lt;span style="color:#2aa198">&amp;#34;queue&amp;#34;&lt;/span> value=&lt;span style="color:#2aa198">&amp;#34;your_queue&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;/dubbo:protocol&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>或： &lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> xmlns=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans&amp;#34;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> xmlns=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans&amp;#34;&lt;/span>
 xmlns:xsi=&lt;span style="color:#2aa198">&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span>
 xmlns:dubbo=&lt;span style="color:#2aa198">&amp;#34;http://dubbo.apache.org/schema/dubbo&amp;#34;&lt;/span>
 xmlns:p=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/p&amp;#34;&lt;/span>
@@ -5609,7 +5609,7 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;p>有关 XML 的详细配置项，请参见：&lt;a href="../../references/xml">配置参考手册&lt;/a>。如果不想使用 Spring 配置，而希望通过 API 的方式进行调用，请参见：&lt;a href="../api">API配置&lt;/a>。想知道如何使用配置，请参见：&lt;a href="../../quick-start">快速启动&lt;/a>。&lt;/p>
 &lt;p>请在此查看文档描述的&lt;a href="https://github.com/apache/dubbo-samples/tree/master/java/dubbo-samples-basic">完整示例&lt;/a>&lt;/p>
 &lt;h2 id="providerxml-示例">provider.xml 示例&lt;/h2>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> xmlns:xsi=&lt;span style="color:#2aa198">&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> xmlns:xsi=&lt;span style="color:#2aa198">&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span>
 xmlns:dubbo=&lt;span style="color:#2aa198">&amp;#34;http://dubbo.apache.org/schema/dubbo&amp;#34;&lt;/span>
 xmlns=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans&amp;#34;&lt;/span>
 xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -5621,7 +5621,7 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.basic.api.DemoService&amp;#34;&lt;/span> ref=&lt;span style="color:#2aa198">&amp;#34;demoService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;/beans&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="consumerxml示例">consumer.xml示例&lt;/h2>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> xmlns:xsi=&lt;span style="color:#2aa198">&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> xmlns:xsi=&lt;span style="color:#2aa198">&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span>
 xmlns:dubbo=&lt;span style="color:#2aa198">&amp;#34;http://dubbo.apache.org/schema/dubbo&amp;#34;&lt;/span>
 xmlns=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans&amp;#34;&lt;/span>
 xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -5631,11 +5631,11 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;demoService&amp;#34;&lt;/span> check=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.basic.api.DemoService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;/beans&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>所有标签都支持自定义参数，用于不同扩展点实现的特殊配置，如：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;jms&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;jms&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo:parameter&lt;/span> key=&lt;span style="color:#2aa198">&amp;#34;queue&amp;#34;&lt;/span> value=&lt;span style="color:#2aa198">&amp;#34;your_queue&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;/dubbo:protocol&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>或： &lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> xmlns=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans&amp;#34;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> xmlns=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans&amp;#34;&lt;/span>
 xmlns:xsi=&lt;span style="color:#2aa198">&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span>
 xmlns:dubbo=&lt;span style="color:#2aa198">&amp;#34;http://dubbo.apache.org/schema/dubbo&amp;#34;&lt;/span>
 xmlns:p=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/p&amp;#34;&lt;/span>
@@ -5751,7 +5751,7 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;/ul>
 &lt;h2 id="使用">使用&lt;/h2>
 &lt;p>在 provider 和 consumer 中增加 zookeeper 客户端 jar 包依赖：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.zookeeper&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>zookeeper&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>3.3.3&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
@@ -5762,13 +5762,13 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;h3 id="使用-zkclient-客户端">使用 zkclient 客户端&lt;/h3>
 &lt;p>从 &lt;code>2.2.0&lt;/code> 版本开始缺省为 zkclient 实现，以提升 zookeeper 客户端的健壮性。&lt;a href="https://github.com/sgroschupf/zkclient">zkclient&lt;/a> 是 Datameer 开源的一个 Zookeeper 客户端实现。&lt;/p>
 &lt;p>缺省配置：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> ... client=&lt;span style="color:#2aa198">&amp;#34;zkclient&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> ... client=&lt;span style="color:#2aa198">&amp;#34;zkclient&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>或：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">dubbo.registry.client&lt;span style="color:#719e07">=&lt;/span>zkclient
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">dubbo.registry.client&lt;span style="color:#719e07">=&lt;/span>zkclient
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>或：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">zookeeper://10.20.153.10:2181?client&lt;span style="color:#719e07">=&lt;/span>zkclient
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">zookeeper://10.20.153.10:2181?client&lt;span style="color:#719e07">=&lt;/span>zkclient
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>需依赖或直接&lt;a href="http://repo1.maven.org/maven2/com/github/sgroschupf/zkclient">下载&lt;/a>：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>com.github.sgroschupf&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>zkclient&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>0.1&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
@@ -5776,13 +5776,13 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="使用-curator-客户端">使用 curator 客户端&lt;/h3>
 &lt;p>从 &lt;code>2.3.0&lt;/code> 版本开始支持可选 curator 实现。&lt;a href="https://github.com/apache/curator">Curator&lt;/a> 是 Netflix 开源的一个 Zookeeper 客户端实现。&lt;/p>
 &lt;p>如果需要改为 curator 实现，请配置：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> ... client=&lt;span style="color:#2aa198">&amp;#34;curator&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> ... client=&lt;span style="color:#2aa198">&amp;#34;curator&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>或：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">dubbo.registry.client&lt;span style="color:#719e07">=&lt;/span>curator
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">dubbo.registry.client&lt;span style="color:#719e07">=&lt;/span>curator
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>或：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">zookeeper://10.20.153.10:2181?client&lt;span style="color:#719e07">=&lt;/span>curator
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">zookeeper://10.20.153.10:2181?client&lt;span style="color:#719e07">=&lt;/span>curator
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>需依赖或直接下载&lt;a href="https://repo1.maven.org/maven2/org/apache/curator/curator-framework/">curator-framework&lt;/a>, &lt;a href="https://repo1.maven.org/maven2/org/apache/curator/curator-recipes/">curator-recipes&lt;/a>：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;properties&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;properties&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo.version&amp;gt;&lt;/span>2.7.8&lt;span style="color:#268bd2">&amp;lt;/dubbo.version&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;zookeeper.version&amp;gt;&lt;/span>2.12.0&lt;span style="color:#268bd2">&amp;lt;/zookeeper.version&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;/properties&amp;gt;&lt;/span>
@@ -5797,16 +5797,16 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>${zookeeper.version}&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>Zookeeper 单机配置:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://10.20.153.10:2181&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://10.20.153.10:2181&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>或：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;zookeeper&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.153.10:2181&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;zookeeper&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.153.10:2181&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>Zookeeper 集群配置：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">
 &lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://10.20.153.10:2181?backup=10.20.153.11:2181,10.20.153.12:2181&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>或：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;zookeeper&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.153.10:2181,10.20.153.11:2181,10.20.153.12:2181&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;zookeeper&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.153.10:2181,10.20.153.11:2181,10.20.153.12:2181&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>同一 Zookeeper，分成多组注册中心:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;chinaRegistry&amp;#34;&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;zookeeper&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.153.10:2181&amp;#34;&lt;/span> group=&lt;span style="color:#2aa198">&amp;#34;china&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;chinaRegistry&amp;#34;&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;zookeeper&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.153.10:2181&amp;#34;&lt;/span> group=&lt;span style="color:#2aa198">&amp;#34;china&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;intlRegistry&amp;#34;&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;zookeeper&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.153.10:2181&amp;#34;&lt;/span> group=&lt;span style="color:#2aa198">&amp;#34;intl&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="zookeeper-安装">zookeeper 安装&lt;/h2>
 &lt;p>安装方式参见: &lt;a href="../../../../admin/install/zookeeper">Zookeeper安装手册&lt;/a>，只需搭一个原生的 Zookeeper 服务器，并将 &lt;a href="../../../quick-start">Quick Start&lt;/a> 中 Provider 和 Consumer 里的 &lt;code>conf/dubbo.properties&lt;/code> 中的 &lt;code>dubbo.registry.address&lt;/code> 的值改为 &lt;code>zookeeper://127.0.0.1:2181&lt;/code> 即可使用。&lt;/p>
@@ -5842,7 +5842,7 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;/ul>
 &lt;h2 id="使用">使用&lt;/h2>
 &lt;p>在 provider 和 consumer 中增加 zookeeper 客户端 jar 包依赖：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.zookeeper&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>zookeeper&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>3.3.3&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
@@ -5853,13 +5853,13 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;h3 id="使用-zkclient-客户端">使用 zkclient 客户端&lt;/h3>
 &lt;p>从 &lt;code>2.2.0&lt;/code> 版本开始缺省为 zkclient 实现，以提升 zookeeper 客户端的健壮性。&lt;a href="https://github.com/sgroschupf/zkclient">zkclient&lt;/a> 是 Datameer 开源的一个 Zookeeper 客户端实现。&lt;/p>
 &lt;p>缺省配置：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> ... client=&lt;span style="color:#2aa198">&amp;#34;zkclient&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> ... client=&lt;span style="color:#2aa198">&amp;#34;zkclient&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>或：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">dubbo.registry.client&lt;span style="color:#719e07">=&lt;/span>zkclient
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">dubbo.registry.client&lt;span style="color:#719e07">=&lt;/span>zkclient
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>或：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">zookeeper://10.20.153.10:2181?client&lt;span style="color:#719e07">=&lt;/span>zkclient
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">zookeeper://10.20.153.10:2181?client&lt;span style="color:#719e07">=&lt;/span>zkclient
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>需依赖或直接&lt;a href="http://repo1.maven.org/maven2/com/github/sgroschupf/zkclient">下载&lt;/a>：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>com.github.sgroschupf&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>zkclient&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>0.1&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
@@ -5867,13 +5867,13 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="使用-curator-客户端">使用 curator 客户端&lt;/h3>
 &lt;p>从 &lt;code>2.3.0&lt;/code> 版本开始支持可选 curator 实现。&lt;a href="https://github.com/apache/curator">Curator&lt;/a> 是 Netflix 开源的一个 Zookeeper 客户端实现。&lt;/p>
 &lt;p>如果需要改为 curator 实现，请配置：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> ... client=&lt;span style="color:#2aa198">&amp;#34;curator&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> ... client=&lt;span style="color:#2aa198">&amp;#34;curator&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>或：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">dubbo.registry.client&lt;span style="color:#719e07">=&lt;/span>curator
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">dubbo.registry.client&lt;span style="color:#719e07">=&lt;/span>curator
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>或：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">zookeeper://10.20.153.10:2181?client&lt;span style="color:#719e07">=&lt;/span>curator
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">zookeeper://10.20.153.10:2181?client&lt;span style="color:#719e07">=&lt;/span>curator
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>需依赖或直接下载&lt;a href="https://repo1.maven.org/maven2/org/apache/curator/curator-framework/">curator-framework&lt;/a>, &lt;a href="https://repo1.maven.org/maven2/org/apache/curator/curator-recipes/">curator-recipes&lt;/a>：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;properties&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;properties&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo.version&amp;gt;&lt;/span>2.7.8&lt;span style="color:#268bd2">&amp;lt;/dubbo.version&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;zookeeper.version&amp;gt;&lt;/span>2.12.0&lt;span style="color:#268bd2">&amp;lt;/zookeeper.version&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;/properties&amp;gt;&lt;/span>
@@ -5888,16 +5888,16 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>${zookeeper.version}&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>Zookeeper 单机配置:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://10.20.153.10:2181&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://10.20.153.10:2181&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>或：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;zookeeper&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.153.10:2181&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;zookeeper&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.153.10:2181&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>Zookeeper 集群配置：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">
 &lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://10.20.153.10:2181?backup=10.20.153.11:2181,10.20.153.12:2181&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>或：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;zookeeper&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.153.10:2181,10.20.153.11:2181,10.20.153.12:2181&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;zookeeper&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.153.10:2181,10.20.153.11:2181,10.20.153.12:2181&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>同一 Zookeeper，分成多组注册中心:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;chinaRegistry&amp;#34;&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;zookeeper&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.153.10:2181&amp;#34;&lt;/span> group=&lt;span style="color:#2aa198">&amp;#34;china&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;chinaRegistry&amp;#34;&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;zookeeper&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.153.10:2181&amp;#34;&lt;/span> group=&lt;span style="color:#2aa198">&amp;#34;china&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;intlRegistry&amp;#34;&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;zookeeper&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.153.10:2181&amp;#34;&lt;/span> group=&lt;span style="color:#2aa198">&amp;#34;intl&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="zookeeper-安装">zookeeper 安装&lt;/h2>
 &lt;p>安装方式参见: &lt;a href="../../../../admin/install/zookeeper">Zookeeper安装手册&lt;/a>，只需搭一个原生的 Zookeeper 服务器，并将 &lt;a href="../../../quick-start">Quick Start&lt;/a> 中 Provider 和 Consumer 里的 &lt;code>conf/dubbo.properties&lt;/code> 中的 &lt;code>dubbo.registry.address&lt;/code> 的值改为 &lt;code>zookeeper://127.0.0.1:2181&lt;/code> 即可使用。&lt;/p>
@@ -5931,7 +5931,7 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;li>&lt;code>org.apache.dubbo.rpc.Exporter&lt;/code>&lt;/li>
 &lt;li>&lt;code>org.apache.dubbo.rpc.Invoker&lt;/code>&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">Protocol&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">Protocol&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#586e75">/**
 &lt;/span>&lt;span style="color:#586e75"> * 暴露远程服务：&amp;lt;br&amp;gt;
 &lt;/span>&lt;span style="color:#586e75"> * 1. 协议在接收请求时，应记录请求来源方地址信息：RpcContext.getContext().setRemoteAddress();&amp;lt;br&amp;gt;
@@ -5959,7 +5959,7 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">refer&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Class&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> type&lt;span style="color:#719e07">,&lt;/span> URL url&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RpcException&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="扩展配置">扩展配置&lt;/h2>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#586e75">&amp;lt;!-- 声明协议，如果没有配置id，将以name为id --&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#586e75">&amp;lt;!-- 声明协议，如果没有配置id，将以name为id --&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;xxx1&amp;#34;&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;xxx&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;span style="color:#586e75">&amp;lt;!-- 引用协议，如果没有配置protocol属性，将在ApplicationContext中自动扫描protocol配置 --&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;xxx1&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
@@ -5975,7 +5975,7 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;/ul>
 &lt;h2 id="扩展示例">扩展示例&lt;/h2>
 &lt;p>Maven项目结构：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">src
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">src
 |-main
 |-java
 |-com
@@ -5988,7 +5988,7 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 |-dubbo
 |-org.apache.dubbo.rpc.Protocol (纯文本文件，内容为：xxx=com.xxx.XxxProtocol)
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>XxxProtocol.java：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">package&lt;/span> com.xxx&lt;span style="color:#719e07">;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">package&lt;/span> com.xxx&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.Protocol&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">XxxProtocol&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> Protocol &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> Exporter&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">export&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> invoker&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RpcException &lt;span style="color:#719e07">{&lt;/span>
@@ -5999,7 +5999,7 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>XxxExporter.java：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">package&lt;/span> com.xxx&lt;span style="color:#719e07">;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">package&lt;/span> com.xxx&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.support.AbstractExporter&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">XxxExporter&lt;/span>&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">extends&lt;/span> AbstractExporter&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">XxxExporter&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> invoker&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RemotingException&lt;span style="color:#719e07">{&lt;/span>
@@ -6012,7 +6012,7 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;/span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>XxxInvoker.java：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">package&lt;/span> com.xxx&lt;span style="color:#719e07">;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">package&lt;/span> com.xxx&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.support.AbstractInvoker&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">XxxInvoker&lt;/span>&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">extends&lt;/span> AbstractInvoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">XxxInvoker&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Class&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> type&lt;span style="color:#719e07">,&lt;/span> URL url&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RemotingException&lt;span style="color:#719e07">{&lt;/span>
@@ -6024,7 +6024,7 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;/span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>META-INF/dubbo/org.apache.dubbo.rpc.Protocol：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">xxx=com.xxx.XxxProtocol
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">xxx=com.xxx.XxxProtocol
 &lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: 协议扩展</title><link>https://dubbo.apache.org/zh/docs/v3.0/references/spis/protocol/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/references/spis/protocol/</guid><description>
 &lt;h2 id="扩展说明">扩展说明&lt;/h2>
 &lt;p>RPC 协议扩展，封装远程调用细节。&lt;/p>
@@ -6044,7 +6044,7 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;li>&lt;code>org.apache.dubbo.rpc.Exporter&lt;/code>&lt;/li>
 &lt;li>&lt;code>org.apache.dubbo.rpc.Invoker&lt;/code>&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">Protocol&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">Protocol&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#586e75">/**
 &lt;/span>&lt;span style="color:#586e75"> * 暴露远程服务：&amp;lt;br&amp;gt;
 &lt;/span>&lt;span style="color:#586e75"> * 1. 协议在接收请求时，应记录请求来源方地址信息：RpcContext.getContext().setRemoteAddress();&amp;lt;br&amp;gt;
@@ -6072,7 +6072,7 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">refer&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Class&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> type&lt;span style="color:#719e07">,&lt;/span> URL url&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RpcException&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="扩展配置">扩展配置&lt;/h2>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#586e75">&amp;lt;!-- 声明协议，如果没有配置id，将以name为id --&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#586e75">&amp;lt;!-- 声明协议，如果没有配置id，将以name为id --&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;xxx1&amp;#34;&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;xxx&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;span style="color:#586e75">&amp;lt;!-- 引用协议，如果没有配置protocol属性，将在ApplicationContext中自动扫描protocol配置 --&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;xxx1&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
@@ -6088,7 +6088,7 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;/ul>
 &lt;h2 id="扩展示例">扩展示例&lt;/h2>
 &lt;p>Maven项目结构：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">src
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">src
 |-main
 |-java
 |-com
@@ -6101,7 +6101,7 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 |-dubbo
 |-org.apache.dubbo.rpc.Protocol (纯文本文件，内容为：xxx=com.xxx.XxxProtocol)
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>XxxProtocol.java：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">package&lt;/span> com.xxx&lt;span style="color:#719e07">;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">package&lt;/span> com.xxx&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.Protocol&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">XxxProtocol&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> Protocol &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> Exporter&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">export&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> invoker&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RpcException &lt;span style="color:#719e07">{&lt;/span>
@@ -6112,7 +6112,7 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>XxxExporter.java：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">package&lt;/span> com.xxx&lt;span style="color:#719e07">;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">package&lt;/span> com.xxx&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.support.AbstractExporter&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">XxxExporter&lt;/span>&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">extends&lt;/span> AbstractExporter&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">XxxExporter&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> invoker&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RemotingException&lt;span style="color:#719e07">{&lt;/span>
@@ -6125,7 +6125,7 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;/span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>XxxInvoker.java：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">package&lt;/span> com.xxx&lt;span style="color:#719e07">;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">package&lt;/span> com.xxx&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.support.AbstractInvoker&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">XxxInvoker&lt;/span>&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">extends&lt;/span> AbstractInvoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">XxxInvoker&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Class&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> type&lt;span style="color:#719e07">,&lt;/span> URL url&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RemotingException&lt;span style="color:#719e07">{&lt;/span>
@@ -6137,7 +6137,7 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;/span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>META-INF/dubbo/org.apache.dubbo.rpc.Protocol：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">xxx=com.xxx.XxxProtocol
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">xxx=com.xxx.XxxProtocol
 &lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: 启动时检查</title><link>https://dubbo.apache.org/zh/docs/v2.7/user/examples/preflight-check/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v2.7/user/examples/preflight-check/</guid><description>
 &lt;p>Dubbo 缺省会在启动时检查依赖的服务是否可用，不可用时会抛出异常，阻止 Spring 初始化完成，以便上线时，能及早发现问题，默认 &lt;code>check=&amp;quot;true&amp;quot;&lt;/code>。&lt;/p>
 &lt;p>可以通过 &lt;code>check=&amp;quot;false&amp;quot;&lt;/code> 关闭检查，比如，测试时，有些服务不关心，或者出现了循环依赖，必须有一方先启动。&lt;/p>
@@ -6145,18 +6145,18 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;h2 id="示例">示例&lt;/h2>
 &lt;h3 id="通过-spring-配置文件">通过 spring 配置文件&lt;/h3>
 &lt;p>关闭某个服务的启动时检查 (没有提供者时报错)：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> check=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> check=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>关闭所有服务的启动时检查 (没有提供者时报错)：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:consumer&lt;/span> check=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:consumer&lt;/span> check=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>关闭注册中心启动时检查 (注册订阅失败时报错)：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> check=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> check=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="通过-dubboproperties">通过 dubbo.properties&lt;/h3>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">dubbo.reference.com.foo.BarService.check=false
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">dubbo.reference.com.foo.BarService.check=false
 dubbo.reference.check=false
 dubbo.consumer.check=false
 dubbo.registry.check=false
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="通过--d-参数">通过 -D 参数&lt;/h3>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">java -Ddubbo.reference.com.foo.BarService.check&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">false&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">java -Ddubbo.reference.com.foo.BarService.check&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">false&lt;/span>
 java -Ddubbo.reference.check&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">false&lt;/span>
 java -Ddubbo.consumer.check&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">false&lt;/span>
 java -Ddubbo.registry.check&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">false&lt;/span>
@@ -6170,18 +6170,18 @@ java -Ddubbo.registry.check&lt;span style="color:#719e07">=&lt;/span>&lt;span st
 &lt;h2 id="示例">示例&lt;/h2>
 &lt;h3 id="通过-spring-配置文件">通过 spring 配置文件&lt;/h3>
 &lt;p>关闭某个服务的启动时检查 (没有提供者时报错)：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> check=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> check=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>关闭所有服务的启动时检查 (没有提供者时报错)：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:consumer&lt;/span> check=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:consumer&lt;/span> check=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>关闭注册中心启动时检查 (注册订阅失败时报错)：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> check=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> check=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="通过-dubboproperties">通过 dubbo.properties&lt;/h3>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">dubbo.reference.com.foo.BarService.check=false
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">dubbo.reference.com.foo.BarService.check=false
 dubbo.reference.check=false
 dubbo.consumer.check=false
 dubbo.registry.check=false
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="通过--d-参数">通过 -D 参数&lt;/h3>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">java -Ddubbo.reference.com.foo.BarService.check&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">false&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">java -Ddubbo.reference.com.foo.BarService.check&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">false&lt;/span>
 java -Ddubbo.reference.check&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">false&lt;/span>
 java -Ddubbo.consumer.check&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">false&lt;/span>
 java -Ddubbo.registry.check&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">false&lt;/span>
@@ -6193,7 +6193,7 @@ java -Ddubbo.registry.check&lt;span style="color:#719e07">=&lt;/span>&lt;span st
 &lt;h2 id="导入依赖库">导入依赖库&lt;/h2>
 &lt;h3 id="使用-rebar-编译工具">使用 Rebar 编译工具。&lt;/h3>
 &lt;p>Add dubblerl to rebar.config with your project&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-erlang" data-lang="erlang">{deps, [
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-erlang" data-lang="erlang">{deps, [
 {dubboerl, {git, &lt;span style="color:#2aa198">&amp;#34;https://github.com/apache/dubbo-erlang.git&amp;#34;&lt;/span>, {branch, &lt;span style="color:#2aa198">&amp;#34;master&amp;#34;&lt;/span>}}}
 ]}.
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="使用-erlangmk-编译工具">使用 erlang.mk 编译工具&lt;/h3>
@@ -6205,7 +6205,7 @@ java -Ddubbo.registry.check&lt;span style="color:#719e07">=&lt;/span>&lt;span st
 into the project&amp;rsquo;s &lt;code>apps&lt;/code> directory.&lt;/li>
 &lt;li>If it is upload to your git repository, you can import like this:&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-erlang" data-lang="erlang">{deps, [
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-erlang" data-lang="erlang">{deps, [
 {dubboerl, {git, &lt;span style="color:#2aa198">&amp;#34;https://github.com/apache/dubbo-erlang.git&amp;#34;&lt;/span>, {branch, &lt;span style="color:#2aa198">&amp;#34;master&amp;#34;&lt;/span>}}},
 {dubbo_service,{git,&lt;span style="color:#2aa198">&amp;#34;${INTERFACE_LIB_URL}&amp;#34;&lt;/span>,{branch,&lt;span style="color:#2aa198">&amp;#34;master&amp;#34;&lt;/span>}}} &lt;span style="color:#586e75">%% replace ${INTERFACE_LIB_URL} with your lib git repos url
 &lt;/span>&lt;span style="color:#586e75">&lt;/span>]}.
@@ -6213,15 +6213,15 @@ into the project&amp;rsquo;s &lt;code>apps&lt;/code> directory.&lt;/li>
 &lt;p>Please reference &lt;a href="./reference.md">Reference Config&lt;/a>&lt;/p>
 &lt;h2 id="init-dubbolib-in-your-project">Init dubbolib in your project&lt;/h2>
 &lt;p>It is need you&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-erlang" data-lang="erlang">dubboerl:&lt;span style="color:#268bd2">init&lt;/span>().
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-erlang" data-lang="erlang">dubboerl:&lt;span style="color:#268bd2">init&lt;/span>().
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="如何调用">如何调用？&lt;/h2>
 &lt;h3 id="同步调用">同步调用&lt;/h3>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-erlang" data-lang="erlang">&lt;span style="color:#268bd2">Request&lt;/span> &lt;span style="color:#719e07">=&lt;/span> #userInfoRequest{requestId &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">123&lt;/span>, username &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;testname&amp;#34;&lt;/span>},
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-erlang" data-lang="erlang">&lt;span style="color:#268bd2">Request&lt;/span> &lt;span style="color:#719e07">=&lt;/span> #userInfoRequest{requestId &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">123&lt;/span>, username &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;testname&amp;#34;&lt;/span>},
 {ok,&lt;span style="color:#268bd2">RequestRef&lt;/span>,&lt;span style="color:#268bd2">Response&lt;/span>,&lt;span style="color:#268bd2">RpcContent&lt;/span>} &lt;span style="color:#719e07">=&lt;/span> userOperator:&lt;span style="color:#268bd2">queryUserInfo&lt;/span>(&lt;span style="color:#268bd2">Request&lt;/span>,#{sync&lt;span style="color:#719e07">=&amp;gt;&lt;/span> true}).
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>If it occur error, is reponse &lt;code>{error,Reason}&lt;/code>.&lt;/p>
 &lt;h3 id="异步调用">异步调用&lt;/h3>
 &lt;p>Default is Async call.&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-erlang" data-lang="erlang">&lt;span style="color:#268bd2">Request&lt;/span> &lt;span style="color:#719e07">=&lt;/span> #userInfoRequest{requestId &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">123&lt;/span>, username &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;testname&amp;#34;&lt;/span>},
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-erlang" data-lang="erlang">&lt;span style="color:#268bd2">Request&lt;/span> &lt;span style="color:#719e07">=&lt;/span> #userInfoRequest{requestId &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">123&lt;/span>, username &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;testname&amp;#34;&lt;/span>},
 {ok,&lt;span style="color:#268bd2">RequestRef&lt;/span>} &lt;span style="color:#719e07">=&lt;/span> userOperator:&lt;span style="color:#268bd2">queryUserInfo&lt;/span>(&lt;span style="color:#268bd2">Request&lt;/span>).
 &lt;span style="color:#586e75">%% you can receive the message after.
 &lt;/span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#268bd2">handle_cast&lt;/span>({msg_back,&lt;span style="color:#268bd2">RequestRef&lt;/span>,&lt;span style="color:#268bd2">Response&lt;/span>,&lt;span style="color:#268bd2">RpcContent&lt;/span>},&lt;span style="color:#268bd2">State&lt;/span>).
@@ -6231,7 +6231,7 @@ into the project&amp;rsquo;s &lt;code>apps&lt;/code> directory.&lt;/li>
 &lt;h2 id="导入依赖库">导入依赖库&lt;/h2>
 &lt;h3 id="使用-rebar-编译工具">使用 Rebar 编译工具。&lt;/h3>
 &lt;p>Add dubblerl to rebar.config with your project&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-erlang" data-lang="erlang">{deps, [
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-erlang" data-lang="erlang">{deps, [
 {dubboerl, {git, &lt;span style="color:#2aa198">&amp;#34;https://github.com/apache/dubbo-erlang.git&amp;#34;&lt;/span>, {branch, &lt;span style="color:#2aa198">&amp;#34;master&amp;#34;&lt;/span>}}}
 ]}.
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="使用-erlangmk-编译工具">使用 erlang.mk 编译工具&lt;/h3>
@@ -6243,7 +6243,7 @@ into the project&amp;rsquo;s &lt;code>apps&lt;/code> directory.&lt;/li>
 into the project&amp;rsquo;s &lt;code>apps&lt;/code> directory.&lt;/li>
 &lt;li>If it is upload to your git repository, you can import like this:&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-erlang" data-lang="erlang">{deps, [
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-erlang" data-lang="erlang">{deps, [
 {dubboerl, {git, &lt;span style="color:#2aa198">&amp;#34;https://github.com/apache/dubbo-erlang.git&amp;#34;&lt;/span>, {branch, &lt;span style="color:#2aa198">&amp;#34;master&amp;#34;&lt;/span>}}},
 {dubbo_service,{git,&lt;span style="color:#2aa198">&amp;#34;${INTERFACE_LIB_URL}&amp;#34;&lt;/span>,{branch,&lt;span style="color:#2aa198">&amp;#34;master&amp;#34;&lt;/span>}}} &lt;span style="color:#586e75">%% replace ${INTERFACE_LIB_URL} with your lib git repos url
 &lt;/span>&lt;span style="color:#586e75">&lt;/span>]}.
@@ -6251,15 +6251,15 @@ into the project&amp;rsquo;s &lt;code>apps&lt;/code> directory.&lt;/li>
 &lt;p>Please reference &lt;a href="./reference.md">Reference Config&lt;/a>&lt;/p>
 &lt;h2 id="init-dubbolib-in-your-project">Init dubbolib in your project&lt;/h2>
 &lt;p>It is need you&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-erlang" data-lang="erlang">dubboerl:&lt;span style="color:#268bd2">init&lt;/span>().
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-erlang" data-lang="erlang">dubboerl:&lt;span style="color:#268bd2">init&lt;/span>().
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="如何调用">如何调用？&lt;/h2>
 &lt;h3 id="同步调用">同步调用&lt;/h3>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-erlang" data-lang="erlang">&lt;span style="color:#268bd2">Request&lt;/span> &lt;span style="color:#719e07">=&lt;/span> #userInfoRequest{requestId &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">123&lt;/span>, username &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;testname&amp;#34;&lt;/span>},
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-erlang" data-lang="erlang">&lt;span style="color:#268bd2">Request&lt;/span> &lt;span style="color:#719e07">=&lt;/span> #userInfoRequest{requestId &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">123&lt;/span>, username &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;testname&amp;#34;&lt;/span>},
 {ok,&lt;span style="color:#268bd2">RequestRef&lt;/span>,&lt;span style="color:#268bd2">Response&lt;/span>,&lt;span style="color:#268bd2">RpcContent&lt;/span>} &lt;span style="color:#719e07">=&lt;/span> userOperator:&lt;span style="color:#268bd2">queryUserInfo&lt;/span>(&lt;span style="color:#268bd2">Request&lt;/span>,#{sync&lt;span style="color:#719e07">=&amp;gt;&lt;/span> true}).
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>If it occur error, is reponse &lt;code>{error,Reason}&lt;/code>.&lt;/p>
 &lt;h3 id="异步调用">异步调用&lt;/h3>
 &lt;p>Default is Async call.&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-erlang" data-lang="erlang">&lt;span style="color:#268bd2">Request&lt;/span> &lt;span style="color:#719e07">=&lt;/span> #userInfoRequest{requestId &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">123&lt;/span>, username &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;testname&amp;#34;&lt;/span>},
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-erlang" data-lang="erlang">&lt;span style="color:#268bd2">Request&lt;/span> &lt;span style="color:#719e07">=&lt;/span> #userInfoRequest{requestId &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">123&lt;/span>, username &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;testname&amp;#34;&lt;/span>},
 {ok,&lt;span style="color:#268bd2">RequestRef&lt;/span>} &lt;span style="color:#719e07">=&lt;/span> userOperator:&lt;span style="color:#268bd2">queryUserInfo&lt;/span>(&lt;span style="color:#268bd2">Request&lt;/span>).
 &lt;span style="color:#586e75">%% you can receive the message after.
 &lt;/span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#268bd2">handle_cast&lt;/span>({msg_back,&lt;span style="color:#268bd2">RequestRef&lt;/span>,&lt;span style="color:#268bd2">Response&lt;/span>,&lt;span style="color:#268bd2">RpcContent&lt;/span>},&lt;span style="color:#268bd2">State&lt;/span>).
@@ -6267,7 +6267,7 @@ into the project&amp;rsquo;s &lt;code>apps&lt;/code> directory.&lt;/li>
 &lt;p>参考项目 &lt;a href="https://github.com/apache/dubbo-erlang/tree/master/samples">dubboerl_demo&lt;/a>&lt;/p></description></item><item><title>Docs: 3.x 升级与兼容性指南</title><link>https://dubbo.apache.org/zh/docs/v3.0/migration/migration-and-compatibility-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/migration/migration-and-compatibility-guide/</guid><description>
 &lt;p>&lt;strong>无需改动任何代码，直接升级到 Dubbo 3.0。&lt;/strong>&lt;/p>
 &lt;p>在 3.0 版本的设计与开发之初，我们就定下了兼容老版本 Dubbo 用户（2.5、2.6、2.7）的目标。因此，往 3.0 版本的升级过程将会是完全透明的，用户无需做任何业务改造，升级 3.x 后的框架行为将保持与 2.x 版本完全一致。&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.dubbo&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>3.0.0&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
@@ -6316,7 +6316,7 @@ into the project&amp;rsquo;s &lt;code>apps&lt;/code> directory.&lt;/li>
 &lt;p>服务发现的一个核心组件是注册中心，Provider 注册地址到注册中心，Consumer 从注册中心读取和订阅 Provider 地址列表。
 因此，要启用服务发现，需要为 Dubbo 增加注册中心配置：&lt;/p>
 &lt;p>以 dubbo-spring-boot-starter 使用方式为例，增加 registry 配置&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback"># application.properties
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback"># application.properties
 dubbo
 registry
 address: zookeeper://127.0.0.1:2181
@@ -6370,7 +6370,7 @@ Dubbo3 特有的业务接口同步机制，是 Dubbo3 需要保留的优势，�
 &lt;p>条件路由实现类 ConditionRouter 在进行工作前，需要先对用户配置的路由规则进行解析，得到一系列的条件。然后再根据这些条件对服务进行路由。本章将分两节进行说明，2.1节介绍表达式解析过程。2.2 节介绍服务路由的过程。下面，我们先从表达式解析过程看起。&lt;/p>
 &lt;h3 id="21-表达式解析">2.1 表达式解析&lt;/h3>
 &lt;p>条件路由规则是一条字符串，对于 Dubbo 来说，它并不能直接理解字符串的意思，需要将其解析成内部格式才行。条件表达式的解析过程始于 ConditionRouter 的构造方法，下面一起看一下：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">ConditionRouter&lt;/span>&lt;span style="color:#719e07">(&lt;/span>URL url&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">ConditionRouter&lt;/span>&lt;span style="color:#719e07">(&lt;/span>URL url&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#719e07">this&lt;/span>&lt;span style="color:#719e07">.&lt;/span>url &lt;span style="color:#719e07">=&lt;/span> url&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#586e75">// 获取 priority 和 force 配置
 &lt;/span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">this&lt;/span>&lt;span style="color:#719e07">.&lt;/span>priority &lt;span style="color:#719e07">=&lt;/span> url&lt;span style="color:#719e07">.&lt;/span>getParameter&lt;span style="color:#719e07">(&lt;/span>Constants&lt;span style="color:#719e07">.&lt;/span>PRIORITY_KEY&lt;span style="color:#719e07">,&lt;/span> 0&lt;span style="color:#719e07">);&lt;/span>
@@ -6403,12 +6403,12 @@ StringUtils&lt;span style="color:#719e07">.&lt;/span>isBlank&lt;span style="colo
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>如上，ConditionRouter 构造方法先是对路由规则做预处理，然后调用 parseRule 方法分别对服务提供者和消费者规则进行解析，最后将解析结果赋值给 whenCondition 和 thenCondition 成员变量。ConditionRouter 构造方法不是很复杂，这里就不多说了。下面我们把重点放在 parseRule 方法上，在详细介绍这个方法之前，我们先来看一个内部类。&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#268bd2">final&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">MatchPair&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#268bd2">final&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">MatchPair&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#268bd2">final&lt;/span> Set&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">&amp;gt;&lt;/span> matches &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> HashSet&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">&amp;gt;();&lt;/span>
 &lt;span style="color:#268bd2">final&lt;/span> Set&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">&amp;gt;&lt;/span> mismatches &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> HashSet&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">&amp;gt;();&lt;/span>
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>MatchPair 内部包含了两个 Set 类型的成员变量，分别用于存放匹配和不匹配的条件。这个类两个成员变量会在 parseRule 方法中被用到，下面来看一下。&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> Map&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">,&lt;/span> MatchPair&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">parseRule&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String rule&lt;span style="color:#719e07">)&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> Map&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">,&lt;/span> MatchPair&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">parseRule&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String rule&lt;span style="color:#719e07">)&lt;/span>
 &lt;span style="color:#268bd2">throws&lt;/span> ParseException &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#586e75">// 定义条件映射集合
 &lt;/span>&lt;span style="color:#586e75">&lt;/span> Map&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">,&lt;/span> MatchPair&lt;span style="color:#719e07">&amp;gt;&lt;/span> condition &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> HashMap&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">,&lt;/span> MatchPair&lt;span style="color:#719e07">&amp;gt;();&lt;/span>
@@ -6482,7 +6482,7 @@ values &lt;span style="color:#719e07">=&lt;/span> pair&lt;span style="color:#719
 &lt;span style="color:#719e07">return&lt;/span> condition&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>以上就是路由规则的解析逻辑，该逻辑由正则表达式和一个 while 循环以及数个条件分支组成。下面通过一个示例对解析逻辑进行演绎。示例为 &lt;code> host = 2.2.2.2 &amp;amp; host != 1.1.1.1 &amp;amp; method = hello&lt;/code>。正则解析结果如下：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback"> 括号一 括号二
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback"> 括号一 括号二
 1. null host
 2. = 2.2.2.2
 3. &amp;amp; host
@@ -6497,7 +6497,7 @@ values &lt;span style="color:#719e07">=&lt;/span> pair&lt;span style="color:#719
 &lt;p>第五次循环：分隔符 separator = &amp;ldquo;&amp;amp;&amp;quot;，content = &amp;ldquo;method&amp;rdquo;。condition.get(&amp;ldquo;method&amp;rdquo;) = null，因此新建一个 MatchPair 对象，并放入到 condition 中。此时 condition = {&amp;ldquo;host&amp;rdquo;: MatchPair@123, &amp;ldquo;method&amp;rdquo;: MatchPair@ 456}&lt;/p>
 &lt;p>第六次循环：分隔符 separator = &amp;ldquo;=&amp;quot;，content = &amp;ldquo;2.2.2.2&amp;rdquo;，pair = MatchPair@456。此时将 hello 放入到 MatchPair@456 对象的 matches 集合中。&lt;/p>
 &lt;p>循环结束，此时 condition 的内容如下：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
 &lt;span style="color:#268bd2">&amp;#34;host&amp;#34;&lt;/span>: {
 &lt;span style="color:#268bd2">&amp;#34;matches&amp;#34;&lt;/span>: [&lt;span style="color:#2aa198">&amp;#34;2.2.2.2&amp;#34;&lt;/span>],
 &lt;span style="color:#268bd2">&amp;#34;mismatches&amp;#34;&lt;/span>: [&lt;span style="color:#2aa198">&amp;#34;1.1.1.1&amp;#34;&lt;/span>]
@@ -6510,7 +6510,7 @@ values &lt;span style="color:#719e07">=&lt;/span> pair&lt;span style="color:#719
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>路由规则的解析过程稍微有点复杂，大家可通过 ConditionRouter 的测试类对该逻辑进行测试。并且找一个表达式，对照上面的代码走一遍，加深理解。&lt;/p>
 &lt;h3 id="22-服务路由">2.2 服务路由&lt;/h3>
 &lt;p>服务路由的入口方法是 ConditionRouter 的 route 方法，该方法定义在 Router 接口中。实现代码如下：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> List&lt;span style="color:#719e07">&amp;lt;&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span> &lt;span style="color:#268bd2">route&lt;/span>&lt;span style="color:#719e07">(&lt;/span>List&lt;span style="color:#719e07">&amp;lt;&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span> invokers&lt;span style="color:#719e07">,&lt;/span> URL url&lt;span style="color:#719e07">,&lt;/span> Invocation invocation&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RpcException &lt;span style="color:#719e07">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> List&lt;span style="color:#719e07">&amp;lt;&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span> &lt;span style="color:#268bd2">route&lt;/span>&lt;span style="color:#719e07">(&lt;/span>List&lt;span style="color:#719e07">&amp;lt;&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span> invokers&lt;span style="color:#719e07">,&lt;/span> URL url&lt;span style="color:#719e07">,&lt;/span> Invocation invocation&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RpcException &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>invokers &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span> &lt;span style="color:#719e07">||&lt;/span> invokers&lt;span style="color:#719e07">.&lt;/span>isEmpty&lt;span style="color:#719e07">())&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#719e07">return&lt;/span> invokers&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">}&lt;/span>
@@ -6554,7 +6554,7 @@ logger&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e
 &lt;/span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">return&lt;/span> invokers&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>route 方法先是调用 matchWhen 对服务消费者进行匹配，如果匹配失败，直接返回 Invoker 列表。如果匹配成功，再对服务提供者进行匹配，匹配逻辑封装在了 matchThen 方法中。下面来看一下这两个方法的逻辑：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#dc322f">boolean&lt;/span> &lt;span style="color:#268bd2">matchWhen&lt;/span>&lt;span style="color:#719e07">(&lt;/span>URL url&lt;span style="color:#719e07">,&lt;/span> Invocation invocation&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#dc322f">boolean&lt;/span> &lt;span style="color:#268bd2">matchWhen&lt;/span>&lt;span style="color:#719e07">(&lt;/span>URL url&lt;span style="color:#719e07">,&lt;/span> Invocation invocation&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#586e75">// 服务消费者条件为 null 或空，均返回 true，比如：
 &lt;/span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#586e75">// =&amp;gt; host != 172.22.3.91
 &lt;/span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#586e75">// 表示所有的服务消费者都不得调用 IP 为 172.22.3.91 的机器上的服务
@@ -6567,7 +6567,7 @@ logger&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e
 &lt;span style="color:#719e07">&amp;amp;&amp;amp;&lt;/span> matchCondition&lt;span style="color:#719e07">(&lt;/span>thenCondition&lt;span style="color:#719e07">,&lt;/span> url&lt;span style="color:#719e07">,&lt;/span> param&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span>&lt;span style="color:#719e07">);&lt;/span> &lt;span style="color:#586e75">// 进行条件匹配
 &lt;/span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>这两个方法长的有点像，不过逻辑上还是有差别的，大家注意看。这两个方法均调用了 matchCondition 方法，但它们所传入的参数是不同的。这个需要特别注意一下，不然后面的逻辑不好弄懂。下面我们对这几个参数进行溯源。matchWhen 方法向 matchCondition 方法传入的参数为 [whenCondition, url, null, invocation]，第一个参数 whenCondition 为服务消费者匹配条件，这个前面分析过。第二个参数 url 源自 route 方法的参数列表，该参数由外部类调用 route 方法时传入。比如：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">private&lt;/span> List&lt;span style="color:#719e07">&amp;lt;&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span> &lt;span style="color:#268bd2">route&lt;/span>&lt;span style="color:#719e07">(&lt;/span>List&lt;span style="color:#719e07">&amp;lt;&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span> invokers&lt;span style="color:#719e07">,&lt;/span> String method&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">private&lt;/span> List&lt;span style="color:#719e07">&amp;lt;&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span> &lt;span style="color:#268bd2">route&lt;/span>&lt;span style="color:#719e07">(&lt;/span>List&lt;span style="color:#719e07">&amp;lt;&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span> invokers&lt;span style="color:#719e07">,&lt;/span> String method&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 Invocation invocation &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> RpcInvocation&lt;span style="color:#719e07">(&lt;/span>method&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#719e07">new&lt;/span> Class&lt;span style="color:#719e07">&amp;lt;?&amp;gt;[&lt;/span>0&lt;span style="color:#719e07">],&lt;/span> &lt;span style="color:#719e07">new&lt;/span> Object&lt;span style="color:#719e07">[&lt;/span>0&lt;span style="color:#719e07">]);&lt;/span>
 List&lt;span style="color:#719e07">&amp;lt;&lt;/span>Router&lt;span style="color:#719e07">&amp;gt;&lt;/span> routers &lt;span style="color:#719e07">=&lt;/span> getRouters&lt;span style="color:#719e07">();&lt;/span>
 &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>routers &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span>&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
@@ -6582,7 +6582,7 @@ List&lt;span style="color:#719e07">&amp;lt;&lt;/span>Router&lt;span style="color
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>上面这段代码来自 RegistryDirectory，第二个参数表示的是服务消费者 url。matchCondition 的 invocation 参数也是从这里传入的。&lt;/p>
 &lt;p>接下来再来看看 matchThen 向 matchCondition 方法传入的参数 [thenCondition, url, param, null]。第一个参数不用解释了。第二个和第三个参数来自 matchThen 方法的参数列表，这两个参数分别为服务提供者 url 和服务消费者 url。搞清楚这些参数来源后，接下来就可以分析 matchCondition 方法了。&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#dc322f">boolean&lt;/span> &lt;span style="color:#268bd2">matchCondition&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Map&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">,&lt;/span> MatchPair&lt;span style="color:#719e07">&amp;gt;&lt;/span> condition&lt;span style="color:#719e07">,&lt;/span> URL url&lt;span style="color:#719e07">,&lt;/span> URL param&lt;span style="color:#719e07">,&lt;/span> Invocation invocation&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#dc322f">boolean&lt;/span> &lt;span style="color:#268bd2">matchCondition&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Map&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">,&lt;/span> MatchPair&lt;span style="color:#719e07">&amp;gt;&lt;/span> condition&lt;span style="color:#719e07">,&lt;/span> URL url&lt;span style="color:#719e07">,&lt;/span> URL param&lt;span style="color:#719e07">,&lt;/span> Invocation invocation&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#586e75">// 将服务提供者或消费者 url 转成 Map
 &lt;/span>&lt;span style="color:#586e75">&lt;/span> Map&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">,&lt;/span> String&lt;span style="color:#719e07">&amp;gt;&lt;/span> sample &lt;span style="color:#719e07">=&lt;/span> url&lt;span style="color:#719e07">.&lt;/span>toMap&lt;span style="color:#719e07">();&lt;/span>
 &lt;span style="color:#dc322f">boolean&lt;/span> result &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#cb4b16">false&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
@@ -6629,7 +6629,7 @@ result &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#cb4b16"
 &lt;span style="color:#719e07">return&lt;/span> result&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>如上，matchCondition 方法看起来有点复杂，这里简单说明一下。分割线以上的代码实际上用于获取 sampleValue 的值，分割线以下才是进行条件匹配。条件匹配调用的逻辑封装在 isMatch 中，代码如下：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#dc322f">boolean&lt;/span> &lt;span style="color:#268bd2">isMatch&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String value&lt;span style="color:#719e07">,&lt;/span> URL param&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#dc322f">boolean&lt;/span> &lt;span style="color:#268bd2">isMatch&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String value&lt;span style="color:#719e07">,&lt;/span> URL param&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#586e75">// 情况一：matches 非空，mismatches 为空
 &lt;/span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(!&lt;/span>matches&lt;span style="color:#719e07">.&lt;/span>isEmpty&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">&amp;amp;&amp;amp;&lt;/span> mismatches&lt;span style="color:#719e07">.&lt;/span>isEmpty&lt;span style="color:#719e07">())&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#586e75">// 遍历 matches 集合，检测入参 value 是否能被 matches 集合元素匹配到。
@@ -6709,7 +6709,7 @@ result &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#cb4b16"
 &lt;/tbody>
 &lt;/table>
 &lt;p>isMatch 方法是通过 UrlUtils 的 isMatchGlobPattern 方法进行匹配，因此下面我们再来看看 isMatchGlobPattern 方法的逻辑。&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#dc322f">boolean&lt;/span> &lt;span style="color:#268bd2">isMatchGlobPattern&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String pattern&lt;span style="color:#719e07">,&lt;/span> String value&lt;span style="color:#719e07">,&lt;/span> URL param&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#dc322f">boolean&lt;/span> &lt;span style="color:#268bd2">isMatchGlobPattern&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String pattern&lt;span style="color:#719e07">,&lt;/span> String value&lt;span style="color:#719e07">,&lt;/span> URL param&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>param &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span> &lt;span style="color:#719e07">&amp;amp;&amp;amp;&lt;/span> pattern&lt;span style="color:#719e07">.&lt;/span>startsWith&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;$&amp;#34;&lt;/span>&lt;span style="color:#719e07">))&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#586e75">// 引用服务消费者参数，param 参数为服务消费者 url
 &lt;/span>&lt;span style="color:#586e75">&lt;/span> pattern &lt;span style="color:#719e07">=&lt;/span> param&lt;span style="color:#719e07">.&lt;/span>getRawParameter&lt;span style="color:#719e07">(&lt;/span>pattern&lt;span style="color:#719e07">.&lt;/span>substring&lt;span style="color:#719e07">(&lt;/span>1&lt;span style="color:#719e07">));&lt;/span>
@@ -6834,7 +6834,7 @@ String suffix &lt;span style="color:#719e07">=&lt;/span> pattern&lt;span style="
 &lt;p>&lt;a href="https://www.apache.org/dev/new-committers-guide.html">https://www.apache.org/dev/new-committers-guide.html&lt;/a>&lt;/p></description></item><item><title>Docs: 源码构建</title><link>https://dubbo.apache.org/zh/docs/v2.7/dev/build/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v2.7/dev/build/</guid><description>
 &lt;h2 id="代码签出">代码签出&lt;/h2>
 &lt;p>通过以下的这个命令签出最新的项目源码 &lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">git clone https://github.com/apache/dubbo.git dubbo
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">git clone https://github.com/apache/dubbo.git dubbo
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="分支">分支&lt;/h2>
 &lt;p>我们使用 master 作为主干版本的开发，使用分支作为维护版本。可以通过 &lt;a href="https://github.com/apache/dubbo/tags">https://github.com/apache/dubbo/tags&lt;/a> 来查看所有版本的标签。&lt;/p>
 &lt;h2 id="构建">构建&lt;/h2>
@@ -6845,25 +6845,25 @@ String suffix &lt;span style="color:#719e07">=&lt;/span> pattern&lt;span style="
 &lt;li>Maven 2.2.1 或者以上的版本&lt;/li>
 &lt;/ul>
 &lt;p>构建之前需要配置以下的 &lt;code>MAVEN_OPTS&lt;/code>&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">&lt;span style="color:#b58900">export&lt;/span> &lt;span style="color:#268bd2">MAVEN_OPTS&lt;/span>&lt;span style="color:#719e07">=&lt;/span>-Xmx1024m -XX:MaxPermSize&lt;span style="color:#719e07">=&lt;/span>512m
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">&lt;span style="color:#b58900">export&lt;/span> &lt;span style="color:#268bd2">MAVEN_OPTS&lt;/span>&lt;span style="color:#719e07">=&lt;/span>-Xmx1024m -XX:MaxPermSize&lt;span style="color:#719e07">=&lt;/span>512m
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>使用以下命令做一次构建&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">mvn clean install
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">mvn clean install
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>可以通过以下的构建命令来跳过单元测试&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">mvn install -Dmaven.test.skip
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">mvn install -Dmaven.test.skip
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="构建源代码-jar-包">构建源代码 jar 包&lt;/h2>
 &lt;p>通过以下命令以构建 Dubbo 的源代码 jar 包&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">mvn clean source:jar install -Dmaven.test.skip
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">mvn clean source:jar install -Dmaven.test.skip
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>并且修改你的样例项目中的 dubbo 依赖为本地仓库的 SANPSHOT 版本，然后使用远程 debug 来调试 dubbo。&lt;/p>
 &lt;h2 id="ide-支持">IDE 支持&lt;/h2>
 &lt;p>使用以下命令来生成 IDE 的工程&lt;/p>
 &lt;h3 id="intellij-idea">Intellij Idea&lt;/h3>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">mvn idea:idea
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">mvn idea:idea
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="eclipse">eclipse&lt;/h3>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">mvn eclipse:eclipse
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">mvn eclipse:eclipse
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>在 eclipse 中导入&lt;/p>
 &lt;p>首先，需要在 eclipse 中配置 maven 仓库。通过 Preferences -&amp;gt; Java -&amp;gt; Build Path -&amp;gt; Classpath 定义 &lt;code>M2_REPO&lt;/code> 的 classpath 变量指向本地的 maven 仓库。 &lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>&lt;/p>
 &lt;p>也可以通过以下的 maven 命令配置：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">mvn eclipse:configure-workspace -Declipse.workspace&lt;span style="color:#719e07">=&lt;/span>/path/to/the/workspace/
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">mvn eclipse:configure-workspace -Declipse.workspace&lt;span style="color:#719e07">=&lt;/span>/path/to/the/workspace/
 &lt;/code>&lt;/pre>&lt;/div>&lt;section class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
@@ -6975,22 +6975,22 @@ String suffix &lt;span style="color:#719e07">=&lt;/span> pattern&lt;span style="
 &lt;p>迁移到 Dubbo3&lt;/p></description></item><item><title>Docs: 管理控制台安装</title><link>https://dubbo.apache.org/zh/docs/v2.7/admin/install/admin-console/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v2.7/admin/install/admin-console/</guid><description>
 &lt;p>目前版本的管理控制台正在开发中，已经完成了服务查询和服务治理的功能，采用前后端分离的模式，具体的安装和使用步骤如下：&lt;/p>
 &lt;p>安装:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">git clone https://github.com/apache/dubbo-admin.git /var/tmp/dubbo-admin
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">git clone https://github.com/apache/dubbo-admin.git /var/tmp/dubbo-admin
 &lt;span style="color:#b58900">cd&lt;/span> /var/tmp/dubbo-admin
 mvn clean package
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>配置 &lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">配置文件为：
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">配置文件为：
 dubbo-admin-server/src/main/resources/application.properties
 主要的配置有：
 admin.registry.address&lt;span style="color:#719e07">=&lt;/span>zookeeper://127.0.0.1:2181
 admin.config-center&lt;span style="color:#719e07">=&lt;/span>zookeeper://127.0.0.1:2181
 admin.metadata-report.address&lt;span style="color:#719e07">=&lt;/span>zookeeper://127.0.0.1:2181
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>启动:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">mvn --projects dubbo-admin-server spring-boot:run
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">mvn --projects dubbo-admin-server spring-boot:run
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>其他配置请访问 github 中的文档:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">https://github.com/apache/dubbo-admin
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">https://github.com/apache/dubbo-admin
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>访问:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">http://127.0.0.1:8080
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">http://127.0.0.1:8080
 &lt;/code>&lt;/pre>&lt;/div>&lt;section class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>

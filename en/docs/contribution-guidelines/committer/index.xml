@@ -101,7 +101,7 @@ If not discussed in the community (mailing list), just as it did not happen.&lt;
 &lt;ul>
 &lt;li>For example, in Mac OS&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">$ brew install gpg
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">$ brew install gpg
 $ gpg --version &lt;span style="color:#586e75">#check version,should be 2.x&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
@@ -109,7 +109,7 @@ $ gpg --version &lt;span style="color:#586e75">#check version,should be 2.x&lt;/
 &lt;ul>
 &lt;li>Generate the key according to the prompt&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ gpg2 --full-gen-key
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ gpg2 --full-gen-key
 gpg &lt;span style="color:#719e07">(&lt;/span>GnuPG&lt;span style="color:#719e07">)&lt;/span> 2.0.12; Copyright &lt;span style="color:#719e07">(&lt;/span>C&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#2aa198">2009&lt;/span> Free Software Foundation, Inc.
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
@@ -142,7 +142,7 @@ You need a Passphrase to protect your secret key. &lt;span style="color:#586e75"
 &lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>View key id&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">$ gpg --list-keys
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">$ gpg --list-keys
 pub rsa4096/28681CB1 2018-04-26 &lt;span style="color:#586e75"># 28681CB1 is the key id&lt;/span>
 uid &lt;span style="color:#719e07">[&lt;/span>ultimate&lt;span style="color:#719e07">]&lt;/span> liujun &lt;span style="color:#719e07">(&lt;/span>apache-dubbo&lt;span style="color:#719e07">)&lt;/span> &amp;lt;liujun@apache.org&amp;gt;
 sub rsa4096/D3D6984B 2018-04-26
@@ -159,19 +159,19 @@ $ gpg --keyserver pgpkeys.mit.edu --send-key 28681CB1
 &lt;li>If there are multiple public keys，you can set the default key&lt;/li>
 &lt;/ul>
 &lt;p>~/.gnupg/gpg.conf&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback"># If you have more than 1 secret key in your keyring, you may want to
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback"># If you have more than 1 secret key in your keyring, you may want to
 # uncomment the following option and set your preferred keyid.
 default-key 28681CB1
 &lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>If there are multiple public keys, you can also delete unuseful key：&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">&lt;span style="color:#586e75">### Delete the private key first, then delete the public key.&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">&lt;span style="color:#586e75">### Delete the private key first, then delete the public key.&lt;/span>
 $ gpg --yes --delete-secret-keys shenglicao2@gmail.com &lt;span style="color:#586e75">### indicate email address &lt;/span>
 $ gpg --delete-keys 1808C6444C781C0AEA0AAD4C4D6A8007D20DB8A4
 &lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>config your fingerprint.&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">&lt;span style="color:#586e75">### Show fingerprint info：&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">&lt;span style="color:#586e75">### Show fingerprint info：&lt;/span>
 $ gpg --fingerprint liujun
 pub rsa4096 2019-10-17 &lt;span style="color:#719e07">[&lt;/span>SC&lt;span style="color:#719e07">]&lt;/span>
 &lt;span style="color:#2aa198">1376&lt;/span> A2FF 67E4 C477 &lt;span style="color:#2aa198">5739&lt;/span> 09BD 7DB6 &lt;span style="color:#2aa198">8550&lt;/span> D366 E4C0
@@ -185,7 +185,7 @@ to the field &lt;code>OpenPGP Public Key Primary Fingerprint&lt;/code> in you pr
 &lt;ul>
 &lt;li>The parent pom of Dubbo project is apache pom&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;parent&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;parent&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>apache&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>19&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
@@ -197,7 +197,7 @@ to the field &lt;code>OpenPGP Public Key Primary Fingerprint&lt;/code> in you pr
 encrypting by &lt;a href="http://maven.apache.org/guides/mini/guide-encryption.html">maven-encryption-plugin&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;settings&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;settings&amp;gt;&lt;/span>
 ...
 &lt;span style="color:#268bd2">&amp;lt;servers&amp;gt;&lt;/span>
 &lt;span style="color:#586e75">&amp;lt;!-- To publish a snapshot of some part of Maven --&amp;gt;&lt;/span>
@@ -230,7 +230,7 @@ modifications and taggings related to ${release_version} Release Candidates are 
 &lt;/li>
 &lt;li>
 &lt;p>First of all, verify that the maven component packing, source packing, signature, etc are working properly on the ${release_version}-release branch.&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ mvn clean install -Papache-release
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ mvn clean install -Papache-release
 $ mvn deploy
 &lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;/ol>
@@ -241,11 +241,11 @@ $ mvn deploy
 &lt;ul>
 &lt;li>&lt;del>verify with dryRun&lt;/del>&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ mvn release:prepare -Prelease -Darguments&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">&amp;#34;-Dmaven.test.skip=true&amp;#34;&lt;/span> -DautoVersionSubmodules&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">true&lt;/span> -Dusername&lt;span style="color:#719e07">=&lt;/span>YOUR GITHUB ID -DdryRun&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">true&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ mvn release:prepare -Prelease -Darguments&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">&amp;#34;-Dmaven.test.skip=true&amp;#34;&lt;/span> -DautoVersionSubmodules&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">true&lt;/span> -Dusername&lt;span style="color:#719e07">=&lt;/span>YOUR GITHUB ID -DdryRun&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">true&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>&lt;del>After verification, run release:prepare&lt;/del>&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ mvn release:clean
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ mvn release:clean
 $ mvn release:prepare -Prelease -Darguments&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">&amp;#34;-Dmaven.test.skip=true&amp;#34;&lt;/span> -DautoVersionSubmodules&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">true&lt;/span> -Dusername&lt;span style="color:#719e07">=&lt;/span>YOUR GITHUB ID -DpushChanges&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">false&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
 &lt;p>If you are promted to input password for pushing to GitHub (basically including adding new commits and tags), do not input your login password of GitHub. Use &lt;code>Personal access tokens&lt;/code> instead. You can go to &lt;a href="https://github.com/settings/profile,">https://github.com/settings/profile,&lt;/a> click &lt;code>Developer settings&lt;/code> -&amp;gt; &lt;code>Personal access tokens&lt;/code>, and generate a new token if not. Please refer to this &lt;a href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/">guide&lt;/a> for more infomation.
@@ -261,7 +261,7 @@ you need to choose the release artifactId, next artifactId and the release tag, 
 &lt;ul>
 &lt;li>&lt;del>Run release:perform&lt;/del>&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ mvn release:perform -Prelease -Darguments&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">&amp;#34;-Dmaven.test.skip=true&amp;#34;&lt;/span> -DautoVersionSubmodules&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">true&lt;/span> -Dusername&lt;span style="color:#719e07">=&lt;/span>YOUR GITHUB ID
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ mvn release:perform -Prelease -Darguments&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">&amp;#34;-Dmaven.test.skip=true&amp;#34;&lt;/span> -DautoVersionSubmodules&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">true&lt;/span> -Dusername&lt;span style="color:#719e07">=&lt;/span>YOUR GITHUB ID
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>Maven will download the source code from the tag you just pushed, compile it, and deploy to remote maven repsoitry in staging state.&lt;/p>
 &lt;/li>
 &lt;/ol>
@@ -270,7 +270,7 @@ you need to choose the release artifactId, next artifactId and the release tag, 
 &lt;p>Requirement：maven 3.5+&lt;/p>
 &lt;/blockquote>
 &lt;p>modify pom version from 2.7.x-SNAPSHOT to 2.7.x . You can search the full-text in the dubbo project.&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ mvn clean install -Prelease
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ mvn clean install -Prelease
 $ mvn deploy -Prelease -DskipTests
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>After this, maven will deploy jar to remote maven repsoitry in staging state.&lt;/p>
 &lt;h3 id="note">Note&lt;/h3>
@@ -285,17 +285,17 @@ The problem is that missing package occurred many times at deploying. So you sho
 &lt;/li>
 &lt;li>
 &lt;p>Checkout dubbo to local directory&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ svn checkout https://dist.apache.org/repos/dist/dev/dubbo
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ svn checkout https://dist.apache.org/repos/dist/dev/dubbo
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>Assume that the local directory is &lt;code>~/apache/dubbo&lt;/code>&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>The current release version is ${release_version}, new directory&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ &lt;span style="color:#b58900">cd&lt;/span> ~/apache/dubbo &lt;span style="color:#586e75"># dubbo svn root directory&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ &lt;span style="color:#b58900">cd&lt;/span> ~/apache/dubbo &lt;span style="color:#586e75"># dubbo svn root directory&lt;/span>
 $ mkdir &lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">release_version&lt;/span>&lt;span style="color:#2aa198">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>Add public key to &lt;a href="https://dist.apache.org/repos/dist/dev/dubbo/KEYS">KEYS&lt;/a> file if you are the first time to be a release manager. KEYS is mainly used to allow people who participate in the voting to be imported locally to verify the correctness of the sign.&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ &lt;span style="color:#719e07">(&lt;/span>gpg --list-sigs &amp;lt;your name&amp;gt; &lt;span style="color:#719e07">&amp;amp;&amp;amp;&lt;/span> gpg --armor --export &amp;lt;your name&amp;gt;&lt;span style="color:#719e07">)&lt;/span> &amp;gt;&amp;gt; KEYS
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ &lt;span style="color:#719e07">(&lt;/span>gpg --list-sigs &amp;lt;your name&amp;gt; &lt;span style="color:#719e07">&amp;amp;&amp;amp;&lt;/span> gpg --armor --export &amp;lt;your name&amp;gt;&lt;span style="color:#719e07">)&lt;/span> &amp;gt;&amp;gt; KEYS
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>For more information on how to get your key id, please refer to this &lt;a href="https://help.github.com/articles/generating-a-new-gpg-key/">guide&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li>
@@ -304,22 +304,22 @@ $ mkdir &lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2
 &lt;li>
 &lt;p>Generate sha512 sign&lt;/p>
 &lt;p>For source-release.zip&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ shasum -a &lt;span style="color:#2aa198">512&lt;/span> apache-dubbo-&lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">release_version&lt;/span>&lt;span style="color:#2aa198">}&lt;/span>-source-release.zip &amp;gt;&amp;gt; apache-dubbo-&lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">release_version&lt;/span>&lt;span style="color:#2aa198">}&lt;/span>-source-release.zip.sha512
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ shasum -a &lt;span style="color:#2aa198">512&lt;/span> apache-dubbo-&lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">release_version&lt;/span>&lt;span style="color:#2aa198">}&lt;/span>-source-release.zip &amp;gt;&amp;gt; apache-dubbo-&lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">release_version&lt;/span>&lt;span style="color:#2aa198">}&lt;/span>-source-release.zip.sha512
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>For bin-release.zip&lt;/p>
 &lt;p>Please add &lt;code>-b&lt;/code> paramter when generating sha512 for bin-release.zip, which indicates it is a binary file.&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ shasum -b -a &lt;span style="color:#2aa198">512&lt;/span> apache-dubbo-&lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">release_version&lt;/span>&lt;span style="color:#2aa198">}&lt;/span>-bin-release.zip &amp;gt;&amp;gt; apache-dubbo-&lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">release_version&lt;/span>&lt;span style="color:#2aa198">}&lt;/span>-bin-release.zip.sha512
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ shasum -b -a &lt;span style="color:#2aa198">512&lt;/span> apache-dubbo-&lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">release_version&lt;/span>&lt;span style="color:#2aa198">}&lt;/span>-bin-release.zip &amp;gt;&amp;gt; apache-dubbo-&lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">release_version&lt;/span>&lt;span style="color:#2aa198">}&lt;/span>-bin-release.zip.sha512
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>You should generate something like this:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">b8f13d1df6d6c9a1facc72fafc00b2d22bea1e600517c507467d8fca2f776a7a3877101742da53114bfa629ca5b941eb4d9ef989de43f0833e2a794e7ccf5c8a *apache-dubbo-spring-boot-project-2.7.0-bin-release.zip
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">b8f13d1df6d6c9a1facc72fafc00b2d22bea1e600517c507467d8fca2f776a7a3877101742da53114bfa629ca5b941eb4d9ef989de43f0833e2a794e7ccf5c8a *apache-dubbo-spring-boot-project-2.7.0-bin-release.zip
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>Note there is a &lt;code>*&lt;/code> sign before the file name.&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>If the binary release is accompanied with the source release. Run the following command in the dubbo-distribution module:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ mvn install
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ mvn install
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>Go to target directory, copy bin-release.zip and bin-release.zip.asc to svn local repository dubbo/${release_version}, and refer to step 6 to generate sha512 sign.&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Commit to Apache svn&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ svn status
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ svn status
 $ svn commit -m &lt;span style="color:#2aa198">&amp;#39;prepare for ${release_version} RC1&amp;#39;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
@@ -335,16 +335,16 @@ $ svn commit -m &lt;span style="color:#2aa198">&amp;#39;prepare for ${release_ve
 &lt;p>The verification link includes but is not limited to the following contents and forms:&lt;/p>
 &lt;h3 id="check-signatures-and-hashes-are-good">Check signatures and hashes are good&lt;/h3>
 &lt;h4 id="check-the-sha512-sum">check the sha512 sum&lt;/h4>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">$ shasum -c apache-dubbo-&lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">release_version&lt;/span>&lt;span style="color:#2aa198">}&lt;/span>-source-release.zip.sha512
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">$ shasum -c apache-dubbo-&lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">release_version&lt;/span>&lt;span style="color:#2aa198">}&lt;/span>-source-release.zip.sha512
 $ shasum -c apache-dubbo-&lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">release_version&lt;/span>&lt;span style="color:#2aa198">}&lt;/span>-bin-release.zip.sha512
 &lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="check-the-gpg-signarure">check the gpg signarure&lt;/h4>
 &lt;p>If it&amp;rsquo;s your first time verify a release candidte, you should import public keys first.&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh"> $ curl https://dist.apache.org/repos/dist/dev/dubbo/KEYS &amp;gt;&amp;gt; KEYS &lt;span style="color:#586e75"># download public keys to local directory&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh"> $ curl https://dist.apache.org/repos/dist/dev/dubbo/KEYS &amp;gt;&amp;gt; KEYS &lt;span style="color:#586e75"># download public keys to local directory&lt;/span>
 $ gpg --import KEYS &lt;span style="color:#586e75"># import keys&lt;/span>
 $ gpg -—edit-key liujun
 &amp;gt; trust &lt;span style="color:#586e75"># type trust command&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>Now, you can verify signature with command&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">gpg --verify apache-dubbo-2.6.3-source-release.zip.asc apache-dubbo-2.6.3-source-release.zip
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">gpg --verify apache-dubbo-2.6.3-source-release.zip.asc apache-dubbo-2.6.3-source-release.zip
 gpg --verify apache-dubbo-2.6.3-bin-release.zip.asc apache-dubbo-2.6.3-bin-release.zip
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="check-source-release-file-content">Check source release file content&lt;/h3>
 &lt;p>Unzip apache-dubbo-${release_version}-source-release.zip to the default directory and check the following:&lt;/p>
@@ -355,7 +355,7 @@ gpg --verify apache-dubbo-2.6.3-bin-release.zip.asc apache-dubbo-2.6.3-bin-relea
 &lt;li>All files has standard ASF License header&lt;/li>
 &lt;li>Can compile from source&lt;/li>
 &lt;li>All unit tests can pass
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">mvn clean &lt;span style="color:#b58900">test&lt;/span> &lt;span style="color:#586e75"># This will run all unit tests&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">mvn clean &lt;span style="color:#b58900">test&lt;/span> &lt;span style="color:#586e75"># This will run all unit tests&lt;/span>
 &lt;span style="color:#586e75"># you can also open rat and style plugin to check if every file meets requirements.&lt;/span>
 mvn clean &lt;span style="color:#b58900">test&lt;/span> -Drat.skip&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">false&lt;/span> -Dcheckstyle.skip&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">false&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;/li>
@@ -370,7 +370,7 @@ mvn clean &lt;span style="color:#b58900">test&lt;/span> -Drat.skip&lt;span style
 &lt;/ul>
 &lt;h3 id="check-third-party-dependencies">check third party dependencies&lt;/h3>
 &lt;p>According to ASF policy, any &lt;a href="https://www.apache.org/legal/resolved.html#what-can-we-not-include-in-an-asf-project-category-x">Category X&lt;/a> dependency can not be included in ASF product, this includes common LGPL/GPL licensed dependencies. Even transitive dependencies are not allowed. Therefore we need to run the following command to ensure no such dependencies are included.&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">mvn license:add-third-party -Dlicense.useMissingFile
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">mvn license:add-third-party -Dlicense.useMissingFile
 find . -name THIRD-PARTY.txt | xargs grep -E &lt;span style="color:#2aa198">&amp;#39;GPL|General Public License&amp;#39;&lt;/span> | grep -v Apache | grep -v MIT | grep -v CDDL
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>If one dependency is dual/multiple licensed, just choose the most permissive one.&lt;/p>
 &lt;p>You can refer to this article : &lt;a href="https://apache.org/legal/resolved.html">ASF 3RD PARTY LICENSE POLICY&lt;/a>&lt;/p>
@@ -385,7 +385,7 @@ find . -name THIRD-PARTY.txt | xargs grep -E &lt;span style="color:#2aa198">&amp
 &lt;p>The voting just only one round:&lt;/p>
 &lt;p>Dubbo community votes and sends the voting email to &lt;a href="mailto:dev@dubbo.apache.org">dev@dubbo.apache.org&lt;/a>. After reviewing by community developers and winning 3 binding tickets that agree to release, you can go to the next stage of voting.&lt;/p>
 &lt;p>The mail template for Apache Dubbo vote：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-tex" data-lang="tex">Hello Dubbo Community,
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-tex" data-lang="tex">Hello Dubbo Community,
 This is a call for vote to release Apache Dubbo version 2.7.2.
 The release candidates:
 https://dist.apache.org/repos/dist/dev/dubbo/2.7.2/
@@ -407,7 +407,7 @@ Please vote accordingly:
 Thanks,
 The Apache Dubbo Team
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>The mail template to announce the vote result:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">We’ve received 3 +1 binding votes and one +1 non-binding vote:
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">We’ve received 3 +1 binding votes and one +1 non-binding vote:
 +1 binding, Ian Luo
 +1 binding, Huxing Zhang
 +1 binding, Jun Liu
@@ -428,7 +428,7 @@ The Apache Dubbo Team
 &lt;li>Send mail to &lt;a href="mailto:dev@dubbo.apache.org">dev@dubbo.apache.org&lt;/a> , notify the community that the release is completed.
 The mail template to announce release:&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">Hello Community,
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">Hello Community,
 The Apache Dubbo team is pleased to announce that the
 2.6.6 has just been released.
 Apache Dubbo™ is a high-performance, java based, open source
@@ -451,7 +451,7 @@ an issue on GitHub[4].
 &lt;h2 id="faq">FAQ&lt;/h2>
 &lt;h4 id="gpg-signing-failed-inappropriate-ioctl-for-device">gpg: signing failed: Inappropriate ioctl for device&lt;/h4>
 &lt;p>If you&amp;rsquo;ve encountered this error, try the following commands:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">export GPG_TTY=$(tty)
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">export GPG_TTY=$(tty)
 &lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Label an Issue</title><link>https://dubbo.apache.org/en/docs/contribution-guidelines/committer/label-an-issue-guide_dev/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/contribution-guidelines/committer/label-an-issue-guide_dev/</guid><description>
 &lt;p>If you are handling an issue, remember to &lt;strong>mark the issue cearly with one or more labels&lt;/strong> whenever you think it&amp;rsquo;s meaningful. With labels on, other developers can easily recognize problems, classify them or track progress.&lt;/p>
 &lt;p>For issues or pull requests that need coding and further version release to fix, you should always &lt;strong>mark it with a &lt;a href="https://github.com/apache/dubbo/milestones">milestone&lt;/a>&lt;/strong>.&lt;/p>

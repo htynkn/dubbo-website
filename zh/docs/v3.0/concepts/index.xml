@@ -6,7 +6,7 @@
 &lt;p>服务发现的一个核心组件是注册中心，Provider 注册地址到注册中心，Consumer 从注册中心读取和订阅 Provider 地址列表。
 因此，要启用服务发现，需要为 Dubbo 增加注册中心配置：&lt;/p>
 &lt;p>以 dubbo-spring-boot-starter 使用方式为例，增加 registry 配置&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback"># application.properties
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback"># application.properties
 dubbo
 registry
 address: zookeeper://127.0.0.1:2181
@@ -218,7 +218,7 @@ gRPC 的优势由HTTP2 和 Protobuf 继承而来。&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;p>**注意：**对于(Variable Part)变长部分，当前版本的dubbo框架使用json序列化时，在每部分内容间额外增加了换行符作为分隔，请选手在Variable Part的每个part后额外增加换行符， 如：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">Dubbo version bytes (换行符)
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">Dubbo version bytes (换行符)
 Service name bytes (换行符)
 ...
 &lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: 服务流量管理</title><link>https://dubbo.apache.org/zh/docs/v3.0/concepts/traffic-management/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/v3.0/concepts/traffic-management/</guid><description>
@@ -319,15 +319,15 @@ Dubbo 定义了一些中心化组件，这包括：&lt;/p>
 &lt;h2 id="如何使用-dubbo-扩展能力进行扩展">如何使用 Dubbo 扩展能力进行扩展&lt;/h2>
 &lt;p>下面以扩展注册中心为例进行说明如何利用 Dubbo 提供的扩展能力扩展 Triple 协议。&lt;/p>
 &lt;p>(1) 在协议的实现 jar 包内放置文本文件：META-INF/dubbo/org.apache.dubbo.remoting.api.WireProtocol&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">tri=org.apache.dubbo.remoting.api.WireProtocol
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">tri=org.apache.dubbo.remoting.api.WireProtocol
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>(2) 实现类内容&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">@Activate&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">@Activate&lt;/span>
 &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">TripleHttp2Protocol&lt;/span> &lt;span style="color:#268bd2">extends&lt;/span> Http2WireProtocol &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#586e75">// ...
 &lt;/span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>说明下：Http2WireProtocol 实现了 WireProtocol 接口&lt;/p>
 &lt;p>(3) Dubbo 配置模块中，扩展点均有对应配置属性或标签，通过配置指定使用哪个扩展实现。比如：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">&amp;lt;dubbo:protocol name=&amp;#34;tri&amp;#34; /&amp;gt;
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">&amp;lt;dubbo:protocol name=&amp;#34;tri&amp;#34; /&amp;gt;
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>从上面的扩展步骤可以看出，用户基本在黑盒下就完成了扩展。&lt;/p>
 &lt;h2 id="dubbo-扩展的应用">Dubbo 扩展的应用&lt;/h2>
 &lt;p>Dubbo 的扩展能力非常灵活，在自身功能的实现上无处不在。&lt;/p>

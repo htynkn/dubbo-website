@@ -50,7 +50,7 @@
 &lt;li>Follow the checklist in the &lt;a href="https://github.com/apache/dubbo/blob/master/PULL_REQUEST_TEMPLATE.md">pull request template&lt;/a>&lt;/li>
 &lt;li>Before you sending out the pull request, please sync your forked repository with remote repository, this will make your pull request simple and clear. See guide below:&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">git remote add upstream git@github.com:apache/dubbo.git
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">git remote add upstream git@github.com:apache/dubbo.git
 git fetch upstream
 git rebase upstream/master
 git checkout -b your_awesome_patch
@@ -86,7 +86,7 @@ If you have any question regarding the check list, please feel free to ask on &l
 &lt;ol>
 &lt;li>Send an email to &lt;a href="mailto:dev-subscribe@dubbo.apache.org">dev-subscribe@dubbo.apache.org&lt;/a>, you can have empty subject and empty content. You will receive an email with the following content:&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">from: dev-help@dubbo.apache.org
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">from: dev-help@dubbo.apache.org
 reply-to: dev-sc.xxxxxxx.xxxxxxxx-hello=example.com@dubbo.apache.org
 to: hello@example.com
 date: Sat, Feb 24, 2018 at 3:12 PM
@@ -110,7 +110,7 @@ mailto:dev-sc.xxxxxxx.xxxxxxxx-hello=example.com@dubbo.apache.org
 &lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
 &lt;li>Reply the email directly, you can have empty subject and empty content. You will receive an email with the following content:&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">from: dev-help@dubbo.apache.org
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">from: dev-help@dubbo.apache.org
 to: hello@example.com
 date: Sat, Feb 24, 2018 at 3:14 PM
 subject: WELCOME to dev@dubbo.apache.org
@@ -152,7 +152,7 @@ subscription address.
 &lt;/ol>
 &lt;h4 id="example">Example:&lt;/h4>
 &lt;p>Below is an text versioned &lt;strong>example&lt;/strong>, original text could be found &lt;a href="https://www.apache.org/licenses/software-grant.txt">here&lt;/a>&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">License Agreement
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">License Agreement
 This License Agreement is entered into as of the _12th_ day of
 ___April____, __2018__ by ___ABC Software Co., Ltd.____ (&amp;#34;Licensor&amp;#34;),
 in favor of The Apache Software Foundation, a Delaware nonstock
@@ -233,7 +233,7 @@ List of software and other intellectual property covered by this agreement:
 &lt;h2 id="dependency">Dependency&lt;/h2>
 &lt;p>Implement your own Dubbo extension, in general is just dependence on API jar correspond to what you want.
 For example:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.dubbo&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo-serialization-api&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>${dubbo.version}&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>

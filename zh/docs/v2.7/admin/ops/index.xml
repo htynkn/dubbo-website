@@ -15,7 +15,7 @@
 &lt;ul>
 &lt;li>安装&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">git clone https://github.com/apache/dubbo-admin.git
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">git clone https://github.com/apache/dubbo-admin.git
 &lt;span style="color:#b58900">cd&lt;/span> dubbo-admin
 mvn clean package
 &lt;span style="color:#b58900">cd&lt;/span> dubbo-admin-distribution/target
@@ -28,13 +28,13 @@ java -jar dubbo-admin-0.1.jar
 &lt;ul>
 &lt;li>前端&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">&lt;span style="color:#b58900">cd&lt;/span> dubbo-admin-ui
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">&lt;span style="color:#b58900">cd&lt;/span> dubbo-admin-ui
 npm install
 npm run dev
 &lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>后端&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">&lt;span style="color:#b58900">cd&lt;/span> dubbo-admin-server
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">&lt;span style="color:#b58900">cd&lt;/span> dubbo-admin-server
 mvn clean package
 &lt;span style="color:#b58900">cd&lt;/span> target
 java -jar dubbo-admin-server-0.1.jar
@@ -47,19 +47,19 @@ java -jar dubbo-admin-server-0.1.jar
 &lt;/ul>
 &lt;h3 id="配置-1">配置: &lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>&lt;/h3>
 &lt;p>配置文件为：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">dubbo-admin-server/src/main/resources/application.properties
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">dubbo-admin-server/src/main/resources/application.properties
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>主要的配置有：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">admin.config-center=zookeeper://127.0.0.1:2181
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">admin.config-center=zookeeper://127.0.0.1:2181
 admin.registry.address=zookeeper://127.0.0.1:2181
 admin.metadata-report.address=zookeeper://127.0.0.1:2181
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>三个配置项分别指定了配置中心，注册中心和元数据中心的地址，关于这三个中心的详细说明，可以参考&lt;a href="../../../user/configuration/config-center">这里&lt;/a>。&lt;/p>
 &lt;p>也可以和 Dubbo 2.7 一样，在配置中心指定元数据和注册中心的地址，以 zookeeper 为例，配置的路径和内容如下:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback"># /dubbo/config/dubbo/dubbo.properties
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback"># /dubbo/config/dubbo/dubbo.properties
 dubbo.registry.address=zookeeper://127.0.0.1:2181
 dubbo.metadata-report.address=zookeeper://127.0.0.1:2181
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>配置中心里的地址会覆盖掉本地 &lt;code>application.properties&lt;/code> 的配置&lt;/p>
 &lt;p>其他配置请访问 github 中的文档:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">https://github.com/apache/dubbo-admin
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">https://github.com/apache/dubbo-admin
 &lt;/code>&lt;/pre>&lt;/div>&lt;section class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
@@ -100,7 +100,7 @@ Dubbo-Api-Docs 相关注解,解析注解&lt;/li>
 &lt;/li>
 &lt;/ol>
 &lt;h3 id="当前版本-同dubbo版本号">当前版本: 同Dubbo版本号&lt;/h3>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">&amp;lt;dependency&amp;gt;
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">&amp;lt;dependency&amp;gt;
 &amp;lt;groupId&amp;gt;org.apache.dubbo&amp;lt;/groupId&amp;gt;
 &amp;lt;artifactId&amp;gt;dubbo-api-docs-annotations&amp;lt;/artifactId&amp;gt;
 &amp;lt;version&amp;gt;${dubbo-version}&amp;lt;/version&amp;gt;
@@ -230,12 +230,12 @@ Dubbo-Api-Docs 相关注解,解析注解&lt;/li>
 &lt;p>Dubbo 实例程序已上传到 &lt;a href="https://github.com/SkywalkingTest/dubbo-trace-example">Github 仓库&lt;/a>中。方便大家下载使用。&lt;/p>
 &lt;h4 id="api-工程">API 工程&lt;/h4>
 &lt;p>服务接口：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">package&lt;/span> org.apache.skywalking.demo.interfaces&lt;span style="color:#719e07">;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">package&lt;/span> org.apache.skywalking.demo.interfaces&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">HelloService&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 String &lt;span style="color:#268bd2">sayHello&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String name&lt;span style="color:#719e07">);&lt;/span>
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="dubbo-服务提供工程">Dubbo 服务提供工程&lt;/h4>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">package&lt;/span> org.apache.skywalking.demo.provider&lt;span style="color:#719e07">;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">package&lt;/span> org.apache.skywalking.demo.provider&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#268bd2">@Service&lt;/span>&lt;span style="color:#719e07">(&lt;/span>version &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;${demo.service.version}&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span>
 application &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;${dubbo.application.id}&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span>
 protocol &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;${dubbo.protocol.id}&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span>
@@ -247,7 +247,7 @@ LockSupport&lt;span style="color:#719e07">.&lt;/span>parkNanos&lt;span style="co
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="consumer-工程">Consumer 工程&lt;/h4>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">package&lt;/span> org.apache.skywalking.demo.consumer&lt;span style="color:#719e07">;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">package&lt;/span> org.apache.skywalking.demo.consumer&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#268bd2">@RestController&lt;/span>
 &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">ConsumerController&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#dc322f">int&lt;/span> COUNT &lt;span style="color:#719e07">=&lt;/span> 0&lt;span style="color:#719e07">;&lt;/span>
@@ -285,13 +285,13 @@ LockSupport&lt;span style="color:#719e07">.&lt;/span>parkNanos&lt;span style="co
 &lt;/ol>
 &lt;h4 id="启动示例程序">启动示例程序&lt;/h4>
 &lt;p>在启动示例程序之前，执行编译打包的命令:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">./mvnw clean package
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">./mvnw clean package
 &lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="启动服务提供端">启动服务提供端&lt;/h4>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">java -jar -javaagent:&lt;span style="color:#268bd2">$AGENT_PATH&lt;/span>/skywalking-agent.jar -Dskywalking.agent.application_code&lt;span style="color:#719e07">=&lt;/span>dubbo-provider -Dskywalking.collector.servers&lt;span style="color:#719e07">=&lt;/span>localhost:10800 dubbo-provider/target/dubbo-provider.jar
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">java -jar -javaagent:&lt;span style="color:#268bd2">$AGENT_PATH&lt;/span>/skywalking-agent.jar -Dskywalking.agent.application_code&lt;span style="color:#719e07">=&lt;/span>dubbo-provider -Dskywalking.collector.servers&lt;span style="color:#719e07">=&lt;/span>localhost:10800 dubbo-provider/target/dubbo-provider.jar
 &lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="启动服务消费端">启动服务消费端&lt;/h4>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">java -jar -javaagent:&lt;span style="color:#268bd2">$AGENT_PATH&lt;/span>/skywalking-agent.jar -Dskywalking.agent.application_code&lt;span style="color:#719e07">=&lt;/span>dubbo-consumer -Dskywalking.collector.servers&lt;span style="color:#719e07">=&lt;/span>localhost:10800 dubbo-consumer/target/dubbo-consumer.jar
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">java -jar -javaagent:&lt;span style="color:#268bd2">$AGENT_PATH&lt;/span>/skywalking-agent.jar -Dskywalking.agent.application_code&lt;span style="color:#719e07">=&lt;/span>dubbo-consumer -Dskywalking.collector.servers&lt;span style="color:#719e07">=&lt;/span>localhost:10800 dubbo-consumer/target/dubbo-consumer.jar
 &lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="访问消费端提供的服务">访问消费端提供的服务&lt;/h4>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">curl http://localhost:8080/sayHello/test
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">curl http://localhost:8080/sayHello/test
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="skywalking-监控截图">Skywalking 监控截图：&lt;/h2>
 &lt;h3 id="首页">首页&lt;/h3>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/admin/skywalking-dashboard.png" alt="/admin-guide/images/skywalking-dashboard.png">&lt;/p>
@@ -359,7 +359,7 @@ LockSupport&lt;span style="color:#719e07">.&lt;/span>parkNanos&lt;span style="co
 &lt;h3 id="准备-dubbo-示例程序">准备 Dubbo 示例程序&lt;/h3>
 &lt;h4 id="创建-api-包">创建 API 包&lt;/h4>
 &lt;p>pom.xml&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#719e07">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#719e07">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;project&lt;/span> xmlns=&lt;span style="color:#2aa198">&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;&lt;/span>
 xmlns:xsi=&lt;span style="color:#2aa198">&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span>
 xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
@@ -369,13 +369,13 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://maven.apache.o
 &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>0.0.1-SNAPSHOT&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;/project&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>新建API接口：&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">package&lt;/span> com.example.demoapi&lt;span style="color:#719e07">;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">package&lt;/span> com.example.demoapi&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">HelloService&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 String &lt;span style="color:#268bd2">sayHello&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String name&lt;span style="color:#719e07">);&lt;/span>
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="实现-dubbo-服务提供方">实现 Dubbo 服务提供方&lt;/h4>
 &lt;p>pom.xml&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#719e07">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#719e07">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;project&lt;/span> xmlns=&lt;span style="color:#2aa198">&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;&lt;/span> xmlns:xsi=&lt;span style="color:#2aa198">&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span>
 xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;modelVersion&amp;gt;&lt;/span>4.0.0&lt;span style="color:#268bd2">&amp;lt;/modelVersion&amp;gt;&lt;/span>
@@ -440,7 +440,7 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://maven.apache.o
 &lt;/code>&lt;/pre>&lt;/div>&lt;ol>
 &lt;li>实现 &lt;code>HelloService&lt;/code> 接口：&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">package&lt;/span> com.example.demoprovider.provider&lt;span style="color:#719e07">;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">package&lt;/span> com.example.demoprovider.provider&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.config.annotation.Service&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">import&lt;/span> com.example.demoapi.HelloService&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#268bd2">@Service&lt;/span>&lt;span style="color:#719e07">(&lt;/span>version &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;${demo.service.version}&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span>
@@ -461,7 +461,7 @@ i&lt;span style="color:#719e07">++;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
 &lt;li>编写 Spring Boot 引导程序：&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">package&lt;/span> com.example.demoprovider&lt;span style="color:#719e07">;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">package&lt;/span> com.example.demoprovider&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">import&lt;/span> org.springframework.boot.SpringApplication&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">import&lt;/span> org.springframework.boot.autoconfigure.SpringBootApplication&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#268bd2">@SpringBootApplication&lt;/span>
@@ -473,7 +473,7 @@ SpringApplication&lt;span style="color:#719e07">.&lt;/span>run&lt;span style="co
 &lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>配置 &lt;code>application.properties&lt;/code>：&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback"># Spring boot application
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback"># Spring boot application
 spring.application.name = dubbo-provider-demo
 server.port = 9090
 management.port = 9091
@@ -494,7 +494,7 @@ dubbo.registry.id = my-registry
 dubbo.registry.address = N/A
 &lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="实现-dubbo-服务消费方">实现 Dubbo 服务消费方&lt;/h4>
 &lt;p>pom.xml&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#719e07">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#719e07">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;project&lt;/span> xmlns=&lt;span style="color:#2aa198">&amp;#34;http://maven.apache.org/POM/4.0.0&amp;#34;&lt;/span> xmlns:xsi=&lt;span style="color:#2aa198">&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span>
 xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;modelVersion&amp;gt;&lt;/span>4.0.0&lt;span style="color:#268bd2">&amp;lt;/modelVersion&amp;gt;&lt;/span>
@@ -562,7 +562,7 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://maven.apache.o
 &lt;/code>&lt;/pre>&lt;/div>&lt;ol>
 &lt;li>通过 &lt;code>@Reference&lt;/code> 注入 &lt;code>HelloService&lt;/code>&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">package&lt;/span> com.example.democonsumer.controller&lt;span style="color:#719e07">;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">package&lt;/span> com.example.democonsumer.controller&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.config.annotation.Reference&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">import&lt;/span> com.example.demoapi.HelloService&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">import&lt;/span> org.springframework.web.bind.annotation.RequestMapping&lt;span style="color:#719e07">;&lt;/span>
@@ -585,7 +585,7 @@ url &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&a
 &lt;ol start="2">
 &lt;li>编写 Spring Boot 引导程序（Web 应用）：&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">package&lt;/span> com.example.democonsumer&lt;span style="color:#719e07">;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">package&lt;/span> com.example.democonsumer&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">import&lt;/span> org.springframework.boot.SpringApplication&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">import&lt;/span> org.springframework.boot.autoconfigure.SpringBootApplication&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#268bd2">@SpringBootApplication&lt;/span>
@@ -597,7 +597,7 @@ SpringApplication&lt;span style="color:#719e07">.&lt;/span>run&lt;span style="co
 &lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>配置 &lt;code>application.properties&lt;/code>：&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback"># Spring boot application
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback"># Spring boot application
 spring.application.name=dubbo-consumer-demo
 server.port=8080
 management.port=8081
@@ -616,19 +616,19 @@ dubbo.protocol.port=12345
 &lt;ol>
 &lt;li>编译打包&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">mvn clean package
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">mvn clean package
 &lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
 &lt;li>附加参数启动服务提供方&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">java -jar -javaagent:&lt;span style="color:#268bd2">$AGENT_PATH&lt;/span>/pinpoint-bootstrap-&lt;span style="color:#268bd2">$VERSION&lt;/span>.jar -Dpinpoint.agentId&lt;span style="color:#719e07">=&lt;/span>demo-provider -Dpinpoint.applicationName&lt;span style="color:#719e07">=&lt;/span>DP target/demo-provider-0.0.1-SNAPSHOT.jar
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">java -jar -javaagent:&lt;span style="color:#268bd2">$AGENT_PATH&lt;/span>/pinpoint-bootstrap-&lt;span style="color:#268bd2">$VERSION&lt;/span>.jar -Dpinpoint.agentId&lt;span style="color:#719e07">=&lt;/span>demo-provider -Dpinpoint.applicationName&lt;span style="color:#719e07">=&lt;/span>DP target/demo-provider-0.0.1-SNAPSHOT.jar
 &lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>附加参数启动服务消费方&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">java -jar -javaagent:&lt;span style="color:#268bd2">$AGENT_PATH&lt;/span>/pinpoint-bootstrap-&lt;span style="color:#268bd2">$VERSION&lt;/span>.jar -Dpinpoint.agentId&lt;span style="color:#719e07">=&lt;/span>demo-consumer -Dpinpoint.applicationName&lt;span style="color:#719e07">=&lt;/span>DC target/demo-comsumer-0.0.1-SNAPSHOT-exec.jar
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">java -jar -javaagent:&lt;span style="color:#268bd2">$AGENT_PATH&lt;/span>/pinpoint-bootstrap-&lt;span style="color:#268bd2">$VERSION&lt;/span>.jar -Dpinpoint.agentId&lt;span style="color:#719e07">=&lt;/span>demo-consumer -Dpinpoint.applicationName&lt;span style="color:#719e07">=&lt;/span>DC target/demo-comsumer-0.0.1-SNAPSHOT-exec.jar
 &lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
 &lt;li>访问消费方地址模拟用户请求&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">http://localhost:8080/sayHello?name=ABC
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">http://localhost:8080/sayHello?name=ABC
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="使用-pinpoint-快速定位问题">使用 Pinpoint 快速定位问题&lt;/h2>
 &lt;h3 id="首页">首页&lt;/h3>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/admin/pinpoint-home.png" alt="/admin-guide/images/pinpoint-home.png">&lt;/p>
