@@ -8,7 +8,7 @@
 &lt;p>Dubbo relies on &lt;a href="http://maven.apache.org">maven&lt;/a> as the building tool.&lt;/p>
 &lt;p>Requirements:&lt;/p>
 &lt;ul>
-&lt;li>Java above 1.5 version&lt;/li>
+&lt;li>Java above 1.8 version&lt;/li>
 &lt;li>Maven version 2.2.1 or above&lt;/li>
 &lt;/ul>
 &lt;p>The following &lt;code>MAVEN_OPTS&lt;/code>should be configured before building:&lt;/p>
