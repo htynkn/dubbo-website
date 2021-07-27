@@ -432,12 +432,7 @@ demo-provider,two-demo-provider,dubbo-demo-annotation-provider
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">ConfigService configService &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">...&lt;/span>
 configService&lt;span style="color:#719e07">.&lt;/span>publishConfigCas&lt;span style="color:#719e07">(&lt;/span>key&lt;span style="color:#719e07">,&lt;/span> group&lt;span style="color:#719e07">,&lt;/span> content&lt;span style="color:#719e07">,&lt;/span> ticket&lt;span style="color:#719e07">);&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>映射信息位于 namespace: &amp;lsquo;public&amp;rsquo;, dataId: &amp;lsquo;{service name}&amp;rsquo;, group: &amp;lsquo;mapping&amp;rsquo;.&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/nacos-metadata-report-service-name-mapping.png" alt="nacos-metadata-report-service-name-mapping.png">&lt;/p></description></item><item><title>Docs: Dubbo 配置</title><link>https://dubbo.apache.org/zh/docs/references/configuration/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/references/configuration/</guid><description/></item><item><title>Docs: 功能列表与用法示例</title><link>https://dubbo.apache.org/zh/docs/references/features/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/references/features/</guid><description>
-&lt;div class="alert alert-primary" role="alert">
-&lt;h4 class="alert-heading">Tips&lt;/h4>
-想完整的运行起来，请参见：&lt;a href="../quick-start">快速启动&lt;/a>，这里只列出各种场景的配置方式。
-以下示例全部使用基于 Spring 的 &lt;a href="../configuration/xml">Xml配置&lt;/a>作为参考，如果不想使用 Spring，而希望通过 API 的方式进行调用，请参见：&lt;a href="../configuration/api">API配置&lt;/a>
-&lt;/div></description></item><item><title>Docs: API 参考手册</title><link>https://dubbo.apache.org/zh/docs/references/api/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/references/api/</guid><description>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/nacos-metadata-report-service-name-mapping.png" alt="nacos-metadata-report-service-name-mapping.png">&lt;/p></description></item><item><title>Docs: Dubbo 配置</title><link>https://dubbo.apache.org/zh/docs/references/configuration/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/references/configuration/</guid><description/></item><item><title>Docs: API 参考手册</title><link>https://dubbo.apache.org/zh/docs/references/api/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/references/api/</guid><description>
 &lt;p>Dubbo 的常规功能，都保持零侵入，但有些功能不得不用 API 侵入才能实现。&lt;/p>
 &lt;div class="alert alert-primary" role="alert">
 &lt;h4 class="alert-heading">提示&lt;/h4>
@@ -753,7 +748,7 @@ dubbo.application.qosAcceptForeignIp=false
 &lt;/li>
 &lt;/ol>
 &lt;/section></description></item><item><title>Docs: RPC协议</title><link>https://dubbo.apache.org/zh/docs/references/protocols/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/references/protocols/</guid><description>
-&lt;p>Dubbo 中目前支持的RPC协议&lt;/p></description></item><item><title>Docs: 路由规则</title><link>https://dubbo.apache.org/zh/docs/references/routers/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/references/routers/</guid><description>
+&lt;p>Dubbo 中目前支持的RPC协议&lt;/p></description></item><item><title>Docs: 支持graalvm</title><link>https://dubbo.apache.org/zh/docs/references/graalvm/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/references/graalvm/</guid><description/></item><item><title>Docs: 路由规则</title><link>https://dubbo.apache.org/zh/docs/references/routers/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/references/routers/</guid><description>
 &lt;h3 id="基本思想">基本思想&lt;/h3>
 &lt;p>基于路由链，采用Pipeline的处理方式，如下图所示：&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/route-rule1.png" alt="route-rule1.png">&lt;/p>

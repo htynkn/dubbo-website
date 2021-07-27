@@ -23,7 +23,7 @@ package com.xxx; import org.apache.dubbo.common.threadpool.ThreadPool; import ja
 xxx=com.xxx.XxxThreadPool ">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docs/references/spis/threadpool/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-07-25T13:48:50+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-07-26T16:31:17+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="线程池扩展">
 <meta itemprop=description content="扩展说明 服务提供方线程池实现策略，当服务器收到一个请求时，需要在线程池中创建一个线程去执行服务提供方业务逻辑。
 扩展接口 org.apache.dubbo.common.threadpool.ThreadPool
@@ -31,7 +31,7 @@ xxx=com.xxx.XxxThreadPool ">
 src |-main |-java |-com |-xxx |-XxxThreadPool.java (实现ThreadPool接口) |-resources |-META-INF |-dubbo |-org.apache.dubbo.common.threadpool.ThreadPool (纯文本文件，内容为：xxx=com.xxx.XxxThreadPool) XxxThreadPool.java：
 package com.xxx; import org.apache.dubbo.common.threadpool.ThreadPool; import java.util.concurrent.Executor; public class XxxThreadPool implements ThreadPool { public Executor getExecutor() { // ...  } } META-INF/dubbo/org.apache.dubbo.common.threadpool.ThreadPool：
 xxx=com.xxx.XxxThreadPool ">
-<meta itemprop=dateModified content="2021-07-25T13:48:50+08:00">
+<meta itemprop=dateModified content="2021-07-26T16:31:17+08:00">
 <meta itemprop=wordCount content="55">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="线程池扩展">
@@ -173,8 +173,56 @@ Releases
 </li>
 <ul>
 <li class=collapse id=zhdocsadvanced>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedprotobufinterface href=/zh/docs/advanced/protobufinterface/>Protobuf vs Interface</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedmigration-invoker href=/zh/docs/advanced/migration-invoker/>地址迁移规则说明</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedpreflight-check href=/zh/docs/advanced/preflight-check/>启动时检查</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedfault-tolerent-strategy href=/zh/docs/advanced/fault-tolerent-strategy/>集群容错</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedloadbalance href=/zh/docs/advanced/loadbalance/>负载均衡</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedthread-model href=/zh/docs/advanced/thread-model/>线程模型</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedexplicit-target href=/zh/docs/advanced/explicit-target/>直连提供者</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedsubscribe-only href=/zh/docs/advanced/subscribe-only/>只订阅</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedmulti-protocols href=/zh/docs/advanced/multi-protocols/>多协议</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedmulti-registry href=/zh/docs/advanced/multi-registry/>多注册中心</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedservice-group href=/zh/docs/advanced/service-group/>服务分组</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedstatic-service href=/zh/docs/advanced/static-service/>静态服务</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedmulti-versions href=/zh/docs/advanced/multi-versions/>多版本</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedgroup-merger href=/zh/docs/advanced/group-merger/>分组聚合</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedparameter-validation href=/zh/docs/advanced/parameter-validation/>参数验证</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedresult-cache href=/zh/docs/advanced/result-cache/>结果缓存</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedgeneric-reference href=/zh/docs/advanced/generic-reference/>使用泛化调用</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedprotobuf-idl href=/zh/docs/advanced/protobuf-idl/>Protobuf</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedpb-generic-reference href=/zh/docs/advanced/pb-generic-reference/>Protobuf 泛化调用</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedgeneric-service href=/zh/docs/advanced/generic-service/>实现泛化调用</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedecho-service href=/zh/docs/advanced/echo-service/>回声测试</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedcontext href=/zh/docs/advanced/context/>上下文信息</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedattachment href=/zh/docs/advanced/attachment/>隐式参数</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedasync-execute-on-provider href=/zh/docs/advanced/async-execute-on-provider/>异步执行</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedasync-call href=/zh/docs/advanced/async-call/>异步调用</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedlocal-call href=/zh/docs/advanced/local-call/>本地调用</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedcallback-parameter href=/zh/docs/advanced/callback-parameter/>参数回调</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedevents-notify href=/zh/docs/advanced/events-notify/>事件通知</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedlocal-stub href=/zh/docs/advanced/local-stub/>本地存根</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedlocal-mock href=/zh/docs/advanced/local-mock/>本地伪装</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvanceddelay-publish href=/zh/docs/advanced/delay-publish/>延迟暴露</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedconcurrency-control href=/zh/docs/advanced/concurrency-control/>并发控制</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedconfig-connections href=/zh/docs/advanced/config-connections/>连接控制</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedlazy-connect href=/zh/docs/advanced/lazy-connect/>延迟连接</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedstickiness href=/zh/docs/advanced/stickiness/>粘滞连接</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedtls href=/zh/docs/advanced/tls/>TLS</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedtoken-authorization href=/zh/docs/advanced/token-authorization/>令牌验证</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedrouting-rule href=/zh/docs/advanced/routing-rule/>路由规则</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedrouting-rule-deprecated href=/zh/docs/advanced/routing-rule-deprecated/>旧路由规则</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedconfig-rule href=/zh/docs/advanced/config-rule/>配置规则</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedconfig-rule-deprecated href=/zh/docs/advanced/config-rule-deprecated/>旧配置规则</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedservice-downgrade href=/zh/docs/advanced/service-downgrade/>服务降级</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedconsumer-threadpool href=/zh/docs/advanced/consumer-threadpool/>消费端线程池模型</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedgraceful-shutdown href=/zh/docs/advanced/graceful-shutdown/>优雅停机</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedhostname-binding href=/zh/docs/advanced/hostname-binding/>主机绑定</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedset-host href=/zh/docs/advanced/set-host/>主机配置</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedsimplify-registry-data href=/zh/docs/advanced/simplify-registry-data/>注册信息简化</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedlogger-strategy href=/zh/docs/advanced/logger-strategy/>日志适配</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedaccesslog href=/zh/docs/advanced/accesslog/>访问日志</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedservice-container href=/zh/docs/advanced/service-container/>服务容器</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedreference-config-cache href=/zh/docs/advanced/reference-config-cache/>ReferenceConfig 缓存</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedregistry-only href=/zh/docs/advanced/registry-only/>只注册</a>
 </li>
 </ul>
 </ul>
@@ -346,65 +394,6 @@ Releases
 </li>
 </ul>
 </ul>
-<ul class="td-sidebar-nav__section pr-md-3">
-<li class=td-sidebar-nav__section-title>
-<a href=/zh/docs/references/features/ class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">功能列表</a>
-</li>
-<ul>
-<li class=collapse id=zhdocsreferencesfeatures>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturespreflight-check href=/zh/docs/references/features/preflight-check/>启动时检查</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesfault-tolerent-strategy href=/zh/docs/references/features/fault-tolerent-strategy/>集群容错</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesloadbalance href=/zh/docs/references/features/loadbalance/>负载均衡</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesthread-model href=/zh/docs/references/features/thread-model/>线程模型</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesexplicit-target href=/zh/docs/references/features/explicit-target/>直连提供者</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturessubscribe-only href=/zh/docs/references/features/subscribe-only/>只订阅</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesmulti-protocols href=/zh/docs/references/features/multi-protocols/>多协议</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesmulti-registry href=/zh/docs/references/features/multi-registry/>多注册中心</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesservice-group href=/zh/docs/references/features/service-group/>服务分组</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesstatic-service href=/zh/docs/references/features/static-service/>静态服务</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesmulti-versions href=/zh/docs/references/features/multi-versions/>多版本</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesgroup-merger href=/zh/docs/references/features/group-merger/>分组聚合</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesparameter-validation href=/zh/docs/references/features/parameter-validation/>参数验证</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesresult-cache href=/zh/docs/references/features/result-cache/>结果缓存</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesgeneric-reference href=/zh/docs/references/features/generic-reference/>使用泛化调用</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesprotobuf-idl href=/zh/docs/references/features/protobuf-idl/>Protobuf</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturespb-generic-reference href=/zh/docs/references/features/pb-generic-reference/>Protobuf 泛化调用</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesgeneric-service href=/zh/docs/references/features/generic-service/>实现泛化调用</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesecho-service href=/zh/docs/references/features/echo-service/>回声测试</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturescontext href=/zh/docs/references/features/context/>上下文信息</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesattachment href=/zh/docs/references/features/attachment/>隐式参数</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesasync-execute-on-provider href=/zh/docs/references/features/async-execute-on-provider/>异步执行</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesasync-call href=/zh/docs/references/features/async-call/>异步调用</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeatureslocal-call href=/zh/docs/references/features/local-call/>本地调用</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturescallback-parameter href=/zh/docs/references/features/callback-parameter/>参数回调</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesevents-notify href=/zh/docs/references/features/events-notify/>事件通知</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeatureslocal-stub href=/zh/docs/references/features/local-stub/>本地存根</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeatureslocal-mock href=/zh/docs/references/features/local-mock/>本地伪装</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesdelay-publish href=/zh/docs/references/features/delay-publish/>延迟暴露</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesconcurrency-control href=/zh/docs/references/features/concurrency-control/>并发控制</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesconfig-connections href=/zh/docs/references/features/config-connections/>连接控制</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeatureslazy-connect href=/zh/docs/references/features/lazy-connect/>延迟连接</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesstickiness href=/zh/docs/references/features/stickiness/>粘滞连接</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturestls href=/zh/docs/references/features/tls/>TLS</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturestoken-authorization href=/zh/docs/references/features/token-authorization/>令牌验证</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesrouting-rule href=/zh/docs/references/features/routing-rule/>路由规则</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesrouting-rule-deprecated href=/zh/docs/references/features/routing-rule-deprecated/>旧路由规则</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesconfig-rule href=/zh/docs/references/features/config-rule/>配置规则</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesconfig-rule-deprecated href=/zh/docs/references/features/config-rule-deprecated/>旧配置规则</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesservice-downgrade href=/zh/docs/references/features/service-downgrade/>服务降级</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesconsumer-threadpool href=/zh/docs/references/features/consumer-threadpool/>消费端线程池模型</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesgraceful-shutdown href=/zh/docs/references/features/graceful-shutdown/>优雅停机</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeatureshostname-binding href=/zh/docs/references/features/hostname-binding/>主机绑定</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesset-host href=/zh/docs/references/features/set-host/>主机配置</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturessimplify-registry-data href=/zh/docs/references/features/simplify-registry-data/>注册信息简化</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeatureslogger-strategy href=/zh/docs/references/features/logger-strategy/>日志适配</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesaccesslog href=/zh/docs/references/features/accesslog/>访问日志</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesservice-container href=/zh/docs/references/features/service-container/>服务容器</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesreference-config-cache href=/zh/docs/references/features/reference-config-cache/>ReferenceConfig 缓存</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesfeaturesregistry-only href=/zh/docs/references/features/registry-only/>只注册</a>
-</li>
-</ul>
-</ul>
 <a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesapi href=/zh/docs/references/api/>API 参考手册</a>
 <ul class="td-sidebar-nav__section pr-md-3">
 <li class=td-sidebar-nav__section-title>
@@ -445,6 +434,16 @@ Releases
 </ul>
 <ul class="td-sidebar-nav__section pr-md-3">
 <li class=td-sidebar-nav__section-title>
+<a href=/zh/docs/references/graalvm/ class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">support graalvm</a>
+</li>
+<ul>
+<li class=collapse id=zhdocsreferencesgraalvm>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesgraalvmsupport-graalvm href=/zh/docs/references/graalvm/support-graalvm/></a>
+</li>
+</ul>
+</ul>
+<ul class="td-sidebar-nav__section pr-md-3">
+<li class=td-sidebar-nav__section-title>
 <a href=/zh/docs/references/routers/ class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">路由规则</a>
 </li>
 <ul>
@@ -454,6 +453,16 @@ Releases
 </li>
 </ul>
 </ul>
+</li>
+</ul>
+</ul>
+<ul class="td-sidebar-nav__section pr-md-3">
+<li class=td-sidebar-nav__section-title>
+<a href=/zh/docs/performance/ class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">性能优化</a>
+</li>
+<ul>
+<li class=collapse id=zhdocsperformance>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsperformancebenchmarking href=/zh/docs/performance/benchmarking/>基准测试</a>
 </li>
 </ul>
 </ul>
@@ -545,7 +554,7 @@ Sorry to hear that. Please <a href=https://github.com/apache/dubbo-website/issue
 </p>
 <script>const yesButton=document.querySelector('.feedback--answer-yes'),noButton=document.querySelector('.feedback--answer-no'),yesResponse=document.querySelector('.feedback--response-yes'),noResponse=document.querySelector('.feedback--response-no'),disableButtons=()=>{yesButton.disabled=!0,noButton.disabled=!0},sendFeedback=b=>{if(typeof ga!='function')return;const a={command:'send',hitType:'event',category:'Helpful',action:'click',label:window.location.pathname,value:b};ga(a.command,a.hitType,a.category,a.action,a.label,a.value)};yesButton.addEventListener('click',()=>{yesResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(1)}),noButton.addEventListener('click',()=>{noResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(0)})</script>
 <br>
-<div class="text-muted mt-5 pt-3 border-top">最后修改 July 25, 2021: <a href=/commit/a3bc6c46c78fb9088b27e8dd512e2e6be381707b>close archive (a3bc6c4)</a>
+<div class="text-muted mt-5 pt-3 border-top">最后修改 July 26, 2021: <a href=/commit/5e5768411df09de63da589f69390c395858eaa86>update links (5e57684)</a>
 </div>
 </div>
 </main>
