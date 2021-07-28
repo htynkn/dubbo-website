@@ -5355,7 +5355,123 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;code>preserved.instance.id.generator&lt;/code>: 该实例的id生成策略，值为&lt;code>snowflake&lt;/code>时，从0开始增加。
 &lt;code>preserved.register.source&lt;/code> : 保留键，目前未使用。&lt;/p>
 &lt;p>该功能将在Dubbo@&lt;code>2.7.10&lt;/code>开始支持，通过在address中增加参数来进行配置.
-例如: &lt;code>nacos://10.20.153.10:8848?preserved.heart.beat.timeout=15000&amp;amp;preserved.ip.delete.timeout=30000&amp;amp;preserved.heart.beat.interval=10000&lt;/code>&lt;/p></description></item><item><title>Docs: XML 配置</title><link>https://dubbo.apache.org/zh/docs/languages/java/configuration/xml/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/languages/java/configuration/xml/</guid><description>
+例如: &lt;code>nacos://10.20.153.10:8848?preserved.heart.beat.timeout=15000&amp;amp;preserved.ip.delete.timeout=30000&amp;amp;preserved.heart.beat.interval=10000&lt;/code>&lt;/p></description></item><item><title>Docs: 使用 GraalVM 打包 Native Image</title><link>https://dubbo.apache.org/zh/docs/references/graalvm/support-graalvm/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/references/graalvm/support-graalvm/</guid><description>
+&lt;p>dubbo3.0支持native-image文档&lt;/p>
+&lt;h2 id="概述">概述&lt;/h2>
+&lt;p>本文档将介绍将dubbo3.0项目接入GraalVM，进行native-image编译为二进制的流程。&lt;/p>
+&lt;p>关于GraalVm的更多信息可以阅读 &lt;a href="https://www.graalvm.org/docs/getting-started/container-images/">https://www.graalvm.org/docs/getting-started/container-images/&lt;/a> 此文档。&lt;/p>
+&lt;h2 id="使用样例">使用样例&lt;/h2>
+&lt;p>在编译我们的dubbo项目之前，需要确保我们正基于graalVm的环境。&lt;/p>
+&lt;ol>
+&lt;li>安装GraalVM&lt;/li>
+&lt;/ol>
+&lt;p>进入https://www.graalvm.org/ 官网根据自己的系统选取最新版本安装：&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo3.0-graalvm-support/graalvmgw.jpg" alt="">&lt;/p>
+&lt;p>安装完成后，修改配置JAVA_HOME的路径，生效后查看本地jdk可以看到如下：&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo3.0-graalvm-support/graalvm_env.jpg" alt="">
+这里我们使用的基于jdk1.8版本的GraalVM。&lt;/p>
+&lt;ul>
+&lt;li>安装native-image，只需执行gu install native-image即可。&lt;/li>
+&lt;/ul>
+&lt;ol>
+&lt;li>拉取dubbo代码，切换到&lt;a href="https://github.com/apache/dubbo">apache:3.0&lt;/a>分支。&lt;/li>
+&lt;li>手动执行生成SPI代码。&lt;/li>
+&lt;/ol>
+&lt;p>由于目前编译native-image不支持代码动态生成编译，所以有关代码动态生成的部分需要我们手动先生成，这里提供了工具函数：&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo3.0-graalvm-support/code_generator.jpg" alt="">
+执行CodeGenerator即可在dubbo-native模块下生成SPI代码。&lt;/p>
+&lt;ol>
+&lt;li>在根目录下执行install&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-go" data-lang="go">MacdeMacBook&lt;span style="color:#719e07">-&lt;/span>pro&lt;span style="color:#719e07">-&lt;/span>&lt;span style="color:#2aa198">3&lt;/span>:incubator&lt;span style="color:#719e07">-&lt;/span>dubbo mac$ pwd
+&lt;span style="color:#719e07">/&lt;/span>Users&lt;span style="color:#719e07">/&lt;/span>mac&lt;span style="color:#719e07">/&lt;/span>Documents&lt;span style="color:#719e07">/&lt;/span>Mi&lt;span style="color:#719e07">/&lt;/span>project&lt;span style="color:#719e07">/&lt;/span>incubator&lt;span style="color:#719e07">-&lt;/span>dubbo
+MacdeMacBook&lt;span style="color:#719e07">-&lt;/span>pro&lt;span style="color:#719e07">-&lt;/span>&lt;span style="color:#2aa198">3&lt;/span>:incubator&lt;span style="color:#719e07">-&lt;/span>dubbo mac$ mvn clean &lt;span style="color:#719e07">package&lt;/span> install &lt;span style="color:#719e07">-&lt;/span>Dmaven.test.skip=&lt;span style="color:#cb4b16">true&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;ol>
+&lt;li>编译demo项目&lt;/li>
+&lt;/ol>
+&lt;p>这里我们提供了可直接进行编译的示例项目，dubbo-demo/dubbo-demo-native。上面步骤install完成后，先到dubbo-demo-native的provider下，执行native-image编译：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-go" data-lang="go"> mvn clean &lt;span style="color:#719e07">package&lt;/span> &lt;span style="color:#719e07">-&lt;/span>P native &lt;span style="color:#719e07">-&lt;/span>Dmaven.test.skip=&lt;span style="color:#cb4b16">true&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>这里由于我们在maven中引入了native-image插件，所以直接-P native即可执行该插件。&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo3.0-graalvm-support/native_image_build.jpg" alt="">
+编译成功后可以在target下看到已经生成的二进制文件，本地启动一个zookeeper，直接执行该二进制，可见启动成功如下：&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo3.0-graalvm-support/run_provider.jpg" alt="">
+consumer端同样执行编译，在consumer的target下也会生成二进制文件：demo-native-consumer,执行该二进制可以看到调用结果如下：&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo3.0-graalvm-support/run_consumer.jpg" alt="">&lt;/p>
+&lt;h3 id="具体步骤">具体步骤&lt;/h3>
+&lt;p>实际上在这个demo下我们做了一些工作来确保项目可以编译执行，主要有以下几个步骤&lt;/p>
+&lt;ul>
+&lt;li>引入dubbo-native依赖&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">&amp;lt;dependency&amp;gt;
+&amp;lt;groupId&amp;gt;org.apache.dubbo&amp;lt;/groupId&amp;gt;
+&amp;lt;artifactId&amp;gt;dubbo-native&amp;lt;/artifactId&amp;gt;
+&amp;lt;version&amp;gt;${project.version}&amp;lt;/version&amp;gt;
+&amp;lt;/dependency&amp;gt;
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>该模块下有我们生成的SPI代码。&lt;/p>
+&lt;ul>
+&lt;li>引入native-image插件&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">&amp;lt;plugin&amp;gt;
+&amp;lt;groupId&amp;gt;org.graalvm.nativeimage&amp;lt;/groupId&amp;gt;
+&amp;lt;artifactId&amp;gt;native-image-maven-plugin&amp;lt;/artifactId&amp;gt;
+&amp;lt;version&amp;gt;21.0.0.2&amp;lt;/version&amp;gt;
+&amp;lt;executions&amp;gt;
+&amp;lt;execution&amp;gt;
+&amp;lt;goals&amp;gt;
+&amp;lt;goal&amp;gt;native-image&amp;lt;/goal&amp;gt;
+&amp;lt;/goals&amp;gt;
+&amp;lt;phase&amp;gt;package&amp;lt;/phase&amp;gt;
+&amp;lt;/execution&amp;gt;
+&amp;lt;/executions&amp;gt;
+&amp;lt;configuration&amp;gt;
+&amp;lt;skip&amp;gt;false&amp;lt;/skip&amp;gt;
+&amp;lt;imageName&amp;gt;demo-native-provider&amp;lt;/imageName&amp;gt;
+&amp;lt;mainClass&amp;gt;org.apache.dubbo.demo.graalvm.provider.Application&amp;lt;/mainClass&amp;gt;
+&amp;lt;buildArgs&amp;gt;
+--no-fallback
+--initialize-at-build-time=org.slf4j.MDC
+--initialize-at-build-time=org.slf4j.LoggerFactory
+--initialize-at-build-time=org.slf4j.impl.StaticLoggerBinder
+--initialize-at-build-time=org.apache.log4j.helpers.Loader
+--initialize-at-build-time=org.apache.log4j.Logger
+--initialize-at-build-time=org.apache.log4j.helpers.LogLog
+--initialize-at-build-time=org.apache.log4j.LogManager
+--initialize-at-build-time=org.apache.log4j.spi.LoggingEvent
+--initialize-at-build-time=org.slf4j.impl.Log4jLoggerFactory
+--initialize-at-build-time=org.slf4j.impl.Log4jLoggerAdapter
+--initialize-at-build-time=org.eclipse.collections.api.factory.Sets
+--initialize-at-run-time=io.netty.channel.epoll.Epoll
+--initialize-at-run-time=io.netty.channel.epoll.Native
+--initialize-at-run-time=io.netty.channel.epoll.EpollEventLoop
+--initialize-at-run-time=io.netty.channel.epoll.EpollEventArray
+--initialize-at-run-time=io.netty.channel.DefaultFileRegion
+--initialize-at-run-time=io.netty.channel.kqueue.KQueueEventArray
+--initialize-at-run-time=io.netty.channel.kqueue.KQueueEventLoop
+--initialize-at-run-time=io.netty.channel.kqueue.Native
+--initialize-at-run-time=io.netty.channel.unix.Errors
+--initialize-at-run-time=io.netty.channel.unix.IovArray
+--initialize-at-run-time=io.netty.channel.unix.Limits
+--initialize-at-run-time=io.netty.util.internal.logging.Log4JLogger
+--initialize-at-run-time=io.netty.channel.unix.Socket
+--initialize-at-run-time=io.netty.channel.ChannelHandlerMask
+--report-unsupported-elements-at-runtime
+--allow-incomplete-classpath
+--enable-url-protocols=http
+-H:+ReportExceptionStackTraces
+&amp;lt;/buildArgs&amp;gt;
+&amp;lt;/configuration&amp;gt;
+&amp;lt;/plugin&amp;gt;
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中定义了生成的镜像名以及一些构建镜像的参数。&lt;/p>
+&lt;ul>
+&lt;li>挂载native-image-agent&lt;/li>
+&lt;/ul>
+&lt;p>由于我们需要将一些反射、JNI等类先指定出来，我们需要先使用该agent以正常方式运行一遍生成这些类的json形式的信息。&lt;/p>
+&lt;p>在启动参数中添加：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">-agentlib:native-image-agent=config-output-dir=/tmp/config/,config-write-period-secs=300,config-write-initial-delay-secs=5
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>以正常方式启动，在项目的resources下建立文件夹META-INF.native-image，把在本地目录中生成的文件粘进去：&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo3.0-graalvm-support/resources.jpg" alt="">
+（可能会有缺漏没有生成的类信息，需要根据编译或运行时的报错信息手动添加。）&lt;/p>
+&lt;p>&lt;strong>完成以上几步后就可以进行项目的编译了。&lt;/strong>&lt;/p></description></item><item><title>Docs: XML 配置</title><link>https://dubbo.apache.org/zh/docs/languages/java/configuration/xml/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/languages/java/configuration/xml/</guid><description>
 &lt;p>有关 XML 的详细配置项，请参见：&lt;a href="../../references/xml">配置参考手册&lt;/a>。如果不想使用 Spring 配置，而希望通过 API 的方式进行调用，请参见：&lt;a href="../api">API配置&lt;/a>。想知道如何使用配置，请参见：&lt;a href="../../quick-start">快速启动&lt;/a>。&lt;/p>
 &lt;p>请在此查看文档描述的&lt;a href="https://github.com/apache/dubbo-samples/tree/master/java/dubbo-samples-basic">完整示例&lt;/a>&lt;/p>
 &lt;h2 id="providerxml-示例">provider.xml 示例&lt;/h2>
@@ -7003,102 +7119,4 @@ String suffix &lt;span style="color:#719e07">=&lt;/span> pattern&lt;span style="
 &lt;p>UNIX 下的路径是 ${HOME}/.m2/repository, Windows 下的路径是 C:\Documents and Settings&amp;lt;user&amp;gt;.m2\repository&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Docs: Dubbo3 简介</title><link>https://dubbo.apache.org/zh/docs/introduction/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/introduction/</guid><description>
-&lt;p>Apache Dubbo 是一款微服务开发框架，它提供了 RPC通信 与 微服务治理 两大关键能力。这意味着，使用 Dubbo 开发的微服务，将具备相互之间的远程发现与通信能力，
-同时利用 Dubbo 提供的丰富服务治理能力，可以实现诸如服务发现、负载均衡、流量调度等服务治理诉求。同时 Dubbo 是高度可扩展的，用户几乎可以在任意功能点去定制自己的实现，以改变框架的默认行为来满足自己的业务需求。&lt;/p>
-&lt;p>Dubbo3 基于 Dubbo2 演进而来，在保持原有核心功能特性的同时， Dubbo3 在易用性、超大规模微服务实践、云原生基础设施适配等几大方向上进行了全面升级。
-以下文档都将基于 Dubbo3 展开。&lt;/p>
-&lt;h2 id="what-dubbo3-is">What Dubbo3 is&lt;/h2>
-&lt;p>如开篇所述，Dubbo 提供了构建云原生微服务业务的一站式解决方案，可以使用 Dubbo 快速定义并发布微服务组件，同时基于 Dubbo 开箱即用的丰富特性及超强的扩展能力，构建运维整个微服务体系所需的各项服务治理能力，如 Tracing、Transaction 等，Dubbo 提供的基础能力包括：&lt;/p>
-&lt;ul>
-&lt;li>服务发现&lt;/li>
-&lt;li>流式通信&lt;/li>
-&lt;li>负载均衡&lt;/li>
-&lt;li>流量治理&lt;/li>
-&lt;li>&amp;hellip;..&lt;/li>
-&lt;/ul>
-&lt;p>Dubbo 计划提供丰富的多语言客户端实现，其中 Java、Golang 版本是当前稳定性、活跃度最好的版本，其他多语言客户端[]正在持续建设中。&lt;/p>
-&lt;p>自开源以来，Dubbo 就被一众大规模互联网、IT公司选型，经过多年企业实践积累了大量经验。Dubbo3 是站在巨人肩膀上的下一代产品，它汲取了上一代的优点并针对已知问题做了大量优化，因此，Dubbo 在解决业务落地与规模化实践方面有着无可比拟的优势：&lt;/p>
-&lt;ul>
-&lt;li>开箱即用
-&lt;ul>
-&lt;li>易用性高，如 Java 版本的面向接口代理特性能实现本地透明调用&lt;/li>
-&lt;li>功能丰富，基于原生库或轻量扩展即可实现绝大多数的微服务治理能力&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>超大规模微服务集群实践
-&lt;ul>
-&lt;li>高性能的跨进程通信协议&lt;/li>
-&lt;li>地址发现、流量治理层面，轻松支持百万规模集群实例&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>企业级微服务治理能力
-&lt;ul>
-&lt;li>服务测试&lt;/li>
-&lt;li>服务Mock&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;p>Dubbo3 是在云原生背景下诞生的，使用 Dubbo 构建的微服务遵循云原生思想，能更好的复用底层云原生基础设施、贴合云原生微服务架构。这体现在：&lt;/p>
-&lt;ul>
-&lt;li>服务支持部署在容器、Kubernetes平台，服务生命周期可实现与平台调度周期对齐；&lt;/li>
-&lt;li>支持经典 Service Mesh 微服务架构，引入了 Proxyless Mesh 架构，进一步简化 Mesh 的落地与迁移成本，提供更灵活的选择；&lt;/li>
-&lt;li>作为桥接层，支持与 SpringCloud、gRPC 等异构微服务体系的互调互通&lt;/li>
-&lt;/ul>
-&lt;h2 id="一站式微服务解决方案">一站式微服务解决方案&lt;/h2>
-&lt;p>Dubbo 提供了从服务定义、服务发现、服务通信到流量管控等几乎所有的服务治理能力，并且尝试从使用上对用户屏蔽底层细节，以提供更好的易用性。&lt;/p>
-&lt;p>定义服务在 Dubbo 中非常简单与直观，可以选择使用与某种语言绑定的方式（如 Java 中可直接定义 Interface），也可以使用 Protobuf IDL 语言中立的方式。无论选择哪种方式，站在服务消费方的视角，都可以通过 Dubbo 提供的透明代理直接编码。&lt;/p>
-&lt;blockquote>
-&lt;p>需要注意的是，在 Dubbo 中，我们提到服务时，通常是指 RPC 粒度的、提供某个具体业务增删改功能的接口或方法，与一些微服务概念书籍中泛指的服务并不是一个概念。&lt;/p>
-&lt;/blockquote>
-&lt;p>点对点的服务通信是 Dubbo 提供的另一项基本能力，Dubbo 以 RPC 的方式将请求数据（Request）发送给后端服务，并接收服务端返回的计算结果（Response）。RPC 通信对用户来说是完全透明的，使用者无需关心请求是如何发出去的、发到了哪里，每次调用只需要拿到正确的调用结果就行。同步的 Request-Response 是默认的通信模型，它最简单但却不能覆盖所有的场景，因此，Dubbo 提供更丰富的通信模型：&lt;/p>
-&lt;ul>
-&lt;li>消费端异步请求(Client Side Asynchronous Request-Response)&lt;/li>
-&lt;li>提供端异步执行（Server Side Asynchronous Request-Response）&lt;/li>
-&lt;li>消费端请求流（Request Streaming）&lt;/li>
-&lt;li>提供端响应流（Response Streaming）&lt;/li>
-&lt;li>双向流式通信（Bidirectional Streaming）&lt;/li>
-&lt;/ul>
-&lt;p>Dubbo 的服务发现机制，让微服务组件之间可以独立演进并任意部署，消费端可以在无需感知对端部署位置与 IP 地址的情况下完成通信。Dubbo 提供的是 Client-Based 的服务发现机制，使用者可以有多种方式启用服务发现：&lt;/p>
-&lt;ul>
-&lt;li>使用独立的注册中心组件，如 Nacos、Zookeeper、Consul、Etcd 等。&lt;/li>
-&lt;li>将服务的组织与注册交给底层容器平台，如 Kubernetes，这被理解是一种更云原生的方式&lt;/li>
-&lt;/ul>
-&lt;p>透明地址发现让 Dubbo 请求可以被发送到任意 IP 实例上，这个过程中流量被随机分配。当需要对流量进行更丰富、更细粒度的管控时，就可以用到 Dubbo 的流量管控策略，Dubbo 提供了包括负载均衡、流量路由、请求超时、流量降级、重试等策略，基于这些基础能力可以轻松的实现更多场景化的路由方案，包括金丝雀发布、A/B测试、权重路由、同区域优先等，更酷的是，Dubbo 支持流控策略在运行态动态生效，无需重新部署。&lt;/p>
-&lt;p>Dubbo 强大的服务治理能力不仅体现在核心框架上，还包括其优秀的扩展能力以及周边配套设施的支持。通过 Filter、Router、Protocol 等几乎存在于每一个关键流程上的扩展点定义，我们可以丰富 Dubbo 的功能或实现与其他微服务配套系统的对接，包括 Transaction、Tracing 目前都有通过 SPI 扩展的实现方案，具体可以参见 Dubbo 扩展性的详情，也可以在 apache/dubbo-spi-extensions 项目中发现与更多的扩展实现。&lt;/p>
-&lt;h2 id="大规模企业微服务实践沉淀">大规模企业微服务实践沉淀&lt;/h2>
-&lt;p>Dubbo 最早诞生于阿里巴巴，随后加入 Apache 软件基金会，项目从设计之初就是为了解决企业的服务化问题，因此充分考虑了大规模集群场景下的服务开发与治理问题，如易用性、性能、流量管理、集群可伸缩性等。在 Dubbo 开源的将近 10 年时间内，Dubbo 几乎成为了国内微服务框架选型的首选框架，尤其受到大规模互联网、IT企业的认可，可以说作为开源服务框架，Dubbo 在支持微服务集群方面有着非常大的规模与非常久的实践经验积累，是最具有企业规模化微服务实践话语权的框架之一。采用 Dubbo 的企业涵盖互联网、传统IT、金融、生产制造业多个领域，一些典型用户包括阿里巴巴、携程、工商银行、中国人寿、海尔、金蝶等。&lt;/p>
-&lt;p>在企业大规模实践的过程中，Dubbo 的稳定性得到了验证，服务治理的易用性与丰富度也在不断提升，而也就是在这样的背景下催生了下一代的产品 - Dubbo3。Dubbo3 的整个设计与开发过程，始终有来自社区团队与众多企业用户的共同参与，因此 Dubbo3 的许多核心架构与功能都充分考虑了大规模微服务实践诉求。阿里巴巴是参与在 Dubbo3 中的核心力量之一，作为企业用户其主导了该版本许多核心功能的设计与开发，阿里巴巴把 Dubbo3 社区版本确定为其未来内部主推的服务框架，并选择将内部 HSF 通过 Dubbo3 的形式贡献到开源社区，在阿里巴巴内部，众多业务线包括电商系统的考拉、交易平台，以及饿了么、钉钉等都已经成功迁移到 Dubbo3 版本。同样全程参与在 Dubbo3 开发与验证试点过程中的企业用户包括工商银行、携程、斗鱼、小米等。&lt;/p>
-&lt;p>Dubbo 的大规模实践经验主要体现在：&lt;/p>
-&lt;ul>
-&lt;li>高性能通信&lt;/li>
-&lt;li>高可扩展性&lt;/li>
-&lt;li>超大规模集群实例水平扩展&lt;/li>
-&lt;li>丰富的服务治理能力&lt;/li>
-&lt;/ul>
-&lt;p>关于 Dubbo 调用性能、支持超大规模集群地址方面的评测数据，将在随后发布，敬请期待。&lt;/p>
-&lt;h2 id="云原生友好">云原生友好&lt;/h2>
-&lt;p>Dubbo 从设计上是完全遵循云原生微服务开发理念的，这体现在多个方面，首先是对云原生基础设施与部署架构的支持，包括 Kubernetes、Service Mesh 等，另一方面，Dubbo 众多核心组件都已面向云原生升级，包括 Triple 协议、统一路由规则、对多语言支持。值得一提的是，如何使用 Dubbo 支持弹性伸缩的服务如 Serverless 也在未来计划之中，这包括利用 Native Image 提高 Dubbo 的启动速度与资源消耗等。&lt;/p>
-&lt;p>结合当前版本，本节主要从以下两点展开 Dubbo 的云原生特性&lt;/p>
-&lt;ul>
-&lt;li>容器调度平台（Kubernetes）&lt;/li>
-&lt;li>Service Mesh&lt;/li>
-&lt;/ul>
-&lt;h3 id="kubernetes">Kubernetes&lt;/h3>
-&lt;p>Dubbo 微服务要支持 Kubernetes 平台调度，最基础的就是实现 dubbo 服务生命周期与容器生命周期的对齐，这包括 Dubbo 的启动、销毁、服务注册等生命周期事件。相比于以往 Dubbo 自行定义生命周期事件，并要求开发人员在运维实践过程中遵守约定，Kubernetes 底层基础设施定义了严格的组件生命周期事件(probe)，转而要求 Dubbo 去按约定适配。&lt;/p>
-&lt;p>Kubernetes Service 是另一个层面的适配，这体现了服务定义与注册向云原生底层基础设施下沉的趋势。在这种模式下，用户不再需要搭建额外的注册中心组件，Dubbo 消费端节点能自动对接到 Kubernetes（API-Server 或 DNS），根据服务名（Kubernetes Service Name） 查询到实例列表（Kubernetes endpoints）。 此时服务是通过标准的 Kubernetes Service API 定义，并被调度到各个节点。&lt;/p>
-&lt;h3 id="service-mesh">Service Mesh&lt;/h3>
-&lt;p>Service Mesh 在业界得到了广泛的传播与认可，并被认为是下一代的微服务架构，这主要是因为它解决了很多棘手的问题，包括透明升级、多语言、依赖冲突、流量治理等。Service Mesh 的典型架构是通过部署独立的 Sidecar 组件来拦截所有的出口与入口流量，并在 Sidecar 中集成丰富的流量治理策略如负载均衡、路由等，除此之外，Service Mesh 还需要一个控制面（Control Plane）来实现对 Sidecar 流量的管控，即各种策略下发。我们在这里称这种架构为经典 Mesh。&lt;/p>
-&lt;p>然而任何技术架构都不是完美的，经典 Mesh 在实施层面也面临成本过高的问题&lt;/p>
-&lt;ol>
-&lt;li>需要运维控制面（Control Plane）&lt;/li>
-&lt;li>需要运维 Sidecar&lt;/li>
-&lt;li>需要考虑如何从原有 SDK 迁移到 Sidecar&lt;/li>
-&lt;li>需要考虑引入 Sidecar 后整个链路的性能损耗&lt;/li>
-&lt;/ol>
-&lt;p>为了解决 Sidecar 引入的相关成本问题，Dubbo 引入了另一种变相的 Mesh 架构 - Proxyless Mesh，顾名思义，Proxyless Mesh 就是指没有 Sidecar 的部署，转而由 Dubbo SDK 直接与控制面交互，其架构图如下&lt;/p>
-&lt;p>可以设想，在不同的组织、不同的发展阶段，未来以 Dubbo 构建的微服务将会允许有三种部署架构：传统 SDK、基于 Sidecar 的 Service Mesh、脱离 Sidecar 的 Proxyless Mesh。基于 Sidecar 的 Service Mesh，即经典的 Mesh 架构，独立的 sidecar 运行时接管所有的流量，脱离 Sidecar 的 Proxyless Mesh，富 SDK 直接通过 xDS 与控制面通信。Dubbo 微服务允许部署在物理机、容器、Kubernetes 平台之上，能做到以 Admin 为控制面，以统一的流量治理规则进行治理。&lt;/p>
-&lt;h2 id="了解更多">了解更多&lt;/h2>
-&lt;p>&lt;a href="../new-in-dubbo3">What&amp;rsquo;s New in Dubbo3&lt;/a>&lt;/p>
-&lt;p>&lt;a href="../quick-start">体验 Dubbo3&lt;/a>&lt;/p>
-&lt;p>&lt;a href="../migration">迁移到 Dubbo3&lt;/a>&lt;/p></description></item></channel></rss>
+&lt;/section></description></item></channel></rss>

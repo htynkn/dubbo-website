@@ -18,10 +18,10 @@
 <meta property="og:description" content="Dubbo3 相比 2.7 版本进行了全面的升级，以下是新增的一些核心特性">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docs/new-in-dubbo3/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-07-26T16:31:17+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-07-27T20:08:31+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="What's New in Dubbo3">
 <meta itemprop=description content="Dubbo3 相比 2.7 版本进行了全面的升级，以下是新增的一些核心特性">
-<meta itemprop=dateModified content="2021-07-26T16:31:17+08:00">
+<meta itemprop=dateModified content="2021-07-27T20:08:31+08:00">
 <meta itemprop=wordCount content="217">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="What's New in Dubbo3">
@@ -423,7 +423,7 @@ Releases
 </li>
 <ul>
 <li class=collapse id=zhdocsreferencesgraalvm>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesgraalvmsupport-graalvm href=/zh/docs/references/graalvm/support-graalvm/></a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesgraalvmsupport-graalvm href=/zh/docs/references/graalvm/support-graalvm/>Native Image</a>
 </li>
 </ul>
 </ul>
@@ -512,7 +512,7 @@ Dubbo 可支持集群规模步入百万实例层次。</li>
 <li>经典的基于 Sidecar 的 Service Mesh</li>
 <li>无 Sidecar 的 Proxyless Mesh</li>
 </ul>
-<p>用户在 Dubbo2 中熟知的路由规则，在 3.x 中将被一套<a href><code>统一的流量治理规则</code></a>取代，这套统一流量规则将覆盖未来 Dubbo3 的 Service Mesh、SDK 等多种部署形态，
+<p>用户在 Dubbo2 中熟知的路由规则，在 3.x 中将被一套<a href=../concepts/traffic-management><code>统一的流量治理规则</code></a>取代，这套统一流量规则将覆盖未来 Dubbo3 的 Service Mesh、SDK 等多种部署形态，
 实现对整套微服务体系的治理。</p>
 <h2 id=扩展点分离>扩展点分离</h2>
 <p>Dubbo3 的 maven 也发生了一些变化，<code>org.apache.dubbo:dubbo:3.0.0</code> 将不再是包含所有资源的 all-in-one 包，一些可选的依赖已经作为独立组件单独发布，
@@ -599,7 +599,7 @@ Sorry to hear that. Please <a href=https://github.com/apache/dubbo-website/issue
 </p>
 <script>const yesButton=document.querySelector('.feedback--answer-yes'),noButton=document.querySelector('.feedback--answer-no'),yesResponse=document.querySelector('.feedback--response-yes'),noResponse=document.querySelector('.feedback--response-no'),disableButtons=()=>{yesButton.disabled=!0,noButton.disabled=!0},sendFeedback=b=>{if(typeof ga!='function')return;const a={command:'send',hitType:'event',category:'Helpful',action:'click',label:window.location.pathname,value:b};ga(a.command,a.hitType,a.category,a.action,a.label,a.value)};yesButton.addEventListener('click',()=>{yesResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(1)}),noButton.addEventListener('click',()=>{noResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(0)})</script>
 <br>
-<div class="text-muted mt-5 pt-3 border-top">最后修改 July 26, 2021: <a href=/commit/5e5768411df09de63da589f69390c395858eaa86>update links (5e57684)</a>
+<div class="text-muted mt-5 pt-3 border-top">最后修改 July 27, 2021: <a href=/commit/291484dd37ffc6b6440f408845f84358517bf26d>fix doc, add section menu config (291484d)</a>
 </div>
 </div>
 </main>
