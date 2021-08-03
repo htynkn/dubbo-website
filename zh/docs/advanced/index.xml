@@ -12,17 +12,15 @@
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> check=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="通过-dubboproperties">通过 dubbo.properties&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">dubbo.reference.com.foo.BarService.check=false
-dubbo.reference.check=false
 dubbo.consumer.check=false
 dubbo.registry.check=false
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="通过--d-参数">通过 -D 参数&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">java -Ddubbo.reference.com.foo.BarService.check&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">false&lt;/span>
-java -Ddubbo.reference.check&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">false&lt;/span>
 java -Ddubbo.consumer.check&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">false&lt;/span>
 java -Ddubbo.registry.check&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">false&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="配置的含义">配置的含义&lt;/h2>
-&lt;p>&lt;code>dubbo.reference.check=false&lt;/code>，强制改变所有 reference 的 check 值，就算配置中有声明，也会被覆盖。&lt;/p>
-&lt;p>&lt;code>dubbo.consumer.check=false&lt;/code>，是设置 check 的缺省值，如果配置中有显式的声明，如：&lt;code>&amp;lt;dubbo:reference check=&amp;quot;true&amp;quot;/&amp;gt;&lt;/code>，不会受影响。&lt;/p>
+&lt;p>&lt;code>dubbo.reference.com.foo.BarService.check&lt;/code>，覆盖 &lt;code>com.foo.BarService&lt;/code>的 reference 的 check 值，就算配置中有声明，也会被覆盖。&lt;/p>
+&lt;p>&lt;code>dubbo.consumer.check=false&lt;/code>，是设置reference的 &lt;code>check&lt;/code> 的缺省值，如果配置中有显式的声明，如：&lt;code>&amp;lt;dubbo:reference check=&amp;quot;true&amp;quot;/&amp;gt;&lt;/code>，不会受影响。&lt;/p>
 &lt;p>&lt;code>dubbo.registry.check=false&lt;/code>，前面两个都是指订阅成功，但提供者列表是否为空是否报错，如果注册订阅失败时，也允许启动，需使用此选项，将在后台定时重试。&lt;/p></description></item><item><title>Docs: 集群容错</title><link>https://dubbo.apache.org/zh/docs/advanced/fault-tolerent-strategy/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/advanced/fault-tolerent-strategy/</guid><description>
 &lt;p>在集群调用失败时，Dubbo 提供了多种容错方案，缺省为 failover 重试。&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/cluster.jpg" alt="cluster">&lt;/p>
@@ -1299,10 +1297,10 @@ sslConfig&lt;span style="color:#719e07">.&lt;/span>setClientPrivateKeyPath&lt;sp
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/dubbo-token.jpg" alt="/user-guide/images/dubbo-token.jpg">&lt;/p>
 &lt;p>可以全局设置开启令牌验证：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#586e75">&amp;lt;!--随机token令牌，使用UUID生成--&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:provider&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> token=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dubbo:provider&lt;/span> token=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>或&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#586e75">&amp;lt;!--固定token令牌，相当于密码--&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:provider&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> token=&lt;span style="color:#2aa198">&amp;#34;123456&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dubbo:provider&lt;/span> token=&lt;span style="color:#2aa198">&amp;#34;123456&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>也可在服务级别设置：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#586e75">&amp;lt;!--随机token令牌，使用UUID生成--&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> token=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>

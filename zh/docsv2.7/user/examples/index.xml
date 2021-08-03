@@ -1684,10 +1684,10 @@ sslConfig&lt;span style="color:#719e07">.&lt;/span>setClientPrivateKeyPath&lt;sp
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/dubbo-token.jpg" alt="/user-guide/images/dubbo-token.jpg">&lt;/p>
 &lt;p>可以全局设置开启令牌验证：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#586e75">&amp;lt;!--随机token令牌，使用UUID生成--&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:provider&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> token=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dubbo:provider&lt;/span> token=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>或&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#586e75">&amp;lt;!--固定token令牌，相当于密码--&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:provider&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> token=&lt;span style="color:#2aa198">&amp;#34;123456&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;span style="color:#268bd2">&amp;lt;dubbo:provider&lt;/span> token=&lt;span style="color:#2aa198">&amp;#34;123456&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>也可在服务级别设置：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#586e75">&amp;lt;!--随机token令牌，使用UUID生成--&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> token=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>

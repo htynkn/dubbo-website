@@ -222,7 +222,7 @@ WheelMaker wheelMaker&lt;span style="color:#719e07">;&lt;/span>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#586e75">// ...
 &lt;/span>&lt;span style="color:#586e75">&lt;/span>Wheel wheel &lt;span style="color:#719e07">=&lt;/span> wheelMaker&lt;span style="color:#719e07">.&lt;/span>makeWheel&lt;span style="color:#719e07">(&lt;/span>url&lt;span style="color:#719e07">);&lt;/span>
 &lt;span style="color:#586e75">// ...
-&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>时，注入的 &lt;code>Adaptive&lt;/code> 实例可以提取事先定义好的 Key 来决定使用哪个 &lt;code>WheelMaker&lt;/code> 实现来调用对应实现的真正的 &lt;code>makeWheel&lt;/code> 方法。如提取 &lt;code>wheel.type&lt;/code> Key，即 &lt;code>url.get(&amp;quot;wheel.type&amp;quot;)&lt;/code> 来决定 &lt;code>WheelMaker&lt;/code> 实现。&lt;code>Adaptive&lt;/code> 实例的逻辑是固定，从 URL 中提取事先定义好的 Key，动态生成真正的实现并执行它。&lt;/p>
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>时，注入的 &lt;code>Adaptive&lt;/code> 实例可以提取事先定义好的 Key 来决定使用哪个 &lt;code>WheelMaker&lt;/code> 实现来调用对应实现的真正的 &lt;code>makeWheel&lt;/code> 方法。如提取 &lt;code>wheel.type&lt;/code> Key，即 &lt;code>url.get(&amp;quot;wheel.type&amp;quot;)&lt;/code> 来决定 &lt;code>WheelMaker&lt;/code> 实现。&lt;code>Adaptive&lt;/code> 实例的逻辑是固定的，从 URL 中提取事先定义好的 Key，动态生成真正的实现并执行它。&lt;/p>
 &lt;p>&lt;code>ExtensionLoader&lt;/code> 里面的扩展点注入的 &lt;code>Adaptive&lt;/code> 实现是在dubbo加载扩展点时动态生成的。Key是从URL中获取的，而URL中Key的值是在扩展点接口的方法定义上通过@Adaptive注解提供的。&lt;/p>
 &lt;p>下面是 Dubbo 的 Transporter 扩展点的代码：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">Transporter&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
@@ -300,7 +300,7 @@ Client &lt;span style="color:#268bd2">connect&lt;/span>&lt;span style="color:#71
 &lt;h3 id="服务提供者暴露一个服务的详细过程">服务提供者暴露一个服务的详细过程&lt;/h3>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/dev/dubbo_rpc_export.jpg" alt="/dev-guide/images/dubbo_rpc_export.jpg">&lt;/p>
 &lt;p>上图是服务提供者暴露服务的主过程：&lt;/p>
-&lt;p>首先 &lt;code>ServiceConfig&lt;/code> 类拿到对外提供服务的实际类 ref(如：HelloWorldImpl),然后通过 &lt;code>ProxyFactory&lt;/code> 类的 &lt;code>getInvoker&lt;/code> 方法使用 ref 生成一个 &lt;code>AbstractProxyInvoker&lt;/code> 实例，到这一步就完成具体服务到 &lt;code>Invoker&lt;/code> 的转化。接下来就是 &lt;code>Invoker&lt;/code> 转换到 &lt;code>Exporter&lt;/code> 的过程。&lt;/p>
+&lt;p>首先 &lt;code>ServiceConfig&lt;/code> 类拿到对外提供服务的实际类 ref（如：HelloWorldImpl），然后通过 &lt;code>ProxyFactory&lt;/code> 类的 &lt;code>getInvoker&lt;/code> 方法使用 ref 生成一个 &lt;code>AbstractProxyInvoker&lt;/code> 实例，到这一步就完成具体服务到 &lt;code>Invoker&lt;/code> 的转化。接下来就是 &lt;code>Invoker&lt;/code> 转换到 &lt;code>Exporter&lt;/code> 的过程。&lt;/p>
 &lt;p>Dubbo 处理服务暴露的关键就在 &lt;code>Invoker&lt;/code> 转换到 &lt;code>Exporter&lt;/code> 的过程，上图中的红色部分。下面我们以 Dubbo 和 RMI 这两种典型协议的实现来进行说明：&lt;/p>
 &lt;h4 id="dubbo-的实现">Dubbo 的实现&lt;/h4>
 &lt;p>Dubbo 协议的 &lt;code>Invoker&lt;/code> 转为 &lt;code>Exporter&lt;/code> 发生在 &lt;code>DubboProtocol&lt;/code> 类的 &lt;code>export&lt;/code> 方法，它主要是打开 socket 侦听服务，并接收客户端发来的各种请求，通讯细节由 Dubbo 自己实现。&lt;/p>
@@ -309,11 +309,11 @@ Client &lt;span style="color:#268bd2">connect&lt;/span>&lt;span style="color:#71
 &lt;h3 id="服务消费者消费一个服务的详细过程">服务消费者消费一个服务的详细过程&lt;/h3>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/dev/dubbo_rpc_refer.jpg" alt="/dev-guide/images/dubbo_rpc_refer.jpg">&lt;/p>
 &lt;p>上图是服务消费的主过程：&lt;/p>
-&lt;p>首先 &lt;code>ReferenceConfig&lt;/code> 类的 &lt;code>init&lt;/code> 方法调用 &lt;code>Protocol&lt;/code> 的 &lt;code>refer&lt;/code> 方法生成 &lt;code>Invoker&lt;/code> 实例(如上图中的红色部分)，这是服务消费的关键。接下来把 &lt;code>Invoker&lt;/code> 转换为客户端需要的接口(如：HelloWorld)。&lt;/p>
+&lt;p>首先 &lt;code>ReferenceConfig&lt;/code> 类的 &lt;code>init&lt;/code> 方法调用 &lt;code>Protocol&lt;/code> 的 &lt;code>refer&lt;/code> 方法生成 &lt;code>Invoker&lt;/code> 实例（如上图中的红色部分），这是服务消费的关键。接下来把 &lt;code>Invoker&lt;/code> 转换为客户端需要的接口（如：HelloWorld）。&lt;/p>
 &lt;p>关于每种协议如 RMI/Dubbo/Web service 等它们在调用 &lt;code>refer&lt;/code> 方法生成 &lt;code>Invoker&lt;/code> 实例的细节和上一章节所描述的类似。&lt;/p>
 &lt;h3 id="满眼都是-invoker">满眼都是 Invoker&lt;/h3>
 &lt;p>由于 &lt;code>Invoker&lt;/code> 是 Dubbo 领域模型中非常重要的一个概念，很多设计思路都是向它靠拢。这就使得 &lt;code>Invoker&lt;/code> 渗透在整个实现代码里，对于刚开始接触 Dubbo 的人，确实容易给搞混了。
-下面我们用一个精简的图来说明最重要的两种 &lt;code>Invoker&lt;/code>：服务提供 &lt;code>Invoker&lt;/code> 和服务消费 &lt;code>Invoker&lt;/code>：&lt;/p>
+下面我们用一个精简的图来说明最重要的两种 &lt;code>Invoker&lt;/code>——服务提供 &lt;code>Invoker&lt;/code> 和服务消费 &lt;code>Invoker&lt;/code>：&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/dev/dubbo_rpc_invoke.jpg" alt="/dev-guide/images/dubbo_rpc_invoke.jpg">&lt;/p>
 &lt;p>为了更好的解释上面这张图，我们结合服务消费和提供者的代码示例来进行说明：&lt;/p>
 &lt;p>服务消费者代码：&lt;/p>
@@ -340,27 +340,27 @@ String hello &lt;span style="color:#719e07">=&lt;/span> demoService&lt;span styl
 &lt;ul>
 &lt;li>
 &lt;p>Magic - Magic High &amp;amp; Magic Low (16 bits)&lt;/p>
-&lt;p>Identifies dubbo protocol with value: 0xdabb&lt;/p>
+&lt;p>标识协议版本号，Dubbo 协议：0xdabb&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Req/Res (1 bit)&lt;/p>
-&lt;p>Identifies this is a request or response. Request - 1; Response - 0.&lt;/p>
+&lt;p>标识是请求或响应。请求： 1; 响应： 0。&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>2 Way (1 bit)&lt;/p>
-&lt;p>Only useful when Req/Res is 1 (Request), expect for a return value from server or not. Set to 1 if need a return value from server.&lt;/p>
+&lt;p>仅在 Req/Res 为1（请求）时才有用，标记是否期望从服务器返回值。如果需要来自服务器的返回值，则设置为1。&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Event (1 bit)&lt;/p>
-&lt;p>Identifies an event message or not, for example, heartbeat event. Set to 1 if this is an event.&lt;/p>
+&lt;p>标识是否是事件消息，例如，心跳事件。如果这是一个事件，则设置为1。&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Serialization ID (5 bit)&lt;/p>
-&lt;p>Identifies serialization type: the value for fastjson is 6.&lt;/p>
+&lt;p>标识序列化类型：比如 fastjson 的值为6。&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Status (8 bits)&lt;/p>
-&lt;p>Only useful when Req/Res is 0 (Response), identifies the status of response&lt;/p>
+&lt;p>仅在 Req/Res 为0（响应）时有用，用于标识响应的状态。&lt;/p>
 &lt;ul>
 &lt;li>20 - OK&lt;/li>
 &lt;li>30 - CLIENT_TIMEOUT&lt;/li>
@@ -376,21 +376,17 @@ String hello &lt;span style="color:#719e07">=&lt;/span> demoService&lt;span styl
 &lt;/li>
 &lt;li>
 &lt;p>Request ID (64 bits)&lt;/p>
-&lt;p>Identifies an unique request. Numeric (long).&lt;/p>
+&lt;p>标识唯一请求。类型为long。&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>Data Length (32)&lt;/p>
-&lt;p>Length of the content (the variable part) after serialization, counted by bytes. Numeric (integer).&lt;/p>
+&lt;p>Data Length (32 bits)&lt;/p>
+&lt;p>序列化后的内容长度（可变部分），按字节计数。int类型。&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Variable Part&lt;/p>
-&lt;p>Each part is a byte[] after serialization with specific serialization type, identifies by Serialization ID.&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;p>Every part is a byte[] after serialization with specific serialization type, identifies by Serialization ID&lt;/p>
-&lt;ol>
-&lt;li>
-&lt;p>If the content is a Request (Req/Res = 1), each part consists of the content, in turn is:&lt;/p>
+&lt;p>被特定的序列化类型（由序列化 ID 标识）序列化后，每个部分都是一个 byte [] 或者 byte&lt;/p>
+&lt;ul>
+&lt;li>如果是请求包 ( Req/Res = 1)，则每个部分依次为：
 &lt;ul>
 &lt;li>Dubbo version&lt;/li>
 &lt;li>Service name&lt;/li>
@@ -401,15 +397,22 @@ String hello &lt;span style="color:#719e07">=&lt;/span> demoService&lt;span styl
 &lt;li>Attachments&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>
-&lt;p>If the content is a Response (Req/Res = 0), each part consists of the content, in turn is:&lt;/p>
+&lt;li>如果是响应包（Req/Res = 0），则每个部分依次为：
 &lt;ul>
-&lt;li>Return value type, identifies what kind of value returns from server side: RESPONSE_NULL_VALUE - 2, RESPONSE_VALUE - 1, RESPONSE_WITH_EXCEPTION - 0.&lt;/li>
-&lt;li>Return value, the real value returns from server.&lt;/li>
+&lt;li>返回值类型(byte)，标识从服务器端返回的值类型：
+&lt;ul>
+&lt;li>返回空值：RESPONSE_NULL_VALUE 2&lt;/li>
+&lt;li>正常响应值： RESPONSE_VALUE 1&lt;/li>
+&lt;li>异常：RESPONSE_WITH_EXCEPTION 0&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;/ol>
-&lt;p>**注意：**对于(Variable Part)变长部分，当前版本的dubbo框架使用json序列化时，在每部分内容间额外增加了换行符作为分隔，请选手在Variable Part的每个part后额外增加换行符， 如：&lt;/p>
+&lt;li>返回值：从服务端返回的响应bytes&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>注意：&lt;/strong> 对于(Variable Part)变长部分，当前版本的Dubbo 框架使用json序列化时，在每部分内容间额外增加了换行符作为分隔，请在Variable Part的每个part后额外增加换行符， 如：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">Dubbo version bytes (换行符)
 Service name bytes (换行符)
 ...

@@ -18,11 +18,11 @@
 <meta property="og:description" content="Dubbo 代码中的一些实现细节">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docsv2.7/dev/implementation/"><meta property="article:section" content="docsv2.7">
-<meta property="article:modified_time" content="2021-07-27T20:08:31+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-08-02T17:47:07+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="实现细节">
 <meta itemprop=description content="Dubbo 代码中的一些实现细节">
-<meta itemprop=dateModified content="2021-07-27T20:08:31+08:00">
-<meta itemprop=wordCount content="666">
+<meta itemprop=dateModified content="2021-08-02T17:47:07+08:00">
+<meta itemprop=wordCount content="512">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="实现细节">
 <meta name=twitter:description content="Dubbo 代码中的一些实现细节">
@@ -535,7 +535,7 @@ Releases
 <h3 id=服务提供者暴露一个服务的详细过程>服务提供者暴露一个服务的详细过程</h3>
 <p><img src=/imgs/dev/dubbo_rpc_export.jpg alt=/dev-guide/images/dubbo_rpc_export.jpg></p>
 <p>上图是服务提供者暴露服务的主过程：</p>
-<p>首先 <code>ServiceConfig</code> 类拿到对外提供服务的实际类 ref(如：HelloWorldImpl),然后通过 <code>ProxyFactory</code> 类的 <code>getInvoker</code> 方法使用 ref 生成一个 <code>AbstractProxyInvoker</code> 实例，到这一步就完成具体服务到 <code>Invoker</code> 的转化。接下来就是 <code>Invoker</code> 转换到 <code>Exporter</code> 的过程。</p>
+<p>首先 <code>ServiceConfig</code> 类拿到对外提供服务的实际类 ref（如：HelloWorldImpl），然后通过 <code>ProxyFactory</code> 类的 <code>getInvoker</code> 方法使用 ref 生成一个 <code>AbstractProxyInvoker</code> 实例，到这一步就完成具体服务到 <code>Invoker</code> 的转化。接下来就是 <code>Invoker</code> 转换到 <code>Exporter</code> 的过程。</p>
 <p>Dubbo 处理服务暴露的关键就在 <code>Invoker</code> 转换到 <code>Exporter</code> 的过程，上图中的红色部分。下面我们以 Dubbo 和 RMI 这两种典型协议的实现来进行说明：</p>
 <h4 id=dubbo-的实现>Dubbo 的实现</h4>
 <p>Dubbo 协议的 <code>Invoker</code> 转为 <code>Exporter</code> 发生在 <code>DubboProtocol</code> 类的 <code>export</code> 方法，它主要是打开 socket 侦听服务，并接收客户端发来的各种请求，通讯细节由 Dubbo 自己实现。</p>
@@ -544,11 +544,11 @@ Releases
 <h3 id=服务消费者消费一个服务的详细过程>服务消费者消费一个服务的详细过程</h3>
 <p><img src=/imgs/dev/dubbo_rpc_refer.jpg alt=/dev-guide/images/dubbo_rpc_refer.jpg></p>
 <p>上图是服务消费的主过程：</p>
-<p>首先 <code>ReferenceConfig</code> 类的 <code>init</code> 方法调用 <code>Protocol</code> 的 <code>refer</code> 方法生成 <code>Invoker</code> 实例(如上图中的红色部分)，这是服务消费的关键。接下来把 <code>Invoker</code> 转换为客户端需要的接口(如：HelloWorld)。</p>
+<p>首先 <code>ReferenceConfig</code> 类的 <code>init</code> 方法调用 <code>Protocol</code> 的 <code>refer</code> 方法生成 <code>Invoker</code> 实例（如上图中的红色部分），这是服务消费的关键。接下来把 <code>Invoker</code> 转换为客户端需要的接口（如：HelloWorld）。</p>
 <p>关于每种协议如 RMI/Dubbo/Web service 等它们在调用 <code>refer</code> 方法生成 <code>Invoker</code> 实例的细节和上一章节所描述的类似。</p>
 <h3 id=满眼都是-invoker>满眼都是 Invoker</h3>
 <p>由于 <code>Invoker</code> 是 Dubbo 领域模型中非常重要的一个概念，很多设计思路都是向它靠拢。这就使得 <code>Invoker</code> 渗透在整个实现代码里，对于刚开始接触 Dubbo 的人，确实容易给搞混了。
-下面我们用一个精简的图来说明最重要的两种 <code>Invoker</code>：服务提供 <code>Invoker</code> 和服务消费 <code>Invoker</code>：</p>
+下面我们用一个精简的图来说明最重要的两种 <code>Invoker</code>——服务提供 <code>Invoker</code> 和服务消费 <code>Invoker</code>：</p>
 <p><img src=/imgs/dev/dubbo_rpc_invoke.jpg alt=/dev-guide/images/dubbo_rpc_invoke.jpg></p>
 <p>为了更好的解释上面这张图，我们结合服务消费和提供者的代码示例来进行说明：</p>
 <p>服务消费者代码：</p>
@@ -579,27 +579,27 @@ Releases
 <ul>
 <li>
 <p>Magic - Magic High & Magic Low (16 bits)</p>
-<p>Identifies dubbo protocol with value: 0xdabb</p>
+<p>标识协议版本号，Dubbo 协议：0xdabb</p>
 </li>
 <li>
 <p>Req/Res (1 bit)</p>
-<p>Identifies this is a request or response. Request - 1; Response - 0.</p>
+<p>标识是请求或响应。请求： 1; 响应： 0。</p>
 </li>
 <li>
 <p>2 Way (1 bit)</p>
-<p>Only useful when Req/Res is 1 (Request), expect for a return value from server or not. Set to 1 if need a return value from server.</p>
+<p>仅在 Req/Res 为1（请求）时才有用，标记是否期望从服务器返回值。如果需要来自服务器的返回值，则设置为1。</p>
 </li>
 <li>
 <p>Event (1 bit)</p>
-<p>Identifies an event message or not, for example, heartbeat event. Set to 1 if this is an event.</p>
+<p>标识是否是事件消息，例如，心跳事件。如果这是一个事件，则设置为1。</p>
 </li>
 <li>
 <p>Serialization ID (5 bit)</p>
-<p>Identifies serialization type: the value for fastjson is 6.</p>
+<p>标识序列化类型：比如 fastjson 的值为6。</p>
 </li>
 <li>
 <p>Status (8 bits)</p>
-<p>Only useful when Req/Res is 0 (Response), identifies the status of response</p>
+<p>仅在 Req/Res 为0（响应）时有用，用于标识响应的状态。</p>
 <ul>
 <li>20 - OK</li>
 <li>30 - CLIENT_TIMEOUT</li>
@@ -615,21 +615,17 @@ Releases
 </li>
 <li>
 <p>Request ID (64 bits)</p>
-<p>Identifies an unique request. Numeric (long).</p>
+<p>标识唯一请求。类型为long。</p>
 </li>
 <li>
-<p>Data Length (32)</p>
-<p>Length of the content (the variable part) after serialization, counted by bytes. Numeric (integer).</p>
+<p>Data Length (32 bits)</p>
+<p>序列化后的内容长度（可变部分），按字节计数。int类型。</p>
 </li>
 <li>
 <p>Variable Part</p>
-<p>Each part is a byte[] after serialization with specific serialization type, identifies by Serialization ID.</p>
-</li>
-</ul>
-<p>Every part is a byte[] after serialization with specific serialization type, identifies by Serialization ID</p>
-<ol>
-<li>
-<p>If the content is a Request (Req/Res = 1), each part consists of the content, in turn is:</p>
+<p>被特定的序列化类型（由序列化 ID 标识）序列化后，每个部分都是一个 byte [] 或者 byte</p>
+<ul>
+<li>如果是请求包 ( Req/Res = 1)，则每个部分依次为：
 <ul>
 <li>Dubbo version</li>
 <li>Service name</li>
@@ -640,15 +636,22 @@ Releases
 <li>Attachments</li>
 </ul>
 </li>
-<li>
-<p>If the content is a Response (Req/Res = 0), each part consists of the content, in turn is:</p>
+<li>如果是响应包（Req/Res = 0），则每个部分依次为：
 <ul>
-<li>Return value type, identifies what kind of value returns from server side: RESPONSE_NULL_VALUE - 2, RESPONSE_VALUE - 1, RESPONSE_WITH_EXCEPTION - 0.</li>
-<li>Return value, the real value returns from server.</li>
+<li>返回值类型(byte)，标识从服务器端返回的值类型：
+<ul>
+<li>返回空值：RESPONSE_NULL_VALUE 2</li>
+<li>正常响应值： RESPONSE_VALUE 1</li>
+<li>异常：RESPONSE_WITH_EXCEPTION 0</li>
 </ul>
 </li>
-</ol>
-<p>**注意：**对于(Variable Part)变长部分，当前版本的dubbo框架使用json序列化时，在每部分内容间额外增加了换行符作为分隔，请选手在Variable Part的每个part后额外增加换行符， 如：</p>
+<li>返回值：从服务端返回的响应bytes</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>注意：</strong> 对于(Variable Part)变长部分，当前版本的Dubbo 框架使用json序列化时，在每部分内容间额外增加了换行符作为分隔，请在Variable Part的每个part后额外增加换行符， 如：</p>
 <div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>Dubbo version bytes (换行符)
 Service name bytes  (换行符)
 ...
@@ -691,7 +694,7 @@ Sorry to hear that. Please <a href=https://github.com/apache/dubbo-website/issue
 </p>
 <script>const yesButton=document.querySelector('.feedback--answer-yes'),noButton=document.querySelector('.feedback--answer-no'),yesResponse=document.querySelector('.feedback--response-yes'),noResponse=document.querySelector('.feedback--response-no'),disableButtons=()=>{yesButton.disabled=!0,noButton.disabled=!0},sendFeedback=b=>{if(typeof ga!='function')return;const a={command:'send',hitType:'event',category:'Helpful',action:'click',label:window.location.pathname,value:b};ga(a.command,a.hitType,a.category,a.action,a.label,a.value)};yesButton.addEventListener('click',()=>{yesResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(1)}),noButton.addEventListener('click',()=>{noResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(0)})</script>
 <br>
-<div class="text-muted mt-5 pt-3 border-top">最后修改 July 27, 2021: <a href=/commit/291484dd37ffc6b6440f408845f84358517bf26d>fix doc, add section menu config (291484d)</a>
+<div class="text-muted mt-5 pt-3 border-top">最后修改 August 2, 2021: <a href=/commit/ccc069d763b2641ab8d2af368f9243d8c2eff74d>修正文档 (#886) (ccc069d)</a>
 </div>
 </div>
 </main>

@@ -329,7 +329,86 @@ String hello &lt;span style="color:#719e07">=&lt;/span> demoService&lt;span styl
 &lt;h2 id="remote-communication-details">Remote communication details&lt;/h2>
 &lt;h3 id="protocol-header-agreement">Protocol header agreement&lt;/h3>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/dev/dubbo_protocol_header.png" alt="/dev-guide/images/dubbo_protocol_header.jpg">&lt;/p>
-&lt;h3 id="thread-dispatch-model">Thread dispatch model&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>Magic - Magic High &amp;amp; Magic Low (16 bits)&lt;/p>
+&lt;p>Identify protocol version, Dubbo protocol: 0xdabb&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Req/Res (1 bit)&lt;/p>
+&lt;p>Identify a request or response. request: 1; response: 0.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>2 Way (1 bit)&lt;/p>
+&lt;p>Only useful when Req/Res is 1(request), identifying if you expect to return a value from the server. Set to 1 if a return value from the server is required.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Event (1 bit)&lt;/p>
+&lt;p>Identifies whether it is an event message, for example, a heartbeat event. Set to 1 if this is an event.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Serialization ID (5 bit)&lt;/p>
+&lt;p>Identifies the serialization type: for example, the value of fastjson is 6.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Status (8 bits)&lt;/p>
+&lt;p>Only useful when Req/Res is 0 (response), used to identify the status of the response&lt;/p>
+&lt;ul>
+&lt;li>20 - OK&lt;/li>
+&lt;li>30 - CLIENT_TIMEOUT&lt;/li>
+&lt;li>31 - SERVER_TIMEOUT&lt;/li>
+&lt;li>40 - BAD_REQUEST&lt;/li>
+&lt;li>50 - BAD_RESPONSE&lt;/li>
+&lt;li>60 - SERVICE_NOT_FOUND&lt;/li>
+&lt;li>70 - SERVICE_ERROR&lt;/li>
+&lt;li>80 - SERVER_ERROR&lt;/li>
+&lt;li>90 - CLIENT_ERROR&lt;/li>
+&lt;li>100 - SERVER_THREADPOOL_EXHAUSTED_ERROR&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Request ID (64 bits)&lt;/p>
+&lt;p>Identifies the only request, the type is long.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Data Length (32 bits)&lt;/p>
+&lt;p>The length of the serialized content (variable part), counted in bytes, the type is int.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Variable Part&lt;/p>
+&lt;p>After being serialized by a specific serialization type (identified by the serialization ID), each part is a byte [] or byte.&lt;/p>
+&lt;ul>
+&lt;li>If it is a request packet (Req/Res = 1), each part is:
+&lt;ul>
+&lt;li>Dubbo version&lt;/li>
+&lt;li>Service name&lt;/li>
+&lt;li>Service version&lt;/li>
+&lt;li>Method name&lt;/li>
+&lt;li>Method parameter types&lt;/li>
+&lt;li>Method arguments&lt;/li>
+&lt;li>Attachments&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>If it is a response packet (Req/Res = 0), each part is:
+&lt;ul>
+&lt;li>Return value&amp;rsquo;s type (byte), identifying the type of value returned from the server:
+&lt;ul>
+&lt;li>Return null: RESPONSE_NULL_VALUE 2&lt;/li>
+&lt;li>Normal response value: RESPONSE_VALUE 1&lt;/li>
+&lt;li>Exception: RESPONSE_WITH_EXCEPTION 0&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Return value: response bytes returned from the server&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>Note:&lt;/strong> For the variable part, when uses json serialization in current version of Dubbo framework, an additional line break is added as a separator between each part of the content. Please add a new line break after each part of the variable part, such as:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">Dubbo version bytes (line break)
+Service name bytes (line break)
+...
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="thread-dispatch-model">Thread dispatch model&lt;/h3>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/dev/dubbo-protocol.jpg" alt="/dev-guide/images/dubbo-protocol.jpg">&lt;/p>
 &lt;ul>
 &lt;li>Dispather: &lt;code>all&lt;/code>, &lt;code>direct&lt;/code>, &lt;code>message&lt;/code>, &lt;code>execution&lt;/code>, &lt;code>connection&lt;/code>&lt;/li>

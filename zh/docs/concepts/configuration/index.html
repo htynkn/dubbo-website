@@ -18,11 +18,11 @@
 <meta property="og:description" content="描述 Dubbo 支持的配置，Dubbo 的动态配置能力。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docs/concepts/configuration/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-07-27T20:08:31+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-08-02T17:47:07+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="配置管理">
 <meta itemprop=description content="描述 Dubbo 支持的配置，Dubbo 的动态配置能力。">
-<meta itemprop=dateModified content="2021-07-27T20:08:31+08:00">
-<meta itemprop=wordCount content="0">
+<meta itemprop=dateModified content="2021-08-02T17:47:07+08:00">
+<meta itemprop=wordCount content="40">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="配置管理">
 <meta name=twitter:description content="描述 Dubbo 支持的配置，Dubbo 的动态配置能力。">
@@ -311,6 +311,7 @@ Releases
 </li>
 </ul>
 </ul>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesconfig-center href=/zh/docs/references/config-center/>配置中心</a>
 <ul class="td-sidebar-nav__section pr-md-3">
 <li class=td-sidebar-nav__section-title>
 <a href=/zh/docs/references/registry/ class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">注册中心参考手册</a>
@@ -369,13 +370,13 @@ Releases
 </li>
 <ul>
 <li class=collapse id=zhdocsreferencesconfiguration>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesconfigurationxml href=/zh/docs/references/configuration/xml/>XML 配置</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesconfigurationconfig-center href=/zh/docs/references/configuration/config-center/>动态配置中心</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesconfigurationproperties href=/zh/docs/references/configuration/properties/>属性配置</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesconfigurationenvironment-variables href=/zh/docs/references/configuration/environment-variables/>自动加载环境变量</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesconfigurationoverview href=/zh/docs/references/configuration/overview/>概述</a>
 <a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesconfigurationapi href=/zh/docs/references/configuration/api/>API 配置</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesconfigurationxml href=/zh/docs/references/configuration/xml/>XML 配置</a>
 <a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesconfigurationannotation href=/zh/docs/references/configuration/annotation/>注解配置</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesconfigurationconfiguration-load-process href=/zh/docs/references/configuration/configuration-load-process/>配置加载流程</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesconfigurationproperties href=/zh/docs/references/configuration/properties/>属性配置</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesconfigurationexternal-config href=/zh/docs/references/configuration/external-config/>外部化配置</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesconfigurationenvironment-variables href=/zh/docs/references/configuration/environment-variables/>自动加载环境变量</a>
 </li>
 </ul>
 </ul>
@@ -458,6 +459,17 @@ Releases
 </div>
 </div>
 <div class="d-none d-xl-block col-xl-2 td-toc d-print-none">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#启动阶段配置项>启动阶段配置项</a>
+<ul>
+<li><a href=#配置方式>配置方式</a></li>
+</ul>
+</li>
+<li><a href=#服务治理规则>服务治理规则</a></li>
+<li><a href=#动态配置项>动态配置项</a></li>
+</ul>
+</nav>
 </div>
 <main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main>
 <nav aria-label=breadcrumb class="d-none d-md-block d-print-none">
@@ -476,6 +488,54 @@ Releases
 <div class=td-content>
 <h1>配置管理</h1>
 <div class=lead>描述 Dubbo 支持的配置，Dubbo 的动态配置能力。</div>
+<p>Dubbo配置主要分为几大类： 启动阶段配置项、服务治理规则、动态配置项。</p>
+<h2 id=启动阶段配置项>启动阶段配置项</h2>
+<p>Dubbo启动时读取的配置项，用于初始化各个组件，不会监听这些配置项的变化。</p>
+<p>Dubbo的配置来源有多种，配置项划分为多个配置组件，详细请参考 <a href=../../references/configuration/overview>配置概述</a>。</p>
+<h3 id=配置方式>配置方式</h3>
+<p>按照编程方式可以分为四种方式：API配置、XML配置、Annotation配置、属性配置。</p>
+<h4 id=api配置>API配置</h4>
+<p>以Java编码的方式组织配置，包括Raw API和Bootstrap API，具体请参考<a href=../../references/configuration/api>API配置</a>。</p>
+<h4 id=xml配置>XML配置</h4>
+<p>以XML方式配置各种组件，支持与Spring无缝集成，具体请参考<a href=../../references/configuration/xml>XML配置</a>。</p>
+<h4 id=annotation配置>Annotation配置</h4>
+<p>以注解方式暴露服务和引用服务接口，支持与Spring无缝集成，具体请参考<a href=../../references/configuration/annotation>Annotation配置</a>。</p>
+<h4 id=属性配置>属性配置</h4>
+<p>根据Key-value属性生成配置组件，类似SpringBoot的ConfigurationProperties，具体请参考<a href=../../references/configuration/properties>属性配置</a>。</p>
+<p>属性配置的另外一个重要的功能特性是<a href=../../references/configuration/properties#%E5%B1%9E%E6%80%A7%E8%A6%86%E7%9B%96>属性覆盖</a>，使用外部属性的值覆盖已创建的配置组件属性。</p>
+<p>如果要将属性配置放到外部的配置中心，请参考<a href=../../references/configuration/external-config>外部化配置</a>。</p>
+<h2 id=服务治理规则>服务治理规则</h2>
+<p>服务治理规则主要作用是改变运行时服务的行为和选址逻辑，达到限流，权重配置等目的，包括覆盖规则、标签路由、条件路由、条件路由。</p>
+<p>Dubbo启动后监听服务治理相关的配置项，当配置发生变化时，会自动进行相应的处理。</p>
+<p>服务治理规则的用法介绍请参考 <a href=../../references/governance>服务治理和配置管理</a></p>
+<p>服务治理规则的存储方法请参考 <a href=../../references/config-center#%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86>配置中心#服务治理</a></p>
+<h2 id=动态配置项>动态配置项</h2>
+<p>动态配置项一般用于控制动态开关。</p>
+<p>Dubbo启动后监听动态配置项，当配置发生变化时，会自动进行相应的处理。</p>
+<p>动态配置的存储方式请参考 <a href=../../references/config-center#%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE>配置中心#动态配置</a></p>
+<p>常用的动态配置项如下：</p>
+<p><strong>[TODO 补充动态配置项说明]</strong></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>描述</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dubbo.application.migration.threshold</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>dubbo.application.service-discovery.migration</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <style>.feedback--answer{display:inline-block}.feedback--answer-no{margin-left:1em}.feedback--response{display:none;margin-top:1em}.feedback--response__visible{display:block}</style>
 <h2 class=feedback--title>Feedback</h2>
 <p class=feedback--question>Was this page helpful?</p>
@@ -489,7 +549,7 @@ Sorry to hear that. Please <a href=https://github.com/apache/dubbo-website/issue
 </p>
 <script>const yesButton=document.querySelector('.feedback--answer-yes'),noButton=document.querySelector('.feedback--answer-no'),yesResponse=document.querySelector('.feedback--response-yes'),noResponse=document.querySelector('.feedback--response-no'),disableButtons=()=>{yesButton.disabled=!0,noButton.disabled=!0},sendFeedback=b=>{if(typeof ga!='function')return;const a={command:'send',hitType:'event',category:'Helpful',action:'click',label:window.location.pathname,value:b};ga(a.command,a.hitType,a.category,a.action,a.label,a.value)};yesButton.addEventListener('click',()=>{yesResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(1)}),noButton.addEventListener('click',()=>{noResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(0)})</script>
 <br>
-<div class="text-muted mt-5 pt-3 border-top">最后修改 July 27, 2021: <a href=/commit/291484dd37ffc6b6440f408845f84358517bf26d>fix doc, add section menu config (291484d)</a>
+<div class="text-muted mt-5 pt-3 border-top">最后修改 August 2, 2021: <a href=/commit/ccc069d763b2641ab8d2af368f9243d8c2eff74d>修正文档 (#886) (ccc069d)</a>
 </div>
 </div>
 </main>

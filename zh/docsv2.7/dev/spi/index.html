@@ -18,10 +18,10 @@
 <meta property="og:description" content="Dubbo 中的扩展点加载机制">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docsv2.7/dev/spi/"><meta property="article:section" content="docsv2.7">
-<meta property="article:modified_time" content="2021-07-27T20:08:31+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-08-02T17:47:07+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="扩展点加载">
 <meta itemprop=description content="Dubbo 中的扩展点加载机制">
-<meta itemprop=dateModified content="2021-07-27T20:08:31+08:00">
+<meta itemprop=dateModified content="2021-08-02T17:47:07+08:00">
 <meta itemprop=wordCount content="443">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="扩展点加载">
@@ -607,7 +607,7 @@ Releases
 <div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#586e75>// ...
 </span><span style=color:#586e75></span>Wheel wheel <span style=color:#719e07>=</span> wheelMaker<span style=color:#719e07>.</span>makeWheel<span style=color:#719e07>(</span>url<span style=color:#719e07>);</span>
 <span style=color:#586e75>// ...
-</span></code></pre></div><p>时，注入的 <code>Adaptive</code> 实例可以提取事先定义好的 Key 来决定使用哪个 <code>WheelMaker</code> 实现来调用对应实现的真正的 <code>makeWheel</code> 方法。如提取 <code>wheel.type</code> Key，即 <code>url.get("wheel.type")</code> 来决定 <code>WheelMaker</code> 实现。<code>Adaptive</code> 实例的逻辑是固定，从 URL 中提取事先定义好的 Key，动态生成真正的实现并执行它。</p>
+</span></code></pre></div><p>时，注入的 <code>Adaptive</code> 实例可以提取事先定义好的 Key 来决定使用哪个 <code>WheelMaker</code> 实现来调用对应实现的真正的 <code>makeWheel</code> 方法。如提取 <code>wheel.type</code> Key，即 <code>url.get("wheel.type")</code> 来决定 <code>WheelMaker</code> 实现。<code>Adaptive</code> 实例的逻辑是固定的，从 URL 中提取事先定义好的 Key，动态生成真正的实现并执行它。</p>
 <p><code>ExtensionLoader</code> 里面的扩展点注入的 <code>Adaptive</code> 实现是在dubbo加载扩展点时动态生成的。Key是从URL中获取的，而URL中Key的值是在扩展点接口的方法定义上通过@Adaptive注解提供的。</p>
 <p>下面是 Dubbo 的 Transporter 扩展点的代码：</p>
 <div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#268bd2>public</span> <span style=color:#268bd2>interface</span> <span style=color:#268bd2>Transporter</span> <span style=color:#719e07>{</span>
@@ -667,7 +667,7 @@ Sorry to hear that. Please <a href=https://github.com/apache/dubbo-website/issue
 </p>
 <script>const yesButton=document.querySelector('.feedback--answer-yes'),noButton=document.querySelector('.feedback--answer-no'),yesResponse=document.querySelector('.feedback--response-yes'),noResponse=document.querySelector('.feedback--response-no'),disableButtons=()=>{yesButton.disabled=!0,noButton.disabled=!0},sendFeedback=b=>{if(typeof ga!='function')return;const a={command:'send',hitType:'event',category:'Helpful',action:'click',label:window.location.pathname,value:b};ga(a.command,a.hitType,a.category,a.action,a.label,a.value)};yesButton.addEventListener('click',()=>{yesResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(1)}),noButton.addEventListener('click',()=>{noResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(0)})</script>
 <br>
-<div class="text-muted mt-5 pt-3 border-top">最后修改 July 27, 2021: <a href=/commit/291484dd37ffc6b6440f408845f84358517bf26d>fix doc, add section menu config (291484d)</a>
+<div class="text-muted mt-5 pt-3 border-top">最后修改 August 2, 2021: <a href=/commit/ccc069d763b2641ab8d2af368f9243d8c2eff74d>修正文档 (#886) (ccc069d)</a>
 </div>
 </div>
 </main>

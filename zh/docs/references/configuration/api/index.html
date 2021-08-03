@@ -18,11 +18,11 @@
 <meta property="og:description" content="以API 配置的方式来配置你的 Dubbo 应用">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docs/references/configuration/api/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-07-27T20:08:31+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-08-02T17:47:07+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="API 配置">
 <meta itemprop=description content="以API 配置的方式来配置你的 Dubbo 应用">
-<meta itemprop=dateModified content="2021-07-27T20:08:31+08:00">
-<meta itemprop=wordCount content="193">
+<meta itemprop=dateModified content="2021-08-02T17:47:07+08:00">
+<meta itemprop=wordCount content="497">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="API 配置">
 <meta name=twitter:description content="以API 配置的方式来配置你的 Dubbo 应用">
@@ -311,6 +311,7 @@ Releases
 </li>
 </ul>
 </ul>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesconfig-center href=/zh/docs/references/config-center/>配置中心</a>
 <ul class="td-sidebar-nav__section pr-md-3">
 <li class=td-sidebar-nav__section-title>
 <a href=/zh/docs/references/registry/ class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">注册中心参考手册</a>
@@ -369,13 +370,13 @@ Releases
 </li>
 <ul>
 <li class="collapse show" id=zhdocsreferencesconfiguration>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesconfigurationxml href=/zh/docs/references/configuration/xml/>XML 配置</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesconfigurationconfig-center href=/zh/docs/references/configuration/config-center/>动态配置中心</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesconfigurationproperties href=/zh/docs/references/configuration/properties/>属性配置</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesconfigurationenvironment-variables href=/zh/docs/references/configuration/environment-variables/>自动加载环境变量</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesconfigurationoverview href=/zh/docs/references/configuration/overview/>概述</a>
 <a class="td-sidebar-link td-sidebar-link__page active" id=m-zhdocsreferencesconfigurationapi href=/zh/docs/references/configuration/api/>API 配置</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesconfigurationxml href=/zh/docs/references/configuration/xml/>XML 配置</a>
 <a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesconfigurationannotation href=/zh/docs/references/configuration/annotation/>注解配置</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesconfigurationconfiguration-load-process href=/zh/docs/references/configuration/configuration-load-process/>配置加载流程</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesconfigurationproperties href=/zh/docs/references/configuration/properties/>属性配置</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesconfigurationexternal-config href=/zh/docs/references/configuration/external-config/>外部化配置</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsreferencesconfigurationenvironment-variables href=/zh/docs/references/configuration/environment-variables/>自动加载环境变量</a>
 </li>
 </ul>
 </ul>
@@ -462,8 +463,10 @@ Releases
 <ul>
 <li><a href=#服务提供者>服务提供者</a></li>
 <li><a href=#服务消费者>服务消费者</a></li>
-<li><a href=#特殊场景>特殊场景</a>
+<li><a href=#bootstrap-api>Bootstrap API</a></li>
+<li><a href=#其它配置>其它配置</a>
 <ul>
+<li><a href=#基本配置>基本配置</a></li>
 <li><a href=#方法级设置>方法级设置</a></li>
 <li><a href=#点对点直连>点对点直连</a></li>
 </ul>
@@ -491,90 +494,267 @@ Releases
 <div class=td-content>
 <h1>API 配置</h1>
 <div class=lead>以API 配置的方式来配置你的 Dubbo 应用</div>
-<p>API 属性与配置项一对一，各属性含义，请参见：<a href=../references/xml/>配置参考手册</a>，比如：<code>ApplicationConfig.setName("xxx")</code> 对应 <code>&lt;dubbo:application name="xxx" /></code> <sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup></p>
+<p>通过API编码方式组装配置，启动Dubbo，发布及订阅服务。此方式可以支持动态创建ReferenceConfig/ServiceConfig，结合泛化调用可以满足API Gateway或测试平台的需要。</p>
+<blockquote>
+<p>API 属性与XML配置项一一对应，各属性含义请参见：<a href=../../../references/xml/>XML配置参考手册</a>，比如：<code>ApplicationConfig.setName("xxx")</code> 对应 <code>&lt;dubbo:application name="xxx" /></code></p>
+</blockquote>
+<blockquote>
+<p>API使用范围说明：API 仅用于 OpenAPI, ESB, Test, Mock, Gateway 等系统集成，普通服务提供方或消费方，请采用<a href=../xml>XML 配置</a> 或
+<a href=../annotation>注解配置</a> 或 <a href=../properties>属性配置</a> 方式使用 Dubbo</p>
+</blockquote>
+<blockquote>
+<p>参考<a href=https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-api>API示例</a></p>
+</blockquote>
 <h2 id=服务提供者>服务提供者</h2>
+<p>通过ServiceConfig暴露服务接口，发布服务接口到注册中心。</p>
+<blockquote>
+<p>注意：为了更好支持Dubbo3的应用级服务发现，推荐使用新的DubboBootstrap API。</p>
+</blockquote>
 <div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#719e07>import</span> org.apache.dubbo.rpc.config.ApplicationConfig<span style=color:#719e07>;</span>
 <span style=color:#719e07>import</span> org.apache.dubbo.rpc.config.RegistryConfig<span style=color:#719e07>;</span>
 <span style=color:#719e07>import</span> org.apache.dubbo.rpc.config.ProviderConfig<span style=color:#719e07>;</span>
 <span style=color:#719e07>import</span> org.apache.dubbo.rpc.config.ServiceConfig<span style=color:#719e07>;</span>
-<span style=color:#719e07>import</span> com.xxx.XxxService<span style=color:#719e07>;</span>
-<span style=color:#719e07>import</span> com.xxx.XxxServiceImpl<span style=color:#719e07>;</span>
- 
-<span style=color:#586e75>// 服务实现
-</span><span style=color:#586e75></span>XxxService xxxService <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> XxxServiceImpl<span style=color:#719e07>();</span>
- 
-<span style=color:#586e75>// 当前应用配置
-</span><span style=color:#586e75></span>ApplicationConfig application <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ApplicationConfig<span style=color:#719e07>();</span>
-application<span style=color:#719e07>.</span>setName<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;xxx&#34;</span><span style=color:#719e07>);</span>
- 
-<span style=color:#586e75>// 连接注册中心配置
+<span style=color:#719e07>import</span> com.xxx.DemoService<span style=color:#719e07>;</span>
+<span style=color:#719e07>import</span> com.xxx.DemoServiceImpl<span style=color:#719e07>;</span>
+
+<span style=color:#268bd2>public</span> <span style=color:#268bd2>class</span> <span style=color:#268bd2>DemoProvider</span> <span style=color:#719e07>{</span>
+    <span style=color:#268bd2>public</span> <span style=color:#268bd2>static</span> <span style=color:#dc322f>void</span> <span style=color:#268bd2>main</span><span style=color:#719e07>(</span>String<span style=color:#719e07>[]</span> args<span style=color:#719e07>)</span> <span style=color:#719e07>{</span>
+        <span style=color:#586e75>// 服务实现
+</span><span style=color:#586e75></span>        DemoService demoService <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> DemoServiceImpl<span style=color:#719e07>();</span>
+
+        <span style=color:#586e75>// 当前应用配置
+</span><span style=color:#586e75></span>        ApplicationConfig application <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ApplicationConfig<span style=color:#719e07>();</span>
+        application<span style=color:#719e07>.</span>setName<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;demo-provider&#34;</span><span style=color:#719e07>);</span>
+
+        <span style=color:#586e75>// 连接注册中心配置
+</span><span style=color:#586e75></span>        RegistryConfig registry <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> RegistryConfig<span style=color:#719e07>();</span>
+        registry<span style=color:#719e07>.</span>setAddress<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;zookeeper://10.20.130.230:2181&#34;</span><span style=color:#719e07>);</span>
+
+        <span style=color:#586e75>// 服务提供者协议配置
+</span><span style=color:#586e75></span>        ProtocolConfig protocol <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ProtocolConfig<span style=color:#719e07>();</span>
+        protocol<span style=color:#719e07>.</span>setName<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;dubbo&#34;</span><span style=color:#719e07>);</span>
+        protocol<span style=color:#719e07>.</span>setPort<span style=color:#719e07>(</span>12345<span style=color:#719e07>);</span>
+        protocol<span style=color:#719e07>.</span>setThreads<span style=color:#719e07>(</span>200<span style=color:#719e07>);</span>
+
+        <span style=color:#586e75>// 注意：ServiceConfig为重对象，内部封装了与注册中心的连接，以及开启服务端口
+</span><span style=color:#586e75></span>        <span style=color:#586e75>// 服务提供者暴露服务配置
+</span><span style=color:#586e75></span>        ServiceConfig<span style=color:#719e07>&lt;</span>DemoService<span style=color:#719e07>&gt;</span> service <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ServiceConfig<span style=color:#719e07>&lt;</span>DemoService<span style=color:#719e07>&gt;();</span> <span style=color:#586e75>// 此实例很重，封装了与注册中心的连接，请自行缓存，否则可能造成内存和连接泄漏
+</span><span style=color:#586e75></span>        service<span style=color:#719e07>.</span>setApplication<span style=color:#719e07>(</span>application<span style=color:#719e07>);</span>
+        service<span style=color:#719e07>.</span>setRegistry<span style=color:#719e07>(</span>registry<span style=color:#719e07>);</span> <span style=color:#586e75>// 多个注册中心可以用setRegistries()
+</span><span style=color:#586e75></span>        service<span style=color:#719e07>.</span>setProtocol<span style=color:#719e07>(</span>protocol<span style=color:#719e07>);</span> <span style=color:#586e75>// 多个协议可以用setProtocols()
+</span><span style=color:#586e75></span>        service<span style=color:#719e07>.</span>setInterface<span style=color:#719e07>(</span>DemoService<span style=color:#719e07>.</span>class<span style=color:#719e07>);</span>
+        service<span style=color:#719e07>.</span>setRef<span style=color:#719e07>(</span>demoService<span style=color:#719e07>);</span>
+        service<span style=color:#719e07>.</span>setVersion<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;1.0.0&#34;</span><span style=color:#719e07>);</span>
+
+        <span style=color:#586e75>// 暴露及注册服务
+</span><span style=color:#586e75></span>        service<span style=color:#719e07>.</span>export<span style=color:#719e07>();</span>
+        
+        <span style=color:#586e75>// 挂起等待(防止进程退出）
+</span><span style=color:#586e75></span>        System<span style=color:#719e07>.</span>in<span style=color:#719e07>.</span>read<span style=color:#719e07>();</span>
+    <span style=color:#719e07>}</span>
+<span style=color:#719e07>}</span>
+</code></pre></div><h2 id=服务消费者>服务消费者</h2>
+<p>通过ReferenceConfig引用远程服务，从注册中心订阅服务接口。</p>
+<blockquote>
+<p>注意：为了更好支持Dubbo3的应用级服务发现，推荐使用新的DubboBootstrap API。</p>
+</blockquote>
+<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#719e07>import</span> org.apache.dubbo.rpc.config.ApplicationConfig<span style=color:#719e07>;</span>
+<span style=color:#719e07>import</span> org.apache.dubbo.rpc.config.RegistryConfig<span style=color:#719e07>;</span>
+<span style=color:#719e07>import</span> org.apache.dubbo.rpc.config.ConsumerConfig<span style=color:#719e07>;</span>
+<span style=color:#719e07>import</span> org.apache.dubbo.rpc.config.ReferenceConfig<span style=color:#719e07>;</span>
+<span style=color:#719e07>import</span> com.xxx.DemoService<span style=color:#719e07>;</span>
+
+<span style=color:#268bd2>public</span> <span style=color:#268bd2>class</span> <span style=color:#268bd2>DemoConsumer</span> <span style=color:#719e07>{</span>
+    <span style=color:#268bd2>public</span> <span style=color:#268bd2>static</span> <span style=color:#dc322f>void</span> <span style=color:#268bd2>main</span><span style=color:#719e07>(</span>String<span style=color:#719e07>[]</span> args<span style=color:#719e07>)</span> <span style=color:#719e07>{</span>
+        <span style=color:#586e75>// 当前应用配置
+</span><span style=color:#586e75></span>        ApplicationConfig application <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ApplicationConfig<span style=color:#719e07>();</span>
+        application<span style=color:#719e07>.</span>setName<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;demo-consumer&#34;</span><span style=color:#719e07>);</span>
+
+        <span style=color:#586e75>// 连接注册中心配置
+</span><span style=color:#586e75></span>        RegistryConfig registry <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> RegistryConfig<span style=color:#719e07>();</span>
+        registry<span style=color:#719e07>.</span>setAddress<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;zookeeper://10.20.130.230:2181&#34;</span><span style=color:#719e07>);</span>
+
+        <span style=color:#586e75>// 注意：ReferenceConfig为重对象，内部封装了与注册中心的连接，以及与服务提供方的连接
+</span><span style=color:#586e75></span>        <span style=color:#586e75>// 引用远程服务
+</span><span style=color:#586e75></span>        ReferenceConfig<span style=color:#719e07>&lt;</span>DemoService<span style=color:#719e07>&gt;</span> reference <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ReferenceConfig<span style=color:#719e07>&lt;</span>DemoService<span style=color:#719e07>&gt;();</span> <span style=color:#586e75>// 此实例很重，封装了与注册中心的连接以及与提供者的连接，请自行缓存，否则可能造成内存和连接泄漏
+</span><span style=color:#586e75></span>        reference<span style=color:#719e07>.</span>setApplication<span style=color:#719e07>(</span>application<span style=color:#719e07>);</span>
+        reference<span style=color:#719e07>.</span>setRegistry<span style=color:#719e07>(</span>registry<span style=color:#719e07>);</span> <span style=color:#586e75>// 多个注册中心可以用setRegistries()
+</span><span style=color:#586e75></span>        reference<span style=color:#719e07>.</span>setInterface<span style=color:#719e07>(</span>DemoService<span style=color:#719e07>.</span>class<span style=color:#719e07>);</span>
+        reference<span style=color:#719e07>.</span>setVersion<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;1.0.0&#34;</span><span style=color:#719e07>);</span>
+
+        <span style=color:#586e75>// 和本地bean一样使用demoService
+</span><span style=color:#586e75></span>        <span style=color:#586e75>// 注意：此代理对象内部封装了所有通讯细节，对象较重，请缓存复用
+</span><span style=color:#586e75></span>        DemoService demoService <span style=color:#719e07>=</span> reference<span style=color:#719e07>.</span>get<span style=color:#719e07>();</span>
+        demoService<span style=color:#719e07>.</span>sayHello<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;Dubbo&#34;</span><span style=color:#719e07>);</span>
+    <span style=color:#719e07>}</span>
+<span style=color:#719e07>}</span>
+</code></pre></div><h2 id=bootstrap-api>Bootstrap API</h2>
+<p>通过DubboBootstrap API可以减少重复配置，更好控制启动过程，支持批量发布/订阅服务接口，还可以更好支持Dubbo3的应用级服务发现。</p>
+<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#719e07>import</span> org.apache.dubbo.config.bootstrap.DubboBootstrap<span style=color:#719e07>;</span>
+<span style=color:#719e07>import</span> org.apache.dubbo.rpc.config.ApplicationConfig<span style=color:#719e07>;</span>
+<span style=color:#719e07>import</span> org.apache.dubbo.rpc.config.RegistryConfig<span style=color:#719e07>;</span>
+<span style=color:#719e07>import</span> org.apache.dubbo.rpc.config.ProviderConfig<span style=color:#719e07>;</span>
+<span style=color:#719e07>import</span> org.apache.dubbo.rpc.config.ServiceConfig<span style=color:#719e07>;</span>
+<span style=color:#719e07>import</span> com.xxx.DemoService<span style=color:#719e07>;</span>
+<span style=color:#719e07>import</span> com.xxx.DemoServiceImpl<span style=color:#719e07>;</span>
+
+<span style=color:#268bd2>public</span> <span style=color:#268bd2>class</span> <span style=color:#268bd2>DemoProvider</span> <span style=color:#719e07>{</span>
+    <span style=color:#268bd2>public</span> <span style=color:#268bd2>static</span> <span style=color:#dc322f>void</span> <span style=color:#268bd2>main</span><span style=color:#719e07>(</span>String<span style=color:#719e07>[]</span> args<span style=color:#719e07>)</span> <span style=color:#719e07>{</span>
+
+        ConfigCenterConfig configCenter <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ConfigCenterConfig<span style=color:#719e07>();</span>
+        configCenter<span style=color:#719e07>.</span>setAddress<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;zookeeper://127.0.0.1:2181&#34;</span><span style=color:#719e07>);</span>
+
+        <span style=color:#586e75>// 服务提供者协议配置
+</span><span style=color:#586e75></span>        ProtocolConfig protocol <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ProtocolConfig<span style=color:#719e07>();</span>
+        protocol<span style=color:#719e07>.</span>setName<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;dubbo&#34;</span><span style=color:#719e07>);</span>
+        protocol<span style=color:#719e07>.</span>setPort<span style=color:#719e07>(</span>12345<span style=color:#719e07>);</span>
+        protocol<span style=color:#719e07>.</span>setThreads<span style=color:#719e07>(</span>200<span style=color:#719e07>);</span>
+
+        <span style=color:#586e75>// 注意：ServiceConfig为重对象，内部封装了与注册中心的连接，以及开启服务端口
+</span><span style=color:#586e75></span>        <span style=color:#586e75>// 服务提供者暴露服务配置
+</span><span style=color:#586e75></span>        ServiceConfig<span style=color:#719e07>&lt;</span>DemoService<span style=color:#719e07>&gt;</span> demoServiceConfig <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ServiceConfig<span style=color:#719e07>&lt;&gt;();</span>
+        demoServiceConfig<span style=color:#719e07>.</span>setInterface<span style=color:#719e07>(</span>DemoService<span style=color:#719e07>.</span>class<span style=color:#719e07>);</span>
+        demoServiceConfig<span style=color:#719e07>.</span>setRef<span style=color:#719e07>(</span><span style=color:#719e07>new</span> DemoServiceImpl<span style=color:#719e07>());</span>
+        demoServiceConfig<span style=color:#719e07>.</span>setVersion<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;1.0.0&#34;</span><span style=color:#719e07>);</span>
+        
+        <span style=color:#586e75>// 第二个服务配置
+</span><span style=color:#586e75></span>        ServiceConfig<span style=color:#719e07>&lt;</span>FooService<span style=color:#719e07>&gt;</span> fooServiceConfig <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ServiceConfig<span style=color:#719e07>&lt;&gt;();</span>
+        fooServiceConfig<span style=color:#719e07>.</span>setInterface<span style=color:#719e07>(</span>FooService<span style=color:#719e07>.</span>class<span style=color:#719e07>);</span>
+        fooServiceConfig<span style=color:#719e07>.</span>setRef<span style=color:#719e07>(</span><span style=color:#719e07>new</span> FooServiceImpl<span style=color:#719e07>());</span>
+        fooServiceConfig<span style=color:#719e07>.</span>setVersion<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;1.0.0&#34;</span><span style=color:#719e07>);</span>
+        
+        <span style=color:#719e07>...</span>
+
+        <span style=color:#586e75>// 通过DubboBootstrap简化配置组装，控制启动过程
+</span><span style=color:#586e75></span>        DubboBootstrap<span style=color:#719e07>.</span>getInstance<span style=color:#719e07>()</span>
+                <span style=color:#719e07>.</span>application<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;demo-provider&#34;</span><span style=color:#719e07>)</span> <span style=color:#586e75>// 应用配置
+</span><span style=color:#586e75></span>                <span style=color:#719e07>.</span>registry<span style=color:#719e07>(</span><span style=color:#719e07>new</span> RegistryConfig<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;zookeeper://127.0.0.1:2181&#34;</span><span style=color:#719e07>))</span> <span style=color:#586e75>// 注册中心配置
+</span><span style=color:#586e75></span>                <span style=color:#719e07>.</span>protocol<span style=color:#719e07>(</span>protocol<span style=color:#719e07>)</span> <span style=color:#586e75>// 全局默认协议配置
+</span><span style=color:#586e75></span>                <span style=color:#719e07>.</span>service<span style=color:#719e07>(</span>demoServiceConfig<span style=color:#719e07>)</span> <span style=color:#586e75>// 添加ServiceConfig
+</span><span style=color:#586e75></span>                <span style=color:#719e07>.</span>service<span style=color:#719e07>(</span>fooServiceConfig<span style=color:#719e07>)</span>
+                <span style=color:#719e07>.</span>start<span style=color:#719e07>()</span>    <span style=color:#586e75>// 启动Dubbo
+</span><span style=color:#586e75></span>                <span style=color:#719e07>.</span>await<span style=color:#719e07>();</span>   <span style=color:#586e75>// 挂起等待(防止进程退出）
+</span><span style=color:#586e75></span>    <span style=color:#719e07>}</span>
+<span style=color:#719e07>}</span>
+</code></pre></div><div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#719e07>import</span> org.apache.dubbo.config.bootstrap.DubboBootstrap<span style=color:#719e07>;</span>
+<span style=color:#719e07>import</span> org.apache.dubbo.rpc.config.ApplicationConfig<span style=color:#719e07>;</span>
+<span style=color:#719e07>import</span> org.apache.dubbo.rpc.config.RegistryConfig<span style=color:#719e07>;</span>
+<span style=color:#719e07>import</span> org.apache.dubbo.rpc.config.ProviderConfig<span style=color:#719e07>;</span>
+<span style=color:#719e07>import</span> org.apache.dubbo.rpc.config.ServiceConfig<span style=color:#719e07>;</span>
+<span style=color:#719e07>import</span> com.xxx.DemoService<span style=color:#719e07>;</span>
+<span style=color:#719e07>import</span> com.xxx.DemoServiceImpl<span style=color:#719e07>;</span>
+
+<span style=color:#268bd2>public</span> <span style=color:#268bd2>class</span> <span style=color:#268bd2>DemoConsumer</span> <span style=color:#719e07>{</span>
+    <span style=color:#268bd2>public</span> <span style=color:#268bd2>static</span> <span style=color:#dc322f>void</span> <span style=color:#268bd2>main</span><span style=color:#719e07>(</span>String<span style=color:#719e07>[]</span> args<span style=color:#719e07>)</span> <span style=color:#719e07>{</span>
+
+        <span style=color:#586e75>// 引用远程服务
+</span><span style=color:#586e75></span>        ReferenceConfig<span style=color:#719e07>&lt;</span>DemoService<span style=color:#719e07>&gt;</span> demoServiceReference <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ReferenceConfig<span style=color:#719e07>&lt;</span>DemoService<span style=color:#719e07>&gt;();</span> 
+        demoServiceReference<span style=color:#719e07>.</span>setInterface<span style=color:#719e07>(</span>DemoService<span style=color:#719e07>.</span>class<span style=color:#719e07>);</span>
+        demoServiceReference<span style=color:#719e07>.</span>setVersion<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;1.0.0&#34;</span><span style=color:#719e07>);</span>
+        
+        ReferenceConfig<span style=color:#719e07>&lt;</span>FooService<span style=color:#719e07>&gt;</span> fooServiceReference <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ReferenceConfig<span style=color:#719e07>&lt;</span>FooService<span style=color:#719e07>&gt;();</span> 
+        fooServiceReference<span style=color:#719e07>.</span>setInterface<span style=color:#719e07>(</span>FooService<span style=color:#719e07>.</span>class<span style=color:#719e07>);</span>
+        fooServiceReference<span style=color:#719e07>.</span>setVersion<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;1.0.0&#34;</span><span style=color:#719e07>);</span>
+
+        <span style=color:#586e75>// 通过DubboBootstrap简化配置组装，控制启动过程
+</span><span style=color:#586e75></span>        DubboBootstrap bootstrap <span style=color:#719e07>=</span> DubboBootstrap<span style=color:#719e07>.</span>getInstance<span style=color:#719e07>();</span>
+        bootstrap<span style=color:#719e07>.</span>application<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;demo-consumer&#34;</span><span style=color:#719e07>)</span> <span style=color:#586e75>// 应用配置
+</span><span style=color:#586e75></span>                <span style=color:#719e07>.</span>registry<span style=color:#719e07>(</span><span style=color:#719e07>new</span> RegistryConfig<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;zookeeper://127.0.0.1:2181&#34;</span><span style=color:#719e07>))</span> <span style=color:#586e75>// 注册中心配置
+</span><span style=color:#586e75></span>                <span style=color:#719e07>.</span>reference<span style=color:#719e07>(</span>demoServiceReference<span style=color:#719e07>)</span> <span style=color:#586e75>// 添加ReferenceConfig
+</span><span style=color:#586e75></span>                <span style=color:#719e07>.</span>service<span style=color:#719e07>(</span>fooServiceReference<span style=color:#719e07>)</span>
+                <span style=color:#719e07>.</span>start<span style=color:#719e07>();</span>    <span style=color:#586e75>// 启动Dubbo
+</span><span style=color:#586e75></span>
+        <span style=color:#719e07>...</span>
+        
+        <span style=color:#586e75>// 和本地bean一样使用demoService
+</span><span style=color:#586e75></span>        <span style=color:#586e75>// 通过Interface获取远程服务接口代理，不需要依赖ReferenceConfig对象
+</span><span style=color:#586e75></span>        DemoService demoService <span style=color:#719e07>=</span> DubboBootstrap<span style=color:#719e07>.</span>getInstance<span style=color:#719e07>().</span>getCache<span style=color:#719e07>().</span>get<span style=color:#719e07>(</span>DemoService<span style=color:#719e07>.</span>class<span style=color:#719e07>);</span>
+        demoService<span style=color:#719e07>.</span>sayHello<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;Dubbo&#34;</span><span style=color:#719e07>);</span>
+
+        FooService fooService <span style=color:#719e07>=</span> DubboBootstrap<span style=color:#719e07>.</span>getInstance<span style=color:#719e07>().</span>getCache<span style=color:#719e07>().</span>get<span style=color:#719e07>(</span>FooService<span style=color:#719e07>.</span>class<span style=color:#719e07>);</span>
+        fooService<span style=color:#719e07>.</span>greeting<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;Dubbo&#34;</span><span style=color:#719e07>);</span>
+    <span style=color:#719e07>}</span>
+    
+<span style=color:#719e07>}</span>
+
+</code></pre></div><h2 id=其它配置>其它配置</h2>
+<p>API配置能力与XML配置是等价的，其它的各种配置都可以用API设置。</p>
+<p>下面只列出不同的地方，其它参见上面的写法。</p>
+<h3 id=基本配置>基本配置</h3>
+<p>可以在DubboBootstrap中设置全局基本配置，包括应用配置、协议配置、注册中心、配置中心、元数据中心、模块、监控、SSL、provider配置、consumer配置等。</p>
+<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#586e75>// 注册中心
 </span><span style=color:#586e75></span>RegistryConfig registry <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> RegistryConfig<span style=color:#719e07>();</span>
-registry<span style=color:#719e07>.</span>setAddress<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;10.20.130.230:9090&#34;</span><span style=color:#719e07>);</span>
-registry<span style=color:#719e07>.</span>setUsername<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;aaa&#34;</span><span style=color:#719e07>);</span>
-registry<span style=color:#719e07>.</span>setPassword<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;bbb&#34;</span><span style=color:#719e07>);</span>
- 
+registry<span style=color:#719e07>.</span>setAddress<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;zookeeper://192.168.10.1:2181&#34;</span><span style=color:#719e07>);</span>
+<span style=color:#719e07>...</span>
+  
 <span style=color:#586e75>// 服务提供者协议配置
 </span><span style=color:#586e75></span>ProtocolConfig protocol <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ProtocolConfig<span style=color:#719e07>();</span>
 protocol<span style=color:#719e07>.</span>setName<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;dubbo&#34;</span><span style=color:#719e07>);</span>
 protocol<span style=color:#719e07>.</span>setPort<span style=color:#719e07>(</span>12345<span style=color:#719e07>);</span>
 protocol<span style=color:#719e07>.</span>setThreads<span style=color:#719e07>(</span>200<span style=color:#719e07>);</span>
- 
-<span style=color:#586e75>// 注意：ServiceConfig为重对象，内部封装了与注册中心的连接，以及开启服务端口
-</span><span style=color:#586e75></span> 
-<span style=color:#586e75>// 服务提供者暴露服务配置
-</span><span style=color:#586e75></span>ServiceConfig<span style=color:#719e07>&lt;</span>XxxService<span style=color:#719e07>&gt;</span> service <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ServiceConfig<span style=color:#719e07>&lt;</span>XxxService<span style=color:#719e07>&gt;();</span> <span style=color:#586e75>// 此实例很重，封装了与注册中心的连接，请自行缓存，否则可能造成内存和连接泄漏
-</span><span style=color:#586e75></span>service<span style=color:#719e07>.</span>setApplication<span style=color:#719e07>(</span>application<span style=color:#719e07>);</span>
-service<span style=color:#719e07>.</span>setRegistry<span style=color:#719e07>(</span>registry<span style=color:#719e07>);</span> <span style=color:#586e75>// 多个注册中心可以用setRegistries()
-</span><span style=color:#586e75></span>service<span style=color:#719e07>.</span>setProtocol<span style=color:#719e07>(</span>protocol<span style=color:#719e07>);</span> <span style=color:#586e75>// 多个协议可以用setProtocols()
-</span><span style=color:#586e75></span>service<span style=color:#719e07>.</span>setInterface<span style=color:#719e07>(</span>XxxService<span style=color:#719e07>.</span>class<span style=color:#719e07>);</span>
-service<span style=color:#719e07>.</span>setRef<span style=color:#719e07>(</span>xxxService<span style=color:#719e07>);</span>
-service<span style=color:#719e07>.</span>setVersion<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;1.0.0&#34;</span><span style=color:#719e07>);</span>
- 
-<span style=color:#586e75>// 暴露及注册服务
-</span><span style=color:#586e75></span>service<span style=color:#719e07>.</span>export<span style=color:#719e07>();</span>
-</code></pre></div><h2 id=服务消费者>服务消费者</h2>
-<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#719e07>import</span> org.apache.dubbo.rpc.config.ApplicationConfig<span style=color:#719e07>;</span>
-<span style=color:#719e07>import</span> org.apache.dubbo.rpc.config.RegistryConfig<span style=color:#719e07>;</span>
-<span style=color:#719e07>import</span> org.apache.dubbo.rpc.config.ConsumerConfig<span style=color:#719e07>;</span>
-<span style=color:#719e07>import</span> org.apache.dubbo.rpc.config.ReferenceConfig<span style=color:#719e07>;</span>
-<span style=color:#719e07>import</span> com.xxx.XxxService<span style=color:#719e07>;</span>
- 
-<span style=color:#586e75>// 当前应用配置
-</span><span style=color:#586e75></span>ApplicationConfig application <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ApplicationConfig<span style=color:#719e07>();</span>
-application<span style=color:#719e07>.</span>setName<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;yyy&#34;</span><span style=color:#719e07>);</span>
- 
-<span style=color:#586e75>// 连接注册中心配置
-</span><span style=color:#586e75></span>RegistryConfig registry <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> RegistryConfig<span style=color:#719e07>();</span>
-registry<span style=color:#719e07>.</span>setAddress<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;10.20.130.230:9090&#34;</span><span style=color:#719e07>);</span>
-registry<span style=color:#719e07>.</span>setUsername<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;aaa&#34;</span><span style=color:#719e07>);</span>
-registry<span style=color:#719e07>.</span>setPassword<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;bbb&#34;</span><span style=color:#719e07>);</span>
- 
-<span style=color:#586e75>// 注意：ReferenceConfig为重对象，内部封装了与注册中心的连接，以及与服务提供方的连接
-</span><span style=color:#586e75></span> 
-<span style=color:#586e75>// 引用远程服务
-</span><span style=color:#586e75></span>ReferenceConfig<span style=color:#719e07>&lt;</span>XxxService<span style=color:#719e07>&gt;</span> reference <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ReferenceConfig<span style=color:#719e07>&lt;</span>XxxService<span style=color:#719e07>&gt;();</span> <span style=color:#586e75>// 此实例很重，封装了与注册中心的连接以及与提供者的连接，请自行缓存，否则可能造成内存和连接泄漏
-</span><span style=color:#586e75></span>reference<span style=color:#719e07>.</span>setApplication<span style=color:#719e07>(</span>application<span style=color:#719e07>);</span>
-reference<span style=color:#719e07>.</span>setRegistry<span style=color:#719e07>(</span>registry<span style=color:#719e07>);</span> <span style=color:#586e75>// 多个注册中心可以用setRegistries()
-</span><span style=color:#586e75></span>reference<span style=color:#719e07>.</span>setInterface<span style=color:#719e07>(</span>XxxService<span style=color:#719e07>.</span>class<span style=color:#719e07>);</span>
-reference<span style=color:#719e07>.</span>setVersion<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;1.0.0&#34;</span><span style=color:#719e07>);</span>
- 
-<span style=color:#586e75>// 和本地bean一样使用xxxService
-</span><span style=color:#586e75></span>XxxService xxxService <span style=color:#719e07>=</span> reference<span style=color:#719e07>.</span>get<span style=color:#719e07>();</span> <span style=color:#586e75>// 注意：此代理对象内部封装了所有通讯细节，对象较重，请缓存复用
-</span></code></pre></div><h2 id=特殊场景>特殊场景</h2>
-<p>下面只列出不同的地方，其它参见上面的写法</p>
-<h3 id=方法级设置>方法级设置</h3>
+<span style=color:#719e07>...</span>
+  
+<span style=color:#586e75>// 配置中心
+</span><span style=color:#586e75></span>ConfigCenterConfig configCenter <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ConfigCenterConfig<span style=color:#719e07>();</span>
+configCenter<span style=color:#719e07>.</span>setAddress<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;zookeeper://192.168.10.2:2181&#34;</span><span style=color:#719e07>);</span>
+<span style=color:#719e07>...</span>
+  
+<span style=color:#586e75>// 元数据中心
+</span><span style=color:#586e75></span>MetadataReportConfig metadataReport <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> MetadataReportConfig<span style=color:#719e07>();</span>
+metadataReport<span style=color:#719e07>.</span>setAddress<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;zookeeper://192.168.10.3:2181&#34;</span><span style=color:#719e07>);</span>
+<span style=color:#719e07>...</span>
+  
+<span style=color:#586e75>// Metrics
+</span><span style=color:#586e75></span>MetricsConfig metrics <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> MetricsConfig<span style=color:#719e07>();</span>
+metrics<span style=color:#719e07>.</span>setProtocol<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;dubbo&#34;</span><span style=color:#719e07>);</span>
+<span style=color:#719e07>...</span>
+  
+<span style=color:#586e75>// SSL
+</span><span style=color:#586e75></span>SslConfig ssl <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> SslConfig<span style=color:#719e07>();</span>
+ssl<span style=color:#719e07>.</span>setServerKeyCertChainPath<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;/path/ssl/server-key-cert-chain&#34;</span><span style=color:#719e07>);</span>
+ssl<span style=color:#719e07>.</span>setServerPrivateKeyPath<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;/path/ssl/server-private-key&#34;</span><span style=color:#719e07>);</span>
+<span style=color:#719e07>...</span>
+  
+<span style=color:#586e75>// Provider配置（ServiceConfig默认配置）
+</span><span style=color:#586e75></span>ProviderConfig provider <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ProviderConfig<span style=color:#719e07>();</span>
+provider<span style=color:#719e07>.</span>setGroup<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;demo&#34;</span><span style=color:#719e07>);</span>
+provider<span style=color:#719e07>.</span>setVersion<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;1.0.0&#34;</span><span style=color:#719e07>);</span>
+<span style=color:#719e07>...</span>
+  
+<span style=color:#586e75>// Consumer配置（ReferenceConfig默认配置）
+</span><span style=color:#586e75></span>ConsumerConfig consumer <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ConsumerConfig<span style=color:#719e07>();</span>
+consumer<span style=color:#719e07>.</span>setGroup<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;demo&#34;</span><span style=color:#719e07>);</span>
+consumer<span style=color:#719e07>.</span>setVersion<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;1.0.0&#34;</span><span style=color:#719e07>);</span>
+consumer<span style=color:#719e07>.</span>setTimeout<span style=color:#719e07>(</span>2000<span style=color:#719e07>);</span>
+<span style=color:#719e07>...</span>
+  
+DubboBootstrap<span style=color:#719e07>.</span>getInstance<span style=color:#719e07>()</span>
+    <span style=color:#719e07>.</span>application<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;demo-app&#34;</span><span style=color:#719e07>)</span>
+    <span style=color:#719e07>.</span>registry<span style=color:#719e07>(</span>registry<span style=color:#719e07>)</span>
+    <span style=color:#719e07>.</span>protocol<span style=color:#719e07>(</span>protocol<span style=color:#719e07>)</span>
+    <span style=color:#719e07>.</span>configCenter<span style=color:#719e07>(</span>configCenter<span style=color:#719e07>)</span>
+    <span style=color:#719e07>.</span>metadataReport<span style=color:#719e07>(</span>metadataReport<span style=color:#719e07>)</span>
+    <span style=color:#719e07>.</span>module<span style=color:#719e07>(</span><span style=color:#719e07>new</span> ModuleConfig<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;module&#34;</span><span style=color:#719e07>))</span>
+    <span style=color:#719e07>.</span>metrics<span style=color:#719e07>(</span>metrics<span style=color:#719e07>)</span>
+  	<span style=color:#719e07>.</span>ssl<span style=color:#719e07>(</span>ssl<span style=color:#719e07>)</span>
+  	<span style=color:#719e07>.</span>provider<span style=color:#719e07>(</span>provider<span style=color:#719e07>)</span>
+  	<span style=color:#719e07>.</span>consumer<span style=color:#719e07>(</span>consumer<span style=color:#719e07>)</span>
+  	<span style=color:#719e07>...</span>
+  	<span style=color:#719e07>.</span>start<span style=color:#719e07>();</span>
+
+</code></pre></div><h3 id=方法级设置>方法级设置</h3>
 <div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#719e07>...</span>
  
 <span style=color:#586e75>// 方法级配置
 </span><span style=color:#586e75></span>List<span style=color:#719e07>&lt;</span>MethodConfig<span style=color:#719e07>&gt;</span> methods <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ArrayList<span style=color:#719e07>&lt;</span>MethodConfig<span style=color:#719e07>&gt;();</span>
 MethodConfig method <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> MethodConfig<span style=color:#719e07>();</span>
-method<span style=color:#719e07>.</span>setName<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;createXxx&#34;</span><span style=color:#719e07>);</span>
+method<span style=color:#719e07>.</span>setName<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;sayHello&#34;</span><span style=color:#719e07>);</span>
 method<span style=color:#719e07>.</span>setTimeout<span style=color:#719e07>(</span>10000<span style=color:#719e07>);</span>
 method<span style=color:#719e07>.</span>setRetries<span style=color:#719e07>(</span>0<span style=color:#719e07>);</span>
 methods<span style=color:#719e07>.</span>add<span style=color:#719e07>(</span>method<span style=color:#719e07>);</span>
  
 <span style=color:#586e75>// 引用远程服务
-</span><span style=color:#586e75></span>ReferenceConfig<span style=color:#719e07>&lt;</span>XxxService<span style=color:#719e07>&gt;</span> reference <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ReferenceConfig<span style=color:#719e07>&lt;</span>XxxService<span style=color:#719e07>&gt;();</span> <span style=color:#586e75>// 此实例很重，封装了与注册中心的连接以及与提供者的连接，请自行缓存，否则可能造成内存和连接泄漏
+</span><span style=color:#586e75></span>ReferenceConfig<span style=color:#719e07>&lt;</span>DemoService<span style=color:#719e07>&gt;</span> reference <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ReferenceConfig<span style=color:#719e07>&lt;</span>DemoService<span style=color:#719e07>&gt;();</span> <span style=color:#586e75>// 此实例很重，封装了与注册中心的连接以及与提供者的连接，请自行缓存，否则可能造成内存和连接泄漏
 </span><span style=color:#586e75></span><span style=color:#719e07>...</span>
 reference<span style=color:#719e07>.</span>setMethods<span style=color:#719e07>(</span>methods<span style=color:#719e07>);</span> <span style=color:#586e75>// 设置方法级配置
 </span><span style=color:#586e75></span> 
@@ -582,22 +762,16 @@ reference<span style=color:#719e07>.</span>setMethods<span style=color:#719e07>(
 </code></pre></div><h3 id=点对点直连>点对点直连</h3>
 <div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>
 <span style=color:#719e07>...</span>
- 
-ReferenceConfig<span style=color:#719e07>&lt;</span>XxxService<span style=color:#719e07>&gt;</span> reference <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ReferenceConfig<span style=color:#719e07>&lt;</span>XxxService<span style=color:#719e07>&gt;();</span> <span style=color:#586e75>// 此实例很重，封装了与注册中心的连接以及与提供者的连接，请自行缓存，否则可能造成内存和连接泄漏
-</span><span style=color:#586e75>// 如果点对点直连，可以用reference.setUrl()指定目标地址，设置url后将绕过注册中心，
+
+<span style=color:#586e75>// 此实例很重，封装了与注册中心的连接以及与提供者的连接，请自行缓存，否则可能造成内存和连接泄漏
+</span><span style=color:#586e75></span>ReferenceConfig<span style=color:#719e07>&lt;</span>DemoService<span style=color:#719e07>&gt;</span> reference <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ReferenceConfig<span style=color:#719e07>&lt;</span>DemoService<span style=color:#719e07>&gt;();</span> 
+<span style=color:#586e75>// 如果点对点直连，可以用reference.setUrl()指定目标地址，设置url后将绕过注册中心，
 </span><span style=color:#586e75>// 其中，协议对应provider.setProtocol()的值，端口对应provider.setPort()的值，
 </span><span style=color:#586e75>// 路径对应service.setPath()的值，如果未设置path，缺省path为接口名
-</span><span style=color:#586e75></span>reference<span style=color:#719e07>.</span>setUrl<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;dubbo://10.20.130.230:20880/com.xxx.XxxService&#34;</span><span style=color:#719e07>);</span> 
+</span><span style=color:#586e75></span>reference<span style=color:#719e07>.</span>setUrl<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;dubbo://10.20.130.230:20880/com.xxx.DemoService&#34;</span><span style=color:#719e07>);</span> 
  
 <span style=color:#719e07>...</span>
-</code></pre></div><section class=footnotes role=doc-endnotes>
-<hr>
-<ol>
-<li id=fn:1 role=doc-endnote>
-<p>API使用范围说明：API 仅用于 OpenAPI, ESB, Test, Mock 等系统集成，普通服务提供方或消费方，请采用<a href=../xml>XML 配置</a>方式使用 Dubbo&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
-</li>
-</ol>
-</section>
+</code></pre></div>
 <style>.feedback--answer{display:inline-block}.feedback--answer-no{margin-left:1em}.feedback--response{display:none;margin-top:1em}.feedback--response__visible{display:block}</style>
 <h2 class=feedback--title>Feedback</h2>
 <p class=feedback--question>Was this page helpful?</p>
@@ -611,7 +785,7 @@ Sorry to hear that. Please <a href=https://github.com/apache/dubbo-website/issue
 </p>
 <script>const yesButton=document.querySelector('.feedback--answer-yes'),noButton=document.querySelector('.feedback--answer-no'),yesResponse=document.querySelector('.feedback--response-yes'),noResponse=document.querySelector('.feedback--response-no'),disableButtons=()=>{yesButton.disabled=!0,noButton.disabled=!0},sendFeedback=b=>{if(typeof ga!='function')return;const a={command:'send',hitType:'event',category:'Helpful',action:'click',label:window.location.pathname,value:b};ga(a.command,a.hitType,a.category,a.action,a.label,a.value)};yesButton.addEventListener('click',()=>{yesResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(1)}),noButton.addEventListener('click',()=>{noResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(0)})</script>
 <br>
-<div class="text-muted mt-5 pt-3 border-top">最后修改 July 27, 2021: <a href=/commit/291484dd37ffc6b6440f408845f84358517bf26d>fix doc, add section menu config (291484d)</a>
+<div class="text-muted mt-5 pt-3 border-top">最后修改 August 2, 2021: <a href=/commit/ccc069d763b2641ab8d2af368f9243d8c2eff74d>修正文档 (#886) (ccc069d)</a>
 </div>
 </div>
 </main>

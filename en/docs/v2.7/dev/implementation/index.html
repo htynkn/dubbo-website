@@ -18,11 +18,11 @@
 <meta property="og:description" content="Dubbo implementation details">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/en/docs/v2.7/dev/implementation/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-07-27T20:08:31+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-08-02T17:47:07+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="Implementation details">
 <meta itemprop=description content="Dubbo implementation details">
-<meta itemprop=dateModified content="2021-07-27T20:08:31+08:00">
-<meta itemprop=wordCount content="955">
+<meta itemprop=dateModified content="2021-08-02T17:47:07+08:00">
+<meta itemprop=wordCount content="1283">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Implementation details">
 <meta name=twitter:description content="Dubbo implementation details">
@@ -641,7 +641,86 @@ English
 <h2 id=remote-communication-details>Remote communication details</h2>
 <h3 id=protocol-header-agreement>Protocol header agreement</h3>
 <p><img src=/imgs/dev/dubbo_protocol_header.png alt=/dev-guide/images/dubbo_protocol_header.jpg></p>
-<h3 id=thread-dispatch-model>Thread dispatch model</h3>
+<ul>
+<li>
+<p>Magic - Magic High & Magic Low (16 bits)</p>
+<p>Identify protocol version, Dubbo protocol: 0xdabb</p>
+</li>
+<li>
+<p>Req/Res (1 bit)</p>
+<p>Identify a request or response. request: 1; response: 0.</p>
+</li>
+<li>
+<p>2 Way (1 bit)</p>
+<p>Only useful when Req/Res is 1(request), identifying if you expect to return a value from the server. Set to 1 if a return value from the server is required.</p>
+</li>
+<li>
+<p>Event (1 bit)</p>
+<p>Identifies whether it is an event message, for example, a heartbeat event. Set to 1 if this is an event.</p>
+</li>
+<li>
+<p>Serialization ID (5 bit)</p>
+<p>Identifies the serialization type: for example, the value of fastjson is 6.</p>
+</li>
+<li>
+<p>Status (8 bits)</p>
+<p>Only useful when Req/Res is 0 (response), used to identify the status of the response</p>
+<ul>
+<li>20 - OK</li>
+<li>30 - CLIENT_TIMEOUT</li>
+<li>31 - SERVER_TIMEOUT</li>
+<li>40 - BAD_REQUEST</li>
+<li>50 - BAD_RESPONSE</li>
+<li>60 - SERVICE_NOT_FOUND</li>
+<li>70 - SERVICE_ERROR</li>
+<li>80 - SERVER_ERROR</li>
+<li>90 - CLIENT_ERROR</li>
+<li>100 - SERVER_THREADPOOL_EXHAUSTED_ERROR</li>
+</ul>
+</li>
+<li>
+<p>Request ID (64 bits)</p>
+<p>Identifies the only request, the type is long.</p>
+</li>
+<li>
+<p>Data Length (32 bits)</p>
+<p>The length of the serialized content (variable part), counted in bytes, the type is int.</p>
+</li>
+<li>
+<p>Variable Part</p>
+<p>After being serialized by a specific serialization type (identified by the serialization ID), each part is a byte [] or byte.</p>
+<ul>
+<li>If it is a request packet (Req/Res = 1), each part is:
+<ul>
+<li>Dubbo version</li>
+<li>Service name</li>
+<li>Service version</li>
+<li>Method name</li>
+<li>Method parameter types</li>
+<li>Method arguments</li>
+<li>Attachments</li>
+</ul>
+</li>
+<li>If it is a response packet (Req/Res = 0), each part is:
+<ul>
+<li>Return value&rsquo;s type (byte), identifying the type of value returned from the server:
+<ul>
+<li>Return null: RESPONSE_NULL_VALUE 2</li>
+<li>Normal response value: RESPONSE_VALUE 1</li>
+<li>Exception: RESPONSE_WITH_EXCEPTION 0</li>
+</ul>
+</li>
+<li>Return value: response bytes returned from the server</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Note:</strong> For the variable part, when uses json serialization in current version of Dubbo framework, an additional line break is added as a separator between each part of the content. Please add a new line break after each part of the variable part, such as:</p>
+<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>Dubbo version bytes (line break)
+Service name bytes  (line break)
+...
+</code></pre></div><h3 id=thread-dispatch-model>Thread dispatch model</h3>
 <p><img src=/imgs/dev/dubbo-protocol.jpg alt=/dev-guide/images/dubbo-protocol.jpg></p>
 <ul>
 <li>Dispather: <code>all</code>, <code>direct</code>, <code>message</code>, <code>execution</code>, <code>connection</code></li>
@@ -680,7 +759,7 @@ Sorry to hear that. Please <a href=https://github.com/apache/dubbo-website/issue
 </p>
 <script>const yesButton=document.querySelector('.feedback--answer-yes'),noButton=document.querySelector('.feedback--answer-no'),yesResponse=document.querySelector('.feedback--response-yes'),noResponse=document.querySelector('.feedback--response-no'),disableButtons=()=>{yesButton.disabled=!0,noButton.disabled=!0},sendFeedback=b=>{if(typeof ga!='function')return;const a={command:'send',hitType:'event',category:'Helpful',action:'click',label:window.location.pathname,value:b};ga(a.command,a.hitType,a.category,a.action,a.label,a.value)};yesButton.addEventListener('click',()=>{yesResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(1)}),noButton.addEventListener('click',()=>{noResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(0)})</script>
 <br>
-<div class="text-muted mt-5 pt-3 border-top">Last modified July 27, 2021: <a href=/commit/291484dd37ffc6b6440f408845f84358517bf26d>fix doc, add section menu config (291484d)</a>
+<div class="text-muted mt-5 pt-3 border-top">Last modified August 2, 2021: <a href=/commit/ccc069d763b2641ab8d2af368f9243d8c2eff74d>修正文档 (#886) (ccc069d)</a>
 </div>
 </div>
 </main>
