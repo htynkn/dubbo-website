@@ -732,6 +732,12 @@ bootstrap&lt;span style="color:#719e07">.&lt;/span>start&lt;span style="color:#7
 &lt;p>GitHub: &lt;a href="https://github.com/apache/dubbo">https://github.com/apache/dubbo&lt;/a>&lt;br>
 发布说明: &lt;a href="https://github.com/apache/dubbo/releases">https://github.com/apache/dubbo/releases&lt;/a>&lt;/p>
 &lt;/blockquote>
+&lt;h3 id="2713-2021-08-05">2.7.13 (2021-08-05)&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://www.apache.org/dyn/closer.cgi?path=dubbo/2.7.13/apache-dubbo-2.7.13-src.zip">source&lt;/a> |
+&lt;a href="https://www.apache.org/dist/dubbo/2.7.13/apache-dubbo-2.7.13-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://www.apache.org/dist/dubbo/2.7.13/apache-dubbo-2.7.13-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;/ul>
 &lt;h3 id="301-2021-07-02">3.0.1 (2021-07-02)&lt;/h3>
 &lt;ul>
 &lt;li>&lt;a href="https://www.apache.org/dyn/closer.cgi?path=dubbo/3.0.1/apache-dubbo-3.0.1-src.zip">source&lt;/a> |
