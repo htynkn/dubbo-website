@@ -20,13 +20,13 @@
 syntax = &#34;proto3&#34;; option java_multiple_files = true; option java_package = &#34;org.apache.dubbo.demo&#34;; option java_outer_classname = &#34;DemoServiceProto&#34;; option objc_class_prefix = &#34;DEMOSRV&#34;; package demoservice; // The demo service definition. service DemoService { rpc SayHello (HelloRequest) returns (HelloReply) {} } // The request message containing the user's name. message HelloRequest { string name = 1; } // The response message containing the greetings message HelloReply { string message = 1; } 以下是使用 IDL 定义服务的一个简单示例，我们可以把它命名为 DemoService.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docs/quick-start/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-08-05T19:58:29+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-08-07T17:42:25+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="快速开始">
 <meta itemprop=description content="定义服务 Dubbo3 推荐使用 IDL 定义跨语言服务，如期望使用特定语言的服务定义方式请移步多语言模块。
 服务是 Dubbo 中的核心概念，一个服务代表一组 RPC 方法的集合，服务是面向用户编程、服务发现机制等的基本单位。基本流程是，用户定义 RPC 服务，通过约定的配置 方式将 RPC 声明为 Dubbo 服务，然后就可以基于服务进行编程了，对服务提供者来说，是提供 RPC 服务的具体实现，对服务消费者来说，则是使用特定数据发起服务调用。
 syntax = &#34;proto3&#34;; option java_multiple_files = true; option java_package = &#34;org.apache.dubbo.demo&#34;; option java_outer_classname = &#34;DemoServiceProto&#34;; option objc_class_prefix = &#34;DEMOSRV&#34;; package demoservice; // The demo service definition. service DemoService { rpc SayHello (HelloRequest) returns (HelloReply) {} } // The request message containing the user's name. message HelloRequest { string name = 1; } // The response message containing the greetings message HelloReply { string message = 1; } 以下是使用 IDL 定义服务的一个简单示例，我们可以把它命名为 DemoService.">
-<meta itemprop=dateModified content="2021-08-05T19:58:29+08:00">
-<meta itemprop=wordCount content="309">
+<meta itemprop=dateModified content="2021-08-07T17:42:25+08:00">
+<meta itemprop=wordCount content="497">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="快速开始">
 <meta name=twitter:description content="定义服务 Dubbo3 推荐使用 IDL 定义跨语言服务，如期望使用特定语言的服务定义方式请移步多语言模块。
@@ -547,7 +547,31 @@ comments <span style=color:#719e07>=</span> <span style=color:#2aa198>&#34;Sourc
     CompletableFuture<span style=color:#719e07>&lt;</span>org<span style=color:#719e07>.</span>apache<span style=color:#719e07>.</span>dubbo<span style=color:#719e07>.</span>demo<span style=color:#719e07>.</span>HelloReply<span style=color:#719e07>&gt;</span> <span style=color:#268bd2>sayHelloAsync</span><span style=color:#719e07>(</span>org<span style=color:#719e07>.</span>apache<span style=color:#719e07>.</span>dubbo<span style=color:#719e07>.</span>demo<span style=color:#719e07>.</span>HelloRequest request<span style=color:#719e07>);</span>
 <span style=color:#719e07>}</span>
 </code></pre></div><h3 id=golang>Golang</h3>
-<h2 id=配置并加载服务>配置并加载服务</h2>
+<p>Go 语言生成的 stub 如下，这个 stub 里存了用户定义的接口和数据的类型。</p>
+<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#268bd2>func</span> <span style=color:#268bd2>_DUBBO_Greeter_SayHello_Handler</span>(srv <span style=color:#268bd2>interface</span>{}, ctx context.Context, dec <span style=color:#268bd2>func</span>(<span style=color:#268bd2>interface</span>{}) <span style=color:#dc322f>error</span>, interceptor grpc.UnaryServerInterceptor) (<span style=color:#268bd2>interface</span>{}, <span style=color:#dc322f>error</span>) {
+	in <span style=color:#719e07>:=</span> <span style=color:#b58900>new</span>(HelloRequest)
+	<span style=color:#719e07>if</span> err <span style=color:#719e07>:=</span> <span style=color:#268bd2>dec</span>(in); err <span style=color:#719e07>!=</span> <span style=color:#cb4b16>nil</span> {
+		<span style=color:#719e07>return</span> <span style=color:#cb4b16>nil</span>, err
+	}
+	base <span style=color:#719e07>:=</span> srv.(dgrpc.Dubbo3GrpcService)
+	args <span style=color:#719e07>:=</span> []<span style=color:#268bd2>interface</span>{}{}
+	args = <span style=color:#b58900>append</span>(args, in)
+	invo <span style=color:#719e07>:=</span> invocation.<span style=color:#268bd2>NewRPCInvocation</span>(<span style=color:#2aa198>&#34;SayHello&#34;</span>, args, <span style=color:#cb4b16>nil</span>)
+	<span style=color:#719e07>if</span> interceptor <span style=color:#719e07>==</span> <span style=color:#cb4b16>nil</span> {
+		result <span style=color:#719e07>:=</span> base.<span style=color:#268bd2>GetProxyImpl</span>().<span style=color:#268bd2>Invoke</span>(ctx, invo)
+		<span style=color:#719e07>return</span> result.<span style=color:#268bd2>Result</span>(), result.<span style=color:#268bd2>Error</span>()
+	}
+	info <span style=color:#719e07>:=</span> <span style=color:#719e07>&amp;</span>grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: <span style=color:#2aa198>&#34;/main.Greeter/SayHello&#34;</span>,
+	}
+	handler <span style=color:#719e07>:=</span> <span style=color:#268bd2>func</span>(ctx context.Context, req <span style=color:#268bd2>interface</span>{}) (<span style=color:#268bd2>interface</span>{}, <span style=color:#dc322f>error</span>) {
+		result <span style=color:#719e07>:=</span> base.<span style=color:#268bd2>GetProxyImpl</span>().<span style=color:#268bd2>Invoke</span>(context.<span style=color:#268bd2>Background</span>(), invo)
+		<span style=color:#719e07>return</span> result.<span style=color:#268bd2>Result</span>(), result.<span style=color:#268bd2>Error</span>()
+	}
+	<span style=color:#719e07>return</span> <span style=color:#268bd2>interceptor</span>(ctx, in, info, handler)
+}
+</code></pre></div><h2 id=配置并加载服务>配置并加载服务</h2>
 <p>提供端负责提供具体的 Dubbo 服务实现，也就是遵循 RPC 签名所约束的格式，去实现具体的业务逻辑代码。在实现服务之后，要将服务实现注册为标准的 Dubbo 服务，
 之后 Dubbo 框架就能根据接收到的请求转发给服务实现，执行方法，并将结果返回。</p>
 <p>消费端的配置会更简单一些，只需要声明 IDL 定义的服务为标准的 Dubbo 服务，框架就可以帮助开发者生成相应的 proxy，开发者将完全面向 proxy 编程，
@@ -585,7 +609,48 @@ comments <span style=color:#719e07>=</span> <span style=color:#2aa198>&#34;Sourc
     System<span style=color:#719e07>.</span>out<span style=color:#719e07>.</span>println<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;result: &#34;</span> <span style=color:#719e07>+</span> reply<span style=color:#719e07>.</span>getMessage<span style=color:#719e07>());</span>
 <span style=color:#719e07>}</span>
 </code></pre></div><h3 id=golang-1>Golang</h3>
-<h2 id=查看完整示例>查看完整示例</h2>
+<p>提供端，实现服务</p>
+<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#268bd2>type</span> User <span style=color:#268bd2>struct</span> {
+	ID   <span style=color:#dc322f>string</span>
+	Name <span style=color:#dc322f>string</span>
+	Age  <span style=color:#dc322f>int32</span>
+	Time time.Time
+}
+
+<span style=color:#268bd2>type</span> UserProvider <span style=color:#268bd2>struct</span> {
+}
+
+<span style=color:#268bd2>func</span> (u <span style=color:#719e07>*</span>UserProvider) <span style=color:#268bd2>GetUser</span>(ctx context.Context, req []<span style=color:#268bd2>interface</span>{}) (<span style=color:#719e07>*</span>User, <span style=color:#dc322f>error</span>) {
+	gxlog.<span style=color:#268bd2>CInfo</span>(<span style=color:#2aa198>&#34;req:%#v&#34;</span>, req)
+	rsp <span style=color:#719e07>:=</span> User{<span style=color:#2aa198>&#34;A001&#34;</span>, <span style=color:#2aa198>&#34;Alex Stocks&#34;</span>, <span style=color:#2aa198>18</span>, time.<span style=color:#268bd2>Now</span>()}
+	gxlog.<span style=color:#268bd2>CInfo</span>(<span style=color:#2aa198>&#34;rsp:%#v&#34;</span>, rsp)
+	<span style=color:#719e07>return</span> <span style=color:#719e07>&amp;</span>rsp, <span style=color:#cb4b16>nil</span>
+}
+
+<span style=color:#268bd2>func</span> (u <span style=color:#719e07>*</span>UserProvider) <span style=color:#268bd2>Reference</span>() <span style=color:#dc322f>string</span> {
+	<span style=color:#719e07>return</span> <span style=color:#2aa198>&#34;UserProvider&#34;</span>
+}
+
+<span style=color:#268bd2>func</span> (u User) <span style=color:#268bd2>JavaClassName</span>() <span style=color:#dc322f>string</span> {
+	<span style=color:#719e07>return</span> <span style=color:#2aa198>&#34;org.apache.dubbo.User&#34;</span>
+}
+
+<span style=color:#268bd2>func</span> <span style=color:#268bd2>main</span>() {
+    hessian.<span style=color:#268bd2>RegisterPOJO</span>(<span style=color:#719e07>&amp;</span>User{})
+	config.<span style=color:#268bd2>SetProviderService</span>(<span style=color:#b58900>new</span>(UserProvider))
+}
+</code></pre></div><p>消费端，使用服务 proxy</p>
+<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#268bd2>func</span> <span style=color:#268bd2>main</span>() {
+	config.<span style=color:#268bd2>Load</span>()
+	user <span style=color:#719e07>:=</span> <span style=color:#719e07>&amp;</span>pkg.User{}
+	err <span style=color:#719e07>:=</span> userProvider.<span style=color:#268bd2>GetUser</span>(context.<span style=color:#268bd2>TODO</span>(), []<span style=color:#268bd2>interface</span>{}{<span style=color:#2aa198>&#34;A001&#34;</span>}, user)
+	<span style=color:#719e07>if</span> err <span style=color:#719e07>!=</span> <span style=color:#cb4b16>nil</span> {
+		os.<span style=color:#268bd2>Exit</span>(<span style=color:#2aa198>1</span>)
+		<span style=color:#719e07>return</span>
+	}
+	gxlog.<span style=color:#268bd2>CInfo</span>(<span style=color:#2aa198>&#34;response result: %v\n&#34;</span>, user)
+}
+</code></pre></div><h2 id=查看完整示例>查看完整示例</h2>
 <ul>
 <li><a href=../languages/java/quick-start>Java IDL Quick Start</a></li>
 <li><a href=../languages/golang/quick-start>Golang IDL Quick Start</a></li>
@@ -605,7 +670,7 @@ Sorry to hear that. Please <a href=https://github.com/apache/dubbo-website/issue
 </p>
 <script>const yesButton=document.querySelector('.feedback--answer-yes'),noButton=document.querySelector('.feedback--answer-no'),yesResponse=document.querySelector('.feedback--response-yes'),noResponse=document.querySelector('.feedback--response-no'),disableButtons=()=>{yesButton.disabled=!0,noButton.disabled=!0},sendFeedback=b=>{if(typeof ga!='function')return;const a={command:'send',hitType:'event',category:'Helpful',action:'click',label:window.location.pathname,value:b};ga(a.command,a.hitType,a.category,a.action,a.label,a.value)};yesButton.addEventListener('click',()=>{yesResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(1)}),noButton.addEventListener('click',()=>{noResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(0)})</script>
 <br>
-<div class="text-muted mt-5 pt-3 border-top">最后修改 August 5, 2021: <a href=/commit/9d459087210137c8d6e41d82b8ba2f47935b4647>update 2.7.13 download link (#887) (9d45908)</a>
+<div class="text-muted mt-5 pt-3 border-top">最后修改 August 7, 2021: <a href=/commit/de6cf8966e243517a52d55498fa28ac0967f3c1d>Feat: add golang quick start introduce (#889) (de6cf89)</a>
 </div>
 </div>
 </main>

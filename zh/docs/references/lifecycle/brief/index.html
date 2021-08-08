@@ -23,7 +23,7 @@ livenessProbe: httpGet: path: /live port: 22222 initialDelaySeconds: 5 periodSec
 实现细节 三种探针对应的 SPI 接口如下：">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docs/references/lifecycle/brief/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-08-05T19:58:29+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-08-07T17:42:25+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="使用方法">
 <meta itemprop=description content="Pod 的生命周期 与服务调度息息相关，通过对 Kubernetes 官方探针的实现，能够使 Dubbo 乃至整个应用的生命周期与 Pod 的生命周期对齐。
 通过 Dubbo 的 SPI 机制，在内部实现多种“探针”，基于 Dubbo QOS 运维模块的 HTTP 服务，使容器探针能够获取到应用内对应探针的状态。另外，SPI 的实现机制也利于用户自行拓展内部“探针”，使整个应用的生命周期更有效的进行管控。
@@ -31,7 +31,7 @@ livenessProbe: httpGet: path: /live port: 22222 initialDelaySeconds: 5 periodSec
 livenessProbe: httpGet: path: /live port: 22222 initialDelaySeconds: 5 periodSeconds: 5 readinessProbe: httpGet: path: /ready port: 22222 initialDelaySeconds: 5 periodSeconds: 5 startupProbe: httpGet: path: /startup port: 22222 failureThreshold: 30 periodSeconds: 10 目前三种探针均有对应的接口，路径为 QOS 中的命令，端口信息请根据 QOS 配置进行对应修改（默认端口为 22222）。其他参数请参考官方文档说明。
 注：为了使 Kubernetes 集群能够正常访问到探针，需要开启 QOS 允许远程访问，此操作有可能带来安全风险，请仔细评估后再打开。
 实现细节 三种探针对应的 SPI 接口如下：">
-<meta itemprop=dateModified content="2021-08-05T19:58:29+08:00">
+<meta itemprop=dateModified content="2021-08-07T17:42:25+08:00">
 <meta itemprop=wordCount content="107">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="使用方法">
@@ -555,7 +555,7 @@ Sorry to hear that. Please <a href=https://github.com/apache/dubbo-website/issue
 </p>
 <script>const yesButton=document.querySelector('.feedback--answer-yes'),noButton=document.querySelector('.feedback--answer-no'),yesResponse=document.querySelector('.feedback--response-yes'),noResponse=document.querySelector('.feedback--response-no'),disableButtons=()=>{yesButton.disabled=!0,noButton.disabled=!0},sendFeedback=b=>{if(typeof ga!='function')return;const a={command:'send',hitType:'event',category:'Helpful',action:'click',label:window.location.pathname,value:b};ga(a.command,a.hitType,a.category,a.action,a.label,a.value)};yesButton.addEventListener('click',()=>{yesResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(1)}),noButton.addEventListener('click',()=>{noResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(0)})</script>
 <br>
-<div class="text-muted mt-5 pt-3 border-top">最后修改 August 5, 2021: <a href=/commit/9d459087210137c8d6e41d82b8ba2f47935b4647>update 2.7.13 download link (#887) (9d45908)</a>
+<div class="text-muted mt-5 pt-3 border-top">最后修改 August 7, 2021: <a href=/commit/de6cf8966e243517a52d55498fa28ac0967f3c1d>Feat: add golang quick start introduce (#889) (de6cf89)</a>
 </div>
 </div>
 </main>
