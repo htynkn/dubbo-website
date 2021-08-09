@@ -2958,7 +2958,7 @@ url &lt;span style="color:#719e07">=&lt;/span> url&lt;span style="color:#719e07"
 &lt;span style="color:#586e75">// 获取 Exchanger 实例，默认为 HeaderExchangeClient
 &lt;/span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">return&lt;/span> getExchanger&lt;span style="color:#719e07">(&lt;/span>url&lt;span style="color:#719e07">).&lt;/span>connect&lt;span style="color:#719e07">(&lt;/span>url&lt;span style="color:#719e07">,&lt;/span> handler&lt;span style="color:#719e07">);&lt;/span>
 &lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>如上，getExchanger 会通过 SPI 加载 HeaderExchangeClient 实例，这个方法比较简单，大家自己看一下吧。接下来分析 HeaderExchangeClient 的实现。&lt;/p>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>如上，getExchanger 会通过 SPI 加载 HeaderExchanger 实例，这个方法比较简单，大家自己看一下吧。接下来分析 HeaderExchanger.connect 的实现。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> ExchangeClient &lt;span style="color:#268bd2">connect&lt;/span>&lt;span style="color:#719e07">(&lt;/span>URL url&lt;span style="color:#719e07">,&lt;/span> ExchangeHandler handler&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RemotingException &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#586e75">// 这里包含了多个调用，分别如下：
 &lt;/span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#586e75">// 1. 创建 HeaderExchangeHandler 对象
@@ -5032,7 +5032,7 @@ invokers&lt;span style="color:#719e07">.&lt;/span>clear&lt;span style="color:#71
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>以上就是 StaticDirectory 的代码逻辑，很简单，就不多说了。下面来看看 RegistryDirectory，这个类的逻辑比较复杂。&lt;/p>
 &lt;h3 id="32-registrydirectory">3.2 RegistryDirectory&lt;/h3>
-&lt;p>RegistryDirectory 是一种动态服务目录，实现了 NotifyListener 接口。当注册中心服务配置发生变化后，RegistryDirectory 可收到与当前服务相关的变化。收到变更通知后，RegistryDirectory 可根据配置变更信息刷新 Invoker 列表。RegistryDirectory 中有几个比较重要的逻辑，第一是 Invoker 的列举逻辑，第二是接收服务配置变更的逻辑，第三是 Invoker 列表的刷新逻辑。接下来按顺序对这三块逻辑。&lt;/p>
+&lt;p>RegistryDirectory 是一种动态服务目录，实现了 NotifyListener 接口。当注册中心服务配置发生变化后，RegistryDirectory 可收到与当前服务相关的变化。收到变更通知后，RegistryDirectory 可根据配置变更信息刷新 Invoker 列表。RegistryDirectory 中有几个比较重要的逻辑，第一是 Invoker 的列举逻辑，第二是接收服务配置变更的逻辑，第三是 Invoker 列表的刷新逻辑。接下来按顺序对这三块逻辑进行分析。&lt;/p>
 &lt;h4 id="321-列举-invoker">3.2.1 列举 Invoker&lt;/h4>
 &lt;p>Invoker 列举逻辑封装在 doList 方法中，相关代码如下：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> List&lt;span style="color:#719e07">&amp;lt;&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span> &lt;span style="color:#268bd2">doList&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Invocation invocation&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
@@ -5073,7 +5073,7 @@ invokers &lt;span style="color:#719e07">=&lt;/span> iterator&lt;span style="colo
 &lt;span style="color:#586e75">// 返回 Invoker 列表
 &lt;/span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">return&lt;/span> invokers &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span> &lt;span style="color:#719e07">?&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ArrayList&lt;span style="color:#719e07">&amp;lt;&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&amp;gt;(&lt;/span>0&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">:&lt;/span> invokers&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>以上代码进行多次尝试，以期从 localMethodInvokerMap 中获取到 Invoker 列表。一般情况下，普通的调用可通过方法名获取到对应的 Invoker 列表，泛化调用可通过 ***** 获取到 Invoker 列表。localMethodInvokerMap 源自 RegistryDirectory 类的成员变量 methodInvokerMap。doList 方法可以看做是对 methodInvokerMap 变量的读操作，至于对 methodInvokerMap 变量的写操作，下一节进行分析。&lt;/p>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>以上代码进行多次尝试，以期从 localMethodInvokerMap 中获取到 Invoker 列表。一般情况下，普通的调用可通过方法名获取到对应的 Invoker 列表，泛化调用可通过 &lt;code>*&lt;/code> 获取到 Invoker 列表。localMethodInvokerMap 源自 RegistryDirectory 类的成员变量 methodInvokerMap。doList 方法可以看做是对 methodInvokerMap 变量的读操作，至于对 methodInvokerMap 变量的写操作，下一节进行分析。&lt;/p>
 &lt;h4 id="322-接收服务变更通知">3.2.2 接收服务变更通知&lt;/h4>
 &lt;p>RegistryDirectory 是一个动态服务目录，会随注册中心配置的变化进行动态调整。因此 RegistryDirectory 实现了 NotifyListener 接口，通过这个接口获取注册中心变更通知。下面我们来看一下具体的逻辑。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">synchronized&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">notify&lt;/span>&lt;span style="color:#719e07">(&lt;/span>List&lt;span style="color:#719e07">&amp;lt;&lt;/span>URL&lt;span style="color:#719e07">&amp;gt;&lt;/span> urls&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
