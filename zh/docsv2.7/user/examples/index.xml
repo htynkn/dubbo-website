@@ -1891,10 +1891,10 @@ application != bops =&amp;gt; host = 172.22.3.94,172.22.3.95,172.22.3.96
 &lt;h4 id="降级约定">降级约定&lt;/h4>
 &lt;ol>
 &lt;li>
-&lt;p>&lt;code>request.tag=tag1&lt;/code> 时优先选择 标记了&lt;code>tag=tag1&lt;/code> 的 provider。若集群中不存在与请求标记对应的服务，默认将降级请求 tag为空的provider；如果要改变这种默认行为，即找不到匹配tag1的provider返回异常，需设置&lt;code>request.tag.force=true&lt;/code>。&lt;/p>
+&lt;p>&lt;code>dubbo.tag=tag1&lt;/code> 时优先选择 标记了&lt;code>tag=tag1&lt;/code> 的 provider。若集群中不存在与请求标记对应的服务，默认将降级请求 tag为空的provider；如果要改变这种默认行为，即找不到匹配tag1的provider返回异常，需设置&lt;code>dubbo.force.tag=true&lt;/code>。&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;code>request.tag&lt;/code>未设置时，只会匹配tag为空的provider。即使集群中存在可用的服务，若 tag 不匹配也就无法调用，这与约定1不同，携带标签的请求可以降级访问到无标签的服务，但不携带标签/携带其他种类标签的请求永远无法访问到其他标签的服务。&lt;/p>
+&lt;p>&lt;code>dubbo.tag&lt;/code>未设置时，只会匹配tag为空的provider。即使集群中存在可用的服务，若 tag 不匹配也就无法调用，这与约定1不同，携带标签的请求可以降级访问到无标签的服务，但不携带标签/携带其他种类标签的请求永远无法访问到其他标签的服务。&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;div class="alert alert-primary" role="alert">
