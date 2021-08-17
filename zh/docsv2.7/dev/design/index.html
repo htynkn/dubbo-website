@@ -18,10 +18,10 @@
 <meta property="og:description" content="Dubbo 框架设计概览">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docsv2.7/dev/design/"><meta property="article:section" content="docsv2.7">
-<meta property="article:modified_time" content="2021-08-13T13:10:33+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-08-16T16:09:42+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="框架设计">
 <meta itemprop=description content="Dubbo 框架设计概览">
-<meta itemprop=dateModified content="2021-08-13T13:10:33+08:00">
+<meta itemprop=dateModified content="2021-08-16T16:09:42+08:00">
 <meta itemprop=wordCount content="323">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="框架设计">
@@ -513,7 +513,7 @@ Releases
 <h2 id=关系说明>关系说明</h2>
 <ul>
 <li>在 RPC 中，Protocol 是核心层，也就是只要有 Protocol + Invoker + Exporter 就可以完成非透明的 RPC 调用，然后在 Invoker 的主过程上 Filter 拦截点。</li>
-<li>图中的 Consumer 和 Provider 是抽象概念，只是想让看图者更直观的了解哪些类分属于客户端与服务器端，不用 Client 和 Server 的原因是 Dubbo 在很多场景下都使用 Provider, Consumer, Registry, Monitor 划分逻辑拓普节点，保持统一概念。</li>
+<li>图中的 Consumer 和 Provider 是抽象概念，只是想让看图者更直观的了解哪些类分属于客户端与服务器端，不用 Client 和 Server 的原因是 Dubbo 在很多场景下都使用 Provider, Consumer, Registry, Monitor 划分逻辑拓扑节点，保持统一概念。</li>
 <li>而 Cluster 是外围概念，所以 Cluster 的目的是将多个 Invoker 伪装成一个 Invoker，这样其它人只要关注 Protocol 层 Invoker 即可，加上 Cluster 或者去掉 Cluster 对其它层都不会造成影响，因为只有一个提供者时，是不需要 Cluster 的。</li>
 <li>Proxy 层封装了所有接口的透明化代理，而在其它层都以 Invoker 为中心，只有到了暴露给用户使用时，才用 Proxy 将 Invoker 转成接口，或将接口实现转成 Invoker，也就是去掉 Proxy 层 RPC 是可以 Run 的，只是不那么透明，不那么看起来像调本地服务一样调远程服务。</li>
 <li>而 Remoting 实现是 Dubbo 协议的实现，如果你选择 RMI 协议，整个 Remoting 都不会用上，Remoting 内部再划为 Transport 传输层和 Exchange 信息交换层，Transport 层只负责单向消息传输，是对 Mina, Netty, Grizzly 的抽象，它也可以扩展 UDP 传输，而 Exchange 层是在传输层之上封装了 Request-Response 语义。</li>
@@ -583,7 +583,7 @@ Sorry to hear that. Please <a href=https://github.com/apache/dubbo-website/issue
 </p>
 <script>const yesButton=document.querySelector('.feedback--answer-yes'),noButton=document.querySelector('.feedback--answer-no'),yesResponse=document.querySelector('.feedback--response-yes'),noResponse=document.querySelector('.feedback--response-no'),disableButtons=()=>{yesButton.disabled=!0,noButton.disabled=!0},sendFeedback=b=>{if(typeof ga!='function')return;const a={command:'send',hitType:'event',category:'Helpful',action:'click',label:window.location.pathname,value:b};ga(a.command,a.hitType,a.category,a.action,a.label,a.value)};yesButton.addEventListener('click',()=>{yesResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(1)}),noButton.addEventListener('click',()=>{noResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(0)})</script>
 <br>
-<div class="text-muted mt-5 pt-3 border-top">最后修改 August 13, 2021: <a href=/commit/e6eab4930985413fa25a9e5c1f72608e40872bd6>fix quick start doc (#891) (e6eab49)</a>
+<div class="text-muted mt-5 pt-3 border-top">最后修改 August 16, 2021: <a href=/commit/e4d7d9b97e13109cd688d7ae31d8a17ba22c703f>fix: 中端 to 终端 (#893) (e4d7d9b)</a>
 </div>
 </div>
 </main>
