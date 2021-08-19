@@ -170,6 +170,7 @@ Releases
 </li>
 <ul>
 <li class=collapse id=zhblogreleases>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhblog20210818302-e58f91e78988e585ace5918a href=/zh/blog/2021/08/18/3.0.2-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/>3.0.2</a>
 <a class="td-sidebar-link td-sidebar-link__page" id=m-zhblog20210702301-e58f91e78988e585ace5918a href=/zh/blog/2021/07/02/3.0.1-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/>3.0.1</a>
 <a class="td-sidebar-link td-sidebar-link__page" id=m-zhblog20210114dubbo-go-150 href=/zh/blog/2021/01/14/dubbo-go-1.5.0/>dubbo-go 1.5.0</a>
 <a class="td-sidebar-link td-sidebar-link__page" id=m-zhblog20210114dubbo-go-151 href=/zh/blog/2021/01/14/dubbo-go-1.5.1/>dubbo-go 1.5.1</a>
@@ -197,6 +198,17 @@ RSS <i class="fa fa-rss ml-2"></i>
 <div class=col-12>
 <h2>Posts in 2018</h2>
 <ul class="list-unstyled mt-4">
+<li class="media mb-4">
+<div class=media-body>
+<h5 class="mt-0 mb-1"><a href=/zh/blog/2018/08/14/dubbo%E7%9A%84%E6%B3%9B%E5%8C%96%E8%B0%83%E7%94%A8/>Dubbo的泛化调用</a></h5>
+<p class="mb-2 mb-md-3"><small class=text-muted>Tuesday, August 14, 2018 in 技术分享</small></p>
+<p class="pt-0 mt-0">以下几种场景可以考虑使用泛化调用：
+服务测试平台 API 服务网关 泛化调用主要用于消费端没有 API 接口的情况；不需要引入接口 jar 包，而是直接通过 GenericService 接口来发起服务调用，参数及返回值中的所有 POJO 均用 Map 表示。泛化调用对于服务端无需关注，按正常服务进行暴露即可。
+下面来看看消费端如何使用泛化调用进行服务调用。
+通过 Spring XML 配置进行泛化调用 在 Spring 配置申明 generic="true"，如： …</p>
+<p class=pt-0><a href=/zh/blog/2018/08/14/dubbo%E7%9A%84%E6%B3%9B%E5%8C%96%E8%B0%83%E7%94%A8/>更多</a></p>
+</div>
+</li>
 <li class="media mb-4">
 <div class=media-body>
 <h5 class="mt-0 mb-1"><a href=/zh/blog/2018/08/14/dubbo-%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95-provider-%E9%85%8D%E7%BD%AE/>Dubbo 基础用法 - Provider 配置</a></h5>
@@ -281,16 +293,6 @@ Java RMI 工作原理 一个典型的 RMI 调用如下图所示：
 <p class="pt-0 mt-0">注解驱动（Annotation-Driven） @DubboComponentScan 起始版本： 2.5.7 &lt;dubbo:annotation> 历史遗留问题 1. 注解支持不充分 在 Dubbo 2.5.7之前的版本 ，Dubbo 提供了两个核心注解 @Service 以及 @Reference，分别用于Dubbo 服务提供和 Dubbo 服务引用。
 其中，@Service 作为 XML 元素 &lt;dubbo:service>的替代注解，与 Spring …</p>
 <p class=pt-0><a href=/zh/blog/2018/08/07/dubbo-%E6%B3%A8%E8%A7%A3%E9%A9%B1%E5%8A%A8/>更多</a></p>
-</div>
-</li>
-<li class="media mb-4">
-<div class=media-body>
-<h5 class="mt-0 mb-1"><a href=/zh/blog/2018/07/30/%E7%AC%AC%E4%B8%89%E5%B1%8Adubbo%E5%BC%80%E5%8F%91%E8%80%85%E6%B2%99%E9%BE%99%E5%9C%A8%E6%B7%B1%E5%9C%B3%E6%88%90%E5%8A%9F%E4%B8%BE%E5%8A%9E/>第三届Dubbo开发者沙龙在深圳成功举办</a></h5>
-<p class="mb-2 mb-md-3"><small class=text-muted>Monday, July 30, 2018 in 技术分享</small></p>
-<p class="pt-0 mt-0">第三届Dubbo开发者沙龙在深圳成功举办，超过2000位开发者报名，现场参与人数700+，通过阿里云天池、云栖社区、大咖说引导线上直播观看次数17000+
-分享嘉宾
-陈志轩: Dubbo开源现状和2.7规划 康彬: 乐信集团的微服务化之路 林佳梁: Sentinel——企业用户的全方位流量哨兵 </p>
-<p class=pt-0><a href=/zh/blog/2018/07/30/%E7%AC%AC%E4%B8%89%E5%B1%8Adubbo%E5%BC%80%E5%8F%91%E8%80%85%E6%B2%99%E9%BE%99%E5%9C%A8%E6%B7%B1%E5%9C%B3%E6%88%90%E5%8A%9F%E4%B8%BE%E5%8A%9E/>更多</a></p>
 </div>
 </li>
 </ul>

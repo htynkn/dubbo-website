@@ -1,4 +1,129 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – 版本发布</title><link>https://dubbo.apache.org/zh/blog/releases/</link><description>Recent content in 版本发布 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/blog/releases/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: 3.0.1 发版公告</title><link>https://dubbo.apache.org/zh/blog/2021/07/02/3.0.1-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</link><pubDate>Fri, 02 Jul 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/07/02/3.0.1-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – 版本发布</title><link>https://dubbo.apache.org/zh/blog/releases/</link><description>Recent content in 版本发布 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/blog/releases/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: 3.0.2 发版公告</title><link>https://dubbo.apache.org/zh/blog/2021/08/18/3.0.2-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</link><pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/08/18/3.0.2-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</guid><description>
+&lt;h2 id="新特性">新特性&lt;/h2>
+&lt;ul>
+&lt;li>支持通过 @DubboService 注解暴露泛化服务&lt;/li>
+&lt;li>元数据中心xml格式的配置支持 protocol 和 port 属性&lt;/li>
+&lt;li>兼容 curator5 以上的版本&lt;/li>
+&lt;li>点对点调用支持*通配符进行匹配, 一个提供者地址可对应多个接口&lt;/li>
+&lt;li>为应用级别的服务发现增加动态配置去进行规则覆盖&lt;/li>
+&lt;li>对提供者测的动态配置覆盖规则提供开关，可以使提供者无视动态配置，不重新暴露&lt;/li>
+&lt;li>支持 native image&lt;/li>
+&lt;li>提供取消执行 shutdown hook 的开关&lt;/li>
+&lt;li>支持 Kubernetes Mesh 的服务治理规则&lt;/li>
+&lt;li>Netty 连接支持 SSL 配置&lt;/li>
+&lt;/ul>
+&lt;h2 id="bug-修复">Bug 修复&lt;/h2>
+&lt;ul>
+&lt;li>DubboBootStrap start 重复调用后，动态配置被覆盖&lt;/li>
+&lt;li>动态配置规则被删除后，依然生效&lt;/li>
+&lt;li>triple 协议在暴露时会抛出空指针异常&lt;/li>
+&lt;li>ConfigCenterConfig.setAddress 方法会覆盖掉 username 属性&lt;/li>
+&lt;li>DefaultFuture.closeChannel 会销毁掉消费端测的线程池&lt;/li>
+&lt;li>TripleClientHandler.writeRequest 抛出空指针异常&lt;/li>
+&lt;li>解析3.0迁移规则异常时会抛出空指针异常&lt;/li>
+&lt;li>Activated Extensions 的顺序性问题&lt;/li>
+&lt;li>URLAddress.parse 方法在解析 ipv6 地址时存在问题&lt;/li>
+&lt;li>用户自定义的参数在 properties 配置中不生效&lt;/li>
+&lt;li>同时使用 API 模式和 Spring 模式配置时属性，Config Id 存在覆盖问题&lt;/li>
+&lt;li>应用级别服务发现在启动时不生效&lt;/li>
+&lt;li>Nacos 注册中心无法动态感知提供者的数量变化&lt;/li>
+&lt;li>${dubbo.application} 在 xml 文件中无法被 spring 的 placeholder 规则给解析替换&lt;/li>
+&lt;li>获取实例参数的顺序问题，先去获取了实例级别参数，再去获取接口级别参数&lt;/li>
+&lt;li>当 DubboConfigBeanInitializer 不存在时，注册应用启动监听器会抛出异常&lt;/li>
+&lt;li>Mock 时 参数中包含 &amp;lsquo;:&amp;rsquo; 或者 &amp;lsquo;=&amp;rsquo; 字符时，不生效&lt;/li>
+&lt;li>删除 Mesh 规则时空指针异常&lt;/li>
+&lt;/ul>
+&lt;h2 id="优化">优化&lt;/h2>
+&lt;ul>
+&lt;li>抓住 RemovalTask 的异常，保证信号量能够释放&lt;/li>
+&lt;li>通过 唯一 service name 检查 ReferenceConfig/ServiceConfig 是否重复&lt;/li>
+&lt;li>优化生成随机数的性能&lt;/li>
+&lt;li>如果用户使用接口级别去做服务发现，不发布应用与接口的映射数据到元数据中心&lt;/li>
+&lt;li>使用 StringBuilder#append(Char) 提升性能&lt;/li>
+&lt;li>保证 GRPC 编译的类文件中接口的顺序&lt;/li>
+&lt;li>优化 reference bean 的占位符解析&lt;/li>
+&lt;li>MergeableClusterInvoker 中使用 CompletableFuture#get(long, TimeUnit) 去提升性能&lt;/li>
+&lt;li>内置服务 MetadataService 不延迟暴露&lt;/li>
+&lt;li>优化 ConfigBean 和 Bootstrap 的启动逻辑&lt;/li>
+&lt;li>优化 Config 检查是否重复的逻辑&lt;/li>
+&lt;li>使用 Ring 数据结构去进行注册通知&lt;/li>
+&lt;li>优化动态配置的初始化逻辑&lt;/li>
+&lt;li>ConfigManager 使用 ConcurrentHashMap 去移除锁逻辑，提升 equals 和 toString 性能&lt;/li>
+&lt;li>优化 MetadataInfo equals 方法 以及 Instance Listener&lt;/li>
+&lt;li>优化异步 export/refer 逻辑&lt;/li>
+&lt;li>使用 TreeSet 数据结构保证应用级别服务发现时应用名称的顺序一致&lt;/li>
+&lt;li>RegistryNotifier 的第一个十次通知不延迟&lt;/li>
+&lt;li>dubbo-compile 编译使用新的格式生成 stub&lt;/li>
+&lt;li>Mesh 服务治理规则在动态配置中心的分组和其他规则分组统一，由 DEFAULT_GROUP 改成 dubbo&lt;/li>
+&lt;li>使用 nacos 用作注册中心时，可以在注册中心地址中使用参数来改变在 nacos 中的分组&lt;/li>
+&lt;li>计算 ServiceInfo 的 reversion 时，移除运行时参数，避免生成多个 reversion&lt;/li>
+&lt;li>Nacos 注册中心抛出异常时，将异常封装称 RpcException 抛出&lt;/li>
+&lt;li>禁止动态配置中心对一些权限参数进行动态修改&lt;/li>
+&lt;li>优化 Config Bean 的初始化流程，并兼容 spring 3.x/4.1.x&lt;/li>
+&lt;li>Bootstrap.start 方法可重入，暴露或引用新的服务&lt;/li>
+&lt;li>将 org.apache.dubbo 包中的类默认添加到白名单中&lt;/li>
+&lt;li>保证生成的 Config 的 Id 唯一，并检查 Config 是否之前存在&lt;/li>
+&lt;li>Javaassist 兼容改变 override 声明字段&lt;/li>
+&lt;li>重构解码时的检查逻辑，当找不到 path, version 对应的提供者是，抛出异常&lt;/li>
+&lt;li>当 ApplicationModel 为 null 时，兼容 adaptive extensions&lt;/li>
+&lt;/ul>
+&lt;h2 id="代码质量提升">代码质量提升&lt;/h2>
+&lt;p>感谢以下提高 Apache Dubbo 的稳定性的贡献。&lt;/p>
+&lt;p>&lt;a href="https://github.com/apache/dubbo/pull/8111">#8111&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8147">#8147&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8164">#8164&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8177">#8177&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8180">#8180&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8161">#8161&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8183">#8183&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8205">#8205&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8215">#8215&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8173">#8173&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8219">#8219&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8228">#8228&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8232">#8232&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8230">#8230&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8236">#8236&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8260">#8260&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8262">#8262&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8252">#8252&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8246">#8246&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8208">#8208&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8278">#8278&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8267">#8267&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8277">#8277&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8291">#8291&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8296">#8296&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8302">#8302&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8175">#8175&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8319">#8319&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8309">#8309&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8336">#8336&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8332">#8332&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8328">#8328&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8355">#8355&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8396">#8396&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8401">#8401&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8395">#8395&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8415">#8415&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8406">#8406&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8411">#8411&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8418">#8418&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8439">#8439&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8404">#8404&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8443">#8443&lt;/a>&lt;/p>
+&lt;h2 id="maven依赖变化">Maven依赖变化&lt;/h2>
+&lt;ul>
+&lt;li>移除依赖: org.eclipse.collections:eclipse-collections&lt;/li>
+&lt;li>移除依赖: com.google.guava:guava&lt;/li>
+&lt;li>jetty: 9.4.11.v20180605 -&amp;gt; 9.4.43.v20210629&lt;/li>
+&lt;li>apollo client: 1.1.1 -&amp;gt; 1.8.0&lt;/li>
+&lt;li>snakeyaml: 1.20 -&amp;gt; 1.29&lt;/li>
+&lt;li>tomcat embed: 8.5.31 -&amp;gt; 8.5.69&lt;/li>
+&lt;li>nacos client: 2.0.0 -&amp;gt; 2.0.2&lt;/li>
+&lt;li>swagger: 1.5.19 -&amp;gt; 1.5.24&lt;/li>
+&lt;li>hessian_lite: 3.2.8 -&amp;gt; 3.2.11&lt;/li>
+&lt;/ul></description></item><item><title>Blog: 3.0.1 发版公告</title><link>https://dubbo.apache.org/zh/blog/2021/07/02/3.0.1-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</link><pubDate>Fri, 02 Jul 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/07/02/3.0.1-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</guid><description>
 &lt;h2 id="优化">优化&lt;/h2>
 &lt;ul>
 &lt;li>重构服务自省映射关系，支持地址迁移时直接配置上游应用名&lt;/li>

@@ -1,4 +1,129 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – Apache Dubbo 博客</title><link>https://dubbo.apache.org/zh/blog/</link><description>Recent content in Apache Dubbo 博客 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: 3.0.1 发版公告</title><link>https://dubbo.apache.org/zh/blog/2021/07/02/3.0.1-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</link><pubDate>Fri, 02 Jul 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/07/02/3.0.1-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – Apache Dubbo 博客</title><link>https://dubbo.apache.org/zh/blog/</link><description>Recent content in Apache Dubbo 博客 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: 3.0.2 发版公告</title><link>https://dubbo.apache.org/zh/blog/2021/08/18/3.0.2-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</link><pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/08/18/3.0.2-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</guid><description>
+&lt;h2 id="新特性">新特性&lt;/h2>
+&lt;ul>
+&lt;li>支持通过 @DubboService 注解暴露泛化服务&lt;/li>
+&lt;li>元数据中心xml格式的配置支持 protocol 和 port 属性&lt;/li>
+&lt;li>兼容 curator5 以上的版本&lt;/li>
+&lt;li>点对点调用支持*通配符进行匹配, 一个提供者地址可对应多个接口&lt;/li>
+&lt;li>为应用级别的服务发现增加动态配置去进行规则覆盖&lt;/li>
+&lt;li>对提供者测的动态配置覆盖规则提供开关，可以使提供者无视动态配置，不重新暴露&lt;/li>
+&lt;li>支持 native image&lt;/li>
+&lt;li>提供取消执行 shutdown hook 的开关&lt;/li>
+&lt;li>支持 Kubernetes Mesh 的服务治理规则&lt;/li>
+&lt;li>Netty 连接支持 SSL 配置&lt;/li>
+&lt;/ul>
+&lt;h2 id="bug-修复">Bug 修复&lt;/h2>
+&lt;ul>
+&lt;li>DubboBootStrap start 重复调用后，动态配置被覆盖&lt;/li>
+&lt;li>动态配置规则被删除后，依然生效&lt;/li>
+&lt;li>triple 协议在暴露时会抛出空指针异常&lt;/li>
+&lt;li>ConfigCenterConfig.setAddress 方法会覆盖掉 username 属性&lt;/li>
+&lt;li>DefaultFuture.closeChannel 会销毁掉消费端测的线程池&lt;/li>
+&lt;li>TripleClientHandler.writeRequest 抛出空指针异常&lt;/li>
+&lt;li>解析3.0迁移规则异常时会抛出空指针异常&lt;/li>
+&lt;li>Activated Extensions 的顺序性问题&lt;/li>
+&lt;li>URLAddress.parse 方法在解析 ipv6 地址时存在问题&lt;/li>
+&lt;li>用户自定义的参数在 properties 配置中不生效&lt;/li>
+&lt;li>同时使用 API 模式和 Spring 模式配置时属性，Config Id 存在覆盖问题&lt;/li>
+&lt;li>应用级别服务发现在启动时不生效&lt;/li>
+&lt;li>Nacos 注册中心无法动态感知提供者的数量变化&lt;/li>
+&lt;li>${dubbo.application} 在 xml 文件中无法被 spring 的 placeholder 规则给解析替换&lt;/li>
+&lt;li>获取实例参数的顺序问题，先去获取了实例级别参数，再去获取接口级别参数&lt;/li>
+&lt;li>当 DubboConfigBeanInitializer 不存在时，注册应用启动监听器会抛出异常&lt;/li>
+&lt;li>Mock 时 参数中包含 &amp;lsquo;:&amp;rsquo; 或者 &amp;lsquo;=&amp;rsquo; 字符时，不生效&lt;/li>
+&lt;li>删除 Mesh 规则时空指针异常&lt;/li>
+&lt;/ul>
+&lt;h2 id="优化">优化&lt;/h2>
+&lt;ul>
+&lt;li>抓住 RemovalTask 的异常，保证信号量能够释放&lt;/li>
+&lt;li>通过 唯一 service name 检查 ReferenceConfig/ServiceConfig 是否重复&lt;/li>
+&lt;li>优化生成随机数的性能&lt;/li>
+&lt;li>如果用户使用接口级别去做服务发现，不发布应用与接口的映射数据到元数据中心&lt;/li>
+&lt;li>使用 StringBuilder#append(Char) 提升性能&lt;/li>
+&lt;li>保证 GRPC 编译的类文件中接口的顺序&lt;/li>
+&lt;li>优化 reference bean 的占位符解析&lt;/li>
+&lt;li>MergeableClusterInvoker 中使用 CompletableFuture#get(long, TimeUnit) 去提升性能&lt;/li>
+&lt;li>内置服务 MetadataService 不延迟暴露&lt;/li>
+&lt;li>优化 ConfigBean 和 Bootstrap 的启动逻辑&lt;/li>
+&lt;li>优化 Config 检查是否重复的逻辑&lt;/li>
+&lt;li>使用 Ring 数据结构去进行注册通知&lt;/li>
+&lt;li>优化动态配置的初始化逻辑&lt;/li>
+&lt;li>ConfigManager 使用 ConcurrentHashMap 去移除锁逻辑，提升 equals 和 toString 性能&lt;/li>
+&lt;li>优化 MetadataInfo equals 方法 以及 Instance Listener&lt;/li>
+&lt;li>优化异步 export/refer 逻辑&lt;/li>
+&lt;li>使用 TreeSet 数据结构保证应用级别服务发现时应用名称的顺序一致&lt;/li>
+&lt;li>RegistryNotifier 的第一个十次通知不延迟&lt;/li>
+&lt;li>dubbo-compile 编译使用新的格式生成 stub&lt;/li>
+&lt;li>Mesh 服务治理规则在动态配置中心的分组和其他规则分组统一，由 DEFAULT_GROUP 改成 dubbo&lt;/li>
+&lt;li>使用 nacos 用作注册中心时，可以在注册中心地址中使用参数来改变在 nacos 中的分组&lt;/li>
+&lt;li>计算 ServiceInfo 的 reversion 时，移除运行时参数，避免生成多个 reversion&lt;/li>
+&lt;li>Nacos 注册中心抛出异常时，将异常封装称 RpcException 抛出&lt;/li>
+&lt;li>禁止动态配置中心对一些权限参数进行动态修改&lt;/li>
+&lt;li>优化 Config Bean 的初始化流程，并兼容 spring 3.x/4.1.x&lt;/li>
+&lt;li>Bootstrap.start 方法可重入，暴露或引用新的服务&lt;/li>
+&lt;li>将 org.apache.dubbo 包中的类默认添加到白名单中&lt;/li>
+&lt;li>保证生成的 Config 的 Id 唯一，并检查 Config 是否之前存在&lt;/li>
+&lt;li>Javaassist 兼容改变 override 声明字段&lt;/li>
+&lt;li>重构解码时的检查逻辑，当找不到 path, version 对应的提供者是，抛出异常&lt;/li>
+&lt;li>当 ApplicationModel 为 null 时，兼容 adaptive extensions&lt;/li>
+&lt;/ul>
+&lt;h2 id="代码质量提升">代码质量提升&lt;/h2>
+&lt;p>感谢以下提高 Apache Dubbo 的稳定性的贡献。&lt;/p>
+&lt;p>&lt;a href="https://github.com/apache/dubbo/pull/8111">#8111&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8147">#8147&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8164">#8164&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8177">#8177&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8180">#8180&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8161">#8161&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8183">#8183&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8205">#8205&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8215">#8215&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8173">#8173&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8219">#8219&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8228">#8228&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8232">#8232&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8230">#8230&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8236">#8236&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8260">#8260&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8262">#8262&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8252">#8252&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8246">#8246&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8208">#8208&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8278">#8278&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8267">#8267&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8277">#8277&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8291">#8291&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8296">#8296&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8302">#8302&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8175">#8175&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8319">#8319&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8309">#8309&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8336">#8336&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8332">#8332&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8328">#8328&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8355">#8355&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8396">#8396&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8401">#8401&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8395">#8395&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8415">#8415&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8406">#8406&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8411">#8411&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8418">#8418&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8439">#8439&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8404">#8404&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8443">#8443&lt;/a>&lt;/p>
+&lt;h2 id="maven依赖变化">Maven依赖变化&lt;/h2>
+&lt;ul>
+&lt;li>移除依赖: org.eclipse.collections:eclipse-collections&lt;/li>
+&lt;li>移除依赖: com.google.guava:guava&lt;/li>
+&lt;li>jetty: 9.4.11.v20180605 -&amp;gt; 9.4.43.v20210629&lt;/li>
+&lt;li>apollo client: 1.1.1 -&amp;gt; 1.8.0&lt;/li>
+&lt;li>snakeyaml: 1.20 -&amp;gt; 1.29&lt;/li>
+&lt;li>tomcat embed: 8.5.31 -&amp;gt; 8.5.69&lt;/li>
+&lt;li>nacos client: 2.0.0 -&amp;gt; 2.0.2&lt;/li>
+&lt;li>swagger: 1.5.19 -&amp;gt; 1.5.24&lt;/li>
+&lt;li>hessian_lite: 3.2.8 -&amp;gt; 3.2.11&lt;/li>
+&lt;/ul></description></item><item><title>Blog: 3.0.1 发版公告</title><link>https://dubbo.apache.org/zh/blog/2021/07/02/3.0.1-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</link><pubDate>Fri, 02 Jul 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/07/02/3.0.1-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</guid><description>
 &lt;h2 id="优化">优化&lt;/h2>
 &lt;ul>
 &lt;li>重构服务自省映射关系，支持地址迁移时直接配置上游应用名&lt;/li>
@@ -8560,94 +8685,4 @@ nd6 &lt;span style="color:#268bd2">options&lt;/span>&lt;span style="color:#719e0
 &lt;h2 id="原理-泛化调用">原理： 泛化调用&lt;/h2>
 &lt;p>有了参数类型，下一个问题就是怎么能够调用到服务端，在传统的Dubbo RPC调用中，客户端需要依赖服务端的API jar包(参考前文demo中的&lt;a href="https://github.com/nzomkxia/dubbo-demo/tree/master/dubbo-basic-consumer">dubbo-basic-consumer&lt;/a>)，这对于Dubbo Admin来说不太可能，因为服务的上下线是动态的，Dubbo Admin无法动态增加jar包依赖，因此需要用到Dubbo中的&lt;strong>泛化调用&lt;/strong>，指的是在没有服务端API接口的情况下，客户端直接通过 &lt;code>GenericService&lt;/code> 接口来发起服务调用，返回值中的数据对象都用Map来表示。泛化调用在服务端不需要做特殊处理，只需要客户端发起即可。&lt;/p>
 &lt;h2 id="总结和展望">总结和展望&lt;/h2>
-&lt;p>本文简单介绍了服务测试的用法和原理，后续会进一步针对该功能进行增强，比如处理抽象类的参数类型，支持从json文件导入参数值，支持对参数值的保存等等，方便对服务接口进行回归测试。&lt;/p></description></item><item><title>Blog: 使用Apache Skywalking (Incubator) 做分布式跟踪</title><link>https://dubbo.apache.org/zh/blog/2019/08/11/%E4%BD%BF%E7%94%A8apache-skywalking-incubator-%E5%81%9A%E5%88%86%E5%B8%83%E5%BC%8F%E8%B7%9F%E8%B8%AA/</link><pubDate>Sun, 11 Aug 2019 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2019/08/11/%E4%BD%BF%E7%94%A8apache-skywalking-incubator-%E5%81%9A%E5%88%86%E5%B8%83%E5%BC%8F%E8%B7%9F%E8%B8%AA/</guid><description>
-&lt;h2 id="apache-skywalkingincubator简介">Apache Skywalking(Incubator)简介&lt;/h2>
-&lt;p>&lt;a href="https://github.com/apache/incubator-skywalking">Apache Skywalking(Incubator)&lt;/a> 专门为微服务架构和云原生架构系统而设计并且支持分布式链路追踪的APM系统。&lt;a href="https://github.com/apache/incubator-skywalking">Apache Skywalking(Incubator)&lt;/a>通过加载探针的方式收集应用调用链路信息，并对采集的调用链路信息进行分析，生成应用间关系和服务间关系以及服务指标。&lt;a href="https://github.com/apache/incubator-skywalking">Apache Skywalking (Incubating)&lt;/a>目前支持多种语言，其中包括&lt;a href="https://github.com/apache/incubator-skywalking">Java&lt;/a>，&lt;a href="https://github.com/OpenSkywalking/skywalking-netcore">.Net Core&lt;/a>，&lt;a href="https://github.com/OpenSkywalking/skywalking-nodejs">Node.js&lt;/a>和&lt;a href="https://github.com/OpenSkywalking/skywalking-go">Go&lt;/a>语言。&lt;/p>
-&lt;p>目前Skywalking已经支持从6个可视化维度剖析分布式系统的运行情况。总览视图是应用和组件的全局视图，其中包括组件和应用数量，应用的告警波动，慢服务列表以及应用吞吐量；拓扑图从应用依赖关系出发，展现整个应用的拓扑关系；应用视图则是从单个应用的角度，展现应用的上下游关系，TopN的服务和服务器，JVM的相关信息以及对应的主机信息。服务视图关注单个服务入口的运行情况以及此服务的上下游依赖关系，依赖度，帮助用户针对单个服务的优化和监控；调用链展现了调用的单次请求经过的所有埋点以及每个埋点的执行时长；告警视图根据配置阈值针对应用、服务器、服务进行实时告警。&lt;/p>
-&lt;h2 id="dubbo与apache-skywalkingincubator">Dubbo与Apache Skywalking(Incubator)&lt;/h2>
-&lt;h3 id="编写dubbo示例程序">编写Dubbo示例程序&lt;/h3>
-&lt;p>Dubbo实例程序已上传到&lt;a href="https://github.com/SkywalkingTest/dubbo-trace-example">Github仓库&lt;/a>中。方便大家下载使用。&lt;/p>
-&lt;h4 id="api工程">API工程&lt;/h4>
-&lt;p>服务接口：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-go" data-lang="go">&lt;span style="color:#719e07">package&lt;/span> org.apache.skywalking.demo.interfaces;
-public &lt;span style="color:#268bd2">interface&lt;/span> HelloService {
-String &lt;span style="color:#268bd2">sayHello&lt;/span>(String name);
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="dubbo服务提供工程">Dubbo服务提供工程&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-go" data-lang="go">&lt;span style="color:#719e07">package&lt;/span> org.apache.skywalking.demo.provider;
-@&lt;span style="color:#268bd2">Service&lt;/span>(version = &lt;span style="color:#2aa198">&amp;#34;${demo.service.version}&amp;#34;&lt;/span>,
-application = &lt;span style="color:#2aa198">&amp;#34;${dubbo.application.id}&amp;#34;&lt;/span>,
-protocol = &lt;span style="color:#2aa198">&amp;#34;${dubbo.protocol.id}&amp;#34;&lt;/span>,
-registry = &lt;span style="color:#2aa198">&amp;#34;${dubbo.registry.id}&amp;#34;&lt;/span>, timeout = &lt;span style="color:#2aa198">60000&lt;/span>)
-public class HelloServiceImpl implements HelloService {
-public String &lt;span style="color:#268bd2">sayHello&lt;/span>(String name) {
-LockSupport.&lt;span style="color:#268bd2">parkNanos&lt;/span>(TimeUnit.SECONDS.&lt;span style="color:#268bd2">toNanos&lt;/span>(&lt;span style="color:#2aa198">1&lt;/span>));
-&lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#2aa198">&amp;#34;Hello, &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> name;
-}
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="consumer工程">Consumer工程&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-go" data-lang="go">&lt;span style="color:#719e07">package&lt;/span> org.apache.skywalking.demo.consumer;
-@RestController
-public class ConsumerController {
-private static &lt;span style="color:#dc322f">int&lt;/span> COUNT = &lt;span style="color:#2aa198">0&lt;/span>;
-@&lt;span style="color:#268bd2">Reference&lt;/span>(version = &lt;span style="color:#2aa198">&amp;#34;${demo.service.version}&amp;#34;&lt;/span>,
-application = &lt;span style="color:#2aa198">&amp;#34;${dubbo.application.id}&amp;#34;&lt;/span>,
-url = &lt;span style="color:#2aa198">&amp;#34;dubbo://localhost:20880&amp;#34;&lt;/span>, timeout = &lt;span style="color:#2aa198">60000&lt;/span>)
-private HelloService helloService;
-@&lt;span style="color:#268bd2">GetMapping&lt;/span>(&lt;span style="color:#2aa198">&amp;#34;/sayHello/{name}&amp;#34;&lt;/span>)
-public String &lt;span style="color:#268bd2">sayHello&lt;/span>(@&lt;span style="color:#268bd2">PathVariable&lt;/span>(name = &lt;span style="color:#2aa198">&amp;#34;name&amp;#34;&lt;/span>) String name) {
-&lt;span style="color:#719e07">if&lt;/span> ((COUNT&lt;span style="color:#719e07">++&lt;/span>) &lt;span style="color:#719e07">%&lt;/span> &lt;span style="color:#2aa198">3&lt;/span> &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#2aa198">0&lt;/span>){
-throw new &lt;span style="color:#268bd2">RuntimeException&lt;/span>();
-}
-LockSupport.&lt;span style="color:#268bd2">parkNanos&lt;/span>(TimeUnit.SECONDS.&lt;span style="color:#268bd2">toNanos&lt;/span>(&lt;span style="color:#2aa198">2&lt;/span>));
-&lt;span style="color:#719e07">return&lt;/span> helloService.&lt;span style="color:#268bd2">sayHello&lt;/span>(name);
-}
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="部署apache-skywalkingincubator">部署Apache Skywalking(Incubator)&lt;/h3>
-&lt;p>Apache Skywalking(Incubator）共提供两种部署模式：单节点模式和集群模式，以下为单节点模式部署步骤，集群模式部署详情参考&lt;a href="https://github.com/apache/incubator-skywalking/blob/master/docs/cn/Deploy-backend-in-cluster-mode-CN.md">文档&lt;/a>。&lt;/p>
-&lt;h4 id="依赖第三方组件">依赖第三方组件&lt;/h4>
-&lt;ol>
-&lt;li>JDK8+&lt;/li>
-&lt;li>Elasticsearch 5.x&lt;/li>
-&lt;/ol>
-&lt;h4 id="部署步骤">部署步骤&lt;/h4>
-&lt;ol>
-&lt;li>下载&lt;a href="http://skywalking.apache.org/downloads/"> Apache Skywalking Collector&lt;/a>&lt;/li>
-&lt;li>部署ElasticSearch
-&lt;ul>
-&lt;li>修改elasticsearch.yml文件，并设置&lt;code>cluster.name&lt;/code>设置成&lt;code>CollectorDBCluster&lt;/code>。此名称需要和collector配置文件一致。&lt;/li>
-&lt;li>修改ES配置&lt;code>network.host&lt;/code>值，将&lt;code>network.host&lt;/code>的值修改成&lt;code>0.0.0.0&lt;/code>。&lt;/li>
-&lt;li>启动Elasticsearch&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>解压并启动Skywalking Collector。运行&lt;code>bin/startup.sh&lt;/code>命令即可启动Skywalking Collector&lt;/li>
-&lt;/ol>
-&lt;h4 id="启动示例程序">启动示例程序&lt;/h4>
-&lt;p>在启动示例程序之前，执行编译打包的命令:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">./mvnw clean package
-&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="启动服务提供端">启动服务提供端&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">java -jar -javaagent:$AGENT_PATH/skywalking-agent.jar -Dskywalking.agent.application_code=dubbo-provider -Dskywalking.collector.servers=localhost:10800 dubbo-provider/target/dubbo-provider.jar
-&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="启动服务消费端">启动服务消费端&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">java -jar -javaagent:$AGENT_PATH/skywalking-agent.jar -Dskywalking.agent.application_code=dubbo-consumer -Dskywalking.collector.servers=localhost:10800 dubbo-consumer/target/dubbo-consumer.jar
-&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="访问消费端提供的服务">访问消费端提供的服务&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">curl http://localhost:8080/sayHello/test
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="skywalking监控截图">Skywalking监控截图：&lt;/h2>
-&lt;h3 id="首页">首页&lt;/h3>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/skywalking-dashboard.png" alt="/admin-guide/images/skywalking-dashboard.png">&lt;/p>
-&lt;h3 id="拓扑图">拓扑图&lt;/h3>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/skywalking-topology.png" alt="/admin-guide/images/skywalking-topology.png">&lt;/p>
-&lt;h3 id="应用视图">应用视图&lt;/h3>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/skywalking-application.png" alt="/admin-guide/images/skywalking-application.png">&lt;/p>
-&lt;p>JVM信息
-&lt;img src="https://dubbo.apache.org/imgs/blog/skywalking-application_instance.png" alt="/admin-guide/images/skywalking-application_instance.png">&lt;/p>
-&lt;h3 id="服务视图">服务视图&lt;/h3>
-&lt;p>服务消费端：
-&lt;img src="https://dubbo.apache.org/imgs/blog/skywalking-service-consumer.png" alt="/admin-guide/images/skywalking-service-consumer.png">&lt;/p>
-&lt;p>服务提供端：
-&lt;img src="https://dubbo.apache.org/imgs/blog/skywalking-service-provider.png" alt="/admin-guide/images/skywalking-service-provider.png">&lt;/p>
-&lt;h3 id="trace视图">Trace视图&lt;/h3>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/skywalking-trace.png" alt="/admin-guide/images/skywalking-trace.png">&lt;/p>
-&lt;p>Span信息：
-&lt;img src="https://dubbo.apache.org/imgs/blog/skywalking-span-Info.png" alt="/admin-guide/images/skywalking-span-Info.png">&lt;/p>
-&lt;h3 id="告警视图">告警视图&lt;/h3>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/skywalking-alarm.png" alt="/admin-guide/images/skywalking-alarm.png">&lt;/p></description></item></channel></rss>
+&lt;p>本文简单介绍了服务测试的用法和原理，后续会进一步针对该功能进行增强，比如处理抽象类的参数类型，支持从json文件导入参数值，支持对参数值的保存等等，方便对服务接口进行回归测试。&lt;/p></description></item></channel></rss>

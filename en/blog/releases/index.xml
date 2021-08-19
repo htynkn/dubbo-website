@@ -1,4 +1,129 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – New Releases</title><link>https://dubbo.apache.org/en/blog/releases/</link><description>Recent content in New Releases on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/en/blog/releases/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: 3.0.1 Release Note</title><link>https://dubbo.apache.org/en/blog/2021/07/02/3.0.1-release-note/</link><pubDate>Fri, 02 Jul 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/blog/2021/07/02/3.0.1-release-note/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – New Releases</title><link>https://dubbo.apache.org/en/blog/releases/</link><description>Recent content in New Releases on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/en/blog/releases/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: 3.0.2 Release Note</title><link>https://dubbo.apache.org/en/blog/2021/08/18/3.0.2-release-note/</link><pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/blog/2021/08/18/3.0.2-release-note/</guid><description>
+&lt;h2 id="features">Features&lt;/h2>
+&lt;ul>
+&lt;li>improve generic service with @DubboService annotation.&lt;/li>
+&lt;li>metadata report config support xml to config protocol and port.&lt;/li>
+&lt;li>compatible for curator5.&lt;/li>
+&lt;li>p2p invoke support wildcard url match.&lt;/li>
+&lt;li>add Dynamic Configuration Override Support For ServiceDiscovery.&lt;/li>
+&lt;li>add provider configuration override disable option.&lt;/li>
+&lt;li>support native image.&lt;/li>
+&lt;li>support disable shutdown hook.&lt;/li>
+&lt;li>add Kubernetes Mesh Rule support.&lt;/li>
+&lt;li>support SSL at netty transport.&lt;/li>
+&lt;/ul>
+&lt;h2 id="bugfixs">BugFixs&lt;/h2>
+&lt;ul>
+&lt;li>fix re-start override dynamic config.&lt;/li>
+&lt;li>fix delete configurators does not take effect.&lt;/li>
+&lt;li>fix triple protocol will throw exception when the service is exposed.&lt;/li>
+&lt;li>fix ConfigCenterConfig.setAddress will override username problem.&lt;/li>
+&lt;li>fix DefaultFuture.closeChannel will shutdown ExecutorService.&lt;/li>
+&lt;li>fix TripleClientHandler#writeRequest throwing NPE problem.&lt;/li>
+&lt;li>fix NPE when parse migration rule error happen.&lt;/li>
+&lt;li>fix Activated Extensions order.&lt;/li>
+&lt;li>fix URLAddress#parse method to judge the isPathAddress problem when the address is ipv6.&lt;/li>
+&lt;li>fix custom parameter in configuration properties does not work.&lt;/li>
+&lt;li>fix Config id Override when both using API and Spring.&lt;/li>
+&lt;li>fix service discovery not work on bootstrap &amp;amp; fix address pollution.&lt;/li>
+&lt;li>fix nacos registry can&amp;rsquo;t received instance change notify.&lt;/li>
+&lt;li>fix could not resolve placeholder &amp;lsquo;${dubbo.application}&amp;rsquo; in xml.&lt;/li>
+&lt;li>fix service parameter fetch order.&lt;/li>
+&lt;li>fix error of register dubbo bootstrap application listener manually.&lt;/li>
+&lt;li>fix mock parameters doesn&amp;rsquo;t work when it contain &amp;lsquo;:&amp;rsquo; or &amp;lsquo;=&amp;rsquo;.&lt;/li>
+&lt;li>fix delete mesh rule npe.&lt;/li>
+&lt;/ul>
+&lt;h2 id="optimization">Optimization&lt;/h2>
+&lt;ul>
+&lt;li>add exception catch for RemovalTask, ensure semaphore release.&lt;/li>
+&lt;li>check duplicated ReferenceConfig/ServiceConfig by unique service name.&lt;/li>
+&lt;li>improve the performance for generating random numbers.&lt;/li>
+&lt;li>if user define interface service discovery, not publish service name mapping info.&lt;/li>
+&lt;li>use StringBuilder#append(Char) to improve performance.&lt;/li>
+&lt;li>gRPC Compile class interface order.&lt;/li>
+&lt;li>improve property placeholder resolving of reference bean.&lt;/li>
+&lt;li>use CompletableFuture#get(long, TimeUnit) to take place of CompletableFuture#get() in MergeableClusterInvoker.&lt;/li>
+&lt;li>service delay export config ignore metadata service.&lt;/li>
+&lt;li>improve dubbo config beans and bootstrap initialization.&lt;/li>
+&lt;li>improve duplicated config checking and add tests for reference annotation.&lt;/li>
+&lt;li>replace with ring for registry notification &amp;amp; suppress property checker.&lt;/li>
+&lt;li>improve dynamic configuration initialization.&lt;/li>
+&lt;li>lock-free ConfigManager and improve config checking.&lt;/li>
+&lt;li>modify metadata equals and instance listener.&lt;/li>
+&lt;li>improve async export / refer.&lt;/li>
+&lt;li>use TreeSet to ensure ServiceNames order when subscribe.&lt;/li>
+&lt;li>make first tenth calls notify not delay RegistryNotifier.&lt;/li>
+&lt;li>refactor compiler to generate new format stubs.&lt;/li>
+&lt;li>change mesh rule group to config default value.&lt;/li>
+&lt;li>compatible with nacos grouping via group.&lt;/li>
+&lt;li>remove runtime params in ServiceInfo.&lt;/li>
+&lt;li>throw RpcException when NacosException occurred.&lt;/li>
+&lt;li>configcenter ban accessLogKey and FileRouterFactory key.&lt;/li>
+&lt;li>improve config bean initialization compatible with spring 3.x/4.1.x.&lt;/li>
+&lt;li>dubbo bootstrap start re-entry, export/refer new services.&lt;/li>
+&lt;li>org.apache.dubbo.* add serialization whitelist.&lt;/li>
+&lt;li>ensure generated config id is unique, checking existed config.&lt;/li>
+&lt;li>compatible with filed change declaration override for Javaassist.&lt;/li>
+&lt;li>refactor Codec check, default deny.&lt;/li>
+&lt;li>compatible with adaptive extensions when ApplicationModel is null.&lt;/li>
+&lt;/ul>
+&lt;h2 id="code-improvement">Code Improvement&lt;/h2>
+&lt;p>Thanks for these contribution to improve stability of Apache Dubbo.&lt;/p>
+&lt;p>&lt;a href="https://github.com/apache/dubbo/pull/8111">#8111&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8147">#8147&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8164">#8164&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8177">#8177&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8180">#8180&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8161">#8161&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8183">#8183&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8205">#8205&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8215">#8215&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8173">#8173&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8219">#8219&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8228">#8228&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8232">#8232&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8230">#8230&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8236">#8236&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8260">#8260&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8262">#8262&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8252">#8252&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8246">#8246&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8208">#8208&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8278">#8278&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8267">#8267&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8277">#8277&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8291">#8291&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8296">#8296&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8302">#8302&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8175">#8175&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8319">#8319&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8309">#8309&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8336">#8336&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8332">#8332&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8328">#8328&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8355">#8355&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8396">#8396&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8401">#8401&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8395">#8395&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8415">#8415&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8406">#8406&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8411">#8411&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8418">#8418&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8439">#8439&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8404">#8404&lt;/a>,
+&lt;a href="https://github.com/apache/dubbo/pull/8443">#8443&lt;/a>&lt;/p>
+&lt;h2 id="dependency-changes">Dependency Changes&lt;/h2>
+&lt;ul>
+&lt;li>remove dependency: org.eclipse.collections:eclipse-collections&lt;/li>
+&lt;li>remove dependency: com.google.guava:guava&lt;/li>
+&lt;li>jetty: 9.4.11.v20180605 -&amp;gt; 9.4.43.v20210629&lt;/li>
+&lt;li>apollo client: 1.1.1 -&amp;gt; 1.8.0&lt;/li>
+&lt;li>snakeyaml: 1.20 -&amp;gt; 1.29&lt;/li>
+&lt;li>tomcat embed: 8.5.31 -&amp;gt; 8.5.69&lt;/li>
+&lt;li>nacos client: 2.0.0 -&amp;gt; 2.0.2&lt;/li>
+&lt;li>swagger: 1.5.19 -&amp;gt; 1.5.24&lt;/li>
+&lt;li>hessian_lite: 3.2.8 -&amp;gt; 3.2.11&lt;/li>
+&lt;/ul></description></item><item><title>Blog: 3.0.1 Release Note</title><link>https://dubbo.apache.org/en/blog/2021/07/02/3.0.1-release-note/</link><pubDate>Fri, 02 Jul 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/blog/2021/07/02/3.0.1-release-note/</guid><description>
 &lt;h2 id="optimization">Optimization&lt;/h2>
 &lt;ul>
 &lt;li>Refactor NameMapping to Metadata, Support application field in MigrationRule&lt;/li>

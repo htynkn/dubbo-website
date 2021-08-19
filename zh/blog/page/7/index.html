@@ -170,6 +170,7 @@ Releases
 </li>
 <ul>
 <li class=collapse id=zhblogreleases>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhblog20210818302-e58f91e78988e585ace5918a href=/zh/blog/2021/08/18/3.0.2-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/>3.0.2</a>
 <a class="td-sidebar-link td-sidebar-link__page" id=m-zhblog20210702301-e58f91e78988e585ace5918a href=/zh/blog/2021/07/02/3.0.1-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/>3.0.1</a>
 <a class="td-sidebar-link td-sidebar-link__page" id=m-zhblog20210114dubbo-go-150 href=/zh/blog/2021/01/14/dubbo-go-1.5.0/>dubbo-go 1.5.0</a>
 <a class="td-sidebar-link td-sidebar-link__page" id=m-zhblog20210114dubbo-go-151 href=/zh/blog/2021/01/14/dubbo-go-1.5.1/>dubbo-go 1.5.1</a>
@@ -197,6 +198,15 @@ RSS <i class="fa fa-rss ml-2"></i>
 <div class=col-12>
 <h2>Posts in 2019</h2>
 <ul class="list-unstyled mt-4">
+<li class="media mb-4">
+<div class=media-body>
+<h5 class="mt-0 mb-1"><a href=/zh/blog/2019/01/17/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8seata%E4%BF%9D%E8%AF%81dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%97%B4%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7/>如何使用Seata保证Dubbo微服务间的一致性</a></h5>
+<p class="mb-2 mb-md-3"><small class=text-muted>Thursday, January 17, 2019 in 技术分享</small></p>
+<p class="pt-0 mt-0">案例 用户采购商品业务，整个业务包含3个微服务:
+库存服务: 扣减给定商品的库存数量。 订单服务: 根据采购请求生成订单。 账户服务: 用户账户金额扣减。 业务结构图 StorageService public interface StorageService { /** * 扣除存储数量 */ void deduct(String commodityCode, int count); } OrderService public interface OrderService { /** * …</p>
+<p class=pt-0><a href=/zh/blog/2019/01/17/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8seata%E4%BF%9D%E8%AF%81dubbo%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%97%B4%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7/>更多</a></p>
+</div>
+</li>
 <li class="media mb-4">
 <div class=media-body>
 <h5 class="mt-0 mb-1"><a href=/zh/blog/2019/01/07/%E6%B5%85%E8%B0%88-rpc/>浅谈 RPC</a></h5>
@@ -284,15 +294,6 @@ public static boolean isMatch(URL consumerUrl, …</p>
 所有软件最重要的使命不是满足功能要求，而是演进，从而持续成长。
 微服务本质是 …</p>
 <p class=pt-0><a href=/zh/blog/2018/09/20/dubbo-mesh-service-mesh%E7%9A%84%E5%AE%9E%E8%B7%B5%E4%B8%8E%E6%8E%A2%E7%B4%A2/>更多</a></p>
-</div>
-</li>
-<li class="media mb-4">
-<div class=media-body>
-<h5 class="mt-0 mb-1"><a href=/zh/blog/2018/09/02/%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8Edubbo%E5%AE%9E%E7%8E%B0%E5%85%A8%E5%BC%82%E6%AD%A5%E8%B0%83%E7%94%A8%E9%93%BE/>如何基于Dubbo实现全异步调用链</a></h5>
-<p class="mb-2 mb-md-3"><small class=text-muted>Sunday, September 02, 2018 in 技术分享</small></p>
-<p class="pt-0 mt-0">基于Dubbo实现全异步编程，是在2.7.0版本中对现有异步方式增强后新引入的功能。本文先是回顾2.6.x及之前版本对异步的支持情况及存在的问题，引出了2.7.0版本基于CompletableFuture做了哪些针对性的增强，通过几个示例详细阐述了增强后的异步编程的使用方式，最后总结了引入异步模式带来的新问题及Dubbo的解决方法。通过阅读这篇文章，可以很容易的基于Dubbo2.7.0+版本实现一个全异步的远程服务调用链路。
-从3.0.0版本开始，Dubbo框架提供了对Reactive编程范式的 …</p>
-<p class=pt-0><a href=/zh/blog/2018/09/02/%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8Edubbo%E5%AE%9E%E7%8E%B0%E5%85%A8%E5%BC%82%E6%AD%A5%E8%B0%83%E7%94%A8%E9%93%BE/>更多</a></p>
 </div>
 </li>
 </ul>
