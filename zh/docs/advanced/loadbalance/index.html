@@ -18,11 +18,11 @@
 <meta property="og:description" content="Dubbo 提供的集群负载均衡策略">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docs/advanced/loadbalance/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-08-18T13:47:52+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-08-23T15:42:04+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="负载均衡">
 <meta itemprop=description content="Dubbo 提供的集群负载均衡策略">
-<meta itemprop=dateModified content="2021-08-18T13:47:52+08:00">
-<meta itemprop=wordCount content="62">
+<meta itemprop=dateModified content="2021-08-23T15:42:04+08:00">
+<meta itemprop=wordCount content="185">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="负载均衡">
 <meta name=twitter:description content="Dubbo 提供的集群负载均衡策略">
@@ -458,10 +458,11 @@ Releases
 <ul>
 <li><a href=#负载均衡策略>负载均衡策略</a>
 <ul>
-<li><a href=#random-loadbalance>Random LoadBalance</a></li>
-<li><a href=#roundrobin-loadbalance>RoundRobin LoadBalance</a></li>
-<li><a href=#leastactive-loadbalance>LeastActive LoadBalance</a></li>
-<li><a href=#consistenthash-loadbalance>ConsistentHash LoadBalance</a></li>
+<li><a href=#random>Random</a></li>
+<li><a href=#roundrobin>RoundRobin</a></li>
+<li><a href=#leastactive>LeastActive</a></li>
+<li><a href=#shortestresponse>ShortestResponse</a></li>
+<li><a href=#consistenthash>ConsistentHash</a></li>
 </ul>
 </li>
 <li><a href=#配置>配置</a>
@@ -493,28 +494,134 @@ Releases
 <h1>负载均衡</h1>
 <div class=lead>Dubbo 提供的集群负载均衡策略</div>
 <p>在集群负载均衡时，Dubbo 提供了多种均衡策略，缺省为 <code>random</code> 随机调用。</p>
-<p>可以自行扩展负载均衡策略，参见：<a href=../../../dev/impls/load-balance>负载均衡扩展</a></p>
+<p>具体实现上，Dubbo 提供的是客户端负载均衡，即由 Consumer 通过负载均衡算法得出需要将请求提交到哪个 Provider 实例。</p>
+<p>可以自行扩展负载均衡策略，参见：<a href=../../references/spis/load-balance>负载均衡扩展</a></p>
 <h2 id=负载均衡策略>负载均衡策略</h2>
-<h3 id=random-loadbalance>Random LoadBalance</h3>
+<p>目前 Dubbo 内置了如下负载均衡算法，用户可直接配置使用：</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>算法</th>
+<th style=text-align:left>特性</th>
+<th style=text-align:left>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left>RandomLoadBalance</td>
+<td style=text-align:left>加权随机</td>
+<td style=text-align:left>默认算法，默认权重相同</td>
+</tr>
+<tr>
+<td style=text-align:left>RoundRobinLoadBalance</td>
+<td style=text-align:left>加权轮询</td>
+<td style=text-align:left>借鉴于 Nginx 的平滑加权轮询算法，默认权重相同，</td>
+</tr>
+<tr>
+<td style=text-align:left>LeastActiveLoadBalance</td>
+<td style=text-align:left>最少活跃优先 + 加权随机</td>
+<td style=text-align:left>背后是能者多劳的思想</td>
+</tr>
+<tr>
+<td style=text-align:left>ShortestResponseLoadBalance</td>
+<td style=text-align:left>最短响应优先 + 加权随机</td>
+<td style=text-align:left>更加关注响应速度</td>
+</tr>
+<tr>
+<td style=text-align:left>ConsistentHashLoadBalance</td>
+<td style=text-align:left>一致性 Hash</td>
+<td style=text-align:left>确定的入参，确定的提供者，适用于有状态请求</td>
+</tr>
+</tbody>
+</table>
+<h3 id=random>Random</h3>
 <ul>
-<li><strong>随机</strong>，按权重设置随机概率。</li>
+<li><strong>加权随机</strong>，按权重设置随机概率。</li>
 <li>在一个截面上碰撞的概率高，但调用量越大分布越均匀，而且按概率使用权重后也比较均匀，有利于动态调整提供者权重。</li>
+<li>缺点：存在慢的提供者累积请求的问题，比如：第二台机器很慢，但没挂，当请求调到第二台时就卡在那，久而久之，所有请求都卡在调到第二台上。</li>
 </ul>
-<h3 id=roundrobin-loadbalance>RoundRobin LoadBalance</h3>
+<h3 id=roundrobin>RoundRobin</h3>
 <ul>
-<li><strong>轮询</strong>，按公约后的权重设置轮询比率。</li>
-<li>存在慢的提供者累积请求的问题，比如：第二台机器很慢，但没挂，当请求调到第二台时就卡在那，久而久之，所有请求都卡在调到第二台上。</li>
+<li><strong>加权轮询</strong>，按公约后的权重设置轮询比率，循环调用节点</li>
+<li>缺点：同样存在慢的提供者累积请求的问题。</li>
 </ul>
-<h3 id=leastactive-loadbalance>LeastActive LoadBalance</h3>
+<p>加权轮询过程过程中，如果某节点权重过大，会存在某段时间内调用过于集中的问题。<br>
+例如 ABC 三节点有如下权重：<code>{A: 3, B: 2, C: 1}</code><br>
+那么按照最原始的轮询算法，调用过程将变成：<code>A A A B B C</code></p>
+<p>对此，Dubbo 借鉴 Nginx 的平滑加权轮询算法，对此做了优化，调用过程可抽象成下表:</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>轮前加和权重</th>
+<th style=text-align:left>本轮胜者</th>
+<th style=text-align:left>合计权重</th>
+<th style=text-align:left>轮后权重（胜者减去合计权重）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left>起始轮</td>
+<td style=text-align:left>\</td>
+<td style=text-align:left>\</td>
+<td style=text-align:left><code>A(0), B(0), C(0)</code></td>
+</tr>
+<tr>
+<td style=text-align:left><code>A(3), B(2), C(1)</code></td>
+<td style=text-align:left>A</td>
+<td style=text-align:left>6</td>
+<td style=text-align:left><code>A(-3), B(2), C(1)</code></td>
+</tr>
+<tr>
+<td style=text-align:left><code>A(0), B(4), C(2)</code></td>
+<td style=text-align:left>B</td>
+<td style=text-align:left>6</td>
+<td style=text-align:left><code>A(0), B(-2), C(2)</code></td>
+</tr>
+<tr>
+<td style=text-align:left><code>A(3), B(0), C(3)</code></td>
+<td style=text-align:left>A</td>
+<td style=text-align:left>6</td>
+<td style=text-align:left><code>A(-3), B(0), C(3)</code></td>
+</tr>
+<tr>
+<td style=text-align:left><code>A(0), B(2), C(4)</code></td>
+<td style=text-align:left>C</td>
+<td style=text-align:left>6</td>
+<td style=text-align:left><code>A(0), B(2), C(-2)</code></td>
+</tr>
+<tr>
+<td style=text-align:left><code>A(3), B(4), C(-1)</code></td>
+<td style=text-align:left>B</td>
+<td style=text-align:left>6</td>
+<td style=text-align:left><code>A(3), B(-2), C(-1)</code></td>
+</tr>
+<tr>
+<td style=text-align:left><code>A(6), B(0), C(0)</code></td>
+<td style=text-align:left>A</td>
+<td style=text-align:left>6</td>
+<td style=text-align:left><code>A(0), B(0), C(0)</code></td>
+</tr>
+</tbody>
+</table>
+<p>我们发现经过合计权重（3+2+1）轮次后，循环又回到了起点，整个过程中节点流量是平滑的，且哪怕在很短的时间周期内，概率都是按期望分布的。</p>
+<p>如果用户有加权轮询的需求，可放心使用该算法。</p>
+<h3 id=leastactive>LeastActive</h3>
 <ul>
-<li><strong>最少活跃调用数</strong>，相同活跃数的随机，活跃数指调用前后计数差。</li>
-<li>使慢的提供者收到更少请求，因为越慢的提供者的调用前后计数差会越大。</li>
+<li><strong>加权最少活跃调用优先</strong>，活跃数越低，越优先调用，相同活跃数的进行加权随机。活跃数指调用前后计数差（针对特定提供者：请求发送数 - 响应返回数），表示特定提供者的任务堆积量，活跃数越低，代表该提供者处理能力越强。</li>
+<li>使慢的提供者收到更少请求，因为越慢的提供者的调用前后计数差会越大；相对的，处理能力越强的节点，处理更多的请求。</li>
 </ul>
-<h3 id=consistenthash-loadbalance>ConsistentHash LoadBalance</h3>
+<h3 id=shortestresponse>ShortestResponse</h3>
+<ul>
+<li><strong>加权最短响应优先</strong>，在最近一个滑动窗口中，响应时间越短，越优先调用。相同响应时间的进行加权随机。</li>
+<li>使得响应时间越快的提供者，处理更多的请求。</li>
+<li>缺点：可能会造成流量过于集中于高性能节点的问题。</li>
+</ul>
+<p>这里的响应时间 = 某个提供者在窗口时间内的平均响应时间，窗口时间默认是 30s。</p>
+<h3 id=consistenthash>ConsistentHash</h3>
 <ul>
 <li><strong>一致性 Hash</strong>，相同参数的请求总是发到同一提供者。</li>
 <li>当某一台提供者挂时，原本发往该提供者的请求，基于虚拟节点，平摊到其它提供者，不会引起剧烈变动。</li>
-<li>算法参见：http://en.wikipedia.org/wiki/Consistent_hashing</li>
+<li>算法参见：<a href=http://en.wikipedia.org/wiki/Consistent_hashing>Consistent Hashing | WIKIPEDIA</a></li>
 <li>缺省只对第一个参数 Hash，如果要修改，请配置 <code>&lt;dubbo:parameter key="hash.arguments" value="0,1" /></code></li>
 <li>缺省用 160 份虚拟节点，如果要修改，请配置 <code>&lt;dubbo:parameter key="hash.nodes" value="320" /></code></li>
 </ul>
@@ -545,7 +652,7 @@ Sorry to hear that. Please <a href=https://github.com/apache/dubbo-website/issue
 </p>
 <script>const yesButton=document.querySelector('.feedback--answer-yes'),noButton=document.querySelector('.feedback--answer-no'),yesResponse=document.querySelector('.feedback--response-yes'),noResponse=document.querySelector('.feedback--response-no'),disableButtons=()=>{yesButton.disabled=!0,noButton.disabled=!0},sendFeedback=b=>{if(typeof ga!='function')return;const a={command:'send',hitType:'event',category:'Helpful',action:'click',label:window.location.pathname,value:b};ga(a.command,a.hitType,a.category,a.action,a.label,a.value)};yesButton.addEventListener('click',()=>{yesResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(1)}),noButton.addEventListener('click',()=>{noResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(0)})</script>
 <br>
-<div class="text-muted mt-5 pt-3 border-top">最后修改 August 18, 2021: <a href=/commit/c43f3ab77c15a05ec84a2a3854121c51afaff460>release note format. (#898) (c43f3ab)</a>
+<div class="text-muted mt-5 pt-3 border-top">最后修改 August 23, 2021: <a href=/commit/46e61d1f3fc79202480811b8f5ac494b52a33c82>update docs configuration (46e61d1)</a>
 </div>
 </div>
 </main>

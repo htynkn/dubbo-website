@@ -453,10 +453,8 @@ dubbo.protocols.dubbo.port=20880
 dubbo.protocols.hessian.name=hessian
 dubbo.protocols.hessian.port=8089
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>扩展配置&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">dubbo.application.parameters.item1=value1
-dubbo.application.parameters.item2=value2
-dubbo.registry.parameters.item3=value3
-dubbo.reference.org.apache.dubbo.samples.api.DemoService.parameters.item4=value4
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">dubbo.application.parameters=[{item1:value1},{item2:value2}]
+dubbo.reference.org.apache.dubbo.samples.api.DemoService.parameters=[{item3:value3}]
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="几种编程配置方式">几种编程配置方式&lt;/h2>
 &lt;p>接下来，我们看一下选择不同的开发方式时，对应到 ServiceConfig、ReferenceConfig 等编程接口采集的配置的变化。&lt;/p>
 &lt;h4 id="spring-xml">Spring XML&lt;/h4>

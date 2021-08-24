@@ -78,28 +78,134 @@ broadcast.fail.percent 只是控制的当失败后是否继续调用其他节点
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> cluster=&lt;span style="color:#2aa198">&amp;#34;failsafe&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: 负载均衡</title><link>https://dubbo.apache.org/zh/docs/advanced/loadbalance/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/advanced/loadbalance/</guid><description>
 &lt;p>在集群负载均衡时，Dubbo 提供了多种均衡策略，缺省为 &lt;code>random&lt;/code> 随机调用。&lt;/p>
-&lt;p>可以自行扩展负载均衡策略，参见：&lt;a href="../../../dev/impls/load-balance">负载均衡扩展&lt;/a>&lt;/p>
+&lt;p>具体实现上，Dubbo 提供的是客户端负载均衡，即由 Consumer 通过负载均衡算法得出需要将请求提交到哪个 Provider 实例。&lt;/p>
+&lt;p>可以自行扩展负载均衡策略，参见：&lt;a href="../../references/spis/load-balance">负载均衡扩展&lt;/a>&lt;/p>
 &lt;h2 id="负载均衡策略">负载均衡策略&lt;/h2>
-&lt;h3 id="random-loadbalance">Random LoadBalance&lt;/h3>
+&lt;p>目前 Dubbo 内置了如下负载均衡算法，用户可直接配置使用：&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align:left">算法&lt;/th>
+&lt;th style="text-align:left">特性&lt;/th>
+&lt;th style="text-align:left">备注&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align:left">RandomLoadBalance&lt;/td>
+&lt;td style="text-align:left">加权随机&lt;/td>
+&lt;td style="text-align:left">默认算法，默认权重相同&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">RoundRobinLoadBalance&lt;/td>
+&lt;td style="text-align:left">加权轮询&lt;/td>
+&lt;td style="text-align:left">借鉴于 Nginx 的平滑加权轮询算法，默认权重相同，&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">LeastActiveLoadBalance&lt;/td>
+&lt;td style="text-align:left">最少活跃优先 + 加权随机&lt;/td>
+&lt;td style="text-align:left">背后是能者多劳的思想&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">ShortestResponseLoadBalance&lt;/td>
+&lt;td style="text-align:left">最短响应优先 + 加权随机&lt;/td>
+&lt;td style="text-align:left">更加关注响应速度&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">ConsistentHashLoadBalance&lt;/td>
+&lt;td style="text-align:left">一致性 Hash&lt;/td>
+&lt;td style="text-align:left">确定的入参，确定的提供者，适用于有状态请求&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="random">Random&lt;/h3>
 &lt;ul>
-&lt;li>&lt;strong>随机&lt;/strong>，按权重设置随机概率。&lt;/li>
+&lt;li>&lt;strong>加权随机&lt;/strong>，按权重设置随机概率。&lt;/li>
 &lt;li>在一个截面上碰撞的概率高，但调用量越大分布越均匀，而且按概率使用权重后也比较均匀，有利于动态调整提供者权重。&lt;/li>
+&lt;li>缺点：存在慢的提供者累积请求的问题，比如：第二台机器很慢，但没挂，当请求调到第二台时就卡在那，久而久之，所有请求都卡在调到第二台上。&lt;/li>
 &lt;/ul>
-&lt;h3 id="roundrobin-loadbalance">RoundRobin LoadBalance&lt;/h3>
+&lt;h3 id="roundrobin">RoundRobin&lt;/h3>
 &lt;ul>
-&lt;li>&lt;strong>轮询&lt;/strong>，按公约后的权重设置轮询比率。&lt;/li>
-&lt;li>存在慢的提供者累积请求的问题，比如：第二台机器很慢，但没挂，当请求调到第二台时就卡在那，久而久之，所有请求都卡在调到第二台上。&lt;/li>
+&lt;li>&lt;strong>加权轮询&lt;/strong>，按公约后的权重设置轮询比率，循环调用节点&lt;/li>
+&lt;li>缺点：同样存在慢的提供者累积请求的问题。&lt;/li>
 &lt;/ul>
-&lt;h3 id="leastactive-loadbalance">LeastActive LoadBalance&lt;/h3>
+&lt;p>加权轮询过程过程中，如果某节点权重过大，会存在某段时间内调用过于集中的问题。&lt;br>
+例如 ABC 三节点有如下权重：&lt;code>{A: 3, B: 2, C: 1}&lt;/code>&lt;br>
+那么按照最原始的轮询算法，调用过程将变成：&lt;code>A A A B B C&lt;/code>&lt;/p>
+&lt;p>对此，Dubbo 借鉴 Nginx 的平滑加权轮询算法，对此做了优化，调用过程可抽象成下表:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align:left">轮前加和权重&lt;/th>
+&lt;th style="text-align:left">本轮胜者&lt;/th>
+&lt;th style="text-align:left">合计权重&lt;/th>
+&lt;th style="text-align:left">轮后权重（胜者减去合计权重）&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align:left">起始轮&lt;/td>
+&lt;td style="text-align:left">\&lt;/td>
+&lt;td style="text-align:left">\&lt;/td>
+&lt;td style="text-align:left">&lt;code>A(0), B(0), C(0)&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">&lt;code>A(3), B(2), C(1)&lt;/code>&lt;/td>
+&lt;td style="text-align:left">A&lt;/td>
+&lt;td style="text-align:left">6&lt;/td>
+&lt;td style="text-align:left">&lt;code>A(-3), B(2), C(1)&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">&lt;code>A(0), B(4), C(2)&lt;/code>&lt;/td>
+&lt;td style="text-align:left">B&lt;/td>
+&lt;td style="text-align:left">6&lt;/td>
+&lt;td style="text-align:left">&lt;code>A(0), B(-2), C(2)&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">&lt;code>A(3), B(0), C(3)&lt;/code>&lt;/td>
+&lt;td style="text-align:left">A&lt;/td>
+&lt;td style="text-align:left">6&lt;/td>
+&lt;td style="text-align:left">&lt;code>A(-3), B(0), C(3)&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">&lt;code>A(0), B(2), C(4)&lt;/code>&lt;/td>
+&lt;td style="text-align:left">C&lt;/td>
+&lt;td style="text-align:left">6&lt;/td>
+&lt;td style="text-align:left">&lt;code>A(0), B(2), C(-2)&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">&lt;code>A(3), B(4), C(-1)&lt;/code>&lt;/td>
+&lt;td style="text-align:left">B&lt;/td>
+&lt;td style="text-align:left">6&lt;/td>
+&lt;td style="text-align:left">&lt;code>A(3), B(-2), C(-1)&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">&lt;code>A(6), B(0), C(0)&lt;/code>&lt;/td>
+&lt;td style="text-align:left">A&lt;/td>
+&lt;td style="text-align:left">6&lt;/td>
+&lt;td style="text-align:left">&lt;code>A(0), B(0), C(0)&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>我们发现经过合计权重（3+2+1）轮次后，循环又回到了起点，整个过程中节点流量是平滑的，且哪怕在很短的时间周期内，概率都是按期望分布的。&lt;/p>
+&lt;p>如果用户有加权轮询的需求，可放心使用该算法。&lt;/p>
+&lt;h3 id="leastactive">LeastActive&lt;/h3>
 &lt;ul>
-&lt;li>&lt;strong>最少活跃调用数&lt;/strong>，相同活跃数的随机，活跃数指调用前后计数差。&lt;/li>
-&lt;li>使慢的提供者收到更少请求，因为越慢的提供者的调用前后计数差会越大。&lt;/li>
+&lt;li>&lt;strong>加权最少活跃调用优先&lt;/strong>，活跃数越低，越优先调用，相同活跃数的进行加权随机。活跃数指调用前后计数差（针对特定提供者：请求发送数 - 响应返回数），表示特定提供者的任务堆积量，活跃数越低，代表该提供者处理能力越强。&lt;/li>
+&lt;li>使慢的提供者收到更少请求，因为越慢的提供者的调用前后计数差会越大；相对的，处理能力越强的节点，处理更多的请求。&lt;/li>
 &lt;/ul>
-&lt;h3 id="consistenthash-loadbalance">ConsistentHash LoadBalance&lt;/h3>
+&lt;h3 id="shortestresponse">ShortestResponse&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>加权最短响应优先&lt;/strong>，在最近一个滑动窗口中，响应时间越短，越优先调用。相同响应时间的进行加权随机。&lt;/li>
+&lt;li>使得响应时间越快的提供者，处理更多的请求。&lt;/li>
+&lt;li>缺点：可能会造成流量过于集中于高性能节点的问题。&lt;/li>
+&lt;/ul>
+&lt;p>这里的响应时间 = 某个提供者在窗口时间内的平均响应时间，窗口时间默认是 30s。&lt;/p>
+&lt;h3 id="consistenthash">ConsistentHash&lt;/h3>
 &lt;ul>
 &lt;li>&lt;strong>一致性 Hash&lt;/strong>，相同参数的请求总是发到同一提供者。&lt;/li>
 &lt;li>当某一台提供者挂时，原本发往该提供者的请求，基于虚拟节点，平摊到其它提供者，不会引起剧烈变动。&lt;/li>
-&lt;li>算法参见：http://en.wikipedia.org/wiki/Consistent_hashing&lt;/li>
+&lt;li>算法参见：&lt;a href="http://en.wikipedia.org/wiki/Consistent_hashing">Consistent Hashing | WIKIPEDIA&lt;/a>&lt;/li>
 &lt;li>缺省只对第一个参数 Hash，如果要修改，请配置 &lt;code>&amp;lt;dubbo:parameter key=&amp;quot;hash.arguments&amp;quot; value=&amp;quot;0,1&amp;quot; /&amp;gt;&lt;/code>&lt;/li>
 &lt;li>缺省用 160 份虚拟节点，如果要修改，请配置 &lt;code>&amp;lt;dubbo:parameter key=&amp;quot;hash.nodes&amp;quot; value=&amp;quot;320&amp;quot; /&amp;gt;&lt;/code>&lt;/li>
 &lt;/ul>
@@ -779,7 +885,7 @@ e&lt;span style="color:#719e07">.&lt;/span>printStackTrace&lt;span style="color:
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>通过 &lt;code>return CompletableFuture.supplyAsync() &lt;/code>，业务执行已从 Dubbo 线程切换到业务线程，避免了对 Dubbo 线程池的阻塞。&lt;/p>
 &lt;h2 id="使用asynccontext">使用AsyncContext&lt;/h2>
-&lt;p>Dubbo 提供了一个类似 Serverlet 3.0 的异步接口&lt;code>AsyncContext&lt;/code>，在没有 CompletableFuture 签名接口的情况下，也可以实现 Provider 端的异步执行。&lt;/p>
+&lt;p>Dubbo 提供了一个类似 Servlet 3.0 的异步接口&lt;code>AsyncContext&lt;/code>，在没有 CompletableFuture 签名接口的情况下，也可以实现 Provider 端的异步执行。&lt;/p>
 &lt;p>服务接口定义：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">AsyncService&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 String &lt;span style="color:#268bd2">sayHello&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String name&lt;span style="color:#719e07">);&lt;/span>
