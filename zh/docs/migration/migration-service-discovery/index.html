@@ -18,11 +18,11 @@
 <meta property="og:description" content="本文档专门针对使用 2.x 版本的老用户，详细阐述了升级到 3.x 后的默认地址注册与发现行为、如何平滑的迁移到新版本的地址模型。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docs/migration/migration-service-discovery/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-08-23T15:42:04+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-08-26T11:28:12+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="应用级地址发现迁移指南">
 <meta itemprop=description content="本文档专门针对使用 2.x 版本的老用户，详细阐述了升级到 3.x 后的默认地址注册与发现行为、如何平滑的迁移到新版本的地址模型。">
-<meta itemprop=dateModified content="2021-08-23T15:42:04+08:00">
-<meta itemprop=wordCount content="283">
+<meta itemprop=dateModified content="2021-08-26T11:28:12+08:00">
+<meta itemprop=wordCount content="280">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="应用级地址发现迁移指南">
 <meta name=twitter:description content="本文档专门针对使用 2.x 版本的老用户，详细阐述了升级到 3.x 后的默认地址注册与发现行为、如何平滑的迁移到新版本的地址模型。">
@@ -508,7 +508,7 @@ Releases
 <p><img src=/imgs/v3/migration/provider-registration.png alt=//imgs/v3/migration/provider-registration.png></p>
 <p>通过 -D 参数，可以指定 provider 启动时的注册行为</p>
 <div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>-Ddubbo.application.register-mode=all
-# 可选值 interface、instance、all，默认是 interface，即只注册接口级地址
+# 可选值 interface、instance、all，默认是 all，即接口级地址、应用级地址都注册
 </code></pre></div><p>另外，可以在配置中心修改全局默认行为，来控制所有 3.x 实例注册行为。其中，全局性开关的优先级低于 -D 参数。</p>
 <p>为了保证平滑迁移，即升级到 3.x 的实例能同时被 2.x 与 3.x 的消费者实例发现，3.x 实例需要开启双注册；当所有上游的消费端都迁移到 3.x 的地址模型后，提供端就可以切换到 instance 模式（只注册应用级地址）。对于如何升级消费端到 3.x 请参见下一小节。</p>
 <h3 id=21-双注册带来的资源消耗>2.1 双注册带来的资源消耗</h3>
@@ -551,7 +551,6 @@ Releases
 </ol>
 <h3 id=32-消费端更细粒度的控制>3.2 消费端更细粒度的控制</h3>
 <p>除了全局的迁移策略之外，Dubbo 在消费端提供了更细粒度的迁移策略支持。控制单位可以是某一个消费者应用，它消费的服务A、服务B可以有各自独立的迁移策略，具体是用方式是在消费端配置迁移规则：</p>
-<p>在 classpath 下增加 dubbo-migration.yml 配置</p>
 <div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#268bd2>key</span>: demo-consumer
 <span style=color:#268bd2>step</span>: APPLICATION_FIRST
 <span style=color:#268bd2>applications</span>:
@@ -560,7 +559,8 @@ Releases
 <span style=color:#268bd2>services</span>:
  - <span style=color:#268bd2>serviceKey</span>: org.apache.dubbo.config.api.DemoService:1.0.0
    <span style=color:#268bd2>step</span>: FORCE_INTERFACE
-</code></pre></div><p>使用这种方式能做到比较精细迁移控制，但是当下及后续的改造成本会比较高，除了一些特别场景，我们不太推荐启用这种配置方式。<strong>官方推荐使用的全局的开关式的迁移策略，让消费端实例在启动阶段自行决策使用哪份可用的地址列表。</strong></p>
+</code></pre></div><p>使用这种方式能做到比较精细迁移控制，但是当下及后续的改造成本会比较高，除了一些特别场景，我们不太推荐启用这种配置方式。
+(<a href=../../advanced/migration-invoker/>迁移指南</a>) <strong>官方推荐使用的全局的开关式的迁移策略，让消费端实例在启动阶段自行决策使用哪份可用的地址列表。</strong></p>
 <h2 id=4-迁移状态的收敛>4 迁移状态的收敛</h2>
 <p>为了同时兼容 2.x 版本，升级到 3.x 版本的应用在一段时间内要么处在双注册状态，要么处在双订阅状态。</p>
 <p>解决这个问题，我们还是从 Provider 视角来看，当所有的 Provider 都切换到应用级地址注册之后，也就不存在双订阅的问题了。</p>
@@ -585,7 +585,7 @@ Sorry to hear that. Please <a href=https://github.com/apache/dubbo-website/issue
 </p>
 <script>const yesButton=document.querySelector('.feedback--answer-yes'),noButton=document.querySelector('.feedback--answer-no'),yesResponse=document.querySelector('.feedback--response-yes'),noResponse=document.querySelector('.feedback--response-no'),disableButtons=()=>{yesButton.disabled=!0,noButton.disabled=!0},sendFeedback=b=>{if(typeof ga!='function')return;const a={command:'send',hitType:'event',category:'Helpful',action:'click',label:window.location.pathname,value:b};ga(a.command,a.hitType,a.category,a.action,a.label,a.value)};yesButton.addEventListener('click',()=>{yesResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(1)}),noButton.addEventListener('click',()=>{noResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(0)})</script>
 <br>
-<div class="text-muted mt-5 pt-3 border-top">最后修改 August 23, 2021: <a href=/commit/46e61d1f3fc79202480811b8f5ac494b52a33c82>update docs configuration (46e61d1)</a>
+<div class="text-muted mt-5 pt-3 border-top">最后修改 August 26, 2021: <a href=/commit/9aa90f4dc627199b18b3245e26c980a722c28940>update header (9aa90f4)</a>
 </div>
 </div>
 </main>

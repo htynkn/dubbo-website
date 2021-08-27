@@ -1,4 +1,12 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – 版本发布</title><link>https://dubbo.apache.org/zh/blog/releases/</link><description>Recent content in 版本发布 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/blog/releases/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: 3.0.2 发版公告</title><link>https://dubbo.apache.org/zh/blog/2021/08/18/3.0.2-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</link><pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/08/18/3.0.2-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – 版本发布</title><link>https://dubbo.apache.org/zh/blog/releases/</link><description>Recent content in 版本发布 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/blog/releases/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: 3.0.2.1 发版公告</title><link>https://dubbo.apache.org/zh/blog/2021/08/23/3.0.2.1-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</link><pubDate>Mon, 23 Aug 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/08/23/3.0.2.1-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</guid><description>
+&lt;p>这是 3.0.2 的错误修正版本。
+除了以下更改外，与版本 3.0.2 完全相同。&lt;/p>
+&lt;h2 id="bug-修复">Bug 修复&lt;/h2>
+&lt;ul>
+&lt;li>修复 nacos group 在消费者端不生效的问题 (#8533)&lt;/li>
+&lt;li>修复请求超时时序列化检查的 NPE (#8547)&lt;/li>
+&lt;li>兼容使用 dubbo-all 是未导入 farbic-io 包的问题 (#8546)&lt;/li>
+&lt;/ul></description></item><item><title>Blog: 3.0.2 发版公告</title><link>https://dubbo.apache.org/zh/blog/2021/08/18/3.0.2-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</link><pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/08/18/3.0.2-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</guid><description>
 &lt;h2 id="新特性">新特性&lt;/h2>
 &lt;ul>
 &lt;li>支持通过 @DubboService 注解暴露泛化服务&lt;/li>
@@ -857,6 +865,12 @@ bootstrap&lt;span style="color:#719e07">.&lt;/span>start&lt;span style="color:#7
 &lt;p>GitHub: &lt;a href="https://github.com/apache/dubbo">https://github.com/apache/dubbo&lt;/a>&lt;br>
 发布说明: &lt;a href="https://github.com/apache/dubbo/releases">https://github.com/apache/dubbo/releases&lt;/a>&lt;/p>
 &lt;/blockquote>
+&lt;h3 id="3021-2021-08-23">3.0.2.1 (2021-08-23)&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://www.apache.org/dyn/closer.cgi?path=dubbo/3.0.2/apache-dubbo-3.0.2.1-src.zip">source&lt;/a> |
+&lt;a href="https://www.apache.org/dist/dubbo/3.0.2/apache-dubbo-3.0.2.1-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://www.apache.org/dist/dubbo/3.0.2/apache-dubbo-3.0.2.1-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;/ul>
 &lt;h3 id="302-2021-08-16">3.0.2 (2021-08-16)&lt;/h3>
 &lt;ul>
 &lt;li>&lt;a href="https://www.apache.org/dyn/closer.cgi?path=dubbo/3.0.2/apache-dubbo-3.0.2-src.zip">source&lt;/a> |

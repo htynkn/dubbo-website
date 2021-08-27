@@ -51,7 +51,7 @@
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/migration/provider-registration.png" alt="//imgs/v3/migration/provider-registration.png">&lt;/p>
 &lt;p>通过 -D 参数，可以指定 provider 启动时的注册行为&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">-Ddubbo.application.register-mode=all
-# 可选值 interface、instance、all，默认是 interface，即只注册接口级地址
+# 可选值 interface、instance、all，默认是 all，即接口级地址、应用级地址都注册
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>另外，可以在配置中心修改全局默认行为，来控制所有 3.x 实例注册行为。其中，全局性开关的优先级低于 -D 参数。&lt;/p>
 &lt;p>为了保证平滑迁移，即升级到 3.x 的实例能同时被 2.x 与 3.x 的消费者实例发现，3.x 实例需要开启双注册；当所有上游的消费端都迁移到 3.x 的地址模型后，提供端就可以切换到 instance 模式（只注册应用级地址）。对于如何升级消费端到 3.x 请参见下一小节。&lt;/p>
 &lt;h3 id="21-双注册带来的资源消耗">2.1 双注册带来的资源消耗&lt;/h3>
@@ -94,7 +94,6 @@
 &lt;/ol>
 &lt;h3 id="32-消费端更细粒度的控制">3.2 消费端更细粒度的控制&lt;/h3>
 &lt;p>除了全局的迁移策略之外，Dubbo 在消费端提供了更细粒度的迁移策略支持。控制单位可以是某一个消费者应用，它消费的服务A、服务B可以有各自独立的迁移策略，具体是用方式是在消费端配置迁移规则：&lt;/p>
-&lt;p>在 classpath 下增加 dubbo-migration.yml 配置&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#268bd2">key&lt;/span>: demo-consumer
 &lt;span style="color:#268bd2">step&lt;/span>: APPLICATION_FIRST
 &lt;span style="color:#268bd2">applications&lt;/span>:
@@ -103,7 +102,8 @@
 &lt;span style="color:#268bd2">services&lt;/span>:
 - &lt;span style="color:#268bd2">serviceKey&lt;/span>: org.apache.dubbo.config.api.DemoService:1.0.0
 &lt;span style="color:#268bd2">step&lt;/span>: FORCE_INTERFACE
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>使用这种方式能做到比较精细迁移控制，但是当下及后续的改造成本会比较高，除了一些特别场景，我们不太推荐启用这种配置方式。&lt;strong>官方推荐使用的全局的开关式的迁移策略，让消费端实例在启动阶段自行决策使用哪份可用的地址列表。&lt;/strong>&lt;/p>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>使用这种方式能做到比较精细迁移控制，但是当下及后续的改造成本会比较高，除了一些特别场景，我们不太推荐启用这种配置方式。
+(&lt;a href="../../advanced/migration-invoker/">迁移指南&lt;/a>) &lt;strong>官方推荐使用的全局的开关式的迁移策略，让消费端实例在启动阶段自行决策使用哪份可用的地址列表。&lt;/strong>&lt;/p>
 &lt;h2 id="4-迁移状态的收敛">4 迁移状态的收敛&lt;/h2>
 &lt;p>为了同时兼容 2.x 版本，升级到 3.x 版本的应用在一段时间内要么处在双注册状态，要么处在双订阅状态。&lt;/p>
 &lt;p>解决这个问题，我们还是从 Provider 视角来看，当所有的 Provider 都切换到应用级地址注册之后，也就不存在双订阅的问题了。&lt;/p>

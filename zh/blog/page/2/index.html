@@ -170,6 +170,7 @@ Releases
 </li>
 <ul>
 <li class=collapse id=zhblogreleases>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhblog202108233021-e58f91e78988e585ace5918a href=/zh/blog/2021/08/23/3.0.2.1-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/>3.0.2.1</a>
 <a class="td-sidebar-link td-sidebar-link__page" id=m-zhblog20210818302-e58f91e78988e585ace5918a href=/zh/blog/2021/08/18/3.0.2-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/>3.0.2</a>
 <a class="td-sidebar-link td-sidebar-link__page" id=m-zhblog20210702301-e58f91e78988e585ace5918a href=/zh/blog/2021/07/02/3.0.1-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/>3.0.1</a>
 <a class="td-sidebar-link td-sidebar-link__page" id=m-zhblog20210114dubbo-go-150 href=/zh/blog/2021/01/14/dubbo-go-1.5.0/>dubbo-go 1.5.0</a>
@@ -198,6 +199,15 @@ RSS <i class="fa fa-rss ml-2"></i>
 <div class=col-12>
 <h2>Posts in 2021</h2>
 <ul class="list-unstyled mt-4">
+<li class="media mb-4">
+<div class=media-body>
+<h5 class="mt-0 mb-1"><a href=/zh/blog/2021/01/14/%E8%A7%A3%E6%9E%84-dubbo-go-%E7%9A%84%E6%A0%B8%E5%BF%83%E6%B3%A8%E5%86%8C%E5%BC%95%E6%93%8E-nacos/>解构 Dubbo-go 的核心注册引擎 Nacos</a></h5>
+<p class="mb-2 mb-md-3"><small class=text-muted>Thursday, January 14, 2021 in 技术分享</small></p>
+<p class="pt-0 mt-0">近几年，随着Go语言社区逐渐发展和壮大，越来越多的公司开始尝试采用Go搭建微服务体系，也涌现了一批Go的微服务框架，如go-micro、go-kit、Dubbo-go等，跟微服务治理相关的组件也逐渐开始在Go生态发力，如Sentinel、Hystrix等都推出了Go语言版本，而作为微服务框架的核心引擎&ndash;注册中心，也是必不可缺少的组件，市面已经有多款注册中心支持Go语言，应该如何选择呢？我们可以对目前主流的支持Go语言的注册中心做个对比。
+根据上表的对比我们可以从以下几个维度得出结论： …</p>
+<p class=pt-0><a href=/zh/blog/2021/01/14/%E8%A7%A3%E6%9E%84-dubbo-go-%E7%9A%84%E6%A0%B8%E5%BF%83%E6%B3%A8%E5%86%8C%E5%BC%95%E6%93%8E-nacos/>更多</a></p>
+</div>
+</li>
 <li class="media mb-4">
 <div class=media-body>
 <h5 class="mt-0 mb-1"><a href=/zh/blog/2021/01/14/%E6%B6%82%E9%B8%A6%E6%99%BA%E8%83%BD-dubbo-go-%E4%BA%BF%E7%BA%A7%E6%B5%81%E9%87%8F%E7%9A%84%E5%AE%9E%E8%B7%B5%E4%B8%8E%E6%8E%A2%E7%B4%A2/>涂鸦智能 dubbo-go 亿级流量的实践与探索</a></h5>
@@ -284,17 +294,6 @@ Dubbo-go 作为 Dubbo 的 Go 语言版本，因跨语言之故，二者针对同
 本文将讲解如何在 Dubbo/Dubbo-Go 中实现灵活，安全和高效的身份验证和授权方案。
 可信的目的 为什么需要鉴权认证？实际生产中类似支付之类的安全性敏感的业务 …</p>
 <p class=pt-0><a href=/zh/blog/2021/01/14/dubbo-go-%E5%8F%AF%E4%BF%A1%E8%B0%83%E7%94%A8%E5%AE%9E%E7%8E%B0/>更多</a></p>
-</div>
-</li>
-<li class="media mb-4">
-<div class=media-body>
-<h5 class="mt-0 mb-1"><a href=/zh/blog/2021/01/14/dubbo-go-%E4%B8%AD%E5%B0%86-kubernets-%E5%8E%9F%E4%BD%9C%E4%B8%BA%E6%B3%A8%E5%86%8C%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/>dubbo-go 中将 Kubernets 原⽣作为注册中⼼的设计和实现</a></h5>
-<p class="mb-2 mb-md-3"><small class=text-muted>Thursday, January 14, 2021 in 技术分享</small></p>
-<p class="pt-0 mt-0">今天这篇⽂章将会介绍 dubbo-go 将 Kubernetes 作为注册中⼼的服务注册的初衷、设计⽅案，以及具体实现。
-到⽬前为⽌该⽅案的实现已经被合并到 dubbo-go 的 master 分⽀。具体实现为关于 Kubernetes 的 PullRequest 。
-Kubernetes管理资源的哲学 Kubernetes 作为容器集群化管理⽅案管理资源的维度可主观的分为服务进程管理和服务接⼊管理。
-服务实例管理，主要体现⽅式为 Pod 设计模式加控制器模式，控制器保证具有特定标签 （ …</p>
-<p class=pt-0><a href=/zh/blog/2021/01/14/dubbo-go-%E4%B8%AD%E5%B0%86-kubernets-%E5%8E%9F%E4%BD%9C%E4%B8%BA%E6%B3%A8%E5%86%8C%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/>更多</a></p>
 </div>
 </li>
 </ul>

@@ -170,6 +170,7 @@ Releases
 </li>
 <ul>
 <li class=collapse id=zhblogreleases>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhblog202108233021-e58f91e78988e585ace5918a href=/zh/blog/2021/08/23/3.0.2.1-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/>3.0.2.1</a>
 <a class="td-sidebar-link td-sidebar-link__page" id=m-zhblog20210818302-e58f91e78988e585ace5918a href=/zh/blog/2021/08/18/3.0.2-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/>3.0.2</a>
 <a class="td-sidebar-link td-sidebar-link__page" id=m-zhblog20210702301-e58f91e78988e585ace5918a href=/zh/blog/2021/07/02/3.0.1-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/>3.0.1</a>
 <a class="td-sidebar-link td-sidebar-link__page" id=m-zhblog20210114dubbo-go-150 href=/zh/blog/2021/01/14/dubbo-go-1.5.0/>dubbo-go 1.5.0</a>
@@ -198,6 +199,17 @@ RSS <i class="fa fa-rss ml-2"></i>
 <div class=col-12>
 <h2>Posts in 2021</h2>
 <ul class="list-unstyled mt-4">
+<li class="media mb-4">
+<div class=media-body>
+<h5 class="mt-0 mb-1"><a href=/zh/blog/2021/01/14/dubbo-go-%E4%B8%AD%E5%B0%86-kubernets-%E5%8E%9F%E4%BD%9C%E4%B8%BA%E6%B3%A8%E5%86%8C%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/>dubbo-go 中将 Kubernets 原⽣作为注册中⼼的设计和实现</a></h5>
+<p class="mb-2 mb-md-3"><small class=text-muted>Thursday, January 14, 2021 in 技术分享</small></p>
+<p class="pt-0 mt-0">今天这篇⽂章将会介绍 dubbo-go 将 Kubernetes 作为注册中⼼的服务注册的初衷、设计⽅案，以及具体实现。
+到⽬前为⽌该⽅案的实现已经被合并到 dubbo-go 的 master 分⽀。具体实现为关于 Kubernetes 的 PullRequest 。
+Kubernetes管理资源的哲学 Kubernetes 作为容器集群化管理⽅案管理资源的维度可主观的分为服务进程管理和服务接⼊管理。
+服务实例管理，主要体现⽅式为 Pod 设计模式加控制器模式，控制器保证具有特定标签 （ …</p>
+<p class=pt-0><a href=/zh/blog/2021/01/14/dubbo-go-%E4%B8%AD%E5%B0%86-kubernets-%E5%8E%9F%E4%BD%9C%E4%B8%BA%E6%B3%A8%E5%86%8C%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0/>更多</a></p>
+</div>
+</li>
 <li class="media mb-4">
 <div class=media-body>
 <h5 class="mt-0 mb-1"><a href=/zh/blog/2021/01/14/dubbo-go-%E4%B8%AD-rest-%E5%8D%8F%E8%AE%AE%E5%AE%9E%E7%8E%B0/>dubbo-go 中 REST 协议实现</a></h5>
@@ -284,17 +296,6 @@ gRPC 先来简单介绍一下 gRPC 。它是 Google 推出来的一个 RPC 框�
 <p class="pt-0 mt-0">0 说明 getty是一个go语言实现的网络层引擎，可以处理TCP/UDP/websocket三种网络协议。
 2016年6月我在上海做一个即时通讯项目时，接口层的底层网络驱动是当时的同事sanbit写的，原始网络层实现了TCP Server，其命名规范学习了著名的netty。当时这个引擎比较简洁，随着我对这个项目的改进这个网络层引擎也就随之进化了（添加了TCP Client、抽象出了 TCP connection 和 TCP session），至2016年8月份（又添加了websocket） …</p>
 <p class=pt-0><a href=/zh/blog/2021/01/11/dubbo-go-getty-%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/>更多</a></p>
-</div>
-</li>
-<li class="media mb-4">
-<div class=media-body>
-<h5 class="mt-0 mb-1"><a href=/zh/blog/2021/01/11/dubbo-go-%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E8%BF%9C%E7%A8%8B%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/>dubbo-go 中如何实现远程配置管理？</a></h5>
-<p class="mb-2 mb-md-3"><small class=text-muted>Monday, January 11, 2021 in 技术分享</small></p>
-<p class="pt-0 mt-0">之前在 Apache/dubbo-go（以下简称 dubbo-go ）社区中，有同学希望配置文件不仅可以放于本地，还可以放于配置管理中心里。那么，放在本地和配置管理中心究竟有哪些不一样呢？
-放在本地，每次更新需要重启，配置文件管理困难，无法做到实时更新即刻生效。此外，本地文件还依赖人工版本控制，在微服务的场景下，大大的增加了运维的成本与难度。
-而配置管理中心提供了统一的配置文件管理，支持文件更新、实时同步、统一版本控制、权限管理等功能。
-目标 基于以上几个背景， …</p>
-<p class=pt-0><a href=/zh/blog/2021/01/11/dubbo-go-%E4%B8%AD%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E8%BF%9C%E7%A8%8B%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/>更多</a></p>
 </div>
 </li>
 </ul>

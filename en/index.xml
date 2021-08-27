@@ -1,4 +1,12 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – Apache Dubbo</title><link>https://dubbo.apache.org/en/</link><description>Recent content on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/en/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: 3.0.2 Release Note</title><link>https://dubbo.apache.org/en/blog/2021/08/18/3.0.2-release-note/</link><pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/blog/2021/08/18/3.0.2-release-note/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – Apache Dubbo</title><link>https://dubbo.apache.org/en/</link><description>Recent content on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/en/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: 3.0.2.1 Release Note</title><link>https://dubbo.apache.org/en/blog/2021/08/23/3.0.2.1-release-note/</link><pubDate>Mon, 23 Aug 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/blog/2021/08/23/3.0.2.1-release-note/</guid><description>
+&lt;p>This is a bugfix version of 3.0.2.
+Exactly the same as version 3.0.2, except for the following changes.&lt;/p>
+&lt;h2 id="bugfix">Bugfix&lt;/h2>
+&lt;ul>
+&lt;li>Fix nacos group inviable in consumer side (#8533)&lt;/li>
+&lt;li>Fix NPE on serialization checking when request timed out (#8547)&lt;/li>
+&lt;li>Compact with dubbo-all without farbic-io (#8546)&lt;/li>
+&lt;/ul></description></item><item><title>Blog: 3.0.2 Release Note</title><link>https://dubbo.apache.org/en/blog/2021/08/18/3.0.2-release-note/</link><pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/blog/2021/08/18/3.0.2-release-note/</guid><description>
 &lt;h2 id="features">Features&lt;/h2>
 &lt;ul>
 &lt;li>improve generic service with @DubboService annotation.&lt;/li>
@@ -161,6 +169,12 @@
 &lt;p>GitHub: &lt;a href="https://github.com/apache/dubbo">https://github.com/apache/dubbo&lt;/a>&lt;br>
 Release Notes: &lt;a href="https://github.com/apache/dubbo/releases">https://github.com/apache/dubbo/releases&lt;/a>&lt;/p>
 &lt;/blockquote>
+&lt;h3 id="3021-2021-08-23">3.0.2.1 (2021-08-23)&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://www.apache.org/dyn/closer.cgi?path=dubbo/3.0.2/apache-dubbo-3.0.2.1-src.zip">source&lt;/a> |
+&lt;a href="https://www.apache.org/dist/dubbo/3.0.2/apache-dubbo-3.0.2.1-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://www.apache.org/dist/dubbo/3.0.2/apache-dubbo-3.0.2.1-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;/ul>
 &lt;h3 id="302-2021-08-16">3.0.2 (2021-08-16)&lt;/h3>
 &lt;ul>
 &lt;li>&lt;a href="https://www.apache.org/dyn/closer.cgi?path=dubbo/3.0.2/apache-dubbo-3.0.2-src.zip">source&lt;/a> |

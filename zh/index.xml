@@ -1,4 +1,12 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – Apache Dubbo</title><link>https://dubbo.apache.org/zh/</link><description>Recent content on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: 3.0.2 发版公告</title><link>https://dubbo.apache.org/zh/blog/2021/08/18/3.0.2-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</link><pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/08/18/3.0.2-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – Apache Dubbo</title><link>https://dubbo.apache.org/zh/</link><description>Recent content on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: 3.0.2.1 发版公告</title><link>https://dubbo.apache.org/zh/blog/2021/08/23/3.0.2.1-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</link><pubDate>Mon, 23 Aug 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/08/23/3.0.2.1-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</guid><description>
+&lt;p>这是 3.0.2 的错误修正版本。
+除了以下更改外，与版本 3.0.2 完全相同。&lt;/p>
+&lt;h2 id="bug-修复">Bug 修复&lt;/h2>
+&lt;ul>
+&lt;li>修复 nacos group 在消费者端不生效的问题 (#8533)&lt;/li>
+&lt;li>修复请求超时时序列化检查的 NPE (#8547)&lt;/li>
+&lt;li>兼容使用 dubbo-all 是未导入 farbic-io 包的问题 (#8546)&lt;/li>
+&lt;/ul></description></item><item><title>Blog: 3.0.2 发版公告</title><link>https://dubbo.apache.org/zh/blog/2021/08/18/3.0.2-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</link><pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/08/18/3.0.2-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</guid><description>
 &lt;h2 id="新特性">新特性&lt;/h2>
 &lt;ul>
 &lt;li>支持通过 @DubboService 注解暴露泛化服务&lt;/li>
@@ -179,31 +187,31 @@ dubbo://192.168.0.103:20880/org.apache.dubbo.samples.basic.api.GreetingService?a
 dubbo://192.168.0.104:20880/org.apache.dubbo.samples.basic.api.GreetingService?anyhost=true&amp;amp;application=demo-provider&amp;amp;default=true&amp;amp;deprecated=false&amp;amp;dubbo=2.0.2&amp;amp;dynamic=true&amp;amp;generic=false&amp;amp;interface=org.apache.dubbo.samples.basic.api.GreetingService&amp;amp;methods=greeting&amp;amp;pid=995&amp;amp;release=2.7.7&amp;amp;side=provider&amp;amp;timestamp=1596988170816
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>2. “应用粒度” 服务发现&lt;/strong>&lt;/p>
 &lt;p>192.168.0.103 与 192.168.0.104 两个实例共享一份注册中心数据，如下：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">{
-&amp;#34;name&amp;#34;: &amp;#34;demo-provider&amp;#34;,
-&amp;#34;id&amp;#34;: &amp;#34;192.168.0.103:20880&amp;#34;,
-&amp;#34;address&amp;#34;: &amp;#34;192.168.0.103&amp;#34;,
-&amp;#34;port&amp;#34;: 20880,
-&amp;#34;metadata&amp;#34;: {
-&amp;#34;dubbo.endpoints&amp;#34;: &amp;#34;[{\&amp;#34;port\&amp;#34;:20880,\&amp;#34;protocol\&amp;#34;:\&amp;#34;dubbo\&amp;#34;}]&amp;#34;,
-&amp;#34;dubbo.metadata.storage-type&amp;#34;: &amp;#34;local&amp;#34;,
-&amp;#34;dubbo.revision&amp;#34;: &amp;#34;6785535733750099598&amp;#34;
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
+&lt;span style="color:#268bd2">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;demo-provider&amp;#34;&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;id&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;192.168.0.103:20880&amp;#34;&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;address&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;192.168.0.103&amp;#34;&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;port&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">20880&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;metadata&amp;#34;&lt;/span>: {
+&lt;span style="color:#268bd2">&amp;#34;dubbo.endpoints&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;[{\&amp;#34;port\&amp;#34;:20880,\&amp;#34;protocol\&amp;#34;:\&amp;#34;dubbo\&amp;#34;}]&amp;#34;&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;dubbo.metadata.storage-type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;local&amp;#34;&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;dubbo.revision&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;6785535733750099598&amp;#34;&lt;/span>
 },
-&amp;#34;time&amp;#34;: 1583461240877
+&lt;span style="color:#268bd2">&amp;#34;time&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">1583461240877&lt;/span>
 }
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>{
-&amp;ldquo;name&amp;rdquo;: &amp;ldquo;demo-provider&amp;rdquo;,
-&amp;ldquo;id&amp;rdquo;: &amp;ldquo;192.168.0.104:20880&amp;rdquo;,
-&amp;ldquo;address&amp;rdquo;: &amp;ldquo;192.168.0.104&amp;rdquo;,
-&amp;ldquo;port&amp;rdquo;: 20880,
-&amp;ldquo;metadata&amp;rdquo;: {
-&amp;ldquo;dubbo.endpoints&amp;rdquo;: &amp;ldquo;[{&amp;quot;port&amp;quot;:20880,&amp;quot;protocol&amp;quot;:&amp;quot;dubbo&amp;quot;}]&amp;rdquo;,
-&amp;ldquo;dubbo.metadata.storage-type&amp;rdquo;: &amp;ldquo;local&amp;rdquo;,
-&amp;ldquo;dubbo.revision&amp;rdquo;: &amp;ldquo;7829635812370099387&amp;rdquo;
+&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
+&lt;span style="color:#268bd2">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;demo-provider&amp;#34;&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;id&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;192.168.0.104:20880&amp;#34;&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;address&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;192.168.0.104&amp;#34;&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;port&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">20880&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;metadata&amp;#34;&lt;/span>: {
+&lt;span style="color:#268bd2">&amp;#34;dubbo.endpoints&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;[{\&amp;#34;port\&amp;#34;:20880,\&amp;#34;protocol\&amp;#34;:\&amp;#34;dubbo\&amp;#34;}]&amp;#34;&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;dubbo.metadata.storage-type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;local&amp;#34;&lt;/span>,
+&lt;span style="color:#268bd2">&amp;#34;dubbo.revision&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;7829635812370099387&amp;#34;&lt;/span>
 },
-&amp;ldquo;time&amp;rdquo;: 1583461240877
-}&lt;/p>
-&lt;p>对比以上两种不同粒度的服务发现模式，从 “接口粒度” 升级到 “应用粒度” 后我们可以总结出最大的区别是：注册中心数据量不再与接口数成正比，不论应用提供有多少接口，注册中心只有一条实例数据。&lt;/p>
+&lt;span style="color:#268bd2">&amp;#34;time&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">1583461240877&lt;/span>
+}
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>对比以上两种不同粒度的服务发现模式，从 “接口粒度” 升级到 “应用粒度” 后我们可以总结出最大的区别是：注册中心数据量不再与接口数成正比，不论应用提供有多少接口，注册中心只有一条实例数据。&lt;/p>
 &lt;p>那么接下来我们详细看下这个变化给 Dubbo 带来了哪些好处。&lt;/p>
 &lt;h2 id="3-dubbo-应用级服务发现的意义">3 Dubbo 应用级服务发现的意义&lt;/h2>
 &lt;p>我们先说结论，应用级服务发现给 Dubbo 带来以下优势：&lt;/p>
@@ -214,14 +222,14 @@ dubbo://192.168.0.104:20880/org.apache.dubbo.samples.basic.api.GreetingService?a
 &lt;h3 id="31-对齐主流微服务模型">3.1 对齐主流微服务模型&lt;/h3>
 &lt;p>自动、透明的实例地址发现（负载均衡）是所有微服务框架需要解决的事情，这能让后端的部署结构对上游微服务透明，上游服务只需要从收到的地址列表中选取一个，发起调用就可以了。要实现以上目标，涉及两个关键点的自动同步：&lt;/p>
 &lt;ul>
-&lt;li>实例地址，服务消费方需要知道地址以建立链接&lt;/li>
+&lt;li>实例地址，服务消费方需要知道地址以建立连接&lt;/li>
 &lt;li>RPC 方法定义，服务消费方需要知道 RPC 服务的具体定义，不论服务类型是 rest 或 rmi 等。&lt;/li>
 &lt;/ul>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/service-discovery-2.png" alt="img2">&lt;/p>
 &lt;p>对于 RPC 实例间借助注册中心的数据同步，REST 定义了一套非常有意思的成熟度模型，感兴趣的朋友可以参考这里的链接 &lt;a href="https://www.martinfowler.com/articles/richardsonMaturityModel.html">https://www.martinfowler.com/articles/richardsonMaturityModel.html&lt;/a>， 按照文章中的 4 级成熟度定义，Dubbo 当前基于接口粒度的模型可以对应到 L4 级别。&lt;/p>
 &lt;p>接下来，我们看看 Dubbo、SpringCloud 以及 Kubernetes 分别是怎么围绕自动化的实例地址发现这个目标设计的。&lt;/p>
 &lt;p>&lt;strong>1. Spring Cloud&lt;/strong>&lt;/p>
-&lt;p>Spring Cloud 通过注册中心只同步了应用与实例地址，消费方可以基于实例地址与服务提供方建立链接，但是消费方对于如何发起 http 调用（SpringCloud 基于 rest 通信）一无所知，比如对方有哪些 http endpoint，需要传入哪些参数等。&lt;/p>
+&lt;p>Spring Cloud 通过注册中心只同步了应用与实例地址，消费方可以基于实例地址与服务提供方建立连接，但是消费方对于如何发起 http 调用（SpringCloud 基于 rest 通信）一无所知，比如对方有哪些 http endpoint，需要传入哪些参数等。&lt;/p>
 &lt;p>RPC 服务这部分信息目前都是通过线下约定或离线的管理系统来协商的。这种架构的优缺点总结如下。
 优势：部署结构清晰、地址推送量小；
 缺点：地址订阅需要指定应用名， provider 应用变更（拆分）需消费端感知；RPC 调用无法全自动同步。&lt;/p>
@@ -294,7 +302,7 @@ dubbo://192.168.0.104:20880/org.apache.dubbo.samples.basic.api.GreetingService?a
 &lt;blockquote>
 &lt;p>对应 REST 成熟度模型中的 L4 级别。&lt;/p>
 &lt;/blockquote>
-&lt;p>如我们上面针对每种模型做了详细的分析，每种模型都有其优势和不足。而我们最初决定 Dubbo 要做出改变，往其他的微服务发现模型上的对齐，是我们最早在确定 Dubbo 的云原生方案时，我们发现要让 Dubbo 去支持 Kubernetes Native Service，模型对齐是一个基础条件；另一点是来自用户侧对 Dubbo 场景化的一些工程实践的需求，得益于 Dubbo 对多注册、多协议能力的支持，使得 Dubbo 联通不同的微服务体系成为可能，而服务发现模型的不一致成为其中的一个障碍，这部分的场景描述请参见以下文章：https://www.atatech.org/articles/157719&lt;/p>
+&lt;p>如我们上面针对每种模型做了详细的分析，每种模型都有其优势和不足。而我们最初决定 Dubbo 要做出改变，往其他的微服务发现模型上的对齐，是我们最早在确定 Dubbo 的云原生方案时，我们发现要让 Dubbo 去支持 Kubernetes Native Service，模型对齐是一个基础条件；另一点是来自用户侧对 Dubbo 场景化的一些工程实践的需求，得益于 Dubbo 对多注册、多协议能力的支持，使得 Dubbo 联通不同的微服务体系成为可能，而服务发现模型的不一致成为其中的一个障碍，这部分的场景描述请参见以下文章：&lt;a href="https://developer.aliyun.com/article/740260">Dubbo 如何成为连接异构微服务体系的最佳服务开发框架&lt;/a>&lt;/p>
 &lt;h3 id="32-更大规模的微服务集群---解决性能瓶颈">3.2 更大规模的微服务集群 - 解决性能瓶颈&lt;/h3>
 &lt;p>这部分涉及到和注册中心、配置中心的交互，关于不同模型下注册中心数据的变化，之前原理部分我们简单分析过。为更直观的对比服务模型变更带来的推送效率提升，我们来通过一个示例看一下不同模型注册中心的对比：&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/service-discovery-6.png" alt="img6">&lt;/p>
@@ -305,13 +313,13 @@ dubbo://192.168.0.104:20880/org.apache.dubbo.samples.basic.api.GreetingService?a
 &lt;li>对于老的 Dubbo 模型，注册中心存储了三条接口粒度的数据，分别对应三个接口 DemoService 1 2 3，并且很多的址数据都是重复的；&lt;/li>
 &lt;/ul>
 &lt;p>可以总结出，基于应用粒度的模型所存储和推送的数据量是和应用、实例数成正比的，只有当我们的应用数增多或应用的实例数增长时，地址推送压力才会上涨。
-而对于基于接口粒度的模型，数据量是和接口数量正相关的，鉴于一个应用通常发布多个接口的现状，这个数量级本身比应用粒度是要乘以倍数的；另外一个关键点在于，接口粒度导致的集群规模评估的不透明，相对于实i例、应用增长都通常是在运维侧的规划之中，接口的定义更多的是业务侧的内部行为，往往可以绕过评估给集群带来压力。&lt;/p>
+而对于基于接口粒度的模型，数据量是和接口数量正相关的，鉴于一个应用通常发布多个接口的现状，这个数量级本身比应用粒度是要乘以倍数的；另外一个关键点在于，接口粒度导致的集群规模评估的不透明，相对于实例、应用增长都通常是在运维侧的规划之中，接口的定义更多的是业务侧的内部行为，往往可以绕过评估给集群带来压力。&lt;/p>
 &lt;p>以 Consumer 端服务订阅举例，根据我对社区部分 Dubbo 中大规模头部用户的粗略统计，根据受统计公司的实际场景，一个 Consumer 应用要消费（订阅）的 Provier 应用数量往往要超过 10 个，而具体到其要消费（订阅）的的接口数量则通常要达到 30 个，平均情况下 Consumer 订阅的 3 个接口来自同一个 Provider 应用，如此计算下来，如果以应用粒度为地址通知和选址基本单位，则平均地址推送和计算量将下降 60% 还要多，
 而在极端情况下，也就是当 Consumer 端消费的接口更多的来自同一个应用时，这个地址推送与内存消耗的占用将会进一步得到降低，甚至可以超过 80% 以上。&lt;/p>
-&lt;p>一个典型的几段场景即是 Dubbo 体系中的网关型应用，有些网关应用消费（订阅）达 100+ 应用，而消费（订阅）的服务有 1000+ ，平均有 10 个接口来自同一个应用，如果我们把地址推送和计算的粒度改为应用，则地址推送量从原来的 n * 1000 变为 n * 100，地址数量降低可达近 90%。&lt;/p>
+&lt;p>一个典型的极端场景即是 Dubbo 体系中的网关型应用，有些网关应用消费（订阅）达 100+ 应用，而消费（订阅）的服务有 1000+ ，平均有 10 个接口来自同一个应用，如果我们把地址推送和计算的粒度改为应用，则地址推送量从原来的 n * 1000 变为 n * 100，地址数量降低可达近 90%。&lt;/p>
 &lt;h2 id="4-应用级服务发现工作原理">4 应用级服务发现工作原理&lt;/h2>
 &lt;h3 id="41-设计原则">4.1 设计原则&lt;/h3>
-&lt;p>上面一节我们从&lt;strong>服务模型&lt;/strong>及&lt;strong>支撑大规模集群&lt;/strong>的角度分别给出了 Dubbo 往应用级服务发现靠拢的好处或原因，但这么做的同时接口粒度的服务治理能力还是要继续保留，这是 Dubbo 框架编程模型易用性、服务治理能力优势的基础。
+&lt;p>上面一节我们从&lt;strong>服务模型&lt;/strong>及&lt;strong>支撑大规模集群&lt;/strong>的角度分别给出了 Dubbo 往应用级服务发现靠拢的好处和原因，但这么做的同时接口粒度的服务治理能力还是要继续保留，这是 Dubbo 框架编程模型易用性、服务治理能力优势的基础。
 以下是我认为我们做服务模型迁移仍要坚持的设计原则&lt;/p>
 &lt;ul>
 &lt;li>新的服务发现模型要实现对原有 Dubbo 消费端开发者的无感知迁移，即 Dubbo 继续面向 RPC 服务编程、面向 RPC 服务治理，做到对用户侧完全无感知。&lt;/li>
@@ -359,7 +367,7 @@ dubbo://192.168.0.104:20880/org.apache.dubbo.samples.basic.api.GreetingService?a
 &lt;li>一部分和实例相关的数据继续保留在注册中心，如 ip、port、机器标识等。&lt;/li>
 &lt;li>另一部分和 RPC 方法相关的数据从注册中心移除，转而通过 MetadataService 暴露给消费端。&lt;/li>
 &lt;/ul>
-&lt;p>&lt;strong>理想情况下是能达到数据按照实例、RPC 服务严格区分开来，但明显可以看到以上实现版本还存在一些数据冗余，有些也数据还未合理划分。尤其是 MetadataService 部分，其返回的数据还只是简单的 URL 列表组装，这些 URL其实是包含了全量的数据。&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>理想情况下是能达到数据按照实例、RPC 服务严格区分开来，但明显可以看到以上实现版本还存在一些数据冗余，有些数据也还未合理划分。尤其是 MetadataService 部分，其返回的数据还只是简单的 URL 列表组装，这些 URL其实是包含了全量的数据。&lt;/strong>&lt;/p>
 &lt;/blockquote>
 &lt;p>以下是服务自省的一个完整工作流程图，详细描述了服务注册、服务发现、MetadataService、RPC 调用间的协作流程。&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/service-discovery-9.png" alt="img9">&lt;/p>
@@ -378,12 +386,12 @@ dubbo://192.168.0.104:20880/org.apache.dubbo.samples.basic.api.GreetingService?a
 &lt;p>Client 与 Server 间在收到地址推送后的配置同步是服务自省的关键环节，目前针对元数据同步有两种具体的可选方案，分别是：&lt;/p>
 &lt;ul>
 &lt;li>内建 MetadataService。&lt;/li>
-&lt;li>独立的元数据中心，通过中细化的元数据集群协调数据。&lt;/li>
+&lt;li>独立的元数据中心，通过中心化的元数据集群协调数据。&lt;/li>
 &lt;/ul>
 &lt;p>&lt;strong>1. 内建 MetadataService&lt;/strong>
 MetadataService 通过标准的 Dubbo 协议暴露，根据查询条件，会将内存中符合条件的“普通服务”配置返回给消费者。这一步发生在消费端选址和调用前。&lt;/p>
-&lt;p>&lt;strong>元数据中心&lt;/strong>
-复用 2.7 版本中引入的元数据中心，provider 实例启动后，会尝试将内部的 RPC 服务组织成元数据的格式到元数据中心，而 consumer 则在每次收到注册中心推送更新后，主动查询元数据中心。&lt;/p>
+&lt;p>&lt;strong>2. 元数据中心&lt;/strong>
+复用 2.7 版本中引入的元数据中心，provider 实例启动后，会尝试将内部的 RPC 服务组织成元数据的格式同步到元数据中心，而 consumer 则在每次收到注册中心推送更新后，主动查询元数据中心。&lt;/p>
 &lt;blockquote>
 &lt;p>注意 consumer 端查询元数据中心的时机，是等到注册中心的地址更新通知之后。也就是通过注册中心下发的数据，我们能明确的知道何时某个实例的元数据被更新了，此时才需要去查元数据中心。&lt;/p>
 &lt;/blockquote>
@@ -404,7 +412,7 @@ MetadataService 通过标准的 Dubbo 协议暴露，根据查询条件，会将
 &lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;RPC Service N&amp;#34;&lt;/span> provided-by=&lt;span style="color:#2aa198">&amp;#34;provider-app-y&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>以上指定 provider 应用名的方式是 Spring Cloud 当前的做法，需要 consumer 端的开发者显示指定其要消费的 provider 应用。&lt;/p>
 &lt;p>以上问题的根源在于注册中心不知道任何 RPC 服务相关的信息，因此只能通过应用名来查询。&lt;/p>
-&lt;p>为了使整个开发流程对老的 Dubbo 用户更透明，同时避免指定 provider 对可扩展性带来的影响（参见下方说明），我们设计了一套 &lt;code>RPC 服务到应用名&lt;/code>的映射关系，以尝试在 consumer 自动完成 RPC 服务到 provider 应用名的转换。&lt;/p>
+&lt;p>为了使整个开发流程对老的 Dubbo 用户更透明，同时避免指定 provider 对可扩展性带来的影响（参见下方说明），我们设计了一套 &lt;code>RPC 服务到应用名&lt;/code>的映射关系，以尝试在 consumer 端自动完成 RPC 服务到 provider 应用名的转换。&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/service-discovery-11.png" alt="img11">&lt;/p>
 &lt;blockquote>
 &lt;p>Dubbo 之所以选择建立一套“接口-应用”的映射关系，主要是考虑到 service - app 映射关系的不确定性。一个典型的场景即是应用/服务拆分，如上面提到的配置&lt;code>&amp;lt;dubbo:reference interface=&amp;quot;RPC Service 2&amp;quot; provided-by=&amp;quot;provider-app-x&amp;quot; /&amp;gt;&lt;/code>，PC Service 2 是定义于 provider-app-x 中的一个服务，未来它随时可能会被开发者分拆到另外一个新的应用如 provider-app-x-1 中，这个拆分要被所有的 PC Service 2 消费方感知到，并对应用进行修改升级，如改为&lt;code>&amp;lt;dubbo:reference interface=&amp;quot;RPC Service 2&amp;quot; provided-by=&amp;quot;provider-app-x-1&amp;quot; /&amp;gt;&lt;/code>，这样的升级成本不可否认还是挺高的。
@@ -6651,6 +6659,12 @@ bootstrap&lt;span style="color:#719e07">.&lt;/span>start&lt;span style="color:#7
 &lt;p>GitHub: &lt;a href="https://github.com/apache/dubbo">https://github.com/apache/dubbo&lt;/a>&lt;br>
 发布说明: &lt;a href="https://github.com/apache/dubbo/releases">https://github.com/apache/dubbo/releases&lt;/a>&lt;/p>
 &lt;/blockquote>
+&lt;h3 id="3021-2021-08-23">3.0.2.1 (2021-08-23)&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://www.apache.org/dyn/closer.cgi?path=dubbo/3.0.2/apache-dubbo-3.0.2.1-src.zip">source&lt;/a> |
+&lt;a href="https://www.apache.org/dist/dubbo/3.0.2/apache-dubbo-3.0.2.1-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://www.apache.org/dist/dubbo/3.0.2/apache-dubbo-3.0.2.1-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;/ul>
 &lt;h3 id="302-2021-08-16">3.0.2 (2021-08-16)&lt;/h3>
 &lt;ul>
 &lt;li>&lt;a href="https://www.apache.org/dyn/closer.cgi?path=dubbo/3.0.2/apache-dubbo-3.0.2-src.zip">source&lt;/a> |
@@ -8548,141 +8562,4 @@ nd6 &lt;span style="color:#268bd2">options&lt;/span>&lt;span style="color:#719e0
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">-&lt;/span>DDUBBO_IP_TO_BIND&lt;span style="color:#719e07">=&lt;/span>1&lt;span style="color:#719e07">.&lt;/span>2&lt;span style="color:#719e07">.&lt;/span>3&lt;span style="color:#719e07">.&lt;/span>4
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="9-参考文章">9 参考文章&lt;/h2>
 &lt;p>&lt;a href="https://www.jianshu.com/p/09f9375b7fa7">TUN/TAP 设备浅析&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://stackoverflow.com/questions/29958143/what-are-en0-en1-p2p-and-so-on-that-are-displayed-after-executing-ifconfig">what-are-en0-en1-p2p-and-so-on-that-are-displayed-after-executing-ifconfig&lt;/a>&lt;/p></description></item><item><title>Blog: Dubbo Admin服务测试功能</title><link>https://dubbo.apache.org/zh/blog/2019/08/26/service-test/</link><pubDate>Mon, 26 Aug 2019 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2019/08/26/service-test/</guid><description>
-&lt;p>基于Dubbo2.7的元数据，Dubbo Admin实现了服务测试功能，可以通过泛化调用，在控制台上调用真实的服务提供者&lt;/p>
-&lt;h2 id="使用方式">使用方式&lt;/h2>
-&lt;ul>
-&lt;li>部署服务提供者： 可以在&lt;a href="https://github.com/nzomkxia/dubbo-demo">这里&lt;/a>下载demo，此工程基于spring boot，方便在IDE或者命令行启动，对于服务测试来说，只需要启动&lt;code>dubbo-basic-provider&lt;/code>即可。&lt;/li>
-&lt;li>服务查询： 完成服务端部署后，可以到Dubbo Admin的&lt;code>服务测试&lt;/code>页面上查询对应的服务:
-&lt;img src="https://dubbo.apache.org/imgs/blog/admin/testSearch.jpg" alt="testSearch">&lt;br>
-这里的信息和元数据类似，包含方法名，参数类型和返回值信息，点击右边的标签就可以进入服务测试页面&lt;/li>
-&lt;li>服务测试：
-&lt;img src="https://dubbo.apache.org/imgs/blog/admin/testSuccess.jpg" alt="testSuccess">&lt;br>
-服务测试页面包含了两个json编辑器，参数类型的信息都是以json格式保存，这里需要填入对应的参数值(本例中数类型时&lt;code>String&lt;/code>)，填写完成后点击&lt;code>执行&lt;/code>即可对服务端发起调用，调用结果展示在右边的编辑器中，如果调用失败，会显示详细的失败原因，下面来看一下调用失败的例子：&lt;br>
-&lt;img src="https://dubbo.apache.org/imgs/blog/admin/testFail.jpg" alt="testFail">
-本例中，先关掉Dubbo服务提供者的进程，再执行服务测试，可以看到返回的结果是&lt;code>找不到服务提供者&lt;/code>的异常。和普通调用一样，业务和框架的异常都会返回在结果中，方便业务排查。&lt;/li>
-&lt;li>复合类型参数&lt;br>
-考虑&lt;code>UserService&lt;/code>中的以下方法和类型：&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#586e75">//org.apache.dubbo.demo.api.UserService
-&lt;/span>&lt;span style="color:#586e75">&lt;/span>Result &lt;span style="color:#268bd2">getUser&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String name&lt;span style="color:#719e07">,&lt;/span> UserInfoDO userInfoDO&lt;span style="color:#719e07">);&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">UserInfoDO&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#dc322f">int&lt;/span> id&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#268bd2">private&lt;/span> LocationDO locationDO&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#268bd2">private&lt;/span> DepartmentDO departmentDO&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#268bd2">@Override&lt;/span>
-&lt;span style="color:#268bd2">public&lt;/span> String &lt;span style="color:#268bd2">toString&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#2aa198">&amp;#34;UserInfoDO{&amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span>
-&lt;span style="color:#2aa198">&amp;#34;id=&amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> id &lt;span style="color:#719e07">+&lt;/span>
-&lt;span style="color:#2aa198">&amp;#34;, locationDO=&amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> locationDO&lt;span style="color:#719e07">.&lt;/span>toString&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">+&lt;/span>
-&lt;span style="color:#2aa198">&amp;#34;, departmentDO=&amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> departmentDO&lt;span style="color:#719e07">.&lt;/span>toString&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">+&lt;/span>
-&lt;span style="color:#2aa198">&amp;#39;}&amp;#39;&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">DepartmentDO&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#268bd2">private&lt;/span> String departName&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#268bd2">private&lt;/span> LocationDO departLocation&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#268bd2">@Override&lt;/span>
-&lt;span style="color:#268bd2">public&lt;/span> String &lt;span style="color:#268bd2">toString&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#2aa198">&amp;#34;DepartmentDO{&amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span>
-&lt;span style="color:#2aa198">&amp;#34;departName=&amp;#39;&amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> departName &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#39;\&amp;#39;&amp;#39;&lt;/span> &lt;span style="color:#719e07">+&lt;/span>
-&lt;span style="color:#2aa198">&amp;#34;, departLocation=&amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> departLocation&lt;span style="color:#719e07">.&lt;/span>toString&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">+&lt;/span>
-&lt;span style="color:#2aa198">&amp;#39;}&amp;#39;&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">LocationDO&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#268bd2">private&lt;/span> String address&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#dc322f">int&lt;/span> postNum&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#268bd2">@Override&lt;/span>
-&lt;span style="color:#268bd2">public&lt;/span> String &lt;span style="color:#268bd2">toString&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#2aa198">&amp;#34;LocationDO{&amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span>
-&lt;span style="color:#2aa198">&amp;#34;address=&amp;#39;&amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> address &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#39;\&amp;#39;&amp;#39;&lt;/span> &lt;span style="color:#719e07">+&lt;/span>
-&lt;span style="color:#2aa198">&amp;#34;, postNum=&amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> postNum &lt;span style="color:#719e07">+&lt;/span>
-&lt;span style="color:#2aa198">&amp;#39;}&amp;#39;&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>参数是比较复杂的符合类型参数，服务测试的时候，会逐层展开填写每一个field的值，如下图所示：&lt;br>
-&lt;img src="https://dubbo.apache.org/imgs/blog/admin/complex.jpg" alt="complex">
-同样可以调用成功并且返回结果&lt;/p>
-&lt;h2 id="原理数据来源">原理：数据来源&lt;/h2>
-&lt;p>服务测试中，最重要的就是完整的方法签名信息，和参数的类型信息，有了这些信息才能够一步步填入每个参数的值，拼装出完整的服务消费者。在Dubbo2.7中，新增了元数据中心，Dubbo Admin的方法签名和参数类型信息就是从这里来的：&lt;br>
-&lt;img src="https://dubbo.apache.org/imgs/blog/admin/metadata.png" alt="medatada">
-如图所示，服务端在运行的时候会将服务的元数据信息注册到元数据中心，格式如下：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
-...
-&lt;span style="color:#268bd2">&amp;#34;methods&amp;#34;&lt;/span>: [
-{
-&lt;span style="color:#268bd2">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;sayHello&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;parameterTypes&amp;#34;&lt;/span>: [
-&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.demo.model.User&amp;#34;&lt;/span>
-],
-&lt;span style="color:#268bd2">&amp;#34;returnType&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.demo.model.Result&amp;#34;&lt;/span>
-},
-...
-],
-&lt;span style="color:#268bd2">&amp;#34;types&amp;#34;&lt;/span>: [
-{
-&lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;char&amp;#34;&lt;/span>
-},
-{
-&lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;long&amp;#34;&lt;/span>
-},
-{
-&lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.demo.model.Result&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;properties&amp;#34;&lt;/span>: {
-&lt;span style="color:#268bd2">&amp;#34;msg&amp;#34;&lt;/span>: {
-&lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;java.lang.String&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;properties&amp;#34;&lt;/span>: {
-&lt;span style="color:#268bd2">&amp;#34;value&amp;#34;&lt;/span>: {
-&lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;char[]&amp;#34;&lt;/span>
-},
-&lt;span style="color:#268bd2">&amp;#34;hash&amp;#34;&lt;/span>: {
-&lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;int&amp;#34;&lt;/span>
-}
-}
-},
-&lt;span style="color:#268bd2">&amp;#34;userName&amp;#34;&lt;/span>: {
-&lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;java.lang.String&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;properties&amp;#34;&lt;/span>: {
-&lt;span style="color:#268bd2">&amp;#34;value&amp;#34;&lt;/span>: {
-&lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;char[]&amp;#34;&lt;/span>
-},
-&lt;span style="color:#268bd2">&amp;#34;hash&amp;#34;&lt;/span>: {
-&lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;int&amp;#34;&lt;/span>
-}
-}
-}
-}
-},
-{
-&lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.demo.model.User&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;properties&amp;#34;&lt;/span>: {
-&lt;span style="color:#268bd2">&amp;#34;id&amp;#34;&lt;/span>: {
-&lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;java.lang.Long&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;properties&amp;#34;&lt;/span>: {
-&lt;span style="color:#268bd2">&amp;#34;value&amp;#34;&lt;/span>: {
-&lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;long&amp;#34;&lt;/span>
-}
-}
-},
-&lt;span style="color:#268bd2">&amp;#34;username&amp;#34;&lt;/span>: {
-&lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;java.lang.Sring&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;properties&amp;#34;&lt;/span>: {
-&lt;span style="color:#268bd2">&amp;#34;value&amp;#34;&lt;/span>: {
-&lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;char[]&amp;#34;&lt;/span>
-},
-&lt;span style="color:#268bd2">&amp;#34;hash&amp;#34;&lt;/span>: {
-&lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;int&amp;#34;&lt;/span>
-}
-}
-}
-}
-},
-...
-]
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>与服务测试相关的就是&lt;code>methods&lt;/code>和&lt;code>types&lt;/code>所包含的方法和类型信息，Dubbo Admin根据这些信息，将参数渲染到服务测试页面的Json Editor中，由用户来输入每个参数，每个成员变量的值。&lt;/p>
-&lt;h2 id="原理-泛化调用">原理： 泛化调用&lt;/h2>
-&lt;p>有了参数类型，下一个问题就是怎么能够调用到服务端，在传统的Dubbo RPC调用中，客户端需要依赖服务端的API jar包(参考前文demo中的&lt;a href="https://github.com/nzomkxia/dubbo-demo/tree/master/dubbo-basic-consumer">dubbo-basic-consumer&lt;/a>)，这对于Dubbo Admin来说不太可能，因为服务的上下线是动态的，Dubbo Admin无法动态增加jar包依赖，因此需要用到Dubbo中的&lt;strong>泛化调用&lt;/strong>，指的是在没有服务端API接口的情况下，客户端直接通过 &lt;code>GenericService&lt;/code> 接口来发起服务调用，返回值中的数据对象都用Map来表示。泛化调用在服务端不需要做特殊处理，只需要客户端发起即可。&lt;/p>
-&lt;h2 id="总结和展望">总结和展望&lt;/h2>
-&lt;p>本文简单介绍了服务测试的用法和原理，后续会进一步针对该功能进行增强，比如处理抽象类的参数类型，支持从json文件导入参数值，支持对参数值的保存等等，方便对服务接口进行回归测试。&lt;/p></description></item></channel></rss>
+&lt;p>&lt;a href="https://stackoverflow.com/questions/29958143/what-are-en0-en1-p2p-and-so-on-that-are-displayed-after-executing-ifconfig">what-are-en0-en1-p2p-and-so-on-that-are-displayed-after-executing-ifconfig&lt;/a>&lt;/p></description></item></channel></rss>

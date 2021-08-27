@@ -14,17 +14,17 @@
 <link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96>
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
-<title>地址迁移规则说明 | Apache Dubbo</title><meta property="og:title" content="地址迁移规则说明">
+<title>应用级服务发现地址迁移规则说明 | Apache Dubbo</title><meta property="og:title" content="应用级服务发现地址迁移规则说明">
 <meta property="og:description" content="本文具体说明了地址迁移过程中使用的规则体信息，用户可以根据自己需求定制适合自己的迁移规则。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docs/advanced/migration-invoker/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-08-23T15:42:04+08:00"><meta property="og:site_name" content="Apache Dubbo">
-<meta itemprop=name content="地址迁移规则说明">
+<meta property="article:modified_time" content="2021-08-26T11:28:12+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta itemprop=name content="应用级服务发现地址迁移规则说明">
 <meta itemprop=description content="本文具体说明了地址迁移过程中使用的规则体信息，用户可以根据自己需求定制适合自己的迁移规则。">
-<meta itemprop=dateModified content="2021-08-23T15:42:04+08:00">
+<meta itemprop=dateModified content="2021-08-26T11:28:12+08:00">
 <meta itemprop=wordCount content="276">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
-<meta name=twitter:title content="地址迁移规则说明">
+<meta name=twitter:title content="应用级服务发现地址迁移规则说明">
 <meta name=twitter:description content="本文具体说明了地址迁移过程中使用的规则体信息，用户可以根据自己需求定制适合自己的迁移规则。">
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-112489517-1','auto'),ga('send','pageview'))</script>
 <script async src=https://www.google-analytics.com/analytics.js></script>
@@ -491,12 +491,12 @@ Releases
 <a href=https://dubbo.apache.org/zh/docs/advanced/>高级用法</a>
 </li>
 <li class="breadcrumb-item active" aria-current=page>
-<a href=https://dubbo.apache.org/zh/docs/advanced/migration-invoker/>地址迁移规则说明</a>
+<a href=https://dubbo.apache.org/zh/docs/advanced/migration-invoker/>应用级服务发现地址迁移规则</a>
 </li>
 </ol>
 </nav>
 <div class=td-content>
-<h1>地址迁移规则说明</h1>
+<h1>应用级服务发现地址迁移规则说明</h1>
 <div class=lead>本文具体说明了地址迁移过程中使用的规则体信息，用户可以根据自己需求定制适合自己的迁移规则。</div>
 <h2 id=状态模型>状态模型</h2>
 <p>在 Dubbo 3 之前地址注册模型是以接口级粒度注册到注册中心的，而 Dubbo 3 全新的应用级注册模型注册到注册中心的粒度是应用级的。从注册中心的实现上来说是几乎不一样的，这导致了对于从接口级注册模型获取到的 invokers 是无法与从应用级注册模型获取到的 invokers 进行合并的。为了帮助用户从接口级往应用级迁移，Dubbo 3 设计了 Migration 机制，基于三个状态的切换实现实际调用中地址模型的切换。</p>
@@ -651,7 +651,7 @@ Sorry to hear that. Please <a href=https://github.com/apache/dubbo-website/issue
 </p>
 <script>const yesButton=document.querySelector('.feedback--answer-yes'),noButton=document.querySelector('.feedback--answer-no'),yesResponse=document.querySelector('.feedback--response-yes'),noResponse=document.querySelector('.feedback--response-no'),disableButtons=()=>{yesButton.disabled=!0,noButton.disabled=!0},sendFeedback=b=>{if(typeof ga!='function')return;const a={command:'send',hitType:'event',category:'Helpful',action:'click',label:window.location.pathname,value:b};ga(a.command,a.hitType,a.category,a.action,a.label,a.value)};yesButton.addEventListener('click',()=>{yesResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(1)}),noButton.addEventListener('click',()=>{noResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(0)})</script>
 <br>
-<div class="text-muted mt-5 pt-3 border-top">最后修改 August 23, 2021: <a href=/commit/46e61d1f3fc79202480811b8f5ac494b52a33c82>update docs configuration (46e61d1)</a>
+<div class="text-muted mt-5 pt-3 border-top">最后修改 August 26, 2021: <a href=/commit/9aa90f4dc627199b18b3245e26c980a722c28940>update header (9aa90f4)</a>
 </div>
 </div>
 </main>
