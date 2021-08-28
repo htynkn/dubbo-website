@@ -135,9 +135,6 @@ subscription address.
 &lt;p>If you want to unsubscribe, just send an email to &lt;a href="mailto:dev-unsubscribe@dubbo.apache.org">dev-unsubscribe@dubbo.apache.org&lt;/a>, and follow the steps once you get an reply.&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;blockquote>
-&lt;p>Note that both &lt;a href="mailto:dev@dubbo.apache.org">dev@dubbo.apache.org&lt;/a> and &lt;a href="mailto:dev@dubbo.apache.org">dev@dubbo.apache.org&lt;/a> should work, you can pick any of it.&lt;/p>
-&lt;/blockquote>
 &lt;p>[^1] &lt;a href="http://apache.org/foundation/mailinglists.html#subscribing">http://apache.org/foundation/mailinglists.html#subscribing&lt;/a>&lt;/p></description></item><item><title>Docs: Software Donation Guide</title><link>https://dubbo.apache.org/en/docs/contribution-guidelines/contributor/software-donation-guide_dev/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/contribution-guidelines/contributor/software-donation-guide_dev/</guid><description>
 &lt;p>Before you go through this guide, make sure you have confirmed with PMC that a SGA is actually needed.&lt;/p>
 &lt;p>If you are donating significant amount of code or documentation to Apache Dubbo , you will be required to sign a &lt;a href="https://www.apache.org/licenses/#grants">Software Grant&lt;/a> before your code/doc could be merged.&lt;/p>

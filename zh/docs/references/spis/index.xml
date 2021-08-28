@@ -266,12 +266,16 @@
 &lt;span style="color:#268bd2">&amp;lt;dubbo:provider&lt;/span> cluster=&lt;span style="color:#2aa198">&amp;#34;xxx&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="已知扩展">已知扩展&lt;/h2>
 &lt;ul>
+&lt;li>&lt;code>org.apache.dubbo.rpc.cluster.support.wrapper.MockClusterWrapper&lt;/code>&lt;/li>
 &lt;li>&lt;code>org.apache.dubbo.rpc.cluster.support.FailoverCluster&lt;/code>&lt;/li>
 &lt;li>&lt;code>org.apache.dubbo.rpc.cluster.support.FailfastCluster&lt;/code>&lt;/li>
 &lt;li>&lt;code>org.apache.dubbo.rpc.cluster.support.FailsafeCluster&lt;/code>&lt;/li>
 &lt;li>&lt;code>org.apache.dubbo.rpc.cluster.support.FailbackCluster&lt;/code>&lt;/li>
 &lt;li>&lt;code>org.apache.dubbo.rpc.cluster.support.ForkingCluster&lt;/code>&lt;/li>
 &lt;li>&lt;code>org.apache.dubbo.rpc.cluster.support.AvailableCluster&lt;/code>&lt;/li>
+&lt;li>&lt;code>org.apache.dubbo.rpc.cluster.support.MergeableCluster&lt;/code>&lt;/li>
+&lt;li>&lt;code>org.apache.dubbo.rpc.cluster.support.BroadcastCluster&lt;/code>&lt;/li>
+&lt;li>&lt;code>org.apache.dubbo.rpc.cluster.support.registry.ZoneAwareCluster&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;h2 id="扩展示例">扩展示例&lt;/h2>
 &lt;p>Maven 项目结构：&lt;/p>
@@ -364,6 +368,8 @@
 &lt;li>&lt;code>org.apache.dubbo.rpc.cluster.loadbalance.RandomLoadBalance&lt;/code>&lt;/li>
 &lt;li>&lt;code>org.apache.dubbo.rpc.cluster.loadbalance.RoundRobinLoadBalance&lt;/code>&lt;/li>
 &lt;li>&lt;code>org.apache.dubbo.rpc.cluster.loadbalance.LeastActiveLoadBalance&lt;/code>&lt;/li>
+&lt;li>&lt;code>org.apache.dubbo.rpc.cluster.loadbalance.ConsistentHashLoadBalance&lt;/code>&lt;/li>
+&lt;li>&lt;code>org.apache.dubbo.rpc.cluster.loadbalance.ShortestResponseLoadBalance&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;h2 id="扩展示例">扩展示例&lt;/h2>
 &lt;p>Maven 项目结构：&lt;/p>
@@ -403,6 +409,14 @@
 &lt;li>&lt;code>org.apache.dubbo.rpc.cluster.merger.ListMerger&lt;/code>&lt;/li>
 &lt;li>&lt;code>org.apache.dubbo.rpc.cluster.merger.SetMerger&lt;/code>&lt;/li>
 &lt;li>&lt;code>org.apache.dubbo.rpc.cluster.merger.MapMerger&lt;/code>&lt;/li>
+&lt;li>&lt;code>org.apache.dubbo.rpc.cluster.merger.ByteArrayMerger&lt;/code>&lt;/li>
+&lt;li>&lt;code>org.apache.dubbo.rpc.cluster.merger.CharArrayMerger&lt;/code>&lt;/li>
+&lt;li>&lt;code>org.apache.dubbo.rpc.cluster.merger.ShortArrayMerger&lt;/code>&lt;/li>
+&lt;li>&lt;code>org.apache.dubbo.rpc.cluster.merger.IntArrayMerger&lt;/code>&lt;/li>
+&lt;li>&lt;code>org.apache.dubbo.rpc.cluster.merger.LongArrayMerger&lt;/code>&lt;/li>
+&lt;li>&lt;code>org.apache.dubbo.rpc.cluster.merger.FloatArrayMerger&lt;/code>&lt;/li>
+&lt;li>&lt;code>org.apache.dubbo.rpc.cluster.merger.DoubleArrayMerger&lt;/code>&lt;/li>
+&lt;li>&lt;code>org.apache.dubbo.rpc.cluster.merger.BooleanArrayMerger&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;h2 id="扩展示例">扩展示例&lt;/h2>
 &lt;p>Maven 项目结构：&lt;/p>

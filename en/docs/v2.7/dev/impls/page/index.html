@@ -22,14 +22,14 @@ src |-main |-java |-com |-xxx |-XxxPageHandler.java (PageHandler implementation)
 package com.xxx; import org.apache.dubbo.container.page.PageHandler; public class XxxPageHandler implements PageHandler { public Group lookup(URL url) { // .">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/en/docs/v2.7/dev/impls/page/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-08-26T11:28:12+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-08-27T17:16:53+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="PageHandler Extension">
 <meta itemprop=description content="Summary Extension for page handler
 Extension Interface org.apache.dubbo.container.page.PageHandler
 Extension Configuration <dubbo:protocol page=&#34;xxx,yyy&#34; /> <!-- default configuration, will take effect if page attribute is not set in <dubbo:protocol> --> <dubbo:provider page=&#34;xxx,yyy&#34; /> Existing Extension  org.apache.dubbo.container.page.pages.HomePageHandler org.apache.dubbo.container.page.pages.StatusPageHandler org.apache.dubbo.container.page.pages.LogPageHandler org.apache.dubbo.container.page.pages.SystemPageHandler  Extension Guide Directory layout:
 src |-main |-java |-com |-xxx |-XxxPageHandler.java (PageHandler implementation) |-resources |-META-INF |-dubbo |-org.apache.dubbo.container.page.PageHandler (plain text file with the content: xxx=com.xxx.XxxPageHandler) XxxPageHandler.java：
 package com.xxx; import org.apache.dubbo.container.page.PageHandler; public class XxxPageHandler implements PageHandler { public Group lookup(URL url) { // .">
-<meta itemprop=dateModified content="2021-08-26T11:28:12+08:00">
+<meta itemprop=dateModified content="2021-08-27T17:16:53+08:00">
 <meta itemprop=wordCount content="82">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="PageHandler Extension">
@@ -64,6 +64,9 @@ package com.xxx; import org.apache.dubbo.container.page.PageHandler; public clas
 </li>
 <li class="nav-item mr-4 mb-2 mb-lg-0">
 <a class=nav-link href=/en/downloads/><span>Downloads</span></a>
+</li>
+<li class="nav-item mr-4 mb-2 mb-lg-0">
+<a class=nav-link href=/en/users/><span>Users</span></a>
 </li>
 <li class="nav-item dropdown d-none d-lg-block">
 <a class="nav-link dropdown-toggle" href=# id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>
@@ -617,7 +620,7 @@ Sorry to hear that. Please <a href=https://github.com/apache/dubbo-website/issue
 </p>
 <script>const yesButton=document.querySelector('.feedback--answer-yes'),noButton=document.querySelector('.feedback--answer-no'),yesResponse=document.querySelector('.feedback--response-yes'),noResponse=document.querySelector('.feedback--response-no'),disableButtons=()=>{yesButton.disabled=!0,noButton.disabled=!0},sendFeedback=b=>{if(typeof ga!='function')return;const a={command:'send',hitType:'event',category:'Helpful',action:'click',label:window.location.pathname,value:b};ga(a.command,a.hitType,a.category,a.action,a.label,a.value)};yesButton.addEventListener('click',()=>{yesResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(1)}),noButton.addEventListener('click',()=>{noResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(0)})</script>
 <br>
-<div class="text-muted mt-5 pt-3 border-top">Last modified August 26, 2021: <a href=/commit/9aa90f4dc627199b18b3245e26c980a722c28940>update header (9aa90f4)</a>
+<div class="text-muted mt-5 pt-3 border-top">Last modified August 27, 2021: <a href=/commit/1e4a72edd40ed727f33d6425c3560dc85f406f70>[DOC] Add meta-type parameter for dubbo:application (#920) (1e4a72e)</a>
 </div>
 </div>
 </main>
