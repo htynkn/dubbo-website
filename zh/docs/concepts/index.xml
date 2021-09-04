@@ -387,4 +387,4 @@ Dubbo 定义了一些中心化组件，这包括：&lt;/p>
 &lt;li>如果你需要实现自定义的注册中心，你可以使用 Dubbo 扩展能力。&lt;/li>
 &lt;li>如果你需要实现自定义的过滤器，你可以使用 Dubbo 扩展能力。&lt;/li>
 &lt;/ul>
-&lt;p>Dubbo 扩展平等的对待内部实现和第三方实现。更多使用场景，参见 &lt;a href="../references/">SPI 扩展实现&lt;/a>&lt;/p></description></item></channel></rss>
+&lt;p>Dubbo 扩展平等的对待内部实现和第三方实现。更多使用场景，参见 &lt;a href="../../references/spis/">SPI 扩展实现&lt;/a>&lt;/p></description></item></channel></rss>
