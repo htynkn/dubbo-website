@@ -6197,7 +6197,12 @@ java -Ddubbo.registry.check&lt;span style="color:#719e07">=&lt;/span>&lt;span st
 &lt;h4 id="323-补充网关场景">3.2.3 补充网关场景&lt;/h4>
 &lt;p>TBD&lt;br />&lt;br />&lt;/p>
 &lt;h4 id="334-模拟-stream-通信场景的吞吐量提升">3.3.4 模拟 Stream 通信场景的吞吐量提升&lt;/h4>
-&lt;p>TBD&lt;/p></description></item><item><title>Docs: 快速开始</title><link>https://dubbo.apache.org/zh/docs/languages/erlang/quick-start/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/languages/erlang/quick-start/</guid><description>
+&lt;p>TBD&lt;/p></description></item><item><title>Docs: 序列化协议安全</title><link>https://dubbo.apache.org/zh/docs/advanced/serialization-security/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/advanced/serialization-security/</guid><description>
+&lt;p>Dubbo3.0在序列化协议安全方面进行了升级加固，推荐使用Tripe协议非Wrapper模式。
+该协议默认安全，但需要开发人员编写IDL文件。&lt;/p>
+&lt;p>Triple协议Wrapper模式下，允许兼容其它序列化数据，提供了良好的兼容性。但其它协议可能存在反序列化安全缺陷，对于Hession2协议，高安全属性用户应当按照samples代码指示，开启白名单模式，框架默认会开启黑名单模式，拦截恶意调用。&lt;/p>
+&lt;p>不建议使用其它序列化协议，当攻击者可访问Provider接口时，其它序列化协议的安全缺陷，可能导致 Povider 接口命令执行。&lt;/p>
+&lt;p>若必须使用其它序列化协议，同时希望具备一定安全性。应当开启Token鉴权机制，防止未鉴权的不可信请求来源威胁Provider的安全性。开启Token鉴权机制时，应当同步开启注册中心的鉴权功能。&lt;/p></description></item><item><title>Docs: 快速开始</title><link>https://dubbo.apache.org/zh/docs/languages/erlang/quick-start/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/languages/erlang/quick-start/</guid><description>
 &lt;p>建议先使用 java 定义接口 jar，并使用 &lt;a href="https://github.com/apache/dubbo-erlang/tree/master/tools/erlanalysis">erlanalysis&lt;/a> 工具解析java接口至Erlang lib&lt;/p>
 &lt;h2 id="导入依赖库">导入依赖库&lt;/h2>
 &lt;h3 id="使用-rebar-编译工具">使用 Rebar 编译工具。&lt;/h3>
@@ -6886,7 +6891,7 @@ String suffix &lt;span style="color:#719e07">=&lt;/span> pattern&lt;span style="
 &lt;/section></description></item><item><title>Docs: Dubbo3 简介</title><link>https://dubbo.apache.org/zh/docs/introduction/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/introduction/</guid><description>
 &lt;p>Apache Dubbo 是一款微服务开发框架，它提供了 RPC通信 与 微服务治理 两大关键能力。这意味着，使用 Dubbo 开发的微服务，将具备相互之间的远程发现与通信能力，
 同时利用 Dubbo 提供的丰富服务治理能力，可以实现诸如服务发现、负载均衡、流量调度等服务治理诉求。同时 Dubbo 是高度可扩展的，用户几乎可以在任意功能点去定制自己的实现，以改变框架的默认行为来满足自己的业务需求。&lt;/p>
-&lt;p>Dubbo3 基于 Dubbo2 演进而来，在保持原有核心功能特性的同时， Dubbo3 在易用性、超大规模微服务实践、云原生基础设施适配等几大方向上进行了全面升级。
+&lt;p>Dubbo3 基于 Dubbo2 演进而来，在保持原有核心功能特性的同时， Dubbo3 在易用性、超大规模微服务实践、云原生基础设施适配、安全设计等几大方向上进行了全面升级。
 以下文档都将基于 Dubbo3 展开。&lt;/p>
 &lt;h2 id="what-dubbo3-is">What Dubbo3 is&lt;/h2>
 &lt;p>如开篇所述，Dubbo 提供了构建云原生微服务业务的一站式解决方案，可以使用 Dubbo 快速定义并发布微服务组件，同时基于 Dubbo 开箱即用的丰富特性及超强的扩展能力，构建运维整个微服务体系所需的各项服务治理能力，如 Tracing、Transaction 等，Dubbo 提供的基础能力包括：&lt;/p>
@@ -6981,30 +6986,4 @@ String suffix &lt;span style="color:#719e07">=&lt;/span> pattern&lt;span style="
 &lt;h2 id="了解更多">了解更多&lt;/h2>
 &lt;p>&lt;a href="../new-in-dubbo3">What&amp;rsquo;s New in Dubbo3&lt;/a>&lt;/p>
 &lt;p>&lt;a href="../quick-start">体验 Dubbo3&lt;/a>&lt;/p>
-&lt;p>&lt;a href="../migration">迁移到 Dubbo3&lt;/a>&lt;/p></description></item><item><title>Docsv2.7: 管理控制台安装</title><link>https://dubbo.apache.org/zh/docsv2.7/admin/install/admin-console/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/admin/install/admin-console/</guid><description>
-&lt;p>目前版本的管理控制台正在开发中，已经完成了服务查询和服务治理的功能，采用前后端分离的模式，具体的安装和使用步骤如下：&lt;/p>
-&lt;p>安装:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">git clone https://github.com/apache/dubbo-admin.git /var/tmp/dubbo-admin
-&lt;span style="color:#b58900">cd&lt;/span> /var/tmp/dubbo-admin
-mvn clean package
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>配置 &lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">配置文件为：
-dubbo-admin-server/src/main/resources/application.properties
-主要的配置有：
-admin.registry.address&lt;span style="color:#719e07">=&lt;/span>zookeeper://127.0.0.1:2181
-admin.config-center&lt;span style="color:#719e07">=&lt;/span>zookeeper://127.0.0.1:2181
-admin.metadata-report.address&lt;span style="color:#719e07">=&lt;/span>zookeeper://127.0.0.1:2181
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">mvn --projects dubbo-admin-server spring-boot:run
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>其他配置请访问 github 中的文档:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">https://github.com/apache/dubbo-admin
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>访问:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">http://127.0.0.1:8080
-&lt;/code>&lt;/pre>&lt;/div>&lt;section class="footnotes" role="doc-endnotes">
-&lt;hr>
-&lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
-&lt;p>当前版本中未实现登录功能，会在后续版本加上&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
-&lt;/li>
-&lt;/ol>
-&lt;/section></description></item></channel></rss>
+&lt;p>&lt;a href="../migration">迁移到 Dubbo3&lt;/a>&lt;/p></description></item></channel></rss>

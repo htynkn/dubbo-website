@@ -21,7 +21,12 @@ java -Ddubbo.registry.check&lt;span style="color:#719e07">=&lt;/span>&lt;span st
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="配置的含义">配置的含义&lt;/h2>
 &lt;p>&lt;code>dubbo.reference.com.foo.BarService.check&lt;/code>，覆盖 &lt;code>com.foo.BarService&lt;/code>的 reference 的 check 值，就算配置中有声明，也会被覆盖。&lt;/p>
 &lt;p>&lt;code>dubbo.consumer.check=false&lt;/code>，是设置reference的 &lt;code>check&lt;/code> 的缺省值，如果配置中有显式的声明，如：&lt;code>&amp;lt;dubbo:reference check=&amp;quot;true&amp;quot;/&amp;gt;&lt;/code>，不会受影响。&lt;/p>
-&lt;p>&lt;code>dubbo.registry.check=false&lt;/code>，前面两个都是指订阅成功，但提供者列表是否为空是否报错，如果注册订阅失败时，也允许启动，需使用此选项，将在后台定时重试。&lt;/p></description></item><item><title>Docs: 集群容错</title><link>https://dubbo.apache.org/zh/docs/advanced/fault-tolerent-strategy/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/advanced/fault-tolerent-strategy/</guid><description>
+&lt;p>&lt;code>dubbo.registry.check=false&lt;/code>，前面两个都是指订阅成功，但提供者列表是否为空是否报错，如果注册订阅失败时，也允许启动，需使用此选项，将在后台定时重试。&lt;/p></description></item><item><title>Docs: 序列化协议安全</title><link>https://dubbo.apache.org/zh/docs/advanced/serialization-security/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/advanced/serialization-security/</guid><description>
+&lt;p>Dubbo3.0在序列化协议安全方面进行了升级加固，推荐使用Tripe协议非Wrapper模式。
+该协议默认安全，但需要开发人员编写IDL文件。&lt;/p>
+&lt;p>Triple协议Wrapper模式下，允许兼容其它序列化数据，提供了良好的兼容性。但其它协议可能存在反序列化安全缺陷，对于Hession2协议，高安全属性用户应当按照samples代码指示，开启白名单模式，框架默认会开启黑名单模式，拦截恶意调用。&lt;/p>
+&lt;p>不建议使用其它序列化协议，当攻击者可访问Provider接口时，其它序列化协议的安全缺陷，可能导致 Povider 接口命令执行。&lt;/p>
+&lt;p>若必须使用其它序列化协议，同时希望具备一定安全性。应当开启Token鉴权机制，防止未鉴权的不可信请求来源威胁Provider的安全性。开启Token鉴权机制时，应当同步开启注册中心的鉴权功能。&lt;/p></description></item><item><title>Docs: 集群容错</title><link>https://dubbo.apache.org/zh/docs/advanced/fault-tolerent-strategy/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/advanced/fault-tolerent-strategy/</guid><description>
 &lt;p>在集群调用失败时，Dubbo 提供了多种容错方案，缺省为 failover 重试。&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/cluster.jpg" alt="cluster">&lt;/p>
 &lt;p>各节点关系：&lt;/p>
@@ -2578,12 +2583,4 @@ cache&lt;span style="color:#719e07">.&lt;/span>destroy&lt;span style="color:#719
 &lt;p>可以修改这个策略，在 &lt;code>ReferenceConfigCache.getCache&lt;/code> 时，传一个 &lt;code>KeyGenerator&lt;/code>。详见 &lt;code>ReferenceConfigCache&lt;/code> 类的方法。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">KeyGenerator keyGenerator &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> &lt;span style="color:#719e07">...&lt;/span>
 ReferenceConfigCache cache &lt;span style="color:#719e07">=&lt;/span> ReferenceConfigCache&lt;span style="color:#719e07">.&lt;/span>getCache&lt;span style="color:#719e07">(&lt;/span>keyGenerator &lt;span style="color:#719e07">);&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: 只注册</title><link>https://dubbo.apache.org/zh/docs/advanced/registry-only/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/advanced/registry-only/</guid><description>
-&lt;p>如果有两个镜像环境，两个注册中心，有一个服务只在其中一个注册中心有部署，另一个注册中心还没来得及部署，而两个注册中心的其它应用都需要依赖此服务。这个时候，可以让服务提供者方只注册服务到另一注册中心，而不从另一注册中心订阅服务。&lt;/p>
-&lt;p>禁用订阅配置&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;hzRegistry&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.153.10:9090&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;qdRegistry&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.141.150:9090&amp;#34;&lt;/span> subscribe=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;hzRegistry&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.153.10:9090&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;qdRegistry&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.141.150:9090?subscribe=false&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

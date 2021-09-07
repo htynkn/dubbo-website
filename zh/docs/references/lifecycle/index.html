@@ -159,6 +159,7 @@ Releases
 <ul>
 <li class=collapse id=zhdocsadvanced>
 <a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedpreflight-check href=/zh/docs/advanced/preflight-check/>启动时检查</a>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedserialization-security href=/zh/docs/advanced/serialization-security/>序列化协议安全</a>
 <a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedfault-tolerent-strategy href=/zh/docs/advanced/fault-tolerent-strategy/>集群容错</a>
 <a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedloadbalance href=/zh/docs/advanced/loadbalance/>负载均衡</a>
 <a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedthread-model href=/zh/docs/advanced/thread-model/>线程模型</a>
@@ -207,7 +208,6 @@ Releases
 <a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedaccesslog href=/zh/docs/advanced/accesslog/>访问日志</a>
 <a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedservice-container href=/zh/docs/advanced/service-container/>服务容器</a>
 <a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedreference-config-cache href=/zh/docs/advanced/reference-config-cache/>ReferenceConfig 缓存</a>
-<a class="td-sidebar-link td-sidebar-link__page" id=m-zhdocsadvancedregistry-only href=/zh/docs/advanced/registry-only/>只注册</a>
 </li>
 </ul>
 </ul>
@@ -518,7 +518,7 @@ Sorry to hear that. Please <a href=https://github.com/apache/dubbo-website/issue
 </p>
 <script>const yesButton=document.querySelector('.feedback--answer-yes'),noButton=document.querySelector('.feedback--answer-no'),yesResponse=document.querySelector('.feedback--response-yes'),noResponse=document.querySelector('.feedback--response-no'),disableButtons=()=>{yesButton.disabled=!0,noButton.disabled=!0},sendFeedback=b=>{if(typeof ga!='function')return;const a={command:'send',hitType:'event',category:'Helpful',action:'click',label:window.location.pathname,value:b};ga(a.command,a.hitType,a.category,a.action,a.label,a.value)};yesButton.addEventListener('click',()=>{yesResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(1)}),noButton.addEventListener('click',()=>{noResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(0)})</script>
 <br>
-<div class="text-muted mt-5 pt-3 border-top">最后修改 September 3, 2021: <a href=/commit/970b17546b71ea363938e2c58cf7887b53b46711>fix doc multi-registry (#930) (970b175)</a>
+<div class="text-muted mt-5 pt-3 border-top">最后修改 September 6, 2021: <a href=/commit/aeb3389acd0ff70f3dedeb2805ad36edf0e1f39a>Add security docs (#938) (aeb3389)</a>
 </div>
 </div>
 </main>
