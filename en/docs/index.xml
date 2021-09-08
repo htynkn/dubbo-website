@@ -2767,6 +2767,10 @@ java -Ddubbo.registry.check &lt;span style="color:#719e07">=&lt;/span> &lt;span 
 &lt;li>&lt;code>org.apache.dubbo.rpc.protocol.rmi.RmiProtocol&lt;/code>&lt;/li>
 &lt;li>&lt;code>org.apache.dubbo.rpc.protocol.http.HttpProtocol&lt;/code>&lt;/li>
 &lt;li>&lt;code>org.apache.dubbo.rpc.protocol.http.hessian.HessianProtocol&lt;/code>&lt;/li>
+&lt;li>&lt;code>org.apache.dubbo.rpc.protocol.memcached.MemcachedProtocol&lt;/code>&lt;/li>
+&lt;li>&lt;code>org.apache.dubbo.rpc.support.MockProtocol&lt;/code>&lt;/li>
+&lt;li>&lt;code>org.apache.dubbo.rpc.protocol.redis.RedisProtocol&lt;/code>&lt;/li>
+&lt;li>&lt;code>org.apache.dubbo.rpc.protocol.nativethrift.ThriftProtocol&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;h2 id="extension-guide">Extension Guide&lt;/h2>
 &lt;p>Directory layout:&lt;/p>

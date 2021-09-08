@@ -58,6 +58,10 @@
 &lt;li>&lt;code>org.apache.dubbo.rpc.protocol.rmi.RmiProtocol&lt;/code>&lt;/li>
 &lt;li>&lt;code>org.apache.dubbo.rpc.protocol.http.HttpProtocol&lt;/code>&lt;/li>
 &lt;li>&lt;code>org.apache.dubbo.rpc.protocol.http.hessian.HessianProtocol&lt;/code>&lt;/li>
+&lt;li>&lt;code>org.apache.dubbo.rpc.protocol.memcached.MemcachedProtocol&lt;/code>&lt;/li>
+&lt;li>&lt;code>org.apache.dubbo.rpc.support.MockProtocol&lt;/code>&lt;/li>
+&lt;li>&lt;code>org.apache.dubbo.rpc.protocol.redis.RedisProtocol&lt;/code>&lt;/li>
+&lt;li>&lt;code>org.apache.dubbo.rpc.protocol.nativethrift.ThriftProtocol&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;h2 id="扩展示例">扩展示例&lt;/h2>
 &lt;p>Maven项目结构：&lt;/p>
