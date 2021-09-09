@@ -18,10 +18,10 @@
 <meta property="og:description" content="通过上下文存放当前调用过程中所需的环境信息">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docsv2.7/user/examples/context/"><meta property="article:section" content="docsv2.7">
-<meta property="article:modified_time" content="2021-09-07T09:54:54+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-09-08T12:36:36+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="上下文信息">
 <meta itemprop=description content="通过上下文存放当前调用过程中所需的环境信息">
-<meta itemprop=dateModified content="2021-09-07T09:54:54+08:00">
+<meta itemprop=dateModified content="2021-09-08T12:36:36+08:00">
 <meta itemprop=wordCount content="104">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="上下文信息">
@@ -481,7 +481,7 @@ Releases
 <div class=td-content>
 <h1>上下文信息</h1>
 <div class=lead>通过上下文存放当前调用过程中所需的环境信息</div>
-<p>上下文中存放的是当前调用过程中所需的环境信息。所有配置信息都将转换为 URL 的参数，参见 <a href=../references/xml>schema 配置参考手册</a> 中的<strong>对应URL参数</strong>一列。</p>
+<p>上下文中存放的是当前调用过程中所需的环境信息。所有配置信息都将转换为 URL 的参数，参见 <a href=../../references/xml>schema 配置参考手册</a> 中的<strong>对应URL参数</strong>一列。</p>
 <p>RpcContext 是一个 ThreadLocal 的临时状态记录器，当接收到 RPC 请求，或发起 RPC 请求时，RpcContext 的状态都会变化。比如：A 调 B，B 再调 C，则 B 机器上，在 B 调 C 之前，RpcContext 记录的是 A 调 B 的信息，在 B 调 C 之后，RpcContext 记录的是 B 调 C 的信息。</p>
 <h2 id=服务消费方>服务消费方</h2>
 <div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#586e75>// 远程调用
@@ -524,7 +524,7 @@ Sorry to hear that. Please <a href=https://github.com/apache/dubbo-website/issue
 </p>
 <script>const yesButton=document.querySelector('.feedback--answer-yes'),noButton=document.querySelector('.feedback--answer-no'),yesResponse=document.querySelector('.feedback--response-yes'),noResponse=document.querySelector('.feedback--response-no'),disableButtons=()=>{yesButton.disabled=!0,noButton.disabled=!0},sendFeedback=b=>{if(typeof ga!='function')return;const a={command:'send',hitType:'event',category:'Helpful',action:'click',label:window.location.pathname,value:b};ga(a.command,a.hitType,a.category,a.action,a.label,a.value)};yesButton.addEventListener('click',()=>{yesResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(1)}),noButton.addEventListener('click',()=>{noResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(0)})</script>
 <br>
-<div class="text-muted mt-5 pt-3 border-top">最后修改 September 7, 2021: <a href=/commit/bb4fdf81816a182d48219be3c34142344b6184e7>fix markdown style in rpc-protocol.md (#934) (bb4fdf8)</a>
+<div class="text-muted mt-5 pt-3 border-top">最后修改 September 8, 2021: <a href=/commit/c285ba0cba94a64a4ca1c812af14150b495ddc20>fix #939 (#940) (c285ba0)</a>
 </div>
 </div>
 </main>

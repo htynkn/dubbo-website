@@ -24,7 +24,7 @@ namespace, group, key 等分别对应不同层级的 ZNode 节点，而 value �
   外部化配置中心 dubbo.properties">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docs/references/spis/config-center/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-09-07T09:54:54+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-09-08T12:36:36+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="配置中心扩展">
 <meta itemprop=description content="设计目的 配置中心的核心功能是作为 Key-Value 存储，Dubbo 框架告知配置中心其关心的 key，配置中心返回该key对应的 value 值。
 按照应用场景划分，配置中心在 Dubbo 框架中主要承担以下职责：
@@ -33,7 +33,7 @@ namespace, group, key 等分别对应不同层级的 ZNode 节点，而 value �
 扩展接口  org.apache.dubbo.configcenter.DynamicConfigurationFactory org.apache.dubbo.configcenter.DynamicConfiguration  已知扩展  org.apache.dubbo.configcenter.support.zookeeper.ZookeeperDynamicConfigurationFactory org.apache.dubbo.configcenter.support.nacos.NacosDynamicConfigurationFactory org.apache.dubbo.configcenter.support.etcd.EtcdDynamicConfigurationFactory org.apache.dubbo.configcenter.consul.ConsulDynamicConfigurationFactory org.apache.dubbo.configcenter.support.apollo.ApolloDynamicConfigurationFactory org.apache.dubbo.common.config.configcenter.file.FileSystemDynamicConfigurationFactory  实现原理 Zookeeper zookeeper提供了一个树状的存储模型，其实现原理如下：
 namespace, group, key 等分别对应不同层级的 ZNode 节点，而 value 则作为根 ZNode 节点的值存储。
   外部化配置中心 dubbo.properties">
-<meta itemprop=dateModified content="2021-09-07T09:54:54+08:00">
+<meta itemprop=dateModified content="2021-09-08T12:36:36+08:00">
 <meta itemprop=wordCount content="138">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="配置中心扩展">
@@ -608,7 +608,7 @@ Sorry to hear that. Please <a href=https://github.com/apache/dubbo-website/issue
 </p>
 <script>const yesButton=document.querySelector('.feedback--answer-yes'),noButton=document.querySelector('.feedback--answer-no'),yesResponse=document.querySelector('.feedback--response-yes'),noResponse=document.querySelector('.feedback--response-no'),disableButtons=()=>{yesButton.disabled=!0,noButton.disabled=!0},sendFeedback=b=>{if(typeof ga!='function')return;const a={command:'send',hitType:'event',category:'Helpful',action:'click',label:window.location.pathname,value:b};ga(a.command,a.hitType,a.category,a.action,a.label,a.value)};yesButton.addEventListener('click',()=>{yesResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(1)}),noButton.addEventListener('click',()=>{noResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(0)})</script>
 <br>
-<div class="text-muted mt-5 pt-3 border-top">最后修改 September 7, 2021: <a href=/commit/bb4fdf81816a182d48219be3c34142344b6184e7>fix markdown style in rpc-protocol.md (#934) (bb4fdf8)</a>
+<div class="text-muted mt-5 pt-3 border-top">最后修改 September 8, 2021: <a href=/commit/c285ba0cba94a64a4ca1c812af14150b495ddc20>fix #939 (#940) (c285ba0)</a>
 </div>
 </div>
 </main>

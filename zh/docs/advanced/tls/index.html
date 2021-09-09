@@ -18,10 +18,10 @@
 <meta property="og:description" content="通过 TLS 保证传输安全">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docs/advanced/tls/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-09-07T09:54:54+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-09-08T12:36:36+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="TLS">
 <meta itemprop=description content="通过 TLS 保证传输安全">
-<meta itemprop=dateModified content="2021-09-07T09:54:54+08:00">
+<meta itemprop=dateModified content="2021-09-08T12:36:36+08:00">
 <meta itemprop=wordCount content="79">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="TLS">
@@ -499,7 +499,7 @@ protocolConfig<span style=color:#719e07>.</span>setSslEnabled<span style=color:#
 </code></pre></div><p>为尽可能保证应用启动的灵活性，TLS Cert 的指定还能通过 -D 参数或环境变量等方式来在启动阶段根据部署环境动态指定，具体请参见 Dubbo 配置读取规则与 TLS 示例</p>
 <div class="alert alert-primary" role=alert>
 <h4 class=alert-heading>提示</h4>
-<p>参考 Dubbo <a href=../../configuration/configuration-load-process>配置读取规则</a>，TLS <a href=https://github.com/apache/dubbo-samples/tree/master/java/dubbo-samples-ssl>示例</a></p>
+<p>参考 Dubbo <a href=../../configuration/configuration-load-process>配置读取规则</a>，TLS <a href=https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-ssl>示例</a></p>
 <p>如果要使用的是 gRPC 协议，在开启 TLS 时会使用到协议协商机制，因此必须使用支持 ALPN 机制的 Provider，推荐使用的是 netty-tcnative，具体可参见 gRPC Java 社区的<a href=https://github.com/grpc/grpc-java/blob/master/SECURITY.md>总结</a></p>
 </div>
 <p>在服务调用的安全性上，Dubbo 在后续的版本中会持续投入，其中服务发现/调用的鉴权机制预计在接下来的版本中就会和大家见面。</p>
@@ -516,7 +516,7 @@ Sorry to hear that. Please <a href=https://github.com/apache/dubbo-website/issue
 </p>
 <script>const yesButton=document.querySelector('.feedback--answer-yes'),noButton=document.querySelector('.feedback--answer-no'),yesResponse=document.querySelector('.feedback--response-yes'),noResponse=document.querySelector('.feedback--response-no'),disableButtons=()=>{yesButton.disabled=!0,noButton.disabled=!0},sendFeedback=b=>{if(typeof ga!='function')return;const a={command:'send',hitType:'event',category:'Helpful',action:'click',label:window.location.pathname,value:b};ga(a.command,a.hitType,a.category,a.action,a.label,a.value)};yesButton.addEventListener('click',()=>{yesResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(1)}),noButton.addEventListener('click',()=>{noResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(0)})</script>
 <br>
-<div class="text-muted mt-5 pt-3 border-top">最后修改 September 7, 2021: <a href=/commit/bb4fdf81816a182d48219be3c34142344b6184e7>fix markdown style in rpc-protocol.md (#934) (bb4fdf8)</a>
+<div class="text-muted mt-5 pt-3 border-top">最后修改 September 8, 2021: <a href=/commit/c285ba0cba94a64a4ca1c812af14150b495ddc20>fix #939 (#940) (c285ba0)</a>
 </div>
 </div>
 </main>

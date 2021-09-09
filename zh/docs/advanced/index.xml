@@ -466,7 +466,7 @@ registry&lt;span style="color:#719e07">.&lt;/span>register&lt;span style="color:
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;barService&amp;#34;&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> version=&lt;span style="color:#2aa198">&amp;#34;*&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: 分组聚合</title><link>https://dubbo.apache.org/zh/docs/advanced/group-merger/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/advanced/group-merger/</guid><description>
 &lt;p>通过分组对结果进行聚合并返回聚合后的结果，比如菜单服务，用group区分同一接口的多种实现，现在消费方需从每种group中调用一次并返回结果，对结果进行合并之后返回，这样就可以实现聚合菜单项。&lt;/p>
-&lt;p>相关代码可以参考 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/java/dubbo-samples-merge">dubbo 项目中的示例&lt;/a>&lt;/p>
+&lt;p>相关代码可以参考 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-merge">dubbo 项目中的示例&lt;/a>&lt;/p>
 &lt;h2 id="配置">配置&lt;/h2>
 &lt;p>搜索所有分组&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.xxx.MenuService&amp;#34;&lt;/span> group=&lt;span style="color:#2aa198">&amp;#34;*&amp;#34;&lt;/span> merger=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
@@ -631,7 +631,7 @@ System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07
 &lt;li>&lt;code>threadlocal&lt;/code> 当前线程缓存，比如一个页面渲染，用到很多 portal，每个 portal 都要去查用户信息，通过线程缓存，可以减少这种多余访问。&lt;/li>
 &lt;li>&lt;code>jcache&lt;/code> 与 &lt;a href="http://jcp.org/en/jsr/detail?id=107%27">JSR107&lt;/a> 集成，可以桥接各种缓存实现。&lt;/li>
 &lt;/ul>
-&lt;p>缓存类型可扩展，参见：&lt;a href="../../../dev/impls/cache">缓存扩展&lt;/a>&lt;/p>
+&lt;p>缓存类型可扩展，参见：&lt;a href="../../references/spis/cache">缓存扩展&lt;/a>&lt;/p>
 &lt;h2 id="配置">配置&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> cache=&lt;span style="color:#2aa198">&amp;#34;lru&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>或：&lt;/p>
@@ -829,7 +829,7 @@ EchoService echoService &lt;span style="color:#719e07">=&lt;/span> &lt;span styl
 &lt;/span>&lt;span style="color:#586e75">&lt;/span>String status &lt;span style="color:#719e07">=&lt;/span> echoService&lt;span style="color:#719e07">.&lt;/span>$echo&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;OK&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
 &lt;span style="color:#719e07">assert&lt;/span>&lt;span style="color:#719e07">(&lt;/span>status&lt;span style="color:#719e07">.&lt;/span>equals&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;OK&amp;#34;&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: 上下文信息</title><link>https://dubbo.apache.org/zh/docs/advanced/context/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/advanced/context/</guid><description>
-&lt;p>上下文中存放的是当前调用过程中所需的环境信息。所有配置信息都将转换为 URL 的参数，参见 &lt;a href="../references/xml">schema 配置参考手册&lt;/a> 中的&lt;strong>对应URL参数&lt;/strong>一列。&lt;/p>
+&lt;p>上下文中存放的是当前调用过程中所需的环境信息。所有配置信息都将转换为 URL 的参数，参见 &lt;a href="../../references/xml">schema 配置参考手册&lt;/a> 中的&lt;strong>对应URL参数&lt;/strong>一列。&lt;/p>
 &lt;p>RpcContext 是一个 ThreadLocal 的临时状态记录器，当接收到 RPC 请求，或发起 RPC 请求时，RpcContext 的状态都会变化。比如：A 调 B，B 再调 C，则 B 机器上，在 B 调 C 之前，RpcContext 记录的是 A 调 B 的信息，在 B 调 C 之后，RpcContext 记录的是 B 调 C 的信息。&lt;/p>
 &lt;h2 id="服务消费方">服务消费方&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#586e75">// 远程调用
@@ -877,7 +877,7 @@ xxxService.xxx(); // 远程调用
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: 异步执行</title><link>https://dubbo.apache.org/zh/docs/advanced/async-execute-on-provider/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/advanced/async-execute-on-provider/</guid><description>
-&lt;p>Provider端异步执行将阻塞的业务从Dubbo内部线程池切换到业务自定义线程，避免Dubbo线程池的过度占用，有助于避免不同服务间的互相影响。异步执行无益于节省资源或提升RPC响应性能，因为如果业务执行需要阻塞，则始终还是要有线程来负责执行。&lt;/p>
+&lt;p>Provider端异步执行将阻塞的业务从Dubbo内部线程池切换到业务自定义线程，避免Dubbo线程池的过度占用，有助于避免不同服务间的互相影响。异步执行无异于节省资源或提升RPC响应性能，因为如果业务执行需要阻塞，则始终还是要有线程来负责执行。&lt;/p>
 &lt;div class="alert alert-warning" role="alert">
 &lt;h4 class="alert-heading">注意&lt;/h4>
 &lt;p>Provider 端异步执行和 Consumer 端异步调用是相互独立的，你可以任意正交组合两端配置&lt;/p>
@@ -1355,7 +1355,7 @@ logger&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo:method&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;sayHello&amp;#34;&lt;/span> actives=&lt;span style="color:#2aa198">&amp;#34;10&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;/dubbo:service&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果 &lt;code>&amp;lt;dubbo:service&amp;gt;&lt;/code> 和 &lt;code>&amp;lt;dubbo:reference&amp;gt;&lt;/code> 都配了actives，&lt;code>&amp;lt;dubbo:reference&amp;gt;&lt;/code> 优先，参见：&lt;a href="../../configuration/xml">配置的覆盖策略&lt;/a>。&lt;/p>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果 &lt;code>&amp;lt;dubbo:service&amp;gt;&lt;/code> 和 &lt;code>&amp;lt;dubbo:reference&amp;gt;&lt;/code> 都配了actives，&lt;code>&amp;lt;dubbo:reference&amp;gt;&lt;/code> 优先，参见：&lt;a href="../../references/configuration/xml">配置的覆盖策略&lt;/a>。&lt;/p>
 &lt;h2 id="load-balance-均衡">Load Balance 均衡&lt;/h2>
 &lt;p>配置服务的客户端的 &lt;code>loadbalance&lt;/code> 属性为 &lt;code>leastactive&lt;/code>，此 Loadbalance 会调用并发数最小的 Provider（Consumer端并发数）。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> loadbalance=&lt;span style="color:#2aa198">&amp;#34;leastactive&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
@@ -1422,7 +1422,7 @@ sslConfig&lt;span style="color:#719e07">.&lt;/span>setClientPrivateKeyPath&lt;sp
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>为尽可能保证应用启动的灵活性，TLS Cert 的指定还能通过 -D 参数或环境变量等方式来在启动阶段根据部署环境动态指定，具体请参见 Dubbo 配置读取规则与 TLS 示例&lt;/p>
 &lt;div class="alert alert-primary" role="alert">
 &lt;h4 class="alert-heading">提示&lt;/h4>
-&lt;p>参考 Dubbo &lt;a href="../../configuration/configuration-load-process">配置读取规则&lt;/a>，TLS &lt;a href="https://github.com/apache/dubbo-samples/tree/master/java/dubbo-samples-ssl">示例&lt;/a>&lt;/p>
+&lt;p>参考 Dubbo &lt;a href="../../configuration/configuration-load-process">配置读取规则&lt;/a>，TLS &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-ssl">示例&lt;/a>&lt;/p>
 &lt;p>如果要使用的是 gRPC 协议，在开启 TLS 时会使用到协议协商机制，因此必须使用支持 ALPN 机制的 Provider，推荐使用的是 netty-tcnative，具体可参见 gRPC Java 社区的&lt;a href="https://github.com/grpc/grpc-java/blob/master/SECURITY.md">总结&lt;/a>&lt;/p>
 &lt;/div>
 &lt;p>在服务调用的安全性上，Dubbo 在后续的版本中会持续投入，其中服务发现/调用的鉴权机制预计在接下来的版本中就会和大家见面。&lt;/p></description></item><item><title>Docs: 令牌验证</title><link>https://dubbo.apache.org/zh/docs/advanced/token-authorization/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/advanced/token-authorization/</guid><description>
