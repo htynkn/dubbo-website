@@ -18,11 +18,11 @@
 <meta property="og:description" content="以属性配置的方式来配置你的 Dubbo 应用">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docs/references/configuration/properties/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-09-08T12:36:36+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-09-12T20:01:24+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="属性配置">
 <meta itemprop=description content="以属性配置的方式来配置你的 Dubbo 应用">
-<meta itemprop=dateModified content="2021-09-08T12:36:36+08:00">
-<meta itemprop=wordCount content="328">
+<meta itemprop=dateModified content="2021-09-12T20:01:24+08:00">
+<meta itemprop=wordCount content="365">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="属性配置">
 <meta name=twitter:description content="以属性配置的方式来配置你的 Dubbo 应用">
@@ -472,6 +472,7 @@ Releases
 <li><a href=#服务接口配置>服务接口配置</a></li>
 <li><a href=#方法配置>方法配置</a></li>
 <li><a href=#参数配置>参数配置</a></li>
+<li><a href=#传输层配置>传输层配置</a></li>
 <li><a href=#属性与xml配置映射规则>属性与XML配置映射规则</a></li>
 </ul>
 </li>
@@ -633,6 +634,36 @@ dubbo.reference.org.apache.dubbo.samples.api.DemoService.sayHello.0.callback=tru
 <p>parameters参数为map对象，支持xxx.parameters=[{key:value},{key:value}]方式进行配置。</p>
 <div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>dubbo.application.parameters=[{item1:value1},{item2:value2}]
 dubbo.reference.org.apache.dubbo.samples.api.DemoService.parameters=[{item3:value3}]
+</code></pre></div><h3 id=传输层配置>传输层配置</h3>
+<p>triple协议采用Http2做底层通信协议，允许使用者自定义Http2的<a href=https://datatracker.ietf.org/doc/html/rfc7540#section-6.5.2>6个settings参数</a></p>
+<p>配置格式如下：</p>
+<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback># 通知对端header压缩索引表的上限个数
+dubbo.rpc.tri.header-table-size=4096
+
+# 启用服务端推送功能
+dubbo.rpc.tri.enable-push=false
+
+# 通知对端允许的最大并发流数
+dubbo.rpc.tri.max-concurrent-streams=2147483647
+
+# 声明发送端的窗口大小
+dubbo.rpc.tri.initial-window-size=1048576
+
+# 设置帧的最大字节数
+dubbo.rpc.tri.max-frame-size=32768
+
+# 通知对端header未压缩的最大字节数
+dubbo.rpc.tri.max-header-list-size=8192
+</code></pre></div><p>等价于yml配置：</p>
+<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#268bd2>dubbo</span>:
+  <span style=color:#268bd2>rpc</span>:
+    <span style=color:#268bd2>tri</span>:
+      <span style=color:#268bd2>header-table-size</span>: <span style=color:#2aa198>4096</span>
+      <span style=color:#268bd2>enable-push</span>: <span style=color:#cb4b16>false</span>
+      <span style=color:#268bd2>max-concurrent-streams</span>: <span style=color:#2aa198>2147483647</span>
+      <span style=color:#268bd2>initial-window-size</span>: <span style=color:#2aa198>1048576</span>
+      <span style=color:#268bd2>max-frame-size</span>: <span style=color:#2aa198>32768</span>
+      <span style=color:#268bd2>max-header-list-size</span>: <span style=color:#2aa198>8192</span>
 </code></pre></div><h3 id=属性与xml配置映射规则>属性与XML配置映射规则</h3>
 <p>可以将 xml 的 tag 名和属性名组合起来，用 ‘.’ 分隔。每行一个属性。</p>
 <ul>
@@ -769,7 +800,7 @@ Sorry to hear that. Please <a href=https://github.com/apache/dubbo-website/issue
 </p>
 <script>const yesButton=document.querySelector('.feedback--answer-yes'),noButton=document.querySelector('.feedback--answer-no'),yesResponse=document.querySelector('.feedback--response-yes'),noResponse=document.querySelector('.feedback--response-no'),disableButtons=()=>{yesButton.disabled=!0,noButton.disabled=!0},sendFeedback=b=>{if(typeof ga!='function')return;const a={command:'send',hitType:'event',category:'Helpful',action:'click',label:window.location.pathname,value:b};ga(a.command,a.hitType,a.category,a.action,a.label,a.value)};yesButton.addEventListener('click',()=>{yesResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(1)}),noButton.addEventListener('click',()=>{noResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(0)})</script>
 <br>
-<div class="text-muted mt-5 pt-3 border-top">最后修改 September 8, 2021: <a href=/commit/c285ba0cba94a64a4ca1c812af14150b495ddc20>fix #939 (#940) (c285ba0)</a>
+<div class="text-muted mt-5 pt-3 border-top">最后修改 September 12, 2021: <a href=/commit/b183bbe3e4f86bdf5955ecd40f97103a93cdc8b1>add http2 settings configuration description for tri-protocol (#943) (b183bbe)</a>
 </div>
 </div>
 </main>
