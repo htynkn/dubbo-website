@@ -5,7 +5,7 @@
 &lt;ul>
 &lt;li>修复 nacos group 在消费者端不生效的问题 (#8533)&lt;/li>
 &lt;li>修复请求超时时序列化检查的 NPE (#8547)&lt;/li>
-&lt;li>兼容使用 dubbo-all 是未导入 farbic-io 包的问题 (#8546)&lt;/li>
+&lt;li>兼容使用 dubbo-all 时未导入 farbic-io 包的问题 (#8546)&lt;/li>
 &lt;/ul></description></item><item><title>Blog: 3.0.2 发版公告</title><link>https://dubbo.apache.org/zh/blog/2021/08/18/3.0.2-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</link><pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/08/18/3.0.2-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</guid><description>
 &lt;h2 id="新特性">新特性&lt;/h2>
 &lt;ul>

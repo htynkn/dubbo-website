@@ -25,7 +25,7 @@ nohup ./src/redis-server redis.conf & Stop:
 killall redis-server  Command line 3:  .">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/en/docs/v2.7/admin/install/redis/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-09-12T20:01:24+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-09-13T10:08:34+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="Install Redis Register Center">
 <meta itemprop=description content="Redis 1 introductions, please refer to: Redis application center manual.
 you need an origin Redis server only, and change the value from dubbo.registry.address to redis://127.0.0.1:6379 in conf/dubbo.properties of quick start
@@ -35,7 +35,7 @@ wget http://redis.googlecode.com/files/redis-2.4.8.tar.gz tar xzf redis-2.4.8.ta
 vi redis.conf Start:
 nohup ./src/redis-server redis.conf & Stop:
 killall redis-server  Command line 3:  .">
-<meta itemprop=dateModified content="2021-09-12T20:01:24+08:00">
+<meta itemprop=dateModified content="2021-09-13T10:08:34+08:00">
 <meta itemprop=wordCount content="101">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Install Redis Register Center">
@@ -613,7 +613,7 @@ Sorry to hear that. Please <a href=https://github.com/apache/dubbo-website/issue
 </p>
 <script>const yesButton=document.querySelector('.feedback--answer-yes'),noButton=document.querySelector('.feedback--answer-no'),yesResponse=document.querySelector('.feedback--response-yes'),noResponse=document.querySelector('.feedback--response-no'),disableButtons=()=>{yesButton.disabled=!0,noButton.disabled=!0},sendFeedback=b=>{if(typeof ga!='function')return;const a={command:'send',hitType:'event',category:'Helpful',action:'click',label:window.location.pathname,value:b};ga(a.command,a.hitType,a.category,a.action,a.label,a.value)};yesButton.addEventListener('click',()=>{yesResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(1)}),noButton.addEventListener('click',()=>{noResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(0)})</script>
 <br>
-<div class="text-muted mt-5 pt-3 border-top">Last modified September 12, 2021: <a href=/commit/b183bbe3e4f86bdf5955ecd40f97103a93cdc8b1>add http2 settings configuration description for tri-protocol (#943) (b183bbe)</a>
+<div class="text-muted mt-5 pt-3 border-top">Last modified September 13, 2021: <a href=/commit/6b3092d94c202e7d4c25fbe12d10c103d7f30340>Update 3.0.2.1.md (#947) (6b3092d)</a>
 </div>
 </div>
 </main>

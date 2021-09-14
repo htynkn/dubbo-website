@@ -22,14 +22,14 @@ API 与 SPI 分离 框架或组件通常有两类客户，一个是使用者，�
 服务域/实体域/会话域分离 任何框架或组件，总会有核心领域模型，比如：Spring 的 Bean，Struts 的 Action，Dubbo 的 Service，Napoli 的 Queue 等等。这个核心领域模型及其组成部分称为实体域，它代表着我们要操作的目标本身。实体域通常是线程安全的，不管是通过不变类，同步状态，或复制的方式。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docsv2.7/dev/principals/general-knowledge/"><meta property="article:section" content="docsv2.7">
-<meta property="article:modified_time" content="2021-09-12T20:01:24+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-09-13T10:08:34+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="一些设计上的基本常识">
 <meta itemprop=description content="最近给团队新人讲了一些设计上的常识，可能会对其它的新人也有些帮助，把暂时想到的几条，先记在这里。
 API 与 SPI 分离 框架或组件通常有两类客户，一个是使用者，一个是扩展者。API (Application Programming Interface) 是给使用者用的，而 SPI (Service Provide Interface) 是给扩展者用的。在设计时，尽量把它们隔离开，而不要混在一起。也就是说，使用者是看不到扩展者写的实现的。
 比如：一个 Web 框架，它有一个 API 接口叫 Action，里面有个 execute() 方法，是给使用者用来写业务逻辑的。然后，Web 框架有一个 SPI 接口给扩展者控制输出方式，比如用 velocity 模板输出还是用 json 输出等。如果这个 Web 框架使用一个都继承 Action 的 VelocityAction 和一个 JsonAction 做为扩展方式，要用 velocity 模板输出的就继承 VelocityAction，要用 json 输出的就继承 JsonAction，这就是 API 和 SPI 没有分离的反面例子，SPI 接口混在了 API 接口中。
 合理的方式是，有一个单独的 Renderer 接口，有 VelocityRenderer 和 JsonRenderer 实现，Web 框架将 Action 的输出转交给 Renderer 接口做渲染输出。
 服务域/实体域/会话域分离 任何框架或组件，总会有核心领域模型，比如：Spring 的 Bean，Struts 的 Action，Dubbo 的 Service，Napoli 的 Queue 等等。这个核心领域模型及其组成部分称为实体域，它代表着我们要操作的目标本身。实体域通常是线程安全的，不管是通过不变类，同步状态，或复制的方式。">
-<meta itemprop=dateModified content="2021-09-12T20:01:24+08:00">
+<meta itemprop=dateModified content="2021-09-13T10:08:34+08:00">
 <meta itemprop=wordCount content="183">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="一些设计上的基本常识">
@@ -551,7 +551,7 @@ Sorry to hear that. Please <a href=https://github.com/apache/dubbo-website/issue
 </p>
 <script>const yesButton=document.querySelector('.feedback--answer-yes'),noButton=document.querySelector('.feedback--answer-no'),yesResponse=document.querySelector('.feedback--response-yes'),noResponse=document.querySelector('.feedback--response-no'),disableButtons=()=>{yesButton.disabled=!0,noButton.disabled=!0},sendFeedback=b=>{if(typeof ga!='function')return;const a={command:'send',hitType:'event',category:'Helpful',action:'click',label:window.location.pathname,value:b};ga(a.command,a.hitType,a.category,a.action,a.label,a.value)};yesButton.addEventListener('click',()=>{yesResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(1)}),noButton.addEventListener('click',()=>{noResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(0)})</script>
 <br>
-<div class="text-muted mt-5 pt-3 border-top">最后修改 September 12, 2021: <a href=/commit/b183bbe3e4f86bdf5955ecd40f97103a93cdc8b1>add http2 settings configuration description for tri-protocol (#943) (b183bbe)</a>
+<div class="text-muted mt-5 pt-3 border-top">最后修改 September 13, 2021: <a href=/commit/6b3092d94c202e7d4c25fbe12d10c103d7f30340>Update 3.0.2.1.md (#947) (6b3092d)</a>
 </div>
 </div>
 </main>
