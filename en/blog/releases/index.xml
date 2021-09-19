@@ -169,6 +169,12 @@ Exactly the same as version 3.0.2, except for the following changes.&lt;/p>
 &lt;p>GitHub: &lt;a href="https://github.com/apache/dubbo">https://github.com/apache/dubbo&lt;/a>&lt;br>
 Release Notes: &lt;a href="https://github.com/apache/dubbo/releases">https://github.com/apache/dubbo/releases&lt;/a>&lt;/p>
 &lt;/blockquote>
+&lt;h3 id="2611-2021-09-18">2.6.11 (2021-09-18)&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://www.apache.org/dyn/closer.cgi?path=dubbo/2.6.11/apache-dubbo-2.6.11-source-release.zip">source&lt;/a> |
+&lt;a href="https://www.apache.org/dyn/closer.cgi?path=dubbo/2.6.11/apache-dubbo-2.6.11-source-release.zip.asc">asc&lt;/a> |
+&lt;a href="https://www.apache.org/dyn/closer.cgi?path=dubbo/2.6.11/apache-dubbo-2.6.11-source-release.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;/ul>
 &lt;h3 id="3021-2021-08-23">3.0.2.1 (2021-08-23)&lt;/h3>
 &lt;ul>
 &lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.2.1/apache-dubbo-3.0.2.1-src.zip">source&lt;/a> |
