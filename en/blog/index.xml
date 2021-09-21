@@ -1,4 +1,31 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – Apache Dubbo Blog</title><link>https://dubbo.apache.org/en/blog/</link><description>Recent content in Apache Dubbo Blog on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/en/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: 3.0.2.1 Release Note</title><link>https://dubbo.apache.org/en/blog/2021/08/23/3.0.2.1-release-note/</link><pubDate>Mon, 23 Aug 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/blog/2021/08/23/3.0.2.1-release-note/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – Apache Dubbo Blog</title><link>https://dubbo.apache.org/en/blog/</link><description>Recent content in Apache Dubbo Blog on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/en/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: 2.7.14 Release Note</title><link>https://dubbo.apache.org/en/blog/2021/09/20/2.7.14-release-note/</link><pubDate>Mon, 20 Sep 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/blog/2021/09/20/2.7.14-release-note/</guid><description>
+&lt;h2 id="change-lists">Change Lists&lt;/h2>
+&lt;ul>
+&lt;li>add Dynamic Configuration Override Support For ServiceDiscovery. (#8389)&lt;/li>
+&lt;li>fix mock parameters doesn&amp;rsquo;t work when it contain &amp;lsquo;:&amp;rsquo; or &amp;lsquo;=&amp;rsquo;. (#8379)&lt;/li>
+&lt;li>fix the issue of taking the zone parameter value in ZoneAwareClusterInvoker. (#8521)&lt;/li>
+&lt;li>add the switch for check class is in serialize white list , default is true. (#8537)&lt;/li>
+&lt;li>fix NPE on serialization checking when request timed out. (#8587)&lt;/li>
+&lt;li>fix NetUtils.ignoreNetworkInterface can&amp;rsquo;t process network card name contains &amp;lsquo;(&amp;rsquo; symbol. (#8629)&lt;/li>
+&lt;li>unify the way of getting local address. (#8679)&lt;/li>
+&lt;li>fix retries param didn&amp;rsquo;t work well when it is 0. (#8743)&lt;/li>
+&lt;li>close client immediately when destroy unused invoker. (#8756)&lt;/li>
+&lt;li>fix destroy IllegalStateException and doOverrideIfNecessary NPE. (#8683)&lt;/li>
+&lt;li>show message according to log level when DefaultFuture.closeChannel. (#8778)&lt;/li>
+&lt;li>use MapUtils instead of AttachmentsAdapter. (#8772)&lt;/li>
+&lt;/ul>
+&lt;h2 id="dependency-changes">Dependency Changes&lt;/h2>
+&lt;ul>
+&lt;li>netty4: 4.1.51.Final -&amp;gt; 4.1.66.Final&lt;/li>
+&lt;li>netty4_ssl: 2.0.39.Final -&amp;gt; 2.0.40.Final&lt;/li>
+&lt;li>http_client: 4.5.3 -&amp;gt; 4.5.13&lt;/li>
+&lt;li>jetty: 9.4.11.v20180605 -&amp;gt; 9.4.43.v20210629&lt;/li>
+&lt;li>apollo_client: 1.1.1 -&amp;gt; 1.8.0&lt;/li>
+&lt;li>tomcat_embed: 8.5.31-&amp;gt; 9.0.48&lt;/li>
+&lt;li>commons_io: 2.6 -&amp;gt; 2.7&lt;/li>
+&lt;li>curator: 5.0.0 -&amp;gt; 5.1.0&lt;/li>
+&lt;li>hessian_lite: 3.2.8 -&amp;gt; 3.2.11&lt;/li>
+&lt;/ul></description></item><item><title>Blog: 3.0.2.1 Release Note</title><link>https://dubbo.apache.org/en/blog/2021/08/23/3.0.2.1-release-note/</link><pubDate>Mon, 23 Aug 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/blog/2021/08/23/3.0.2.1-release-note/</guid><description>
 &lt;p>This is a bugfix version of 3.0.2.
 Exactly the same as version 3.0.2, except for the following changes.&lt;/p>
 &lt;h2 id="bugfix">Bugfix&lt;/h2>
@@ -169,6 +196,12 @@ Exactly the same as version 3.0.2, except for the following changes.&lt;/p>
 &lt;p>GitHub: &lt;a href="https://github.com/apache/dubbo">https://github.com/apache/dubbo&lt;/a>&lt;br>
 Release Notes: &lt;a href="https://github.com/apache/dubbo/releases">https://github.com/apache/dubbo/releases&lt;/a>&lt;/p>
 &lt;/blockquote>
+&lt;h3 id="2714-2021-09-20">2.7.14 (2021-09-20)&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.14/apache-dubbo-2.7.14-src.zip">source&lt;/a> |
+&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.14/apache-dubbo-2.7.14-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.14/apache-dubbo-2.7.14-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;/ul>
 &lt;h3 id="2611-2021-09-18">2.6.11 (2021-09-18)&lt;/h3>
 &lt;ul>
 &lt;li>&lt;a href="https://www.apache.org/dyn/closer.cgi?path=dubbo/2.6.11/apache-dubbo-2.6.11-source-release.zip">source&lt;/a> |

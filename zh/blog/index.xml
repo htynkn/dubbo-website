@@ -1,4 +1,31 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – Apache Dubbo 博客</title><link>https://dubbo.apache.org/zh/blog/</link><description>Recent content in Apache Dubbo 博客 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: 3.0.2.1 发版公告</title><link>https://dubbo.apache.org/zh/blog/2021/08/23/3.0.2.1-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</link><pubDate>Mon, 23 Aug 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/08/23/3.0.2.1-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – Apache Dubbo 博客</title><link>https://dubbo.apache.org/zh/blog/</link><description>Recent content in Apache Dubbo 博客 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: 2.7.14 发版公告</title><link>https://dubbo.apache.org/zh/blog/2021/09/20/2.7.14-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</link><pubDate>Mon, 20 Sep 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/09/20/2.7.14-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</guid><description>
+&lt;h2 id="变动项">变动项&lt;/h2>
+&lt;ul>
+&lt;li>为 ServiceDiscovery 增加动态配置中心的覆盖规则。（#8389）&lt;/li>
+&lt;li>修复当 mock 参数中包含 &amp;lsquo;:&amp;rsquo; 或者 &amp;lsquo;=&amp;rsquo; 符号时无法正常使用的问题。（#8379）&lt;/li>
+&lt;li>修复 zone 参数对 ZoneAwareClusterInvoker 配置无法生效的问题。（#8521）&lt;/li>
+&lt;li>为序列化白名单检查增加开关，默认为 true。（#8537）&lt;/li>
+&lt;li>修复当请求超时时序列化检查的空指针异常。（#8587）&lt;/li>
+&lt;li>修复 NetUtils.ignoreNetworkInterface 无法处理网卡中包含 &amp;lsquo;(&amp;rsquo; 符号的问题。（#8629）&lt;/li>
+&lt;li>统一获取本地地址的方式。（#8679）&lt;/li>
+&lt;li>修复当重试参数为0，依旧会重试1次的问题。（#8743）&lt;/li>
+&lt;li>当清除未使用的 invoker 时，立即关闭客户端。（#8756）&lt;/li>
+&lt;li>修复 destroy 方法以及 doOverrideIfNecessary 中的异常。（#8683）&lt;/li>
+&lt;li>DefaultFuture.closeChannel 根据日志级别选择是否打印请求的详细数据。（#8778）&lt;/li>
+&lt;li>使用 MapUtils 替换 AttachmentsAdapter（#8772）&lt;/li>
+&lt;/ul>
+&lt;h2 id="maven依赖变化">Maven依赖变化&lt;/h2>
+&lt;ul>
+&lt;li>netty4: 4.1.51.Final -&amp;gt; 4.1.66.Final&lt;/li>
+&lt;li>netty4_ssl: 2.0.39.Final -&amp;gt; 2.0.40.Final&lt;/li>
+&lt;li>http_client: 4.5.3 -&amp;gt; 4.5.13&lt;/li>
+&lt;li>jetty: 9.4.11.v20180605 -&amp;gt; 9.4.43.v20210629&lt;/li>
+&lt;li>apollo_client: 1.1.1 -&amp;gt; 1.8.0&lt;/li>
+&lt;li>tomcat_embed: 8.5.31-&amp;gt; 9.0.48&lt;/li>
+&lt;li>commons_io: 2.6 -&amp;gt; 2.7&lt;/li>
+&lt;li>curator: 5.0.0 -&amp;gt; 5.1.0&lt;/li>
+&lt;li>hessian_lite: 3.2.8 -&amp;gt; 3.2.11&lt;/li>
+&lt;/ul></description></item><item><title>Blog: 3.0.2.1 发版公告</title><link>https://dubbo.apache.org/zh/blog/2021/08/23/3.0.2.1-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</link><pubDate>Mon, 23 Aug 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/08/23/3.0.2.1-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/</guid><description>
 &lt;p>这是 3.0.2 的错误修正版本。
 除了以下更改外，与版本 3.0.2 完全相同。&lt;/p>
 &lt;h2 id="bug-修复">Bug 修复&lt;/h2>
@@ -6659,6 +6686,12 @@ bootstrap&lt;span style="color:#719e07">.&lt;/span>start&lt;span style="color:#7
 &lt;p>GitHub: &lt;a href="https://github.com/apache/dubbo">https://github.com/apache/dubbo&lt;/a>&lt;br>
 发布说明: &lt;a href="https://github.com/apache/dubbo/releases">https://github.com/apache/dubbo/releases&lt;/a>&lt;/p>
 &lt;/blockquote>
+&lt;h3 id="2714-2021-09-20">2.7.14 (2021-09-20)&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.14/apache-dubbo-2.7.14-src.zip">source&lt;/a> |
+&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.14/apache-dubbo-2.7.14-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.14/apache-dubbo-2.7.14-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;/ul>
 &lt;h3 id="2611-2021-09-18">2.6.11 (2021-09-18)&lt;/h3>
 &lt;ul>
 &lt;li>&lt;a href="https://www.apache.org/dyn/closer.cgi?path=dubbo/2.6.11/apache-dubbo-2.6.11-source-release.zip">source&lt;/a> |
@@ -8224,348 +8257,4 @@ createExporter&lt;span style="color:#719e07">(&lt;/span>URL url&lt;span style="c
 &lt;li>可扩展性强，URL 相当于参数的集合(相当于一个 Map)，他所表达的含义比单个参数更丰富，当我们在扩展代码时，可以将新的参数追加到 URL 之中，而不需要改变入参，返参的结构。&lt;/li>
 &lt;li>统一模型，它位于 org.apache.dubbo.common 包中，各个扩展模块都可以使用它作为参数的表达形式，简化了概念，降低了代码的理解成本。&lt;/li>
 &lt;/ol>
-&lt;p>如果你能够理解 final 契约和 restful 契约，那我相信你会很好地理解 URL 契约。契约的好处我还是啰嗦一句：大家都这么做，就形成了默契，沟通是一件很麻烦的事，统一 URL 模型可以省去很多沟通成本，这边是 URL 统一模型存在的意义。&lt;/p></description></item><item><title>Blog: 研究 Dubbo 网卡地址注册时的一点思考</title><link>https://dubbo.apache.org/zh/blog/2019/10/01/%E7%A0%94%E7%A9%B6-dubbo-%E7%BD%91%E5%8D%A1%E5%9C%B0%E5%9D%80%E6%B3%A8%E5%86%8C%E6%97%B6%E7%9A%84%E4%B8%80%E7%82%B9%E6%80%9D%E8%80%83/</link><pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2019/10/01/%E7%A0%94%E7%A9%B6-dubbo-%E7%BD%91%E5%8D%A1%E5%9C%B0%E5%9D%80%E6%B3%A8%E5%86%8C%E6%97%B6%E7%9A%84%E4%B8%80%E7%82%B9%E6%80%9D%E8%80%83/</guid><description>
-&lt;h2 id="1-如何选择合适的网卡地址">1 如何选择合适的网卡地址&lt;/h2>
-&lt;p>可能相当一部分人还不知道我这篇文章到底要讲什么，我说个场景，大家应该就明晰了。在分布式服务调用过程中，以 Dubbo 为例，服务提供者往往需要将自身的 IP 地址上报给注册中心，供消费者去发现。在大多数情况下 Dubbo 都可以正常工作，但如果你留意过 Dubbo 的 github issue，其实有不少人反馈：Dubbo Provider 注册了错误的 IP。如果你能立刻联想到：多网卡、内外网地址共存、VPN、虚拟网卡等关键词，那我建议你一定要继续将本文看下去，因为我也想到了这些，它们都是本文所要探讨的东西！那么“如何选择合适的网卡地址”呢，Dubbo 现有的逻辑到底算不算完备？我们不急着回答它，而是带着这些问题一起进行研究，相信到文末，其中答案，各位看官自有评说。&lt;/p>
-&lt;h2 id="2-dubbo-是怎么做的">2 Dubbo 是怎么做的&lt;/h2>
-&lt;p>Dubbo 获取网卡地址的逻辑在各个版本中也是千回百转，走过弯路，也做过优化，我们用最新的 2.7.2-SNAPSHOT 版本来介绍，在看以下源码时，大家可以怀着质疑的心态去阅读，在 dubbo github 的 master 分支可以获取源码。获取 localhost 的逻辑位于 &lt;code>org.apache.dubbo.common.utils.NetUtils#getLocalAddress0()&lt;/code> 之中&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> InetAddress &lt;span style="color:#268bd2">getLocalAddress0&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-InetAddress localAddress &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#586e75">// 首先尝试获取 /etc/hosts 中 hostname 对应的 IP
-&lt;/span>&lt;span style="color:#586e75">&lt;/span> localAddress &lt;span style="color:#719e07">=&lt;/span> InetAddress&lt;span style="color:#719e07">.&lt;/span>getLocalHost&lt;span style="color:#719e07">();&lt;/span>
-Optional&lt;span style="color:#719e07">&amp;lt;&lt;/span>InetAddress&lt;span style="color:#719e07">&amp;gt;&lt;/span> addressOp &lt;span style="color:#719e07">=&lt;/span> toValidAddress&lt;span style="color:#719e07">(&lt;/span>localAddress&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>addressOp&lt;span style="color:#719e07">.&lt;/span>isPresent&lt;span style="color:#719e07">())&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#719e07">return&lt;/span> addressOp&lt;span style="color:#719e07">.&lt;/span>get&lt;span style="color:#719e07">();&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#586e75">// 没有找到适合注册的 IP，则开始轮询网卡
-&lt;/span>&lt;span style="color:#586e75">&lt;/span> Enumeration&lt;span style="color:#719e07">&amp;lt;&lt;/span>NetworkInterface&lt;span style="color:#719e07">&amp;gt;&lt;/span> interfaces &lt;span style="color:#719e07">=&lt;/span> NetworkInterface&lt;span style="color:#719e07">.&lt;/span>getNetworkInterfaces&lt;span style="color:#719e07">();&lt;/span>
-&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#cb4b16">null&lt;/span> &lt;span style="color:#719e07">==&lt;/span> interfaces&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#719e07">return&lt;/span> localAddress&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">while&lt;/span> &lt;span style="color:#719e07">(&lt;/span>interfaces&lt;span style="color:#719e07">.&lt;/span>hasMoreElements&lt;span style="color:#719e07">())&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-NetworkInterface network &lt;span style="color:#719e07">=&lt;/span> interfaces&lt;span style="color:#719e07">.&lt;/span>nextElement&lt;span style="color:#719e07">();&lt;/span>
-Enumeration&lt;span style="color:#719e07">&amp;lt;&lt;/span>InetAddress&lt;span style="color:#719e07">&amp;gt;&lt;/span> addresses &lt;span style="color:#719e07">=&lt;/span> network&lt;span style="color:#719e07">.&lt;/span>getInetAddresses&lt;span style="color:#719e07">();&lt;/span>
-&lt;span style="color:#719e07">while&lt;/span> &lt;span style="color:#719e07">(&lt;/span>addresses&lt;span style="color:#719e07">.&lt;/span>hasMoreElements&lt;span style="color:#719e07">())&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#586e75">// 返回第一个匹配的适合注册的 IP
-&lt;/span>&lt;span style="color:#586e75">&lt;/span> Optional&lt;span style="color:#719e07">&amp;lt;&lt;/span>InetAddress&lt;span style="color:#719e07">&amp;gt;&lt;/span> addressOp &lt;span style="color:#719e07">=&lt;/span> toValidAddress&lt;span style="color:#719e07">(&lt;/span>addresses&lt;span style="color:#719e07">.&lt;/span>nextElement&lt;span style="color:#719e07">());&lt;/span>
-&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>addressOp&lt;span style="color:#719e07">.&lt;/span>isPresent&lt;span style="color:#719e07">())&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#719e07">return&lt;/span> addressOp&lt;span style="color:#719e07">.&lt;/span>get&lt;span style="color:#719e07">();&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">return&lt;/span> localAddress&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Dubbo 这段选取本地地址的逻辑大致分成了两步&lt;/p>
-&lt;ol>
-&lt;li>先去 /etc/hosts 文件中找 hostname 对应的 IP 地址，找到则返回；找不到则转 2&lt;/li>
-&lt;li>轮询网卡，寻找合适的 IP 地址，找到则返回；找不到返回 null，在 getLocalAddress0 外侧还有一段逻辑，如果返回 null，则注册 127.0.0.1 这个本地回环地址&lt;/li>
-&lt;/ol>
-&lt;p>首先强调下，这段逻辑并没有太大的问题，先别急着挑刺，让我们来分析下其中的一些细节，并进行验证。&lt;/p>
-&lt;h3 id="21-尝试获取-hostname-映射-ip">2.1 尝试获取 hostname 映射 IP&lt;/h3>
-&lt;p>Dubbo 首先选取的是 hostname 对应的 IP，在源码中对应的 &lt;code>InetAddress.getLocalHost();&lt;/code> 在 &lt;code>*nix&lt;/code> 系统实际部署 Dubbo 应用时，可以首先使用 &lt;code>hostname&lt;/code> 命令获取主机名&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">xujingfengdeMacBook-Pro:~ xujingfeng$ hostname
-xujingfengdeMacBook-Pro.local
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>紧接着在 &lt;code>/etc/hosts&lt;/code> 配置 IP 映射，为了验证 Dubbo 的机制，我们随意为 hostname 配置一个 IP 地址&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">127.0.0.1 localhost
-1.2.3.4 xujingfengdeMacBook-Pro.local
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>接着调用 &lt;code>NetUtils.getLocalAddress0()&lt;/code> 进行验证，控制台打印如下：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">xujingfengdeMacBook-Pro.local/1.2.3.4
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="22-判定有效的-ip-地址">2.2 判定有效的 IP 地址&lt;/h3>
-&lt;p>在 toValidAddress 逻辑中，Dubbo 存在以下逻辑判定一个 IP 地址是否有效&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> Optional&lt;span style="color:#719e07">&amp;lt;&lt;/span>InetAddress&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">toValidAddress&lt;/span>&lt;span style="color:#719e07">(&lt;/span>InetAddress address&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>address &lt;span style="color:#719e07">instanceof&lt;/span> Inet6Address&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-Inet6Address v6Address &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">(&lt;/span>Inet6Address&lt;span style="color:#719e07">)&lt;/span> address&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>isValidV6Address&lt;span style="color:#719e07">(&lt;/span>v6Address&lt;span style="color:#719e07">))&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#719e07">return&lt;/span> Optional&lt;span style="color:#719e07">.&lt;/span>ofNullable&lt;span style="color:#719e07">(&lt;/span>normalizeV6Address&lt;span style="color:#719e07">(&lt;/span>v6Address&lt;span style="color:#719e07">));&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>isValidV4Address&lt;span style="color:#719e07">(&lt;/span>address&lt;span style="color:#719e07">))&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#719e07">return&lt;/span> Optional&lt;span style="color:#719e07">.&lt;/span>of&lt;span style="color:#719e07">(&lt;/span>address&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">return&lt;/span> Optional&lt;span style="color:#719e07">.&lt;/span>empty&lt;span style="color:#719e07">();&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>依次校验其符合 Ipv6 或者 Ipv4 的 IP 规范，对于 Ipv6 的地址，见如下代码：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#dc322f">boolean&lt;/span> &lt;span style="color:#268bd2">isValidV6Address&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Inet6Address address&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#dc322f">boolean&lt;/span> preferIpv6 &lt;span style="color:#719e07">=&lt;/span> Boolean&lt;span style="color:#719e07">.&lt;/span>getBoolean&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;java.net.preferIPv6Addresses&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(!&lt;/span>preferIpv6&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#cb4b16">false&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">try&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#719e07">return&lt;/span> address&lt;span style="color:#719e07">.&lt;/span>isReachable&lt;span style="color:#719e07">(&lt;/span>100&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">catch&lt;/span> &lt;span style="color:#719e07">(&lt;/span>IOException e&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#586e75">// ignore
-&lt;/span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#cb4b16">false&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>首先获取 &lt;code>java.net.preferIPv6Addresses&lt;/code> 参数，其默认值为 false，鉴于大多数应用并没有使用 Ipv6 地址作为理想的注册 IP，这问题不大，紧接着通过 isReachable 判断网卡的连通性。例如一些网卡可能是 VPN/虚拟网卡的地址，如果没有配置路由表，往往无法连通，可以将之过滤。&lt;/p>
-&lt;p>对于 Ipv4 的地址，见如下代码：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#dc322f">boolean&lt;/span> &lt;span style="color:#268bd2">isValidV4Address&lt;/span>&lt;span style="color:#719e07">(&lt;/span>InetAddress address&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>address &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span> &lt;span style="color:#719e07">||&lt;/span> address&lt;span style="color:#719e07">.&lt;/span>isLoopbackAddress&lt;span style="color:#719e07">())&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#cb4b16">false&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-String name &lt;span style="color:#719e07">=&lt;/span> address&lt;span style="color:#719e07">.&lt;/span>getHostAddress&lt;span style="color:#719e07">();&lt;/span>
-&lt;span style="color:#dc322f">boolean&lt;/span> result &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">(&lt;/span>name &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span>
-&lt;span style="color:#719e07">&amp;amp;&amp;amp;&lt;/span> IP_PATTERN&lt;span style="color:#719e07">.&lt;/span>matcher&lt;span style="color:#719e07">(&lt;/span>name&lt;span style="color:#719e07">).&lt;/span>matches&lt;span style="color:#719e07">()&lt;/span>
-&lt;span style="color:#719e07">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#719e07">!&lt;/span>Constants&lt;span style="color:#719e07">.&lt;/span>ANYHOST_VALUE&lt;span style="color:#719e07">.&lt;/span>equals&lt;span style="color:#719e07">(&lt;/span>name&lt;span style="color:#719e07">)&lt;/span>
-&lt;span style="color:#719e07">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#719e07">!&lt;/span>Constants&lt;span style="color:#719e07">.&lt;/span>LOCALHOST_VALUE&lt;span style="color:#719e07">.&lt;/span>equals&lt;span style="color:#719e07">(&lt;/span>name&lt;span style="color:#719e07">));&lt;/span>
-&lt;span style="color:#719e07">return&lt;/span> result&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>对比 Ipv6 的判断，这里我们已经发现前后不对称的情况了&lt;/p>
-&lt;ul>
-&lt;li>Ipv4 相比 Ipv6 的逻辑多了 Ipv4 格式的正则校验、本地回环地址校验、ANYHOST 校验&lt;/li>
-&lt;li>Ipv4 相比 Ipv6 的逻辑少了网卡连通性的校验&lt;/li>
-&lt;/ul>
-&lt;p>大家都知道，Ipv4 将 127.0.0.1 定为本地回环地址， Ipv6 也存在回环地址：0:0:0:0:0:0:0:1 或者表示为 ::1。改进建议也很明显，我们放到文末统一总结。&lt;/p>
-&lt;h3 id="23-轮询网卡">2.3 轮询网卡&lt;/h3>
-&lt;p>如果上述地址获取为 null 则进入轮询网卡的逻辑（例如 hosts 未指定 hostname 的映射或者 hostname 配置成了 127.0.0.1 之类的地址便会导致获取到空的网卡地址），轮询网卡对应的源码是 &lt;code>NetworkInterface.getNetworkInterfaces()&lt;/code> ，这里面涉及的知识点就比较多了，支撑起了我写这篇文章的素材，Dubbo 的逻辑并不复杂，进行简单的校验，返回第一个可用的 IP 即可。&lt;/p>
-&lt;p>性子急的读者可能忍不住了，多网卡！合适的网卡可能不止一个，Dubbo 怎么应对呢？按道理说，我们也替 Dubbo 说句公道话，客官要不你自己指定下？我们首先得对多网卡的场景达成一致看法，才能继续把这篇文章完成下去：我们只能&lt;strong>尽可能&lt;/strong>过滤那些“&lt;strong>不对&lt;/strong>”的网卡。Dubbo 看样子对所有网卡是一视同仁了，那么是不是可以尝试优化一下其中的逻辑呢？&lt;/p>
-&lt;p>许多开源的服务治理框架在 stackoverflow 或者其 issue 中，注册错 IP 相关的问题都十分高频，大多数都是轮询网卡出了问题。既然事情发展到这儿，势必需要了解一些网络、网卡的知识，我们才能过滤掉那些明显不适合 RPC 服务注册的 IP 地址了。&lt;/p>
-&lt;h2 id="3-ifconfig-介绍">3 Ifconfig 介绍&lt;/h2>
-&lt;p>我并没有想要让大家对后续的内容望而却步，特地选择了这个大家最熟悉的 Linux 命令！对于那些吐槽：“天呐，都 2019 年了，你怎么还在用 net-tools/ifconfig，iproute2/ip 了解一下”的言论，请大家视而不见。无论你使用的是 mac，还是 linux，都可以使用它去 CRUD 你的网卡配置。&lt;/p>
-&lt;h3 id="31-常用指令">3.1 常用指令&lt;/h3>
-&lt;p>&lt;strong>启动关闭指定网卡：&lt;/strong>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">ifconfig eth0 up
-ifconfig eth0 down
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>ifconfig eth0 up&lt;/code> 为启动网卡 eth0，&lt;code>ifconfig eth0 down&lt;/code> 为关闭网卡 eth0。ssh 登陆 linux 服务器操作的用户要小心执行这个操作了，千万不要蠢哭自己。不然你下一步就需要去 google：“禁用 eth0 网卡后如何远程连接 Linux 服务器” 了。&lt;/p>
-&lt;p>&lt;strong>为网卡配置和删除IPv6地址：&lt;/strong>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">ifconfig eth0 add 33ffe:3240:800:1005::2/64 #为网卡eth0配置IPv6地址
-ifconfig eth0 del 33ffe:3240:800:1005::2/64 #为网卡eth0删除IPv6地址
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>用 ifconfig 修改 MAC 地址：&lt;/strong>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">ifconfig eth0 hw ether 00:AA:BB:CC:dd:EE
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>配置 IP 地址：&lt;/strong>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">[root@localhost ~]# ifconfig eth0 192.168.2.10
-[root@localhost ~]# ifconfig eth0 192.168.2.10 netmask 255.255.255.0
-[root@localhost ~]# ifconfig eth0 192.168.2.10 netmask 255.255.255.0 broadcast 192.168.2.255
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>启用和关闭arp协议：&lt;/strong>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">ifconfig eth0 arp #开启网卡eth0 的arp协议
-ifconfig eth0 -arp #关闭网卡eth0 的arp协议
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>设置最大传输单元：&lt;/strong>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">ifconfig eth0 mtu 1500 #设置能通过的最大数据包大小为 1500 bytes
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="32-查看网卡信息">3.2 查看网卡信息&lt;/h3>
-&lt;p>在一台 ubuntu 上执行 &lt;code>ifconfig -a&lt;/code>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">ubuntu@VM-30-130-ubuntu:~$ ifconfig -a
-eth0 Link encap:Ethernet HWaddr 52:54:00:a9:5f:ae
-inet addr:10.154.30.130 Bcast:10.154.63.255 Mask:255.255.192.0
-UP BROADCAST RUNNING MULTICAST MTU:1500 Metric:1
-RX packets:149673 errors:0 dropped:0 overruns:0 frame:0
-TX packets:152271 errors:0 dropped:0 overruns:0 carrier:0
-collisions:0 txqueuelen:1000
-RX bytes:15205083 &lt;span style="color:#719e07">(&lt;/span>15.2 MB&lt;span style="color:#719e07">)&lt;/span> TX bytes:21386362 &lt;span style="color:#719e07">(&lt;/span>21.3 MB&lt;span style="color:#719e07">)&lt;/span>
-lo Link encap:Local Loopback
-inet addr:127.0.0.1 Mask:255.0.0.0
-UP LOOPBACK RUNNING MTU:65536 Metric:1
-RX packets:0 errors:0 dropped:0 overruns:0 frame:0
-TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
-collisions:0 txqueuelen:1
-RX bytes:0 &lt;span style="color:#719e07">(&lt;/span>0.0 B&lt;span style="color:#719e07">)&lt;/span> TX bytes:0 &lt;span style="color:#719e07">(&lt;/span>0.0 B&lt;span style="color:#719e07">)&lt;/span>
-docker0 Link encap:Ethernet HWaddr 02:42:58:45:c1:15
-inet addr:172.17.0.1 Bcast:172.17.255.255 Mask:255.255.0.0
-UP BROADCAST MULTICAST MTU:1500 Metric:1
-RX packets:0 errors:0 dropped:0 overruns:0 frame:0
-TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
-collisions:0 txqueuelen:0
-RX bytes:0 &lt;span style="color:#719e07">(&lt;/span>0.0 B&lt;span style="color:#719e07">)&lt;/span> TX bytes:0 &lt;span style="color:#719e07">(&lt;/span>0.0 B&lt;span style="color:#719e07">)&lt;/span>
-tun0 Link encap:UNSPEC HWaddr 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00
-UP POINTOPOINT NOARP MULTICAST MTU:1500 Metric:1
-RX packets:0 errors:0 dropped:0 overruns:0 frame:0
-TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
-collisions:0 txqueuelen:100
-RX bytes:0 &lt;span style="color:#719e07">(&lt;/span>0.0 B&lt;span style="color:#719e07">)&lt;/span> TX bytes:0 &lt;span style="color:#719e07">(&lt;/span>0.0 B&lt;span style="color:#719e07">)&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>为了防止黑客对我的 Linux 发起攻击，我还是偷偷对 IP 做了一点“改造”，请不要为难一个趁着打折+组团购买廉价云服务器的小伙子。对于部分网卡的详细解读:&lt;/p>
-&lt;p>eth0 表示第一块网卡， 其中 HWaddr 表示网卡的物理地址，可以看到目前这个网卡的物理地址(MAC 地址）是 02:42:38:52:70:54&lt;/p>
-&lt;p>inet addr 用来表示网卡的 IP 地址，此网卡的 IP 地址是 10.154.30.130，广播地址， Bcast: 172.18.255.255，掩码地址 Mask:255.255.0.0&lt;/p>
-&lt;p>lo 是表示主机的回环地址，这个一般是用来测试一个网络程序，但又不想让局域网或外网的用户能够查看，只能在此台主机上运行和查看所用的网络接口。比如把 HTTPD 服务器的指定到回坏地址，在浏览器输入 127.0.0.1 就能看到你所架构的 WEB 网站了。但只有你能看得到，局域网的其它主机或用户则无从知晓。&lt;/p>
-&lt;p>第一行：连接类型：Ethernet（以太网）HWaddr（硬件mac地址）&lt;/p>
-&lt;p>第二行：网卡的IP地址、子网、掩码&lt;/p>
-&lt;p>第三行：UP（代表网卡开启状态）RUNNING（代表网卡的网线被接上）MULTICAST（支持组播）MTU:1500（最大传输单元）：1500字节（ifconfig 不加 -a 则无法看到 DOWN 的网卡）&lt;/p>
-&lt;p>第四、五行：接收、发送数据包情况统计&lt;/p>
-&lt;p>第七行：接收、发送数据字节数统计信息。&lt;/p>
-&lt;p>紧接着的两个网卡 docker0，tun0 是怎么出来的呢？我在我的 ubuntu 上装了 docker 和 openvpn。这两个东西应该是日常干扰我们做服务注册时的罪魁祸首了，当然，也有可能存在 eth1 这样的第二块网卡。ifconfig -a 看到的东西就对应了 JDK 的 api ：&lt;code>NetworkInterface.getNetworkInterfaces()&lt;/code> 。我们简单做个总结，大致有三个干扰因素&lt;/p>
-&lt;ul>
-&lt;li>以 docker 网桥为首的虚拟网卡地址，毕竟这东西这么火，怎么也得单独列出来吧？&lt;/li>
-&lt;li>以 TUN/TAP 为代表的虚拟网卡地址，多为 VPN 场景&lt;/li>
-&lt;li>以 eth1 为代表的多网卡场景，有钱就可以装多网卡了！&lt;/li>
-&lt;/ul>
-&lt;p>我们后续的篇幅将针对这些场景做分别的介绍，力求让大家没吃过猪肉，起码看下猪怎么跑的。&lt;/p>
-&lt;h2 id="4-干扰因素一docker-网桥">4 干扰因素一：Docker 网桥&lt;/h2>
-&lt;p>熟悉 docker 的朋友应该知道 docker 会默认创建一个 docker0 的网桥，供容器实例连接。如果嫌默认的网桥不够直观，我们可以使用 bridge 模式自定义创建一个新的网桥：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">ubuntu@VM-30-130-ubuntu:~$ docker network create kirito-bridge
-a38696dbbe58aa916894c674052c4aa6ab32266dcf6d8111fb794b8a344aa0d9
-ubuntu@VM-30-130-ubuntu:~$ ifconfig -a
-br-a38696dbbe58 Link encap:Ethernet HWaddr 02:42:6e:aa:fd:0c
-inet addr:172.19.0.1 Bcast:172.19.255.255 Mask:255.255.0.0
-UP BROADCAST MULTICAST MTU:1500 Metric:1
-RX packets:0 errors:0 dropped:0 overruns:0 frame:0
-TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
-collisions:0 txqueuelen:0
-RX bytes:0 &lt;span style="color:#719e07">(&lt;/span>0.0 B&lt;span style="color:#719e07">)&lt;/span> TX bytes:0 &lt;span style="color:#719e07">(&lt;/span>0.0 B&lt;span style="color:#719e07">)&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>使用 docker network 指令创建网桥之后，自动创建了对应的网卡，我只给出了 &lt;code>ifconfig -a&lt;/code> 的增量返回部分，可以看出多了一个 br-a38696dbbe58 的网卡。&lt;/p>
-&lt;p>我有意区分了“网桥”和“网卡”，可以使用 bridge-utils/brctl 来查看网桥信息：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">ubuntu@VM-30-130-ubuntu:~$ sudo brctl show
-bridge name bridge id STP enabled interfaces
-br-a38696dbbe58 8000.02426eaafd0c no
-docker0 8000.02425845c215 no
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>网桥是一个虚拟设备，这个设备只有 brctl show 能看到，网桥创建之后，会自动创建一个同名的网卡，并将这个网卡加入网桥。&lt;/p>
-&lt;h2 id="5-干扰因素二tuntap-虚拟网络设备">5 干扰因素二：TUN/TAP 虚拟网络设备&lt;/h2>
-&lt;p>平时我们所说的虚拟网卡、虚拟机，大致都跟 TUN/TAP 有关。我的读者大多数是 Java 从业者，相信我下面的内容并没有太超纲，不要被陌生的名词唬住。对于被唬住的读者，也可以直接跳过 5.1~5.3，直接看 5.4 的实战。&lt;/p>
-&lt;h3 id="51-真实网卡工作原理">5.1 真实网卡工作原理&lt;/h3>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/network/01.png" alt="1918847-496d0e96c237f25a">&lt;/p>
-&lt;p>上图中的 &lt;strong>eth0&lt;/strong> 表示我们主机已有的真实的网卡接口 (&lt;strong>interface&lt;/strong>)。&lt;/p>
-&lt;p>网卡接口 &lt;strong>eth0&lt;/strong> 所代表的真实网卡通过网线(&lt;strong>wire&lt;/strong>)和外部网络相连，该物理网卡收到的数据包会经由接口 &lt;strong>eth0&lt;/strong> 传递给内核的网络协议栈(&lt;strong>Network Stack&lt;/strong>)。然后协议栈对这些数据包进行进一步的处理。&lt;/p>
-&lt;p>对于一些错误的数据包,协议栈可以选择丢弃；对于不属于本机的数据包，协议栈可以选择转发；而对于确实是传递给本机的数据包,而且该数据包确实被上层的应用所需要，协议栈会通过 &lt;strong>Socket API&lt;/strong> 告知上层正在等待的应用程序。&lt;/p>
-&lt;h3 id="52-tun-工作原理">5.2 TUN 工作原理&lt;/h3>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/network/02.png" alt="1918847-85ea08bc89d9427e">&lt;/p>
-&lt;p>我们知道，普通的网卡是通过网线来收发数据包的话，而 &lt;strong>TUN&lt;/strong> 设备比较特殊，它通过一个文件收发数据包。&lt;/p>
-&lt;p>如上图所示，&lt;strong>tunX&lt;/strong> 和上面的 &lt;strong>eth0&lt;/strong> 在逻辑上面是等价的， &lt;strong>tunX&lt;/strong> 也代表了一个网络接口,虽然这个接口是系统通过软件所模拟出来的.&lt;/p>
-&lt;p>网卡接口 &lt;strong>tunX 所代表的虚拟网卡通过文件 /dev/tunX 与我们的应用程序(App)相连&lt;/strong>，应用程序每次使用 &lt;strong>write&lt;/strong> 之类的系统调用将数据写入该文件，这些数据会以网络层数据包的形式，通过该虚拟网卡，经由网络接口 &lt;strong>tunX&lt;/strong> 传递给网络协议栈，同时该应用程序也可以通过 &lt;strong>read&lt;/strong> 之类的系统调用，经由文件 &lt;strong>/dev/tunX&lt;/strong> 读取到协议栈向 &lt;strong>tunX&lt;/strong> 传递的&lt;strong>所有&lt;/strong>数据包。&lt;/p>
-&lt;p>此外，协议栈可以像操纵普通网卡一样来操纵 &lt;strong>tunX&lt;/strong> 所代表的虚拟网卡。比如说，给 &lt;strong>tunX&lt;/strong> 设定 &lt;strong>IP&lt;/strong> 地址，设置路由，总之，在协议栈看来，&lt;strong>tunX&lt;/strong> 所代表的网卡和其他普通的网卡区别不大，当然，硬要说区别，那还是有的,那就是 &lt;strong>tunX&lt;/strong> 设备不存在 &lt;strong>MAC&lt;/strong> 地址，这个很好理解，&lt;strong>tunX&lt;/strong> 只模拟到了网络层，要 &lt;strong>MAC&lt;/strong>地址没有任何意义。当然，如果是 &lt;strong>tapX&lt;/strong> 的话，在协议栈的眼中，&lt;strong>tapX&lt;/strong> 和真实网卡没有任何区别。&lt;/p>
-&lt;p>是不是有些懵了？我是谁，为什么我要在这篇文章里面学习 TUN！因为我们常用的 VPN 基本就是基于 TUN/TAP 搭建的，如果我们使用 &lt;strong>TUN&lt;/strong> 设备搭建一个基于 &lt;strong>UDP&lt;/strong> 的 &lt;strong>VPN&lt;/strong> ，那么整个处理过程可能是这幅样子：&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/network/03.png" alt="1918847-ac4155ec7e9489b2">&lt;/p>
-&lt;h3 id="53-tap-工作原理">5.3 TAP 工作原理&lt;/h3>
-&lt;p>&lt;strong>TAP&lt;/strong> 设备与 &lt;strong>TUN&lt;/strong> 设备工作方式完全相同，区别在于：&lt;/p>
-&lt;ol>
-&lt;li>&lt;strong>TUN&lt;/strong> 设备是一个三层设备，它只模拟到了 &lt;strong>IP&lt;/strong> 层，即网络层 我们可以通过 &lt;strong>/dev/tunX&lt;/strong> 文件收发 &lt;strong>IP&lt;/strong> 层数据包，它无法与物理网卡做 &lt;strong>bridge&lt;/strong>，但是可以通过三层交换（如 &lt;strong>ip_forward&lt;/strong>）与物理网卡连通。可以使用&lt;code>ifconfig&lt;/code>之类的命令给该设备设定 &lt;strong>IP&lt;/strong> 地址。&lt;/li>
-&lt;li>&lt;strong>TAP&lt;/strong> 设备是一个二层设备，它比 &lt;strong>TUN&lt;/strong> 更加深入，通过 &lt;strong>/dev/tapX&lt;/strong> 文件可以收发 &lt;strong>MAC&lt;/strong> 层数据包，即数据链路层，拥有 &lt;strong>MAC&lt;/strong> 层功能，可以与物理网卡做 &lt;strong>bridge&lt;/strong>，支持 &lt;strong>MAC&lt;/strong> 层广播。同样的，我们也可以通过&lt;code>ifconfig&lt;/code>之类的命令给该设备设定 &lt;strong>IP&lt;/strong> 地址，你如果愿意，我们可以给它设定 &lt;strong>MAC&lt;/strong> 地址。&lt;/li>
-&lt;/ol>
-&lt;p>关于文章中出现的二层，三层，我这里说明一下，第一层是物理层，第二层是数据链路层，第三层是网络层，第四层是传输层。&lt;/p>
-&lt;h3 id="54-openvpn-实战">5.4 openvpn 实战&lt;/h3>
-&lt;p>openvpn 是 Linux 上一款开源的 vpn 工具，我们通过它来复现出影响我们做网卡选择的场景。&lt;/p>
-&lt;p>安装 openvpn&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">sudo apt-get install openvpn
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>安装一个 TUN 设备：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">ubuntu@VM-30-130-ubuntu:~$ sudo openvpn --mktun --dev tun0
-Mon Apr &lt;span style="color:#2aa198">29&lt;/span> 22:23:31 &lt;span style="color:#2aa198">2019&lt;/span> TUN/TAP device tun0 opened
-Mon Apr &lt;span style="color:#2aa198">29&lt;/span> 22:23:31 &lt;span style="color:#2aa198">2019&lt;/span> Persist state &lt;span style="color:#b58900">set&lt;/span> to: ON
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>安装一个 TAP 设备：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">ubuntu@VM-30-130-ubuntu:~$ sudo openvpn --mktun --dev tap0
-Mon Apr &lt;span style="color:#2aa198">29&lt;/span> 22:24:36 &lt;span style="color:#2aa198">2019&lt;/span> TUN/TAP device tap0 opened
-Mon Apr &lt;span style="color:#2aa198">29&lt;/span> 22:24:36 &lt;span style="color:#2aa198">2019&lt;/span> Persist state &lt;span style="color:#b58900">set&lt;/span> to: ON
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>执行 &lt;code>ifconfig -a&lt;/code> 查看网卡，只给出增量的部分：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">tap0 Link encap:Ethernet HWaddr 7a:a2:a8:f1:6b:df
-BROADCAST MULTICAST MTU:1500 Metric:1
-RX packets:0 errors:0 dropped:0 overruns:0 frame:0
-TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
-collisions:0 txqueuelen:100
-RX bytes:0 &lt;span style="color:#719e07">(&lt;/span>0.0 B&lt;span style="color:#719e07">)&lt;/span> TX bytes:0 &lt;span style="color:#719e07">(&lt;/span>0.0 B&lt;span style="color:#719e07">)&lt;/span>
-tun0 Link encap:UNSPEC HWaddr 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00
-inet addr:10.154.30.131 P-t-P:10.154.30.131 Mask:255.255.255.255
-UP POINTOPOINT NOARP MULTICAST MTU:1500 Metric:1
-RX packets:0 errors:0 dropped:0 overruns:0 frame:0
-TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
-collisions:0 txqueuelen:100
-RX bytes:0 &lt;span style="color:#719e07">(&lt;/span>0.0 B&lt;span style="color:#719e07">)&lt;/span> TX bytes:0 &lt;span style="color:#719e07">(&lt;/span>0.0 B&lt;span style="color:#719e07">)&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>这样就解释了文章一开始为什么会有 tun0 这样的网卡了。这里读者可能会有疑惑，使用 ifconfig 不是也可以创建 tap 和 tun 网卡吗？当然啦，openvpn 是一个 vpn 工具，只能创建名为 tunX/tapX 的网卡，其遵守着一定的规范，ifconfig 可以随意创建，但没人认那些随意创建的网卡。&lt;/p>
-&lt;h2 id="6-干扰因素三多网卡">6 干扰因素三：多网卡&lt;/h2>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/network/04.png" alt="image-20190429223515625">&lt;/p>
-&lt;p>这个没有太多好说的，有多张真实的网卡，从普哥那儿搞到如上的 IP 信息。&lt;/p>
-&lt;h2 id="7-mac-下的差异">7 MAC 下的差异&lt;/h2>
-&lt;p>虽然 ifconfig 等指令是 &lt;code>*nux&lt;/code> 通用的，但是其展示信息，网卡相关的属性和命名都有较大的差异。例如这是我 MAC 下执行 &lt;code>ifconfig -a&lt;/code> 的返回：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">xujingfengdeMacBook-Pro:dubbo-in-action xujingfeng$ ifconfig -a
-lo0: &lt;span style="color:#268bd2">flags&lt;/span>&lt;span style="color:#719e07">=&lt;/span>8049&amp;lt;UP,LOOPBACK,RUNNING,MULTICAST&amp;gt; mtu &lt;span style="color:#2aa198">16384&lt;/span>
-&lt;span style="color:#268bd2">options&lt;/span>&lt;span style="color:#719e07">=&lt;/span>1203&amp;lt;RXCSUM,TXCSUM,TXSTATUS,SW_TIMESTAMP&amp;gt;
-inet 127.0.0.1 netmask 0xff000000
-inet6 ::1 prefixlen &lt;span style="color:#2aa198">128&lt;/span>
-inet6 fe80::1%lo0 prefixlen &lt;span style="color:#2aa198">64&lt;/span> scopeid 0x1
-nd6 &lt;span style="color:#268bd2">options&lt;/span>&lt;span style="color:#719e07">=&lt;/span>201&amp;lt;PERFORMNUD,DAD&amp;gt;
-gif0: &lt;span style="color:#268bd2">flags&lt;/span>&lt;span style="color:#719e07">=&lt;/span>8010&amp;lt;POINTOPOINT,MULTICAST&amp;gt; mtu &lt;span style="color:#2aa198">1280&lt;/span>
-stf0: &lt;span style="color:#268bd2">flags&lt;/span>&lt;span style="color:#719e07">=&lt;/span>0&amp;lt;&amp;gt; mtu &lt;span style="color:#2aa198">1280&lt;/span>
-XHC0: &lt;span style="color:#268bd2">flags&lt;/span>&lt;span style="color:#719e07">=&lt;/span>0&amp;lt;&amp;gt; mtu &lt;span style="color:#2aa198">0&lt;/span>
-XHC20: &lt;span style="color:#268bd2">flags&lt;/span>&lt;span style="color:#719e07">=&lt;/span>0&amp;lt;&amp;gt; mtu &lt;span style="color:#2aa198">0&lt;/span>
-en0: &lt;span style="color:#268bd2">flags&lt;/span>&lt;span style="color:#719e07">=&lt;/span>8863&amp;lt;UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST&amp;gt; mtu &lt;span style="color:#2aa198">1500&lt;/span>
-ether 88:e9:fe:88:a0:76
-inet6 fe80::1cab:f689:60d1:bacb%en0 prefixlen &lt;span style="color:#2aa198">64&lt;/span> secured scopeid 0x6
-inet 30.130.11.242 netmask 0xffffff80 broadcast 30.130.11.255
-nd6 &lt;span style="color:#268bd2">options&lt;/span>&lt;span style="color:#719e07">=&lt;/span>201&amp;lt;PERFORMNUD,DAD&amp;gt;
-media: autoselect
-status: active
-p2p0: &lt;span style="color:#268bd2">flags&lt;/span>&lt;span style="color:#719e07">=&lt;/span>8843&amp;lt;UP,BROADCAST,RUNNING,SIMPLEX,MULTICAST&amp;gt; mtu &lt;span style="color:#2aa198">2304&lt;/span>
-ether 0a:e9:fe:88:a0:76
-media: autoselect
-status: inactive
-awdl0: &lt;span style="color:#268bd2">flags&lt;/span>&lt;span style="color:#719e07">=&lt;/span>8943&amp;lt;UP,BROADCAST,RUNNING,PROMISC,SIMPLEX,MULTICAST&amp;gt; mtu &lt;span style="color:#2aa198">1484&lt;/span>
-ether 66:d2:8c:8c:dd:85
-inet6 fe80::64d2:8cff:fe8c:dd85%awdl0 prefixlen &lt;span style="color:#2aa198">64&lt;/span> scopeid 0x8
-nd6 &lt;span style="color:#268bd2">options&lt;/span>&lt;span style="color:#719e07">=&lt;/span>201&amp;lt;PERFORMNUD,DAD&amp;gt;
-media: autoselect
-status: active
-en1: &lt;span style="color:#268bd2">flags&lt;/span>&lt;span style="color:#719e07">=&lt;/span>8963&amp;lt;UP,BROADCAST,SMART,RUNNING,PROMISC,SIMPLEX,MULTICAST&amp;gt; mtu &lt;span style="color:#2aa198">1500&lt;/span>
-&lt;span style="color:#268bd2">options&lt;/span>&lt;span style="color:#719e07">=&lt;/span>60&amp;lt;TSO4,TSO6&amp;gt;
-ether aa:00:d0:13:0e:01
-media: autoselect &amp;lt;full-duplex&amp;gt;
-status: inactive
-en2: &lt;span style="color:#268bd2">flags&lt;/span>&lt;span style="color:#719e07">=&lt;/span>8963&amp;lt;UP,BROADCAST,SMART,RUNNING,PROMISC,SIMPLEX,MULTICAST&amp;gt; mtu &lt;span style="color:#2aa198">1500&lt;/span>
-&lt;span style="color:#268bd2">options&lt;/span>&lt;span style="color:#719e07">=&lt;/span>60&amp;lt;TSO4,TSO6&amp;gt;
-ether aa:00:d0:13:0e:00
-media: autoselect &amp;lt;full-duplex&amp;gt;
-status: inactive
-bridge0: &lt;span style="color:#268bd2">flags&lt;/span>&lt;span style="color:#719e07">=&lt;/span>8863&amp;lt;UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST&amp;gt; mtu &lt;span style="color:#2aa198">1500&lt;/span>
-&lt;span style="color:#268bd2">options&lt;/span>&lt;span style="color:#719e07">=&lt;/span>63&amp;lt;RXCSUM,TXCSUM,TSO4,TSO6&amp;gt;
-ether aa:00:d0:13:0e:01
-Configuration:
-id 0:0:0:0:0:0 priority &lt;span style="color:#2aa198">0&lt;/span> hellotime &lt;span style="color:#2aa198">0&lt;/span> fwddelay &lt;span style="color:#2aa198">0&lt;/span>
-maxage &lt;span style="color:#2aa198">0&lt;/span> holdcnt &lt;span style="color:#2aa198">0&lt;/span> proto stp maxaddr &lt;span style="color:#2aa198">100&lt;/span> timeout &lt;span style="color:#2aa198">1200&lt;/span>
-root id 0:0:0:0:0:0 priority &lt;span style="color:#2aa198">0&lt;/span> ifcost &lt;span style="color:#2aa198">0&lt;/span> port &lt;span style="color:#2aa198">0&lt;/span>
-ipfilter disabled flags 0x2
-member: en1 &lt;span style="color:#268bd2">flags&lt;/span>&lt;span style="color:#719e07">=&lt;/span>3&amp;lt;LEARNING,DISCOVER&amp;gt;
-ifmaxaddr &lt;span style="color:#2aa198">0&lt;/span> port &lt;span style="color:#2aa198">9&lt;/span> priority &lt;span style="color:#2aa198">0&lt;/span> path cost &lt;span style="color:#2aa198">0&lt;/span>
-member: en2 &lt;span style="color:#268bd2">flags&lt;/span>&lt;span style="color:#719e07">=&lt;/span>3&amp;lt;LEARNING,DISCOVER&amp;gt;
-ifmaxaddr &lt;span style="color:#2aa198">0&lt;/span> port &lt;span style="color:#2aa198">10&lt;/span> priority &lt;span style="color:#2aa198">0&lt;/span> path cost &lt;span style="color:#2aa198">0&lt;/span>
-nd6 &lt;span style="color:#268bd2">options&lt;/span>&lt;span style="color:#719e07">=&lt;/span>201&amp;lt;PERFORMNUD,DAD&amp;gt;
-media: &amp;lt;unknown type&amp;gt;
-status: inactive
-utun0: &lt;span style="color:#268bd2">flags&lt;/span>&lt;span style="color:#719e07">=&lt;/span>8051&amp;lt;UP,POINTOPOINT,RUNNING,MULTICAST&amp;gt; mtu &lt;span style="color:#2aa198">2000&lt;/span>
-inet6 fe80::3fe0:3e8b:384:9968%utun0 prefixlen &lt;span style="color:#2aa198">64&lt;/span> scopeid 0xc
-nd6 &lt;span style="color:#268bd2">options&lt;/span>&lt;span style="color:#719e07">=&lt;/span>201&amp;lt;PERFORMNUD,DAD&amp;gt;
-utun1: &lt;span style="color:#268bd2">flags&lt;/span>&lt;span style="color:#719e07">=&lt;/span>8051&amp;lt;UP,POINTOPOINT,RUNNING,MULTICAST&amp;gt; mtu &lt;span style="color:#2aa198">1380&lt;/span>
-inet6 fe80::7894:3abc:5abd:457d%utun1 prefixlen &lt;span style="color:#2aa198">64&lt;/span> scopeid 0xd
-nd6 &lt;span style="color:#268bd2">options&lt;/span>&lt;span style="color:#719e07">=&lt;/span>201&amp;lt;PERFORMNUD,DAD&amp;gt;
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>内容很多，我挑几点差异简述下：&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>内容展示形式不一样，没有 Linux 下的接收、发送数据字节数等统计信息&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>真实网卡的命名不一样：eth0 -&amp;gt; en0&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>虚拟网卡的命名格式不一样：tun/tap -&amp;gt; utun&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;p>对于这些常见网卡命名的解读，我摘抄一部分来自 stackoverflow 的回答：&lt;/p>
-&lt;blockquote>
-&lt;p>In arbitrary order of my familarity / widespread relevance:&lt;/p>
-&lt;p>&lt;code>lo0&lt;/code> is loopback.&lt;/p>
-&lt;p>&lt;code>en0&lt;/code> at one point &amp;ldquo;ethernet&amp;rdquo;, now is WiFi (and I have no idea what extra &lt;code>en1&lt;/code> or &lt;code>en2&lt;/code> are used for).&lt;/p>
-&lt;p>&lt;code>fw0&lt;/code> is the FireWire network interface.&lt;/p>
-&lt;p>&lt;code>stf0&lt;/code> is an &lt;a href="https://www.freebsd.org/cgi/man.cgi?gif(4)">IPv6 to IPv4 tunnel interface&lt;/a> to support &lt;a href="http://en.wikipedia.org/wiki/6to4">the transition&lt;/a> from IPv4 to the IPv6 standard.&lt;/p>
-&lt;p>&lt;code>gif0&lt;/code> is a more &lt;a href="https://www.freebsd.org/cgi/man.cgi?gif(4)">generic tunneling interface&lt;/a> [46]-to-[46].&lt;/p>
-&lt;p>&lt;code>awdl0&lt;/code> is &lt;a href="https://stackoverflow.com/questions/19587701/what-is-awdl-apple-wireless-direct-link-and-how-does-it-work">Apple Wireless Direct Link&lt;/a>&lt;/p>
-&lt;p>&lt;code>p2p0&lt;/code> is related to AWDL features. Either as an old version, or virtual interface with different semantics than &lt;code>awdl&lt;/code>.&lt;/p>
-&lt;p>the &amp;ldquo;Network&amp;rdquo; panel in System Preferences to see what network devices &amp;ldquo;exist&amp;rdquo; or &amp;ldquo;can exist&amp;rdquo; with current configuration.&lt;/p>
-&lt;p>many VPNs will add additional devices, often &amp;ldquo;utun#&amp;rdquo; or &amp;ldquo;utap#&amp;rdquo; following &lt;a href="https://en.wikipedia.org/wiki/TUN/TAP">TUN/TAP (L3/L2)&lt;/a>virtual networking devices.&lt;/p>
-&lt;p>use &lt;code>netstat -nr&lt;/code> to see how traffic is currently routed via network devices according to destination.&lt;/p>
-&lt;p>interface naming conventions started in BSD were retained in OS X / macOS, and now there also additions.&lt;/p>
-&lt;/blockquote>
-&lt;h2 id="8-dubbo-改进建议">8 Dubbo 改进建议&lt;/h2>
-&lt;p>我们进行了以上探索，算是对网卡有一点了解了。回过头来看看 Dubbo 获取网卡的逻辑，是否可以做出改进呢？&lt;/p>
-&lt;p>&lt;strong>Dubbo Action 1:&lt;/strong>&lt;/p>
-&lt;p>保持 Ipv4 和 Ipv6 的一致性校验。为 Ipv4 增加连通性校验；为 Ipv6 增加 LoopBack 和 ANYHOST 等校验。&lt;/p>
-&lt;p>&lt;strong>Dubbo Action 2:&lt;/strong>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">NetworkInterface network &lt;span style="color:#719e07">=&lt;/span> interfaces&lt;span style="color:#719e07">.&lt;/span>nextElement&lt;span style="color:#719e07">();&lt;/span>
-&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>network&lt;span style="color:#719e07">.&lt;/span>isLoopback&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">||&lt;/span> network&lt;span style="color:#719e07">.&lt;/span>isVirtual&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">||&lt;/span> &lt;span style="color:#719e07">!&lt;/span>network&lt;span style="color:#719e07">.&lt;/span>isUp&lt;span style="color:#719e07">())&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#719e07">continue&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>JDK 提供了以上的 API，我们可以利用起来，过滤一部分一定不正确的网卡。&lt;/p>
-&lt;p>&lt;strong>Dubbo Action 3:&lt;/strong>&lt;/p>
-&lt;p>我们本文花了较多的篇幅介绍了 docker 和 TUN/TAP 两种场景导致的虚拟网卡的问题，算是较为常见的一个影响因素，虽然他们的命名具有固定性，如 docker0、tunX、tapX，但我觉得通过网卡名称的判断方式去过滤注册 IP 有一些 hack，所以不建议 dubbo contributor 提出相应的 pr 去增加这些 hack 判断，尽管可能会对判断有所帮助。&lt;/p>
-&lt;p>对于真实多网卡、内外网 IP 共存的场景，不能仅仅是框架侧在做努力，用户也需要做一些事，就像爱情一样，我可以主动一点，但你也得反馈，才能发展出故事。&lt;/p>
-&lt;p>&lt;strong>Dubbo User Action 1:&lt;/strong>&lt;/p>
-&lt;p>可以配置 &lt;code>/etc/hosts&lt;/code> 文件，将 hostname 对应的 IP 显式配置进去。&lt;/p>
-&lt;p>&lt;strong>Dubbo User Action 2:&lt;/strong>&lt;/p>
-&lt;p>可以使用启动参数去显式指定注册的 IP：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">-&lt;/span>DDUBBO_IP_TO_REGISTRY&lt;span style="color:#719e07">=&lt;/span>1&lt;span style="color:#719e07">.&lt;/span>2&lt;span style="color:#719e07">.&lt;/span>3&lt;span style="color:#719e07">.&lt;/span>4
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>也可以指定 Dubbo 服务绑定在哪块网卡上：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">-&lt;/span>DDUBBO_IP_TO_BIND&lt;span style="color:#719e07">=&lt;/span>1&lt;span style="color:#719e07">.&lt;/span>2&lt;span style="color:#719e07">.&lt;/span>3&lt;span style="color:#719e07">.&lt;/span>4
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="9-参考文章">9 参考文章&lt;/h2>
-&lt;p>&lt;a href="https://www.jianshu.com/p/09f9375b7fa7">TUN/TAP 设备浅析&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://stackoverflow.com/questions/29958143/what-are-en0-en1-p2p-and-so-on-that-are-displayed-after-executing-ifconfig">what-are-en0-en1-p2p-and-so-on-that-are-displayed-after-executing-ifconfig&lt;/a>&lt;/p></description></item></channel></rss>
+&lt;p>如果你能够理解 final 契约和 restful 契约，那我相信你会很好地理解 URL 契约。契约的好处我还是啰嗦一句：大家都这么做，就形成了默契，沟通是一件很麻烦的事，统一 URL 模型可以省去很多沟通成本，这边是 URL 统一模型存在的意义。&lt;/p></description></item></channel></rss>

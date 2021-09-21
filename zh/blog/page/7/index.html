@@ -173,6 +173,7 @@ Releases
 </li>
 <ul>
 <li class=collapse id=zhblogreleases>
+<a class="td-sidebar-link td-sidebar-link__page" id=m-zhblog202109202714-e58f91e78988e585ace5918a href=/zh/blog/2021/09/20/2.7.14-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/>2.7.14</a>
 <a class="td-sidebar-link td-sidebar-link__page" id=m-zhblog202108233021-e58f91e78988e585ace5918a href=/zh/blog/2021/08/23/3.0.2.1-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/>3.0.2.1</a>
 <a class="td-sidebar-link td-sidebar-link__page" id=m-zhblog20210818302-e58f91e78988e585ace5918a href=/zh/blog/2021/08/18/3.0.2-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/>3.0.2</a>
 <a class="td-sidebar-link td-sidebar-link__page" id=m-zhblog20210702301-e58f91e78988e585ace5918a href=/zh/blog/2021/07/02/3.0.1-%E5%8F%91%E7%89%88%E5%85%AC%E5%91%8A/>3.0.1</a>
@@ -202,6 +203,16 @@ RSS <i class="fa fa-rss ml-2"></i>
 <div class=col-12>
 <h2>Posts in 2019</h2>
 <ul class="list-unstyled mt-4">
+<li class="media mb-4">
+<div class=media-body>
+<h5 class="mt-0 mb-1"><a href=/zh/blog/2019/02/02/%E5%BD%93dubbo%E9%81%87%E4%B8%8Aarthas%E6%8E%92%E6%9F%A5%E9%97%AE%E9%A2%98%E7%9A%84%E5%AE%9E%E8%B7%B5/>当Dubbo遇上Arthas：排查问题的实践</a></h5>
+<p class="mb-2 mb-md-3"><small class=text-muted>Saturday, February 02, 2019 in 技术分享</small></p>
+<p class="pt-0 mt-0">Apache Dubbo是Alibaba开源的高性能RPC框架，在国内有非常多的用户。
+Github: https://github.com/apache/dubbo 文档：http://dubbo.apache.org/zh-cn/ Arthas是Alibaba开源的应用诊断利器，9月份开源以来，Github Star数三个月超过6000。
+Github: https://github.com/alibaba/arthas 文 …</p>
+<p class=pt-0><a href=/zh/blog/2019/02/02/%E5%BD%93dubbo%E9%81%87%E4%B8%8Aarthas%E6%8E%92%E6%9F%A5%E9%97%AE%E9%A2%98%E7%9A%84%E5%AE%9E%E8%B7%B5/>更多</a></p>
+</div>
+</li>
 <li class="media mb-4">
 <div class=media-body>
 <h5 class="mt-0 mb-1"><a href=/zh/blog/2019/01/26/%E9%81%87%E8%A7%81dubbo/>遇见Dubbo</a></h5>
@@ -289,15 +300,6 @@ public static boolean isMatch(URL consumerUrl, …</p>
 协议是什么 协议是双方确定的交流语义，比如：我们设计一个字符串传输的协议，它允许客户端发送一个字符串，服务端接收到对应的字符串。这个协议很简单，首先发送一个4字节的消息总长度，然后再发送1字节的字符集charset长度，接下来就是消息的payload，字符集名称和字符串正文。
 发送 …</p>
 <p class=pt-0><a href=/zh/blog/2018/10/05/dubbo-%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/>更多</a></p>
-</div>
-</li>
-<li class="media mb-4">
-<div class=media-body>
-<h5 class="mt-0 mb-1"><a href=/zh/blog/2018/09/30/dubbo%E4%B8%8Ekubernetes%E9%9B%86%E6%88%90/>Dubbo与Kubernetes集成</a></h5>
-<p class="mb-2 mb-md-3"><small class=text-muted>Sunday, September 30, 2018 in 技术分享</small></p>
-<p class="pt-0 mt-0">大体目标 Dubbo的provider不再关心服务注册的事宜，只需要把其Dubbo服务端口打开，由Kubernetes来进行服务的声明和发布；Dubbo的consumer在服务发现时直接发现kubernetes的对应服务endpoints，从而复用Dubbo已有的微服务通道能力。好处是无需依赖三方的软负载注册中心；同时无缝融入Kubernetes的多租户安全体系。Demo的代码参照： https://github.com/dubbo/dubbo-kubernetes
-闲谈 Kubernates是 …</p>
-<p class=pt-0><a href=/zh/blog/2018/09/30/dubbo%E4%B8%8Ekubernetes%E9%9B%86%E6%88%90/>更多</a></p>
 </div>
 </li>
 </ul>

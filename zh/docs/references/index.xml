@@ -696,9 +696,9 @@ dubbo.application.qosAcceptForeignIp=false
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">telnet localhost &lt;span style="color:#2aa198">20880&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>或者：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">&lt;span style="color:#b58900">echo&lt;/span> status | nc -i &lt;span style="color:#2aa198">1&lt;/span> localhost &lt;span style="color:#2aa198">20880&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>status命令所检查的资源也可以扩展，参见：&lt;a href="../../../dev/impls/status-checker">扩展参考手册&lt;/a>。&lt;/p>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>status命令所检查的资源也可以扩展，参见：&lt;a href="../../references/spis/status-checker">扩展参考手册&lt;/a>。&lt;/p>
 &lt;h2 id="命令">命令&lt;/h2>
-&lt;p>以下展示了 dubbo 内建的 telnet 命令的说明和用法，此外，telnet 命令还支持用户自行扩展，参见：&lt;a href="../../../dev/impls/telnet-handler">Telnet 命令扩展&lt;/a>。&lt;/p>
+&lt;p>以下展示了 dubbo 内建的 telnet 命令的说明和用法，此外，telnet 命令还支持用户自行扩展，参见：&lt;a href="../../references/spis/telnet-handler">Telnet 命令扩展&lt;/a>。&lt;/p>
 &lt;h3 id="ls">&lt;code>ls&lt;/code>&lt;/h3>
 &lt;ol start="0">
 &lt;li>&lt;code>ls&lt;/code>: 显示服务列表&lt;/li>

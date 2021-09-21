@@ -6309,7 +6309,7 @@ into the project&amp;rsquo;s &lt;code>apps&lt;/code> directory.&lt;/li>
 &lt;li>&lt;strong>下一代基于 HTTP/2 的 Triple 协议。&lt;/strong>
 &lt;ul>
 &lt;li>查看&lt;a href="../migration-triple">Triple 协议迁移步骤&lt;/a>&lt;/li>
-&lt;li>查看 &lt;a href="../../references/tri">Triple 协议使用方式&lt;/a>&lt;/li>
+&lt;li>查看 &lt;a href="../../references/protocols/tri">Triple 协议使用方式&lt;/a>&lt;/li>
 &lt;li>查看 Triple 协议设计与实现。&lt;/li>
 &lt;/ul>
 &lt;/li>
