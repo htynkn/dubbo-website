@@ -35,7 +35,7 @@
   ">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docsv2.7/admin/ops/governance/"><meta property="article:section" content="docsv2.7">
-<meta property="article:modified_time" content="2021-09-20T11:14:11+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-09-21T23:58:24+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="服务治理和配置管理">
 <meta itemprop=description content="服务治理 服务治理主要作用是改变运行时服务的行为和选址逻辑，达到限流，权重配置等目的，主要有以下几个功能：
 应用级别的服务治理 在 Dubbo 2.6 及更早版本中，所有的服务治理规则都只针对服务粒度，如果要把某条规则作用到应用粒度上，需要为应用下的所有服务配合相同的规则，变更，删除的时候也需要对应的操作，这样的操作很不友好，因此 Dubbo 2.7 版本中增加了应用粒度的服务治理操作，对于条件路由(包括黑白名单)，动态配置(包括权重，负载均衡)都可以做应用级别的配置：
@@ -55,7 +55,7 @@
 应用级别的配置可以为应用或者应用内的服务指定配置，在服务维度上，需要区分提供者和消费者。dubbo.reference.{serviceName}表示作为该服务消费者的配置，dubbo.provider.{servcieName}表示作为该服务提供者的配置。其中注册中心和元数据中心的地址，只能在全局配置中指定，这也是Dubbo2.7中推荐的使用方式。
   优先级： 服务配置 > 应用配置 > 全局配置
   ">
-<meta itemprop=dateModified content="2021-09-20T11:14:11+08:00">
+<meta itemprop=dateModified content="2021-09-21T23:58:24+08:00">
 <meta itemprop=wordCount content="45">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="服务治理和配置管理">
@@ -601,7 +601,7 @@ Sorry to hear that. Please <a href=https://github.com/apache/dubbo-website/issue
 </p>
 <script>const yesButton=document.querySelector('.feedback--answer-yes'),noButton=document.querySelector('.feedback--answer-no'),yesResponse=document.querySelector('.feedback--response-yes'),noResponse=document.querySelector('.feedback--response-no'),disableButtons=()=>{yesButton.disabled=!0,noButton.disabled=!0},sendFeedback=b=>{if(typeof ga!='function')return;const a={command:'send',hitType:'event',category:'Helpful',action:'click',label:window.location.pathname,value:b};ga(a.command,a.hitType,a.category,a.action,a.label,a.value)};yesButton.addEventListener('click',()=>{yesResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(1)}),noButton.addEventListener('click',()=>{noResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(0)})</script>
 <br>
-<div class="text-muted mt-5 pt-3 border-top">最后修改 September 20, 2021: <a href=/commit/958e20a62ef7150dc89417cc9f9e46c6f17e4fd0>fix migration-and-compatibility-guide tri error link (#945) (958e20a)</a>
+<div class="text-muted mt-5 pt-3 border-top">最后修改 September 21, 2021: <a href=/commit/57cf51baa09d33943132fb2e28ddfdc036e1598b>Bug fix miss mialbox (#953) (57cf51b)</a>
 </div>
 </div>
 </main>

@@ -37,7 +37,7 @@ Dubbo 的服务注册中心 目前服务注册中心使用了数据库来保存�
 A 注册中心认为 B 过期，删除 B 的数据。 B 发现自己的数据没有了，重新写入自己的数据的反复操作。这些反复的操作又加重了数据库的负荷，恶化问题。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docsv2.7/dev/principals/robustness/"><meta property="article:section" content="docsv2.7">
-<meta property="article:modified_time" content="2021-09-20T11:14:11+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-09-21T23:58:24+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="设计实现的健壮性">
 <meta itemprop=description content="Dubbo 作为远程服务暴露、调用和治理的解决方案，是应用运转的经络，其本身实现健壮性的重要程度是不言而喻的。
 这里列出一些 Dubbo 用到的原则和方法。
@@ -59,7 +59,7 @@ Dubbo 的服务注册中心 目前服务注册中心使用了数据库来保存�
 重试延迟策略 上一点的子问题。Dubbo 中碰到有两个相关的场景。
 数据库上的活锁 注册中心会定时更新数据库一条记录的时间戳，这样集群中其它的注册中心感知它是存活。过期注册中心和它的相关数据 会被清除。数据库正常时，这个机制运行良好。但是数据库负荷高时，其上的每个操作都会很慢。这就出现：
 A 注册中心认为 B 过期，删除 B 的数据。 B 发现自己的数据没有了，重新写入自己的数据的反复操作。这些反复的操作又加重了数据库的负荷，恶化问题。">
-<meta itemprop=dateModified content="2021-09-20T11:14:11+08:00">
+<meta itemprop=dateModified content="2021-09-21T23:58:24+08:00">
 <meta itemprop=wordCount content="93">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="设计实现的健壮性">
@@ -624,7 +624,7 @@ Sorry to hear that. Please <a href=https://github.com/apache/dubbo-website/issue
 </p>
 <script>const yesButton=document.querySelector('.feedback--answer-yes'),noButton=document.querySelector('.feedback--answer-no'),yesResponse=document.querySelector('.feedback--response-yes'),noResponse=document.querySelector('.feedback--response-no'),disableButtons=()=>{yesButton.disabled=!0,noButton.disabled=!0},sendFeedback=b=>{if(typeof ga!='function')return;const a={command:'send',hitType:'event',category:'Helpful',action:'click',label:window.location.pathname,value:b};ga(a.command,a.hitType,a.category,a.action,a.label,a.value)};yesButton.addEventListener('click',()=>{yesResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(1)}),noButton.addEventListener('click',()=>{noResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(0)})</script>
 <br>
-<div class="text-muted mt-5 pt-3 border-top">最后修改 September 20, 2021: <a href=/commit/958e20a62ef7150dc89417cc9f9e46c6f17e4fd0>fix migration-and-compatibility-guide tri error link (#945) (958e20a)</a>
+<div class="text-muted mt-5 pt-3 border-top">最后修改 September 21, 2021: <a href=/commit/57cf51baa09d33943132fb2e28ddfdc036e1598b>Bug fix miss mialbox (#953) (57cf51b)</a>
 </div>
 </div>
 </main>
