@@ -184,6 +184,9 @@ subscription address.
 &lt;p>如果您想取消订阅，只需发送一封邮件到dev-unsubscribe@dubbo.apache.org，收到回复后，请按其指定步骤执行。&lt;/p>
 &lt;/li>
 &lt;/ol>
+&lt;blockquote>
+&lt;p>请注意：dev@dubbo.apache.org是有效的。dev@dubbo.incubator.apache.org已经不再使用。&lt;/p>
+&lt;/blockquote>
 &lt;p>[^1] &lt;a href="https://apache.org/foundation/mailinglists.html#subscribing">https://apache.org/foundation/mailinglists.html#subscribing&lt;/a>&lt;/p></description></item><item><title>Contribution-Guidelines: 报告安全问题</title><link>https://dubbo.apache.org/zh/contribution-guidelines/contributor/reporting-security-issues_dev/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/contribution-guidelines/contributor/reporting-security-issues_dev/</guid><description>
 &lt;p>Apache Software Foundation 在消除其软件项目中的安全性问题方面采取严格的立场。Apache Dubbo 对与其功能和特性有关的问题非常敏感并很快提出。&lt;/p>
 &lt;h2 id="报告漏洞">报告漏洞&lt;/h2>
