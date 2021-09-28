@@ -23,7 +23,7 @@ src |-main |-java |-com |-xxx |-XxxExporterListener.java (实现ExporterListener
 package com.xxx; import org.apache.dubbo.rpc.ExporterListener; import org.apache.dubbo.rpc.Exporter; import org.apache.dubbo.rpc.RpcException; public class XxxExporterListener implements ExporterListener { public void exported(Exporter<?> exporter) throws RpcException { // ...  } public void unexported(Exporter<?> exporter) throws RpcException { // ...  } } META-INF/dubbo/org.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docsv2.7/dev/impls/exporter-listener/"><meta property="article:section" content="docsv2.7">
-<meta property="article:modified_time" content="2021-09-22T16:12:59+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-09-27T20:32:20+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="暴露监听扩展">
 <meta itemprop=description content="扩展说明 当有服务暴露时，触发该事件。
 扩展接口 org.apache.dubbo.rpc.ExporterListener
@@ -31,7 +31,7 @@ package com.xxx; import org.apache.dubbo.rpc.ExporterListener; import org.apache
 扩展示例 Maven 项目结构：
 src |-main |-java |-com |-xxx |-XxxExporterListener.java (实现ExporterListener接口) |-resources |-META-INF |-dubbo |-org.apache.dubbo.rpc.ExporterListener (纯文本文件，内容为：xxx=com.xxx.XxxExporterListener) XxxExporterListener.java：
 package com.xxx; import org.apache.dubbo.rpc.ExporterListener; import org.apache.dubbo.rpc.Exporter; import org.apache.dubbo.rpc.RpcException; public class XxxExporterListener implements ExporterListener { public void exported(Exporter<?> exporter) throws RpcException { // ...  } public void unexported(Exporter<?> exporter) throws RpcException { // ...  } } META-INF/dubbo/org.">
-<meta itemprop=dateModified content="2021-09-22T16:12:59+08:00">
+<meta itemprop=dateModified content="2021-09-27T20:32:20+08:00">
 <meta itemprop=wordCount content="72">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="暴露监听扩展">
