@@ -7113,7 +7113,7 @@ consumer://30.5.120.217/org.apache.dubbo.demo.DemoService?application=demo-consu
 &lt;p>基于扩展点自适应机制，通过提供者 URL 的 &lt;code>dubbo://&lt;/code> 协议头识别，就会调用 &lt;code>DubboProtocol&lt;/code> 的 &lt;code>refer()&lt;/code> 方法，得到提供者引用。&lt;/p>
 &lt;p>然后 &lt;code>RegistryProtocol&lt;/code> 将多个提供者引用，通过 &lt;code>Cluster&lt;/code> 扩展点，伪装成单个提供者引用返回。&lt;/p>
 &lt;h3 id="url-统一模型的意义">URL 统一模型的意义&lt;/h3>
-&lt;p>对于 dubbo 中的 URL，有人理解为配置总线，有人理解为统一配置模型，说法虽然不同，但都是在表达一个意思，这样的 URL 在 dubbo 中被当做是&lt;a href="http://dubbo.apache.org/zh-cn/docs/dev/contract.html">公共契约&lt;/a>，所有扩展点参数都包含 URL 参数，URL 作为上下文信息贯穿整个扩展点设计体系。&lt;/p>
+&lt;p>对于 dubbo 中的 URL，有人理解为配置总线，有人理解为统一配置模型，说法虽然不同，但都是在表达一个意思，这样的 URL 在 dubbo 中被当做是&lt;a href="https://dubbo.apache.org/zh/docs/v2.7/dev/contract/">公共契约&lt;/a>，所有扩展点参数都包含 URL 参数，URL 作为上下文信息贯穿整个扩展点设计体系。&lt;/p>
 &lt;p>在没有 URL 之前，只能以字符串传递参数，不停的解析和拼装，导致相同类型的接口，参数时而 Map, 时而 Parameters 类包装：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">export&lt;span style="color:#719e07">(&lt;/span>String url&lt;span style="color:#719e07">)&lt;/span>
 createExporter&lt;span style="color:#719e07">(&lt;/span>String host&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#dc322f">int&lt;/span> port&lt;span style="color:#719e07">,&lt;/span> Parameters params&lt;span style="color:#719e07">)&lt;/span>

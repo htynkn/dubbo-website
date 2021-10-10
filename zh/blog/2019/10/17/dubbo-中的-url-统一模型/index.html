@@ -15,20 +15,20 @@
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
 <title>Dubbo 中的 URL 统一模型 | Apache Dubbo</title><meta property="og:title" content="Dubbo 中的 URL 统一模型">
-<meta property="og:description" content="URL 是 Dubbo 种一个重要的领域模型，了解它可以更加轻松的理解 Dubbo 的设计理念。
+<meta property="og:description" content="URL 是 Dubbo 中一个重要的领域模型，了解它可以更加轻松的理解 Dubbo 的设计理念。
 ">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/blog/2019/10/17/dubbo-%E4%B8%AD%E7%9A%84-url-%E7%BB%9F%E4%B8%80%E6%A8%A1%E5%9E%8B/"><meta property="article:section" content="blog">
 <meta property="article:published_time" content="2019-10-17T00:00:00+00:00">
-<meta property="article:modified_time" content="2021-09-27T20:32:20+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-10-09T15:17:10+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="Dubbo 中的 URL 统一模型">
-<meta itemprop=description content="URL 是 Dubbo 种一个重要的领域模型，了解它可以更加轻松的理解 Dubbo 的设计理念。
+<meta itemprop=description content="URL 是 Dubbo 中一个重要的领域模型，了解它可以更加轻松的理解 Dubbo 的设计理念。
 "><meta itemprop=datePublished content="2019-10-17T00:00:00+00:00">
-<meta itemprop=dateModified content="2021-09-27T20:32:20+08:00">
+<meta itemprop=dateModified content="2021-10-09T15:17:10+08:00">
 <meta itemprop=wordCount content="455">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Dubbo 中的 URL 统一模型">
-<meta name=twitter:description content="URL 是 Dubbo 种一个重要的领域模型，了解它可以更加轻松的理解 Dubbo 的设计理念。
+<meta name=twitter:description content="URL 是 Dubbo 中一个重要的领域模型，了解它可以更加轻松的理解 Dubbo 的设计理念。
 ">
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-112489517-1','auto'),ga('send','pageview'))</script>
 <script async src=https://www.google-analytics.com/analytics.js></script>
@@ -274,7 +274,7 @@ RSS <i class="fa fa-rss ml-2"></i>
 </a>
 <div class=td-content>
 <h1>Dubbo 中的 URL 统一模型</h1>
-<div class=lead>URL 是 Dubbo 种一个重要的领域模型，了解它可以更加轻松的理解 Dubbo 的设计理念。</div>
+<div class=lead>URL 是 Dubbo 中一个重要的领域模型，了解它可以更加轻松的理解 Dubbo 的设计理念。</div>
 <div class="td-byline mb-4">
 <time datetime=2019-10-17 class=text-muted>Thursday, October 17, 2019</time>
 </div>
@@ -379,7 +379,7 @@ consumer://30.5.120.217/org.apache.dubbo.demo.DemoService?application=demo-consu
 <p>基于扩展点自适应机制，通过提供者 URL 的 <code>dubbo://</code> 协议头识别，就会调用 <code>DubboProtocol</code> 的 <code>refer()</code> 方法，得到提供者引用。</p>
 <p>然后 <code>RegistryProtocol</code> 将多个提供者引用，通过 <code>Cluster</code> 扩展点，伪装成单个提供者引用返回。</p>
 <h3 id=url-统一模型的意义>URL 统一模型的意义</h3>
-<p>对于 dubbo 中的 URL，有人理解为配置总线，有人理解为统一配置模型，说法虽然不同，但都是在表达一个意思，这样的 URL 在 dubbo 中被当做是<a href=http://dubbo.apache.org/zh-cn/docs/dev/contract.html>公共契约</a>，所有扩展点参数都包含 URL 参数，URL 作为上下文信息贯穿整个扩展点设计体系。</p>
+<p>对于 dubbo 中的 URL，有人理解为配置总线，有人理解为统一配置模型，说法虽然不同，但都是在表达一个意思，这样的 URL 在 dubbo 中被当做是<a href=https://dubbo.apache.org/zh/docs/v2.7/dev/contract/>公共契约</a>，所有扩展点参数都包含 URL 参数，URL 作为上下文信息贯穿整个扩展点设计体系。</p>
 <p>在没有 URL 之前，只能以字符串传递参数，不停的解析和拼装，导致相同类型的接口，参数时而 Map, 时而 Parameters 类包装：</p>
 <div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>export<span style=color:#719e07>(</span>String url<span style=color:#719e07>)</span> 
 createExporter<span style=color:#719e07>(</span>String host<span style=color:#719e07>,</span> <span style=color:#dc322f>int</span> port<span style=color:#719e07>,</span> Parameters params<span style=color:#719e07>)</span>
