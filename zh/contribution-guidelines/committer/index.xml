@@ -244,18 +244,18 @@ $ mkdir &lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">$ &lt;span style="color:#719e07">(&lt;/span>gpg --list-sigs &amp;lt;your name&amp;gt; &lt;span style="color:#719e07">&amp;amp;&amp;amp;&lt;/span> gpg --armor --export &amp;lt;your name&amp;gt;&lt;span style="color:#719e07">)&lt;/span> &amp;gt;&amp;gt; KEYS
 &lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
-&lt;p>拷贝&lt;code>distribution/target&lt;/code>下的source相关的包到svn本地仓库&lt;code>dubbo/${release_version}&lt;/code>&lt;/p>
+&lt;p>拷贝&lt;code>dubbo-distribution/dubbo-apache-release/target&lt;/code>下的source相关的包到svn本地仓库&lt;code>dubbo/${release_version}&lt;/code>&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>生成sha512签名&lt;/p>
-&lt;p>针对&lt;code>source-release.zip&lt;/code>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ shasum -a &lt;span style="color:#2aa198">512&lt;/span> apache-dubbo-&lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">release_version&lt;/span>&lt;span style="color:#2aa198">}&lt;/span>-source-release.zip &amp;gt;&amp;gt; apache-dubbo-&lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">release_version&lt;/span>&lt;span style="color:#2aa198">}&lt;/span>-source-release.zip.sha512
+&lt;p>针对&lt;code>src.zip&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ shasum -a &lt;span style="color:#2aa198">512&lt;/span> apache-dubbo-&lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">release_version&lt;/span>&lt;span style="color:#2aa198">}&lt;/span>-src.zip &amp;gt;&amp;gt; apache-dubbo-&lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">release_version&lt;/span>&lt;span style="color:#2aa198">}&lt;/span>-src.zip.sha512
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>针对&lt;code>bin-release.zip&lt;/code>，需要增加&lt;code>-b&lt;/code>参数，表明是一个二进制文件&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ shasum -b -a &lt;span style="color:#2aa198">512&lt;/span> apache-dubbo-&lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">release_version&lt;/span>&lt;span style="color:#2aa198">}&lt;/span>-bin-release.zip &amp;gt;&amp;gt; apache-dubbo-&lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">release_version&lt;/span>&lt;span style="color:#2aa198">}&lt;/span>-bin-release.zip.sha512
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ shasum -b -a &lt;span style="color:#2aa198">512&lt;/span> apache-dubbo-&lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">release_version&lt;/span>&lt;span style="color:#2aa198">}&lt;/span>-bin.zip &amp;gt;&amp;gt; apache-dubbo-&lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">release_version&lt;/span>&lt;span style="color:#2aa198">}&lt;/span>-bin.zip.sha512
 &lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>如果有binary release要同时发布&lt;/p>
-&lt;p>在&lt;code>distribution/target&lt;/code>目录下，拷贝&lt;code>bin-release.zip&lt;/code>以及&lt;code>bin-release.zip.asc&lt;/code>到svn本地仓库&lt;code>dubbo/${release_version}&lt;/code>，参考第6步，生成sha512签名。&lt;/p>
+&lt;p>在&lt;code>dubbo-distribution/dubbo-apache-release/target&lt;/code>目录下，拷贝&lt;code>bin.zip&lt;/code>以及&lt;code>bin.zip.asc&lt;/code>到svn本地仓库&lt;code>dubbo/${release_version}&lt;/code>，参考第6步，生成sha512签名。&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>提交到Apache svn&lt;/p>
@@ -279,8 +279,8 @@ https://dist.apache.org/repos/dist/dev/dubbo/${release_version}/
 &lt;p>然后，开始验证环节，验证包含但不限于以下内容和形式&lt;/p>
 &lt;h3 id="检查签名和hash等信息">检查签名和hash等信息&lt;/h3>
 &lt;h4 id="检查sha512哈希">检查sha512哈希&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">$ shasum -c apache-dubbo-&lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">release_version&lt;/span>&lt;span style="color:#2aa198">}&lt;/span>-source-release.zip.sha512
-$ shasum -c apache-dubbo-&lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">release_version&lt;/span>&lt;span style="color:#2aa198">}&lt;/span>-bin-release.zip.sha512
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">$ shasum -c apache-dubbo-&lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">release_version&lt;/span>&lt;span style="color:#2aa198">}&lt;/span>-src.zip.sha512
+$ shasum -c apache-dubbo-&lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">release_version&lt;/span>&lt;span style="color:#2aa198">}&lt;/span>-bin.zip.sha512
 &lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="检查gpg签名">检查gpg签名&lt;/h4>
 &lt;p>如果是第一次检查，需要首先导入公钥。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh"> $ curl https://dist.apache.org/repos/dist/dev/dubbo/KEYS &amp;gt;&amp;gt; KEYS &lt;span style="color:#586e75"># download public keys to local directory&lt;/span>
@@ -288,10 +288,10 @@ $ gpg --import KEYS &lt;span style="color:#586e75"># import keys&lt;/span>
 $ gpg —-edit-key liujun
 &amp;gt; trust &lt;span style="color:#586e75"># type trust command&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>然后使用如下命令检查签名&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">gpg --verify apache-dubbo-2.6.3-source-release.zip.asc apache-dubbo-2.6.3-source-release.zip
-gpg --verify apache-dubbo-2.6.3-bin-release.zip.asc apache-dubbo-2.6.3-bin-release.zip
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">gpg --verify apache-dubbo-3.0.4-src.zip.asc apache-dubbo-3.0.4-src.zip
+gpg --verify apache-dubbo-3.0.4-bin.zip.asc apache-dubbo-3.0.4-bin.zip
 &lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="检查源码包的文件内容">检查源码包的文件内容&lt;/h3>
-&lt;p>解压缩&lt;code>apache-dubbo-${release_version}-source-release.zip&lt;/code>，进行如下检查:&lt;/p>
+&lt;p>解压缩&lt;code>apache-dubbo-${release_version}-src.zip&lt;/code>，进行如下检查:&lt;/p>
 &lt;ul>
 &lt;li>DISCLAIMER exists&lt;/li>
 &lt;li>LICENSE and NOTICE exists and contents are good&lt;/li>
@@ -319,7 +319,7 @@ find . -name THIRD-PARTY.txt | xargs grep -E &lt;span style="color:#2aa198">&amp
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>如果一个依赖提供了双协议或多重协议，可以选择与Apache最兼容的一个协议。&lt;/p>
 &lt;p>你可以参考此文章：&lt;a href="https://apache.org/legal/resolved.html">ASF第三方许可证策&lt;/a>&lt;/p>
 &lt;h3 id="检查二进制包的文件内容">检查二进制包的文件内容&lt;/h3>
-&lt;p>解压缩&lt;code>apache-dubbo-${release_version}-bin-release.zip&lt;/code>，进行如下检查:&lt;/p>
+&lt;p>解压缩&lt;code>apache-dubbo-${release_version}-bin.zip&lt;/code>，进行如下检查:&lt;/p>
 &lt;ul>
 &lt;li>Check signatures are good&lt;/li>
 &lt;li>LICENSE and NOTICE exists and contents are good&lt;/li>
@@ -366,6 +366,7 @@ The Apache Dubbo Team
 &lt;li>将&lt;a href="https://dist.apache.org/repos/dist/dev/dubbo">dev&lt;/a>目录下的发布包添加到&lt;a href="https://dist.apache.org/repos/dist/release/dubbo">release&lt;/a>目录下，KEYS有更新的，也需要同步更新。&lt;/li>
 &lt;li>删除&lt;a href="https://dist.apache.org/repos/dist/dev/dubbo">dev&lt;/a>目录下的发布包&lt;/li>
 &lt;li>删除&lt;a href="https://dist.apache.org/repos/dist/release/dubbo">release&lt;/a>目录下上一个版本的发布包，这些包会被自动保存在&lt;a href="https://archive.apache.org/dist/dubbo">这里&lt;/a>&lt;/li>
+&lt;li>此步骤为发布2.7.0及以上版本必须要的步骤。在此之前请先确保所有的artifact都是ok的。登录http://repository.apache.org，点击左侧的&lt;code>Staging repositories&lt;/code>，然后搜索Dubbo关键字，会出现一系列的仓库，选择你最近上传的仓库，然后点击上方的Release按钮.&lt;/li>
 &lt;li>发布GitHub上的&lt;a href="https://github.com/apache/dubbo/releases">release notes&lt;/a>&lt;/li>
 &lt;li>修改GitHub的Readme文件，将版本号更新到最新发布的版本&lt;/li>
 &lt;li>在官网下载&lt;a href="http://dubbo.apache.org/en-us/blog/download.html">页面&lt;/a>上添加最新版本的下载链接。最新的下载链接应该类似&lt;a href="https://www.apache.org/dyn/closer.cgi?path=dubbo/$VERSION/apache-dubbo-$VERSION-source-release.zip">这样&lt;/a>. 同时更新以前版本的下载链接，改为类似&lt;a href="https://archive.apache.org/dist/dubbo/$VERSION/apache-dubbo-$VERSION-bin-release.zip">这样&lt;/a>. 具体可以参考过往的&lt;a href="https://github.com/apache/dubbo-website/blob/asf-site/blog/en-us/download.md">下载链接&lt;/a> [可以参考] (&lt;a href="https://github.com/apache/dubbo-website/pull/887">https://github.com/apache/dubbo-website/pull/887&lt;/a>)&lt;/li>
