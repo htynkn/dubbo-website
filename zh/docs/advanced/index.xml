@@ -1799,7 +1799,7 @@ providerConfig&lt;span style="color:#719e07">.&lt;/span>setTag&lt;span style="co
 &lt;p>&lt;code>2.2.0&lt;/code> 以上版本支持&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:2" role="doc-endnote">
-&lt;p>路由规则扩展点：&lt;a href="../../../dev/impls/router">路由扩展&lt;/a>&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>路由规则扩展点：&lt;a href="../../references/spis/router">路由扩展&lt;/a>&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:3" role="doc-endnote">
 &lt;p>注意：一个服务只能有一条白名单规则，否则两条规则交叉，就都被筛选掉了&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
