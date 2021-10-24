@@ -367,7 +367,7 @@ Dubbo 定义了一些中心化组件，这包括：&lt;/p>
 &lt;h2 id="如何使用-dubbo-扩展能力进行扩展">如何使用 Dubbo 扩展能力进行扩展&lt;/h2>
 &lt;p>下面以扩展注册中心为例进行说明如何利用 Dubbo 提供的扩展能力扩展 Triple 协议。&lt;/p>
 &lt;p>(1) 在协议的实现 jar 包内放置文本文件：META-INF/dubbo/org.apache.dubbo.remoting.api.WireProtocol&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">tri=org.apache.dubbo.remoting.api.WireProtocol
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-text" data-lang="text">tri=org.apache.dubbo.rpc.protocol.tri.TripleHttp2Protocol
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>(2) 实现类内容&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">@Activate&lt;/span>
 &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">TripleHttp2Protocol&lt;/span> &lt;span style="color:#268bd2">extends&lt;/span> Http2WireProtocol &lt;span style="color:#719e07">{&lt;/span>

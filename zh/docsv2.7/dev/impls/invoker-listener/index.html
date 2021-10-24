@@ -23,7 +23,7 @@ src |-main |-java |-com |-xxx |-XxxInvokerListener.java (实现InvokerListener�
 package com.xxx; import org.apache.dubbo.rpc.InvokerListener; import org.apache.dubbo.rpc.Invoker; import org.apache.dubbo.rpc.RpcException; public class XxxInvokerListener implements InvokerListener { public void referred(Invoker<?> invoker) throws RpcException { // ...  } public void destroyed(Invoker<?> invoker) throws RpcException { // ...  } } META-INF/dubbo/org.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docsv2.7/dev/impls/invoker-listener/"><meta property="article:section" content="docsv2.7">
-<meta property="article:modified_time" content="2021-10-21T11:07:52+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-10-23T21:32:12+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="引用监听扩展">
 <meta itemprop=description content="扩展说明 当有服务引用时，触发该事件。
 扩展接口 org.apache.dubbo.rpc.InvokerListener
@@ -31,7 +31,7 @@ package com.xxx; import org.apache.dubbo.rpc.InvokerListener; import org.apache.
 扩展示例 Maven 项目结构：
 src |-main |-java |-com |-xxx |-XxxInvokerListener.java (实现InvokerListener接口) |-resources |-META-INF |-dubbo |-org.apache.dubbo.rpc.InvokerListener (纯文本文件，内容为：xxx=com.xxx.XxxInvokerListener) XxxInvokerListener.java：
 package com.xxx; import org.apache.dubbo.rpc.InvokerListener; import org.apache.dubbo.rpc.Invoker; import org.apache.dubbo.rpc.RpcException; public class XxxInvokerListener implements InvokerListener { public void referred(Invoker<?> invoker) throws RpcException { // ...  } public void destroyed(Invoker<?> invoker) throws RpcException { // ...  } } META-INF/dubbo/org.">
-<meta itemprop=dateModified content="2021-10-21T11:07:52+08:00">
+<meta itemprop=dateModified content="2021-10-23T21:32:12+08:00">
 <meta itemprop=wordCount content="72">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="引用监听扩展">

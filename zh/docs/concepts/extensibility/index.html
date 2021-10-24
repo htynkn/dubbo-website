@@ -18,10 +18,10 @@
 <meta property="og:description" content="Dubbo 通过 SPI 机制提供了非常灵活的可扩展性">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docs/concepts/extensibility/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-10-21T11:07:52+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-10-23T21:32:12+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="如何扩展 Dubbo">
 <meta itemprop=description content="Dubbo 通过 SPI 机制提供了非常灵活的可扩展性">
-<meta itemprop=dateModified content="2021-10-21T11:07:52+08:00">
+<meta itemprop=dateModified content="2021-10-23T21:32:12+08:00">
 <meta itemprop=wordCount content="174">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="如何扩展 Dubbo">
@@ -617,7 +617,7 @@ Releases
 <h2 id=如何使用-dubbo-扩展能力进行扩展>如何使用 Dubbo 扩展能力进行扩展</h2>
 <p>下面以扩展注册中心为例进行说明如何利用 Dubbo 提供的扩展能力扩展 Triple 协议。</p>
 <p>(1) 在协议的实现 jar 包内放置文本文件：META-INF/dubbo/org.apache.dubbo.remoting.api.WireProtocol</p>
-<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>tri=org.apache.dubbo.remoting.api.WireProtocol
+<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text>tri=org.apache.dubbo.rpc.protocol.tri.TripleHttp2Protocol
 </code></pre></div><p>(2) 实现类内容</p>
 <div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#268bd2>@Activate</span>
 <span style=color:#268bd2>public</span> <span style=color:#268bd2>class</span> <span style=color:#268bd2>TripleHttp2Protocol</span> <span style=color:#268bd2>extends</span> Http2WireProtocol <span style=color:#719e07>{</span>
