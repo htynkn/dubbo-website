@@ -22,14 +22,14 @@ src |-main |-java |-com |-xxx |-XxxDispatcher.java (Dispatcher implementation) |
 package com.xxx; import org.apache.dubbo.remoting.Dispatcher; public class XxxDispatcher implements Dispatcher { public Group lookup(URL url) { // .">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/en/docs/v2.7/dev/impls/dispatcher/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-10-24T21:25:42+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-11-01T10:30:52+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="Dispatcher Extension">
 <meta itemprop=description content="Summary Thread pool dispatch strategy.
 Extension Interface org.apache.dubbo.remoting.Dispatcher
 Extension Configuration <dubbo:protocol dispatcher=&#34;xxx&#34; /> <!-- default configuration, will take effect if dispatcher attribute is not set in <dubbo:protocol> --> <dubbo:provider dispatcher=&#34;xxx&#34; /> Existing Extensions  org.apache.dubbo.remoting.transport.dispatcher.all.AllDispatcher org.apache.dubbo.remoting.transport.dispatcher.direct.DirectDispatcher org.apache.dubbo.remoting.transport.dispatcher.message.MessageOnlyDispatcher org.apache.dubbo.remoting.transport.dispatcher.execution.ExecutionDispatcher org.apache.dubbo.remoting.transport.dispatcher.connection.ConnectionOrderedDispatcher  Extension Guide Directory layout:
 src |-main |-java |-com |-xxx |-XxxDispatcher.java (Dispatcher implementation) |-resources |-META-INF |-dubbo |-org.apache.dubbo.remoting.Dispatcher (plain text file with the content: xxx=com.xxx.XxxDispatcher) XxxDispatcher.java：
 package com.xxx; import org.apache.dubbo.remoting.Dispatcher; public class XxxDispatcher implements Dispatcher { public Group lookup(URL url) { // .">
-<meta itemprop=dateModified content="2021-10-24T21:25:42+08:00">
+<meta itemprop=dateModified content="2021-11-01T10:30:52+08:00">
 <meta itemprop=wordCount content="83">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Dispatcher Extension">

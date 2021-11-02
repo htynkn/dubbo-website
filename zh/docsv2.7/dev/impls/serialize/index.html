@@ -21,13 +21,13 @@ src |-main |-java |-com |-xxx |-XxxSerialization.java (实现Serialization接口
 package com.xxx; import org.apache.dubbo.common.serialize.Serialization; import org.apache.dubbo.common.serialize.ObjectInput; import org.apache.dubbo.common.serialize.ObjectOutput; public class XxxSerialization implements Serialization { public ObjectOutput serialize(Parameters parameters, OutputStream output) throws IOException { return new XxxObjectOutput(output); } public ObjectInput deserialize(Parameters parameters, InputStream input) throws IOException { return new XxxObjectInput(input); } } META-INF/dubbo/org.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docsv2.7/dev/impls/serialize/"><meta property="article:section" content="docsv2.7">
-<meta property="article:modified_time" content="2021-10-24T21:25:42+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-11-01T10:30:52+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="序列化扩展">
 <meta itemprop=description content="扩展说明 将对象转成字节流，用于网络传输，以及将字节流转为对象，用于在收到字节流数据后还原成对象。
 扩展接口  org.apache.dubbo.common.serialize.Serialization org.apache.dubbo.common.serialize.ObjectInput org.apache.dubbo.common.serialize.ObjectOutput  扩展配置 <!-- 协议的序列化方式 --> <dubbo:protocol serialization=&#34;xxx&#34; /> <!-- 缺省值设置，当<dubbo:protocol>没有配置serialization时，使用此配置 --> <dubbo:provider serialization=&#34;xxx&#34; /> 已知扩展  org.apache.dubbo.common.serialize.dubbo.DubboSerialization org.apache.dubbo.common.serialize.hessian.Hessian2Serialization org.apache.dubbo.common.serialize.java.JavaSerialization org.apache.dubbo.common.serialize.java.CompactedJavaSerialization  扩展示例 Maven 项目结构：
 src |-main |-java |-com |-xxx |-XxxSerialization.java (实现Serialization接口) |-XxxObjectInput.java (实现ObjectInput接口) |-XxxObjectOutput.java (实现ObjectOutput接口) |-resources |-META-INF |-dubbo |-org.apache.dubbo.common.serialize.Serialization (纯文本文件，内容为：xxx=com.xxx.XxxSerialization) XxxSerialization.java：
 package com.xxx; import org.apache.dubbo.common.serialize.Serialization; import org.apache.dubbo.common.serialize.ObjectInput; import org.apache.dubbo.common.serialize.ObjectOutput; public class XxxSerialization implements Serialization { public ObjectOutput serialize(Parameters parameters, OutputStream output) throws IOException { return new XxxObjectOutput(output); } public ObjectInput deserialize(Parameters parameters, InputStream input) throws IOException { return new XxxObjectInput(input); } } META-INF/dubbo/org.">
-<meta itemprop=dateModified content="2021-10-24T21:25:42+08:00">
+<meta itemprop=dateModified content="2021-11-01T10:30:52+08:00">
 <meta itemprop=wordCount content="87">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="序列化扩展">
