@@ -2,7 +2,7 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
-<meta name=generator content="Hugo 0.88.1">
+<meta name=generator content="Hugo 0.89.0">
 <meta name=ROBOTS content="INDEX, FOLLOW">
 <link rel="shortcut icon" href=/favicons/favicon.ico>
 <link rel=apple-touch-icon href=/favicons/apple-touch-icon-180x180.png sizes=180x180>
@@ -22,7 +22,7 @@
 <meta itemprop=name content="简单监控">
 <meta itemprop=description content="Dubbo 中的简单监控服务">
 <meta itemprop=dateModified content="2021-11-01T10:30:52+08:00">
-<meta itemprop=wordCount content="99">
+<meta itemprop=wordCount content="70">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="简单监控">
 <meta name=twitter:description content="Dubbo 中的简单监控服务">
@@ -600,20 +600,15 @@ Releases
    xmlns:xsi=<span style=color:#2aa198>&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
    xmlns:dubbo=<span style=color:#2aa198>&#34;http://dubbo.apache.org/schema/dubbo&#34;</span>
    xsi:schemaLocation=<span style=color:#2aa198>&#34;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd&#34;</span><span style=color:#268bd2>&gt;</span>
-
-   <span style=color:#586e75>&lt;!-- 当前应用信息配置 --&gt;</span>
+ 
    <span style=color:#268bd2>&lt;dubbo:application</span> name=<span style=color:#2aa198>&#34;simple-monitor&#34;</span> <span style=color:#268bd2>/&gt;</span>
-
-   <span style=color:#586e75>&lt;!-- 连接注册中心配置 --&gt;</span>
+ 
    <span style=color:#268bd2>&lt;dubbo:registry</span> address=<span style=color:#2aa198>&#34;127.0.0.1:9090&#34;</span> <span style=color:#268bd2>/&gt;</span>
-
-   <span style=color:#586e75>&lt;!-- 暴露服务协议配置 --&gt;</span>
+ 
    <span style=color:#268bd2>&lt;dubbo:protocol</span> port=<span style=color:#2aa198>&#34;7070&#34;</span> <span style=color:#268bd2>/&gt;</span>
-
-   <span style=color:#586e75>&lt;!-- 暴露服务配置 --&gt;</span>
+ 
    <span style=color:#268bd2>&lt;dubbo:service</span> interface=<span style=color:#2aa198>&#34;org.apache.dubbo.monitor.MonitorService&#34;</span> ref=<span style=color:#2aa198>&#34;monitorService&#34;</span> <span style=color:#268bd2>/&gt;</span>
-
-   <span style=color:#268bd2>&lt;bean</span> id=<span style=color:#2aa198>&#34;monitorService&#34;</span> class=<span style=color:#2aa198>&#34;org.apache.dubbo.monitor.simple.SimpleMonitorService&#34;</span> <span style=color:#268bd2>/&gt;</span>
+ 
 <span style=color:#268bd2>&lt;/beans&gt;</span>
 </code></pre></div></li>
 <li>
@@ -628,17 +623,13 @@ Releases
     xmlns:xsi=<span style=color:#2aa198>&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
     xmlns:dubbo=<span style=color:#2aa198>&#34;http://dubbo.apache.org/schema/dubbo&#34;</span>
     xsi:schemaLocation=<span style=color:#2aa198>&#34;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd&#34;</span><span style=color:#268bd2>&gt;</span>
-
-    <span style=color:#586e75>&lt;!-- 当前应用信息配置 --&gt;</span>
+ 
     <span style=color:#268bd2>&lt;dubbo:application</span> name=<span style=color:#2aa198>&#34;simple-monitor&#34;</span> <span style=color:#268bd2>/&gt;</span>
-
-    <span style=color:#586e75>&lt;!-- 暴露服务协议配置 --&gt;</span>
+ 
     <span style=color:#268bd2>&lt;dubbo:protocol</span> port=<span style=color:#2aa198>&#34;7070&#34;</span> <span style=color:#268bd2>/&gt;</span>
-
-    <span style=color:#586e75>&lt;!-- 暴露服务配置 --&gt;</span>
+ 
     <span style=color:#268bd2>&lt;dubbo:service</span> interface=<span style=color:#2aa198>&#34;org.apache.dubbo.monitor.MonitorService&#34;</span> ref=<span style=color:#2aa198>&#34;monitorService&#34;</span> registry=<span style=color:#2aa198>&#34;N/A&#34;</span> <span style=color:#268bd2>/&gt;</span>
-
-    <span style=color:#268bd2>&lt;bean</span> id=<span style=color:#2aa198>&#34;monitorService&#34;</span> class=<span style=color:#2aa198>&#34;org.apache.dubbo.monitor.simple.SimpleMonitorService&#34;</span> <span style=color:#268bd2>/&gt;</span>   
+ 
 <span style=color:#268bd2>&lt;/beans&gt;</span>
 </code></pre></div></li>
 <li>

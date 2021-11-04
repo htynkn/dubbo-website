@@ -2,7 +2,7 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
-<meta name=generator content="Hugo 0.88.1">
+<meta name=generator content="Hugo 0.89.0">
 <meta name=ROBOTS content="INDEX, FOLLOW">
 <link rel="shortcut icon" href=/favicons/favicon.ico>
 <link rel=apple-touch-icon href=/favicons/apple-touch-icon-180x180.png sizes=180x180>
@@ -26,7 +26,7 @@ Please refer to the following links for more information on ASF&rsquo;s release 
 Please refer to the following links for more information on ASF&rsquo;s release guide:
  Apache Release Guide Apache Release Policy Maven Release Info  Preparation of Local Building Environment Mainly including the related preparation of signature utilities and Maven repository certification">
 <meta itemprop=dateModified content="2021-11-01T10:30:52+08:00">
-<meta itemprop=wordCount content="2520">
+<meta itemprop=wordCount content="2465">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Release Guide">
 <meta name=twitter:description content="Understanding the Apache Release Cycle In general, Source Release is the key and the required content of Apache. But Binary Release is optional, Dubbo can choose whether to release binary packages to the Apache repository or to the Maven central repository.
@@ -689,8 +689,7 @@ $ gpg --version <span style=color:#586e75>#check version,should be 2.x</span>
 gpg <span style=color:#719e07>(</span>GnuPG<span style=color:#719e07>)</span> 2.0.12; Copyright <span style=color:#719e07>(</span>C<span style=color:#719e07>)</span> <span style=color:#2aa198>2009</span> Free Software Foundation, Inc.
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
-
-Please <span style=color:#719e07>select</span> what kind of key you want:
+ 
   <span style=color:#719e07>(</span>1<span style=color:#719e07>)</span> RSA and RSA <span style=color:#719e07>(</span>default<span style=color:#719e07>)</span>
   <span style=color:#719e07>(</span>2<span style=color:#719e07>)</span> DSA and Elgamal
   <span style=color:#719e07>(</span>3<span style=color:#719e07>)</span> DSA <span style=color:#719e07>(</span>sign only<span style=color:#719e07>)</span>
@@ -708,16 +707,13 @@ Please specify how long the key should be valid.
 Key is valid <span style=color:#719e07>for</span>? <span style=color:#719e07>(</span>0<span style=color:#719e07>)</span> 
 Key does not expire at all
 Is this correct? <span style=color:#719e07>(</span>y/N<span style=color:#719e07>)</span> y
-
-GnuPG needs to construct a user ID to identify your key.
-
-Real name: Robert Burrell Donkin
+ 
+ 
 Email address: rdonkin@apache.org
 Comment: CODE SIGNING KEY
 You selected this USER-ID:
    <span style=color:#2aa198>&#34;Robert Burrell Donkin (CODE SIGNING KEY) &lt;rdonkin@apache.org&gt;&#34;</span>
-
-Change <span style=color:#719e07>(</span>N<span style=color:#719e07>)</span>ame, <span style=color:#719e07>(</span>C<span style=color:#719e07>)</span>omment, <span style=color:#719e07>(</span>E<span style=color:#719e07>)</span>mail or <span style=color:#719e07>(</span>O<span style=color:#719e07>)</span>kay/<span style=color:#719e07>(</span>Q<span style=color:#719e07>)</span>uit? O
+ 
 You need a Passphrase to protect your secret key. <span style=color:#586e75># enter the password, which will be used frequently when packaging.</span>
 </code></pre></div><ul>
 <li>View key id</li>
@@ -726,15 +722,13 @@ You need a Passphrase to protect your secret key. <span style=color:#586e75># en
 pub   rsa4096/28681CB1 2018-04-26 <span style=color:#586e75># 28681CB1 is the key id</span>
 uid       <span style=color:#719e07>[</span>ultimate<span style=color:#719e07>]</span> liujun <span style=color:#719e07>(</span>apache-dubbo<span style=color:#719e07>)</span> &lt;liujun@apache.org&gt;
 sub   rsa4096/D3D6984B 2018-04-26
-
-<span style=color:#586e75>########### Note: Different diaplay for different version.</span>
+ 
 $ gpg --list-keys
 pub   rsa4096 2018-11-12 <span style=color:#719e07>[</span>SC<span style=color:#719e07>]</span>
       63AAE9838F4A303E40BAF5FEA3A1CA7A5D4A3981     <span style=color:#586e75># Last 8 character(5D4A3981) as key id，it will be used when send public key to keyserver</span>
 uid           <span style=color:#719e07>[</span> 绝对 <span style=color:#719e07>]</span> Victory Cao <span style=color:#719e07>(</span>CODE SIGNING KEY<span style=color:#719e07>)</span> &lt;victory@apache.org&gt;
 sub   rsa4096 2018-11-12 <span style=color:#719e07>[</span>E<span style=color:#719e07>]</span>
-
-
+ 
 <span style=color:#586e75># send public key to keyserver via key id </span>
 $ gpg --keyserver pgpkeys.mit.edu --send-key 28681CB1
 <span style=color:#586e75># Here pgpkeys.mit.edu is a random selection of keyserver. Any key server from the list https://sks-keyservers.net/status/ is acceptable because they are automatically synchronized.</span>
@@ -744,24 +738,20 @@ $ gpg --keyserver pgpkeys.mit.edu --send-key 28681CB1
 <p>~/.gnupg/gpg.conf</p>
 <div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback># If you have more than 1 secret key in your keyring, you may want to
 # uncomment the following option and set your preferred keyid.
-
-default-key 28681CB1
+ 
 </code></pre></div><ul>
 <li>If there are multiple public keys, you can also delete unuseful key：</li>
 </ul>
 <div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=color:#586e75>### Delete the private key first, then delete the public key.</span>
-
-$ gpg --yes --delete-secret-keys shenglicao2@gmail.com   <span style=color:#586e75>### indicate email address  </span>
-
-$ gpg --delete-keys 1808C6444C781C0AEA0AAD4C4D6A8007D20DB8A4 
-
-</code></pre></div><ul>
-<li>config your fingerprint.</li>
-</ul>
-<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=color:#586e75>### Show fingerprint info：</span>
+ 
+ 
+ 
+ 
+<span style=color:#586e75>```</span>sh
+<span style=color:#586e75>### Show fingerprint info：</span>
 $ gpg --fingerprint liujun
 pub   rsa4096 2019-10-17 <span style=color:#719e07>[</span>SC<span style=color:#719e07>]</span>
-      <span style=color:#2aa198>1376</span> A2FF 67E4 C477 <span style=color:#2aa198>5739</span>  09BD 7DB6 <span style=color:#2aa198>8550</span> D366 E4C0
+     <span style=color:#2aa198>1376</span> A2FF 67E4 C477 <span style=color:#2aa198>5739</span>  09BD 7DB6 <span style=color:#2aa198>8550</span> D366 E4C0
 uid           <span style=color:#719e07>[</span>ultimate<span style=color:#719e07>]</span> liujun <span style=color:#719e07>(</span>CODE SIGNING KEY<span style=color:#719e07>)</span> &lt;liujun@apache.org&gt;
 sub   rsa4096 2019-10-17 <span style=color:#719e07>[</span>E<span style=color:#719e07>]</span>
 </code></pre></div><p>Save the fingerprint, as above <code>1376 A2FF 67E4 C477 5739 09BD 7DB6 8550 D366 E4C0</code>,

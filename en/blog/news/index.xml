@@ -1687,7 +1687,6 @@ $ gpg --version &lt;span style="color:#586e75">#check version,should be 2.x&lt;/
 gpg &lt;span style="color:#719e07">(&lt;/span>GnuPG&lt;span style="color:#719e07">)&lt;/span> 2.0.12; Copyright &lt;span style="color:#719e07">(&lt;/span>C&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#2aa198">2009&lt;/span> Free Software Foundation, Inc.
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
-Please &lt;span style="color:#719e07">select&lt;/span> what kind of key you want:
 &lt;span style="color:#719e07">(&lt;/span>1&lt;span style="color:#719e07">)&lt;/span> RSA and RSA &lt;span style="color:#719e07">(&lt;/span>default&lt;span style="color:#719e07">)&lt;/span>
 &lt;span style="color:#719e07">(&lt;/span>2&lt;span style="color:#719e07">)&lt;/span> DSA and Elgamal
 &lt;span style="color:#719e07">(&lt;/span>3&lt;span style="color:#719e07">)&lt;/span> DSA &lt;span style="color:#719e07">(&lt;/span>sign only&lt;span style="color:#719e07">)&lt;/span>
@@ -1705,13 +1704,10 @@ Please specify how long the key should be valid.
 Key is valid &lt;span style="color:#719e07">for&lt;/span>? &lt;span style="color:#719e07">(&lt;/span>0&lt;span style="color:#719e07">)&lt;/span>
 Key does not expire at all
 Is this correct? &lt;span style="color:#719e07">(&lt;/span>y/N&lt;span style="color:#719e07">)&lt;/span> y
-GnuPG needs to construct a user ID to identify your key.
-Real name: Robert Burrell Donkin
 Email address: rdonkin@apache.org
 Comment: CODE SIGNING KEY
 You selected this USER-ID:
 &lt;span style="color:#2aa198">&amp;#34;Robert Burrell Donkin (CODE SIGNING KEY) &amp;lt;rdonkin@apache.org&amp;gt;&amp;#34;&lt;/span>
-Change &lt;span style="color:#719e07">(&lt;/span>N&lt;span style="color:#719e07">)&lt;/span>ame, &lt;span style="color:#719e07">(&lt;/span>C&lt;span style="color:#719e07">)&lt;/span>omment, &lt;span style="color:#719e07">(&lt;/span>E&lt;span style="color:#719e07">)&lt;/span>mail or &lt;span style="color:#719e07">(&lt;/span>O&lt;span style="color:#719e07">)&lt;/span>kay/&lt;span style="color:#719e07">(&lt;/span>Q&lt;span style="color:#719e07">)&lt;/span>uit? O
 You need a Passphrase to protect your secret key. &lt;span style="color:#586e75"># enter the password, which will be used frequently when packaging.&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>View key id&lt;/li>
@@ -1720,7 +1716,6 @@ You need a Passphrase to protect your secret key. &lt;span style="color:#586e75"
 pub rsa4096/28681CB1 2018-04-26 &lt;span style="color:#586e75"># 28681CB1 is the key id&lt;/span>
 uid &lt;span style="color:#719e07">[&lt;/span>ultimate&lt;span style="color:#719e07">]&lt;/span> liujun &lt;span style="color:#719e07">(&lt;/span>apache-dubbo&lt;span style="color:#719e07">)&lt;/span> &amp;lt;liujun@apache.org&amp;gt;
 sub rsa4096/D3D6984B 2018-04-26
-&lt;span style="color:#586e75">########### Note: Different diaplay for different version.&lt;/span>
 $ gpg --list-keys
 pub rsa4096 2018-11-12 &lt;span style="color:#719e07">[&lt;/span>SC&lt;span style="color:#719e07">]&lt;/span>
 63AAE9838F4A303E40BAF5FEA3A1CA7A5D4A3981 &lt;span style="color:#586e75"># Last 8 character(5D4A3981) as key id，it will be used when send public key to keyserver&lt;/span>
@@ -1735,24 +1730,15 @@ $ gpg --keyserver pgpkeys.mit.edu --send-key 28681CB1
 &lt;p>~/.gnupg/gpg.conf&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback"># If you have more than 1 secret key in your keyring, you may want to
 # uncomment the following option and set your preferred keyid.
-default-key 28681CB1
 &lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>If there are multiple public keys, you can also delete unuseful key：&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">&lt;span style="color:#586e75">### Delete the private key first, then delete the public key.&lt;/span>
-$ gpg --yes --delete-secret-keys shenglicao2@gmail.com &lt;span style="color:#586e75">### indicate email address &lt;/span>
-$ gpg --delete-keys 1808C6444C781C0AEA0AAD4C4D6A8007D20DB8A4
-&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;li>
-&lt;p>Set up Apache central repository.&lt;/p>
-&lt;ul>
-&lt;li>The parent pom of Dubbo project is apache pom&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;parent&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>apache&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>19&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;/parent&amp;gt;&lt;/span>
+&amp;lt;parent&amp;gt;
+&amp;lt;groupId&amp;gt;org.apache&amp;lt;/groupId&amp;gt;
+&amp;lt;artifactId&amp;gt;apache&amp;lt;/artifactId&amp;gt;
+&amp;lt;version&amp;gt;19&amp;lt;/version&amp;gt;
+&amp;lt;/parent&amp;gt;
 &lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>
 &lt;p>Add the following contents to .m2/settings.xml&lt;/p>

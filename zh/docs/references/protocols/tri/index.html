@@ -2,7 +2,7 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
-<meta name=generator content="Hugo 0.88.1">
+<meta name=generator content="Hugo 0.89.0">
 <meta name=ROBOTS content="INDEX, FOLLOW">
 <link rel="shortcut icon" href=/favicons/favicon.ico>
 <link rel=apple-touch-icon href=/favicons/apple-touch-icon-180x180.png sizes=180x180>
@@ -22,7 +22,7 @@
 <meta itemprop=name content="Triple 协议">
 <meta itemprop=description content="Triple 协议使用">
 <meta itemprop=dateModified content="2021-11-01T10:30:52+08:00">
-<meta itemprop=wordCount content="495">
+<meta itemprop=wordCount content="463">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Triple 协议">
 <meta name=twitter:description content="Triple 协议使用">
@@ -581,20 +581,20 @@ Releases
 <p>编写 IDL 文件</p>
 <div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-protobuf data-lang=protobuf>syntax <span style=color:#719e07>=</span> <span style=color:#2aa198>&#34;proto3&#34;</span>;
 
-<span style=color:#719e07>option</span> java_multiple_files <span style=color:#719e07>=</span> <span style=color:#cb4b16>true</span>;
+
 <span style=color:#719e07>option</span> java_package <span style=color:#719e07>=</span> <span style=color:#2aa198>&#34;org.apache.dubbo.hello&#34;</span>;
 <span style=color:#719e07>option</span> java_outer_classname <span style=color:#719e07>=</span> <span style=color:#2aa198>&#34;HelloWorldProto&#34;</span>;
 <span style=color:#719e07>option</span> objc_class_prefix <span style=color:#719e07>=</span> <span style=color:#2aa198>&#34;HLW&#34;</span>;
 
-<span style=color:#719e07>package</span> helloworld;
 
-<span style=color:#586e75>// The request message containing the user&#39;s name.
-</span><span style=color:#586e75></span><span style=color:#268bd2>message</span> <span style=color:#268bd2>HelloRequest</span> {
+
+
+<span style=color:#268bd2>message</span> <span style=color:#268bd2>HelloRequest</span> {
   <span style=color:#dc322f>string</span> name <span style=color:#719e07>=</span> <span style=color:#2aa198>1</span>;
 }
 
-<span style=color:#586e75>// The response message containing the greetings
-</span><span style=color:#586e75></span><span style=color:#268bd2>message</span> <span style=color:#268bd2>HelloReply</span> {
+
+<span style=color:#268bd2>message</span> <span style=color:#268bd2>HelloReply</span> {
   <span style=color:#dc322f>string</span> <span style=color:#268bd2>message</span> <span style=color:#719e07>=</span> <span style=color:#2aa198>1</span>;
 }
 </code></pre></div></li>
@@ -665,6 +665,9 @@ Releases
         <span style=color:#719e07>new</span> CountDownLatch<span style=color:#719e07>(</span>1<span style=color:#719e07>).</span>await<span style=color:#719e07>();</span>
     <span style=color:#719e07>}</span>
 
+
+
+
 </code></pre></div></li>
 <li>
 <p>创建 Consumer</p>
@@ -681,7 +684,7 @@ Releases
     ref<span style=color:#719e07>.</span>setRegistry<span style=color:#719e07>(</span><span style=color:#719e07>new</span> RegistryConfig<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;zookeeper://127.0.0.1:2181&#34;</span><span style=color:#719e07>));</span>
     <span style=color:#268bd2>final</span> IGreeter iGreeter <span style=color:#719e07>=</span> ref<span style=color:#719e07>.</span>get<span style=color:#719e07>();</span>
 
-    System<span style=color:#719e07>.</span>out<span style=color:#719e07>.</span>println<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;dubbo ref started&#34;</span><span style=color:#719e07>);</span>
+
     <span style=color:#719e07>try</span> <span style=color:#719e07>{</span>
         <span style=color:#268bd2>final</span> HelloReply reply <span style=color:#719e07>=</span> iGreeter<span style=color:#719e07>.</span>sayHello<span style=color:#719e07>(</span>HelloRequest<span style=color:#719e07>.</span>newBuilder<span style=color:#719e07>()</span>
                 <span style=color:#719e07>.</span>setName<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;name&#34;</span><span style=color:#719e07>)</span>
@@ -710,10 +713,10 @@ Releases
 
 <span style=color:#268bd2>public</span> <span style=color:#268bd2>interface</span> <span style=color:#268bd2>IGreeter</span> <span style=color:#719e07>{</span>
     <span style=color:#586e75>/**
-</span><span style=color:#586e75>    * &lt;pre&gt;
-</span><span style=color:#586e75>    *  Sends greeting by stream
-</span><span style=color:#586e75>    * &lt;/pre&gt;
-</span><span style=color:#586e75>     */</span>
+</span><span style=color:#586e75> 	* &lt;pre&gt;
+</span><span style=color:#586e75> 	*  Sends greeting by stream
+</span><span style=color:#586e75> 	* &lt;/pre&gt;
+</span><span style=color:#586e75>	 */</span>
     StreamObserver<span style=color:#719e07>&lt;</span>HelloRequest<span style=color:#719e07>&gt;</span> <span style=color:#268bd2>sayHello</span><span style=color:#719e07>(</span>StreamObserver<span style=color:#719e07>&lt;</span>HelloReply<span style=color:#719e07>&gt;</span> replyObserver<span style=color:#719e07>);</span>
 
 <span style=color:#719e07>}</span>
@@ -722,13 +725,13 @@ Releases
 <p>编写实现类</p>
 <div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#268bd2>public</span> <span style=color:#268bd2>class</span> <span style=color:#268bd2>IStreamGreeterImpl</span> <span style=color:#268bd2>implements</span> IStreamGreeter <span style=color:#719e07>{</span>
 
-    <span style=color:#268bd2>@Override</span>
+
     <span style=color:#268bd2>public</span> StreamObserver<span style=color:#719e07>&lt;</span>HelloRequest<span style=color:#719e07>&gt;</span> <span style=color:#268bd2>sayHello</span><span style=color:#719e07>(</span>StreamObserver<span style=color:#719e07>&lt;</span>HelloReply<span style=color:#719e07>&gt;</span> replyObserver<span style=color:#719e07>)</span> <span style=color:#719e07>{</span>
 
-        <span style=color:#719e07>return</span> <span style=color:#719e07>new</span> StreamObserver<span style=color:#719e07>&lt;</span>HelloRequest<span style=color:#719e07>&gt;()</span> <span style=color:#719e07>{</span>
+
             <span style=color:#268bd2>private</span> List<span style=color:#719e07>&lt;</span>HelloReply<span style=color:#719e07>&gt;</span> replyList <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ArrayList<span style=color:#719e07>&lt;&gt;();</span>
 
-            <span style=color:#268bd2>@Override</span>
+
             <span style=color:#268bd2>public</span> <span style=color:#dc322f>void</span> <span style=color:#268bd2>onNext</span><span style=color:#719e07>(</span>HelloRequest helloRequest<span style=color:#719e07>)</span> <span style=color:#719e07>{</span>
                 System<span style=color:#719e07>.</span>out<span style=color:#719e07>.</span>println<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;onNext receive request name:&#34;</span> <span style=color:#719e07>+</span> helloRequest<span style=color:#719e07>.</span>getName<span style=color:#719e07>());</span>
                 replyList<span style=color:#719e07>.</span>add<span style=color:#719e07>(</span>HelloReply<span style=color:#719e07>.</span>newBuilder<span style=color:#719e07>()</span>
@@ -736,13 +739,13 @@ Releases
                     <span style=color:#719e07>.</span>build<span style=color:#719e07>());</span>
             <span style=color:#719e07>}</span>
 
-            <span style=color:#268bd2>@Override</span>
+
             <span style=color:#268bd2>public</span> <span style=color:#dc322f>void</span> <span style=color:#268bd2>onError</span><span style=color:#719e07>(</span>Throwable cause<span style=color:#719e07>)</span> <span style=color:#719e07>{</span>
                 System<span style=color:#719e07>.</span>out<span style=color:#719e07>.</span>println<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;onError&#34;</span><span style=color:#719e07>);</span>
                 replyObserver<span style=color:#719e07>.</span>onError<span style=color:#719e07>(</span>cause<span style=color:#719e07>);</span>
             <span style=color:#719e07>}</span>
 
-            <span style=color:#268bd2>@Override</span>
+
             <span style=color:#268bd2>public</span> <span style=color:#dc322f>void</span> <span style=color:#268bd2>onCompleted</span><span style=color:#719e07>()</span> <span style=color:#719e07>{</span>
                 System<span style=color:#719e07>.</span>out<span style=color:#719e07>.</span>println<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;onComplete receive request size:&#34;</span> <span style=color:#719e07>+</span> replyList<span style=color:#719e07>.</span>size<span style=color:#719e07>());</span>
                 <span style=color:#719e07>for</span> <span style=color:#719e07>(</span>HelloReply reply <span style=color:#719e07>:</span> replyList<span style=color:#719e07>)</span> <span style=color:#719e07>{</span>

@@ -2280,15 +2280,10 @@ keepAliveTimeout=&lt;span style="color:#2aa198">&amp;#34;60000&amp;#34;&lt;/span
 xmlns:xsi=&lt;span style="color:#2aa198">&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span>
 xmlns:dubbo=&lt;span style="color:#2aa198">&amp;#34;http://dubbo.apache.org/schema/dubbo&amp;#34;&lt;/span>
 xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
-&lt;span style="color:#586e75">&amp;lt;!-- configuration of current application --&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo:application&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;simple-monitor&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#586e75">&amp;lt;!-- connection address of the registry --&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;127.0.0.1:9090&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#586e75">&amp;lt;!-- protool configuration of exposed services --&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;7070&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#586e75">&amp;lt;!-- configuration of certain exposed service --&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.monitor.MonitorService&amp;#34;&lt;/span> ref=&lt;span style="color:#2aa198">&amp;#34;monitorService&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;bean&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;monitorService&amp;#34;&lt;/span> class=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.monitor.simple.SimpleMonitorService&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;/beans&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
@@ -2306,13 +2301,9 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 xmlns:xsi=&lt;span style="color:#2aa198">&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span>
 xmlns:dubbo=&lt;span style="color:#2aa198">&amp;#34;http://dubbo.apache.org/schema/dubbo&amp;#34;&lt;/span>
 xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
-&lt;span style="color:#586e75">&amp;lt;!-- configuration of current application --&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo:application&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;simple-monitor&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#586e75">&amp;lt;!-- protool configuration of exposed service --&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;7070&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#586e75">&amp;lt;!-- configuration of exposed service --&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.monitor.MonitorService&amp;#34;&lt;/span> ref=&lt;span style="color:#2aa198">&amp;#34;monitorService&amp;#34;&lt;/span> registry=&lt;span style="color:#2aa198">&amp;#34;N/A&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;bean&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;monitorService&amp;#34;&lt;/span> class=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.monitor.simple.SimpleMonitorService&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;/beans&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>

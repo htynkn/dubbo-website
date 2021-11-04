@@ -2,7 +2,7 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
-<meta name=generator content="Hugo 0.88.1">
+<meta name=generator content="Hugo 0.89.0">
 <meta name=ROBOTS content="INDEX, FOLLOW">
 <link rel="shortcut icon" href=/favicons/favicon.ico>
 <link rel=apple-touch-icon href=/favicons/apple-touch-icon-180x180.png sizes=180x180>
@@ -645,7 +645,7 @@ FORCE_APPLICATION：只启用新模式下应用级服务发现的注册中心逻
 <li>Key: 消费者应用名 + &ldquo;.migration&rdquo;</li>
 <li>Group: DUBBO_SERVICEDISCOVERY_MIGRATION</li>
 </ul>
-<p> 
+<p>�
 配置项内容参考上一节</p>
 <p>程序启动时会拉取此配置作为最高优先级启动项，当配置项为启动项时不执行检查操作，直接按状态信息达到终态。
 程序运行过程中收到新配置项将执行迁移操作，过程中根据配置信息进行检查，如果检查失败将回滚为迁移前状态。迁移是按接口粒度执行的，也即是如果一个应用有 10 个接口，其中 8 个迁移成功，2 个失败，那终态 8 个迁移成功的接口将执行新的行为，2 个失败的仍为旧状态。如果需要重新触发迁移可以通过重新下发规则达到。</p>

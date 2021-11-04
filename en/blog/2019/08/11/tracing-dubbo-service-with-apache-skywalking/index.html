@@ -2,7 +2,7 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
-<meta name=generator content="Hugo 0.88.1">
+<meta name=generator content="Hugo 0.89.0">
 <meta name=ROBOTS content="INDEX, FOLLOW">
 <link rel="shortcut icon" href=/favicons/favicon.ico>
 <link rel=apple-touch-icon href=/favicons/apple-touch-icon-180x180.png sizes=180x180>
@@ -280,7 +280,7 @@ private HelloService helloService;
 @GetMapping(&quot;/sayHello/{name}&quot;)
 public String sayHello(@PathVariable(name = &quot;name&quot;) String name) {
 	if ((COUNT++) % 3 == 0){
-        throw new RuntimeException();
+		throw new RuntimeException();
 	}
 	LockSupport.parkNanos(TimeUnit.SECONDS.toNanos(2));
 	return helloService.sayHello(name);
