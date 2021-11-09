@@ -2,7 +2,7 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
-<meta name=generator content="Hugo 0.89.1">
+<meta name=generator content="Hugo 0.89.2">
 <meta name=ROBOTS content="INDEX, FOLLOW">
 <link rel="shortcut icon" href=/favicons/favicon.ico>
 <link rel=apple-touch-icon href=/favicons/apple-touch-icon-180x180.png sizes=180x180>
@@ -25,7 +25,7 @@
 <meta itemprop=description content="本文介绍如何在 Dubbo 中使用 Zipkin 进行全链路追踪
 "><meta itemprop=datePublished content="2018-06-17T00:00:00+00:00">
 <meta itemprop=dateModified content="2021-11-01T10:30:52+08:00">
-<meta itemprop=wordCount content="1435">
+<meta itemprop=wordCount content="1449">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="在 Dubbo 中使用 Zipkin">
 <meta name=twitter:description content="本文介绍如何在 Dubbo 中使用 Zipkin 进行全链路追踪
@@ -452,7 +452,7 @@ o.s.b.w.e.u.UndertowServletWebServer     : Undertow started on port<span style=c
 <p>com.alibaba.dubbo.samples.api.GreetingService</p>
 <div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#719e07>package</span> com.alibaba.dubbo.samples.api<span style=color:#719e07>;</span>
 
-
+<span style=color:#268bd2>public</span> <span style=color:#268bd2>interface</span> <span style=color:#268bd2>GreetingService</span> <span style=color:#719e07>{</span>
     String <span style=color:#268bd2>greeting</span><span style=color:#719e07>(</span>String message<span style=color:#719e07>);</span>
 <span style=color:#719e07>}</span>
 </code></pre></div></li>
@@ -472,11 +472,11 @@ o.s.b.w.e.u.UndertowServletWebServer     : Undertow started on port<span style=c
 <p>实现 com.alibaba.dubbo.samples.api.HelloService</p>
 <div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#719e07>package</span> com.alibaba.dubbo.samples.service.hello<span style=color:#719e07>;</span>
 
+<span style=color:#719e07>import</span> com.alibaba.dubbo.samples.api.HelloService<span style=color:#719e07>;</span>
 
+<span style=color:#719e07>import</span> java.util.Random<span style=color:#719e07>;</span>
 
-
-
-
+<span style=color:#268bd2>public</span> <span style=color:#268bd2>class</span> <span style=color:#268bd2>HelloServiceImpl</span> <span style=color:#268bd2>implements</span> HelloService <span style=color:#719e07>{</span>
     <span style=color:#268bd2>@Override</span>
     <span style=color:#268bd2>public</span> String <span style=color:#268bd2>hello</span><span style=color:#719e07>(</span>String message<span style=color:#719e07>)</span> <span style=color:#719e07>{</span>
         <span style=color:#719e07>try</span> <span style=color:#719e07>{</span>

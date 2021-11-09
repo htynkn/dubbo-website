@@ -193,7 +193,7 @@ Exactly the same as version 3.0.2, except for the following changes.&lt;/p>
 &lt;p>you can follow these &lt;a href="https://www.apache.org/info/verification">procedures&lt;/a> and the &lt;a href="https://downloads.apache.org/PROJECT/KEYS">KEYS&lt;/a> file to verify the download files&lt;/p>
 &lt;h2 id="apache-dubbo">Apache Dubbo&lt;/h2>
 &lt;blockquote>
-&lt;p>GitHub: &lt;a href="https://github.com/apache/dubbo">https://github.com/apache/dubbo&lt;/a>&lt;br>
+&lt;p>GitHub: &lt;a href="https://github.com/apache/dubbo">https://github.com/apache/dubbo&lt;/a> &lt;br>
 Release Notes: &lt;a href="https://github.com/apache/dubbo/releases">https://github.com/apache/dubbo/releases&lt;/a>&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="304-2021-10-24">3.0.4 (2021-10-24)&lt;/h3>
@@ -396,7 +396,7 @@ Release Notes: &lt;a href="https://github.com/apache/dubbo/releases">https://git
 &lt;/ul>
 &lt;h2 id="dubbo-spring-boot-starter">Dubbo Spring Boot Starter&lt;/h2>
 &lt;blockquote>
-&lt;p>GitHub: &lt;a href="https://github.com/apache/incubator-dubbo-spring-boot-project">https://github.com/apache/incubator-dubbo-spring-boot-project&lt;/a>&lt;br>
+&lt;p>GitHub: &lt;a href="https://github.com/apache/incubator-dubbo-spring-boot-project">https://github.com/apache/incubator-dubbo-spring-boot-project&lt;/a> &lt;br>
 Release Notes: &lt;a href="https://github.com/apache/incubator-dubbo-spring-boot-project/releases">https://github.com/apache/incubator-dubbo-spring-boot-project/releases&lt;/a>&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="271-2019-04-09">2.7.1 (2019-04-09)&lt;/h3>
@@ -437,7 +437,7 @@ Release Notes: &lt;a href="https://github.com/apache/incubator-dubbo-spring-boot
 &lt;/ul>
 &lt;h2 id="dubbo-admin">Dubbo Admin&lt;/h2>
 &lt;blockquote>
-&lt;p>GitHub: &lt;a href="https://github.com/apache/incubator-dubbo-admin">https://github.com/apache/incubator-dubbo-admin&lt;/a>&lt;br>
+&lt;p>GitHub: &lt;a href="https://github.com/apache/incubator-dubbo-admin">https://github.com/apache/incubator-dubbo-admin&lt;/a> &lt;br>
 Release Notes: &lt;a href="https://github.com/apache/incubator-dubbo-admin/releases">https://github.com/apache/incubator-dubbo-admin/releases&lt;/a>&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="01-2019-02-15">0.1 (2019-02-15)&lt;/h3>

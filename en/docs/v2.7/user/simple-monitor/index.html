@@ -2,7 +2,7 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
-<meta name=generator content="Hugo 0.89.1">
+<meta name=generator content="Hugo 0.89.2">
 <meta name=ROBOTS content="INDEX, FOLLOW">
 <link rel="shortcut icon" href=/favicons/favicon.ico>
 <link rel=apple-touch-icon href=/favicons/apple-touch-icon-180x180.png sizes=180x180>
@@ -22,7 +22,7 @@
 <meta itemprop=name content="Simple Monitor">
 <meta itemprop=description content="Dubbo simple monitor service">
 <meta itemprop=dateModified content="2021-11-01T10:30:52+08:00">
-<meta itemprop=wordCount content="154">
+<meta itemprop=wordCount content="208">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Simple Monitor">
 <meta name=twitter:description content="Dubbo simple monitor service">
@@ -639,15 +639,20 @@ English
 xmlns:xsi=<span style=color:#2aa198>&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
 xmlns:dubbo=<span style=color:#2aa198>&#34;http://dubbo.apache.org/schema/dubbo&#34;</span>
 xsi:schemaLocation=<span style=color:#2aa198>&#34;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd&#34;</span><span style=color:#268bd2>&gt;</span>
- 
+
+<span style=color:#586e75>&lt;!-- configuration of current application --&gt;</span>
 <span style=color:#268bd2>&lt;dubbo:application</span> name=<span style=color:#2aa198>&#34;simple-monitor&#34;</span> <span style=color:#268bd2>/&gt;</span>
- 
+
+<span style=color:#586e75>&lt;!-- connection address of the registry --&gt;</span>
 <span style=color:#268bd2>&lt;dubbo:registry</span> address=<span style=color:#2aa198>&#34;127.0.0.1:9090&#34;</span> <span style=color:#268bd2>/&gt;</span>
- 
+
+<span style=color:#586e75>&lt;!-- protool configuration of exposed services --&gt;</span>
 <span style=color:#268bd2>&lt;dubbo:protocol</span> port=<span style=color:#2aa198>&#34;7070&#34;</span> <span style=color:#268bd2>/&gt;</span>
- 
+
+<span style=color:#586e75>&lt;!-- configuration of certain exposed service --&gt;</span>
 <span style=color:#268bd2>&lt;dubbo:service</span> interface=<span style=color:#2aa198>&#34;org.apache.dubbo.monitor.MonitorService&#34;</span> ref=<span style=color:#2aa198>&#34;monitorService&#34;</span> <span style=color:#268bd2>/&gt;</span>
- 
+
+<span style=color:#268bd2>&lt;bean</span> id=<span style=color:#2aa198>&#34;monitorService&#34;</span> class=<span style=color:#2aa198>&#34;org.apache.dubbo.monitor.simple.SimpleMonitorService&#34;</span> <span style=color:#268bd2>/&gt;</span>
 <span style=color:#268bd2>&lt;/beans&gt;</span>
 </code></pre></div></li>
 <li>
@@ -665,13 +670,17 @@ xsi:schemaLocation=<span style=color:#2aa198>&#34;http://www.springframework.org
 xmlns:xsi=<span style=color:#2aa198>&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
 xmlns:dubbo=<span style=color:#2aa198>&#34;http://dubbo.apache.org/schema/dubbo&#34;</span>
 xsi:schemaLocation=<span style=color:#2aa198>&#34;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd&#34;</span><span style=color:#268bd2>&gt;</span>
- 
+
+<span style=color:#586e75>&lt;!-- configuration of current application --&gt;</span>
 <span style=color:#268bd2>&lt;dubbo:application</span> name=<span style=color:#2aa198>&#34;simple-monitor&#34;</span> <span style=color:#268bd2>/&gt;</span>
- 
+
+<span style=color:#586e75>&lt;!-- protool configuration of exposed service --&gt;</span>
 <span style=color:#268bd2>&lt;dubbo:protocol</span> port=<span style=color:#2aa198>&#34;7070&#34;</span> <span style=color:#268bd2>/&gt;</span>
- 
+
+<span style=color:#586e75>&lt;!-- configuration of exposed service --&gt;</span>
 <span style=color:#268bd2>&lt;dubbo:service</span> interface=<span style=color:#2aa198>&#34;org.apache.dubbo.monitor.MonitorService&#34;</span> ref=<span style=color:#2aa198>&#34;monitorService&#34;</span> registry=<span style=color:#2aa198>&#34;N/A&#34;</span> <span style=color:#268bd2>/&gt;</span>
- 
+
+<span style=color:#268bd2>&lt;bean</span> id=<span style=color:#2aa198>&#34;monitorService&#34;</span> class=<span style=color:#2aa198>&#34;org.apache.dubbo.monitor.simple.SimpleMonitorService&#34;</span> <span style=color:#268bd2>/&gt;</span>   
 <span style=color:#268bd2>&lt;/beans&gt;</span>
 </code></pre></div></li>
 <li>
