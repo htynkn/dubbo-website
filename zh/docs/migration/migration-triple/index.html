@@ -18,11 +18,11 @@
 <meta property="og:description" content="Triple协议迁移指南">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docs/migration/migration-triple/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-11-01T10:30:52+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-11-19T16:48:38+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="Triple协议迁移指南">
 <meta itemprop=description content="Triple协议迁移指南">
-<meta itemprop=dateModified content="2021-11-01T10:30:52+08:00">
-<meta itemprop=wordCount content="668">
+<meta itemprop=dateModified content="2021-11-19T16:48:38+08:00">
+<meta itemprop=wordCount content="711">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Triple协议迁移指南">
 <meta name=twitter:description content="Triple协议迁移指南">
@@ -606,8 +606,8 @@ Releases
 <p>接下来我们我们以一个使用 Dubbo2 协议的<a href=https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/org/apache/dubbo/sample/tri/migration>工程</a> 来举例，如何一步一步安全的升级。</p>
 <ol>
 <li>仅使用 <code>dubbo</code> 协议启动 <code>provider</code> 和 <code>consumer</code>，并完成调用。</li>
-<li>使用 <code>dubbo</code> 和 <code>tri</code> 协议 启动<code>provider</code>，以<code>dubbo</code>协议启动<code>consumer</code>，并完成调用。</li>
-<li>仅使用<code>tri</code> 协议 启动<code>provider</code>和 <code>consumer</code>，并完成调用。</li>
+<li>使用 <code>dubbo</code> 和 <code>tri</code> 协议 启动<code>provider</code>，以 <code>dubbo</code> 协议启动 <code>consumer</code>，并完成调用。</li>
+<li>仅使用 <code>tri</code> 协议 启动 <code>provider</code>和 <code>consumer</code>，并完成调用。</li>
 </ol>
 <h3 id=定义服务>定义服务</h3>
 <ol>
@@ -634,7 +634,7 @@ Releases
     <span style=color:#719e07>}</span>
 <span style=color:#719e07>}</span>
 </code></pre></div><h3 id=仅使用-dubbo-协议>仅使用 dubbo 协议</h3>
-<p>为保证兼容性，我们先将部分 provider 升级到<code>dubbo3</code>版本并使用 <code>dubbo</code> 协议。</p>
+<p>为保证兼容性，我们先将部分 provider 升级到 <code>dubbo3</code> 版本并使用 <code>dubbo</code> 协议。</p>
 <p>使用 <code>dubbo</code> 协议启动一个 <a href=https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/com/apache/dubbo/sample/basic/migration/ApiMigrationDubboProvider><code>Provider</code></a> 和 <a href=https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/com/apache/dubbo/sample/basic/migration/ApiMigrationDubboConsumer><code>Consumer</code></a> ,完成调用，输出如下:
 <img src=/imgs/v3/migration/tri/dubbo3-tri-migration-dubbo-dubbo-result.png alt=result></p>
 <h3 id=同时使用-dubbo-和-triple-协议>同时使用 dubbo 和 triple 协议</h3>
@@ -648,7 +648,7 @@ Releases
 <p>使用<code>dubbo</code>协议和<code>triple</code>协议启动<a href=https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/com/apache/dubbo/sample/basic/migration/ApiMigrationBothProvider><code>Provider</code></a>和<a href=https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/com/apache/dubbo/sample/basic/migration/ApiMigrationBothConsumer><code>Consumer</code></a>,完成调用，输出如下:</p>
 <p><img src=/imgs/v3/migration/tri/dubbo3-tri-migration-both-dubbo-tri-result.png alt=result></p>
 <h3 id=仅使用-triple-协议>仅使用 triple 协议</h3>
-<p>当所有的 consuemr 都升级至支持 Triple 协议的版本后，provider 可切换至仅使用<code>Triple</code>协议启动</p>
+<p>当所有的 consuemr 都升级至支持 <code>Triple</code> 协议的版本后，provider 可切换至仅使用 <code>Triple</code> 协议启动</p>
 <p>结构如图所示:
 <img src=/imgs/v3/migration/tri/migrate-only-tri-strust.png alt=strust></p>
 <p><a href=https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/com/apache/dubbo/sample/basic/migration/ApiMigrationTriProvider>Provider</a>
@@ -656,8 +656,8 @@ Releases
 <p><img src=/imgs/v3/migration/tri/dubbo3-tri-migration-tri-tri-result.png alt=result></p>
 <h3 id=实现原理>实现原理</h3>
 <p>通过上面介绍的升级过程，我们可以很简单的通过修改协议类型来完成升级。框架是怎么帮我们做到这些的呢？</p>
-<p>通过对<code>Triple</code>协议的介绍，我们知道Dubbo3的<code>Triple</code>的数据类型是 <code>protobuf</code>对象，那为什么非 <code>protobuf</code>的 java 对象也可以被正常传输呢。</p>
-<p>这里 Dubbo3 使用了一个巧妙的设计，首先判断参数类型是否为<code>protobuf</code>对象，如果不是。用一个<code>protobuf</code>对象将<code>request</code>和<code>response</code>进行 wrapper，这样就屏蔽了其他各种序列化带来的复杂度。在 wrapper 对象内部声明序列化类型，来支持序列化的扩展。</p>
+<p>通过对 <code>Triple</code> 协议的介绍，我们知道Dubbo3的 <code>Triple</code> 的数据类型是 <code>protobuf</code> 对象，那为什么非 <code>protobuf</code> 的 java 对象也可以被正常传输呢。</p>
+<p>这里 Dubbo3 使用了一个巧妙的设计，首先判断参数类型是否为 <code>protobuf</code> 对象，如果不是。用一个 <code>protobuf</code> 对象将 <code>request</code> 和 <code>response</code> 进行 wrapper，这样就屏蔽了其他各种序列化带来的复杂度。在 <code>wrapper</code> 对象内部声明序列化类型，来支持序列化的扩展。</p>
 <p>wrapper 的<code>protobuf</code>的 IDL如下:</p>
 <div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-proto data-lang=proto>syntax <span style=color:#719e07>=</span> <span style=color:#2aa198>&#34;proto3&#34;</span>;
 
@@ -687,7 +687,7 @@ Releases
 <p>对于 Dubbo3 和 Triple 来说，主推的是使用 <code>protobuf</code> 序列化，并且使用 <code>proto</code> 定义的 <code>IDL</code> 来生成相关接口定义。以 <code>IDL</code> 做为多语言中的通用接口约定，加上 <code>Triple</code> 与 <code>Grpc</code> 的天然互通性，可以轻松地实现跨语言交互，例如 Go 语言等。</p>
 <p>将编写好的 <code>.proto</code> 文件使用 <code>dubbo-compiler</code> 插件进行编译并编写实现类，完成方法调用：</p>
 <p><img src=/imgs/v3/migration/tri/dubbo3-tri-migration-tri-tri-result.png alt=result></p>
-<p>从上面升级的例子我们可以知道，<code>Triple</code>协议使用<code>protbuf</code>对象序列化后进行传输，所以对于本身就是<code>protobuf</code>对象的方法来说，没有任何其他逻辑。</p>
+<p>从上面升级的例子我们可以知道，<code>Triple</code> 协议使用 <code>protbuf</code> 对象序列化后进行传输，所以对于本身就是 <code>protobuf</code> 对象的方法来说，没有任何其他逻辑。</p>
 <p>使用 <code>protobuf</code> 插件编译后接口如下：</p>
 <div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#268bd2>public</span> <span style=color:#268bd2>interface</span> <span style=color:#268bd2>PbGreeter</span> <span style=color:#719e07>{</span>
 
@@ -829,7 +829,7 @@ StreamObserver<span style=color:#719e07>&lt;</span>String<span style=color:#719e
 <span style=color:#719e07>}</span>
 request<span style=color:#719e07>.</span>onCompleted<span style=color:#719e07>();</span>
 </code></pre></div><h2 id=使用-protobuf-序列化的流>使用 Protobuf 序列化的流</h2>
-<p>对于<code>Protobuf</code>序列化方式，推荐编写<code>IDL</code>使用<code>compiler</code>插件进行编译生成。生成的代码大致如下:</p>
+<p>对于 <code>Protobuf</code> 序列化方式，推荐编写 <code>IDL</code> 使用 <code>compiler</code> 插件进行编译生成。生成的代码大致如下:</p>
 <div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#268bd2>public</span> <span style=color:#268bd2>interface</span> <span style=color:#268bd2>PbGreeter</span> <span style=color:#719e07>{</span>
 
     <span style=color:#268bd2>static</span> <span style=color:#268bd2>final</span> String JAVA_SERVICE_NAME <span style=color:#719e07>=</span> <span style=color:#2aa198>&#34;org.apache.dubbo.sample.tri.PbGreeter&#34;</span><span style=color:#719e07>;</span>
@@ -847,7 +847,7 @@ request<span style=color:#719e07>.</span>onCompleted<span style=color:#719e07>()
 <p><code>Triple</code>协议的流模式是怎么支持的呢？</p>
 <ul>
 <li>
-<p>从协议层来说，<code>Triple</code>是建立在<code>HTTP2</code>基础上的，所以直接拥有所有<code>HTTP2</code>的能力，故拥有了分 stream 和全双工的能力。</p>
+<p>从协议层来说，<code>Triple</code> 是建立在 <code>HTTP2</code> 基础上的，所以直接拥有所有 <code>HTTP2</code> 的能力，故拥有了分 <code>stream</code> 和全双工的能力。</p>
 </li>
 <li>
 <p>框架层来说，<code>StreamObserver</code> 作为流的接口提供给用户，用于入参和出参提供流式处理。框架在收发 stream data 时进行相应的接口调用, 从而保证流的生命周期完整。</p>
@@ -870,8 +870,8 @@ Grpc 使用 <code>compiler</code> 将编写的 <code>proto</code> 文件编译�
 <li>reactorStub</li>
 <li>&mldr;</li>
 </ul>
-<p><code>stub</code> 用一种统一的使用方式帮我们屏蔽了不同调用方式的细节。不过目前<code>Dubbo3</code>暂时只支持传统定义接口并进行调用的使用方式。</p>
-<p>在不久的未来，<code>Triple</code> 也将实现各种常用的 <code>Stub</code>,让用户写一份<code>proto</code>文件，通过<code>comipler</code>可以在任意场景方便的使用,请拭目以待。</p>
+<p><code>stub</code> 用一种统一的使用方式帮我们屏蔽了不同调用方式的细节。不过目前 <code>Dubbo3</code> 暂时只支持传统定义接口并进行调用的使用方式。</p>
+<p>在不久的未来，<code>Triple</code> 也将实现各种常用的 <code>Stub</code>，让用户写一份<code>proto</code>文件，通过 <code>comipler</code> 可以在任意场景方便的使用，请拭目以待。</p>
 <style>.feedback--answer{display:inline-block}.feedback--answer-no{margin-left:1em}.feedback--response{display:none;margin-top:1em}.feedback--response__visible{display:block}</style>
 <div class=d-print-none>
 <h2 class=feedback--title>Feedback</h2>
