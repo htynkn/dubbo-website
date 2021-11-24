@@ -261,7 +261,7 @@ Service name bytes (换行符)
 &lt;p>属性配置的另外一个重要的功能特性是&lt;a href="../../references/configuration/properties#%E5%B1%9E%E6%80%A7%E8%A6%86%E7%9B%96">属性覆盖&lt;/a>，使用外部属性的值覆盖已创建的配置组件属性。&lt;/p>
 &lt;p>如果要将属性配置放到外部的配置中心，请参考&lt;a href="../../references/configuration/external-config">外部化配置&lt;/a>。&lt;/p>
 &lt;h2 id="服务治理规则">服务治理规则&lt;/h2>
-&lt;p>服务治理规则主要作用是改变运行时服务的行为和选址逻辑，达到限流，权重配置等目的，包括覆盖规则、标签路由、条件路由、条件路由。&lt;/p>
+&lt;p>服务治理规则主要作用是改变运行时服务的行为和选址逻辑，达到限流，权重配置等目的，包括覆盖规则、标签路由、条件路由。&lt;/p>
 &lt;p>Dubbo启动后监听服务治理相关的配置项，当配置发生变化时，会自动进行相应的处理。&lt;/p>
 &lt;p>服务治理规则的用法介绍请参考 &lt;a href="../../references/governance">服务治理和配置管理&lt;/a>&lt;/p>
 &lt;p>服务治理规则的存储方法请参考 &lt;a href="../../references/config-center#%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86">配置中心#服务治理&lt;/a>&lt;/p>

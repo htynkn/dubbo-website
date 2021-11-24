@@ -22,14 +22,14 @@ src |-main |-java |-com |-xxx |-XxxMerger.java (Merger implementation) |-resourc
 package com.xxx; import org.apache.dubbo.rpc.cluster.Merger; public class XxxMerger<T> implements Merger<T> { public T merge(T... results) { // .">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/en/docs/v2.7/dev/impls/merger/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-11-19T16:48:38+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-11-23T10:39:34+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="Merger Extension">
 <meta itemprop=description content="Summary Merge strategy for return result aggregation in group.
 Extension Interface org.apache.dubbo.rpc.cluster.Merger
 Extension Configuration <dubbo:method merger=&#34;xxx&#34; /> Existing Extension  org.apache.dubbo.rpc.cluster.merger.ArrayMerger org.apache.dubbo.rpc.cluster.merger.ListMerger org.apache.dubbo.rpc.cluster.merger.SetMerger org.apache.dubbo.rpc.cluster.merger.MapMerger org.apache.dubbo.rpc.cluster.merger.ByteArrayMerger org.apache.dubbo.rpc.cluster.merger.CharArrayMerger org.apache.dubbo.rpc.cluster.merger.ShortArrayMerger org.apache.dubbo.rpc.cluster.merger.IntArrayMerger org.apache.dubbo.rpc.cluster.merger.LongArrayMerger org.apache.dubbo.rpc.cluster.merger.FloatArrayMerger org.apache.dubbo.rpc.cluster.merger.DoubleArrayMerger org.apache.dubbo.rpc.cluster.merger.BooleanArrayMerger  Extension Guide Directory layout:
 src |-main |-java |-com |-xxx |-XxxMerger.java (Merger implementation) |-resources |-META-INF |-dubbo |-org.apache.dubbo.rpc.cluster.Merger (plain text file with the content: xxx=com.xxx.XxxMerger) XxxMerger.java：
 package com.xxx; import org.apache.dubbo.rpc.cluster.Merger; public class XxxMerger<T> implements Merger<T> { public T merge(T... results) { // .">
-<meta itemprop=dateModified content="2021-11-19T16:48:38+08:00">
+<meta itemprop=dateModified content="2021-11-23T10:39:34+08:00">
 <meta itemprop=wordCount content="76">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Merger Extension">
