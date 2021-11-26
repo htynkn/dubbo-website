@@ -22,14 +22,14 @@ src |-main |-java |-com |-xxx |-XxxDispatcher.java (Dispatcher implementation) |
 package com.xxx; import org.apache.dubbo.remoting.Dispatcher; public class XxxDispatcher implements Dispatcher { public Group lookup(URL url) { // .">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/en/docs/v2.7/dev/impls/dispatcher/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-11-23T10:39:34+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-11-25T09:57:18+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="Dispatcher Extension">
 <meta itemprop=description content="Summary Thread pool dispatch strategy.
 Extension Interface org.apache.dubbo.remoting.Dispatcher
 Extension Configuration <dubbo:protocol dispatcher=&#34;xxx&#34; /> <!-- default configuration, will take effect if dispatcher attribute is not set in <dubbo:protocol> --> <dubbo:provider dispatcher=&#34;xxx&#34; /> Existing Extensions  org.apache.dubbo.remoting.transport.dispatcher.all.AllDispatcher org.apache.dubbo.remoting.transport.dispatcher.direct.DirectDispatcher org.apache.dubbo.remoting.transport.dispatcher.message.MessageOnlyDispatcher org.apache.dubbo.remoting.transport.dispatcher.execution.ExecutionDispatcher org.apache.dubbo.remoting.transport.dispatcher.connection.ConnectionOrderedDispatcher  Extension Guide Directory layout:
 src |-main |-java |-com |-xxx |-XxxDispatcher.java (Dispatcher implementation) |-resources |-META-INF |-dubbo |-org.apache.dubbo.remoting.Dispatcher (plain text file with the content: xxx=com.xxx.XxxDispatcher) XxxDispatcher.java：
 package com.xxx; import org.apache.dubbo.remoting.Dispatcher; public class XxxDispatcher implements Dispatcher { public Group lookup(URL url) { // .">
-<meta itemprop=dateModified content="2021-11-23T10:39:34+08:00">
+<meta itemprop=dateModified content="2021-11-25T09:57:18+08:00">
 <meta itemprop=wordCount content="83">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Dispatcher Extension">
@@ -552,6 +552,33 @@ English
 <ul class="ul-4 foldable">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-endocsv30referencesgraalvmsupport-graalvm-li>
 <a href=/en/docs/v3.0/references/graalvm/support-graalvm/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-endocsv30referencesgraalvmsupport-graalvm><span></span></a>
+</li>
+</ul>
+</li>
+</ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id=m-endocsv30languages-li>
+<a href=/en/docs/v3.0/languages/ title="Multi-language implementation" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-endocsv30languages><span>multi-language</span></a>
+<ul class="ul-3 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id=m-endocsv30languageserlang-li>
+<a href=/en/docs/v3.0/languages/erlang/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-endocsv30languageserlang><span>Erlang</span></a>
+<ul class="ul-4 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-endocsv30languageserlangquick-start-li>
+<a href=/en/docs/v3.0/languages/erlang/quick-start/ title="Quick start " class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-endocsv30languageserlangquick-start><span>Quick start</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-endocsv30languageserlangreference-li>
+<a href=/en/docs/v3.0/languages/erlang/reference/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-endocsv30languageserlangreference><span>Consumer configuration</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-endocsv30languageserlangservice-li>
+<a href=/en/docs/v3.0/languages/erlang/service/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-endocsv30languageserlangservice><span>Provider configuration</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-endocsv30languageserlangserialization-li>
+<a href=/en/docs/v3.0/languages/erlang/serialization/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-endocsv30languageserlangserialization><span>Serialized configuration items</span></a>
+</li>
+</ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id=m-endocsv30languagesgolang-li>
+<a href=/en/docs/v3.0/languages/golang/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-endocsv30languagesgolang><span>golang</span></a>
+<ul class="ul-4 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-endocsv30languagesgolanggo-specific-li>
+<a href=/en/docs/v3.0/languages/golang/go-specific/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-endocsv30languagesgolanggo-specific><span>Go language definition service</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-endocsv30languagesgolangquick-start-li>
+<a href=/en/docs/v3.0/languages/golang/quick-start/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-endocsv30languagesgolangquick-start><span>Go quick start</span></a>
 </li>
 </ul>
 </li>
