@@ -20,12 +20,12 @@
 public interface RegistryFactory { /** * 连接注册中心. * * 连接注册中心需处理契约：<br> * 1. 当设置check=false时表示不检查连接，否则在连接不上时抛出异常。<br> * 2. 支持URL上的username:password权限认证。<br> * 3. 支持backup=10.20.153.10备选注册中心集群地址。<br> * 4. 支持file=registry.cache本地磁盘文件缓存。<br> * 5. 支持timeout=1000请求超时设置。<br> * 6. 支持session=60000会话超时或过期设置。<br> * * @param url 注册中心地址，不允许为空 * @return 注册中心引用，总不返回空 */ Registry getRegistry(URL url); } RegistryService.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docsv2.7/dev/impls/registry/"><meta property="article:section" content="docsv2.7">
-<meta property="article:modified_time" content="2021-11-25T09:57:18+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-11-26T15:52:40+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="注册中心扩展">
 <meta itemprop=description content="扩展说明 负责服务的注册与发现。
 扩展接口  org.apache.dubbo.registry.RegistryFactory org.apache.dubbo.registry.Registry  扩展配置 <!-- 定义注册中心 --> <dubbo:registry id=&#34;xxx1&#34; address=&#34;xxx://ip:port&#34; /> <!-- 引用注册中心，如果没有配置registry属性，将在ApplicationContext中自动扫描registry配置 --> <dubbo:service registry=&#34;xxx1&#34; /> <!-- 引用注册中心缺省值，当<dubbo:service>没有配置registry属性时，使用此配置 --> <dubbo:provider registry=&#34;xxx1&#34; /> 扩展契约 RegistryFactory.java：
 public interface RegistryFactory { /** * 连接注册中心. * * 连接注册中心需处理契约：<br> * 1. 当设置check=false时表示不检查连接，否则在连接不上时抛出异常。<br> * 2. 支持URL上的username:password权限认证。<br> * 3. 支持backup=10.20.153.10备选注册中心集群地址。<br> * 4. 支持file=registry.cache本地磁盘文件缓存。<br> * 5. 支持timeout=1000请求超时设置。<br> * 6. 支持session=60000会话超时或过期设置。<br> * * @param url 注册中心地址，不允许为空 * @return 注册中心引用，总不返回空 */ Registry getRegistry(URL url); } RegistryService.">
-<meta itemprop=dateModified content="2021-11-25T09:57:18+08:00">
+<meta itemprop=dateModified content="2021-11-26T15:52:40+08:00">
 <meta itemprop=wordCount content="355">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="注册中心扩展">

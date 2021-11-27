@@ -19,19 +19,19 @@
 除此之外，Dubbo Java 还提供了包括注解、API、配置文件、spring boot等多种启动与接入方式，具体可参见配置章节具体描述。
 下载示例代码 示例代码在 dubbo-samples 中
  下载源码  $ git clone -b master https://github.com/apache/dubbo-samples.git 进入示例目录  $ cd dubbo-samples/dubbo-samples-basic 快速运行示例 在 dubbo-samples-basic 目录
- 编译 Provider  $ mvn clean compile -Pprovider 运行 Provider  $ java -jar ./target/provider.jar 编译 Consumer  $ mvn clean compile -Pconsumer 运行 consumer  $ java -jar ./target/consumer.jar 详细解释 定义服务接口 DemoService.java
+ 编译 Provider  $ mvn clean package -Pprovider 运行 Provider  $ java -jar ./target/provider.jar 编译 Consumer  $ mvn clean package -Pconsumer 运行 consumer  $ java -jar ./target/consumer.jar 详细解释 定义服务接口 DemoService.java
 package org.apache.dubbo.samples.basic.api; public interface DemoService { String sayHello(String name); } 在服务提供方实现接口 DemoServiceImpl.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docs/languages/java/java-specific/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-11-25T09:57:18+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-11-26T15:52:40+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="Java 语言定义服务">
 <meta itemprop=description content="示例使用 Spring XML 配置方式进行演示。
 除此之外，Dubbo Java 还提供了包括注解、API、配置文件、spring boot等多种启动与接入方式，具体可参见配置章节具体描述。
 下载示例代码 示例代码在 dubbo-samples 中
  下载源码  $ git clone -b master https://github.com/apache/dubbo-samples.git 进入示例目录  $ cd dubbo-samples/dubbo-samples-basic 快速运行示例 在 dubbo-samples-basic 目录
- 编译 Provider  $ mvn clean compile -Pprovider 运行 Provider  $ java -jar ./target/provider.jar 编译 Consumer  $ mvn clean compile -Pconsumer 运行 consumer  $ java -jar ./target/consumer.jar 详细解释 定义服务接口 DemoService.java
+ 编译 Provider  $ mvn clean package -Pprovider 运行 Provider  $ java -jar ./target/provider.jar 编译 Consumer  $ mvn clean package -Pconsumer 运行 consumer  $ java -jar ./target/consumer.jar 详细解释 定义服务接口 DemoService.java
 package org.apache.dubbo.samples.basic.api; public interface DemoService { String sayHello(String name); } 在服务提供方实现接口 DemoServiceImpl.">
-<meta itemprop=dateModified content="2021-11-25T09:57:18+08:00">
+<meta itemprop=dateModified content="2021-11-26T15:52:40+08:00">
 <meta itemprop=wordCount content="151">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Java 语言定义服务">
@@ -39,7 +39,7 @@ package org.apache.dubbo.samples.basic.api; public interface DemoService { Strin
 除此之外，Dubbo Java 还提供了包括注解、API、配置文件、spring boot等多种启动与接入方式，具体可参见配置章节具体描述。
 下载示例代码 示例代码在 dubbo-samples 中
  下载源码  $ git clone -b master https://github.com/apache/dubbo-samples.git 进入示例目录  $ cd dubbo-samples/dubbo-samples-basic 快速运行示例 在 dubbo-samples-basic 目录
- 编译 Provider  $ mvn clean compile -Pprovider 运行 Provider  $ java -jar ./target/provider.jar 编译 Consumer  $ mvn clean compile -Pconsumer 运行 consumer  $ java -jar ./target/consumer.jar 详细解释 定义服务接口 DemoService.java
+ 编译 Provider  $ mvn clean package -Pprovider 运行 Provider  $ java -jar ./target/provider.jar 编译 Consumer  $ mvn clean package -Pconsumer 运行 consumer  $ java -jar ./target/consumer.jar 详细解释 定义服务接口 DemoService.java
 package org.apache.dubbo.samples.basic.api; public interface DemoService { String sayHello(String name); } 在服务提供方实现接口 DemoServiceImpl.">
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-112489517-1','auto'),ga('send','pageview'))</script>
 <script async src=https://www.google-analytics.com/analytics.js></script>
@@ -610,7 +610,7 @@ Releases
 <ol>
 <li>编译 Provider</li>
 </ol>
-<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ mvn clean compile -Pprovider
+<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ mvn clean package -Pprovider
 </code></pre></div><ol start=2>
 <li>运行 Provider</li>
 </ol>
@@ -618,7 +618,7 @@ Releases
 </code></pre></div><ol start=3>
 <li>编译 Consumer</li>
 </ol>
-<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ mvn clean compile -Pconsumer
+<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>$ mvn clean package -Pconsumer
 </code></pre></div><ol start=4>
 <li>运行 consumer</li>
 </ol>

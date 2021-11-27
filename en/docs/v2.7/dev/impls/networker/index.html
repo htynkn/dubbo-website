@@ -22,14 +22,14 @@ src |-main |-java |-com |-xxx |-XxxNetworker.java (Networker implementation) |-r
 package com.xxx; import org.apache.dubbo.remoting.p2p.Networker; public class XxxNetworker implements Networker { public Group lookup(URL url) { // .">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/en/docs/v2.7/dev/impls/networker/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-11-25T09:57:18+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-11-26T15:52:40+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="Networker Extension">
 <meta itemprop=description content="Summary Extension for peer to peer network grouping.
 Extension Interface org.apache.dubbo.remoting.p2p.Networker
 Extension Configuration <dubbo:protocol networker=&#34;xxx&#34; /> <!-- default configuration, it takes effect if networker attribute is not set in <dubbo:protocol> --> <dubbo:provider networker=&#34;xxx&#34; /> Existing Extension  org.apache.dubbo.remoting.p2p.support.MulticastNetworker org.apache.dubbo.remoting.p2p.support.FileNetworker  Extension Guide Directory layout:
 src |-main |-java |-com |-xxx |-XxxNetworker.java (Networker implementation) |-resources |-META-INF |-dubbo |-org.apache.dubbo.remoting.p2p.Networker (plain text file with the content: xxx=com.xxx.XxxNetworker) XxxNetworker.java：
 package com.xxx; import org.apache.dubbo.remoting.p2p.Networker; public class XxxNetworker implements Networker { public Group lookup(URL url) { // .">
-<meta itemprop=dateModified content="2021-11-25T09:57:18+08:00">
+<meta itemprop=dateModified content="2021-11-26T15:52:40+08:00">
 <meta itemprop=wordCount content="83">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Networker Extension">

@@ -16,7 +16,7 @@
 &lt;ol>
 &lt;li>编译 Provider&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ mvn clean compile -Pprovider
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ mvn clean package -Pprovider
 &lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
 &lt;li>运行 Provider&lt;/li>
 &lt;/ol>
@@ -24,7 +24,7 @@
 &lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>编译 Consumer&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ mvn clean compile -Pconsumer
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-shell" data-lang="shell">$ mvn clean package -Pconsumer
 &lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
 &lt;li>运行 consumer&lt;/li>
 &lt;/ol>

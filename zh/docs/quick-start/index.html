@@ -21,13 +21,13 @@
 syntax = &#34;proto3&#34;; option java_multiple_files = true; option java_package = &#34;org.apache.dubbo.demo&#34;; option java_outer_classname = &#34;DemoServiceProto&#34;; option objc_class_prefix = &#34;DEMOSRV&#34;; package demoservice; // The demo service definition. service DemoService { rpc SayHello (HelloRequest) returns (HelloReply) {} } // The request message containing the user's name. message HelloRequest { string name = 1; } // The response message containing the greetings message HelloReply { string message = 1; } 以上是使用 IDL 定义服务的一个简单示例，我们可以把它命名为 DemoService.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docs/quick-start/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-11-25T09:57:18+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-11-26T15:52:40+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="快速开始">
 <meta itemprop=description content="服务是 Dubbo 中的核心概念，一个服务代表一组 RPC 方法的集合，服务是面向用户编程、服务发现机制等的基本单位。Dubbo 开发的基本流程是：用户定义 RPC 服务，通过约定的配置 方式将 RPC 声明为 Dubbo 服务，然后就可以基于服务 API 进行编程了。对服务提供者来说是提供 RPC 服务的具体实现，而对服务消费者来说则是使用特定数据发起服务调用。
 下面从定义服务、编译服务、配置并加载服务三个方面说明如何快速的开发 Dubbo 服务。
 定义服务 Dubbo3 推荐使用 IDL 定义跨语言服务，如您更习惯使用特定语言的服务定义方式，请移步多语言模块。
 syntax = &#34;proto3&#34;; option java_multiple_files = true; option java_package = &#34;org.apache.dubbo.demo&#34;; option java_outer_classname = &#34;DemoServiceProto&#34;; option objc_class_prefix = &#34;DEMOSRV&#34;; package demoservice; // The demo service definition. service DemoService { rpc SayHello (HelloRequest) returns (HelloReply) {} } // The request message containing the user's name. message HelloRequest { string name = 1; } // The response message containing the greetings message HelloReply { string message = 1; } 以上是使用 IDL 定义服务的一个简单示例，我们可以把它命名为 DemoService.">
-<meta itemprop=dateModified content="2021-11-25T09:57:18+08:00">
+<meta itemprop=dateModified content="2021-11-26T15:52:40+08:00">
 <meta itemprop=wordCount content="503">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="快速开始">

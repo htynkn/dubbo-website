@@ -22,14 +22,14 @@ src |-main |-java |-com |-xxx |-XxxMonitorFactoryjava (MonitorFactory implementa
 package com.xxx; import org.apache.dubbo.monitor.MonitorFactory; import org.apache.dubbo.monitor.Monitor; import org.apache.dubbo.common.URL; public class XxxMonitorFactory implements MonitorFactory { public Monitor getMonitor(URL url) { return new XxxMonitor(url); } } XxxMonitor.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/en/docs/v2.7/dev/impls/monitor/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-11-25T09:57:18+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-11-26T15:52:40+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="Monitor Extension">
 <meta itemprop=description content="Summary Extension to monitor service invocation times and time taken for each service invocation.
 Extension Interface  org.apache.dubbo.monitor.MonitorFactory org.apache.dubbo.monitor.Monitor  Extension Configuration <!-- configure monitor center --> <dubbo:monitor address=&#34;xxx://ip:port&#34; /> Existing Extension org.apache.dubbo.monitor.support.dubbo.DubboMonitorFactory
 Extension Guide Directory layout:
 src |-main |-java |-com |-xxx |-XxxMonitorFactoryjava (MonitorFactory implementation) |-XxxMonitor.java (Monitor implementation) |-resources |-META-INF |-dubbo |-org.apache.dubbo.monitor.MonitorFactory (plain text file with the format: xxx=com.xxx.XxxMonitorFactory) XxxMonitorFactory.java：
 package com.xxx; import org.apache.dubbo.monitor.MonitorFactory; import org.apache.dubbo.monitor.Monitor; import org.apache.dubbo.common.URL; public class XxxMonitorFactory implements MonitorFactory { public Monitor getMonitor(URL url) { return new XxxMonitor(url); } } XxxMonitor.">
-<meta itemprop=dateModified content="2021-11-25T09:57:18+08:00">
+<meta itemprop=dateModified content="2021-11-26T15:52:40+08:00">
 <meta itemprop=wordCount content="104">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Monitor Extension">
