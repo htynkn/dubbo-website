@@ -22,14 +22,14 @@ src |-main |-java |-com |-xxx |-XxxProxyFactory.java (ProxyFactory implementatio
 package com.xxx; import org.apache.dubbo.rpc.ProxyFactory; import org.apache.dubbo.rpc.Invoker; import org.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/en/docs/v2.7/dev/impls/proxy-factory/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-11-26T15:52:40+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-12-05T15:17:13+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="ProxyFactory Extension">
 <meta itemprop=description content="Summary Convert Invoker into business interface.
 Extension Interface org.apache.dubbo.rpc.ProxyFactory
 Extension Configuration <dubbo:protocol proxy=&#34;xxx&#34; /> <!-- default configuration, it will take effect when proxy attribute is not configured in <dubbo:protocol> --> <dubbo:provider proxy=&#34;xxx&#34; /> Existing Extension  org.apache.dubbo.rpc.proxy.JdkProxyFactory org.apache.dubbo.rpc.proxy.JavassistProxyFactory  Extension Guide Directory layout:
 src |-main |-java |-com |-xxx |-XxxProxyFactory.java (ProxyFactory implementation) |-resources |-META-INF |-dubbo |-org.apache.dubbo.rpc.ProxyFactory (plain text file with the content: xxx=com.xxx.XxxProxyFactory) XxxProxyFactory.java：
 package com.xxx; import org.apache.dubbo.rpc.ProxyFactory; import org.apache.dubbo.rpc.Invoker; import org.">
-<meta itemprop=dateModified content="2021-11-26T15:52:40+08:00">
+<meta itemprop=dateModified content="2021-12-05T15:17:13+08:00">
 <meta itemprop=wordCount content="104">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="ProxyFactory Extension">
