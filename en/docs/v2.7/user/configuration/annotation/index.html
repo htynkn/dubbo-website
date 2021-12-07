@@ -18,10 +18,10 @@
 <meta property="og:description" content="Configure Dubbo with annotation">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/en/docs/v2.7/user/configuration/annotation/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-12-05T15:17:13+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-12-06T15:41:32+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="Annotation Configuration">
 <meta itemprop=description content="Configure Dubbo with annotation">
-<meta itemprop=dateModified content="2021-12-05T15:17:13+08:00">
+<meta itemprop=dateModified content="2021-12-06T15:41:32+08:00">
 <meta itemprop=wordCount content="139">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Annotation Configuration">
@@ -635,7 +635,7 @@ English
 <ul>
 <li><a href=#provider-side>Provider Side</a>
 <ul>
-<li><a href=#service-annotation-for-exporting><code>@Service</code> annotation for exporting</a></li>
+<li><a href=#dubboservice-annotation-for-exporting><code>@DubboService</code> annotation for exporting</a></li>
 <li><a href=#add-application-sharing-configuration>Add application sharing configuration</a></li>
 <li><a href=#spring-scan-path>Spring scan path</a></li>
 </ul>
@@ -681,8 +681,8 @@ English
 </div>
 <h2 id=provider-side>Provider Side</h2>
 <p>k</p>
-<h3 id=service-annotation-for-exporting><code>@Service</code> annotation for exporting</h3>
-<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#268bd2>@Service</span>
+<h3 id=dubboservice-annotation-for-exporting><code>@DubboService</code> annotation for exporting</h3>
+<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#268bd2>@DubboService</span>
 <span style=color:#268bd2>public</span> <span style=color:#268bd2>class</span> <span style=color:#268bd2>AnnotationServiceImpl</span> <span style=color:#268bd2>implements</span> AnnotationService <span style=color:#719e07>{</span>
     <span style=color:#268bd2>@Override</span>
     <span style=color:#268bd2>public</span> String <span style=color:#268bd2>sayHello</span><span style=color:#719e07>(</span>String name<span style=color:#719e07>)</span> <span style=color:#719e07>{</span>

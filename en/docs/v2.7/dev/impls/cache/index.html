@@ -21,13 +21,13 @@ Extension Configuration <dubbo:service cache=&#34;lru&#34; /> <!-- method level 
 src |-main |-java |-com |-xxx |-XxxCacheFactory.java (CacheFactory implementation) |-resources |-META-INF |-dubbo |-org.apache.dubbo.cache.CacheFactory (plain text file with contents: xxx=com.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/en/docs/v2.7/dev/impls/cache/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-12-05T15:17:13+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-12-06T15:41:32+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="Cache Extension">
 <meta itemprop=description content="Summary Cache the return value, use request parameter as the key.
 Extension Interface org.apache.dubbo.cache.CacheFactory
 Extension Configuration <dubbo:service cache=&#34;lru&#34; /> <!-- method level cache --> <dubbo:service><dubbo:method cache=&#34;lru&#34; /></dubbo:service> <!-- 缺省值设置，当<dubbo:service>没有配置cache属性时，使用此配置 --> <!-- default configuration, will take affect if cache attribute isn't configured in <dubbo:service> --> <dubbo:provider cache=&#34;xxx,yyy&#34; /> Existing Extensions  org.apache.dubbo.cache.support.lru.LruCacheFactory org.apache.dubbo.cache.support.threadlocal.ThreadLocalCacheFactory org.apache.dubbo.cache.support.jcache.JCacheFactory  Extension Guide Directory layout:
 src |-main |-java |-com |-xxx |-XxxCacheFactory.java (CacheFactory implementation) |-resources |-META-INF |-dubbo |-org.apache.dubbo.cache.CacheFactory (plain text file with contents: xxx=com.">
-<meta itemprop=dateModified content="2021-12-05T15:17:13+08:00">
+<meta itemprop=dateModified content="2021-12-06T15:41:32+08:00">
 <meta itemprop=wordCount content="139">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Cache Extension">
