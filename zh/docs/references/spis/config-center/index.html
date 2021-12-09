@@ -24,7 +24,7 @@ namespace, group, key 等分别对应不同层级的 ZNode 节点，而 value �
   外部化配置中心 dubbo.properties">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docs/references/spis/config-center/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-12-06T15:41:32+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-12-08T19:57:03+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="配置中心扩展">
 <meta itemprop=description content="设计目的 配置中心的核心功能是作为 Key-Value 存储，Dubbo 框架告知配置中心其关心的 key，配置中心返回该key对应的 value 值。
 按照应用场景划分，配置中心在 Dubbo 框架中主要承担以下职责：
@@ -33,7 +33,7 @@ namespace, group, key 等分别对应不同层级的 ZNode 节点，而 value �
 扩展接口  org.apache.dubbo.configcenter.DynamicConfigurationFactory org.apache.dubbo.configcenter.DynamicConfiguration  已知扩展  org.apache.dubbo.configcenter.support.zookeeper.ZookeeperDynamicConfigurationFactory org.apache.dubbo.configcenter.support.nacos.NacosDynamicConfigurationFactory org.apache.dubbo.configcenter.support.etcd.EtcdDynamicConfigurationFactory org.apache.dubbo.configcenter.consul.ConsulDynamicConfigurationFactory org.apache.dubbo.configcenter.support.apollo.ApolloDynamicConfigurationFactory org.apache.dubbo.common.config.configcenter.file.FileSystemDynamicConfigurationFactory  实现原理 Zookeeper zookeeper提供了一个树状的存储模型，其实现原理如下：
 namespace, group, key 等分别对应不同层级的 ZNode 节点，而 value 则作为根 ZNode 节点的值存储。
   外部化配置中心 dubbo.properties">
-<meta itemprop=dateModified content="2021-12-06T15:41:32+08:00">
+<meta itemprop=dateModified content="2021-12-08T19:57:03+08:00">
 <meta itemprop=wordCount content="138">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="配置中心扩展">
@@ -317,6 +317,22 @@ Releases
 <a href=/zh/docs/languages/golang/quick-start/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangquick-start><span>Go 快速开始</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolanggo-specific-li>
 <a href=/zh/docs/languages/golang/go-specific/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolanggo-specific><span>Go 语言定义服务</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id=m-zhdocslanguagesgolangdubbo-go-15-li>
+<a href=/zh/docs/languages/golang/dubbo-go-1.5/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocslanguagesgolangdubbo-go-15><span>Dubbo-go 1.5</span></a>
+<ul class="ul-4 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-15quick-start-li>
+<a href=/zh/docs/languages/golang/dubbo-go-1.5/quick-start/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-15quick-start><span>快速开始</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id=m-zhdocslanguagesgolangdubbo-go-15configuration-li>
+<a href=/zh/docs/languages/golang/dubbo-go-1.5/configuration/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocslanguagesgolangdubbo-go-15configuration><span>配置</span></a>
+<ul class="ul-5 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-15configurationclient-li>
+<a href=/zh/docs/languages/golang/dubbo-go-1.5/configuration/client/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-15configurationclient><span>client</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-15configurationprovider-li>
+<a href=/zh/docs/languages/golang/dubbo-go-1.5/configuration/provider/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-15configurationprovider><span>service providers</span></a>
+</li>
+</ul>
+</li>
+</ul>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id=m-zhdocslanguagesjava-li>

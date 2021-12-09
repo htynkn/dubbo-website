@@ -25,7 +25,7 @@
   该方案目前已经提交给Dubbo开源社区，并且完成了基本框架的合并，除了AK/SK的鉴权方式之外，通过SPI机制支持用户可定制化的鉴权认证以及适配公司内部基础设施的密钥存储。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docs/advanced/auth/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-12-06T15:41:32+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-12-08T19:57:03+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content>
 <meta itemprop=description content="服务鉴权 类似支付之类的对安全性敏感的业务可能会有限制匿名调用的需求。在加固安全性方面，2.7.5 引入了基于AK/SK机制的认证鉴权机制，并且引入了鉴权服务中心，主要原理是消费端在请求需要鉴权的服务时，会通过SK、请求元数据、时间戳、参数等信息来生成对应的请求签名，通过Dubbo的Attahcment机制携带到对端进行验签，验签通过才进行业务逻辑处理。如下图所示：
 具体的接入方式也并不复杂：
@@ -35,7 +35,7 @@
 服务提供端，只需要设置service.auth为true，表示该服务的调用需要鉴权认证通过。param.sign为true表示需要对参数也进行校验。
 @Service(parameters = {&#34;service.auth&#34;,&#34;true&#34;,&#34;param.sign&#34;,&#34;true&#34;}) public class AuthDemoServiceImpl implements AuthService { } 服务消费端，只需要配置好对应的证书等信息即可，之后会自动地在对这些需要认证的接口发起调用前进行签名操作，通过与鉴权服务的交互，用户无需在代码中配置AK/SK这些敏感信息，并且在不重启应用的情况下刷新AK/SK，达到权限动态下发的目的。
   该方案目前已经提交给Dubbo开源社区，并且完成了基本框架的合并，除了AK/SK的鉴权方式之外，通过SPI机制支持用户可定制化的鉴权认证以及适配公司内部基础设施的密钥存储。">
-<meta itemprop=dateModified content="2021-12-06T15:41:32+08:00">
+<meta itemprop=dateModified content="2021-12-08T19:57:03+08:00">
 <meta itemprop=wordCount content="20">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content>
@@ -320,6 +320,22 @@ Releases
 <a href=/zh/docs/languages/golang/quick-start/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangquick-start><span>Go 快速开始</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolanggo-specific-li>
 <a href=/zh/docs/languages/golang/go-specific/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolanggo-specific><span>Go 语言定义服务</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id=m-zhdocslanguagesgolangdubbo-go-15-li>
+<a href=/zh/docs/languages/golang/dubbo-go-1.5/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocslanguagesgolangdubbo-go-15><span>Dubbo-go 1.5</span></a>
+<ul class="ul-4 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-15quick-start-li>
+<a href=/zh/docs/languages/golang/dubbo-go-1.5/quick-start/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-15quick-start><span>快速开始</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id=m-zhdocslanguagesgolangdubbo-go-15configuration-li>
+<a href=/zh/docs/languages/golang/dubbo-go-1.5/configuration/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocslanguagesgolangdubbo-go-15configuration><span>配置</span></a>
+<ul class="ul-5 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-15configurationclient-li>
+<a href=/zh/docs/languages/golang/dubbo-go-1.5/configuration/client/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-15configurationclient><span>client</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-15configurationprovider-li>
+<a href=/zh/docs/languages/golang/dubbo-go-1.5/configuration/provider/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-15configurationprovider><span>service providers</span></a>
+</li>
+</ul>
+</li>
+</ul>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id=m-zhdocslanguagesjava-li>

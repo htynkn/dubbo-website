@@ -23,7 +23,7 @@ package com.xxx; import org.apache.dubbo.cache.CacheFactory; public class XxxCac
 package com.xxx; import org.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docs/references/spis/cache/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-12-06T15:41:32+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-12-08T19:57:03+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="缓存扩展">
 <meta itemprop=description content="扩展说明 用请求参数作为 key，缓存返回结果。
 扩展接口 org.apache.dubbo.cache.CacheFactory
@@ -31,7 +31,7 @@ package com.xxx; import org.">
 src |-main |-java |-com |-xxx |-XxxCacheFactory.java (实现CacheFactory接口) |-resources |-META-INF |-dubbo |-org.apache.dubbo.cache.CacheFactory (纯文本文件，内容为：xxx=com.xxx.XxxCacheFactory) XxxCacheFactory.java：
 package com.xxx; import org.apache.dubbo.cache.CacheFactory; public class XxxCacheFactory implements CacheFactory { public Cache getCache(URL url, String name) { return new XxxCache(url, name); } } XxxCache.java：
 package com.xxx; import org.">
-<meta itemprop=dateModified content="2021-12-06T15:41:32+08:00">
+<meta itemprop=dateModified content="2021-12-08T19:57:03+08:00">
 <meta itemprop=wordCount content="105">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="缓存扩展">
@@ -314,6 +314,22 @@ Releases
 <a href=/zh/docs/languages/golang/quick-start/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangquick-start><span>Go 快速开始</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolanggo-specific-li>
 <a href=/zh/docs/languages/golang/go-specific/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolanggo-specific><span>Go 语言定义服务</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id=m-zhdocslanguagesgolangdubbo-go-15-li>
+<a href=/zh/docs/languages/golang/dubbo-go-1.5/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocslanguagesgolangdubbo-go-15><span>Dubbo-go 1.5</span></a>
+<ul class="ul-4 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-15quick-start-li>
+<a href=/zh/docs/languages/golang/dubbo-go-1.5/quick-start/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-15quick-start><span>快速开始</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id=m-zhdocslanguagesgolangdubbo-go-15configuration-li>
+<a href=/zh/docs/languages/golang/dubbo-go-1.5/configuration/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocslanguagesgolangdubbo-go-15configuration><span>配置</span></a>
+<ul class="ul-5 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-15configurationclient-li>
+<a href=/zh/docs/languages/golang/dubbo-go-1.5/configuration/client/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-15configurationclient><span>client</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-15configurationprovider-li>
+<a href=/zh/docs/languages/golang/dubbo-go-1.5/configuration/provider/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-15configurationprovider><span>service providers</span></a>
+</li>
+</ul>
+</li>
+</ul>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id=m-zhdocslanguagesjava-li>

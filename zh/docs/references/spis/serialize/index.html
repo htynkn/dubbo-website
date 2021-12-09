@@ -21,13 +21,13 @@ src |-main |-java |-com |-xxx |-XxxSerialization.java (实现Serialization接口
 package com.xxx; import org.apache.dubbo.common.serialize.Serialization; import org.apache.dubbo.common.serialize.ObjectInput; import org.apache.dubbo.common.serialize.ObjectOutput; public class XxxSerialization implements Serialization { public ObjectOutput serialize(Parameters parameters, OutputStream output) throws IOException { return new XxxObjectOutput(output); } public ObjectInput deserialize(Parameters parameters, InputStream input) throws IOException { return new XxxObjectInput(input); } } META-INF/dubbo/org.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docs/references/spis/serialize/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-12-06T15:41:32+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-12-08T19:57:03+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="序列化扩展">
 <meta itemprop=description content="扩展说明 将对象转成字节流，用于网络传输，以及将字节流转为对象，用于在收到字节流数据后还原成对象。
 扩展接口  org.apache.dubbo.common.serialize.Serialization org.apache.dubbo.common.serialize.ObjectInput org.apache.dubbo.common.serialize.ObjectOutput  扩展配置 <!-- 协议的序列化方式 --> <dubbo:protocol serialization=&#34;xxx&#34; /> <!-- 缺省值设置，当<dubbo:protocol>没有配置serialization时，使用此配置 --> <dubbo:provider serialization=&#34;xxx&#34; /> 已知扩展  org.apache.dubbo.common.serialize.dubbo.DubboSerialization org.apache.dubbo.common.serialize.hessian.Hessian2Serialization org.apache.dubbo.common.serialize.java.JavaSerialization org.apache.dubbo.common.serialize.java.CompactedJavaSerialization  扩展示例 Maven 项目结构：
 src |-main |-java |-com |-xxx |-XxxSerialization.java (实现Serialization接口) |-XxxObjectInput.java (实现ObjectInput接口) |-XxxObjectOutput.java (实现ObjectOutput接口) |-resources |-META-INF |-dubbo |-org.apache.dubbo.common.serialize.Serialization (纯文本文件，内容为：xxx=com.xxx.XxxSerialization) XxxSerialization.java：
 package com.xxx; import org.apache.dubbo.common.serialize.Serialization; import org.apache.dubbo.common.serialize.ObjectInput; import org.apache.dubbo.common.serialize.ObjectOutput; public class XxxSerialization implements Serialization { public ObjectOutput serialize(Parameters parameters, OutputStream output) throws IOException { return new XxxObjectOutput(output); } public ObjectInput deserialize(Parameters parameters, InputStream input) throws IOException { return new XxxObjectInput(input); } } META-INF/dubbo/org.">
-<meta itemprop=dateModified content="2021-12-06T15:41:32+08:00">
+<meta itemprop=dateModified content="2021-12-08T19:57:03+08:00">
 <meta itemprop=wordCount content="87">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="序列化扩展">
@@ -308,6 +308,22 @@ Releases
 <a href=/zh/docs/languages/golang/quick-start/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangquick-start><span>Go 快速开始</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolanggo-specific-li>
 <a href=/zh/docs/languages/golang/go-specific/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolanggo-specific><span>Go 语言定义服务</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id=m-zhdocslanguagesgolangdubbo-go-15-li>
+<a href=/zh/docs/languages/golang/dubbo-go-1.5/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocslanguagesgolangdubbo-go-15><span>Dubbo-go 1.5</span></a>
+<ul class="ul-4 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-15quick-start-li>
+<a href=/zh/docs/languages/golang/dubbo-go-1.5/quick-start/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-15quick-start><span>快速开始</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id=m-zhdocslanguagesgolangdubbo-go-15configuration-li>
+<a href=/zh/docs/languages/golang/dubbo-go-1.5/configuration/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocslanguagesgolangdubbo-go-15configuration><span>配置</span></a>
+<ul class="ul-5 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-15configurationclient-li>
+<a href=/zh/docs/languages/golang/dubbo-go-1.5/configuration/client/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-15configurationclient><span>client</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-15configurationprovider-li>
+<a href=/zh/docs/languages/golang/dubbo-go-1.5/configuration/provider/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-15configurationprovider><span>service providers</span></a>
+</li>
+</ul>
+</li>
+</ul>
 </li>
 </ul>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id=m-zhdocslanguagesjava-li>
