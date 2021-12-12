@@ -15,17 +15,17 @@
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
 <title>vulnerability | Apache Dubbo</title><meta property="og:title" content="vulnerability">
-<meta property="og:description" content="Deserialization Vulnerability">
+<meta property="og:description" content="Vulnerability descriptions">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/en/docs/notices/security/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-12-08T19:57:03+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-12-11T17:30:34+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="vulnerability">
-<meta itemprop=description content="Deserialization Vulnerability">
-<meta itemprop=dateModified content="2021-12-08T19:57:03+08:00">
-<meta itemprop=wordCount content="410">
+<meta itemprop=description content="Vulnerability descriptions">
+<meta itemprop=dateModified content="2021-12-11T17:30:34+08:00">
+<meta itemprop=wordCount content="693">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="vulnerability">
-<meta name=twitter:description content="Deserialization Vulnerability">
+<meta name=twitter:description content="Vulnerability descriptions">
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-112489517-1','auto'),ga('send','pageview'))</script>
 <script async src=https://www.google-analytics.com/analytics.js></script>
 <link rel=preload href=/scss/main.min.852d6009d14696a1459da05640f22ebf287239f9f7b676f2d2402427b3ea980d.css as=style>
@@ -633,7 +633,12 @@ English
 </div>
 <div class=td-toc><nav id=TableOfContents>
 <ul>
-<li><a href=#third-party-deserialization-library-vulnerabilities>Third-party Deserialization Library Vulnerabilities</a></li>
+<li><a href=#1-log4j-cve-2021-44228>1. Log4j CVE-2021-44228</a>
+<ul>
+<li><a href=#potential-influence-on-dubbo>Potential Influence on Dubbo</a></li>
+</ul>
+</li>
+<li><a href=#2-third-party-deserialization-library-vulnerabilities>2. Third-party Deserialization Library Vulnerabilities</a></li>
 <li><a href=#some-suggestions-to-deal-with-the-security-vulnerability-of-deserialization>Some suggestions to deal with the security vulnerability of deserialization</a></li>
 </ul>
 </nav></div>
@@ -654,10 +659,41 @@ English
 </nav>
 <div class=td-content>
 <h1>vulnerability</h1>
-<div class=lead>Deserialization Vulnerability</div>
+<div class=lead>Vulnerability descriptions</div>
 <header class=article-meta>
 </header>
-<h2 id=third-party-deserialization-library-vulnerabilities>Third-party Deserialization Library Vulnerabilities</h2>
+<h2 id=1-log4j-cve-2021-44228>1. Log4j CVE-2021-44228</h2>
+<p>Recently, the mainstream log framework <a href=https://logging.apache.org/log4j/2.x/>log4j2</a> was reported with a severe security vulnerability <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-44228">cve-2021-44228</a>.</p>
+<p>The following is a summary of the impact of this vulnerability cve-2021-44228 on the Apache Dubbo framework and the user&rsquo;s guide.</p>
+<h3 id=potential-influence-on-dubbo>Potential Influence on Dubbo</h3>
+<p><strong>CVE-2021-44228 has no security impact on use of Dubbo framework</strong></p>
+<p>Dubbo itself does not rely on the log4j2 framework, nor will it bring log4j2 to the project through dependency transfer. Therefore, Dubbo users of version 2.7.x and 3.0.x do not need to upgrade their Dubbo versions.</p>
+<p>The following is the dependency analysis of Dubbo components on log4j2, involving <code>Dubbo common</code>, <code>Dubbo spring boot starter</code> and <code>Dubbo spring boot actuator</code>:</p>
+<ul>
+<li><code>dubbo-common</code> optionally depends on <code>log4j-core</code>. The only need to check is whether the project itself has enabled log4j dependency. If so, upgrade accordingly.</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml>[INFO] --- maven-dependency-plugin:3.1. 2:tree (default-cli) @ dubbo-common ---
+[INFO] org. apache. dubbo:dubbo-common:jar:2.7. 14-SNAPSHOT
+[INFO] +- org. apache. logging. log4j:log4j-api:jar:2.11. 1:provided
+[INFO] \- org. apache. logging. log4j:log4j-core:jar:2.11. 1:provided
+</code></pre></div><ul>
+<li><code>dubbo-spring-boot-starter</code> transfers log4j-api dependency through spring-boot. log4j-api itself has no security issue. But pay attention to compatibility with log4j-api when upgrading the log4j-core component</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml>[INFO] org. apache. dubbo:dubbo-spring-boot-starter:jar:2.7. 14-SNAPSHOT
+[INFO] \- org. springframework. boot:spring-boot-starter:jar:2.3. 1.RELEASE:compile (optional)
+[INFO] \- org. springframework. boot:spring-boot-starter-logging:jar:2.3. 1.RELEASE:compile (optional)
+[INFO] \- org. apache. logging. log4j:log4j-to-slf4j:jar:2.13. 3:compile (optional)
+[INFO] \- org. apache. logging. log4j:log4j-api:jar:2.13. 3:compile (optional)
+</code></pre></div><ul>
+<li><code>dubbo-spring-boot-actuator</code> transfers log4j-api dependency through spring-boot. log4j-api itself has no security issue. But pay attention to compatibility with log4j-api when upgrading the log4j-core component</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml>[INFO] org. apache. dubbo:dubbo-spring-boot-actuator:jar:2.7. 14-SNAPSHOT
+[INFO] \- org. springframework. boot:spring-boot-starter-web:jar:2.3. 1.RELEASE:compile (optional)
+[INFO] \- org. springframework. boot:spring-boot-starter:jar:2.3. 1.RELEASE:compile
+[INFO] \- org. springframework. boot:spring-boot-starter-logging:jar:2.3. 1.RELEASE:compile
+[INFO] \- org. apache. logging. log4j:log4j-to-slf4j:jar:2.13. 3:compile
+[INFO] \- org. apache. logging. log4j:log4j-api:jar:2.13. 3:compile
+</code></pre></div><h2 id=2-third-party-deserialization-library-vulnerabilities>2. Third-party Deserialization Library Vulnerabilities</h2>
 <p>Dubbo supports the extension of serialization protocol. Theoretically, users can enable serialization protocol with arbitrary order based on the extension mechanism, which brings great flexibility, but at the same time, they should be aware of the potential security risks.
 Data deserialization is one of the most vulnerable links to be exploited by attackers. Attackers use it to steal or destroy server-side data, such as rce attack.
 Before switching the serialization protocol or implementation, the user should fully investigate the security guarantee of target serialization protocol and its framework implementation, and set corresponding security measures in advance (such as setting Black / white list). The Dubbo framework itself cannot guarantee the security of the target serialization mechanism.</p>

@@ -15,17 +15,17 @@
 <link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144>
 <link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192>
 <title>安全漏洞 | Apache Dubbo</title><meta property="og:title" content="安全漏洞">
-<meta property="og:description" content="序列化相关的安全问题说明">
+<meta property="og:description" content="安全漏洞说明">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/notices/security/"><meta property="article:section" content="notices">
-<meta property="article:modified_time" content="2021-12-08T19:57:03+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-12-11T17:30:34+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="安全漏洞">
-<meta itemprop=description content="序列化相关的安全问题说明">
-<meta itemprop=dateModified content="2021-12-08T19:57:03+08:00">
-<meta itemprop=wordCount content="26">
+<meta itemprop=description content="安全漏洞说明">
+<meta itemprop=dateModified content="2021-12-11T17:30:34+08:00">
+<meta itemprop=wordCount content="149">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="安全漏洞">
-<meta name=twitter:description content="序列化相关的安全问题说明">
+<meta name=twitter:description content="安全漏洞说明">
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-112489517-1','auto'),ga('send','pageview'))</script>
 <script async src=https://www.google-analytics.com/analytics.js></script>
 <link rel=preload href=/scss/main.min.852d6009d14696a1459da05640f22ebf287239f9f7b676f2d2402427b3ea980d.css as=style>
@@ -121,6 +121,13 @@ Releases
 <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
 </div>
+<div class=td-toc><nav id=TableOfContents>
+<ul>
+<li><a href=#1-log4j-cve-2021-44228-漏洞>1. Log4j CVE-2021-44228 漏洞</a></li>
+<li><a href=#dubbo-影响范围>Dubbo 影响范围</a></li>
+<li><a href=#2-序列化>2. 序列化</a></li>
+</ul>
+</nav></div>
 </aside>
 <main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main>
 <nav aria-label=breadcrumb class="d-none d-md-block d-print-none">
@@ -135,10 +142,44 @@ Releases
 </nav>
 <div class=td-content>
 <h1>安全漏洞</h1>
-<div class=lead>序列化相关的安全问题说明</div>
+<div class=lead>安全漏洞说明</div>
 <header class=article-meta>
 </header>
-<h2 id=序列化>序列化</h2>
+<h2 id=1-log4j-cve-2021-44228-漏洞>1. Log4j CVE-2021-44228 漏洞</h2>
+<p>最近，主流日志组件 <a href=https://logging.apache.org/log4j/2.x/>log4j2</a> 爆出<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-44228">安全漏洞 CVE-2021-44228</a>。</p>
+<p>以下是漏洞 CVE-2021-44228 对 Apache Dubbo 框架的影响总结及用户应对指南。</p>
+<h2 id=dubbo-影响范围>Dubbo 影响范围</h2>
+<p><strong>该漏洞对 Dubbo 框架使用安全并无影响。</strong></p>
+<p>Dubbo 本身不强依赖 log4j2 框架，也不会通过依赖传递将 log4j2 带到业务工程中去，因此，正在使用 Dubbo 2.7.x、3.0.x 等版本的用户均无需强制升级 Dubbo 版本。</p>
+<p>以下是 Dubbo 各组件对 log4j2 的依赖分析，涉及 <code>dubbo-common</code>、<code>dubbo-spring-boot-starter</code>、<code>dubbo-spring-boot-actuator</code>：</p>
+<ul>
+<li>dubbo-common 包含对 <code>log4j-core</code> 的可选依赖，请检查项目自身是否启用了 log4j 依赖，如启用则对应升级即可。</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml>[INFO] --- maven-dependency-plugin:3.1.2:tree (default-cli) @ dubbo-common ---
+[INFO] org.apache.dubbo:dubbo-common:jar:2.7.14-SNAPSHOT
+[INFO] +- org.apache.logging.log4j:log4j-api:jar:2.11.1:provided
+[INFO] \- org.apache.logging.log4j:log4j-core:jar:2.11.1:provided
+
+</code></pre></div><ul>
+<li>dubbo-spring-boot-starter 通过 spring-boot 组件传递了 log4j-api 依赖，log4j-api 本身并无安全问题，升级 log4j-core 组件时注意与 log4j-api 的兼容性</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml>[INFO] --- maven-dependency-plugin:3.1.2:tree (default-cli) @ dubbo-spring-boot-starter ---
+[INFO] org.apache.dubbo:dubbo-spring-boot-starter:jar:2.7.14-SNAPSHOT
+[INFO] \- org.springframework.boot:spring-boot-starter:jar:2.3.1.RELEASE:compile (optional) 
+[INFO]    \- org.springframework.boot:spring-boot-starter-logging:jar:2.3.1.RELEASE:compile (optional) 
+[INFO]       \- org.apache.logging.log4j:log4j-to-slf4j:jar:2.13.3:compile (optional) 
+[INFO]          \- org.apache.logging.log4j:log4j-api:jar:2.13.3:compile (optional) 
+
+</code></pre></div><ul>
+<li>dubbo-spring-boot-actuator 通过 spring-boot 组件传递了 log4j-api 依赖，log4j-api 本身并无安全问题，升级 log4j-core 组件时应注意与 log4j-api 的兼容性</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml>[INFO] org.apache.dubbo:dubbo-spring-boot-actuator:jar:2.7.14-SNAPSHOT
+[INFO] \- org.springframework.boot:spring-boot-starter-web:jar:2.3.1.RELEASE:compile (optional) 
+[INFO]    \- org.springframework.boot:spring-boot-starter:jar:2.3.1.RELEASE:compile
+[INFO]       \- org.springframework.boot:spring-boot-starter-logging:jar:2.3.1.RELEASE:compile
+[INFO]          \- org.apache.logging.log4j:log4j-to-slf4j:jar:2.13.3:compile
+[INFO]             \- org.apache.logging.log4j:log4j-api:jar:2.13.3:compile
+</code></pre></div><h2 id=2-序列化>2. 序列化</h2>
 <p>Dubbo 支持序列化协议的扩展，理论上用户可以基于该扩展机制启用任意的序列化协议，这带来了极大的灵活的，但同时也要意识到其中潜藏的安全性风险。
 数据反序列化是最容易被被攻击者利用的一个环节，攻击者利用它执行 RCE 攻击等窃取或破坏服务端数据，用户在切换序列化协议或实现前，
 应充分调研目标序列化协议及其框架实现的安全性保障，并提前设置相应的安全措施（如设置黑/白名单）。Dubbo 框架自身并不能保证目标序列化机制的安全性。</p>
