@@ -22,14 +22,14 @@ src |-main |-java |-com |-xxx |-XxxMerger.java (Merger implementation) |-resourc
 package com.xxx; import org.apache.dubbo.rpc.cluster.Merger; public class XxxMerger<T> implements Merger<T> { public T merge(T... results) { // .">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/en/docs/v2.7/dev/impls/merger/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-12-20T10:58:13+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-12-21T13:31:20-03:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="Merger Extension">
 <meta itemprop=description content="Summary Merge strategy for return result aggregation in group.
 Extension Interface org.apache.dubbo.rpc.cluster.Merger
 Extension Configuration <dubbo:method merger=&#34;xxx&#34; /> Existing Extension  org.apache.dubbo.rpc.cluster.merger.ArrayMerger org.apache.dubbo.rpc.cluster.merger.ListMerger org.apache.dubbo.rpc.cluster.merger.SetMerger org.apache.dubbo.rpc.cluster.merger.MapMerger org.apache.dubbo.rpc.cluster.merger.ByteArrayMerger org.apache.dubbo.rpc.cluster.merger.CharArrayMerger org.apache.dubbo.rpc.cluster.merger.ShortArrayMerger org.apache.dubbo.rpc.cluster.merger.IntArrayMerger org.apache.dubbo.rpc.cluster.merger.LongArrayMerger org.apache.dubbo.rpc.cluster.merger.FloatArrayMerger org.apache.dubbo.rpc.cluster.merger.DoubleArrayMerger org.apache.dubbo.rpc.cluster.merger.BooleanArrayMerger  Extension Guide Directory layout:
 src |-main |-java |-com |-xxx |-XxxMerger.java (Merger implementation) |-resources |-META-INF |-dubbo |-org.apache.dubbo.rpc.cluster.Merger (plain text file with the content: xxx=com.xxx.XxxMerger) XxxMerger.java：
 package com.xxx; import org.apache.dubbo.rpc.cluster.Merger; public class XxxMerger<T> implements Merger<T> { public T merge(T... results) { // .">
-<meta itemprop=dateModified content="2021-12-20T10:58:13+08:00">
+<meta itemprop=dateModified content="2021-12-21T13:31:20-03:00">
 <meta itemprop=wordCount content="76">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Merger Extension">
@@ -626,6 +626,8 @@ English
 </ul>
 </li>
 </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-endocsfaq-li>
+<a href=/en/docs/faq/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-endocsfaq><span>FAQ - Frequently Asked Questions</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-endocsnotices-li>
 <a href=/en/docs/notices/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-endocsnotices><span>notices</span></a>
 <ul class="ul-2 foldable">
