@@ -21,13 +21,13 @@ src |-main |-java |-com |-xxx |-XxxRouterFactory.java (RouterFactory implementat
 package com.xxx; import org.apache.dubbo.rpc.cluster.RouterFactory; import org.apache.dubbo.rpc.Invoker; import org.apache.dubbo.rpc.Invocation; import org.apache.dubbo.rpc.RpcException; public class XxxRouterFactory implements RouterFactory { public Router getRouter(URL url) { // .">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/en/docs/v2.7/dev/impls/router/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-12-22T16:47:01+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-12-28T16:36:37+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="Router Extension">
 <meta itemprop=description content="Summary Pick one from service providers and fire the invocation.
 Extension Interface  org.apache.dubbo.rpc.cluster.RouterFactory org.apache.dubbo.rpc.cluster.Router  Existing Extension  org.apache.dubbo.rpc.cluster.router.ScriptRouterFactory org.apache.dubbo.rpc.cluster.router.FileRouterFactory org.apache.dubbo.rpc.cluster.router.condition.config.AppRouterFactory org.apache.dubbo.rpc.cluster.CacheableRouterFactory org.apache.dubbo.rpc.cluster.router.condition.ConditionRouterFactory org.apache.dubbo.rpc.cluster.router.mock.MockRouterFactory org.apache.dubbo.rpc.cluster.router.condition.config.ServiceRouterFactory org.apache.dubbo.rpc.cluster.router.tag.TagRouterFactory  Extension Guide Directory layout:
 src |-main |-java |-com |-xxx |-XxxRouterFactory.java (RouterFactory implementation) |-resources |-META-INF |-dubbo |-org.apache.dubbo.rpc.cluster.RouterFactory (plain text file with the content: xxx=com.xxx.XxxRouterFactory) XxxRouterFactory.java：
 package com.xxx; import org.apache.dubbo.rpc.cluster.RouterFactory; import org.apache.dubbo.rpc.Invoker; import org.apache.dubbo.rpc.Invocation; import org.apache.dubbo.rpc.RpcException; public class XxxRouterFactory implements RouterFactory { public Router getRouter(URL url) { // .">
-<meta itemprop=dateModified content="2021-12-22T16:47:01+08:00">
+<meta itemprop=dateModified content="2021-12-28T16:36:37+08:00">
 <meta itemprop=wordCount content="75">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Router Extension">
@@ -530,6 +530,8 @@ English
 <ul class="ul-2 foldable">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-endocsv30loadbalance-li>
 <a href=/en/docs/v3.0/loadbalance/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-endocsv30loadbalance><span>Load Balance</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-endocsv30whats-new-in-dubbo3-li>
+<a href=/en/docs/v3.0/whats-new-in-dubbo3/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-endocsv30whats-new-in-dubbo3><span>What's new in Apache Dubbo 3.x?</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id=m-endocsv30references-li>
 <a href=/en/docs/v3.0/references/ title="Function Reference Manual" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-endocsv30references><span>Reference</span></a>
 <ul class="ul-3 foldable">

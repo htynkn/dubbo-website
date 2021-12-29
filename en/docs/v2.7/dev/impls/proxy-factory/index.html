@@ -22,14 +22,14 @@ src |-main |-java |-com |-xxx |-XxxProxyFactory.java (ProxyFactory implementatio
 package com.xxx; import org.apache.dubbo.rpc.ProxyFactory; import org.apache.dubbo.rpc.Invoker; import org.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/en/docs/v2.7/dev/impls/proxy-factory/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2021-12-22T16:47:01+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2021-12-28T16:36:37+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="ProxyFactory Extension">
 <meta itemprop=description content="Summary Convert Invoker into business interface.
 Extension Interface org.apache.dubbo.rpc.ProxyFactory
 Extension Configuration <dubbo:protocol proxy=&#34;xxx&#34; /> <!-- default configuration, it will take effect when proxy attribute is not configured in <dubbo:protocol> --> <dubbo:provider proxy=&#34;xxx&#34; /> Existing Extension  org.apache.dubbo.rpc.proxy.JdkProxyFactory org.apache.dubbo.rpc.proxy.JavassistProxyFactory  Extension Guide Directory layout:
 src |-main |-java |-com |-xxx |-XxxProxyFactory.java (ProxyFactory implementation) |-resources |-META-INF |-dubbo |-org.apache.dubbo.rpc.ProxyFactory (plain text file with the content: xxx=com.xxx.XxxProxyFactory) XxxProxyFactory.java：
 package com.xxx; import org.apache.dubbo.rpc.ProxyFactory; import org.apache.dubbo.rpc.Invoker; import org.">
-<meta itemprop=dateModified content="2021-12-22T16:47:01+08:00">
+<meta itemprop=dateModified content="2021-12-28T16:36:37+08:00">
 <meta itemprop=wordCount content="104">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="ProxyFactory Extension">
@@ -533,6 +533,8 @@ English
 <ul class="ul-2 foldable">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-endocsv30loadbalance-li>
 <a href=/en/docs/v3.0/loadbalance/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-endocsv30loadbalance><span>Load Balance</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-endocsv30whats-new-in-dubbo3-li>
+<a href=/en/docs/v3.0/whats-new-in-dubbo3/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-endocsv30whats-new-in-dubbo3><span>What's new in Apache Dubbo 3.x?</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id=m-endocsv30references-li>
 <a href=/en/docs/v3.0/references/ title="Function Reference Manual" class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-endocsv30references><span>Reference</span></a>
 <ul class="ul-3 foldable">
