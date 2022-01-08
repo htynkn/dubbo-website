@@ -153,10 +153,10 @@ System&lt;span style="color:#719e07">.&lt;/span>in&lt;span style="color:#719e07"
 &lt;blockquote>
 &lt;p>注意：为了更好支持Dubbo3的应用级服务发现，推荐使用新的DubboBootstrap API。&lt;/p>
 &lt;/blockquote>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.config.ApplicationConfig&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.config.RegistryConfig&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.config.ProviderConfig&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.config.ServiceConfig&lt;span style="color:#719e07">;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.config.ApplicationConfig&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.config.RegistryConfig&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.config.ProviderConfig&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.config.ServiceConfig&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">import&lt;/span> com.xxx.DemoService&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">import&lt;/span> com.xxx.DemoServiceImpl&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">DemoProvider&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
@@ -194,10 +194,10 @@ service&lt;span style="color:#719e07">.&lt;/span>setVersion&lt;span style="color
 &lt;blockquote>
 &lt;p>注意：为了更好支持Dubbo3的应用级服务发现，推荐使用新的DubboBootstrap API。&lt;/p>
 &lt;/blockquote>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.config.ApplicationConfig&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.config.RegistryConfig&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.config.ConsumerConfig&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.config.ReferenceConfig&lt;span style="color:#719e07">;&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.config.ApplicationConfig&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.config.RegistryConfig&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.config.ConsumerConfig&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.config.ReferenceConfig&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">import&lt;/span> com.xxx.DemoService&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">DemoConsumer&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">main&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String&lt;span style="color:#719e07">[]&lt;/span> args&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
@@ -223,10 +223,10 @@ demoService&lt;span style="color:#719e07">.&lt;/span>sayHello&lt;span style="col
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="bootstrap-api">Bootstrap API&lt;/h2>
 &lt;p>通过DubboBootstrap API可以减少重复配置，更好控制启动过程，支持批量发布/订阅服务接口，还可以更好支持Dubbo3的应用级服务发现。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.config.bootstrap.DubboBootstrap&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.config.ApplicationConfig&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.config.RegistryConfig&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.config.ProviderConfig&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.config.ServiceConfig&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.config.ApplicationConfig&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.config.RegistryConfig&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.config.ProviderConfig&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.config.ServiceConfig&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">import&lt;/span> com.xxx.DemoService&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">import&lt;/span> com.xxx.DemoServiceImpl&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">DemoProvider&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
@@ -262,10 +262,10 @@ fooServiceConfig&lt;span style="color:#719e07">.&lt;/span>setVersion&lt;span sty
 &lt;/span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
 &lt;span style="color:#719e07">}&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.config.bootstrap.DubboBootstrap&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.config.ApplicationConfig&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.config.RegistryConfig&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.config.ProviderConfig&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.config.ServiceConfig&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.config.ApplicationConfig&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.config.RegistryConfig&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.config.ProviderConfig&lt;span style="color:#719e07">;&lt;/span>
+&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.config.ServiceConfig&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">import&lt;/span> com.xxx.DemoService&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#719e07">import&lt;/span> com.xxx.DemoServiceImpl&lt;span style="color:#719e07">;&lt;/span>
 &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">DemoConsumer&lt;/span> &lt;span style="color:#719e07">{&lt;/span>

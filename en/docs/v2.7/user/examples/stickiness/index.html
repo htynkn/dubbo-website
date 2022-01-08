@@ -18,10 +18,10 @@
 <meta property="og:description" content="Config stickiness connection in dubbo">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/en/docs/v2.7/user/examples/stickiness/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2022-01-01T16:18:24+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2022-01-07T14:25:14+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="Stickiness Connection">
 <meta itemprop=description content="Config stickiness connection in dubbo">
-<meta itemprop=dateModified content="2022-01-01T16:18:24+08:00">
+<meta itemprop=dateModified content="2022-01-07T14:25:14+08:00">
 <meta itemprop=wordCount content="77">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Stickiness Connection">
@@ -666,9 +666,9 @@ English
 <p>Sticky connections are used for stateful services, as much as possible so that clients always make calls to the same provider, unless the provider hangs up and connects to the other one.</p>
 <p>Sticky connections will automatically open <a href=../lazy-connect>Lazy Connection</a> to reduce the number of long connections.</p>
 <div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml><span style=color:#268bd2>&lt;dubbo:reference</span> id=<span style=color:#2aa198>&#34;xxxService&#34;</span> interface=<span style=color:#2aa198>&#34;com.xxx.XxxService&#34;</span> sticky=<span style=color:#2aa198>&#34;true&#34;</span> <span style=color:#268bd2>/&gt;</span>
-</code></pre></div><p>Dubbo supports method-level sticky connection, and if you want more granular control, you can also configure as follow.</p>
+</code></pre></div><p>Dubbo supports method-level sticky connection, and if you want more granular control, you can also configure as follows.</p>
 <div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml><span style=color:#268bd2>&lt;dubbo:reference</span> id=<span style=color:#2aa198>&#34;xxxService&#34;</span> interface=<span style=color:#2aa198>&#34;com.xxx.XxxService&#34;</span><span style=color:#268bd2>&gt;</span>
-    <span style=color:#268bd2>&lt;dubbo:mothod</span> name=<span style=color:#2aa198>&#34;sayHello&#34;</span> sticky=<span style=color:#2aa198>&#34;true&#34;</span> <span style=color:#268bd2>/&gt;</span>
+    <span style=color:#268bd2>&lt;dubbo:method</span> name=<span style=color:#2aa198>&#34;sayHello&#34;</span> sticky=<span style=color:#2aa198>&#34;true&#34;</span> <span style=color:#268bd2>/&gt;</span>
 <span style=color:#268bd2>&lt;/dubbo:reference&gt;</span>
 </code></pre></div>
 <style>.feedback--answer{display:inline-block}.feedback--answer-no{margin-left:1em}.feedback--response{display:none;margin-top:1em}.feedback--response__visible{display:block}</style>

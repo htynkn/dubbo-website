@@ -19,9 +19,9 @@ address: zookeeper://127.0.0.1:2181
 &lt;/ul>
 &lt;p>Dubbo3 格式的 Provider 地址不能被 Dubbo2 的 Consumer 识别到，反之 Dubbo2 的消费者也不能订阅到 Dubbo3 Provider。&lt;/p>
 &lt;ul>
-&lt;li>对于新用户，我们提倡直接启用 Dubbo3 的默认行为，即启用应用级服务发现，参见《samples/应用级服务发现》；&lt;/li>
+&lt;li>对于新用户，我们提倡直接启用 Dubbo3 的默认行为，即启用应用级服务发现，参见《&lt;a href="../../examples/service-discovery">应用级服务发现&lt;/a>》；&lt;/li>
 &lt;li>对于老用户，要面临如何平滑迁移到应用级服务发现的问题，考虑到老用户的规模如此之大，Dubbo3 默认保持了接口级地址发现的行为，这保证了老用户可以直接无感升级到 Dubbo3。
-而如果要开启应用级服务发现，则需要通过配置显示开启（双注册、双订阅），具体开启与平滑迁移过程，可参见《migration/地址发现迁移指南》。&lt;/li>
+而如果要开启应用级服务发现，则需要通过配置显示开启（双注册、双订阅），具体开启与平滑迁移过程，可参见《&lt;a href="../../migration/migration-service-discovery">地址发现迁移指南&lt;/a>》。&lt;/li>
 &lt;/ul>
 &lt;h2 id="应用级服务发现简介">应用级服务发现简介&lt;/h2>
 &lt;p>概括来说，Dubbo3 引入的应用级服务发现主要有以下优势&lt;/p>
@@ -36,7 +36,7 @@ address: zookeeper://127.0.0.1:2181
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/concepts/servicediscovery_k8s.png" alt="//imgs/v3/concepts/servicediscovery_k8s.png">&lt;/p>
 &lt;p>在这样的场景下，对 Dubbo3 的服务注册发现机制提出了两个要求：
 Dubbo3 需要在原有服务发现流程中抽象出通用的、与业务逻辑无关的地址映射模型，并确保这部分模型足够合理，以支持将地址的注册行为和存储委托给下层基础设施
-Dubbo3 特有的业务接口同步机制，是 Dubbo3 需要保留的优势，需要在 1 中定义的新地址模型之上，通过框架内的自有机制予以解决。&lt;/p>
+Dubbo3 特有的业务接口同步机制，是 Dubbo3 需要保留的优势，需要在 Dubbo3 中定义的新地址模型之上，通过框架内的自有机制予以解决。&lt;/p>
 &lt;p>这样设计的全新的服务发现模型，在架构兼容性、可伸缩性上都给 Dubbo3 带来了更大的优势。&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/concepts/servicediscovery_mem.png" alt="//imgs/v3/concepts/servicediscovery_mem.png">&lt;/p>
 &lt;p>在架构兼容性上，如上文所述，Dubbo3 复用下层基础设施的服务抽象能力成为了可能；另一方面，如 Spring Cloud 等业界其它微服务解决方案也沿用这种模型，
@@ -228,7 +228,7 @@ Service name bytes (换行符)
 &lt;p>其中：&lt;/p>
 &lt;ul>
 &lt;li>路由规则可以有多个，不同的路由规则之间存在优先级。如：Router(1) -&amp;gt; Router(2) -&amp;gt; …… -&amp;gt; Router(n)&lt;/li>
-&lt;li>一个路由规则可以路由到多个不同的应用服务。如：Router(2)即可以路由到Service(1)也可以路由到Service(2)&lt;/li>
+&lt;li>一个路由规则可以路由到多个不同的应用服务。如：Router(2)既可以路由到Service(1)也可以路由到Service(2)&lt;/li>
 &lt;li>多个不同的路由规则可以路由到同一个应用服务。如：Router(1)和Router(2)都可以路由到Service(2)&lt;/li>
 &lt;li>路由规则也可以不路由到任何应用服务。如：Router(m)没有路由到任何一个Service上，所有命中Router(m)的请求都会因为没有对应的应用服务处理而导致报错&lt;/li>
 &lt;li>应用服务可以是单个的实例，也可以是一个应用集群。&lt;/li>

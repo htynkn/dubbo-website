@@ -18,10 +18,10 @@
 <meta property="og:description" content="通过 Dubbo 中的路由规则做服务治理">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docsv2.7/user/examples/routing-rule/"><meta property="article:section" content="docsv2.7">
-<meta property="article:modified_time" content="2022-01-01T16:18:24+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2022-01-07T14:25:14+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="路由规则">
 <meta itemprop=description content="通过 Dubbo 中的路由规则做服务治理">
-<meta itemprop=dateModified content="2022-01-01T16:18:24+08:00">
+<meta itemprop=dateModified content="2022-01-07T14:25:14+08:00">
 <meta itemprop=wordCount content="338">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="路由规则">
@@ -781,7 +781,7 @@ application != bops =&gt; host = 172.22.3.94,172.22.3.95,172.22.3.96
 </code></pre></div></li>
 </ul>
 <h4 id=consumer>Consumer</h4>
-<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>RpcContext<span style=color:#719e07>.</span>getContext<span style=color:#719e07>().</span>setAttachment<span style=color:#719e07>(</span>Constants<span style=color:#719e07>.</span>REQUEST_TAG_KEY<span style=color:#719e07>,</span><span style=color:#2aa198>&#34;tag1&#34;</span><span style=color:#719e07>);</span>
+<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>RpcContext<span style=color:#719e07>.</span>getContext<span style=color:#719e07>().</span>setAttachment<span style=color:#719e07>(</span>CommonConstants<span style=color:#719e07>.</span>TAG_KEY<span style=color:#719e07>,</span><span style=color:#2aa198>&#34;tag1&#34;</span><span style=color:#719e07>);</span>
 </code></pre></div><p>请求标签的作用域为每一次 invocation，使用 attachment 来传递请求标签，注意保存在 attachment 中的值将会在一次完整的远程调用中持续传递，得益于这样的特性，我们只需要在起始调用时，通过一行代码的设置，达到标签的持续传递。</p>
 <blockquote>
 <p>目前仅仅支持 hardcoding 的方式设置 requestTag。注意到 RpcContext 是线程绑定的，优雅的使用 TagRouter 特性，建议通过 servlet 过滤器(在 web 环境下)，或者定制的 SPI 过滤器设置 requestTag。</p>

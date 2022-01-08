@@ -501,23 +501,23 @@ org.apache.dubbo.config.ProviderConfig
 org.apache.dubbo.config.ConsumerConfig
 org.apache.dubbo.config.MethodConfig
 org.apache.dubbo.config.ArgumentConfig
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>详细参见：&lt;a href="../../configuration/api">API配置&lt;/a>&lt;/p>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>详细参见：&lt;a href="../configuration/api">API配置&lt;/a>&lt;/p>
 &lt;h2 id="注解-api">注解 API&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">org.apache.dubbo.config.annotation.Service
-org.apache.dubbo.config.annotation.Reference
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>详细参见：&lt;a href="../../configuration/annotation">注解配置&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">org.apache.dubbo.config.annotation.DubboService
+org.apache.dubbo.config.annotation.DubboReference
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>详细参见：&lt;a href="../configuration/annotation">注解配置&lt;/a>&lt;/p>
 &lt;h2 id="模型-api">模型 API&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">org.apache.dubbo.common.URL
 org.apache.dubbo.rpc.RpcException
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="上下文-api">上下文 API&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">org.apache.dubbo.rpc.RpcContext
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>详细参见：&lt;a href="../../examples/context">上下文信息&lt;/a> &amp;amp; &lt;a href="../../examples/attachment">隐式传参&lt;/a> &amp;amp; &lt;a href="../../examples/async-call">异步调用&lt;/a>&lt;/p>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>详细参见：&lt;a href="../../advanced/context">上下文信息&lt;/a> &amp;amp; &lt;a href="../../advanced/attachment">隐式传参&lt;/a> &amp;amp; &lt;a href="../../advanced/async-call">异步调用&lt;/a>&lt;/p>
 &lt;h2 id="服务-api">服务 API&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">org.apache.dubbo.rpc.service.GenericService
 org.apache.dubbo.rpc.service.GenericException
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>详细参见：&lt;a href="../../examples/generic-reference">泛化引用&lt;/a> &amp;amp; &lt;a href="../../examples/generic-service">泛化实现&lt;/a>&lt;/p>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>详细参见：&lt;a href="../../advanced/generic-reference">泛化引用&lt;/a> &amp;amp; &lt;a href="../../advanced/generic-service">泛化实现&lt;/a>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">org.apache.dubbo.rpc.service.EchoService
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>详细参见：&lt;a href="../../examples/echo-service">回声测试&lt;/a>&lt;/p></description></item><item><title>Docs: Kubernetes 生命周期对齐探针</title><link>https://dubbo.apache.org/zh/docs/references/lifecycle/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/references/lifecycle/</guid><description>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>详细参见：&lt;a href="../../advanced/echo-service">回声测试&lt;/a>&lt;/p></description></item><item><title>Docs: Kubernetes 生命周期对齐探针</title><link>https://dubbo.apache.org/zh/docs/references/lifecycle/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/references/lifecycle/</guid><description>
 &lt;p>和 Kubernetes 生命周期对齐的一些扩展点&lt;/p></description></item><item><title>Docs: 在线运维命令参考手册</title><link>https://dubbo.apache.org/zh/docs/references/qos/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/references/qos/</guid><description>
 &lt;p>dubbo &lt;code>2.5.8&lt;/code> 新版本增加了 QOS 模块，提供了新的 telnet 命令支持。&lt;/p>
 &lt;h2 id="端口">端口&lt;/h2>

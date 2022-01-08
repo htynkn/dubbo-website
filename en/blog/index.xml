@@ -1101,10 +1101,10 @@ Save tom to Mysql&lt;/p>
 &lt;li>Our class is usually singleton-scaled, such as beans of Spring IoC Container. When instantiating beans, if it depends on some specific extension point, it will know which extension to use, otherwise, the bean will not know how to choose extensions. At this time, a proxy mode is needed, which implements the interface of an extension point. The method can dynamically select the appropriate extension according to the run-time parameters, and this proxy is an adaptive instance. Adaptive extension instance is widely used in Dubbo, in Dubbo, each extension will have an adaptive class, and if we do not provide it, Dubbo will automatically generate one for us by using the bytecode encoder. Therefore, we basically don&amp;rsquo;t recognize the existence of adaptive classes. We will explain how the adaptive class works in later chapters.&lt;/li>
 &lt;/ul>
 &lt;h3 id="55-spi">5.5 @SPI&lt;/h3>
-&lt;p>@SPI annotation works on the interface of the extension point, which indicates that the interface is an extension point, and can be loaded by Dubbo ExtentionLoader. If there is no such ExtentionLoader, the call will throw an exception.&lt;/p>
+&lt;p>@SPI annotation works on the interface of the extension point, which indicates that the interface is an extension point, and can be loaded by Dubbo ExtensionLoader. If there is no such ExtentionLoader, the call will throw an exception.&lt;/p>
 &lt;h3 id="56-adaptive">5.6 @Adaptive&lt;/h3>
 &lt;p>@Adaptive annotation is used on the method that extends the interface, which indicates an adaptive method. When Dubbo generates an adaptive instance for an extension point, if the function has @Adaptive annotation, then Dubbo will generate the corresponding code for the method. The method determines which extension to use according to the parameters. When @Adaptive annotation is used on the class to implement a Decorator class, it is similar to the Decorator pattern, whose major function is to return a specified class. Currently in Dubbo, both AdaptiveCompiler and AdaptiveExtensionFactory have @Adaptive annotation.&lt;/p>
-&lt;h3 id="57-extentionloader">5.7 ExtentionLoader&lt;/h3>
+&lt;h3 id="57-extensionloader">5.7 ExtensionLoader&lt;/h3>
 &lt;p>Similar to the Java SPI ServiceLoader, it is responsible for loading extensions and life-cycle maintenance.&lt;/p>
 &lt;h3 id="58-extension-alias">5.8 Extension Alias&lt;/h3>
 &lt;p>Different from Java, each extension in Dubbo has an alias, which is used to reference them in the application, such as&lt;/p>

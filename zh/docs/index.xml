@@ -1321,6 +1321,16 @@ logger&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e
 &lt;td>是否启用JSR303标准注解验证，如果启用，将对方法参数上的注解进行校验&lt;/td>
 &lt;td>Dubbo2.1.0及其以上版本支持&lt;/td>
 &lt;/tr>
+&lt;tr>
+&lt;td>version&lt;/td>
+&lt;td>version&lt;/td>
+&lt;td>string&lt;/td>
+&lt;td>可选&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>服务治理&lt;/td>
+&lt;td>在 Dubbo 中为同一个服务配置多个版本&lt;/td>
+&lt;td>Dubbo2.2.0及其以上版本支持&lt;/td>
+&lt;/tr>
 &lt;/tbody>
 &lt;/table></description></item><item><title>Docsv2.7: dubbo:consumer</title><link>https://dubbo.apache.org/zh/docsv2.7/user/references/xml/dubbo-consumer/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/user/references/xml/dubbo-consumer/</guid><description>
 &lt;p>服务消费者缺省值配置。配置类： &lt;code>org.apache.dubbo.config.ConsumerConfig&lt;/code> 。同时该标签为 &lt;code>&amp;lt;dubbo:reference&amp;gt;&lt;/code> 标签的缺省值设置。&lt;/p>
@@ -5683,7 +5693,7 @@ xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springfram
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;chinaRegistry&amp;#34;&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;zookeeper&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.153.10:2181&amp;#34;&lt;/span> group=&lt;span style="color:#2aa198">&amp;#34;china&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;intlRegistry&amp;#34;&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;zookeeper&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.153.10:2181&amp;#34;&lt;/span> group=&lt;span style="color:#2aa198">&amp;#34;intl&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="zookeeper-安装">zookeeper 安装&lt;/h2>
-&lt;p>安装方式参见: &lt;a href="../../../../admin/install/zookeeper">Zookeeper安装手册&lt;/a>，只需搭一个原生的 Zookeeper 服务器，并将 &lt;a href="../../../quick-start">Quick Start&lt;/a> 中 Provider 和 Consumer 里的 &lt;code>conf/dubbo.properties&lt;/code> 中的 &lt;code>dubbo.registry.address&lt;/code> 的值改为 &lt;code>zookeeper://127.0.0.1:2181&lt;/code> 即可使用。&lt;/p>
+&lt;p>安装方式参见: &lt;a href="../../../../docsv2.7/admin/install/zookeeper">Zookeeper安装手册&lt;/a>，只需搭一个原生的 Zookeeper 服务器，并将 &lt;a href="../../../quick-start">Quick Start&lt;/a> 中 Provider 和 Consumer 里的 &lt;code>conf/dubbo.properties&lt;/code> 中的 &lt;code>dubbo.registry.address&lt;/code> 的值改为 &lt;code>zookeeper://127.0.0.1:2181&lt;/code> 即可使用。&lt;/p>
 &lt;h2 id="可靠性声明">可靠性声明&lt;/h2>
 &lt;p>阿里内部并没有采用 Zookeeper 做为注册中心，而是使用自己实现的基于数据库的注册中心，即：Zookeeper 注册中心并没有在阿里内部长时间运行的可靠性保障，此 Zookeeper 桥接实现只为开源版本提供，其可靠性依赖于 Zookeeper 本身的可靠性。&lt;/p>
 &lt;h2 id="兼容性声明">兼容性声明&lt;/h2>
@@ -6348,9 +6358,9 @@ address: zookeeper://127.0.0.1:2181
 &lt;/ul>
 &lt;p>Dubbo3 格式的 Provider 地址不能被 Dubbo2 的 Consumer 识别到，反之 Dubbo2 的消费者也不能订阅到 Dubbo3 Provider。&lt;/p>
 &lt;ul>
-&lt;li>对于新用户，我们提倡直接启用 Dubbo3 的默认行为，即启用应用级服务发现，参见《samples/应用级服务发现》；&lt;/li>
+&lt;li>对于新用户，我们提倡直接启用 Dubbo3 的默认行为，即启用应用级服务发现，参见《&lt;a href="../../examples/service-discovery">应用级服务发现&lt;/a>》；&lt;/li>
 &lt;li>对于老用户，要面临如何平滑迁移到应用级服务发现的问题，考虑到老用户的规模如此之大，Dubbo3 默认保持了接口级地址发现的行为，这保证了老用户可以直接无感升级到 Dubbo3。
-而如果要开启应用级服务发现，则需要通过配置显示开启（双注册、双订阅），具体开启与平滑迁移过程，可参见《migration/地址发现迁移指南》。&lt;/li>
+而如果要开启应用级服务发现，则需要通过配置显示开启（双注册、双订阅），具体开启与平滑迁移过程，可参见《&lt;a href="../../migration/migration-service-discovery">地址发现迁移指南&lt;/a>》。&lt;/li>
 &lt;/ul>
 &lt;h2 id="应用级服务发现简介">应用级服务发现简介&lt;/h2>
 &lt;p>概括来说，Dubbo3 引入的应用级服务发现主要有以下优势&lt;/p>
@@ -6365,7 +6375,7 @@ address: zookeeper://127.0.0.1:2181
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/concepts/servicediscovery_k8s.png" alt="//imgs/v3/concepts/servicediscovery_k8s.png">&lt;/p>
 &lt;p>在这样的场景下，对 Dubbo3 的服务注册发现机制提出了两个要求：
 Dubbo3 需要在原有服务发现流程中抽象出通用的、与业务逻辑无关的地址映射模型，并确保这部分模型足够合理，以支持将地址的注册行为和存储委托给下层基础设施
-Dubbo3 特有的业务接口同步机制，是 Dubbo3 需要保留的优势，需要在 1 中定义的新地址模型之上，通过框架内的自有机制予以解决。&lt;/p>
+Dubbo3 特有的业务接口同步机制，是 Dubbo3 需要保留的优势，需要在 Dubbo3 中定义的新地址模型之上，通过框架内的自有机制予以解决。&lt;/p>
 &lt;p>这样设计的全新的服务发现模型，在架构兼容性、可伸缩性上都给 Dubbo3 带来了更大的优势。&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/concepts/servicediscovery_mem.png" alt="//imgs/v3/concepts/servicediscovery_mem.png">&lt;/p>
 &lt;p>在架构兼容性上，如上文所述，Dubbo3 复用下层基础设施的服务抽象能力成为了可能；另一方面，如 Spring Cloud 等业界其它微服务解决方案也沿用这种模型，

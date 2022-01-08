@@ -484,6 +484,16 @@
 &lt;td>是否启用JSR303标准注解验证，如果启用，将对方法参数上的注解进行校验&lt;/td>
 &lt;td>Dubbo2.1.0及其以上版本支持&lt;/td>
 &lt;/tr>
+&lt;tr>
+&lt;td>version&lt;/td>
+&lt;td>version&lt;/td>
+&lt;td>string&lt;/td>
+&lt;td>可选&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>服务治理&lt;/td>
+&lt;td>在 Dubbo 中为同一个服务配置多个版本&lt;/td>
+&lt;td>Dubbo2.2.0及其以上版本支持&lt;/td>
+&lt;/tr>
 &lt;/tbody>
 &lt;/table></description></item><item><title>Docs: dubbo:method</title><link>https://dubbo.apache.org/zh/docs/references/xml/dubbo-method/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/references/xml/dubbo-method/</guid><description>
 &lt;p>方法级配置。对应的配置类： &lt;code>org.apache.dubbo.config.MethodConfig&lt;/code>。同时该标签为 &lt;code>&amp;lt;dubbo:service&amp;gt;&lt;/code> 或 &lt;code>&amp;lt;dubbo:reference&amp;gt;&lt;/code> 的子标签，用于控制到方法级。&lt;/p>

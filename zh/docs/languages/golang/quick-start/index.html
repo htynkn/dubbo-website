@@ -23,7 +23,7 @@
   编写需要被编码的结构体，由于使用 Hessian2 作为编码协议，User 需要实现 JavaClassName 方法，它的返回值在dubbo中对应User类的类名。  type User struct { Id string Name string Age int32 Time time.Time } func (u User) JavaClassName() string { return &#34;com.ikurento.user.User&#34; } 编写业务逻辑，UserProvider 相当于dubbo中的一个服务实现。需要实现 Reference 方法，返回值是这个服务的唯一标识，对应dubbo的 beans 和 path 字段。  type UserProvider struct { } func (u *UserProvider) GetUser(ctx context.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docs/languages/golang/quick-start/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2022-01-01T16:18:24+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2022-01-07T14:25:14+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="Go 快速开始">
 <meta itemprop=description content="推荐使用 IDL 定义跨语言的服务与编码格式，以下展示的是 Golang 语言版本的服务定义与开发方式，如果你有遗留系统或无多语言开发需求，可参考以下使用方式。
 快速开始 通过一个 hellowworld 例子带领大家快速上手Dubbo-go框架。
@@ -31,7 +31,7 @@
 注册中心：Zookeeper
 环境  Go编程环境 启动zookeeper服务，也可以使用远程实例  从服务端开始 第一步：编写 Provider 结构体和提供服务的方法  https://github.com/dubbogo/dubbo-samples/blob/master/golang/helloworld/dubbo/go-server/app/user.go
   编写需要被编码的结构体，由于使用 Hessian2 作为编码协议，User 需要实现 JavaClassName 方法，它的返回值在dubbo中对应User类的类名。  type User struct { Id string Name string Age int32 Time time.Time } func (u User) JavaClassName() string { return &#34;com.ikurento.user.User&#34; } 编写业务逻辑，UserProvider 相当于dubbo中的一个服务实现。需要实现 Reference 方法，返回值是这个服务的唯一标识，对应dubbo的 beans 和 path 字段。  type UserProvider struct { } func (u *UserProvider) GetUser(ctx context.">
-<meta itemprop=dateModified content="2022-01-01T16:18:24+08:00">
+<meta itemprop=dateModified content="2022-01-07T14:25:14+08:00">
 <meta itemprop=wordCount content="277">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Go 快速开始">
@@ -326,6 +326,78 @@ Releases
 <a href=/zh/docs/languages/golang/dubbo-go-1.5/configuration/client/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-15configurationclient><span>client</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-15configurationprovider-li>
 <a href=/zh/docs/languages/golang/dubbo-go-1.5/configuration/provider/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-15configurationprovider><span>service providers</span></a>
+</li>
+</ul>
+</li>
+</ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zhdocslanguagesgolangdubbo-go-30-li>
+<a href=/zh/docs/languages/golang/dubbo-go-3.0/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocslanguagesgolangdubbo-go-30><span>Dubbo-go 3.0</span></a>
+<ul class="ul-4 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id=m-zhdocslanguagesgolangdubbo-go-30concept-li>
+<a href=/zh/docs/languages/golang/dubbo-go-3.0/concept/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocslanguagesgolangdubbo-go-30concept><span>基本概念</span></a>
+<ul class="ul-5 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-30conceptapp_and_interface-li>
+<a href=/zh/docs/languages/golang/dubbo-go-3.0/concept/app_and_interface/ title="Dubbo-go 的应用和接口" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-30conceptapp_and_interface><span>服务层级</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-30conceptconfiguration-li>
+<a href=/zh/docs/languages/golang/dubbo-go-3.0/concept/configuration/ title=Dubbo-go的配置 class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-30conceptconfiguration><span>框架配置</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-30conceptregistry-li>
+<a href=/zh/docs/languages/golang/dubbo-go-3.0/concept/registry/ title="Dubbo-go 的注册中心" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-30conceptregistry><span>注册中心</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-30conceptprotocol-li>
+<a href=/zh/docs/languages/golang/dubbo-go-3.0/concept/protocol/ title="Dubbo-go 的网络协议" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-30conceptprotocol><span>网络协议</span></a>
+</li>
+</ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id=m-zhdocslanguagesgolangdubbo-go-30developer-li>
+<a href=/zh/docs/languages/golang/dubbo-go-3.0/developer/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocslanguagesgolangdubbo-go-30developer><span>开发者指南</span></a>
+<ul class="ul-5 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-30developerdesign-li>
+<a href=/zh/docs/languages/golang/dubbo-go-3.0/developer/design/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-30developerdesign><span>架构设计</span></a>
+</li>
+</ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id=m-zhdocslanguagesgolangdubbo-go-30quickstart-li>
+<a href=/zh/docs/languages/golang/dubbo-go-3.0/quickstart/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocslanguagesgolangdubbo-go-30quickstart><span>快速开始</span></a>
+<ul class="ul-5 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-30quickstartquickstart_dubbo-li>
+<a href=/zh/docs/languages/golang/dubbo-go-3.0/quickstart/quickstart_dubbo/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-30quickstartquickstart_dubbo><span>Dubbo-go 协议快速开始</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-30quickstartquickstart_triple-li>
+<a href=/zh/docs/languages/golang/dubbo-go-3.0/quickstart/quickstart_triple/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-30quickstartquickstart_triple><span>Triple 协议快速开始</span></a>
+</li>
+</ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id=m-zhdocslanguagesgolangdubbo-go-30preface-li>
+<a href=/zh/docs/languages/golang/dubbo-go-3.0/preface/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocslanguagesgolangdubbo-go-30preface><span>简介</span></a>
+<ul class="ul-5 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-30preface30_feature-li>
+<a href=/zh/docs/languages/golang/dubbo-go-3.0/preface/3.0_feature/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-30preface30_feature><span>dubbo-go 3.0 新特性</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-30prefacearchitecture-li>
+<a href=/zh/docs/languages/golang/dubbo-go-3.0/preface/architecture/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-30prefacearchitecture><span>架构</span></a>
+</li>
+</ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child collapse" id=m-zhdocslanguagesgolangdubbo-go-30samples-li>
+<a href=/zh/docs/languages/golang/dubbo-go-3.0/samples/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocslanguagesgolangdubbo-go-30samples><span>高级使用</span></a>
+<ul class="ul-5 foldable">
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-30samplescustom-filter-li>
+<a href=/zh/docs/languages/golang/dubbo-go-3.0/samples/custom-filter/ title="Dubbo-go 3.0 自定义filter" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-30samplescustom-filter><span>Filter</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-30samplesgo_java_interactive-li>
+<a href=/zh/docs/languages/golang/dubbo-go-3.0/samples/go_java_interactive/ title="go-java 3.0 互通示例" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-30samplesgo_java_interactive><span>Go-Java 互通</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-30samplesmetrics-li>
+<a href=/zh/docs/languages/golang/dubbo-go-3.0/samples/metrics/ title="Dubbo-go 数据上报" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-30samplesmetrics><span>Metrics 数据上报</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-30samplessamples_repo-li>
+<a href=/zh/docs/languages/golang/dubbo-go-3.0/samples/samples_repo/ title="dubbo-go 3.0 示例仓库" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-30samplessamples_repo><span>Samples 仓库介绍</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-30samplesexception_response-li>
+<a href=/zh/docs/languages/golang/dubbo-go-3.0/samples/exception_response/ title="Dubbo-go 3.0 异常回传" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-30samplesexception_response><span>Triple 异常回传</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-30samplesstart-check-li>
+<a href=/zh/docs/languages/golang/dubbo-go-3.0/samples/start-check/ title="Dubbo-go 3.0  启动时检查" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-30samplesstart-check><span>启动时检查</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-30samplesservice-discovery-li>
+<a href=/zh/docs/languages/golang/dubbo-go-3.0/samples/service-discovery/ title="Dubbo-go 3.0 应用级服务发现" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-30samplesservice-discovery><span>应用级服务发现</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-30samplescustom-logger-li>
+<a href=/zh/docs/languages/golang/dubbo-go-3.0/samples/custom-logger/ title="Dubbo-go 3.0 自定义日志" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-30samplescustom-logger><span>日志</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-30samplesgeneric-li>
+<a href=/zh/docs/languages/golang/dubbo-go-3.0/samples/generic/ title="Dubbo-go 泛化调用" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-30samplesgeneric><span>泛化调用</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-30samplesregistry-li>
+<a href=/zh/docs/languages/golang/dubbo-go-3.0/samples/registry/ title="Dubbo-go 3.0 注册中心" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-30samplesregistry><span>注册中心</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-30samplesmesh_router-li>
+<a href=/zh/docs/languages/golang/dubbo-go-3.0/samples/mesh_router/ title="Dubbo-go v3 统一路由规则" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-30samplesmesh_router><span>路由规则</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhdocslanguagesgolangdubbo-go-30samplesconfig-center-dynamic-li>
+<a href=/zh/docs/languages/golang/dubbo-go-3.0/samples/config-center-dynamic/ title="Dubbo-go 3.0 动态配置" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocslanguagesgolangdubbo-go-30samplesconfig-center-dynamic><span>配置中心和配置监听</span></a>
 </li>
 </ul>
 </li>

@@ -20,11 +20,11 @@
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/en/blog/2019/04/25/dubbo-extensible-mechanism-source-code-analysis-part-1/"><meta property="article:section" content="blog">
 <meta property="article:published_time" content="2019-04-25T00:00:00+00:00">
-<meta property="article:modified_time" content="2022-01-01T16:18:24+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2022-01-07T14:25:14+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="Dubbo extensible mechanism source code analysis - part 1">
 <meta itemprop=description content="description: This article introduces Dubbo's SPI mechanism.
 "><meta itemprop=datePublished content="2019-04-25T00:00:00+00:00">
-<meta itemprop=dateModified content="2022-01-01T16:18:24+08:00">
+<meta itemprop=dateModified content="2022-01-07T14:25:14+08:00">
 <meta itemprop=wordCount content="2284">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="Dubbo extensible mechanism source code analysis - part 1">
@@ -221,7 +221,7 @@ English
 <li><a href=#54-extension-adaptive-instance>5.4 Extension Adaptive Instance</a></li>
 <li><a href=#55-spi>5.5 @SPI</a></li>
 <li><a href=#56-adaptive>5.6 @Adaptive</a></li>
-<li><a href=#57-extentionloader>5.7 ExtentionLoader</a></li>
+<li><a href=#57-extensionloader>5.7 ExtensionLoader</a></li>
 <li><a href=#58-extension-alias>5.8 Extension Alias</a></li>
 <li><a href=#59-paths>5.9 Paths</a></li>
 </ul>
@@ -338,10 +338,10 @@ Save tom to Mysql</p>
 <li>Our class is usually singleton-scaled, such as beans of Spring IoC Container. When instantiating beans, if it depends on some specific extension point, it will know which extension to use, otherwise, the bean will not know how to choose extensions. At this time, a proxy mode is needed, which implements the interface of an extension point. The method can dynamically select the appropriate extension according to the run-time parameters, and this proxy is an adaptive instance. Adaptive extension instance is widely used in Dubbo, in Dubbo, each extension will have an adaptive class, and if we do not provide it, Dubbo will automatically generate one for us by using the bytecode encoder. Therefore, we basically don&rsquo;t recognize the existence of adaptive classes. We will explain how the adaptive class works in later chapters.</li>
 </ul>
 <h3 id=55-spi>5.5 @SPI</h3>
-<p>@SPI annotation works on the interface of the extension point, which indicates that the interface is an extension point, and can be loaded by Dubbo ExtentionLoader. If there is no such ExtentionLoader, the call will throw an exception.</p>
+<p>@SPI annotation works on the interface of the extension point, which indicates that the interface is an extension point, and can be loaded by Dubbo ExtensionLoader. If there is no such ExtentionLoader, the call will throw an exception.</p>
 <h3 id=56-adaptive>5.6 @Adaptive</h3>
 <p>@Adaptive annotation is used on the method that extends the interface, which indicates an adaptive method. When Dubbo generates an adaptive instance for an extension point, if the function has @Adaptive annotation, then Dubbo will generate the corresponding code for the method. The method determines which extension to use according to the parameters. When @Adaptive annotation is used on the class to implement a Decorator class, it is similar to the Decorator pattern, whose major function is to return a specified class. Currently in Dubbo, both AdaptiveCompiler and AdaptiveExtensionFactory have @Adaptive annotation.</p>
-<h3 id=57-extentionloader>5.7 ExtentionLoader</h3>
+<h3 id=57-extensionloader>5.7 ExtensionLoader</h3>
 <p>Similar to the Java SPI ServiceLoader, it is responsible for loading extensions and life-cycle maintenance.</p>
 <h3 id=58-extension-alias>5.8 Extension Alias</h3>
 <p>Different from Java, each extension in Dubbo has an alias, which is used to reference them in the application, such as</p>
