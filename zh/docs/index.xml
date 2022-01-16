@@ -6370,8 +6370,7 @@ address: zookeeper://127.0.0.1:2181
 &lt;/ul>
 &lt;p>下图是 Dubbo2 的服务发现模型：Provider 注册服务地址，Consumer 经过注册中心协调并发现服务地址，进而对地址发起通信，这是被绝大多数微服务框架的经典服务发现流程。而 Dubbo2 的特殊之处在于，它把 “RPC 接口”的信息也融合在了地址发现过程中，而这部分信息往往是和具体的业务定义密切相关的。&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/concepts/servicediscovery_old.png" alt="//imgs/v3/concepts/servicediscovery_old.png">&lt;/p>
-&lt;p>而在接入云原生基础设施后，基础设施融入了微服务概念的抽象，容器化微服务被编排、调度的过程即
-完成了在基础设施层面的注册。如下图所示，基础设施即承担了注册中心的职责，又完成了服务注册的动作，而 “RPC 接口”这部分信息，由于与具体的业务相关，不可能也不适合被基础设施托管。&lt;/p>
+&lt;p>而在接入云原生基础设施后，基础设施融入了微服务概念的抽象，容器化微服务被编排、调度的过程即完成了在基础设施层面的注册。如下图所示，基础设施既承担了注册中心的职责，又完成了服务注册的动作，而 “RPC 接口”这部分信息，由于与具体的业务相关，不可能也不适合被基础设施托管。&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/concepts/servicediscovery_k8s.png" alt="//imgs/v3/concepts/servicediscovery_k8s.png">&lt;/p>
 &lt;p>在这样的场景下，对 Dubbo3 的服务注册发现机制提出了两个要求：
 Dubbo3 需要在原有服务发现流程中抽象出通用的、与业务逻辑无关的地址映射模型，并确保这部分模型足够合理，以支持将地址的注册行为和存储委托给下层基础设施
