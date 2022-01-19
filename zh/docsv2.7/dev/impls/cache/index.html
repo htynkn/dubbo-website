@@ -23,7 +23,7 @@ package com.xxx; import org.apache.dubbo.cache.CacheFactory; public class XxxCac
 package com.xxx; import org.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docsv2.7/dev/impls/cache/"><meta property="article:section" content="docsv2.7">
-<meta property="article:modified_time" content="2022-01-15T13:51:24+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2022-01-18T10:32:59+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="缓存扩展">
 <meta itemprop=description content="扩展说明 用请求参数作为 key，缓存返回结果。
 扩展接口 org.apache.dubbo.cache.CacheFactory
@@ -31,7 +31,7 @@ package com.xxx; import org.">
 src |-main |-java |-com |-xxx |-XxxCacheFactory.java (实现CacheFactory接口) |-resources |-META-INF |-dubbo |-org.apache.dubbo.cache.CacheFactory (纯文本文件，内容为：xxx=com.xxx.XxxCacheFactory) XxxCacheFactory.java：
 package com.xxx; import org.apache.dubbo.cache.CacheFactory; public class XxxCacheFactory implements CacheFactory { public Cache getCache(URL url, String name) { return new XxxCache(url, name); } } XxxCache.java：
 package com.xxx; import org.">
-<meta itemprop=dateModified content="2022-01-15T13:51:24+08:00">
+<meta itemprop=dateModified content="2022-01-18T10:32:59+08:00">
 <meta itemprop=wordCount content="105">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="缓存扩展">
