@@ -18,11 +18,11 @@
 <meta property="og:description" content="在 Dubbo 中进行参数验证">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/docs/advanced/parameter-validation/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2022-01-18T10:32:59+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2022-01-23T17:04:02+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="参数验证">
 <meta itemprop=description content="在 Dubbo 中进行参数验证">
-<meta itemprop=dateModified content="2022-01-18T10:32:59+08:00">
-<meta itemprop=wordCount content="344">
+<meta itemprop=dateModified content="2022-01-23T17:04:02+08:00">
+<meta itemprop=wordCount content="356">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="参数验证">
 <meta name=twitter:description content="在 Dubbo 中进行参数验证">
@@ -781,7 +781,12 @@ Releases
 <div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml><span style=color:#268bd2>&lt;dubbo:reference</span> id=<span style=color:#2aa198>&#34;validationService&#34;</span> interface=<span style=color:#2aa198>&#34;org.apache.dubbo.examples.validation.api.ValidationService&#34;</span> validation=<span style=color:#2aa198>&#34;true&#34;</span> <span style=color:#268bd2>/&gt;</span>
 </code></pre></div><h3 id=在服务器端验证参数>在服务器端验证参数</h3>
 <div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml><span style=color:#268bd2>&lt;dubbo:service</span> interface=<span style=color:#2aa198>&#34;org.apache.dubbo.examples.validation.api.ValidationService&#34;</span> ref=<span style=color:#2aa198>&#34;validationService&#34;</span> validation=<span style=color:#2aa198>&#34;true&#34;</span> <span style=color:#268bd2>/&gt;</span>
-</code></pre></div><h2 id=验证异常信息>验证异常信息</h2>
+</code></pre></div>
+<div class="alert alert-primary" role=alert>
+<h4 class=alert-heading>提示</h4>
+Dubbo 默认支持 hibernate-validator 版本 &lt;=6.x，若使用 hibernate-validator 7.x 版本，请将 validation 参数声明为 jvalidatorNew
+</div>
+<h2 id=验证异常信息>验证异常信息</h2>
 <div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#719e07>import</span> javax.validation.ConstraintViolationException<span style=color:#719e07>;</span>
 <span style=color:#719e07>import</span> javax.validation.ConstraintViolationException<span style=color:#719e07>;</span>
  

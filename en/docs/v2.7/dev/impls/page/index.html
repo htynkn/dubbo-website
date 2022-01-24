@@ -22,14 +22,14 @@ src |-main |-java |-com |-xxx |-XxxPageHandler.java (PageHandler implementation)
 package com.xxx; import org.apache.dubbo.container.page.PageHandler; public class XxxPageHandler implements PageHandler { public Group lookup(URL url) { // .">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/en/docs/v2.7/dev/impls/page/"><meta property="article:section" content="docs">
-<meta property="article:modified_time" content="2022-01-18T10:32:59+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2022-01-23T17:04:02+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="PageHandler Extension">
 <meta itemprop=description content="Summary Extension for page handler
 Extension Interface org.apache.dubbo.container.page.PageHandler
 Extension Configuration <dubbo:protocol page=&#34;xxx,yyy&#34; /> <!-- default configuration, will take effect if page attribute is not set in <dubbo:protocol> --> <dubbo:provider page=&#34;xxx,yyy&#34; /> Existing Extension  org.apache.dubbo.container.page.pages.HomePageHandler org.apache.dubbo.container.page.pages.StatusPageHandler org.apache.dubbo.container.page.pages.LogPageHandler org.apache.dubbo.container.page.pages.SystemPageHandler  Extension Guide Directory layout:
 src |-main |-java |-com |-xxx |-XxxPageHandler.java (PageHandler implementation) |-resources |-META-INF |-dubbo |-org.apache.dubbo.container.page.PageHandler (plain text file with the content: xxx=com.xxx.XxxPageHandler) XxxPageHandler.java：
 package com.xxx; import org.apache.dubbo.container.page.PageHandler; public class XxxPageHandler implements PageHandler { public Group lookup(URL url) { // .">
-<meta itemprop=dateModified content="2022-01-18T10:32:59+08:00">
+<meta itemprop=dateModified content="2022-01-23T17:04:02+08:00">
 <meta itemprop=wordCount content="82">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="PageHandler Extension">
