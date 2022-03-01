@@ -44,258 +44,259 @@ Consumer gets parameter information from the URL that it wrote to the registry a
 &lt;h4 id="refresh-regularly">Refresh regularly&lt;/h4>
 &lt;p>It&amp;rsquo;s opening by default and can be turned off by setting cycleReport=false.&lt;/p>
 &lt;h4 id="complete-configurations">Complete configurations:&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">dubbo.metadata-report.address=zookeeper://127.0.0.1:2181
-dubbo.metadata-report.username=xxx ##Not necessary
-dubbo.metadata-report.password=xxx ##Not necessary
-dubbo.metadata-report.retry-times=30 ##Not necessary,default 100
-dubbo.metadata-report.retry-period=5000 ##Not necessary,default 3000
-dubbo.metadata-report.cycle-report=false ##Not necessary,default true
-&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.metadata-report.address=zookeeper://127.0.0.1:2181
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.metadata-report.username=xxx ##Not necessary
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.metadata-report.password=xxx ##Not necessary
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.metadata-report.retry-times=30 ##Not necessary,default 100
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.metadata-report.retry-period=5000 ##Not necessary,default 3000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.metadata-report.cycle-report=false ##Not necessary,default true
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
 &lt;p>If the metadata address (dubbo.metadata-report.address) is not configured, the writing of the entire metadata will not take effect, but it will not affect the running of the program.&lt;/p>
 &lt;/blockquote>
 &lt;p>Let&amp;rsquo;s look at a few sample configurations. Regardless of the configuration, some maven dependencies need to be introduced:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.dubbo&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo-metadata-report-zookeeper&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>If redis is needed, the corresponding redis dependencies can be introduced:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.dubbo&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo-metadata-report-redis&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.dubbo&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo-metadata-report-zookeeper&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>If redis is needed, the corresponding redis dependencies can be introduced:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.dubbo&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo-metadata-report-redis&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
 &lt;p>&lt;strong>Complete sample，refer to&lt;a href="https://github.com/dubbo/dubbo-samples/tree/master">sample-2.7&lt;/a>&lt;/strong>&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="method-1-config-in-configcenter">Method 1: Config in Configcenter&lt;/h3>
 &lt;p>Refer to the sample: dubbo-samples-metadata-report/dubbo-samples-metadata-report-configcenter.&lt;/p>
 &lt;h5 id="configcenter-configuration">Configcenter Configuration&lt;/h5>
 &lt;p>Configurations of Configcenter，can refer to the document of Configcenter. As follows:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">dubbo.registry.address=zookeeper://127.0.0.1:2181
-### Notice the hump style
-dubbo.metadata-report.address=zookeeper://127.0.0.1:2181 ###Address of metadata storage
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>In the sample, Zookeeper is used as the Configcenter. Run directly: org.Apache.Dubbo.Samples.Metadatareport.Configcenter.ZKTools after starting a local zookeeper service, then writing finished.
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.registry.address=zookeeper://127.0.0.1:2181
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>### Notice the hump style
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.metadata-report.address=zookeeper://127.0.0.1:2181 ###Address of metadata storage
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In the sample, Zookeeper is used as the Configcenter. Run directly: org.Apache.Dubbo.Samples.Metadatareport.Configcenter.ZKTools after starting a local zookeeper service, then writing finished.
 You can also use Nacos, Apollo as the Configcenter. These products themselves support ops configuration.&lt;/p>
 &lt;h5 id="application-configuration">Application Configuration&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">###dubbo.properties
-dubbo.config-center.address=zookeeper://127.0.0.1:2181
-...
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>After completing the above two steps, the registry address and metadata address are retrieved from the Configcenter. You can now run the Provider and the Consumer in turn and get the corresponding output in console or view it directly through the client of zookeeper.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>###dubbo.properties
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.config-center.address=zookeeper://127.0.0.1:2181
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>After completing the above two steps, the registry address and metadata address are retrieved from the Configcenter. You can now run the Provider and the Consumer in turn and get the corresponding output in console or view it directly through the client of zookeeper.&lt;/p>
 &lt;h5 id="provider-configuration">Provider Configuration&lt;/h5>
 &lt;p>The metadata stored on the Provider side is as follows:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
-&lt;span style="color:#268bd2">&amp;#34;parameters&amp;#34;&lt;/span>: {
-&lt;span style="color:#268bd2">&amp;#34;side&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;provider&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;methods&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;sayHello&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;dubbo&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;2.0.2&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;threads&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;100&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;interface&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.metadatareport.configcenter.api.AnnotationService&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;threadpool&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;fixed&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;version&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;1.1.1&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;generic&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;revision&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;1.1.1&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;valid&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;application&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;metadatareport-configcenter-provider&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;default.timeout&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;5000&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;group&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;d-test&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;anyhost&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>
-},
-&lt;span style="color:#268bd2">&amp;#34;canonicalName&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.metadatareport.configcenter.api.AnnotationService&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;codeSource&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;file:/Users/cvictory/workspace/work-mw/dubbo-samples/dubbo-samples-metadata-report/dubbo-samples-metadata-report-configcenter/target/classes/&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;methods&amp;#34;&lt;/span>: [{
-&lt;span style="color:#268bd2">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;sayHello&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;parameterTypes&amp;#34;&lt;/span>: [&lt;span style="color:#2aa198">&amp;#34;java.lang.String&amp;#34;&lt;/span>],
-&lt;span style="color:#268bd2">&amp;#34;returnType&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;java.lang.String&amp;#34;&lt;/span>
-}],
-&lt;span style="color:#268bd2">&amp;#34;types&amp;#34;&lt;/span>: [{
-&lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;java.lang.String&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;properties&amp;#34;&lt;/span>: {
-&lt;span style="color:#268bd2">&amp;#34;value&amp;#34;&lt;/span>: {
-&lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;char[]&amp;#34;&lt;/span>
-},
-&lt;span style="color:#268bd2">&amp;#34;hash&amp;#34;&lt;/span>: {
-&lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;int&amp;#34;&lt;/span>
-}
-}
-}, {
-&lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;int&amp;#34;&lt;/span>
-}, {
-&lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;char&amp;#34;&lt;/span>
-}]
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>The Provider side stores all the parameters that the Provider service fills in to the registry, as well as the method information of the service (method name, input and output format).&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;parameters&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;side&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;provider&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;methods&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;sayHello&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;dubbo&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;2.0.2&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;threads&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;100&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;interface&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.metadatareport.configcenter.api.AnnotationService&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;threadpool&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;fixed&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;version&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;1.1.1&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;generic&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;revision&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;1.1.1&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;valid&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;application&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;metadatareport-configcenter-provider&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;default.timeout&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;5000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;group&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;d-test&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;anyhost&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;canonicalName&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.metadatareport.configcenter.api.AnnotationService&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;codeSource&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;file:/Users/cvictory/workspace/work-mw/dubbo-samples/dubbo-samples-metadata-report/dubbo-samples-metadata-report-configcenter/target/classes/&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;methods&amp;#34;&lt;/span>: [{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;sayHello&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;parameterTypes&amp;#34;&lt;/span>: [&lt;span style="color:#2aa198">&amp;#34;java.lang.String&amp;#34;&lt;/span>],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;returnType&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;java.lang.String&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;types&amp;#34;&lt;/span>: [{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;java.lang.String&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;properties&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;value&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;char[]&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;hash&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;int&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }, {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;int&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }, {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;char&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The Provider side stores all the parameters that the Provider service fills in to the registry, as well as the method information of the service (method name, input and output format).&lt;/p>
 &lt;h5 id="consumer-configuration">Consumer Configuration&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
-&lt;span style="color:#268bd2">&amp;#34;valid&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;side&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;consumer&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;application&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;metadatareport-configcenter-consumer&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;methods&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;sayHello&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;default.timeout&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;6666&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;dubbo&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;2.0.2&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;interface&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.metadatareport.configcenter.api.AnnotationService&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;version&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;1.1.1&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;revision&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;1.1.1&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;group&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;d-test&amp;#34;&lt;/span>
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>The Consumer side stores all the parameters that the Consumer fills in to the registry.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;valid&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;side&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;consumer&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;application&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;metadatareport-configcenter-consumer&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;methods&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;sayHello&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;default.timeout&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;6666&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;dubbo&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;2.0.2&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;interface&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.metadatareport.configcenter.api.AnnotationService&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;version&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;1.1.1&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;revision&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;1.1.1&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;group&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;d-test&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The Consumer side stores all the parameters that the Consumer fills in to the registry.&lt;/p>
 &lt;p>The above example is mainly a presentation of the provider side service information and consumer side service information stored in the metadata area by placing the metadata address in the Configcenter.
 The next two examples focus on configuring in a project: the XML mode and the annotation mode .&lt;/p>
 &lt;h3 id="method-2-config-project-in-properties-way">Method 2: Config project in properties way&lt;/h3>
 &lt;p>Refer to the sample: dubbo-samples-metadata-report/dubbo-samples-metadata-report-local-xml.&lt;/p>
 &lt;h5 id="dubboproperties">dubbo.properties&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">dubbo.metadata-report.address=zookeeper://127.0.0.1:2181
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>After setting this configuration, have not to focus on others. You can also view the service information of the corresponding provider and consumer directly.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.metadata-report.address=zookeeper://127.0.0.1:2181
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>After setting this configuration, have not to focus on others. You can also view the service information of the corresponding provider and consumer directly.&lt;/p>
 &lt;h5 id="provider-stores">Provider stores:&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
-&lt;span style="color:#268bd2">&amp;#34;parameters&amp;#34;&lt;/span>: {
-&lt;span style="color:#268bd2">&amp;#34;valid&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;async&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;side&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;provider&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;application&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;metadatareport-local-xml-provider&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;methods&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;sayHello&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;dubbo&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;2.0.2&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;interface&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.metadatareport.local.xml.api.DemoService&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;generic&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;anyhost&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>
-},
-&lt;span style="color:#268bd2">&amp;#34;canonicalName&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.metadatareport.local.xml.api.DemoService&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;codeSource&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;file:/Users/cvictory/workspace/work-mw/dubbo-samples/dubbo-samples-metadata-report/dubbo-samples-metadata-report-local-xml/target/classes/&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;methods&amp;#34;&lt;/span>: [{
-&lt;span style="color:#268bd2">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;sayHello&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;parameterTypes&amp;#34;&lt;/span>: [&lt;span style="color:#2aa198">&amp;#34;java.lang.String&amp;#34;&lt;/span>],
-&lt;span style="color:#268bd2">&amp;#34;returnType&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;java.lang.String&amp;#34;&lt;/span>
-}],
-&lt;span style="color:#268bd2">&amp;#34;types&amp;#34;&lt;/span>: [{
-&lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;int&amp;#34;&lt;/span>
-}, {
-&lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;char&amp;#34;&lt;/span>
-}, {
-&lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;java.lang.String&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;properties&amp;#34;&lt;/span>: {
-&lt;span style="color:#268bd2">&amp;#34;value&amp;#34;&lt;/span>: {
-&lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;char[]&amp;#34;&lt;/span>
-},
-&lt;span style="color:#268bd2">&amp;#34;hash&amp;#34;&lt;/span>: {
-&lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;int&amp;#34;&lt;/span>
-}
-}
-}]
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="consumer-stores">Consumer stores:&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
-&lt;span style="color:#268bd2">&amp;#34;valid&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;side&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;consumer&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;application&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;metadatareport-local-xml-consumer&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;methods&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;sayHello&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;dubbo&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;2.0.2&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;interface&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.metadatareport.local.xml.api.DemoService&amp;#34;&lt;/span>
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="method-3-config-project-in-annotation-way">Method 3: Config project in annotation way&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;parameters&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;valid&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;async&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;side&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;provider&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;application&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;metadatareport-local-xml-provider&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;methods&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;sayHello&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;dubbo&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;2.0.2&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;interface&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.metadatareport.local.xml.api.DemoService&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;generic&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;anyhost&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;canonicalName&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.metadatareport.local.xml.api.DemoService&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;codeSource&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;file:/Users/cvictory/workspace/work-mw/dubbo-samples/dubbo-samples-metadata-report/dubbo-samples-metadata-report-local-xml/target/classes/&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;methods&amp;#34;&lt;/span>: [{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;sayHello&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;parameterTypes&amp;#34;&lt;/span>: [&lt;span style="color:#2aa198">&amp;#34;java.lang.String&amp;#34;&lt;/span>],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;returnType&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;java.lang.String&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;types&amp;#34;&lt;/span>: [{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;int&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }, {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;char&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }, {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;java.lang.String&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;properties&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;value&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;char[]&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;hash&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;int&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="consumer-stores">Consumer stores:&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;valid&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;side&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;consumer&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;application&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;metadatareport-local-xml-consumer&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;methods&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;sayHello&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;dubbo&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;2.0.2&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;interface&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.metadatareport.local.xml.api.DemoService&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="method-3-config-project-in-annotation-way">Method 3: Config project in annotation way&lt;/h3>
 &lt;p>Refer to the sample: dubbo-samples-metadata-report/dubbo-samples-metadata-report-local-annotaion.&lt;/p>
 &lt;h5 id="bean-introduce-bean">@Bean introduce Bean&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">@Bean&lt;/span>
-&lt;span style="color:#268bd2">public&lt;/span> MetadataReportConfig &lt;span style="color:#268bd2">metadataReportConfig&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-MetadataReportConfig metadataReportConfig &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> MetadataReportConfig&lt;span style="color:#719e07">();&lt;/span>
-metadataReportConfig&lt;span style="color:#719e07">.&lt;/span>setAddress&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;zookeeper://127.0.0.1:2181&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">return&lt;/span> metadataReportConfig&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>After introducing Bean, also have not to set others. View corresponding service information directly:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@Bean&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> MetadataReportConfig &lt;span style="color:#268bd2">metadataReportConfig&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> MetadataReportConfig metadataReportConfig &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> MetadataReportConfig&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> metadataReportConfig&lt;span style="color:#719e07">.&lt;/span>setAddress&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;zookeeper://127.0.0.1:2181&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> metadataReportConfig&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>After introducing Bean, also have not to set others. View corresponding service information directly:&lt;/p>
 &lt;h5 id="provider-stores-1">Provider stores:&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
-&lt;span style="color:#268bd2">&amp;#34;parameters&amp;#34;&lt;/span>: {
-&lt;span style="color:#268bd2">&amp;#34;side&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;provider&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;methods&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;sayHello&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;dubbo&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;2.0.2&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;interface&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.metadatareport.local.annotation.api.AnnotationService&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;version&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;1.1.8&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;generic&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;revision&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;1.1.8&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;valid&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;application&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;metadatareport-local-annotaion-provider&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;default.timeout&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;1000&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;group&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;d-test&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;anyhost&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>
-},
-&lt;span style="color:#268bd2">&amp;#34;canonicalName&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.metadatareport.local.annotation.api.AnnotationService&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;codeSource&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;file:/Users/cvictory/workspace/work-mw/dubbo-samples/dubbo-samples-metadata-report/dubbo-samples-metadata-report-local-annotaion/target/classes/&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;methods&amp;#34;&lt;/span>: [{
-&lt;span style="color:#268bd2">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;sayHello&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;parameterTypes&amp;#34;&lt;/span>: [&lt;span style="color:#2aa198">&amp;#34;java.lang.String&amp;#34;&lt;/span>],
-&lt;span style="color:#268bd2">&amp;#34;returnType&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;java.lang.String&amp;#34;&lt;/span>
-}],
-&lt;span style="color:#268bd2">&amp;#34;types&amp;#34;&lt;/span>: [{
-&lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;int&amp;#34;&lt;/span>
-}, {
-&lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;java.lang.String&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;properties&amp;#34;&lt;/span>: {
-&lt;span style="color:#268bd2">&amp;#34;value&amp;#34;&lt;/span>: {
-&lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;char[]&amp;#34;&lt;/span>
-},
-&lt;span style="color:#268bd2">&amp;#34;hash&amp;#34;&lt;/span>: {
-&lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;int&amp;#34;&lt;/span>
-}
-}
-}, {
-&lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;char&amp;#34;&lt;/span>
-}]
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="consumer-stores-1">Consumer stores:&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
-&lt;span style="color:#268bd2">&amp;#34;valid&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;side&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;consumer&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;application&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;metadatareport-local-annotaion-consumer&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;methods&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;sayHello&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;dubbo&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;2.0.2&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;interface&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.metadatareport.local.annotation.api.AnnotationService&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;version&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;1.1.8&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;revision&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;1.1.8&amp;#34;&lt;/span>,
-&lt;span style="color:#268bd2">&amp;#34;group&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;d-test&amp;#34;&lt;/span>
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="extension">Extension&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;parameters&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;side&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;provider&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;methods&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;sayHello&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;dubbo&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;2.0.2&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;interface&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.metadatareport.local.annotation.api.AnnotationService&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;version&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;1.1.8&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;generic&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;revision&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;1.1.8&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;valid&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;application&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;metadatareport-local-annotaion-provider&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;default.timeout&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;1000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;group&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;d-test&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;anyhost&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;canonicalName&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.metadatareport.local.annotation.api.AnnotationService&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;codeSource&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;file:/Users/cvictory/workspace/work-mw/dubbo-samples/dubbo-samples-metadata-report/dubbo-samples-metadata-report-local-annotaion/target/classes/&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;methods&amp;#34;&lt;/span>: [{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;sayHello&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;parameterTypes&amp;#34;&lt;/span>: [&lt;span style="color:#2aa198">&amp;#34;java.lang.String&amp;#34;&lt;/span>],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;returnType&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;java.lang.String&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;types&amp;#34;&lt;/span>: [{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;int&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }, {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;java.lang.String&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;properties&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;value&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;char[]&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;hash&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;int&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }, {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;char&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="consumer-stores-1">Consumer stores:&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;valid&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;side&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;consumer&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;application&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;metadatareport-local-annotaion-consumer&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;methods&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;sayHello&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;dubbo&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;2.0.2&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;interface&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.metadatareport.local.annotation.api.AnnotationService&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;version&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;1.1.8&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;revision&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;1.1.8&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;#34;group&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;d-test&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="extension">Extension&lt;/h2>
 &lt;h3 id="spi-definition">SPI Definition&lt;/h3>
 &lt;p>Refer to: org.apache.dubbo.metadata.store.MetadataReportFactory, org.apache.dubbo.metadata.store.MetadataReport&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">@SPI&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;redis&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
-&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">MetadataReportFactory&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#268bd2">@Adaptive&lt;/span>&lt;span style="color:#719e07">({&lt;/span>&lt;span style="color:#2aa198">&amp;#34;protocol&amp;#34;&lt;/span>&lt;span style="color:#719e07">})&lt;/span>
-MetadataReport &lt;span style="color:#268bd2">getMetadataReport&lt;/span>&lt;span style="color:#719e07">(&lt;/span>URL url&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="custom-metadata-storage">Custom metadata storage&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@SPI&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;redis&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">MetadataReportFactory&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Adaptive&lt;/span>&lt;span style="color:#719e07">({&lt;/span>&lt;span style="color:#2aa198">&amp;#34;protocol&amp;#34;&lt;/span>&lt;span style="color:#719e07">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> MetadataReport &lt;span style="color:#268bd2">getMetadataReport&lt;/span>&lt;span style="color:#719e07">(&lt;/span>URL url&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="custom-metadata-storage">Custom metadata storage&lt;/h3>
 &lt;p>Let&amp;rsquo;s take Redis storage as an example to illustrate.&lt;/p>
 &lt;p>Create a new project supporting the following modifications:&lt;/p>
 &lt;h4 id="extend-abstractmetadatareport">Extend AbstractMetadataReport&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">RedisMetadataReport&lt;/span> &lt;span style="color:#268bd2">extends&lt;/span> AbstractMetadataReport &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">final&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> Logger logger &lt;span style="color:#719e07">=&lt;/span> LoggerFactory&lt;span style="color:#719e07">.&lt;/span>getLogger&lt;span style="color:#719e07">(&lt;/span>RedisMetadataReport&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#268bd2">final&lt;/span> JedisPool pool&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">RedisMetadataReport&lt;/span>&lt;span style="color:#719e07">(&lt;/span>URL url&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#268bd2">super&lt;/span>&lt;span style="color:#719e07">(&lt;/span>url&lt;span style="color:#719e07">);&lt;/span>
-pool &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> JedisPool&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">new&lt;/span> JedisPoolConfig&lt;span style="color:#719e07">(),&lt;/span> url&lt;span style="color:#719e07">.&lt;/span>getHost&lt;span style="color:#719e07">(),&lt;/span> url&lt;span style="color:#719e07">.&lt;/span>getPort&lt;span style="color:#719e07">());&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#268bd2">@Override&lt;/span>
-&lt;span style="color:#268bd2">protected&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">doStoreProviderMetadata&lt;/span>&lt;span style="color:#719e07">(&lt;/span>ProviderMetadataIdentifier providerMetadataIdentifier&lt;span style="color:#719e07">,&lt;/span> String serviceDefinitions&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#719e07">this&lt;/span>&lt;span style="color:#719e07">.&lt;/span>storeMetadata&lt;span style="color:#719e07">(&lt;/span>providerMetadataIdentifier&lt;span style="color:#719e07">,&lt;/span> serviceDefinitions&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#268bd2">@Override&lt;/span>
-&lt;span style="color:#268bd2">protected&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">doStoreConsumerMetadata&lt;/span>&lt;span style="color:#719e07">(&lt;/span>ConsumerMetadataIdentifier consumerMetadataIdentifier&lt;span style="color:#719e07">,&lt;/span> String value&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#719e07">this&lt;/span>&lt;span style="color:#719e07">.&lt;/span>storeMetadata&lt;span style="color:#719e07">(&lt;/span>consumerMetadataIdentifier&lt;span style="color:#719e07">,&lt;/span> value&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">storeMetadata&lt;/span>&lt;span style="color:#719e07">(&lt;/span>MetadataIdentifier metadataIdentifier&lt;span style="color:#719e07">,&lt;/span> String v&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#719e07">try&lt;/span> &lt;span style="color:#719e07">(&lt;/span>Jedis jedis &lt;span style="color:#719e07">=&lt;/span> pool&lt;span style="color:#719e07">.&lt;/span>getResource&lt;span style="color:#719e07">())&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-jedis&lt;span style="color:#719e07">.&lt;/span>set&lt;span style="color:#719e07">(&lt;/span>metadataIdentifier&lt;span style="color:#719e07">.&lt;/span>getIdentifierKey&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">+&lt;/span> META_DATA_SOTRE_TAG&lt;span style="color:#719e07">,&lt;/span> v&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">catch&lt;/span> &lt;span style="color:#719e07">(&lt;/span>Throwable e&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-logger&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Failed to put &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> metadataIdentifier &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34; to redis &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> v &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34;, cause: &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> e&lt;span style="color:#719e07">.&lt;/span>getMessage&lt;span style="color:#719e07">(),&lt;/span> e&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">throw&lt;/span> &lt;span style="color:#719e07">new&lt;/span> RpcException&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Failed to put &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> metadataIdentifier &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34; to redis &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> v &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34;, cause: &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> e&lt;span style="color:#719e07">.&lt;/span>getMessage&lt;span style="color:#719e07">(),&lt;/span> e&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="extend-abstractmetadatareportfactory">Extend AbstractMetadataReportFactory&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">RedisMetadataReportFactory&lt;/span> &lt;span style="color:#268bd2">extends&lt;/span> AbstractMetadataReportFactory &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#268bd2">@Override&lt;/span>
-&lt;span style="color:#268bd2">public&lt;/span> MetadataReport &lt;span style="color:#268bd2">createMetadataReport&lt;/span>&lt;span style="color:#719e07">(&lt;/span>URL url&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#719e07">new&lt;/span> RedisMetadataReport&lt;span style="color:#719e07">(&lt;/span>url&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="new-meta-infdubbointernalorgapachedubbometadatastoremetadatareportfactory">New META-INF/dubbo/internal/org.apache.dubbo.metadata.store.MetadataReportFactory&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">redis=org.apache.dubbo.metadata.store.redis.RedisMetadataReportFactory
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>As long as the above modifications along with the project are packaged into a jar, then config metadata center url: redis://10.20.153.10:6379.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">RedisMetadataReport&lt;/span> &lt;span style="color:#268bd2">extends&lt;/span> AbstractMetadataReport &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">final&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> Logger logger &lt;span style="color:#719e07">=&lt;/span> LoggerFactory&lt;span style="color:#719e07">.&lt;/span>getLogger&lt;span style="color:#719e07">(&lt;/span>RedisMetadataReport&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">final&lt;/span> JedisPool pool&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">RedisMetadataReport&lt;/span>&lt;span style="color:#719e07">(&lt;/span>URL url&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">super&lt;/span>&lt;span style="color:#719e07">(&lt;/span>url&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pool &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> JedisPool&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">new&lt;/span> JedisPoolConfig&lt;span style="color:#719e07">(),&lt;/span> url&lt;span style="color:#719e07">.&lt;/span>getHost&lt;span style="color:#719e07">(),&lt;/span> url&lt;span style="color:#719e07">.&lt;/span>getPort&lt;span style="color:#719e07">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Override&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">protected&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">doStoreProviderMetadata&lt;/span>&lt;span style="color:#719e07">(&lt;/span>ProviderMetadataIdentifier providerMetadataIdentifier&lt;span style="color:#719e07">,&lt;/span> String serviceDefinitions&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">this&lt;/span>&lt;span style="color:#719e07">.&lt;/span>storeMetadata&lt;span style="color:#719e07">(&lt;/span>providerMetadataIdentifier&lt;span style="color:#719e07">,&lt;/span> serviceDefinitions&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Override&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">protected&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">doStoreConsumerMetadata&lt;/span>&lt;span style="color:#719e07">(&lt;/span>ConsumerMetadataIdentifier consumerMetadataIdentifier&lt;span style="color:#719e07">,&lt;/span> String value&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">this&lt;/span>&lt;span style="color:#719e07">.&lt;/span>storeMetadata&lt;span style="color:#719e07">(&lt;/span>consumerMetadataIdentifier&lt;span style="color:#719e07">,&lt;/span> value&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">storeMetadata&lt;/span>&lt;span style="color:#719e07">(&lt;/span>MetadataIdentifier metadataIdentifier&lt;span style="color:#719e07">,&lt;/span> String v&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">try&lt;/span> &lt;span style="color:#719e07">(&lt;/span>Jedis jedis &lt;span style="color:#719e07">=&lt;/span> pool&lt;span style="color:#719e07">.&lt;/span>getResource&lt;span style="color:#719e07">())&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> jedis&lt;span style="color:#719e07">.&lt;/span>set&lt;span style="color:#719e07">(&lt;/span>metadataIdentifier&lt;span style="color:#719e07">.&lt;/span>getIdentifierKey&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">+&lt;/span> META_DATA_SOTRE_TAG&lt;span style="color:#719e07">,&lt;/span> v&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">catch&lt;/span> &lt;span style="color:#719e07">(&lt;/span>Throwable e&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> logger&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Failed to put &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> metadataIdentifier &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34; to redis &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> v &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34;, cause: &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> e&lt;span style="color:#719e07">.&lt;/span>getMessage&lt;span style="color:#719e07">(),&lt;/span> e&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">throw&lt;/span> &lt;span style="color:#719e07">new&lt;/span> RpcException&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Failed to put &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> metadataIdentifier &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34; to redis &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> v &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34;, cause: &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> e&lt;span style="color:#719e07">.&lt;/span>getMessage&lt;span style="color:#719e07">(),&lt;/span> e&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="extend-abstractmetadatareportfactory">Extend AbstractMetadataReportFactory&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">RedisMetadataReportFactory&lt;/span> &lt;span style="color:#268bd2">extends&lt;/span> AbstractMetadataReportFactory &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Override&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> MetadataReport &lt;span style="color:#268bd2">createMetadataReport&lt;/span>&lt;span style="color:#719e07">(&lt;/span>URL url&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#719e07">new&lt;/span> RedisMetadataReport&lt;span style="color:#719e07">(&lt;/span>url&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="new-meta-infdubbointernalorgapachedubbometadatastoremetadatareportfactory">New META-INF/dubbo/internal/org.apache.dubbo.metadata.store.MetadataReportFactory&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>redis=org.apache.dubbo.metadata.store.redis.RedisMetadataReportFactory
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>As long as the above modifications along with the project are packaged into a jar, then config metadata center url: redis://10.20.153.10:6379.&lt;/p>
 &lt;p>Up to now, a custom metadata store is ready to run.&lt;/p></description></item><item><title>Docs: API Reference</title><link>https://dubbo.apache.org/en/docs/v2.7/user/references/api/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/references/api/</guid><description>
 &lt;p>Generally speaking, dubbo keeps its functionality no intrusive as much as possible, but for some particular features, there&amp;rsquo;s no other way not only API can achieve.
 &lt;div class="alert alert-warning" role="alert">
@@ -304,134 +305,140 @@ Do not rely on APIs other than what&amp;rsquo;re mentioned here, otherwise your 
 &lt;/div>
 These APIs are summarized here below:&lt;/p>
 &lt;h2 id="configuration-api">Configuration API&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">org.apache.dubbo.config.ServiceConfig
-org.apache.dubbo.config.ReferenceConfig
-org.apache.dubbo.config.ProtocolConfig
-org.apache.dubbo.config.RegistryConfig
-org.apache.dubbo.config.MonitorConfig
-org.apache.dubbo.config.ApplicationConfig
-org.apache.dubbo.config.ModuleConfig
-org.apache.dubbo.config.ProviderConfig
-org.apache.dubbo.config.ConsumerConfig
-org.apache.dubbo.config.MethodConfig
-org.apache.dubbo.config.ArgumentConfig
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Pls. refer to &lt;a href="../../configuration/api">API Configuration&lt;/a> for further information.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>org.apache.dubbo.config.ServiceConfig
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>org.apache.dubbo.config.ReferenceConfig
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>org.apache.dubbo.config.ProtocolConfig
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>org.apache.dubbo.config.RegistryConfig
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>org.apache.dubbo.config.MonitorConfig
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>org.apache.dubbo.config.ApplicationConfig
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>org.apache.dubbo.config.ModuleConfig
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>org.apache.dubbo.config.ProviderConfig
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>org.apache.dubbo.config.ConsumerConfig
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>org.apache.dubbo.config.MethodConfig
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>org.apache.dubbo.config.ArgumentConfig
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Pls. refer to &lt;a href="../../configuration/api">API Configuration&lt;/a> for further information.&lt;/p>
 &lt;h2 id="annotation-api">Annotation API&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">org.apache.dubbo.config.annotation.Service
-org.apache.dubbo.config.annotation.Reference
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Pls. refer to &lt;a href="../../configuration/annotation">Annotation Configuration&lt;/a> for further information.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>org.apache.dubbo.config.annotation.Service
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>org.apache.dubbo.config.annotation.Reference
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Pls. refer to &lt;a href="../../configuration/annotation">Annotation Configuration&lt;/a> for further information.&lt;/p>
 &lt;h2 id="model-api">Model API&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">org.apache.dubbo.common.URL
-org.apache.dubbo.rpc.RpcException
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="context-api">Context API&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">org.apache.dubbo.rpc.RpcContext
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Pls. refer to &lt;a href="../../examples/context">context&lt;/a> &amp;amp; &lt;a href="../../examples/attachment">pass parameter in attachment&lt;/a> &amp;amp; &lt;a href="../../examples/async-call">asynchronous call&lt;/a> for further information.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>org.apache.dubbo.common.URL
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>org.apache.dubbo.rpc.RpcException
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="context-api">Context API&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>org.apache.dubbo.rpc.RpcContext
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Pls. refer to &lt;a href="../../examples/context">context&lt;/a> &amp;amp; &lt;a href="../../examples/attachment">pass parameter in attachment&lt;/a> &amp;amp; &lt;a href="../../examples/async-call">asynchronous call&lt;/a> for further information.&lt;/p>
 &lt;h2 id="service-api">Service API&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">org.apache.dubbo.rpc.service.GenericService
-org.apache.dubbo.rpc.service.GenericException
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Pls. refer to &lt;a href="../../examples/generic-reference">generic reference&lt;/a> &amp;amp; &lt;a href="../../examples/generic-service">generic service&lt;/a> for further information.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">org.apache.dubbo.rpc.service.EchoService
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Pls. refer to &lt;a href="../../examples/echo-service">test via echo service&lt;/a> for further details.&lt;/p></description></item><item><title>Docs: Qos Command Usage</title><link>https://dubbo.apache.org/en/docs/v2.7/user/references/qos/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/references/qos/</guid><description>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>org.apache.dubbo.rpc.service.GenericService
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>org.apache.dubbo.rpc.service.GenericException
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Pls. refer to &lt;a href="../../examples/generic-reference">generic reference&lt;/a> &amp;amp; &lt;a href="../../examples/generic-service">generic service&lt;/a> for further information.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>org.apache.dubbo.rpc.service.EchoService
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Pls. refer to &lt;a href="../../examples/echo-service">test via echo service&lt;/a> for further details.&lt;/p></description></item><item><title>Docs: Qos Command Usage</title><link>https://dubbo.apache.org/en/docs/v2.7/user/references/qos/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/references/qos/</guid><description>
 &lt;p>In dubbo &lt;code>2.5.8&lt;/code> a new QOS module is introduced, to provide new telnet command support.&lt;/p>
 &lt;h2 id="port">Port&lt;/h2>
 &lt;p>the port of new version telnet is different from the port of dubbo protocol. The default port is &lt;code>22222&lt;/code>, which can be changed by modifying configuration file &lt;code>dubbo.properties&lt;/code>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">dubbo.application.qos.port=33333
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>or by modifying the JVM parameter&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">-Ddubbo.application.qos.port=33333
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="safety">Safety&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.application.qos.port=33333
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>or by modifying the JVM parameter&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>-Ddubbo.application.qos.port=33333
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="safety">Safety&lt;/h2>
 &lt;p>By default, dubbo can receive any command sent from the host, which can be changed by modifying the configuration file &lt;code>dubbo.properties&lt;/code>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">dubbo.application.qos.accept.foreign.ip=false
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>or by configuring the JVM parameter&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">-Ddubbo.application.qos.accept.foreign.ip=false
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>to reject command sent from the remote host, allowing only the local server to run the command&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.application.qos.accept.foreign.ip=false
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>or by configuring the JVM parameter&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>-Ddubbo.application.qos.accept.foreign.ip=false
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>to reject command sent from the remote host, allowing only the local server to run the command&lt;/p>
 &lt;h2 id="telnet-and-http-protocol">Telnet and HTTP protocol&lt;/h2>
 &lt;p>The telnet module supports both http and telnet protocol, in order to facilitate the use of various situations&lt;/p>
 &lt;p>For example,&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">➜ ~ telnet localhost 22222
-Trying ::1...
-telnet: connect to address ::1: Connection refused
-Trying 127.0.0.1...
-Connected to localhost.
-Escape character is &amp;#39;^]&amp;#39;.
-████████▄ ███ █▄ ▀█████████▄ ▀█████████▄ ▄██████▄
-███ ▀███ ███ ███ ███ ███ ███ ███ ███ ███
-███ ███ ███ ███ ███ ███ ███ ███ ███ ███
-███ ███ ███ ███ ▄███▄▄▄██▀ ▄███▄▄▄██▀ ███ ███
-███ ███ ███ ███ ▀▀███▀▀▀██▄ ▀▀███▀▀▀██▄ ███ ███
-███ ███ ███ ███ ███ ██▄ ███ ██▄ ███ ███
-███ ▄███ ███ ███ ███ ███ ███ ███ ███ ███
-████████▀ ████████▀ ▄█████████▀ ▄█████████▀ ▀██████▀
-dubbo&amp;gt;ls
-As Provider side:
-+----------------------------------+---+
-| Provider Service Name |PUB|
-+----------------------------------+---+
-|org.apache.dubbo.demo.DemoService| N |
-+----------------------------------+---+
-As Consumer side:
-+---------------------+---+
-|Consumer Service Name|NUM|
-+---------------------+---+
-dubbo&amp;gt;
-&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">➜ ~ curl &amp;#34;localhost:22222/ls?arg1=xxx&amp;amp;arg2=xxxx&amp;#34;
-As Provider side:
-+----------------------------------+---+
-| Provider Service Name |PUB|
-+----------------------------------+---+
-|org.apache.dubbo.demo.DemoService| N |
-+----------------------------------+---+
-As Consumer side:
-+---------------------+---+
-|Consumer Service Name|NUM|
-+---------------------+---+
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="supported-commands">Supported Commands&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>➜ ~ telnet localhost 22222
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Trying ::1...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>telnet: connect to address ::1: Connection refused
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Trying 127.0.0.1...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connected to localhost.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Escape character is &amp;#39;^]&amp;#39;.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ████████▄ ███ █▄ ▀█████████▄ ▀█████████▄ ▄██████▄
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ███ ▀███ ███ ███ ███ ███ ███ ███ ███ ███
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ███ ███ ███ ███ ███ ███ ███ ███ ███ ███
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ███ ███ ███ ███ ▄███▄▄▄██▀ ▄███▄▄▄██▀ ███ ███
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ███ ███ ███ ███ ▀▀███▀▀▀██▄ ▀▀███▀▀▀██▄ ███ ███
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ███ ███ ███ ███ ███ ██▄ ███ ██▄ ███ ███
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ███ ▄███ ███ ███ ███ ███ ███ ███ ███ ███
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ████████▀ ████████▀ ▄█████████▀ ▄█████████▀ ▀██████▀
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;ls
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>As Provider side:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+----------------------------------+---+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>| Provider Service Name |PUB|
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+----------------------------------+---+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>|org.apache.dubbo.demo.DemoService| N |
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+----------------------------------+---+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>As Consumer side:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+---------------------+---+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>|Consumer Service Name|NUM|
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+---------------------+---+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>➜ ~ curl &amp;#34;localhost:22222/ls?arg1=xxx&amp;amp;arg2=xxxx&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>As Provider side:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+----------------------------------+---+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>| Provider Service Name |PUB|
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+----------------------------------+---+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>|org.apache.dubbo.demo.DemoService| N |
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+----------------------------------+---+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>As Consumer side:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+---------------------+---+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>|Consumer Service Name|NUM|
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+---------------------+---+
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="supported-commands">Supported Commands&lt;/h2>
 &lt;h3 id="ls-list-consumers-and-providers">ls List consumers and providers&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">dubbo&amp;gt;ls
-As Provider side:
-+----------------------------------+---+
-| Provider Service Name |PUB|
-+----------------------------------+---+
-|org.apache.dubbo.demo.DemoService| Y |
-+----------------------------------+---+
-As Consumer side:
-+---------------------+---+
-|Consumer Service Name|NUM|
-+---------------------+---+
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>List the services of the provides and the consumers that dubbo provide&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;ls
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>As Provider side:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+----------------------------------+---+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>| Provider Service Name |PUB|
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+----------------------------------+---+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>|org.apache.dubbo.demo.DemoService| Y |
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+----------------------------------+---+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>As Consumer side:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+---------------------+---+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>|Consumer Service Name|NUM|
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+---------------------+---+
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>List the services of the provides and the consumers that dubbo provide&lt;/p>
 &lt;h3 id="online-service-command">Online service command&lt;/h3>
 &lt;p>When using delay publishing function(org.apache.dubbo.config.AbstractServiceConfig#register set as false), you can use “online” command to online the service&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">//online all services
-dubbo&amp;gt;online
-OK
-//online part of servies according to regularity.
-dubbo&amp;gt;online com.*
-OK
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Common usage situations:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>//online all services
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;online
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>OK
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>//online part of servies according to regularity.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;online com.*
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>OK
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Common usage situations:&lt;/p>
 &lt;ul>
 &lt;li>Because there is no JIT or the related resources warm-up, when the machine is restarted and the online QPS is relatively high , a large amount of timeout situations may occur. At this time,the problem can be solved by distributing the batch service and increasing the traffic gradually.&lt;/li>
 &lt;li>A machine needs to be back online after going offline due to some reasons.&lt;/li>
 &lt;/ul>
 &lt;h3 id="offline-service-command">Offline service Command&lt;/h3>
 &lt;p>Offline command can be used if temporary offline service is needed when fault occurs.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">//offline all service
-dubbo&amp;gt;offline
-OK
-//offline some services according to regular rules
-dubbo&amp;gt;offline com.*
-OK
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="help-command">help command&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">//list all commands
-dubbo&amp;gt;help
-//list the specific use case of a command
-dubbo&amp;gt;help online
-+--------------+----------------------------------------------------------------------------------+
-| COMMAND NAME | online |
-+--------------+----------------------------------------------------------------------------------+
-| EXAMPLE | online dubbo |
-| | online xx.xx.xxx.service |
-+--------------+----------------------------------------------------------------------------------+
-dubbo&amp;gt;
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="qos-parameters">QoS' Parameters&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>//offline all service
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;offline
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>OK
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>//offline some services according to regular rules
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;offline com.*
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>OK
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="help-command">help command&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>//list all commands
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;help
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>//list the specific use case of a command
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;help online
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+--------------+----------------------------------------------------------------------------------+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>| COMMAND NAME | online |
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+--------------+----------------------------------------------------------------------------------+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>| EXAMPLE | online dubbo |
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>| | online xx.xx.xxx.service |
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+--------------+----------------------------------------------------------------------------------+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="qos-parameters">QoS&amp;rsquo; Parameters&lt;/h2>
 &lt;p>You can use parameters that QoS provides to config its startup. These parameters include:&lt;/p>
 &lt;table>
 &lt;thead>
@@ -471,45 +478,45 @@ dubbo&amp;gt;
 &lt;/ul>
 &lt;p>They have priority in the following order: system property &amp;gt; &lt;code>dubbo.properties&lt;/code> &amp;gt; XML &amp;gt; spring-boot.&lt;/p>
 &lt;h3 id="system-property">System Property&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">-Ddubbo.application.qos.enable=true
--Ddubbo.application.qos.port=33333
--Ddubbo.application.qos.accept.foreign.ip=false
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="dubboproperties">&lt;code>Dubbo.properties&lt;/code>&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>-Ddubbo.application.qos.enable=true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-Ddubbo.application.qos.port=33333
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-Ddubbo.application.qos.accept.foreign.ip=false
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="dubboproperties">&lt;code>Dubbo.properties&lt;/code>&lt;/h3>
 &lt;p>Create a &lt;code>dubbo.properties&lt;/code> file in this directory &lt;code>src/main/resources&lt;/code> in your project, and copy the following codes into it:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">dubbo.application.qos.enable=true
-dubbo.application.qos.port=33333
-dubbo.application.qos.accept.foreign.ip=false
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="xml">XML&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.application.qos.enable=true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.qos.port=33333
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.qos.accept.foreign.ip=false
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="xml">XML&lt;/h3>
 &lt;p>If you are going to config using XML, you can try this:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#719e07">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> xmlns=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans&amp;#34;&lt;/span>
-xmlns:xsi=&lt;span style="color:#2aa198">&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span>
-xmlns:dubbo=&lt;span style="color:#2aa198">&amp;#34;http://dubbo.apache.org/schema/dubbo&amp;#34;&lt;/span>
-xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans
-&lt;/span>&lt;span style="color:#2aa198"> http://www.springframework.org/schema/beans/spring-beans.xsd
-&lt;/span>&lt;span style="color:#2aa198"> http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:application&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;demo-provider&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:parameter&lt;/span> key=&lt;span style="color:#2aa198">&amp;#34;qos.enable&amp;#34;&lt;/span> value=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:parameter&lt;/span> key=&lt;span style="color:#2aa198">&amp;#34;qos.accept.foreign.ip&amp;#34;&lt;/span> value=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:parameter&lt;/span> key=&lt;span style="color:#2aa198">&amp;#34;qos.port&amp;#34;&lt;/span> value=&lt;span style="color:#2aa198">&amp;#34;33333&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;/dubbo:application&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;multicast://224.5.6.7:1234&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;20880&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.demo.provider.DemoService&amp;#34;&lt;/span> ref=&lt;span style="color:#2aa198">&amp;#34;demoService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;bean&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;demoService&amp;#34;&lt;/span> class=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.demo.provider.DemoServiceImpl&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;/beans&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="spring-boot-auto-configuration">spring-boot auto configuration&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> xmlns=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> xmlns:xsi=&lt;span style="color:#2aa198">&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> xmlns:dubbo=&lt;span style="color:#2aa198">&amp;#34;http://dubbo.apache.org/schema/dubbo&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#2aa198"> http://www.springframework.org/schema/beans/spring-beans.xsd
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#2aa198"> http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:application&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;demo-provider&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:parameter&lt;/span> key=&lt;span style="color:#2aa198">&amp;#34;qos.enable&amp;#34;&lt;/span> value=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:parameter&lt;/span> key=&lt;span style="color:#2aa198">&amp;#34;qos.accept.foreign.ip&amp;#34;&lt;/span> value=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:parameter&lt;/span> key=&lt;span style="color:#2aa198">&amp;#34;qos.port&amp;#34;&lt;/span> value=&lt;span style="color:#2aa198">&amp;#34;33333&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;/dubbo:application&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;multicast://224.5.6.7:1234&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;20880&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.demo.provider.DemoService&amp;#34;&lt;/span> ref=&lt;span style="color:#2aa198">&amp;#34;demoService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;bean&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;demoService&amp;#34;&lt;/span> class=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.demo.provider.DemoServiceImpl&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/beans&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="spring-boot-auto-configuration">spring-boot auto configuration&lt;/h3>
 &lt;p>If you are developing a spring-boot application, you can configure in &lt;code>application.properties&lt;/code> or &lt;code>application.yml&lt;/code>:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">dubbo.application.qosEnable=true
-dubbo.application.qosPort=33333
-dubbo.application.qosAcceptForeignIp=false
-&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Telnet Command Reference</title><link>https://dubbo.apache.org/en/docs/v2.7/user/references/telnet/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/references/telnet/</guid><description>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.application.qosEnable=true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.qosPort=33333
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.qosAcceptForeignIp=false
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Telnet Command Reference</title><link>https://dubbo.apache.org/en/docs/v2.7/user/references/telnet/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/references/telnet/</guid><description>
 &lt;p>Since &lt;code>2.0.5&lt;/code> dubbo starts supporting to use telnet command to govern services.&lt;/p>
 &lt;h2 id="how-to-use">How To Use&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">telnet localhost &lt;span style="color:#2aa198">20880&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Or:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">&lt;span style="color:#b58900">echo&lt;/span> status | nc -i &lt;span style="color:#2aa198">1&lt;/span> localhost &lt;span style="color:#2aa198">20880&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>It is possible to extend command &lt;code>status&lt;/code> to check more resources, pls. refer to &lt;a href="http://dubbo.apache.org/books/dubbo-dev-book-en/impls/status-checker.html">extension references&lt;/a> for more details.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>telnet localhost &lt;span style="color:#2aa198">20880&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Or:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#b58900">echo&lt;/span> status | nc -i &lt;span style="color:#2aa198">1&lt;/span> localhost &lt;span style="color:#2aa198">20880&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>It is possible to extend command &lt;code>status&lt;/code> to check more resources, pls. refer to &lt;a href="http://dubbo.apache.org/books/dubbo-dev-book-en/impls/status-checker.html">extension references&lt;/a> for more details.&lt;/p>
 &lt;h2 id="supported-commands">Supported Commands&lt;/h2>
 &lt;p>The built-in telnet commands are listed below. Furthermore, it is possible to extend telnet commands, pls. refer to
 &lt;a href="http://dubbo.apache.org/en-us/docs/user/references/telnet.html">extend telnet command&lt;/a> for more details.&lt;/p>
@@ -604,8 +611,8 @@ dubbo.application.qosAcceptForeignIp=false
 &lt;h4 class="alert-heading">Info&lt;/h4>
 Default port is 9090 if the port is not specified
 &lt;/div>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">mvn dubbo:registry -Dport&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">9099&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="generate-a-service-provider-demo-application">Generate a service provider demo application&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mvn dubbo:registry -Dport&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">9099&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="generate-a-service-provider-demo-application">Generate a service provider demo application&lt;/h2>
 &lt;p>Generate a service provider with the specified interface and version:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">mvn dubbo:create -Dapplication&lt;span style="color:#719e07">=&lt;/span>xxx -Dpackage&lt;span style="color:#719e07">=&lt;/span>com.alibaba.xxx -Dservice&lt;span style="color:#719e07">=&lt;/span>XxxService,YyyService -Dversion&lt;span style="color:#719e07">=&lt;/span>1.0.0
-&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mvn dubbo:create -Dapplication&lt;span style="color:#719e07">=&lt;/span>xxx -Dpackage&lt;span style="color:#719e07">=&lt;/span>com.alibaba.xxx -Dservice&lt;span style="color:#719e07">=&lt;/span>XxxService,YyyService -Dversion&lt;span style="color:#719e07">=&lt;/span>1.0.0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

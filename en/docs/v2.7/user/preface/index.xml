@@ -124,26 +124,26 @@
 &lt;/table></description></item><item><title>Docs: Usage</title><link>https://dubbo.apache.org/en/docs/v2.7/user/preface/usage/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/preface/usage/</guid><description>
 &lt;h2 id="spring-configuration-of-local-service">Spring configuration of local service&lt;/h2>
 &lt;p>local.xml:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;bean&lt;/span> id=&lt;span style="color:#2aa198">“xxxService”&lt;/span> class=&lt;span style="color:#2aa198">“com.xxx.XxxServiceImpl”&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;bean&lt;/span> id=&lt;span style="color:#2aa198">“xxxAction”&lt;/span> class=&lt;span style="color:#2aa198">“com.xxx.XxxAction”&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;property&lt;/span> name=&lt;span style="color:#2aa198">“xxxService”&lt;/span> ref=&lt;span style="color:#2aa198">“xxxService”&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;/bean&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="spring-configuration-of-remote-service">Spring configuration of remote service&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;bean&lt;/span> id=&lt;span style="color:#2aa198">“xxxService”&lt;/span> class=&lt;span style="color:#2aa198">“com.xxx.XxxServiceImpl”&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;bean&lt;/span> id=&lt;span style="color:#2aa198">“xxxAction”&lt;/span> class=&lt;span style="color:#2aa198">“com.xxx.XxxAction”&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;property&lt;/span> name=&lt;span style="color:#2aa198">“xxxService”&lt;/span> ref=&lt;span style="color:#2aa198">“xxxService”&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/bean&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="spring-configuration-of-remote-service">Spring configuration of remote service&lt;/h2>
 &lt;p>The remote configuration can be done by very little change based on the local configuration:&lt;/p>
 &lt;ul>
 &lt;li>split the &lt;code>local.xml&lt;/code> into two part, put the service define part into &lt;code>remote-privider.xml&lt;/code>(exists in the provider node), meanwhile the refrence part into &lt;code>remote-consumer.xml&lt;/code>(exists in the consumer node).&lt;/li>
 &lt;li>add &lt;code>&amp;lt;dubbo:service&amp;gt;&lt;/code> to the provider&amp;rsquo;s configuration, and &lt;code>&amp;lt;dubbo:reference&amp;gt;&lt;/code> to the consumer&amp;rsquo;s configuration.&lt;/li>
 &lt;/ul>
 &lt;p>remote-provider.xml:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#586e75">&amp;lt;!-- define remote service bean the same way as local service bean --&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;bean&lt;/span> id=&lt;span style="color:#2aa198">“xxxService”&lt;/span> class=&lt;span style="color:#2aa198">“com.xxx.XxxServiceImpl”&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#586e75">&amp;lt;!-- expose the remote service --&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">“com.xxx.XxxService”&lt;/span> ref=&lt;span style="color:#2aa198">“xxxService”&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>remote-consumer.xml:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#586e75">&amp;lt;!-- reference the remote service --&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> id=&lt;span style="color:#2aa198">“xxxService”&lt;/span> interface=&lt;span style="color:#2aa198">“com.xxx.XxxService”&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#586e75">&amp;lt;!-- use remote service the same say as local service --&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;bean&lt;/span> id=&lt;span style="color:#2aa198">“xxxAction”&lt;/span> class=&lt;span style="color:#2aa198">“com.xxx.XxxAction”&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;property&lt;/span> name=&lt;span style="color:#2aa198">“xxxService”&lt;/span> ref=&lt;span style="color:#2aa198">“xxxService”&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;/bean&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&amp;lt;!-- define remote service bean the same way as local service bean --&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;bean&lt;/span> id=&lt;span style="color:#2aa198">“xxxService”&lt;/span> class=&lt;span style="color:#2aa198">“com.xxx.XxxServiceImpl”&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&amp;lt;!-- expose the remote service --&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">“com.xxx.XxxService”&lt;/span> ref=&lt;span style="color:#2aa198">“xxxService”&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>remote-consumer.xml:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&amp;lt;!-- reference the remote service --&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> id=&lt;span style="color:#2aa198">“xxxService”&lt;/span> interface=&lt;span style="color:#2aa198">“com.xxx.XxxService”&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&amp;lt;!-- use remote service the same say as local service --&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;bean&lt;/span> id=&lt;span style="color:#2aa198">“xxxAction”&lt;/span> class=&lt;span style="color:#2aa198">“com.xxx.XxxAction”&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;property&lt;/span> name=&lt;span style="color:#2aa198">“xxxService”&lt;/span> ref=&lt;span style="color:#2aa198">“xxxService”&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/bean&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

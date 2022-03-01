@@ -97,10 +97,10 @@
 &lt;/tbody>
 &lt;/table></description></item><item><title>Docs: dubbo:argument</title><link>https://dubbo.apache.org/en/docs/v2.7/user/references/xml/dubbo-argument/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/references/xml/dubbo-argument/</guid><description>
 &lt;p>Method argument configuration. The corresponding class：&lt;code>org.apache.dubbo.config.ArgumentConfig&lt;/code>. This tag is child of &lt;code>&amp;lt;dubbo:method&amp;gt;&lt;/code>, which is for feature description of method argument, such as:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:method&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;findXxx&amp;#34;&lt;/span> timeout=&lt;span style="color:#2aa198">&amp;#34;3000&amp;#34;&lt;/span> retries=&lt;span style="color:#2aa198">&amp;#34;2&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:argument&lt;/span> index=&lt;span style="color:#2aa198">&amp;#34;0&amp;#34;&lt;/span> callback=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;/dubbo:method&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;table>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:method&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;findXxx&amp;#34;&lt;/span> timeout=&lt;span style="color:#2aa198">&amp;#34;3000&amp;#34;&lt;/span> retries=&lt;span style="color:#2aa198">&amp;#34;2&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:argument&lt;/span> index=&lt;span style="color:#2aa198">&amp;#34;0&amp;#34;&lt;/span> callback=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dubbo:method&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;table>
 &lt;thead>
 &lt;tr>
 &lt;th>Property&lt;/th>
@@ -654,10 +654,10 @@
 &lt;/tbody>
 &lt;/table>
 &lt;p>For example:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.xxx.XxxService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:method&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;findXxx&amp;#34;&lt;/span> timeout=&lt;span style="color:#2aa198">&amp;#34;3000&amp;#34;&lt;/span> retries=&lt;span style="color:#2aa198">&amp;#34;2&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;/dubbo:reference&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: dubbo:module</title><link>https://dubbo.apache.org/en/docs/v2.7/user/references/xml/dubbo-module/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/references/xml/dubbo-module/</guid><description>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.xxx.XxxService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:method&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;findXxx&amp;#34;&lt;/span> timeout=&lt;span style="color:#2aa198">&amp;#34;3000&amp;#34;&lt;/span> retries=&lt;span style="color:#2aa198">&amp;#34;2&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dubbo:reference&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: dubbo:module</title><link>https://dubbo.apache.org/en/docs/v2.7/user/references/xml/dubbo-module/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/references/xml/dubbo-module/</guid><description>
 &lt;p>Module configuration. The corresponding class &lt;code>org.apache.dubbo.config.ModuleConfig&lt;/code>&lt;/p>
 &lt;table>
 &lt;thead>
@@ -790,12 +790,12 @@
 &lt;/tbody>
 &lt;/table>
 &lt;p>For example：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;napoli&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:parameter&lt;/span> key=&lt;span style="color:#2aa198">&amp;#34;http://10.20.160.198/wiki/display/dubbo/napoli.queue.name&amp;#34;&lt;/span> value=&lt;span style="color:#2aa198">&amp;#34;xxx&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;/dubbo:protocol&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>you can also use it like this:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;jms&amp;#34;&lt;/span> p:queue=&lt;span style="color:#2aa198">&amp;#34;xxx&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: dubbo:protocol</title><link>https://dubbo.apache.org/en/docs/v2.7/user/references/xml/dubbo-protocol/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/references/xml/dubbo-protocol/</guid><description>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;napoli&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:parameter&lt;/span> key=&lt;span style="color:#2aa198">&amp;#34;http://10.20.160.198/wiki/display/dubbo/napoli.queue.name&amp;#34;&lt;/span> value=&lt;span style="color:#2aa198">&amp;#34;xxx&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dubbo:protocol&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>you can also use it like this:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;jms&amp;#34;&lt;/span> p:queue=&lt;span style="color:#2aa198">&amp;#34;xxx&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: dubbo:protocol</title><link>https://dubbo.apache.org/en/docs/v2.7/user/references/xml/dubbo-protocol/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/references/xml/dubbo-protocol/</guid><description>
 &lt;p>Service provider protocol configuration. The corresponding class is &lt;code>org.apache.dubbo.config.ProtocolConfig&lt;/code>. If you need to support multiple protocols, you could declare multiple &lt;code>&amp;lt;dubbo:protocol&amp;gt;&lt;/code> tags, and specify the protocol via &lt;code>protocol&lt;/code> property.&lt;/p>
 &lt;table>
 &lt;thead>
@@ -868,7 +868,7 @@
 &lt;td>False&lt;/td>
 &lt;td>200&lt;/td>
 &lt;td>Performance optimize&lt;/td>
-&lt;td>The size of the services' Thread Pool(Fixed)&lt;/td>
+&lt;td>The size of the services&amp;rsquo; Thread Pool(Fixed)&lt;/td>
 &lt;td>Above 2.0.5&lt;/td>
 &lt;/tr>
 &lt;tr>
@@ -1105,7 +1105,7 @@
 &lt;td>False&lt;/td>
 &lt;td>200&lt;/td>
 &lt;td>Performance optimize&lt;/td>
-&lt;td>The size of the services' Thread Pool(Fixed)&lt;/td>
+&lt;td>The size of the services&amp;rsquo; Thread Pool(Fixed)&lt;/td>
 &lt;td>Above 1.0.16&lt;/td>
 &lt;/tr>
 &lt;tr>
@@ -1682,7 +1682,7 @@
 &lt;td>False&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>Service governance&lt;/td>
-&lt;td>Enable JSR303 annotation validation. If true, it will validate the method parameters' annotations.&lt;/td>
+&lt;td>Enable JSR303 annotation validation. If true, it will validate the method parameters&amp;rsquo; annotations.&lt;/td>
 &lt;td>Above 2.1.0&lt;/td>
 &lt;/tr>
 &lt;tr>

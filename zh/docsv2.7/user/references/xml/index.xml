@@ -97,10 +97,10 @@
 &lt;/tbody>
 &lt;/table></description></item><item><title>Docsv2.7: dubbo:argument</title><link>https://dubbo.apache.org/zh/docsv2.7/user/references/xml/dubbo-argument/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/user/references/xml/dubbo-argument/</guid><description>
 &lt;p>方法参数配置。对应的配置类： &lt;code>org.apache.dubbo.config.ArgumentConfig&lt;/code>。该标签为 &lt;code>&amp;lt;dubbo:method&amp;gt;&lt;/code> 的子标签，用于方法参数的特征描述，比如：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:method&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;findXxx&amp;#34;&lt;/span> timeout=&lt;span style="color:#2aa198">&amp;#34;3000&amp;#34;&lt;/span> retries=&lt;span style="color:#2aa198">&amp;#34;2&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:argument&lt;/span> index=&lt;span style="color:#2aa198">&amp;#34;0&amp;#34;&lt;/span> callback=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;/dubbo:method&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;table>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:method&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;findXxx&amp;#34;&lt;/span> timeout=&lt;span style="color:#2aa198">&amp;#34;3000&amp;#34;&lt;/span> retries=&lt;span style="color:#2aa198">&amp;#34;2&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:argument&lt;/span> index=&lt;span style="color:#2aa198">&amp;#34;0&amp;#34;&lt;/span> callback=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dubbo:method&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;table>
 &lt;thead>
 &lt;tr>
 &lt;th>属性&lt;/th>
@@ -654,10 +654,10 @@
 &lt;/tbody>
 &lt;/table>
 &lt;p>比如:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.xxx.XxxService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:method&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;findXxx&amp;#34;&lt;/span> timeout=&lt;span style="color:#2aa198">&amp;#34;3000&amp;#34;&lt;/span> retries=&lt;span style="color:#2aa198">&amp;#34;2&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;/dubbo:reference&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docsv2.7: dubbo:module</title><link>https://dubbo.apache.org/zh/docsv2.7/user/references/xml/dubbo-module/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/user/references/xml/dubbo-module/</guid><description>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.xxx.XxxService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:method&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;findXxx&amp;#34;&lt;/span> timeout=&lt;span style="color:#2aa198">&amp;#34;3000&amp;#34;&lt;/span> retries=&lt;span style="color:#2aa198">&amp;#34;2&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dubbo:reference&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docsv2.7: dubbo:module</title><link>https://dubbo.apache.org/zh/docsv2.7/user/references/xml/dubbo-module/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/user/references/xml/dubbo-module/</guid><description>
 &lt;p>模块信息配置。对应的配置类 &lt;code>org.apache.dubbo.config.ModuleConfig&lt;/code>&lt;/p>
 &lt;table>
 &lt;thead>
@@ -790,12 +790,12 @@
 &lt;/tbody>
 &lt;/table>
 &lt;p>比如：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;napoli&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:parameter&lt;/span> key=&lt;span style="color:#2aa198">&amp;#34;http://10.20.160.198/wiki/display/dubbo/napoli.queue.name&amp;#34;&lt;/span> value=&lt;span style="color:#2aa198">&amp;#34;xxx&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;/dubbo:protocol&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>也可以：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;jms&amp;#34;&lt;/span> p:queue=&lt;span style="color:#2aa198">&amp;#34;xxx&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docsv2.7: dubbo:protocol</title><link>https://dubbo.apache.org/zh/docsv2.7/user/references/xml/dubbo-protocol/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/user/references/xml/dubbo-protocol/</guid><description>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;napoli&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:parameter&lt;/span> key=&lt;span style="color:#2aa198">&amp;#34;http://10.20.160.198/wiki/display/dubbo/napoli.queue.name&amp;#34;&lt;/span> value=&lt;span style="color:#2aa198">&amp;#34;xxx&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dubbo:protocol&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>也可以：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;jms&amp;#34;&lt;/span> p:queue=&lt;span style="color:#2aa198">&amp;#34;xxx&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docsv2.7: dubbo:protocol</title><link>https://dubbo.apache.org/zh/docsv2.7/user/references/xml/dubbo-protocol/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/user/references/xml/dubbo-protocol/</guid><description>
 &lt;p>服务提供者协议配置。对应的配置类： &lt;code>org.apache.dubbo.config.ProtocolConfig&lt;/code>。同时，如果需要支持多协议，可以声明多个 &lt;code>&amp;lt;dubbo:protocol&amp;gt;&lt;/code> 标签，并在 &lt;code>&amp;lt;dubbo:service&amp;gt;&lt;/code> 中通过 &lt;code>protocol&lt;/code> 属性指定使用的协议。&lt;/p>
 &lt;table>
 &lt;thead>

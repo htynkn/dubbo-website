@@ -26,15 +26,17 @@
 &lt;ol>
 &lt;li>在根目录下执行install&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-go" data-lang="go">MacdeMacBook&lt;span style="color:#719e07">-&lt;/span>pro&lt;span style="color:#719e07">-&lt;/span>&lt;span style="color:#2aa198">3&lt;/span>:incubator&lt;span style="color:#719e07">-&lt;/span>dubbo mac$ pwd
-&lt;span style="color:#719e07">/&lt;/span>Users&lt;span style="color:#719e07">/&lt;/span>mac&lt;span style="color:#719e07">/&lt;/span>Documents&lt;span style="color:#719e07">/&lt;/span>Mi&lt;span style="color:#719e07">/&lt;/span>project&lt;span style="color:#719e07">/&lt;/span>incubator&lt;span style="color:#719e07">-&lt;/span>dubbo
-MacdeMacBook&lt;span style="color:#719e07">-&lt;/span>pro&lt;span style="color:#719e07">-&lt;/span>&lt;span style="color:#2aa198">3&lt;/span>:incubator&lt;span style="color:#719e07">-&lt;/span>dubbo mac$ mvn clean &lt;span style="color:#719e07">package&lt;/span> install &lt;span style="color:#719e07">-&lt;/span>Dmaven.test.skip=&lt;span style="color:#cb4b16">true&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>MacdeMacBook&lt;span style="color:#719e07">-&lt;/span>pro&lt;span style="color:#719e07">-&lt;/span>&lt;span style="color:#2aa198">3&lt;/span>:incubator&lt;span style="color:#719e07">-&lt;/span>dubbo mac$ pwd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">/&lt;/span>Users&lt;span style="color:#719e07">/&lt;/span>mac&lt;span style="color:#719e07">/&lt;/span>Documents&lt;span style="color:#719e07">/&lt;/span>Mi&lt;span style="color:#719e07">/&lt;/span>project&lt;span style="color:#719e07">/&lt;/span>incubator&lt;span style="color:#719e07">-&lt;/span>dubbo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>MacdeMacBook&lt;span style="color:#719e07">-&lt;/span>pro&lt;span style="color:#719e07">-&lt;/span>&lt;span style="color:#2aa198">3&lt;/span>:incubator&lt;span style="color:#719e07">-&lt;/span>dubbo mac$ mvn clean &lt;span style="color:#719e07">package&lt;/span> install &lt;span style="color:#719e07">-&lt;/span>Dmaven.test.skip=&lt;span style="color:#cb4b16">true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol>
 &lt;li>编译demo项目&lt;/li>
 &lt;/ol>
 &lt;p>这里我们提供了可直接进行编译的示例项目，dubbo-demo/dubbo-demo-native。上面步骤install完成后，先到dubbo-demo-native的provider下，执行native-image编译：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-go" data-lang="go"> mvn clean &lt;span style="color:#719e07">package&lt;/span> &lt;span style="color:#719e07">-&lt;/span>P native &lt;span style="color:#719e07">-&lt;/span>Dmaven.test.skip=&lt;span style="color:#cb4b16">true&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>这里由于我们在maven中引入了native-image插件，所以直接-P native即可执行该插件。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span> mvn clean &lt;span style="color:#719e07">package&lt;/span> &lt;span style="color:#719e07">-&lt;/span>P native &lt;span style="color:#719e07">-&lt;/span>Dmaven.test.skip=&lt;span style="color:#cb4b16">true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这里由于我们在maven中引入了native-image插件，所以直接-P native即可执行该插件。&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo3.0-graalvm-support/native_image_build.jpg" alt="">
 编译成功后可以在target下看到已经生成的二进制文件，本地启动一个zookeeper，直接执行该二进制，可见启动成功如下：&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo3.0-graalvm-support/run_provider.jpg" alt="">
@@ -45,73 +47,128 @@ consumer端同样执行编译，在consumer的target下也会生成二进制文�
 &lt;ul>
 &lt;li>引入dubbo-native依赖&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">&amp;lt;dependency&amp;gt;
-&amp;lt;groupId&amp;gt;org.apache.dubbo&amp;lt;/groupId&amp;gt;
-&amp;lt;artifactId&amp;gt;dubbo-native&amp;lt;/artifactId&amp;gt;
-&amp;lt;version&amp;gt;${project.version}&amp;lt;/version&amp;gt;
-&amp;lt;/dependency&amp;gt;
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>该模块下有我们生成的SPI代码。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>&amp;lt;dependency&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;groupId&amp;gt;org.apache.dubbo&amp;lt;/groupId&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;artifactId&amp;gt;dubbo-native&amp;lt;/artifactId&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;version&amp;gt;${project.version}&amp;lt;/version&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/dependency&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>该模块下有我们生成的SPI代码。&lt;/p>
 &lt;ul>
 &lt;li>引入native-image插件&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">&amp;lt;plugin&amp;gt;
-&amp;lt;groupId&amp;gt;org.graalvm.nativeimage&amp;lt;/groupId&amp;gt;
-&amp;lt;artifactId&amp;gt;native-image-maven-plugin&amp;lt;/artifactId&amp;gt;
-&amp;lt;version&amp;gt;21.0.0.2&amp;lt;/version&amp;gt;
-&amp;lt;executions&amp;gt;
-&amp;lt;execution&amp;gt;
-&amp;lt;goals&amp;gt;
-&amp;lt;goal&amp;gt;native-image&amp;lt;/goal&amp;gt;
-&amp;lt;/goals&amp;gt;
-&amp;lt;phase&amp;gt;package&amp;lt;/phase&amp;gt;
-&amp;lt;/execution&amp;gt;
-&amp;lt;/executions&amp;gt;
-&amp;lt;configuration&amp;gt;
-&amp;lt;skip&amp;gt;false&amp;lt;/skip&amp;gt;
-&amp;lt;imageName&amp;gt;demo-native-provider&amp;lt;/imageName&amp;gt;
-&amp;lt;mainClass&amp;gt;org.apache.dubbo.demo.graalvm.provider.Application&amp;lt;/mainClass&amp;gt;
-&amp;lt;buildArgs&amp;gt;
---no-fallback
---initialize-at-build-time=org.slf4j.MDC
---initialize-at-build-time=org.slf4j.LoggerFactory
---initialize-at-build-time=org.slf4j.impl.StaticLoggerBinder
---initialize-at-build-time=org.apache.log4j.helpers.Loader
---initialize-at-build-time=org.apache.log4j.Logger
---initialize-at-build-time=org.apache.log4j.helpers.LogLog
---initialize-at-build-time=org.apache.log4j.LogManager
---initialize-at-build-time=org.apache.log4j.spi.LoggingEvent
---initialize-at-build-time=org.slf4j.impl.Log4jLoggerFactory
---initialize-at-build-time=org.slf4j.impl.Log4jLoggerAdapter
---initialize-at-build-time=org.eclipse.collections.api.factory.Sets
---initialize-at-run-time=io.netty.channel.epoll.Epoll
---initialize-at-run-time=io.netty.channel.epoll.Native
---initialize-at-run-time=io.netty.channel.epoll.EpollEventLoop
---initialize-at-run-time=io.netty.channel.epoll.EpollEventArray
---initialize-at-run-time=io.netty.channel.DefaultFileRegion
---initialize-at-run-time=io.netty.channel.kqueue.KQueueEventArray
---initialize-at-run-time=io.netty.channel.kqueue.KQueueEventLoop
---initialize-at-run-time=io.netty.channel.kqueue.Native
---initialize-at-run-time=io.netty.channel.unix.Errors
---initialize-at-run-time=io.netty.channel.unix.IovArray
---initialize-at-run-time=io.netty.channel.unix.Limits
---initialize-at-run-time=io.netty.util.internal.logging.Log4JLogger
---initialize-at-run-time=io.netty.channel.unix.Socket
---initialize-at-run-time=io.netty.channel.ChannelHandlerMask
---report-unsupported-elements-at-runtime
---allow-incomplete-classpath
---enable-url-protocols=http
--H:+ReportExceptionStackTraces
-&amp;lt;/buildArgs&amp;gt;
-&amp;lt;/configuration&amp;gt;
-&amp;lt;/plugin&amp;gt;
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中定义了生成的镜像名以及一些构建镜像的参数。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>&amp;lt;plugin&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;groupId&amp;gt;org.graalvm.nativeimage&amp;lt;/groupId&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;artifactId&amp;gt;native-image-maven-plugin&amp;lt;/artifactId&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;version&amp;gt;21.0.0.2&amp;lt;/version&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;executions&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;execution&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;goals&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;goal&amp;gt;native-image&amp;lt;/goal&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;/goals&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;phase&amp;gt;package&amp;lt;/phase&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;/execution&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;/executions&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;configuration&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;skip&amp;gt;false&amp;lt;/skip&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;imageName&amp;gt;demo-native-provider&amp;lt;/imageName&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;mainClass&amp;gt;org.apache.dubbo.demo.graalvm.provider.Application&amp;lt;/mainClass&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;buildArgs&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --no-fallback
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --initialize-at-build-time=org.slf4j.MDC
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --initialize-at-build-time=org.slf4j.LoggerFactory
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --initialize-at-build-time=org.slf4j.impl.StaticLoggerBinder
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --initialize-at-build-time=org.apache.log4j.helpers.Loader
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --initialize-at-build-time=org.apache.log4j.Logger
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --initialize-at-build-time=org.apache.log4j.helpers.LogLog
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --initialize-at-build-time=org.apache.log4j.LogManager
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --initialize-at-build-time=org.apache.log4j.spi.LoggingEvent
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --initialize-at-build-time=org.slf4j.impl.Log4jLoggerFactory
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --initialize-at-build-time=org.slf4j.impl.Log4jLoggerAdapter
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --initialize-at-build-time=org.eclipse.collections.api.factory.Sets
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --initialize-at-run-time=io.netty.channel.epoll.Epoll
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --initialize-at-run-time=io.netty.channel.epoll.Native
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --initialize-at-run-time=io.netty.channel.epoll.EpollEventLoop
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --initialize-at-run-time=io.netty.channel.epoll.EpollEventArray
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --initialize-at-run-time=io.netty.channel.DefaultFileRegion
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --initialize-at-run-time=io.netty.channel.kqueue.KQueueEventArray
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --initialize-at-run-time=io.netty.channel.kqueue.KQueueEventLoop
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --initialize-at-run-time=io.netty.channel.kqueue.Native
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --initialize-at-run-time=io.netty.channel.unix.Errors
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --initialize-at-run-time=io.netty.channel.unix.IovArray
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --initialize-at-run-time=io.netty.channel.unix.Limits
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --initialize-at-run-time=io.netty.util.internal.logging.Log4JLogger
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --initialize-at-run-time=io.netty.channel.unix.Socket
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --initialize-at-run-time=io.netty.channel.ChannelHandlerMask
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --report-unsupported-elements-at-runtime
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --allow-incomplete-classpath
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> --enable-url-protocols=http
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> -H:+ReportExceptionStackTraces
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;/buildArgs&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;/configuration&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/plugin&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中定义了生成的镜像名以及一些构建镜像的参数。&lt;/p>
 &lt;ul>
 &lt;li>挂载native-image-agent&lt;/li>
 &lt;/ul>
 &lt;p>由于我们需要将一些反射、JNI等类先指定出来，我们需要先使用该agent以正常方式运行一遍生成这些类的json形式的信息。&lt;/p>
 &lt;p>在启动参数中添加：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">-agentlib:native-image-agent=config-output-dir=/tmp/config/,config-write-period-secs=300,config-write-initial-delay-secs=5
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>以正常方式启动，在项目的resources下建立文件夹META-INF.native-image，把在本地目录中生成的文件粘进去：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>-agentlib:native-image-agent=config-output-dir=/tmp/config/,config-write-period-secs=300,config-write-initial-delay-secs=5
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>以正常方式启动，在项目的resources下建立文件夹META-INF.native-image，把在本地目录中生成的文件粘进去：&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo3.0-graalvm-support/resources.jpg" alt="">
 （可能会有缺漏没有生成的类信息，需要根据编译或运行时的报错信息手动添加。）&lt;/p>
 &lt;p>&lt;strong>完成以上几步后就可以进行项目的编译了。&lt;/strong>&lt;/p></description></item></channel></rss>

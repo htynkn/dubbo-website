@@ -50,13 +50,13 @@
 &lt;li>Follow the checklist in the &lt;a href="https://github.com/apache/dubbo/blob/master/PULL_REQUEST_TEMPLATE.md">pull request template&lt;/a>&lt;/li>
 &lt;li>Before you sending out the pull request, please sync your forked repository with remote repository, this will make your pull request simple and clear. See guide below:&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">git remote add upstream git@github.com:apache/dubbo.git
-git fetch upstream
-git rebase upstream/master
-git checkout -b your_awesome_patch
-... add some work
-git push origin your_awesome_patch
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="code-convention">Code convention&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>git remote add upstream git@github.com:apache/dubbo.git
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git fetch upstream
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git rebase upstream/master
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git checkout -b your_awesome_patch
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>... add some work
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git push origin your_awesome_patch
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="code-convention">Code convention&lt;/h3>
 &lt;p>Please check the &lt;a href="https://github.com/apache/dubbo/blob/master/CONTRIBUTING.md">CONTRIBUTING.md&lt;/a> for code convention.&lt;/p>
 &lt;h3 id="participate-in-the-release-vote">Participate in the release vote&lt;/h3>
 &lt;p>Participate in the release vote is an important way to contribute to Dubbo. The Dubbo community welcomes everyone to partipate, you can check the release vote using this &lt;a href="https://wiki.apache.org/incubator/IncubatorReleaseChecklist">check list&lt;/a>.
@@ -86,48 +86,65 @@ If you have any question regarding the check list, please feel free to ask on &l
 &lt;ol>
 &lt;li>Send an email to &lt;a href="mailto:dev-subscribe@dubbo.apache.org">dev-subscribe@dubbo.apache.org&lt;/a>, you can have empty subject and empty content. You will receive an email with the following content:&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">from: dev-help@dubbo.apache.org
-reply-to: dev-sc.xxxxxxx.xxxxxxxx-hello=example.com@dubbo.apache.org
-to: hello@example.com
-date: Sat, Feb 24, 2018 at 3:12 PM
-subject: confirm subscribe to dev@dubbo.apache.org
-mailed-by: apache.org
-Hi! This is the ezmlm program. I&amp;#39;m managing the
-dev@dubbo.apache.org mailing list.
-I&amp;#39;m working for my owner, who can be reached
-at dev-owner@dubbo.apache.org.
-To confirm that you would like
-hello@example.com
-added to the dev mailing list, please send
-a short reply to this address:
-dev-sc.xxxxxxx.xxxxxxxx-hello=example.com@dubbo.apache.org
-Usually, this happens when you just hit the &amp;#34;reply&amp;#34; button.
-If this does not work, simply copy the address and paste it into
-the &amp;#34;To:&amp;#34; field of a new message.
-or click here:
-mailto:dev-sc.xxxxxxx.xxxxxxxx-hello=example.com@dubbo.apache.org
-...
-&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>from: dev-help@dubbo.apache.org
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reply-to: dev-sc.xxxxxxx.xxxxxxxx-hello=example.com@dubbo.apache.org
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>to: hello@example.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>date: Sat, Feb 24, 2018 at 3:12 PM
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>subject: confirm subscribe to dev@dubbo.apache.org
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mailed-by: apache.org
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Hi! This is the ezmlm program. I&amp;#39;m managing the
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dev@dubbo.apache.org mailing list.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>I&amp;#39;m working for my owner, who can be reached
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>at dev-owner@dubbo.apache.org.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>To confirm that you would like
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> hello@example.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>added to the dev mailing list, please send
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>a short reply to this address:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dev-sc.xxxxxxx.xxxxxxxx-hello=example.com@dubbo.apache.org
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Usually, this happens when you just hit the &amp;#34;reply&amp;#34; button.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>If this does not work, simply copy the address and paste it into
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>the &amp;#34;To:&amp;#34; field of a new message.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>or click here:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mailto:dev-sc.xxxxxxx.xxxxxxxx-hello=example.com@dubbo.apache.org
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
 &lt;li>Reply the email directly, you can have empty subject and empty content. You will receive an email with the following content:&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">from: dev-help@dubbo.apache.org
-to: hello@example.com
-date: Sat, Feb 24, 2018 at 3:14 PM
-subject: WELCOME to dev@dubbo.apache.org
-mailed-by: apache.org
-Hi! This is the ezmlm program. I&amp;#39;m managing the
-dev@dubbo.apache.org mailing list.
-I&amp;#39;m working for my owner, who can be reached
-at dev-owner@dubbo.apache.org.
-Acknowledgment: I have added the address
-hello@example.com
-to the dev mailing list.
-Welcome to dev@dubbo.apache.org!
-Please save this message so that you know the address you are
-subscribed under, in case you later want to unsubscribe or change your
-subscription address.
-...
-&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>from: dev-help@dubbo.apache.org
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>to: hello@example.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>date: Sat, Feb 24, 2018 at 3:14 PM
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>subject: WELCOME to dev@dubbo.apache.org
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mailed-by: apache.org
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Hi! This is the ezmlm program. I&amp;#39;m managing the
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dev@dubbo.apache.org mailing list.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>I&amp;#39;m working for my owner, who can be reached
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>at dev-owner@dubbo.apache.org.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Acknowledgment: I have added the address
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> hello@example.com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>to the dev mailing list.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Welcome to dev@dubbo.apache.org!
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Please save this message so that you know the address you are
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>subscribed under, in case you later want to unsubscribe or change your
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>subscription address.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>
 &lt;p>After that, you will receive any email that is posted to this mailing list. If you have any further questions, just send email to &lt;a href="mailto:dev@dubbo.apache.org">dev@dubbo.apache.org&lt;/a> and hopefully someone will answer your questions.&lt;/p>
 &lt;/li>
@@ -152,68 +169,92 @@ subscription address.
 &lt;/ol>
 &lt;h4 id="example">Example:&lt;/h4>
 &lt;p>Below is an text versioned &lt;strong>example&lt;/strong>, original text could be found &lt;a href="https://www.apache.org/licenses/software-grant.txt">here&lt;/a>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-fallback" data-lang="fallback">License Agreement
-This License Agreement is entered into as of the _12th_ day of
-___April____, __2018__ by ___ABC Software Co., Ltd.____ (&amp;#34;Licensor&amp;#34;),
-in favor of The Apache Software Foundation, a Delaware nonstock
-membership corporation (the &amp;#34;Foundation&amp;#34;).
-WHEREAS, Licensor owns or has sufficient rights to contribute the
-software source code and other related intellectual property as
-itemized on Exhibit A (&amp;#34;Software&amp;#34;) under the terms of this agreement
-to the Foundation for use within Foundation software development
-projects (&amp;#34;Projects&amp;#34;).
-NOW, THEREFORE, FOR GOOD AND VALUABLE CONSIDERATION, the receipt
-and legal sufficiency of which are hereby acknowledged, the parties
-hereto, intending to be legally bound, agree as follows:
-1. Subject to the terms and conditions of this License, Licensor
-hereby grants to the Foundation:
-a) a non-exclusive, worldwide, royalty-free, irrevocable
-copyright license to reproduce, prepare derivative works of,
-publicly display, publicly perform, distribute and sublicense,
-internally and externally, the Software and such derivative
-works, in source code and object code form; and,
-b) a non-exclusive, worldwide, royalty-free, irrevocable
-patent license under Licensed Patents to make, use, sell,
-offer to sell, import and otherwise transfer the Software
-in source code and object code form. &amp;#34;Licensed Patents&amp;#34; mean
-patent claims owned by Licensor which are necessarily
-infringed by the use or sale of the Software alone.
-2. Licensor represents that, to Licensor&amp;#39;s knowledge, Licensor is
-legally entitled to grant the above license. Licensor agrees to notify
-the Foundation of any facts or circumstances of which Licensor becomes
-aware and which makes or would make Licensor&amp;#39;s representations in this
-License Agreement inaccurate in any respect.
-3. This Software is provided AS-IS, WITHOUT WARRANTIES OR CONDITIONS
-OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
-ANY WARRANTIES OR CONDITIONS OF TITLE, NON-INFRINGEMENT, MERCHANTABILITY
-OR FITNESS FOR A PARTICULAR PURPOSE. NEITHER THE LICENSOR NOR ITS
-SUPPLIERS WILL BE LIABLE TO THE FOUNDATION OR ITS LICENSEES FOR ANY
-DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING WITHOUT LIMITATION LOST PROFITS), HOWEVER CAUSED
-AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
-THE USE OR DISTRIBUTION OF THE WORK OR THE EXERCISE OF ANY RIGHTS
-GRANTED HEREUNDER, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
-This License Agreement is the entire agreement of the parties
-with respect to its subject matter, and may only be amended by a
-writing signed by each party. This License Agreement may be
-executed in one or more counterparts, each of which shall be
-considered an original.
-IN WITNESS WHEREOF, Licensor has executed this License Agreement
-as of the date first written above.
-LICENSOR:
-Signed By: _____________________________________ &amp;lt;--- Your boss&amp;#39;s sign here
-Print Name: _____Lei Li_________________________ &amp;lt;--- Your boss&amp;#39;s name here
-Title: ____Director_____________________________ &amp;lt;--- Your boss&amp;#39;s title here
-Representing: ____ABC Software Co., Ltd. _______
-________________________________________________
-Contact Name: ____Lei Li________________________ &amp;lt;--- Your boss&amp;#39;s name here
-Contact Email: ____lilei@abc.com________________ &amp;lt;--- Your boss&amp;#39;s email here
-Exhibit A
-List of software and other intellectual property covered by this agreement:
-* Github address where your code is hosted
-* Pull request link
-&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Reporting Security Issues</title><link>https://dubbo.apache.org/en/docs/contribution-guidelines/contributor/reporting-security-issues_dev/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/contribution-guidelines/contributor/reporting-security-issues_dev/</guid><description>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>License Agreement
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> This License Agreement is entered into as of the _12th_ day of
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>___April____, __2018__ by ___ABC Software Co., Ltd.____ (&amp;#34;Licensor&amp;#34;),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>in favor of The Apache Software Foundation, a Delaware nonstock
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>membership corporation (the &amp;#34;Foundation&amp;#34;).
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> WHEREAS, Licensor owns or has sufficient rights to contribute the
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>software source code and other related intellectual property as
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>itemized on Exhibit A (&amp;#34;Software&amp;#34;) under the terms of this agreement
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>to the Foundation for use within Foundation software development
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>projects (&amp;#34;Projects&amp;#34;).
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> NOW, THEREFORE, FOR GOOD AND VALUABLE CONSIDERATION, the receipt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>and legal sufficiency of which are hereby acknowledged, the parties
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hereto, intending to be legally bound, agree as follows:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1. Subject to the terms and conditions of this License, Licensor
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hereby grants to the Foundation:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> a) a non-exclusive, worldwide, royalty-free, irrevocable
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> copyright license to reproduce, prepare derivative works of,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> publicly display, publicly perform, distribute and sublicense,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> internally and externally, the Software and such derivative
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> works, in source code and object code form; and,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> b) a non-exclusive, worldwide, royalty-free, irrevocable
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> patent license under Licensed Patents to make, use, sell,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> offer to sell, import and otherwise transfer the Software
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> in source code and object code form. &amp;#34;Licensed Patents&amp;#34; mean
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> patent claims owned by Licensor which are necessarily
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> infringed by the use or sale of the Software alone.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2. Licensor represents that, to Licensor&amp;#39;s knowledge, Licensor is
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>legally entitled to grant the above license. Licensor agrees to notify
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>the Foundation of any facts or circumstances of which Licensor becomes
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>aware and which makes or would make Licensor&amp;#39;s representations in this
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>License Agreement inaccurate in any respect.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>3. This Software is provided AS-IS, WITHOUT WARRANTIES OR CONDITIONS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ANY WARRANTIES OR CONDITIONS OF TITLE, NON-INFRINGEMENT, MERCHANTABILITY
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>OR FITNESS FOR A PARTICULAR PURPOSE. NEITHER THE LICENSOR NOR ITS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>SUPPLIERS WILL BE LIABLE TO THE FOUNDATION OR ITS LICENSEES FOR ANY
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>DAMAGES (INCLUDING WITHOUT LIMITATION LOST PROFITS), HOWEVER CAUSED
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>THE USE OR DISTRIBUTION OF THE WORK OR THE EXERCISE OF ANY RIGHTS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>GRANTED HEREUNDER, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>This License Agreement is the entire agreement of the parties
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>with respect to its subject matter, and may only be amended by a
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>writing signed by each party. This License Agreement may be
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>executed in one or more counterparts, each of which shall be
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>considered an original.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> IN WITNESS WHEREOF, Licensor has executed this License Agreement
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>as of the date first written above.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> LICENSOR:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Signed By: _____________________________________ &amp;lt;--- Your boss&amp;#39;s sign here
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Print Name: _____Lei Li_________________________ &amp;lt;--- Your boss&amp;#39;s name here
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Title: ____Director_____________________________ &amp;lt;--- Your boss&amp;#39;s title here
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Representing: ____ABC Software Co., Ltd. _______
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ________________________________________________
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Contact Name: ____Lei Li________________________ &amp;lt;--- Your boss&amp;#39;s name here
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Contact Email: ____lilei@abc.com________________ &amp;lt;--- Your boss&amp;#39;s email here
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Exhibit A
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>List of software and other intellectual property covered by this agreement:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>* Github address where your code is hosted
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>* Pull request link
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Reporting Security Issues</title><link>https://dubbo.apache.org/en/docs/contribution-guidelines/contributor/reporting-security-issues_dev/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/contribution-guidelines/contributor/reporting-security-issues_dev/</guid><description>
 &lt;p>The Apache Software Foundation takes a rigorous standpoint in annihilating the security issues in its software projects. Apache Dubbo is highly sensitive and forthcoming to issues pertaining to its features and functionality.&lt;/p>
 &lt;h2 id="reporting-vulnerability">REPORTING VULNERABILITY&lt;/h2>
 &lt;p>If you have apprehensions regarding Dubbo&amp;rsquo;s security or you discover vulnerability or potential threat, don’t hesitate to get in touch with the Apache Dubbo Security Team by dropping a mail at &lt;a href="mailto:security@dubbo.apache.org">security@dubbo.apache.org&lt;/a>. In the mail, specify the description of the issue or potential threat. You are also urged to recommend the way to reproduce and replicate the issue. The Dubbo community will get back to you after assessing and analysing the findings.&lt;/p>
@@ -233,12 +274,12 @@ List of software and other intellectual property covered by this agreement:
 &lt;h2 id="dependency">Dependency&lt;/h2>
 &lt;p>Implement your own Dubbo extension, in general is just dependence on API jar correspond to what you want.
 For example:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.dubbo&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo-serialization-api&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>${dubbo.version}&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="src-guide">Src Guide&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.dubbo&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo-serialization-api&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>${dubbo.version}&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="src-guide">Src Guide&lt;/h2>
 &lt;p>Usually, implement special extension, just need reference the &lt;a href="http://dubbo.apache.org/#/docs/dev/build.md?lang=en-us">Developer Guide&lt;/a> docs. Implement necessary interface and adapt extension to dubbo. Besides, some others should be considered:&lt;/p>
 &lt;ol>
 &lt;li>Well tested. You should write unit test and mock test to eliminate potential bugs.&lt;/li>

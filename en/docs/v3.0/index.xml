@@ -65,12 +65,12 @@
 &lt;/ul>
 &lt;h2 id="configuration">Configuration&lt;/h2>
 &lt;h3 id="server-service-level-and-client-service-level">Server Service Level and Client Service Level&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;...&amp;#34;&lt;/span> loadbalance=&lt;span style="color:#2aa198">&amp;#34;roundrobin&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="server-method-level-and-client-method-level">Server Method Level and Client Method Level&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;...&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:method&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;...&amp;#34;&lt;/span> loadbalance=&lt;span style="color:#2aa198">&amp;#34;roundrobin&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;/dubbo:service&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: What's new in Apache Dubbo 3.x?</title><link>https://dubbo.apache.org/en/docs/v3.0/whats-new-in-dubbo3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v3.0/whats-new-in-dubbo3/</guid><description>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;...&amp;#34;&lt;/span> loadbalance=&lt;span style="color:#2aa198">&amp;#34;roundrobin&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="server-method-level-and-client-method-level">Server Method Level and Client Method Level&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;...&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:method&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;...&amp;#34;&lt;/span> loadbalance=&lt;span style="color:#2aa198">&amp;#34;roundrobin&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dubbo:service&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: What's new in Apache Dubbo 3.x?</title><link>https://dubbo.apache.org/en/docs/v3.0/whats-new-in-dubbo3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v3.0/whats-new-in-dubbo3/</guid><description>
 &lt;h2 id="new-service-discovery-mechanism">New Service Discovery Mechanism&lt;/h2>
 &lt;ul>
 &lt;li>
@@ -101,22 +101,24 @@
 &lt;li>Dubbo 3.x only includes the core dependency package and now the user has to include each optional dependency.&lt;/li>
 &lt;/ul>
 &lt;p>Example&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#268bd2">&amp;lt;properties&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo.version&amp;gt;&lt;/span>3.0.0&lt;span style="color:#268bd2">&amp;lt;/dubbo.version&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;/properties&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dependencies&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.dubbo&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>${dubbo.version}&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.dubbo&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo-registry-redis&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>${dubbo.version}&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;/dependencies&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="removed-dependencies">Removed dependencies&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;properties&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo.version&amp;gt;&lt;/span>3.0.0&lt;span style="color:#268bd2">&amp;lt;/dubbo.version&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/properties&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dependencies&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.dubbo&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>${dubbo.version}&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.dubbo&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo-registry-redis&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>${dubbo.version}&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependencies&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="removed-dependencies">Removed dependencies&lt;/h2>
 &lt;ul>
 &lt;li>
 &lt;p>org.eclipse.collections:eclipse-collections&lt;/p>

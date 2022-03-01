@@ -4,14 +4,14 @@
 &lt;ul>
 &lt;li>使用示例&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
-&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
-&lt;span style="color:#268bd2">metadata&lt;/span>:
-&lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
-&lt;span style="color:#268bd2">spec&lt;/span>:
-&lt;span style="color:#268bd2">hosts&lt;/span>:
-&lt;span style="color:#268bd2">dubbo&lt;/span>:
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">hosts&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">dubbo&lt;/span>:
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>属性说明&lt;/li>
 &lt;/ul>
 &lt;table>
@@ -70,21 +70,21 @@
 &lt;ul>
 &lt;li>使用示例&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
-&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
-&lt;span style="color:#268bd2">metadata&lt;/span>:
-&lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
-&lt;span style="color:#268bd2">spec&lt;/span>:
-&lt;span style="color:#268bd2">hosts&lt;/span>:
-&lt;span style="color:#268bd2">dubbo&lt;/span>: &lt;span style="color:#586e75">#DubboRoute&lt;/span>
-- &lt;span style="color:#268bd2">name&lt;/span>:
-&lt;span style="color:#268bd2">service&lt;/span>:
-&lt;span style="color:#268bd2">fault&lt;/span>:
-&lt;span style="color:#268bd2">mirror&lt;/span>:
-&lt;span style="color:#268bd2">retries&lt;/span>:
-&lt;span style="color:#268bd2">timeout&lt;/span>:
-&lt;span style="color:#268bd2">routedetail&lt;/span>:
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">hosts&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">dubbo&lt;/span>: &lt;span style="color:#586e75">#DubboRoute&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">name&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">service&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">fault&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">mirror&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">retries&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">timeout&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">routedetail&lt;/span>:
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>属性说明&lt;/li>
 &lt;/ul>
 &lt;table>
@@ -146,21 +146,21 @@
 &lt;ul>
 &lt;li>使用示例&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
-&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
-&lt;span style="color:#268bd2">metadata&lt;/span>:
-&lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
-&lt;span style="color:#268bd2">spec&lt;/span>:
-&lt;span style="color:#268bd2">hosts&lt;/span>:
-&lt;span style="color:#268bd2">dubbo&lt;/span>:
-- &lt;span style="color:#268bd2">routedetail&lt;/span>: &lt;span style="color:#586e75">#DubboRouteDetail&lt;/span>
-- &lt;span style="color:#268bd2">name&lt;/span>:
-&lt;span style="color:#268bd2">match&lt;/span>:
-&lt;span style="color:#268bd2">route&lt;/span>:
-&lt;span style="color:#268bd2">mirror&lt;/span>:
-&lt;span style="color:#268bd2">retries&lt;/span>:
-&lt;span style="color:#268bd2">timeout&lt;/span>:
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">hosts&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">dubbo&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">routedetail&lt;/span>: &lt;span style="color:#586e75">#DubboRouteDetail&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">name&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">match&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">route&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">mirror&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">retries&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">timeout&lt;/span>:
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>属性说明&lt;/li>
 &lt;/ul>
 &lt;table>
@@ -216,22 +216,22 @@
 &lt;ul>
 &lt;li>使用示例&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
-&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
-&lt;span style="color:#268bd2">metadata&lt;/span>:
-&lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
-&lt;span style="color:#268bd2">spec&lt;/span>:
-&lt;span style="color:#268bd2">hosts&lt;/span>:
-&lt;span style="color:#268bd2">dubbo&lt;/span>:
-- &lt;span style="color:#268bd2">routedetail&lt;/span>:
-- &lt;span style="color:#268bd2">match&lt;/span>: &lt;span style="color:#586e75">#DubboMatchRequest&lt;/span>
-- &lt;span style="color:#268bd2">name&lt;/span>:
-&lt;span style="color:#268bd2">method&lt;/span>:
-&lt;span style="color:#268bd2">sourceLabels&lt;/span>:
-&lt;span style="color:#268bd2">attachments&lt;/span>:
-&lt;span style="color:#268bd2">headers&lt;/span>:
-&lt;span style="color:#268bd2">threshold&lt;/span>:
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">hosts&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">dubbo&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">routedetail&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">match&lt;/span>: &lt;span style="color:#586e75">#DubboMatchRequest&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">name&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">method&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">sourceLabels&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">attachments&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">headers&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">threshold&lt;/span>:
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>属性说明&lt;/li>
 &lt;/ul>
 &lt;table>
@@ -288,22 +288,22 @@
 &lt;ul>
 &lt;li>使用示例&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
-&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
-&lt;span style="color:#268bd2">metadata&lt;/span>:
-&lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
-&lt;span style="color:#268bd2">spec&lt;/span>:
-&lt;span style="color:#268bd2">hosts&lt;/span>:
-&lt;span style="color:#268bd2">dubbo&lt;/span>:
-- &lt;span style="color:#268bd2">routedetail&lt;/span>:
-- &lt;span style="color:#268bd2">match&lt;/span>:
-- &lt;span style="color:#268bd2">method&lt;/span>: &lt;span style="color:#586e75">#DubboMethodRequest&lt;/span>
-- &lt;span style="color:#268bd2">name_match&lt;/span>:
-&lt;span style="color:#268bd2">argc&lt;/span>:
-&lt;span style="color:#268bd2">args&lt;/span>:
-&lt;span style="color:#268bd2">argp&lt;/span>:
-&lt;span style="color:#268bd2">headers&lt;/span>:
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">hosts&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">dubbo&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">routedetail&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">match&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">method&lt;/span>: &lt;span style="color:#586e75">#DubboMethodRequest&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">name_match&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">argc&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">args&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">argp&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">headers&lt;/span>:
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>属性说明&lt;/li>
 &lt;/ul>
 &lt;table>
@@ -353,24 +353,24 @@
 &lt;ul>
 &lt;li>使用示例&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
-&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
-&lt;span style="color:#268bd2">metadata&lt;/span>:
-&lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
-&lt;span style="color:#268bd2">spec&lt;/span>:
-&lt;span style="color:#268bd2">hosts&lt;/span>:
-&lt;span style="color:#268bd2">dubbo&lt;/span>:
-- &lt;span style="color:#268bd2">routedetail&lt;/span>:
-- &lt;span style="color:#268bd2">match&lt;/span>:
-- &lt;span style="color:#268bd2">method&lt;/span>:
-- &lt;span style="color:#268bd2">args&lt;/span>: &lt;span style="color:#586e75">#DubboMethodArg&lt;/span>
-- &lt;span style="color:#268bd2">index&lt;/span>:
-&lt;span style="color:#268bd2">str_value&lt;/span>:
-&lt;span style="color:#268bd2">type&lt;/span>:
-&lt;span style="color:#268bd2">num_value&lt;/span>:
-&lt;span style="color:#268bd2">bool_value&lt;/span>:
-&lt;span style="color:#268bd2">reserve&lt;/span>:
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">hosts&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">dubbo&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">routedetail&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">match&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">method&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">args&lt;/span>: &lt;span style="color:#586e75">#DubboMethodArg&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">index&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">str_value&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">type&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">num_value&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">bool_value&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">reserve&lt;/span>:
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>属性说明&lt;/li>
 &lt;/ul>
 &lt;table>
@@ -426,19 +426,19 @@
 &lt;ul>
 &lt;li>使用示例&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
-&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
-&lt;span style="color:#268bd2">metadata&lt;/span>:
-&lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
-&lt;span style="color:#268bd2">spec&lt;/span>:
-&lt;span style="color:#268bd2">hosts&lt;/span>:
-&lt;span style="color:#268bd2">dubbo&lt;/span>:
-- &lt;span style="color:#268bd2">routedetail&lt;/span>:
-- &lt;span style="color:#268bd2">match&lt;/span>:
-- &lt;span style="color:#268bd2">attachments&lt;/span>: &lt;span style="color:#586e75">#DubboAttachmentMatch&lt;/span>
-&lt;span style="color:#268bd2">eagleeyecontext&lt;/span>:
-&lt;span style="color:#268bd2">dubbocontext&lt;/span>:
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">hosts&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">dubbo&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">routedetail&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">match&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">attachments&lt;/span>: &lt;span style="color:#586e75">#DubboAttachmentMatch&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">eagleeyecontext&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">dubbocontext&lt;/span>:
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>属性说明&lt;/li>
 &lt;/ul>
 &lt;table>
@@ -470,23 +470,23 @@
 &lt;ul>
 &lt;li>使用示例&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
-&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
-&lt;span style="color:#268bd2">metadata&lt;/span>:
-&lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
-&lt;span style="color:#268bd2">spec&lt;/span>:
-&lt;span style="color:#268bd2">hosts&lt;/span>:
-&lt;span style="color:#268bd2">dubbo&lt;/span>:
-- &lt;span style="color:#268bd2">routedetail&lt;/span>:
-- &lt;span style="color:#268bd2">match&lt;/span>:
-- &lt;span style="color:#268bd2">method&lt;/span>:
-- &lt;span style="color:#268bd2">args&lt;/span>:
-- &lt;span style="color:#268bd2">index&lt;/span>: &lt;span style="color:#2aa198">1&lt;/span>
-&lt;span style="color:#268bd2">str_value&lt;/span>: &lt;span style="color:#586e75">#ListStringMatch&lt;/span>
-&lt;span style="color:#268bd2">oneof&lt;/span>:
-- &lt;span style="color:#268bd2">regex&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;*abc*&amp;#34;&lt;/span>
-- &lt;span style="color:#268bd2">exact&lt;/span>: parameter-1
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">hosts&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">dubbo&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">routedetail&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">match&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">method&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">args&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">index&lt;/span>: &lt;span style="color:#2aa198">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">str_value&lt;/span>: &lt;span style="color:#586e75">#ListStringMatch&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">oneof&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">regex&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;*abc*&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">exact&lt;/span>: parameter-1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>属性说明&lt;/li>
 &lt;/ul>
 &lt;table>
@@ -512,18 +512,18 @@
 &lt;ul>
 &lt;li>使用示例&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
-&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
-&lt;span style="color:#268bd2">metadata&lt;/span>:
-&lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
-&lt;span style="color:#268bd2">spec&lt;/span>:
-&lt;span style="color:#268bd2">hosts&lt;/span>:
-&lt;span style="color:#268bd2">dubbo&lt;/span>:
-- &lt;span style="color:#268bd2">service&lt;/span>: &lt;span style="color:#586e75">#StringMatch&lt;/span>
-- &lt;span style="color:#268bd2">exact&lt;/span>: org.apache.dubbo.demoService:1.0.0
-- &lt;span style="color:#268bd2">prefix&lt;/span>: org.apache.dubbo.hello
-- &lt;span style="color:#268bd2">regex&lt;/span>: org.apache.dubbo.*Service:2.0.0
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">hosts&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">dubbo&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">service&lt;/span>: &lt;span style="color:#586e75">#StringMatch&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">exact&lt;/span>: org.apache.dubbo.demoService:1.0.0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">prefix&lt;/span>: org.apache.dubbo.hello
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">regex&lt;/span>: org.apache.dubbo.*Service:2.0.0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>属性说明&lt;/li>
 &lt;/ul>
 &lt;table>
@@ -573,25 +573,26 @@
 &lt;ul>
 &lt;li>使用示例&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
-&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
-&lt;span style="color:#268bd2">metadata&lt;/span>:
-&lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
-&lt;span style="color:#268bd2">spec&lt;/span>:
-&lt;span style="color:#268bd2">hosts&lt;/span>:
-&lt;span style="color:#268bd2">dubbo&lt;/span>:
-- &lt;span style="color:#268bd2">routedetail&lt;/span>:
-- &lt;span style="color:#268bd2">match&lt;/span>:
-- &lt;span style="color:#268bd2">method&lt;/span>:
-- &lt;span style="color:#268bd2">args&lt;/span>:
-- &lt;span style="color:#268bd2">index&lt;/span>: &lt;span style="color:#2aa198">1&lt;/span>
-&lt;span style="color:#268bd2">type&lt;/span>: java.lang.Double
-&lt;span style="color:#268bd2">num_value&lt;/span>: &lt;span style="color:#586e75">#ListDoubleMatch&lt;/span>
-&lt;span style="color:#268bd2">oneof&lt;/span>:
-- &lt;span style="color:#268bd2">range&lt;/span>:
-&lt;span style="color:#268bd2">start&lt;/span>: &lt;span style="color:#2aa198">1&lt;/span>
-&lt;span style="color:#268bd2">end&lt;/span>: &lt;span style="color:#2aa198">100&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">hosts&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">dubbo&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">routedetail&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">match&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">method&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">args&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">index&lt;/span>: &lt;span style="color:#2aa198">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">type&lt;/span>: java.lang.Double
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">num_value&lt;/span>: &lt;span style="color:#586e75">#ListDoubleMatch&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">oneof&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">range&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">start&lt;/span>: &lt;span style="color:#2aa198">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">end&lt;/span>: &lt;span style="color:#2aa198">100&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>属性说明&lt;/li>
 &lt;/ul>
 &lt;table>
@@ -617,30 +618,31 @@
 &lt;ul>
 &lt;li>使用示例&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
-&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
-&lt;span style="color:#268bd2">metadata&lt;/span>:
-&lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
-&lt;span style="color:#268bd2">spec&lt;/span>:
-&lt;span style="color:#268bd2">hosts&lt;/span>:
-&lt;span style="color:#268bd2">dubbo&lt;/span>:
-- &lt;span style="color:#268bd2">routedetail&lt;/span>:
-- &lt;span style="color:#268bd2">match&lt;/span>:
-- &lt;span style="color:#268bd2">method&lt;/span>:
-- &lt;span style="color:#268bd2">args&lt;/span>:
-- &lt;span style="color:#268bd2">index&lt;/span>: &lt;span style="color:#2aa198">1&lt;/span>
-&lt;span style="color:#268bd2">type&lt;/span>: java.lang.Double
-&lt;span style="color:#268bd2">num_value&lt;/span>:
-&lt;span style="color:#268bd2">oneof&lt;/span>: &lt;span style="color:#586e75">#DoubleMatch[]&lt;/span>
-- &lt;span style="color:#268bd2">range&lt;/span>:
-&lt;span style="color:#268bd2">start&lt;/span>: &lt;span style="color:#2aa198">1&lt;/span>
-&lt;span style="color:#268bd2">end&lt;/span>: &lt;span style="color:#2aa198">100&lt;/span>
-&lt;span style="color:#586e75">#假设当前输入的Double类型的参数值为x，&lt;/span>
-&lt;span style="color:#586e75">#则下面表达式的意思是：x%mode=exact, &lt;/span>
-&lt;span style="color:#586e75">#即当x%10=6才匹配&lt;/span>
-- &lt;span style="color:#268bd2">exact&lt;/span>: &lt;span style="color:#2aa198">6&lt;/span>
-&lt;span style="color:#268bd2">mode&lt;/span>: &lt;span style="color:#2aa198">10&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">hosts&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">dubbo&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">routedetail&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">match&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">method&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">args&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">index&lt;/span>: &lt;span style="color:#2aa198">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">type&lt;/span>: java.lang.Double
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">num_value&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">oneof&lt;/span>: &lt;span style="color:#586e75">#DoubleMatch[]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">range&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">start&lt;/span>: &lt;span style="color:#2aa198">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">end&lt;/span>: &lt;span style="color:#2aa198">100&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">#假设当前输入的Double类型的参数值为x，&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">#则下面表达式的意思是：x%mode=exact, &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">#即当x%10=6才匹配&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">exact&lt;/span>: &lt;span style="color:#2aa198">6&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">mode&lt;/span>: &lt;span style="color:#2aa198">10&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>属性说明&lt;/li>
 &lt;/ul>
 &lt;table>
@@ -678,25 +680,26 @@
 &lt;ul>
 &lt;li>使用示例&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
-&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
-&lt;span style="color:#268bd2">metadata&lt;/span>:
-&lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
-&lt;span style="color:#268bd2">spec&lt;/span>:
-&lt;span style="color:#268bd2">hosts&lt;/span>:
-&lt;span style="color:#268bd2">dubbo&lt;/span>:
-- &lt;span style="color:#268bd2">routedetail&lt;/span>:
-- &lt;span style="color:#268bd2">match&lt;/span>:
-- &lt;span style="color:#268bd2">method&lt;/span>:
-- &lt;span style="color:#268bd2">args&lt;/span>:
-- &lt;span style="color:#268bd2">index&lt;/span>: &lt;span style="color:#2aa198">1&lt;/span>
-&lt;span style="color:#268bd2">type&lt;/span>: java.lang.Double
-&lt;span style="color:#268bd2">num_value&lt;/span>:
-&lt;span style="color:#268bd2">oneof&lt;/span>:
-- &lt;span style="color:#268bd2">range&lt;/span>: &lt;span style="color:#586e75">#DoubleRangeMatch&lt;/span>
-&lt;span style="color:#268bd2">start&lt;/span>: &lt;span style="color:#2aa198">1.2&lt;/span>
-&lt;span style="color:#268bd2">end&lt;/span>: &lt;span style="color:#2aa198">1000.5&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">hosts&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">dubbo&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">routedetail&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">match&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">method&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">args&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">index&lt;/span>: &lt;span style="color:#2aa198">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">type&lt;/span>: java.lang.Double
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">num_value&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">oneof&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">range&lt;/span>: &lt;span style="color:#586e75">#DoubleRangeMatch&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">start&lt;/span>: &lt;span style="color:#2aa198">1.2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">end&lt;/span>: &lt;span style="color:#2aa198">1000.5&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>属性说明&lt;/li>
 &lt;/ul>
 &lt;table>
@@ -728,22 +731,22 @@
 &lt;ul>
 &lt;li>使用示例&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
-&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
-&lt;span style="color:#268bd2">metadata&lt;/span>:
-&lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
-&lt;span style="color:#268bd2">spec&lt;/span>:
-&lt;span style="color:#268bd2">hosts&lt;/span>:
-&lt;span style="color:#268bd2">dubbo&lt;/span>:
-- &lt;span style="color:#268bd2">routedetail&lt;/span>:
-- &lt;span style="color:#268bd2">match&lt;/span>:
-- &lt;span style="color:#268bd2">method&lt;/span>:
-- &lt;span style="color:#268bd2">args&lt;/span>:
-- &lt;span style="color:#268bd2">index&lt;/span>: &lt;span style="color:#2aa198">1&lt;/span>
-&lt;span style="color:#268bd2">type&lt;/span>: java.lang.Boolean
-&lt;span style="color:#268bd2">bool_value&lt;/span>: &lt;span style="color:#586e75">#BoolMatch&lt;/span>
-- &lt;span style="color:#268bd2">exact&lt;/span>: &lt;span style="color:#cb4b16">true&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">hosts&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">dubbo&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">routedetail&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">match&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">method&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">args&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">index&lt;/span>: &lt;span style="color:#2aa198">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">type&lt;/span>: java.lang.Boolean
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">bool_value&lt;/span>: &lt;span style="color:#586e75">#BoolMatch&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">exact&lt;/span>: &lt;span style="color:#cb4b16">true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>属性说明&lt;/li>
 &lt;/ul>
 &lt;table>
@@ -769,24 +772,24 @@
 &lt;ul>
 &lt;li>使用示例&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
-&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
-&lt;span style="color:#268bd2">metadata&lt;/span>:
-&lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
-&lt;span style="color:#268bd2">spec&lt;/span>:
-&lt;span style="color:#268bd2">hosts&lt;/span>:
-&lt;span style="color:#268bd2">dubbo&lt;/span>:
-- &lt;span style="color:#268bd2">routedetail&lt;/span>:
-- &lt;span style="color:#268bd2">match&lt;/span>:
-- &lt;span style="color:#268bd2">method&lt;/span>:
-- &lt;span style="color:#268bd2">args&lt;/span>:
-- &lt;span style="color:#268bd2">index&lt;/span>: &lt;span style="color:#2aa198">1&lt;/span>
-&lt;span style="color:#268bd2">type&lt;/span>: java.lang.String
-&lt;span style="color:#268bd2">str_value&lt;/span>:
-&lt;span style="color:#268bd2">oneof&lt;/span>:
-- &lt;span style="color:#268bd2">regex&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;*abc*&amp;#34;&lt;/span>
-- &lt;span style="color:#268bd2">exact&lt;/span>: parameter-1
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">hosts&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">dubbo&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">routedetail&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">match&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">method&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">args&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">index&lt;/span>: &lt;span style="color:#2aa198">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">type&lt;/span>: java.lang.String
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">str_value&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">oneof&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">regex&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;*abc*&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">exact&lt;/span>: parameter-1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>属性说明&lt;/li>
 &lt;/ul>
 &lt;table>
@@ -830,18 +833,18 @@
 &lt;ul>
 &lt;li>使用示例&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
-&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
-&lt;span style="color:#268bd2">metadata&lt;/span>:
-&lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
-&lt;span style="color:#268bd2">spec&lt;/span>:
-&lt;span style="color:#268bd2">hosts&lt;/span>:
-&lt;span style="color:#268bd2">dubbo&lt;/span>:
-- &lt;span style="color:#268bd2">routedetail&lt;/span>:
-- &lt;span style="color:#268bd2">route&lt;/span>: &lt;span style="color:#586e75">#DubboRouteDestination&lt;/span>
-&lt;span style="color:#268bd2">destination&lt;/span>:
-&lt;span style="color:#268bd2">weight&lt;/span>: &lt;span style="color:#2aa198">50&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">hosts&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">dubbo&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">routedetail&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">route&lt;/span>: &lt;span style="color:#586e75">#DubboRouteDestination&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">destination&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">weight&lt;/span>: &lt;span style="color:#2aa198">50&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>属性说明&lt;/li>
 &lt;/ul>
 &lt;table>
@@ -873,21 +876,21 @@
 &lt;ul>
 &lt;li>使用示例&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
-&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
-&lt;span style="color:#268bd2">metadata&lt;/span>:
-&lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
-&lt;span style="color:#268bd2">spec&lt;/span>:
-&lt;span style="color:#268bd2">hosts&lt;/span>:
-&lt;span style="color:#268bd2">dubbo&lt;/span>:
-- &lt;span style="color:#268bd2">routedetail&lt;/span>:
-- &lt;span style="color:#268bd2">route&lt;/span>: &lt;span style="color:#586e75">#DubboRouteDestination&lt;/span>
-&lt;span style="color:#268bd2">destination&lt;/span>:
-&lt;span style="color:#268bd2">host&lt;/span>:
-&lt;span style="color:#268bd2">subnet&lt;/span>:
-&lt;span style="color:#268bd2">port&lt;/span>:
-&lt;span style="color:#268bd2">fallback&lt;/span>:
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">kind&lt;/span>: VirtualService
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">name&lt;/span>: demo/StandardRouter
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">hosts&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">dubbo&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">routedetail&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">route&lt;/span>: &lt;span style="color:#586e75">#DubboRouteDestination&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">destination&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">host&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">subnet&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">port&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">fallback&lt;/span>:
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>属性说明&lt;/li>
 &lt;/ul>
 &lt;table>
@@ -931,15 +934,15 @@
 &lt;ul>
 &lt;li>使用示例&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
-&lt;span style="color:#268bd2">kind&lt;/span>: DestinationRule
-&lt;span style="color:#268bd2">metadata&lt;/span>:
-&lt;span style="color:#268bd2">name&lt;/span>: demo-route
-&lt;span style="color:#268bd2">spec&lt;/span>:
-&lt;span style="color:#268bd2">host&lt;/span>: demo
-&lt;span style="color:#268bd2">subsets&lt;/span>:
-&lt;span style="color:#268bd2">trafficPolicy&lt;/span>:
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">kind&lt;/span>: DestinationRule
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">name&lt;/span>: demo-route
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">host&lt;/span>: demo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">subsets&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">trafficPolicy&lt;/span>:
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>属性说明&lt;/li>
 &lt;/ul>
 &lt;table>
@@ -983,15 +986,15 @@
 &lt;ul>
 &lt;li>使用示例&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
-&lt;span style="color:#268bd2">kind&lt;/span>: DestinationRule
-&lt;span style="color:#268bd2">metadata&lt;/span>:
-&lt;span style="color:#268bd2">name&lt;/span>: demo-route
-&lt;span style="color:#268bd2">spec&lt;/span>:
-&lt;span style="color:#268bd2">subsets&lt;/span>: &lt;span style="color:#586e75">#Subnet[]&lt;/span>
-- &lt;span style="color:#268bd2">name&lt;/span>:
-&lt;span style="color:#268bd2">labels&lt;/span>:
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">kind&lt;/span>: DestinationRule
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">name&lt;/span>: demo-route
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">subsets&lt;/span>: &lt;span style="color:#586e75">#Subnet[]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">name&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">labels&lt;/span>:
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>属性说明&lt;/li>
 &lt;/ul>
 &lt;table>
@@ -1023,14 +1026,14 @@
 &lt;ul>
 &lt;li>使用示例&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
-&lt;span style="color:#268bd2">kind&lt;/span>: DestinationRule
-&lt;span style="color:#268bd2">metadata&lt;/span>:
-&lt;span style="color:#268bd2">name&lt;/span>: demo-route
-&lt;span style="color:#268bd2">spec&lt;/span>:
-&lt;span style="color:#268bd2">trafficPolicy&lt;/span>: &lt;span style="color:#586e75">#TrafficPolicy&lt;/span>
-&lt;span style="color:#268bd2">loadBalancer&lt;/span>:
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">kind&lt;/span>: DestinationRule
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">name&lt;/span>: demo-route
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">trafficPolicy&lt;/span>: &lt;span style="color:#586e75">#TrafficPolicy&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">loadBalancer&lt;/span>:
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>属性说明&lt;/li>
 &lt;/ul>
 &lt;table>
@@ -1056,16 +1059,16 @@
 &lt;ul>
 &lt;li>使用示例&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
-&lt;span style="color:#268bd2">kind&lt;/span>: DestinationRule
-&lt;span style="color:#268bd2">metadata&lt;/span>:
-&lt;span style="color:#268bd2">name&lt;/span>: demo-route
-&lt;span style="color:#268bd2">spec&lt;/span>:
-&lt;span style="color:#268bd2">trafficPolicy&lt;/span>:
-&lt;span style="color:#268bd2">loadBalancer&lt;/span>: &lt;span style="color:#586e75">#LoadBalancerSettings&lt;/span>
-&lt;span style="color:#268bd2">simple&lt;/span>:
-&lt;span style="color:#268bd2">consistentHash&lt;/span>:
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">apiVersion&lt;/span>: service.dubbo.apache.org/v1alpha1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">kind&lt;/span>: DestinationRule
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">name&lt;/span>: demo-route
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">trafficPolicy&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">loadBalancer&lt;/span>: &lt;span style="color:#586e75">#LoadBalancerSettings&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">simple&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">consistentHash&lt;/span>:
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>属性说明&lt;/li>
 &lt;/ul>
 &lt;table>

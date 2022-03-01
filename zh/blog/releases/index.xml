@@ -290,42 +290,42 @@
 &lt;p>标签主要是指对 Provider 端应用实例的分组，目前有两种方式可以完成实例分组，分别是&lt;code>动态规则打标&lt;/code>和&lt;code>静态规则打标&lt;/code>，其中动态规则相较于静态规则优先级更高，而当两种规则同时存在且出现冲突时，将以动态规则为准。&lt;/p>
 &lt;h4 id="511-动态规则打标">5.1.1 动态规则打标&lt;/h4>
 &lt;p>可随时在&lt;a href="http://dubbo.apache.org/zh-cn/docs/user/demos/routing-rule.html">服务治理控制台&lt;/a>下发标签归组规则&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#586e75"># governance-tagrouter-provider应用增加了两个标签分组tag1和tag2&lt;/span>
-&lt;span style="color:#586e75"># tag1包含一个实例 127.0.0.1:20880&lt;/span>
-&lt;span style="color:#586e75"># tag2包含一个实例 127.0.0.1:20881&lt;/span>
----
-&lt;span style="color:#268bd2">force&lt;/span>: &lt;span style="color:#cb4b16">false&lt;/span>
-&lt;span style="color:#268bd2">runtime&lt;/span>: &lt;span style="color:#cb4b16">true&lt;/span>
-&lt;span style="color:#268bd2">enabled&lt;/span>: &lt;span style="color:#cb4b16">true&lt;/span>
-&lt;span style="color:#268bd2">key&lt;/span>: governance-tagrouter-provider
-&lt;span style="color:#268bd2">tags&lt;/span>:
-- &lt;span style="color:#268bd2">name&lt;/span>: tag1
-&lt;span style="color:#268bd2">addresses&lt;/span>: [&lt;span style="color:#2aa198">&amp;#34;127.0.0.1:20880&amp;#34;&lt;/span>]
-- &lt;span style="color:#268bd2">name&lt;/span>: tag2
-&lt;span style="color:#268bd2">addresses&lt;/span>: [&lt;span style="color:#2aa198">&amp;#34;127.0.0.1:20881&amp;#34;&lt;/span>]
-...
-&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="512-静态规则打标">5.1.2 静态规则打标&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># governance-tagrouter-provider应用增加了两个标签分组tag1和tag2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># tag1包含一个实例 127.0.0.1:20880&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># tag2包含一个实例 127.0.0.1:20881&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">force&lt;/span>: &lt;span style="color:#cb4b16">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">runtime&lt;/span>: &lt;span style="color:#cb4b16">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">enabled&lt;/span>: &lt;span style="color:#cb4b16">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">key&lt;/span>: governance-tagrouter-provider
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">tags&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">name&lt;/span>: tag1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">addresses&lt;/span>: [&lt;span style="color:#2aa198">&amp;#34;127.0.0.1:20880&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">name&lt;/span>: tag2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">addresses&lt;/span>: [&lt;span style="color:#2aa198">&amp;#34;127.0.0.1:20881&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ...
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="512-静态规则打标">5.1.2 静态规则打标&lt;/h4>
 &lt;p>可以在 server 配置文件的 tag 字段里设置&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#268bd2">services&lt;/span>:
-&lt;span style="color:#2aa198">&amp;#34;UserProvider&amp;#34;&lt;/span>:
-&lt;span style="color:#268bd2">registry&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;hangzhouzk&amp;#34;&lt;/span>
-&lt;span style="color:#268bd2">protocol &lt;/span>: &lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span>
-&lt;span style="color:#268bd2">interface &lt;/span>: &lt;span style="color:#2aa198">&amp;#34;com.ikurento.user.UserProvider&amp;#34;&lt;/span>
-&lt;span style="color:#268bd2">loadbalance&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;random&amp;#34;&lt;/span>
-&lt;span style="color:#268bd2">warmup&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;100&amp;#34;&lt;/span>
-&lt;span style="color:#268bd2">tag&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;beijing&amp;#34;&lt;/span>
-&lt;span style="color:#268bd2">cluster&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;failover&amp;#34;&lt;/span>
-&lt;span style="color:#268bd2">methods&lt;/span>:
-- &lt;span style="color:#268bd2">name&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;GetUser&amp;#34;&lt;/span>
-&lt;span style="color:#268bd2">retries&lt;/span>: &lt;span style="color:#2aa198">1&lt;/span>
-&lt;span style="color:#268bd2">loadbalance&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;random&amp;#34;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>consumer 添加 tag 至 attachment 即可&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-go" data-lang="go">ctx &lt;span style="color:#719e07">:=&lt;/span> context.&lt;span style="color:#268bd2">Background&lt;/span>()
-attachment &lt;span style="color:#719e07">:=&lt;/span> &lt;span style="color:#b58900">make&lt;/span>(&lt;span style="color:#268bd2">map&lt;/span>[&lt;span style="color:#dc322f">string&lt;/span>]&lt;span style="color:#dc322f">string&lt;/span>)
-attachment[&lt;span style="color:#2aa198">&amp;#34;dubbo.tag&amp;#34;&lt;/span>] = &lt;span style="color:#2aa198">&amp;#34;beijing&amp;#34;&lt;/span>
-ctx = context.&lt;span style="color:#268bd2">WithValue&lt;/span>(ctx, constant.AttachmentKey, attachment)
-err &lt;span style="color:#719e07">:=&lt;/span> userProvider.&lt;span style="color:#268bd2">GetUser&lt;/span>(ctx, []&lt;span style="color:#268bd2">interface&lt;/span>{}{&lt;span style="color:#2aa198">&amp;#34;A001&amp;#34;&lt;/span>}, user)
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>请求标签的作用域为每一次 invocation，使用 attachment 来传递请求标签，注意保存在 attachment 中的值将会在一次完整的远程调用中持续传递，得益于这样的特性，我们只需要在起始调用时，通过一行代码的设置，达到标签的持续传递。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">services&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#2aa198">&amp;#34;UserProvider&amp;#34;&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">registry&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;hangzhouzk&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">protocol &lt;/span>: &lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">interface &lt;/span>: &lt;span style="color:#2aa198">&amp;#34;com.ikurento.user.UserProvider&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">loadbalance&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;random&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">warmup&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;100&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">tag&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;beijing&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">cluster&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;failover&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">methods&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">name&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;GetUser&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">retries&lt;/span>: &lt;span style="color:#2aa198">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">loadbalance&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;random&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>consumer 添加 tag 至 attachment 即可&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>ctx &lt;span style="color:#719e07">:=&lt;/span> context.&lt;span style="color:#268bd2">Background&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>attachment &lt;span style="color:#719e07">:=&lt;/span> &lt;span style="color:#b58900">make&lt;/span>(&lt;span style="color:#268bd2">map&lt;/span>[&lt;span style="color:#dc322f">string&lt;/span>]&lt;span style="color:#dc322f">string&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>attachment[&lt;span style="color:#2aa198">&amp;#34;dubbo.tag&amp;#34;&lt;/span>] = &lt;span style="color:#2aa198">&amp;#34;beijing&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ctx = context.&lt;span style="color:#268bd2">WithValue&lt;/span>(ctx, constant.AttachmentKey, attachment)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>err &lt;span style="color:#719e07">:=&lt;/span> userProvider.&lt;span style="color:#268bd2">GetUser&lt;/span>(ctx, []&lt;span style="color:#268bd2">interface&lt;/span>{}{&lt;span style="color:#2aa198">&amp;#34;A001&amp;#34;&lt;/span>}, user)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>请求标签的作用域为每一次 invocation，使用 attachment 来传递请求标签，注意保存在 attachment 中的值将会在一次完整的远程调用中持续传递，得益于这样的特性，我们只需要在起始调用时，通过一行代码的设置，达到标签的持续传递。&lt;/p>
 &lt;h4 id="513-规则详解">5.1.3 规则详解&lt;/h4>
 &lt;h5 id="格式">格式&lt;/h5>
 &lt;ul>
@@ -350,20 +350,20 @@ err &lt;span style="color:#719e07">:=&lt;/span> userProvider.&lt;span style="col
 &lt;h3 id="52-应用服务级条件路由">5.2 应用/服务级条件路由&lt;/h3>
 &lt;p>您可以在路由规则配置中配置多个条件路由及其粒度&lt;/p>
 &lt;p>Sample:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="color:#586e75"># dubbo router yaml configure file&lt;/span>
-&lt;span style="color:#268bd2">routerRules&lt;/span>:
-- &lt;span style="color:#268bd2">scope&lt;/span>: application
-&lt;span style="color:#268bd2">key&lt;/span>: BDTService
-&lt;span style="color:#268bd2">priority&lt;/span>: &lt;span style="color:#2aa198">1&lt;/span>
-&lt;span style="color:#268bd2">enable&lt;/span>: &lt;span style="color:#cb4b16">false&lt;/span>
-&lt;span style="color:#268bd2">force&lt;/span>: &lt;span style="color:#cb4b16">true&lt;/span>
-&lt;span style="color:#268bd2">conditions &lt;/span>: [&lt;span style="color:#2aa198">&amp;#34;host = 192.168.199.208 =&amp;gt; host = 192.168.199.208 &amp;#34;&lt;/span>]
-- &lt;span style="color:#268bd2">scope&lt;/span>: service
-&lt;span style="color:#268bd2">key&lt;/span>: com.ikurento.user.UserProvider
-&lt;span style="color:#268bd2">priority&lt;/span>: &lt;span style="color:#2aa198">1&lt;/span>
-&lt;span style="color:#268bd2">force&lt;/span>: &lt;span style="color:#cb4b16">true&lt;/span>
-&lt;span style="color:#268bd2">conditions &lt;/span>: [&lt;span style="color:#2aa198">&amp;#34;host = 192.168.199.208 =&amp;gt; host = 192.168.199.208 &amp;#34;&lt;/span>]
-&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="521-规则详解">5.2.1 规则详解&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># dubbo router yaml configure file&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">routerRules&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">scope&lt;/span>: application
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">key&lt;/span>: BDTService
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">priority&lt;/span>: &lt;span style="color:#2aa198">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">enable&lt;/span>: &lt;span style="color:#cb4b16">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">force&lt;/span>: &lt;span style="color:#cb4b16">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">conditions &lt;/span>: [&lt;span style="color:#2aa198">&amp;#34;host = 192.168.199.208 =&amp;gt; host = 192.168.199.208 &amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">scope&lt;/span>: service
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">key&lt;/span>: com.ikurento.user.UserProvider
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">priority&lt;/span>: &lt;span style="color:#2aa198">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">force&lt;/span>: &lt;span style="color:#cb4b16">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">conditions &lt;/span>: [&lt;span style="color:#2aa198">&amp;#34;host = 192.168.199.208 =&amp;gt; host = 192.168.199.208 &amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="521-规则详解">5.2.1 规则详解&lt;/h4>
 &lt;h5 id="各字段含义">各字段含义&lt;/h5>
 &lt;ul>
 &lt;li>scope表示路由规则的作用粒度，scope的取值会决定key的取值。必填。&lt;/li>
@@ -424,12 +424,12 @@ err &lt;span style="color:#719e07">:=&lt;/span> userProvider.&lt;span style="col
 &lt;p>对应 pr &lt;a href="https://github.com/apache/dubbo-go-hessian2/pull/191">#191&lt;/a>，作者 &lt;a href="https://github.com/champly">champly&lt;/a>。&lt;/p>
 &lt;h2 id="6-支持-继承-和忽略冗余字段">6. 支持 ‘继承’ 和忽略冗余字段&lt;/h2>
 &lt;p>由于 go 没有继承的概念，所以在之前的版本，Java 父类的字段不被 dubbo-go-hessian2 所支持。新版本中，dubbo-go-hessian2 将Java来自父类的字段用匿名结构体对应，如：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-go" data-lang="go">&lt;span style="color:#268bd2">type&lt;/span> Dog &lt;span style="color:#268bd2">struct&lt;/span> {
-Animal
-Gender &lt;span style="color:#dc322f">string&lt;/span>
-DogName &lt;span style="color:#dc322f">string&lt;/span> &lt;span style="color:#2aa198">`hessian:&amp;#34;-&amp;#34;`&lt;/span>
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>同时，就像 json 编码中通过 immediately 可以在序列化中忽略该字段，同理，通过 hessian:&amp;quot;-&amp;quot; 用户也可以让冗余字段不参与 hessian 序列化。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">type&lt;/span> Dog &lt;span style="color:#268bd2">struct&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Animal
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Gender &lt;span style="color:#dc322f">string&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> DogName &lt;span style="color:#dc322f">string&lt;/span> &lt;span style="color:#2aa198">`hessian:&amp;#34;-&amp;#34;`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>同时，就像 json 编码中通过 immediately 可以在序列化中忽略该字段，同理，通过 hessian:&amp;quot;-&amp;quot; 用户也可以让冗余字段不参与 hessian 序列化。&lt;/p>
 &lt;p>对应pr &lt;a href="https://github.com/apache/dubbo-go-hessian2/pull/154">#154&lt;/a>，作者 &lt;a href="https://github.com/micln">micln&lt;/a>&lt;/p></description></item><item><title>Blog: dubbo-go-hessian2 v1.7.0</title><link>https://dubbo.apache.org/zh/blog/2021/01/14/dubbo-go-hessian2-v1.7.0/</link><pubDate>Thu, 14 Jan 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/01/14/dubbo-go-hessian2-v1.7.0/</guid><description>
 &lt;p>Dubbo-go-hessian2 v1.7.0已发布，详见 &lt;a href="https://github.com/apache/dubbo-go-hessian2/releases/tag/v1.7.0">https://github.com/apache/dubbo-go-hessian2/releases/tag/v1.7.0&lt;/a>， 以下对这次更新内容进行详细整理。&lt;/p>
 &lt;p>另外v1.6.3 将 attachment 类型由 map[string]stiring 改为map[string]interface{} 导致版本不兼容问题，这部分已还原，后续的计划是将dubbo协议的request/response对象整体迁移到dubbogo项目中进行迭代修改， hessian2中将不再改动到request/response对象。&lt;/p>
@@ -440,139 +440,139 @@ DogName &lt;span style="color:#dc322f">string&lt;/span> &lt;span style="color:#2
 &lt;p>注：其实还有一种更好的方法，所有的具体的异常类型都包含java_exception/exception.go的Throwable struct。这样只需要在Throwable中增加GetStackTrace方法就可以了。但是这种方式需要更多的测试验证，改动的逻辑相对会复杂一些。但是代码会更整洁。 这里先不用这种方法。&lt;/p>
 &lt;h3 id="12-catch-user-defined-exceptions-208httpsgithubcomapachedubbo-go-hessian2pull208">1.2 catch user defined exceptions. &lt;a href="https://github.com/apache/dubbo-go-hessian2/pull/208">#208&lt;/a>&lt;/h3>
 &lt;p>golang中增加一个java中Exception对象的序列化输出方法：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-go" data-lang="go">&lt;span style="color:#268bd2">func&lt;/span> &lt;span style="color:#268bd2">JavaException&lt;/span>() []&lt;span style="color:#dc322f">byte&lt;/span> {
-e &lt;span style="color:#719e07">:=&lt;/span> hessian.&lt;span style="color:#268bd2">NewEncoder&lt;/span>()
-exception &lt;span style="color:#719e07">:=&lt;/span> java_exception.&lt;span style="color:#268bd2">NewException&lt;/span>(&lt;span style="color:#2aa198">&amp;#34;java_exception&amp;#34;&lt;/span>)
-e.&lt;span style="color:#268bd2">Encode&lt;/span>(exception)
-&lt;span style="color:#719e07">return&lt;/span> e.&lt;span style="color:#268bd2">Buffer&lt;/span>()
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>在output/output.go 提供调用入口:添加如下函数初始化声明&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-go" data-lang="go">&lt;span style="color:#268bd2">func&lt;/span> &lt;span style="color:#268bd2">init&lt;/span>() {
-funcMap[&lt;span style="color:#2aa198">&amp;#34;JavaException&amp;#34;&lt;/span>] = testfuncs.JavaException
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>java代码中增加调用go方法序列化结果:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">func&lt;/span> &lt;span style="color:#268bd2">JavaException&lt;/span>() []&lt;span style="color:#dc322f">byte&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> e &lt;span style="color:#719e07">:=&lt;/span> hessian.&lt;span style="color:#268bd2">NewEncoder&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> exception &lt;span style="color:#719e07">:=&lt;/span> java_exception.&lt;span style="color:#268bd2">NewException&lt;/span>(&lt;span style="color:#2aa198">&amp;#34;java_exception&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> e.&lt;span style="color:#268bd2">Encode&lt;/span>(exception)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> e.&lt;span style="color:#268bd2">Buffer&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在output/output.go 提供调用入口:添加如下函数初始化声明&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">func&lt;/span> &lt;span style="color:#268bd2">init&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> funcMap[&lt;span style="color:#2aa198">&amp;#34;JavaException&amp;#34;&lt;/span>] = testfuncs.JavaException
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>java代码中增加调用go方法序列化结果:&lt;/p>
 &lt;p>&lt;strong>说明&lt;/strong>: Assert.assertEquals 不能直接比较Exception对象是否相等&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java"> &lt;span style="color:#586e75">/**
-&lt;/span>&lt;span style="color:#586e75"> * test java java.lang.Exception object and go java_exception Exception struct
-&lt;/span>&lt;span style="color:#586e75"> */&lt;/span>
-&lt;span style="color:#268bd2">@Test&lt;/span>
-&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">testException&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-Exception exception &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> Exception&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;java_exception&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-Object javaException &lt;span style="color:#719e07">=&lt;/span> GoTestUtil&lt;span style="color:#719e07">.&lt;/span>readGoObject&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;JavaException&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>javaException &lt;span style="color:#719e07">instanceof&lt;/span> Exception&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-Assert&lt;span style="color:#719e07">.&lt;/span>assertEquals&lt;span style="color:#719e07">(&lt;/span>exception&lt;span style="color:#719e07">.&lt;/span>getMessage&lt;span style="color:#719e07">(),&lt;/span> &lt;span style="color:#719e07">((&lt;/span>Exception&lt;span style="color:#719e07">)&lt;/span> javaException&lt;span style="color:#719e07">).&lt;/span>getMessage&lt;span style="color:#719e07">());&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="13-support-java8-time-object-212httpsgithubcomapachedubbo-go-hessian2pull212-221httpsgithubcomapachedubbo-go-hessian2pull221">1.3 support java8 time object. &lt;a href="https://github.com/apache/dubbo-go-hessian2/pull/212">#212&lt;/a>, &lt;a href="https://github.com/apache/dubbo-go-hessian2/pull/221">#221&lt;/a>&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * test java java.lang.Exception object and go java_exception Exception struct
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Test&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">testException&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Exception exception &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> Exception&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;java_exception&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Object javaException &lt;span style="color:#719e07">=&lt;/span> GoTestUtil&lt;span style="color:#719e07">.&lt;/span>readGoObject&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;JavaException&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>javaException &lt;span style="color:#719e07">instanceof&lt;/span> Exception&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Assert&lt;span style="color:#719e07">.&lt;/span>assertEquals&lt;span style="color:#719e07">(&lt;/span>exception&lt;span style="color:#719e07">.&lt;/span>getMessage&lt;span style="color:#719e07">(),&lt;/span> &lt;span style="color:#719e07">((&lt;/span>Exception&lt;span style="color:#719e07">)&lt;/span> javaException&lt;span style="color:#719e07">).&lt;/span>getMessage&lt;span style="color:#719e07">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="13-support-java8-time-object-212httpsgithubcomapachedubbo-go-hessian2pull212-221httpsgithubcomapachedubbo-go-hessian2pull221">1.3 support java8 time object. &lt;a href="https://github.com/apache/dubbo-go-hessian2/pull/212">#212&lt;/a>, &lt;a href="https://github.com/apache/dubbo-go-hessian2/pull/221">#221&lt;/a>&lt;/h3>
 &lt;p>golang中增加一个java8对象的序列化输出方法：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-go" data-lang="go">&lt;span style="color:#586e75">// test java8 java.time.Year
-&lt;/span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#268bd2">func&lt;/span> &lt;span style="color:#268bd2">Java8TimeYear&lt;/span>() []&lt;span style="color:#dc322f">byte&lt;/span> {
-e &lt;span style="color:#719e07">:=&lt;/span> hessian.&lt;span style="color:#268bd2">NewEncoder&lt;/span>()
-year &lt;span style="color:#719e07">:=&lt;/span> java8_time.Year{Year: &lt;span style="color:#2aa198">2020&lt;/span>}
-e.&lt;span style="color:#268bd2">Encode&lt;/span>(year)
-&lt;span style="color:#719e07">return&lt;/span> e.&lt;span style="color:#268bd2">Buffer&lt;/span>()
-}
-&lt;span style="color:#586e75">// test java8 java.time.LocalDate
-&lt;/span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#268bd2">func&lt;/span> &lt;span style="color:#268bd2">Java8LocalDate&lt;/span>() []&lt;span style="color:#dc322f">byte&lt;/span> {
-e &lt;span style="color:#719e07">:=&lt;/span> hessian.&lt;span style="color:#268bd2">NewEncoder&lt;/span>()
-date &lt;span style="color:#719e07">:=&lt;/span> java8_time.LocalDate{Year: &lt;span style="color:#2aa198">2020&lt;/span>, Month: &lt;span style="color:#2aa198">9&lt;/span>, Day: &lt;span style="color:#2aa198">12&lt;/span>}
-e.&lt;span style="color:#268bd2">Encode&lt;/span>(date)
-&lt;span style="color:#719e07">return&lt;/span> e.&lt;span style="color:#268bd2">Buffer&lt;/span>()
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>在output/output.go 提供调用入口:添加函数初始化声明&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-go" data-lang="go">&lt;span style="color:#268bd2">func&lt;/span> &lt;span style="color:#268bd2">init&lt;/span>() {
-funcMap[&lt;span style="color:#2aa198">&amp;#34;Java8TimeYear&amp;#34;&lt;/span>] = testfuncs.Java8TimeYear
-funcMap[&lt;span style="color:#2aa198">&amp;#34;Java8LocalDate&amp;#34;&lt;/span>] = testfuncs.Java8LocalDate
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>java代码中增加调用go方法序列化结果:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#586e75">/**
-&lt;/span>&lt;span style="color:#586e75"> * test java8 java.time.* object and go java8_time/* struct
-&lt;/span>&lt;span style="color:#586e75"> */&lt;/span>
-&lt;span style="color:#268bd2">@Test&lt;/span>
-&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">testJava8Year&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-Year year &lt;span style="color:#719e07">=&lt;/span> Year&lt;span style="color:#719e07">.&lt;/span>of&lt;span style="color:#719e07">(&lt;/span>2020&lt;span style="color:#719e07">);&lt;/span>
-Assert&lt;span style="color:#719e07">.&lt;/span>assertEquals&lt;span style="color:#719e07">(&lt;/span>year
-&lt;span style="color:#719e07">,&lt;/span> GoTestUtil&lt;span style="color:#719e07">.&lt;/span>readGoObject&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Java8TimeYear&amp;#34;&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
-LocalDate localDate &lt;span style="color:#719e07">=&lt;/span> LocalDate&lt;span style="color:#719e07">.&lt;/span>of&lt;span style="color:#719e07">(&lt;/span>2020&lt;span style="color:#719e07">,&lt;/span> 9&lt;span style="color:#719e07">,&lt;/span> 12&lt;span style="color:#719e07">);&lt;/span>
-Assert&lt;span style="color:#719e07">.&lt;/span>assertEquals&lt;span style="color:#719e07">(&lt;/span>localDate&lt;span style="color:#719e07">,&lt;/span> GoTestUtil&lt;span style="color:#719e07">.&lt;/span>readGoObject&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Java8LocalDate&amp;#34;&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="14-support-test-golang-encoding-data-in-java-213httpsgithubcomapachedubbo-go-hessian2pull213">1.4 support test golang encoding data in java. &lt;a href="https://github.com/apache/dubbo-go-hessian2/pull/213">#213&lt;/a>&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// test java8 java.time.Year
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#268bd2">func&lt;/span> &lt;span style="color:#268bd2">Java8TimeYear&lt;/span>() []&lt;span style="color:#dc322f">byte&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> e &lt;span style="color:#719e07">:=&lt;/span> hessian.&lt;span style="color:#268bd2">NewEncoder&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> year &lt;span style="color:#719e07">:=&lt;/span> java8_time.Year{Year: &lt;span style="color:#2aa198">2020&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> e.&lt;span style="color:#268bd2">Encode&lt;/span>(year)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> e.&lt;span style="color:#268bd2">Buffer&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// test java8 java.time.LocalDate
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#268bd2">func&lt;/span> &lt;span style="color:#268bd2">Java8LocalDate&lt;/span>() []&lt;span style="color:#dc322f">byte&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> e &lt;span style="color:#719e07">:=&lt;/span> hessian.&lt;span style="color:#268bd2">NewEncoder&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> date &lt;span style="color:#719e07">:=&lt;/span> java8_time.LocalDate{Year: &lt;span style="color:#2aa198">2020&lt;/span>, Month: &lt;span style="color:#2aa198">9&lt;/span>, Day: &lt;span style="color:#2aa198">12&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> e.&lt;span style="color:#268bd2">Encode&lt;/span>(date)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> e.&lt;span style="color:#268bd2">Buffer&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在output/output.go 提供调用入口:添加函数初始化声明&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">func&lt;/span> &lt;span style="color:#268bd2">init&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> funcMap[&lt;span style="color:#2aa198">&amp;#34;Java8TimeYear&amp;#34;&lt;/span>] = testfuncs.Java8TimeYear
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> funcMap[&lt;span style="color:#2aa198">&amp;#34;Java8LocalDate&amp;#34;&lt;/span>] = testfuncs.Java8LocalDate
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>java代码中增加调用go方法序列化结果:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * test java8 java.time.* object and go java8_time/* struct
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@Test&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">testJava8Year&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Year year &lt;span style="color:#719e07">=&lt;/span> Year&lt;span style="color:#719e07">.&lt;/span>of&lt;span style="color:#719e07">(&lt;/span>2020&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Assert&lt;span style="color:#719e07">.&lt;/span>assertEquals&lt;span style="color:#719e07">(&lt;/span>year
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">,&lt;/span> GoTestUtil&lt;span style="color:#719e07">.&lt;/span>readGoObject&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Java8TimeYear&amp;#34;&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> LocalDate localDate &lt;span style="color:#719e07">=&lt;/span> LocalDate&lt;span style="color:#719e07">.&lt;/span>of&lt;span style="color:#719e07">(&lt;/span>2020&lt;span style="color:#719e07">,&lt;/span> 9&lt;span style="color:#719e07">,&lt;/span> 12&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Assert&lt;span style="color:#719e07">.&lt;/span>assertEquals&lt;span style="color:#719e07">(&lt;/span>localDate&lt;span style="color:#719e07">,&lt;/span> GoTestUtil&lt;span style="color:#719e07">.&lt;/span>readGoObject&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Java8LocalDate&amp;#34;&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="14-support-test-golang-encoding-data-in-java-213httpsgithubcomapachedubbo-go-hessian2pull213">1.4 support test golang encoding data in java. &lt;a href="https://github.com/apache/dubbo-go-hessian2/pull/213">#213&lt;/a>&lt;/h3>
 &lt;p>为了更好的测试验证hessian库，原来已经支持在golang中测试java的序列化数据，现在增加在java中测试golang的序列化数据，实现双向测试验证。&lt;/p>
 &lt;p>golang中增加序列化输出方法:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-go" data-lang="go">&lt;span style="color:#268bd2">func&lt;/span> &lt;span style="color:#268bd2">HelloWorldString&lt;/span>() []&lt;span style="color:#dc322f">byte&lt;/span> {
-e &lt;span style="color:#719e07">:=&lt;/span> hessian.&lt;span style="color:#268bd2">NewEncoder&lt;/span>()
-e.&lt;span style="color:#268bd2">Encode&lt;/span>(&lt;span style="color:#2aa198">&amp;#34;hello world&amp;#34;&lt;/span>)
-&lt;span style="color:#719e07">return&lt;/span> e.&lt;span style="color:#268bd2">Buffer&lt;/span>()
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>将该方法注册到output/output.go中&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-go" data-lang="go"> &lt;span style="color:#586e75">// add all output func here
-&lt;/span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#268bd2">func&lt;/span> &lt;span style="color:#268bd2">init&lt;/span>() {
-funcMap[&lt;span style="color:#2aa198">&amp;#34;HelloWorldString&amp;#34;&lt;/span>] = testfuncs.HelloWorldString
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>output/output.go 提供调用入口:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-go" data-lang="go">&lt;span style="color:#268bd2">func&lt;/span> &lt;span style="color:#268bd2">main&lt;/span>() {
-flag.&lt;span style="color:#268bd2">Parse&lt;/span>()
-&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">*&lt;/span>funcName &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#2aa198">&amp;#34;&amp;#34;&lt;/span> {
-_, _ = fmt.&lt;span style="color:#268bd2">Fprintln&lt;/span>(os.Stderr, &lt;span style="color:#2aa198">&amp;#34;func name required&amp;#34;&lt;/span>)
-os.&lt;span style="color:#268bd2">Exit&lt;/span>(&lt;span style="color:#2aa198">1&lt;/span>)
-}
-f, exist &lt;span style="color:#719e07">:=&lt;/span> funcMap[&lt;span style="color:#719e07">*&lt;/span>funcName]
-&lt;span style="color:#719e07">if&lt;/span> !exist {
-_, _ = fmt.&lt;span style="color:#268bd2">Fprintln&lt;/span>(os.Stderr, &lt;span style="color:#2aa198">&amp;#34;func name not exist: &amp;#34;&lt;/span>, &lt;span style="color:#719e07">*&lt;/span>funcName)
-os.&lt;span style="color:#268bd2">Exit&lt;/span>(&lt;span style="color:#2aa198">1&lt;/span>)
-}
-&lt;span style="color:#719e07">defer&lt;/span> &lt;span style="color:#268bd2">func&lt;/span>() {
-&lt;span style="color:#719e07">if&lt;/span> err &lt;span style="color:#719e07">:=&lt;/span> &lt;span style="color:#b58900">recover&lt;/span>(); err &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#cb4b16">nil&lt;/span> {
-_, _ = fmt.&lt;span style="color:#268bd2">Fprintln&lt;/span>(os.Stderr, &lt;span style="color:#2aa198">&amp;#34;error: &amp;#34;&lt;/span>, err)
-os.&lt;span style="color:#268bd2">Exit&lt;/span>(&lt;span style="color:#2aa198">1&lt;/span>)
-}
-}()
-&lt;span style="color:#719e07">if&lt;/span> _, err &lt;span style="color:#719e07">:=&lt;/span> os.Stdout.&lt;span style="color:#268bd2">Write&lt;/span>(&lt;span style="color:#268bd2">f&lt;/span>()); err &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#cb4b16">nil&lt;/span> {
-_, _ = fmt.&lt;span style="color:#268bd2">Fprintln&lt;/span>(os.Stderr, &lt;span style="color:#2aa198">&amp;#34;call error: &amp;#34;&lt;/span>, err)
-os.&lt;span style="color:#268bd2">Exit&lt;/span>(&lt;span style="color:#2aa198">1&lt;/span>)
-}
-os.&lt;span style="color:#268bd2">Exit&lt;/span>(&lt;span style="color:#2aa198">0&lt;/span>)
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>java代码中增加调用go方法序列化结果:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">GoTestUtil&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> Object &lt;span style="color:#268bd2">readGoObject&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String func&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;read go data: &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> func&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">try&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-Process process &lt;span style="color:#719e07">=&lt;/span> Runtime&lt;span style="color:#719e07">.&lt;/span>getRuntime&lt;span style="color:#719e07">()&lt;/span>
-&lt;span style="color:#719e07">.&lt;/span>exec&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;go run output/output.go -func_name=&amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> func&lt;span style="color:#719e07">,&lt;/span>
-&lt;span style="color:#cb4b16">null&lt;/span>&lt;span style="color:#719e07">,&lt;/span>
-&lt;span style="color:#719e07">new&lt;/span> File&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;..&amp;#34;&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
-&lt;span style="color:#dc322f">int&lt;/span> exitValue &lt;span style="color:#719e07">=&lt;/span> process&lt;span style="color:#719e07">.&lt;/span>waitFor&lt;span style="color:#719e07">();&lt;/span>
-&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>exitValue &lt;span style="color:#719e07">!=&lt;/span> 0&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-Assert&lt;span style="color:#719e07">.&lt;/span>fail&lt;span style="color:#719e07">(&lt;/span>readString&lt;span style="color:#719e07">(&lt;/span>process&lt;span style="color:#719e07">.&lt;/span>getErrorStream&lt;span style="color:#719e07">()));&lt;/span>
-&lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-InputStream is &lt;span style="color:#719e07">=&lt;/span> process&lt;span style="color:#719e07">.&lt;/span>getInputStream&lt;span style="color:#719e07">();&lt;/span>
-Hessian2Input input &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> Hessian2Input&lt;span style="color:#719e07">(&lt;/span>is&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">return&lt;/span> input&lt;span style="color:#719e07">.&lt;/span>readObject&lt;span style="color:#719e07">();&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">catch&lt;/span> &lt;span style="color:#719e07">(&lt;/span>Exception e&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-e&lt;span style="color:#719e07">.&lt;/span>printStackTrace&lt;span style="color:#719e07">();&lt;/span>
-&lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> String &lt;span style="color:#268bd2">readString&lt;/span>&lt;span style="color:#719e07">(&lt;/span>InputStream in&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> IOException &lt;span style="color:#719e07">{&lt;/span>
-StringBuilder out &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> StringBuilder&lt;span style="color:#719e07">();&lt;/span>
-InputStreamReader reader &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> InputStreamReader&lt;span style="color:#719e07">(&lt;/span>in&lt;span style="color:#719e07">,&lt;/span> StandardCharsets&lt;span style="color:#719e07">.&lt;/span>UTF_8&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#dc322f">char&lt;/span>&lt;span style="color:#719e07">[]&lt;/span> buffer &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> &lt;span style="color:#dc322f">char&lt;/span>&lt;span style="color:#719e07">[&lt;/span>4096&lt;span style="color:#719e07">];&lt;/span>
-&lt;span style="color:#dc322f">int&lt;/span> bytesRead&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">while&lt;/span> &lt;span style="color:#719e07">((&lt;/span>bytesRead &lt;span style="color:#719e07">=&lt;/span> reader&lt;span style="color:#719e07">.&lt;/span>read&lt;span style="color:#719e07">(&lt;/span>buffer&lt;span style="color:#719e07">))&lt;/span> &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#719e07">-&lt;/span>1&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-out&lt;span style="color:#719e07">.&lt;/span>append&lt;span style="color:#719e07">(&lt;/span>buffer&lt;span style="color:#719e07">,&lt;/span> 0&lt;span style="color:#719e07">,&lt;/span> bytesRead&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">return&lt;/span> out&lt;span style="color:#719e07">.&lt;/span>toString&lt;span style="color:#719e07">();&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>增加java测试代码:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">@Test&lt;/span>
-&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">testHelloWordString&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-Assert&lt;span style="color:#719e07">.&lt;/span>assertEquals&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;hello world&amp;#34;&lt;/span>
-&lt;span style="color:#719e07">,&lt;/span> GoTestUtil&lt;span style="color:#719e07">.&lt;/span>readGoObject&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;HelloWorldString&amp;#34;&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="15-support-javasqltime--javasqldate-219httpsgithubcomapachedubbo-go-hessian2pull219">1.5 support java.sql.Time &amp;amp; java.sql.Date. &lt;a href="https://github.com/apache/dubbo-go-hessian2/pull/219">#219&lt;/a>&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">func&lt;/span> &lt;span style="color:#268bd2">HelloWorldString&lt;/span>() []&lt;span style="color:#dc322f">byte&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> e &lt;span style="color:#719e07">:=&lt;/span> hessian.&lt;span style="color:#268bd2">NewEncoder&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> e.&lt;span style="color:#268bd2">Encode&lt;/span>(&lt;span style="color:#2aa198">&amp;#34;hello world&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> e.&lt;span style="color:#268bd2">Buffer&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>将该方法注册到output/output.go中&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// add all output func here
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#268bd2">func&lt;/span> &lt;span style="color:#268bd2">init&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> funcMap[&lt;span style="color:#2aa198">&amp;#34;HelloWorldString&amp;#34;&lt;/span>] = testfuncs.HelloWorldString
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>output/output.go 提供调用入口:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">func&lt;/span> &lt;span style="color:#268bd2">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> flag.&lt;span style="color:#268bd2">Parse&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">*&lt;/span>funcName &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#2aa198">&amp;#34;&amp;#34;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> _, _ = fmt.&lt;span style="color:#268bd2">Fprintln&lt;/span>(os.Stderr, &lt;span style="color:#2aa198">&amp;#34;func name required&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> os.&lt;span style="color:#268bd2">Exit&lt;/span>(&lt;span style="color:#2aa198">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f, exist &lt;span style="color:#719e07">:=&lt;/span> funcMap[&lt;span style="color:#719e07">*&lt;/span>funcName]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> !exist {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> _, _ = fmt.&lt;span style="color:#268bd2">Fprintln&lt;/span>(os.Stderr, &lt;span style="color:#2aa198">&amp;#34;func name not exist: &amp;#34;&lt;/span>, &lt;span style="color:#719e07">*&lt;/span>funcName)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> os.&lt;span style="color:#268bd2">Exit&lt;/span>(&lt;span style="color:#2aa198">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">defer&lt;/span> &lt;span style="color:#268bd2">func&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> err &lt;span style="color:#719e07">:=&lt;/span> &lt;span style="color:#b58900">recover&lt;/span>(); err &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#cb4b16">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> _, _ = fmt.&lt;span style="color:#268bd2">Fprintln&lt;/span>(os.Stderr, &lt;span style="color:#2aa198">&amp;#34;error: &amp;#34;&lt;/span>, err)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> os.&lt;span style="color:#268bd2">Exit&lt;/span>(&lt;span style="color:#2aa198">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> _, err &lt;span style="color:#719e07">:=&lt;/span> os.Stdout.&lt;span style="color:#268bd2">Write&lt;/span>(&lt;span style="color:#268bd2">f&lt;/span>()); err &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#cb4b16">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> _, _ = fmt.&lt;span style="color:#268bd2">Fprintln&lt;/span>(os.Stderr, &lt;span style="color:#2aa198">&amp;#34;call error: &amp;#34;&lt;/span>, err)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> os.&lt;span style="color:#268bd2">Exit&lt;/span>(&lt;span style="color:#2aa198">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> os.&lt;span style="color:#268bd2">Exit&lt;/span>(&lt;span style="color:#2aa198">0&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>java代码中增加调用go方法序列化结果:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">GoTestUtil&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> Object &lt;span style="color:#268bd2">readGoObject&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String func&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;read go data: &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> func&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">try&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Process process &lt;span style="color:#719e07">=&lt;/span> Runtime&lt;span style="color:#719e07">.&lt;/span>getRuntime&lt;span style="color:#719e07">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">.&lt;/span>exec&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;go run output/output.go -func_name=&amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> func&lt;span style="color:#719e07">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#cb4b16">null&lt;/span>&lt;span style="color:#719e07">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">new&lt;/span> File&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;..&amp;#34;&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#dc322f">int&lt;/span> exitValue &lt;span style="color:#719e07">=&lt;/span> process&lt;span style="color:#719e07">.&lt;/span>waitFor&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>exitValue &lt;span style="color:#719e07">!=&lt;/span> 0&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Assert&lt;span style="color:#719e07">.&lt;/span>fail&lt;span style="color:#719e07">(&lt;/span>readString&lt;span style="color:#719e07">(&lt;/span>process&lt;span style="color:#719e07">.&lt;/span>getErrorStream&lt;span style="color:#719e07">()));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> InputStream is &lt;span style="color:#719e07">=&lt;/span> process&lt;span style="color:#719e07">.&lt;/span>getInputStream&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Hessian2Input input &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> Hessian2Input&lt;span style="color:#719e07">(&lt;/span>is&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> input&lt;span style="color:#719e07">.&lt;/span>readObject&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">catch&lt;/span> &lt;span style="color:#719e07">(&lt;/span>Exception e&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> e&lt;span style="color:#719e07">.&lt;/span>printStackTrace&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> String &lt;span style="color:#268bd2">readString&lt;/span>&lt;span style="color:#719e07">(&lt;/span>InputStream in&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> IOException &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> StringBuilder out &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> StringBuilder&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> InputStreamReader reader &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> InputStreamReader&lt;span style="color:#719e07">(&lt;/span>in&lt;span style="color:#719e07">,&lt;/span> StandardCharsets&lt;span style="color:#719e07">.&lt;/span>UTF_8&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#dc322f">char&lt;/span>&lt;span style="color:#719e07">[]&lt;/span> buffer &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> &lt;span style="color:#dc322f">char&lt;/span>&lt;span style="color:#719e07">[&lt;/span>4096&lt;span style="color:#719e07">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#dc322f">int&lt;/span> bytesRead&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">while&lt;/span> &lt;span style="color:#719e07">((&lt;/span>bytesRead &lt;span style="color:#719e07">=&lt;/span> reader&lt;span style="color:#719e07">.&lt;/span>read&lt;span style="color:#719e07">(&lt;/span>buffer&lt;span style="color:#719e07">))&lt;/span> &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#719e07">-&lt;/span>1&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> out&lt;span style="color:#719e07">.&lt;/span>append&lt;span style="color:#719e07">(&lt;/span>buffer&lt;span style="color:#719e07">,&lt;/span> 0&lt;span style="color:#719e07">,&lt;/span> bytesRead&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> out&lt;span style="color:#719e07">.&lt;/span>toString&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>增加java测试代码:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@Test&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">testHelloWordString&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Assert&lt;span style="color:#719e07">.&lt;/span>assertEquals&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;hello world&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">,&lt;/span> GoTestUtil&lt;span style="color:#719e07">.&lt;/span>readGoObject&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;HelloWorldString&amp;#34;&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="15-support-javasqltime--javasqldate-219httpsgithubcomapachedubbo-go-hessian2pull219">1.5 support java.sql.Time &amp;amp; java.sql.Date. &lt;a href="https://github.com/apache/dubbo-go-hessian2/pull/219">#219&lt;/a>&lt;/h3>
 &lt;p>增加了 java 类 java.sql.Time, java.sql.Date 支持，分别对应到hessian.Time 和 hessian.Date， 详见 &lt;a href="https://github.com/apache/dubbo-go-hessian2/pull/219/files">https://github.com/apache/dubbo-go-hessian2/pull/219/files&lt;/a>。&lt;/p>
 &lt;h2 id="2-enhancement">2. Enhancement&lt;/h2>
 &lt;h3 id="21-export-function-encnull-225httpsgithubcomapachedubbo-go-hessian2pull225">2.1 Export function EncNull. &lt;a href="https://github.com/apache/dubbo-go-hessian2/pull/225">#225&lt;/a>&lt;/h3>
@@ -582,16 +582,16 @@ Assert&lt;span style="color:#719e07">.&lt;/span>assertEquals&lt;span style="colo
 &lt;p>原来在 dubbo request 对象中没有判断 enum 类型的情况，此pr增加了判断是不是POJOEnum类型。详见 &lt;a href="https://github.com/apache/dubbo-go-hessian2/pull/203/files">https://github.com/apache/dubbo-go-hessian2/pull/203/files&lt;/a>&lt;/p>
 &lt;h3 id="32-fix-byte-field-decoding-issue-216httpsgithubcomapachedubbo-go-hessian2pull216">3.2 fix []byte field decoding issue. &lt;a href="https://github.com/apache/dubbo-go-hessian2/pull/216">#216&lt;/a>&lt;/h3>
 &lt;p>v1.7.0 之前如果 struct中包含[]byte字段时无法反序列化, 报错“error list tag: 0x29”，主要原因是被当做list进行处理，对于这种情况应该按照binary数据进行处理即可。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-go" data-lang="go">&lt;span style="color:#268bd2">type&lt;/span> Circular &lt;span style="color:#268bd2">struct&lt;/span> {
-Num &lt;span style="color:#dc322f">int&lt;/span>
-Previous &lt;span style="color:#719e07">*&lt;/span>Circular
-Next &lt;span style="color:#719e07">*&lt;/span>Circular
-ResponseDataBytes []&lt;span style="color:#dc322f">byte&lt;/span> &lt;span style="color:#586e75">// &amp;lt;----
-&lt;/span>&lt;span style="color:#586e75">&lt;/span>}
-&lt;span style="color:#268bd2">func&lt;/span> (Circular) &lt;span style="color:#268bd2">JavaClassName&lt;/span>() &lt;span style="color:#dc322f">string&lt;/span> {
-&lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#2aa198">&amp;#34;com.company.Circular&amp;#34;&lt;/span>
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="33-fix-decoding-error-for-map-in-map-229httpsgithubcomapachedubbo-go-hessian2pull229">3.3 fix decoding error for map in map. &lt;a href="https://github.com/apache/dubbo-go-hessian2/pull/229">#229&lt;/a>&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">type&lt;/span> Circular &lt;span style="color:#268bd2">struct&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Num &lt;span style="color:#dc322f">int&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Previous &lt;span style="color:#719e07">*&lt;/span>Circular
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Next &lt;span style="color:#719e07">*&lt;/span>Circular
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ResponseDataBytes []&lt;span style="color:#dc322f">byte&lt;/span> &lt;span style="color:#586e75">// &amp;lt;----
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">func&lt;/span> (Circular) &lt;span style="color:#268bd2">JavaClassName&lt;/span>() &lt;span style="color:#dc322f">string&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#2aa198">&amp;#34;com.company.Circular&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="33-fix-decoding-error-for-map-in-map-229httpsgithubcomapachedubbo-go-hessian2pull229">3.3 fix decoding error for map in map. &lt;a href="https://github.com/apache/dubbo-go-hessian2/pull/229">#229&lt;/a>&lt;/h3>
 &lt;p>v1.7.0 之前嵌套map无法正确解析，主要原因是对应的map对象被当做一个数据类型却未被自动加到类引用列表中，而嵌套map类信息是同一类型的引用，去类引用列表找，找不到就报错了。 解决这个问题的方法就是遇到map类对象，也将其加入到类引用列表中即可。 问题详细参考 &lt;a href="https://github.com/apache/dubbo-go-hessian2/issues/119">#119&lt;/a>.&lt;/p>
 &lt;h3 id="34-fix-fields-name-mismatch-in-duration-class-234httpsgithubcomapachedubbo-go-hessian2pull234">3.4 fix fields name mismatch in Duration class. &lt;a href="https://github.com/apache/dubbo-go-hessian2/pull/234">#234&lt;/a>&lt;/h3>
 &lt;p>这个 PR 解决了Duration对象中字段错误定义，原来是&amp;quot;second/nano&amp;quot;， 应该是&amp;quot;seconds/nanos&amp;quot;。&lt;/p>
@@ -646,12 +646,12 @@ ResponseDataBytes []&lt;span style="color:#dc322f">byte&lt;/span> &lt;span style
 &lt;p>在 Java 服务中，java.math.BigInteger 和 java.math.BigDecimal 是被频繁使用的数字类型，hessian 库将它们映射为 github.com/dubbogo/gost/math/big 下的对应类型。&lt;/p>
 &lt;h3 id="54-支持-继承-和忽略冗余字段">5.4 支持 ‘继承’ 和忽略冗余字段&lt;/h3>
 &lt;p>由于 go 没有继承的概念，所以在之前的版本，Java 父类的字段不被 dubbo-go-hessian2 所支持。新版本中，dubbo-go-hessian2 将Java来自父类的字段用匿名结构体对应，如：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-go" data-lang="go">&lt;span style="color:#268bd2">type&lt;/span> Dog &lt;span style="color:#268bd2">struct&lt;/span> {
-Animal
-Gender &lt;span style="color:#dc322f">string&lt;/span>
-DogName &lt;span style="color:#dc322f">string&lt;/span> &lt;span style="color:#2aa198">`hessian:&amp;#34;-&amp;#34;`&lt;/span>
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>同时，就像 json 编码中通过 &lt;code>immediately&lt;/code> 可以在序列化中忽略该字段，同理，通过 &lt;code>hessian:&amp;quot;-&amp;quot;&lt;/code> 用户也可以让冗余字段不参与 hessian 序列化。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">type&lt;/span> Dog &lt;span style="color:#268bd2">struct&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Animal
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Gender &lt;span style="color:#dc322f">string&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> DogName &lt;span style="color:#dc322f">string&lt;/span> &lt;span style="color:#2aa198">`hessian:&amp;#34;-&amp;#34;`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>同时，就像 json 编码中通过 &lt;code>immediately&lt;/code> 可以在序列化中忽略该字段，同理，通过 &lt;code>hessian:&amp;quot;-&amp;quot;&lt;/code> 用户也可以让冗余字段不参与 hessian 序列化。&lt;/p>
 &lt;p>目前，上述四个特性已被某 Go 版本的 sidecar 集成到其商业版本中提供商业服务。&lt;/p>
 &lt;h2 id="6-nacos-配置中心">6. Nacos 配置中心&lt;/h2>
 &lt;p>配置中心是现代微服务架构里面的核心组件，现在 dubbo-go 提供了对配置中心的支持。&lt;/p>
@@ -725,25 +725,30 @@ DogName &lt;span style="color:#dc322f">string&lt;/span> &lt;span style="color:#2
 &lt;li>序列化。Dubbo 当前支持的序列化包括 Json、Hessian2、Kryo、FST、Java 等，而这其中支持跨语言的只有 Json、Hessian2，通用的 Json 有固有的性能问题，而 Hessian2 无论在效率还是多语言 SDK 方面都有所欠缺。为此，Dubbo 通过支持 Protobuf 序列化来提供更高效、易用的跨语言序列化方案。&lt;/li>
 &lt;/ul>
 &lt;p>日后，不论我们使用什么语言版本来开发 Dubbo 服务，都可以直接使用 IDL 定义如下服务，具体请参见示例&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-go" data-lang="go">syntax = &lt;span style="color:#2aa198">&amp;#34;proto3&amp;#34;&lt;/span>;
-option java_multiple_files = &lt;span style="color:#cb4b16">true&lt;/span>;
-option java_package = &lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.demo&amp;#34;&lt;/span>;
-option java_outer_classname = &lt;span style="color:#2aa198">&amp;#34;DemoServiceProto&amp;#34;&lt;/span>;
-option objc_class_prefix = &lt;span style="color:#2aa198">&amp;#34;DEMOSRV&amp;#34;&lt;/span>;
-&lt;span style="color:#719e07">package&lt;/span> demoservice;
-&lt;span style="color:#586e75">// The demo service definition.
-&lt;/span>&lt;span style="color:#586e75">&lt;/span>service DemoService {
-rpc &lt;span style="color:#268bd2">SayHello&lt;/span> (HelloRequest) &lt;span style="color:#268bd2">returns&lt;/span> (HelloReply) {}
-}
-&lt;span style="color:#586e75">// The request message containing the user&amp;#39;s name.
-&lt;/span>&lt;span style="color:#586e75">&lt;/span>message HelloRequest {
-&lt;span style="color:#dc322f">string&lt;/span> name = &lt;span style="color:#2aa198">1&lt;/span>;
-}
-&lt;span style="color:#586e75">// The response message containing the greetings
-&lt;/span>&lt;span style="color:#586e75">&lt;/span>message HelloReply {
-&lt;span style="color:#dc322f">string&lt;/span> message = &lt;span style="color:#2aa198">1&lt;/span>;
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="4-性能优化">4. 性能优化&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>syntax = &lt;span style="color:#2aa198">&amp;#34;proto3&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>option java_multiple_files = &lt;span style="color:#cb4b16">true&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>option java_package = &lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.demo&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>option java_outer_classname = &lt;span style="color:#2aa198">&amp;#34;DemoServiceProto&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>option objc_class_prefix = &lt;span style="color:#2aa198">&amp;#34;DEMOSRV&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">package&lt;/span> demoservice;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// The demo service definition.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>service DemoService {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> rpc &lt;span style="color:#268bd2">SayHello&lt;/span> (HelloRequest) &lt;span style="color:#268bd2">returns&lt;/span> (HelloReply) {}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// The request message containing the user&amp;#39;s name.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>message HelloRequest {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#dc322f">string&lt;/span> name = &lt;span style="color:#2aa198">1&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// The response message containing the greetings
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>message HelloReply {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#dc322f">string&lt;/span> message = &lt;span style="color:#2aa198">1&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="4-性能优化">4. 性能优化&lt;/h2>
 &lt;h3 id="41-调用链路优化">4.1 调用链路优化&lt;/h3>
 &lt;p>2.7.5 版本对整个调用链路做了全面的优化，根据压测结果显示，总体 QPS 性能提升将近 30%，同时也减少了调用过程中的内存分配开销。其中一个值得提及的设计点是 2.7.5 引入了 Servicerepository 的概念，在服务注册阶段提前生成 ServiceDescriptor 和 MethodDescriptor，以减少 RPC 调用阶段计算 Service 元信息带来的资源消耗。&lt;/p>
 &lt;h3 id="42-消费端线程池模型优化">4.2 消费端线程池模型优化&lt;/h3>
@@ -778,24 +783,25 @@ rpc &lt;span style="color:#268bd2">SayHello&lt;/span> (HelloRequest) &lt;span st
 &lt;p>2.7.5 版本在传输链路的安全性上做了很多工作，对于内置的 Dubbo Netty Server 和新引入的 gRPC 协议都提供了基于 TLS 的安全链路传输机制。&lt;/p>
 &lt;p>TLS 的配置都有统一的入口，如下所示：&lt;/p>
 &lt;p>&lt;strong>Provider 端&lt;/strong>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">SslConfig sslConfig &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> SslConfig&lt;span style="color:#719e07">();&lt;/span>
-sslConfig&lt;span style="color:#719e07">.&lt;/span>setServerKeyCertChainPath&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;path to cert&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-sslConfig&lt;span style="color:#719e07">.&lt;/span>setServerPrivateKeyPath&lt;span style="color:#719e07">(&lt;/span>args&lt;span style="color:#719e07">[&lt;/span>1&lt;span style="color:#719e07">]);&lt;/span>
-&lt;span style="color:#586e75">// 如果开启双向 cert 认证
-&lt;/span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>mutualTls&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-sslConfig&lt;span style="color:#719e07">.&lt;/span>setServerTrustCertCollectionPath&lt;span style="color:#719e07">(&lt;/span>args&lt;span style="color:#719e07">[&lt;/span>2&lt;span style="color:#719e07">]);&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-ProtocolConfig protocolConfig &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ProtocolConfig&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;dubbo/grpc&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-protocolConfig&lt;span style="color:#719e07">.&lt;/span>setSslEnabled&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#cb4b16">true&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Consumer 端&lt;/strong>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(!&lt;/span>mutualTls&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{}&lt;/span>
-sslConfig&lt;span style="color:#719e07">.&lt;/span>setClientTrustCertCollectionPath&lt;span style="color:#719e07">(&lt;/span>args&lt;span style="color:#719e07">[&lt;/span>0&lt;span style="color:#719e07">]);&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">else&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-sslConfig&lt;span style="color:#719e07">.&lt;/span>setClientTrustCertCollectionPath&lt;span style="color:#719e07">(&lt;/span>args&lt;span style="color:#719e07">[&lt;/span>0&lt;span style="color:#719e07">]);&lt;/span>
-sslConfig&lt;span style="color:#719e07">.&lt;/span>setClientKeyCertChainPath&lt;span style="color:#719e07">(&lt;/span>args&lt;span style="color:#719e07">[&lt;/span>1&lt;span style="color:#719e07">]);&lt;/span>
-sslConfig&lt;span style="color:#719e07">.&lt;/span>setClientPrivateKeyPath&lt;span style="color:#719e07">(&lt;/span>args&lt;span style="color:#719e07">[&lt;/span>2&lt;span style="color:#719e07">]);&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>为尽可能保证应用启动的灵活性，TLS Cert 的指定还能通过 -D 参数或环境变量等方式来在启动阶段根据部署环境动态指定，具体请参见 Dubbo 配置读取规则与 TLS 示例&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>SslConfig sslConfig &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> SslConfig&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sslConfig&lt;span style="color:#719e07">.&lt;/span>setServerKeyCertChainPath&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;path to cert&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sslConfig&lt;span style="color:#719e07">.&lt;/span>setServerPrivateKeyPath&lt;span style="color:#719e07">(&lt;/span>args&lt;span style="color:#719e07">[&lt;/span>1&lt;span style="color:#719e07">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// 如果开启双向 cert 认证
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>mutualTls&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sslConfig&lt;span style="color:#719e07">.&lt;/span>setServerTrustCertCollectionPath&lt;span style="color:#719e07">(&lt;/span>args&lt;span style="color:#719e07">[&lt;/span>2&lt;span style="color:#719e07">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ProtocolConfig protocolConfig &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ProtocolConfig&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;dubbo/grpc&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>protocolConfig&lt;span style="color:#719e07">.&lt;/span>setSslEnabled&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#cb4b16">true&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Consumer 端&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(!&lt;/span>mutualTls&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sslConfig&lt;span style="color:#719e07">.&lt;/span>setClientTrustCertCollectionPath&lt;span style="color:#719e07">(&lt;/span>args&lt;span style="color:#719e07">[&lt;/span>0&lt;span style="color:#719e07">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">else&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sslConfig&lt;span style="color:#719e07">.&lt;/span>setClientTrustCertCollectionPath&lt;span style="color:#719e07">(&lt;/span>args&lt;span style="color:#719e07">[&lt;/span>0&lt;span style="color:#719e07">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sslConfig&lt;span style="color:#719e07">.&lt;/span>setClientKeyCertChainPath&lt;span style="color:#719e07">(&lt;/span>args&lt;span style="color:#719e07">[&lt;/span>1&lt;span style="color:#719e07">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sslConfig&lt;span style="color:#719e07">.&lt;/span>setClientPrivateKeyPath&lt;span style="color:#719e07">(&lt;/span>args&lt;span style="color:#719e07">[&lt;/span>2&lt;span style="color:#719e07">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>为尽可能保证应用启动的灵活性，TLS Cert 的指定还能通过 -D 参数或环境变量等方式来在启动阶段根据部署环境动态指定，具体请参见 Dubbo 配置读取规则与 TLS 示例&lt;/p>
 &lt;p>Dubbo 配置读取规则：http://dubbo.apache.org/zh-cn/docs/user/configuration/configuration-load-process.html&lt;/p>
 &lt;p>TLS 示例：https://github.com/apache/dubbo-samples/tree/master/java/dubbo-samples-ssl&lt;/p>
 &lt;blockquote>
@@ -805,51 +811,57 @@ sslConfig&lt;span style="color:#719e07">.&lt;/span>setClientPrivateKeyPath&lt;sp
 &lt;h2 id="6-bootstrap-apibeta">6. Bootstrap API【beta】&lt;/h2>
 &lt;p>在上面讲《服务自省》时，我们提到了 Dubbo 面向接口的设计，面向接口编程、面向接口做服务发现和服务治理。在引入应用粒度服务发现的同时，2.7.5 版本对编程入口也做了优化，在兼容老版本 API 的同时，新增了新的面向应用的编程接口 - DubboBootstrap。&lt;/p>
 &lt;p>以面向 Dubbo API 编程为例，以前我们要这么写：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">ServiceConfig&lt;span style="color:#719e07">&amp;lt;&lt;/span>GreetingsService&lt;span style="color:#719e07">&amp;gt;&lt;/span> service1 &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ServiceConfig&lt;span style="color:#719e07">&amp;lt;&amp;gt;();&lt;/span>
-service1&lt;span style="color:#719e07">.&lt;/span>setApplication&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">new&lt;/span> ApplicationConfig&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;first-dubbo-provider&amp;#34;&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
-service1&lt;span style="color:#719e07">.&lt;/span>setRegistry&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">new&lt;/span> RegistryConfig&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;zookeeper://&amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> zookeeperHost &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34;:2181&amp;#34;&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
-service1&lt;span style="color:#719e07">.&lt;/span>export&lt;span style="color:#719e07">();&lt;/span>
-ServiceConfig&lt;span style="color:#719e07">&amp;lt;&lt;/span>GreetingsService&lt;span style="color:#719e07">&amp;gt;&lt;/span> service2 &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ServiceConfig&lt;span style="color:#719e07">&amp;lt;&amp;gt;();&lt;/span>
-service2&lt;span style="color:#719e07">.&lt;/span>setApplication&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">new&lt;/span> ApplicationConfig&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;first-dubbo-provider&amp;#34;&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
-service2&lt;span style="color:#719e07">.&lt;/span>setRegistry&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">new&lt;/span> RegistryConfig&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;zookeeper://&amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> zookeeperHost &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34;:2181&amp;#34;&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
-service2&lt;span style="color:#719e07">.&lt;/span>export&lt;span style="color:#719e07">();&lt;/span>
-&lt;span style="color:#719e07">......&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>ApplicationConfig、RegistryConfig、ProtocolConfig 等全局性的配置要在每个服务上去配置；并且从 Dubbo 框架的角度，由于缺少一个统一的 Server 入口，一些实例级别的配置如 ShutdownHook、ApplicationListener、应用级服务治理组件等都缺少一个加载驱动点。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>ServiceConfig&lt;span style="color:#719e07">&amp;lt;&lt;/span>GreetingsService&lt;span style="color:#719e07">&amp;gt;&lt;/span> service1 &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ServiceConfig&lt;span style="color:#719e07">&amp;lt;&amp;gt;();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>service1&lt;span style="color:#719e07">.&lt;/span>setApplication&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">new&lt;/span> ApplicationConfig&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;first-dubbo-provider&amp;#34;&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>service1&lt;span style="color:#719e07">.&lt;/span>setRegistry&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">new&lt;/span> RegistryConfig&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;zookeeper://&amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> zookeeperHost &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34;:2181&amp;#34;&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>service1&lt;span style="color:#719e07">.&lt;/span>export&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ServiceConfig&lt;span style="color:#719e07">&amp;lt;&lt;/span>GreetingsService&lt;span style="color:#719e07">&amp;gt;&lt;/span> service2 &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ServiceConfig&lt;span style="color:#719e07">&amp;lt;&amp;gt;();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>service2&lt;span style="color:#719e07">.&lt;/span>setApplication&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">new&lt;/span> ApplicationConfig&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;first-dubbo-provider&amp;#34;&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>service2&lt;span style="color:#719e07">.&lt;/span>setRegistry&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">new&lt;/span> RegistryConfig&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;zookeeper://&amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> zookeeperHost &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34;:2181&amp;#34;&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>service2&lt;span style="color:#719e07">.&lt;/span>export&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">......&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>ApplicationConfig、RegistryConfig、ProtocolConfig 等全局性的配置要在每个服务上去配置；并且从 Dubbo 框架的角度，由于缺少一个统一的 Server 入口，一些实例级别的配置如 ShutdownHook、ApplicationListener、应用级服务治理组件等都缺少一个加载驱动点。&lt;/p>
 &lt;p>在引入 DubboBootstrap 后，新的编程模型变得更简单，并且也为解决了缺少实例级启动入口的问题&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">ProtocolConfig protocolConfig &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ProtocolConfig&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;grpc&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-protocolConfig&lt;span style="color:#719e07">.&lt;/span>setSslEnabled&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#cb4b16">true&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-SslConfig sslConfig &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> SslConfig&lt;span style="color:#719e07">();&lt;/span>
-sslConfig&lt;span style="color:#719e07">.&lt;/span>setXxxCert&lt;span style="color:#719e07">(...);&lt;/span>
-DubboBootstrap bootstrap &lt;span style="color:#719e07">=&lt;/span> DubboBootstrap&lt;span style="color:#719e07">.&lt;/span>getInstance&lt;span style="color:#719e07">();&lt;/span>
-bootstrap&lt;span style="color:#719e07">.&lt;/span>application&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">new&lt;/span> ApplicationConfig&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;ssl-provider&amp;#34;&lt;/span>&lt;span style="color:#719e07">))&lt;/span>
-&lt;span style="color:#719e07">.&lt;/span>registry&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">new&lt;/span> RegistryConfig&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;zookeeper://127.0.0.1:2181&amp;#34;&lt;/span>&lt;span style="color:#719e07">))&lt;/span>
-&lt;span style="color:#719e07">.&lt;/span>protocol&lt;span style="color:#719e07">(&lt;/span>protocolConfig&lt;span style="color:#719e07">)&lt;/span>
-&lt;span style="color:#719e07">.&lt;/span>ssl&lt;span style="color:#719e07">(&lt;/span>sslConfig&lt;span style="color:#719e07">);&lt;/span>
-ServiceConfig&lt;span style="color:#719e07">&amp;lt;&lt;/span>GreetingsService&lt;span style="color:#719e07">&amp;gt;&lt;/span> service1 &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ServiceConfig&lt;span style="color:#719e07">&amp;lt;&amp;gt;();&lt;/span>
-ServiceConfig&lt;span style="color:#719e07">&amp;lt;&lt;/span>GreetingsService&lt;span style="color:#719e07">&amp;gt;&lt;/span> service2 &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ServiceConfig&lt;span style="color:#719e07">&amp;lt;&amp;gt;();&lt;/span>
-bootstrap&lt;span style="color:#719e07">.&lt;/span>service&lt;span style="color:#719e07">(&lt;/span>service1&lt;span style="color:#719e07">).&lt;/span>service&lt;span style="color:#719e07">(&lt;/span>service2&lt;span style="color:#719e07">);&lt;/span>
-bootstrap&lt;span style="color:#719e07">.&lt;/span>start&lt;span style="color:#719e07">();&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="7-多注册中心集群负载均衡">7. 多注册中心集群负载均衡&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>ProtocolConfig protocolConfig &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ProtocolConfig&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;grpc&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>protocolConfig&lt;span style="color:#719e07">.&lt;/span>setSslEnabled&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#cb4b16">true&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>SslConfig sslConfig &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> SslConfig&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sslConfig&lt;span style="color:#719e07">.&lt;/span>setXxxCert&lt;span style="color:#719e07">(...);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>DubboBootstrap bootstrap &lt;span style="color:#719e07">=&lt;/span> DubboBootstrap&lt;span style="color:#719e07">.&lt;/span>getInstance&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bootstrap&lt;span style="color:#719e07">.&lt;/span>application&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">new&lt;/span> ApplicationConfig&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;ssl-provider&amp;#34;&lt;/span>&lt;span style="color:#719e07">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">.&lt;/span>registry&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">new&lt;/span> RegistryConfig&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;zookeeper://127.0.0.1:2181&amp;#34;&lt;/span>&lt;span style="color:#719e07">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">.&lt;/span>protocol&lt;span style="color:#719e07">(&lt;/span>protocolConfig&lt;span style="color:#719e07">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">.&lt;/span>ssl&lt;span style="color:#719e07">(&lt;/span>sslConfig&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ServiceConfig&lt;span style="color:#719e07">&amp;lt;&lt;/span>GreetingsService&lt;span style="color:#719e07">&amp;gt;&lt;/span> service1 &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ServiceConfig&lt;span style="color:#719e07">&amp;lt;&amp;gt;();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ServiceConfig&lt;span style="color:#719e07">&amp;lt;&lt;/span>GreetingsService&lt;span style="color:#719e07">&amp;gt;&lt;/span> service2 &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ServiceConfig&lt;span style="color:#719e07">&amp;lt;&amp;gt;();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bootstrap&lt;span style="color:#719e07">.&lt;/span>service&lt;span style="color:#719e07">(&lt;/span>service1&lt;span style="color:#719e07">).&lt;/span>service&lt;span style="color:#719e07">(&lt;/span>service2&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>bootstrap&lt;span style="color:#719e07">.&lt;/span>start&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="7-多注册中心集群负载均衡">7. 多注册中心集群负载均衡&lt;/h2>
 &lt;p>对于多注册中心订阅的场景，选址时的多了一层注册中心集群间的负载均衡：&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/cluster-lb.png" alt="cluster-lb.png">&lt;/p>
 &lt;p>在 Cluster Invoker 这一级，我们支持的选址策略有（2.7.5+ 版本，具体使用请参见文档）：&lt;/p>
 &lt;ul>
 &lt;li>
 &lt;p>指定优先级&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#586e75">&amp;lt;!-- 来自 preferred=“true” 注册中心的地址将被优先选择，只有该中心无可用地址时才 Fallback 到其他注册中心 --&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://${zookeeper.address1}&amp;#34;&lt;/span> preferred=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&amp;lt;!-- 来自 preferred=“true” 注册中心的地址将被优先选择，只有该中心无可用地址时才 Fallback 到其他注册中心 --&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://${zookeeper.address1}&amp;#34;&lt;/span> preferred=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>同 zone 优先&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#586e75">&amp;lt;!-- 选址时会和流量中的 zone key 做匹配，流量会优先派发到相同 zone 的地址 --&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://${zookeeper.address1}&amp;#34;&lt;/span> zone=&lt;span style="color:#2aa198">&amp;#34;beijing&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&amp;lt;!-- 选址时会和流量中的 zone key 做匹配，流量会优先派发到相同 zone 的地址 --&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://${zookeeper.address1}&amp;#34;&lt;/span> zone=&lt;span style="color:#2aa198">&amp;#34;beijing&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>权重轮询&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">&lt;span style="color:#586e75">&amp;lt;!-- 来自北京和上海集群的地址，将以 10:1 的比例来分配流量 --&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;beijing&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://${zookeeper.address1}&amp;#34;&lt;/span> weight=&lt;span style="color:#2aa198">”100“&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;shanghai&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://${zookeeper.address2}&amp;#34;&lt;/span> weight=&lt;span style="color:#2aa198">”10“&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&amp;lt;!-- 来自北京和上海集群的地址，将以 10:1 的比例来分配流量 --&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;beijing&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://${zookeeper.address1}&amp;#34;&lt;/span> weight=&lt;span style="color:#2aa198">”100“&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;shanghai&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://${zookeeper.address2}&amp;#34;&lt;/span> weight=&lt;span style="color:#2aa198">”10“&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>默认，stick to 任意可用&lt;/p>
 &lt;/li>

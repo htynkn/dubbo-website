@@ -2,7 +2,7 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
-<meta name=generator content="Hugo 0.92.2">
+<meta name=generator content="Hugo 0.93.0">
 <meta name=ROBOTS content="INDEX, FOLLOW">
 <link rel="shortcut icon" href=/favicons/favicon.ico>
 <link rel=apple-touch-icon href=/favicons/apple-touch-icon-180x180.png sizes=180x180>
@@ -20,24 +20,23 @@
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dubbo.apache.org/zh/blog/2018/08/07/%E5%9C%A8-dubbo-%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3/"><meta property="article:section" content="blog">
 <meta property="article:published_time" content="2018-08-07T00:00:00+00:00">
-<meta property="article:modified_time" content="2022-02-25T14:13:40+08:00"><meta property="og:site_name" content="Apache Dubbo">
+<meta property="article:modified_time" content="2022-02-28T10:22:24+08:00"><meta property="og:site_name" content="Apache Dubbo">
 <meta itemprop=name content="在 Dubbo 中使用注解">
 <meta itemprop=description content="介绍了如何使用注解方式而非 XML 方式来开发 Dubbo 应用，可以学习到如何使用 @EnableDubbo、@Service、@Reference 的用法。
 "><meta itemprop=datePublished content="2018-08-07T00:00:00+00:00">
-<meta itemprop=dateModified content="2022-02-25T14:13:40+08:00">
+<meta itemprop=dateModified content="2022-02-28T10:22:24+08:00">
 <meta itemprop=wordCount content="994">
 <meta itemprop=keywords content><meta name=twitter:card content="summary">
 <meta name=twitter:title content="在 Dubbo 中使用注解">
 <meta name=twitter:description content="介绍了如何使用注解方式而非 XML 方式来开发 Dubbo 应用，可以学习到如何使用 @EnableDubbo、@Service、@Reference 的用法。
 ">
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-112489517-1','auto'),ga('send','pageview'))</script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-112489517-1","auto"),ga("send","pageview"))</script>
 <script async src=https://www.google-analytics.com/analytics.js></script>
 <link rel=preload href=/scss/main.min.852d6009d14696a1459da05640f22ebf287239f9f7b676f2d2402427b3ea980d.css as=style>
 <link href=/scss/main.min.852d6009d14696a1459da05640f22ebf287239f9f7b676f2d2402427b3ea980d.css rel=stylesheet integrity>
 <script src=/js/jquery-3.5.1.min.js integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin=anonymous></script>
 <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css>
-</head>
-<body class="td-page td-blog">
+</head><body class="td-page td-blog">
 <header>
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
 <a class=navbar-brand href=/zh/>
@@ -47,47 +46,32 @@
 <ul class="navbar-nav mt-2 mt-lg-0">
 <li class="nav-item mr-4 mb-2 mb-lg-0">
 <a class=nav-link href=/zh/docs/><span>文档</span></a>
-</li>
-<li class="nav-item mr-4 mb-2 mb-lg-0">
+</li><li class="nav-item mr-4 mb-2 mb-lg-0">
 <a class="nav-link active" href=/zh/blog/><span class=active>博客</span></a>
-</li>
-<li class="nav-item mr-4 mb-2 mb-lg-0">
+</li><li class="nav-item mr-4 mb-2 mb-lg-0">
 <a class=nav-link href=/zh/community/><span>社区</span></a>
-</li>
-<li class="nav-item mr-4 mb-2 mb-lg-0">
+</li><li class="nav-item mr-4 mb-2 mb-lg-0">
 <a class=nav-link href=/zh/contribution-guidelines/><span>贡献指南</span></a>
-</li>
-<li class="nav-item mr-4 mb-2 mb-lg-0">
+</li><li class="nav-item mr-4 mb-2 mb-lg-0">
 <a class=nav-link href=/zh/notices/><span>公告</span></a>
-</li>
-<li class="nav-item mr-4 mb-2 mb-lg-0">
+</li><li class="nav-item mr-4 mb-2 mb-lg-0">
 <a class=nav-link href=/zh/users/><span>用户</span></a>
-</li>
-<li class="nav-item dropdown mr-4 d-none d-lg-block">
+</li><li class="nav-item dropdown mr-4 d-none d-lg-block">
 <a class="nav-link dropdown-toggle" href=# id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>
 Releases
 </a>
 <div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
 <a class=dropdown-item href=https://dubbo.apache.org/zh/docs/>v3.0 (latest)</a>
 <a class=dropdown-item href=https://dubbo.apache.org/zh/docsv2.7/>v2.x</a>
-</div>
-</li>
-<li class="nav-item dropdown mr-4 d-none d-lg-block">
+</div></li><li class="nav-item dropdown mr-4 d-none d-lg-block">
 <a class="nav-link dropdown-toggle" href=# id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>
 中文
 </a>
 <div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
 <a class=dropdown-item href=/en/blog/2018/08/07/use-annotations-in-dubbo/>English</a>
-</div>
-</li>
-</ul>
-</div>
-<div class="navbar-nav d-none d-lg-block">
+</div></li></ul></div><div class="navbar-nav d-none d-lg-block">
 <input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off>
-</div>
-</nav>
-</header>
-<div class="container-fluid td-outer">
+</div></nav></header><div class="container-fluid td-outer">
 <div class=td-main>
 <div class="row flex-xl-nowrap">
 <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
@@ -97,26 +81,23 @@ Releases
 <input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off>
 <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation">
 </button>
-</form>
-</div>
-<div id=content-desktop></div>
-<nav class="collapse td-sidebar-nav" id=td-section-nav>
+</form></div><div id=content-desktop></div><nav class="collapse td-sidebar-nav" id=td-section-nav>
 <div class="nav-item dropdown d-block d-lg-none">
 <a class="nav-link dropdown-toggle" href=# id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>
 中文
 </a>
 <div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink>
 <a class=dropdown-item href=/en/blog/2018/08/07/use-annotations-in-dubbo/>English</a>
-</div>
-</div>
-<ul class="td-sidebar-nav__section pr-md-3 ul-0">
+</div></div><ul class="td-sidebar-nav__section pr-md-3 ul-0">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-zhblog-li>
 <a href=/zh/blog/ title="Apache Dubbo 博客" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-zhblog><span>博客</span></a>
 <ul class=ul-1>
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-zhblognews-li>
 <a href=/zh/blog/news/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhblognews><span>技术分享</span></a>
 <ul class="ul-2 foldable">
-<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhblog20210602dubbo3-e5ba94e794a8e7baa7e69c8de58aa1e58f91e78eb0-li>
+<li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhblog20220118e4bb8ee58e9fe79086e588b0e6938de4bd9ce8aea9e4bda0e59ca8-apache-apisix-e4b8ade4bba3e79086-dubbo-e69c8de58aa1e69bb4e4bebfe68db7-li>
+<a href=/zh/blog/2022/01/18/%E4%BB%8E%E5%8E%9F%E7%90%86%E5%88%B0%E6%93%8D%E4%BD%9C%E8%AE%A9%E4%BD%A0%E5%9C%A8-apache-apisix-%E4%B8%AD%E4%BB%A3%E7%90%86-dubbo-%E6%9C%8D%E5%8A%A1%E6%9B%B4%E4%BE%BF%E6%8D%B7/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhblog20220118e4bb8ee58e9fe79086e588b0e6938de4bd9ce8aea9e4bda0e59ca8-apache-apisix-e4b8ade4bba3e79086-dubbo-e69c8de58aa1e69bb4e4bebfe68db7><span>从原理到操作，让你在 Apache APISIX 中代理 Dubbo 服务更便捷</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhblog20210602dubbo3-e5ba94e794a8e7baa7e69c8de58aa1e58f91e78eb0-li>
 <a href=/zh/blog/2021/06/02/dubbo3-%E5%BA%94%E7%94%A8%E7%BA%A7%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0/ title="Dubbo3 应用级服务发现" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhblog20210602dubbo3-e5ba94e794a8e7baa7e69c8de58aa1e58f91e78eb0><span>应用级服务发现</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhblog20210220dubbo-go-e799bde8af9de69687-li>
 <a href=/zh/blog/2021/02/20/dubbo-go-%E7%99%BD%E8%AF%9D%E6%96%87/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhblog20210220dubbo-go-e799bde8af9de69687><span>dubbo-go 白话文</span></a>
@@ -176,8 +157,8 @@ Releases
 <a href=/zh/blog/2021/01/11/%E5%9C%A8dubbo-go%E4%B8%AD%E4%BD%BF%E7%94%A8sentinel/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhblog20210111e59ca8dubbo-goe4b8ade4bdbfe794a8sentinel><span>在dubbo-go中使用sentinel</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhblog20210111e697a0e7bc9de8a194e68ea5-grpc-e4b88e-dubbo-go-li>
 <a href=/zh/blog/2021/01/11/%E6%97%A0%E7%BC%9D%E8%A1%94%E6%8E%A5-grpc-%E4%B8%8E-dubbo-go/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhblog20210111e697a0e7bc9de8a194e68ea5-grpc-e4b88e-dubbo-go><span>无缝衔接 gRPC 与 dubbo-go</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhblog20201222dubbo-api-docs-apache-dubboe69687e6a1a3e5b195e7a4bae6b58be8af95e5b7a5e585b7-li>
-<a href=/zh/blog/2020/12/22/dubbo-api-docs-apache-dubbo%E6%96%87%E6%A1%A3%E5%B1%95%E7%A4%BA%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhblog20201222dubbo-api-docs-apache-dubboe69687e6a1a3e5b195e7a4bae6b58be8af95e5b7a5e585b7><span>Dubbo-Api-Docs -- Apache Dubbo文档展示&测试工具</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhblog20201222dubbo-api-docs--apache-dubboe69687e6a1a3e5b195e7a4bae6b58be8af95e5b7a5e585b7-li>
+<a href=/zh/blog/2020/12/22/dubbo-api-docs--apache-dubbo%E6%96%87%E6%A1%A3%E5%B1%95%E7%A4%BA%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhblog20201222dubbo-api-docs--apache-dubboe69687e6a1a3e5b195e7a4bae6b58be8af95e5b7a5e585b7><span>Dubbo-Api-Docs -- Apache Dubbo文档展示&测试工具</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhblog20200511e4bb8e-2019-e588b0-2020apache-dubbo-e5b9b4e5baa6e59b9ee9a1bee4b88ee680bbe7bb93-li>
 <a href=/zh/blog/2020/05/11/%E4%BB%8E-2019-%E5%88%B0-2020apache-dubbo-%E5%B9%B4%E5%BA%A6%E5%9B%9E%E9%A1%BE%E4%B8%8E%E6%80%BB%E7%BB%93/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhblog20200511e4bb8e-2019-e588b0-2020apache-dubbo-e5b9b4e5baa6e59b9ee9a1bee4b88ee680bbe7bb93><span>从 2019 到 2020，Apache Dubbo 年度回顾与总结</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhblog20191202dubboe6b58be8af95e9aa8ce8af81-li>
@@ -214,11 +195,7 @@ Releases
 <a href=/zh/blog/2019/04/25/dubbo%E5%8F%AF%E6%89%A9%E5%B1%95%E6%9C%BA%E5%88%B6%E5%AE%9E%E6%88%98/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhblog20190425dubboe58fafe689a9e5b195e69cbae588b6e5ae9ee68898><span>Dubbo可扩展机制实战</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhblog20190203e68f90e5898dife588a4e696ade5b8aee58aa9cpue58886e694afe9a284e6b58b-li>
 <a href=/zh/blog/2019/02/03/%E6%8F%90%E5%89%8Dif%E5%88%A4%E6%96%AD%E5%B8%AE%E5%8A%A9cpu%E5%88%86%E6%94%AF%E9%A2%84%E6%B5%8B/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhblog20190203e68f90e5898dife588a4e696ade5b8aee58aa9cpue58886e694afe9a284e6b58b><span>提前if判断帮助CPU分支预测</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhblog20190202e5bd93dubboe98187e4b88aarthase68e92e69fa5e997aee9a298e79a84e5ae9ee8b7b5-li>
-<a href=/zh/blog/2019/02/02/%E5%BD%93dubbo%E9%81%87%E4%B8%8Aarthas%E6%8E%92%E6%9F%A5%E9%97%AE%E9%A2%98%E7%9A%84%E5%AE%9E%E8%B7%B5/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhblog20190202e5bd93dubboe98187e4b88aarthase68e92e69fa5e997aee9a298e79a84e5ae9ee8b7b5><span>当Dubbo遇上Arthas：排查问题的实践</span></a>
-</li>
-</ul>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zhblogreleases-li>
+</li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zhblogreleases-li>
 <a href=/zh/blog/releases/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhblogreleases><span>版本发布</span></a>
 <ul class="ul-2 foldable">
 <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhblog202109202714-e58f91e78988e585ace5918a-li>
@@ -243,376 +220,229 @@ Releases
 <a href=/zh/blog/2020/05/18/2.7.5-%E5%8A%9F%E8%83%BD%E8%A7%A3%E6%9E%90/ title="2.7.5 功能解析" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhblog20200518275-e58a9fe883bde8a7a3e69e90><span>2.7.5</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child collapse" id=m-zhblog20200518e8bf87e5be80e78988e69cac-li>
 <a href=/zh/blog/2020/05/18/%E8%BF%87%E5%BE%80%E7%89%88%E6%9C%AC/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhblog20200518e8bf87e5be80e78988e69cac><span>过往版本</span></a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</nav>
-</div>
-</aside>
-<aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
+</li></ul></li></ul></li></ul></nav></div></aside><aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
-</div>
-<div class=td-toc><nav id=TableOfContents>
+</div><div class=td-toc><nav id=TableOfContents>
 <ul>
 <li><a href=#注解介绍>注解介绍</a>
 <ul>
-<li><a href=#enabledubbo>@EnableDubbo</a></li>
-<li><a href=#service>@Service</a></li>
-<li><a href=#reference>@Reference</a></li>
-</ul>
-</li>
-<li><a href=#示例实战>示例实战</a>
+<li><a href=#enabledubbo>@EnableDubbo</a></li><li><a href=#service>@Service</a></li><li><a href=#reference>@Reference</a></li></ul></li><li><a href=#示例实战>示例实战</a>
 <ul>
-<li><a href=#1-接口定义>1. 接口定义</a></li>
-<li><a href=#2-服务端服务实现>2. 服务端：服务实现</a></li>
-<li><a href=#3-服务端组装服务提供方>3. 服务端：组装服务提供方</a></li>
-<li><a href=#4-服务端启动服务>4. 服务端：启动服务</a></li>
-<li><a href=#5-客户端引用服务>5. 客户端：引用服务</a></li>
-<li><a href=#6-客户端组装服务消费者>6. 客户端：组装服务消费者</a></li>
-<li><a href=#7-客户端发起远程调用>7. 客户端：发起远程调用</a></li>
-</ul>
-</li>
-<li><a href=#总结>总结</a></li>
-</ul>
-</nav></div>
-</aside>
-<main class="col-12 col-md-9 col-xl-8 pl-md-5 pr-md-4" role=main>
+<li><a href=#1-接口定义>1. 接口定义</a></li><li><a href=#2-服务端服务实现>2. 服务端：服务实现</a></li><li><a href=#3-服务端组装服务提供方>3. 服务端：组装服务提供方</a></li><li><a href=#4-服务端启动服务>4. 服务端：启动服务</a></li><li><a href=#5-客户端引用服务>5. 客户端：引用服务</a></li><li><a href=#6-客户端组装服务消费者>6. 客户端：组装服务消费者</a></li><li><a href=#7-客户端发起远程调用>7. 客户端：发起远程调用</a></li></ul></li><li><a href=#总结>总结</a></li></ul></nav></div></aside><main class="col-12 col-md-9 col-xl-8 pl-md-5 pr-md-4" role=main>
 <a class="btn btn-lg -bg-orange td-rss-button d-none d-lg-block" href=https://dubbo.apache.org/zh/blog/news/index.xml target=_blank>
 RSS <i class="fa fa-rss ml-2"></i>
 </a>
 <div class=td-content>
-<h1>在 Dubbo 中使用注解</h1>
-<div class=lead>介绍了如何使用注解方式而非 XML 方式来开发 Dubbo 应用，可以学习到如何使用 @EnableDubbo、@Service、@Reference 的用法。</div>
-<div class="td-byline mb-4">
+<h1>在 Dubbo 中使用注解</h1><div class=lead>介绍了如何使用注解方式而非 XML 方式来开发 Dubbo 应用，可以学习到如何使用 @EnableDubbo、@Service、@Reference 的用法。</div><div class="td-byline mb-4">
 <time datetime=2018-08-07 class=text-muted>Tuesday, August 07, 2018</time>
-</div>
-<header class=article-meta>
-</header>
-<h1 id=在-dubbo-中使用注解>在 Dubbo 中使用注解</h1>
-<p>随着微服务架构的广泛地推广和实施。在 Java 生态系统中，以 Spring Boot 和 Spring Cloud 为代表的微服务框架，引入了全新的编程模型，包括：</p>
-<ul>
-<li>注解驱动（Annotation-Driven）</li>
-<li>外部化配置（External Configuration）</li>
-<li>以及自动装配（Auto-Configure）</li>
-</ul>
-<p>新的编程模型无需 XML 配置、简化部署、提升开发效率。为了更好地实践微服务架构，Dubbo 从 <code>2.5.8</code> 版本开始， 分别针对了上述的三个场景，提供了更完善的支持。本文不讨论传统的 XML 配置方式，而是侧重介绍注解这种方式。外部配置、自动装配两种自动装配会在另外的文章中专门介绍。</p>
-<h2 id=注解介绍>注解介绍</h2>
-<h3 id=enabledubbo>@EnableDubbo</h3>
-<p><code>@EnableDubbo</code> 注解是 <code>@EnableDubboConfig</code> 和 <code>@DubboComponentScan</code>两者组合的便捷表达方式。与注解驱动相关的是 <code>@DubboComponentScan</code>。</p>
-<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#719e07>package</span> org.apache.dubbo.config.spring.context.annotation<span style=color:#719e07>;</span>
-
-<span style=color:#268bd2>@EnableDubboConfig</span>
-<span style=color:#268bd2>@DubboComponentScan</span>
-<span style=color:#268bd2>public</span> <span style=color:#268bd2>@interface</span> EnableDubbo <span style=color:#719e07>{</span>
-    <span style=color:#586e75>/**
-</span><span style=color:#586e75>     * Base packages to scan for annotated @Service classes.
-</span><span style=color:#586e75>     * &lt;p&gt;
-</span><span style=color:#586e75>     * Use {@link #scanBasePackageClasses()} for a type-safe alternative to String-based
-</span><span style=color:#586e75>     * package names.
-</span><span style=color:#586e75>     *
-</span><span style=color:#586e75>     * @return the base packages to scan
-</span><span style=color:#586e75>     * @see DubboComponentScan#basePackages()
-</span><span style=color:#586e75>     */</span>
-    <span style=color:#268bd2>@AliasFor</span><span style=color:#719e07>(</span>annotation <span style=color:#719e07>=</span> DubboComponentScan<span style=color:#719e07>.</span>class<span style=color:#719e07>,</span> attribute <span style=color:#719e07>=</span> <span style=color:#2aa198>&#34;basePackages&#34;</span><span style=color:#719e07>)</span>
-    String<span style=color:#719e07>[]</span> <span style=color:#268bd2>scanBasePackages</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#719e07>{};</span>
-
-    <span style=color:#586e75>/**
-</span><span style=color:#586e75>     * Type-safe alternative to {@link #scanBasePackages()} for specifying the packages to
-</span><span style=color:#586e75>     * scan for annotated @Service classes. The package of each class specified will be
-</span><span style=color:#586e75>     * scanned.
-</span><span style=color:#586e75>     *
-</span><span style=color:#586e75>     * @return classes from the base packages to scan
-</span><span style=color:#586e75>     * @see DubboComponentScan#basePackageClasses
-</span><span style=color:#586e75>     */</span>
-    <span style=color:#268bd2>@AliasFor</span><span style=color:#719e07>(</span>annotation <span style=color:#719e07>=</span> DubboComponentScan<span style=color:#719e07>.</span>class<span style=color:#719e07>,</span> attribute <span style=color:#719e07>=</span> <span style=color:#2aa198>&#34;basePackageClasses&#34;</span><span style=color:#719e07>)</span>
-    Class<span style=color:#719e07>&lt;?&gt;[]</span> scanBasePackageClasses<span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#719e07>{};</span>    
-<span style=color:#719e07>}</span>
-</code></pre></div><p>通过 <code>@EnableDubbo</code> 可以在指定的包名下（通过 <code>scanBasePackages</code>），或者指定的类中（通过 <code>scanBasePackageClasses</code>）扫描 Dubbo 的服务提供者（以 <code>@Service</code> 标注）以及 Dubbo 的服务消费者（以 <code>Reference</code> 标注）。</p>
-<p>扫描到 Dubbo 的服务提供方和消费者之后，对其做相应的组装并初始化，并最终完成服务暴露或者引用的工作。</p>
-<p>当然，如果不使用外部化配置（External Configuration）的话，也可以直接使用 <code>@DubboComponentScan</code>。</p>
-<h3 id=service>@Service</h3>
-<p><code>@Service</code> 用来配置 Dubbo 的服务提供方，比如：</p>
-<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#268bd2>@Service</span>
-<span style=color:#268bd2>public</span> <span style=color:#268bd2>class</span> <span style=color:#268bd2>AnnotatedGreetingService</span> <span style=color:#268bd2>implements</span> GreetingService <span style=color:#719e07>{</span>
-    <span style=color:#268bd2>public</span> String <span style=color:#268bd2>sayHello</span><span style=color:#719e07>(</span>String name<span style=color:#719e07>)</span> <span style=color:#719e07>{</span>
-        <span style=color:#719e07>return</span> <span style=color:#2aa198>&#34;hello, &#34;</span> <span style=color:#719e07>+</span> name<span style=color:#719e07>;</span>
-    <span style=color:#719e07>}</span>
-<span style=color:#719e07>}</span>
-</code></pre></div><p>通过 <code>@Service</code> 上提供的属性，可以进一步的定制化 Dubbo 的服务提供方：</p>
-<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#719e07>package</span> org.apache.dubbo.config.annotation<span style=color:#719e07>;</span>
-
-<span style=color:#268bd2>@Documented</span>
-<span style=color:#268bd2>@Retention</span><span style=color:#719e07>(</span>RetentionPolicy<span style=color:#719e07>.</span>RUNTIME<span style=color:#719e07>)</span>
-<span style=color:#268bd2>@Target</span><span style=color:#719e07>({</span>ElementType<span style=color:#719e07>.</span>TYPE<span style=color:#719e07>})</span> <span style=color:#586e75>// #1
-</span><span style=color:#586e75></span><span style=color:#268bd2>@Inherited</span>
-<span style=color:#268bd2>public</span> <span style=color:#268bd2>@interface</span> Service <span style=color:#719e07>{</span>
-    Class<span style=color:#719e07>&lt;?&gt;</span> interfaceClass<span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#dc322f>void</span><span style=color:#719e07>.</span>class<span style=color:#719e07>;</span> <span style=color:#586e75>// #2
-</span><span style=color:#586e75></span>    String <span style=color:#268bd2>interfaceName</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #3
-</span><span style=color:#586e75></span>    String <span style=color:#268bd2>version</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #4
-</span><span style=color:#586e75></span>    String <span style=color:#268bd2>group</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #5
-</span><span style=color:#586e75></span>    <span style=color:#dc322f>boolean</span> <span style=color:#268bd2>export</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#cb4b16>true</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #6
-</span><span style=color:#586e75></span>    <span style=color:#dc322f>boolean</span> <span style=color:#268bd2>register</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#cb4b16>true</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #7
-</span><span style=color:#586e75></span>    
-    String <span style=color:#268bd2>application</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #8
-</span><span style=color:#586e75></span>    String <span style=color:#268bd2>module</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #9
-</span><span style=color:#586e75></span>    String <span style=color:#268bd2>provider</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #10
-</span><span style=color:#586e75></span>    String<span style=color:#719e07>[]</span> <span style=color:#268bd2>protocol</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#719e07>{};</span> <span style=color:#586e75>// #11
-</span><span style=color:#586e75></span>    String <span style=color:#268bd2>monitor</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #12
-</span><span style=color:#586e75></span>    String<span style=color:#719e07>[]</span> <span style=color:#268bd2>registry</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#719e07>{};</span> <span style=color:#586e75>// #13
-</span><span style=color:#586e75></span><span style=color:#719e07>}</span>
-</code></pre></div><p>其中比较重要的有：</p>
+</div><header class=article-meta>
+</header><h1 id=在-dubbo-中使用注解>在 Dubbo 中使用注解</h1><p>随着微服务架构的广泛地推广和实施。在 Java 生态系统中，以 Spring Boot 和 Spring Cloud 为代表的微服务框架，引入了全新的编程模型，包括：</p><ul>
+<li>注解驱动（Annotation-Driven）</li><li>外部化配置（External Configuration）</li><li>以及自动装配（Auto-Configure）</li></ul><p>新的编程模型无需 XML 配置、简化部署、提升开发效率。为了更好地实践微服务架构，Dubbo 从 <code>2.5.8</code> 版本开始， 分别针对了上述的三个场景，提供了更完善的支持。本文不讨论传统的 XML 配置方式，而是侧重介绍注解这种方式。外部配置、自动装配两种自动装配会在另外的文章中专门介绍。</p><h2 id=注解介绍>注解介绍</h2><h3 id=enabledubbo>@EnableDubbo</h3><p><code>@EnableDubbo</code> 注解是 <code>@EnableDubboConfig</code> 和 <code>@DubboComponentScan</code>两者组合的便捷表达方式。与注解驱动相关的是 <code>@DubboComponentScan</code>。</p><div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#719e07>package</span> org.apache.dubbo.config.spring.context.annotation<span style=color:#719e07>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#268bd2>@EnableDubboConfig</span>
+</span></span><span style=display:flex><span><span style=color:#268bd2>@DubboComponentScan</span>
+</span></span><span style=display:flex><span><span style=color:#268bd2>public</span> <span style=color:#268bd2>@interface</span> EnableDubbo <span style=color:#719e07>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#586e75>/**
+</span></span></span><span style=display:flex><span><span style=color:#586e75>     * Base packages to scan for annotated @Service classes.
+</span></span></span><span style=display:flex><span><span style=color:#586e75>     * &lt;p&gt;
+</span></span></span><span style=display:flex><span><span style=color:#586e75>     * Use {@link #scanBasePackageClasses()} for a type-safe alternative to String-based
+</span></span></span><span style=display:flex><span><span style=color:#586e75>     * package names.
+</span></span></span><span style=display:flex><span><span style=color:#586e75>     *
+</span></span></span><span style=display:flex><span><span style=color:#586e75>     * @return the base packages to scan
+</span></span></span><span style=display:flex><span><span style=color:#586e75>     * @see DubboComponentScan#basePackages()
+</span></span></span><span style=display:flex><span><span style=color:#586e75>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#268bd2>@AliasFor</span><span style=color:#719e07>(</span>annotation <span style=color:#719e07>=</span> DubboComponentScan<span style=color:#719e07>.</span>class<span style=color:#719e07>,</span> attribute <span style=color:#719e07>=</span> <span style=color:#2aa198>&#34;basePackages&#34;</span><span style=color:#719e07>)</span>
+</span></span><span style=display:flex><span>    String<span style=color:#719e07>[]</span> <span style=color:#268bd2>scanBasePackages</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#719e07>{};</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#586e75>/**
+</span></span></span><span style=display:flex><span><span style=color:#586e75>     * Type-safe alternative to {@link #scanBasePackages()} for specifying the packages to
+</span></span></span><span style=display:flex><span><span style=color:#586e75>     * scan for annotated @Service classes. The package of each class specified will be
+</span></span></span><span style=display:flex><span><span style=color:#586e75>     * scanned.
+</span></span></span><span style=display:flex><span><span style=color:#586e75>     *
+</span></span></span><span style=display:flex><span><span style=color:#586e75>     * @return classes from the base packages to scan
+</span></span></span><span style=display:flex><span><span style=color:#586e75>     * @see DubboComponentScan#basePackageClasses
+</span></span></span><span style=display:flex><span><span style=color:#586e75>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#268bd2>@AliasFor</span><span style=color:#719e07>(</span>annotation <span style=color:#719e07>=</span> DubboComponentScan<span style=color:#719e07>.</span>class<span style=color:#719e07>,</span> attribute <span style=color:#719e07>=</span> <span style=color:#2aa198>&#34;basePackageClasses&#34;</span><span style=color:#719e07>)</span>
+</span></span><span style=display:flex><span>    Class<span style=color:#719e07>&lt;?&gt;[]</span> scanBasePackageClasses<span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#719e07>{};</span>    
+</span></span><span style=display:flex><span><span style=color:#719e07>}</span>
+</span></span></code></pre></div><p>通过 <code>@EnableDubbo</code> 可以在指定的包名下（通过 <code>scanBasePackages</code>），或者指定的类中（通过 <code>scanBasePackageClasses</code>）扫描 Dubbo 的服务提供者（以 <code>@Service</code> 标注）以及 Dubbo 的服务消费者（以 <code>Reference</code> 标注）。</p><p>扫描到 Dubbo 的服务提供方和消费者之后，对其做相应的组装并初始化，并最终完成服务暴露或者引用的工作。</p><p>当然，如果不使用外部化配置（External Configuration）的话，也可以直接使用 <code>@DubboComponentScan</code>。</p><h3 id=service>@Service</h3><p><code>@Service</code> 用来配置 Dubbo 的服务提供方，比如：</p><div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#268bd2>@Service</span>
+</span></span><span style=display:flex><span><span style=color:#268bd2>public</span> <span style=color:#268bd2>class</span> <span style=color:#268bd2>AnnotatedGreetingService</span> <span style=color:#268bd2>implements</span> GreetingService <span style=color:#719e07>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#268bd2>public</span> String <span style=color:#268bd2>sayHello</span><span style=color:#719e07>(</span>String name<span style=color:#719e07>)</span> <span style=color:#719e07>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#719e07>return</span> <span style=color:#2aa198>&#34;hello, &#34;</span> <span style=color:#719e07>+</span> name<span style=color:#719e07>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#719e07>}</span>
+</span></span><span style=display:flex><span><span style=color:#719e07>}</span>
+</span></span></code></pre></div><p>通过 <code>@Service</code> 上提供的属性，可以进一步的定制化 Dubbo 的服务提供方：</p><div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#719e07>package</span> org.apache.dubbo.config.annotation<span style=color:#719e07>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#268bd2>@Documented</span>
+</span></span><span style=display:flex><span><span style=color:#268bd2>@Retention</span><span style=color:#719e07>(</span>RetentionPolicy<span style=color:#719e07>.</span>RUNTIME<span style=color:#719e07>)</span>
+</span></span><span style=display:flex><span><span style=color:#268bd2>@Target</span><span style=color:#719e07>({</span>ElementType<span style=color:#719e07>.</span>TYPE<span style=color:#719e07>})</span> <span style=color:#586e75>// #1
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span><span style=color:#268bd2>@Inherited</span>
+</span></span><span style=display:flex><span><span style=color:#268bd2>public</span> <span style=color:#268bd2>@interface</span> Service <span style=color:#719e07>{</span>
+</span></span><span style=display:flex><span>    Class<span style=color:#719e07>&lt;?&gt;</span> interfaceClass<span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#dc322f>void</span><span style=color:#719e07>.</span>class<span style=color:#719e07>;</span> <span style=color:#586e75>// #2
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>    String <span style=color:#268bd2>interfaceName</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #3
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>    String <span style=color:#268bd2>version</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #4
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>    String <span style=color:#268bd2>group</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #5
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>    <span style=color:#dc322f>boolean</span> <span style=color:#268bd2>export</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#cb4b16>true</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #6
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>    <span style=color:#dc322f>boolean</span> <span style=color:#268bd2>register</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#cb4b16>true</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #7
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>    
+</span></span><span style=display:flex><span>    String <span style=color:#268bd2>application</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #8
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>    String <span style=color:#268bd2>module</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #9
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>    String <span style=color:#268bd2>provider</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #10
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>    String<span style=color:#719e07>[]</span> <span style=color:#268bd2>protocol</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#719e07>{};</span> <span style=color:#586e75>// #11
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>    String <span style=color:#268bd2>monitor</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #12
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>    String<span style=color:#719e07>[]</span> <span style=color:#268bd2>registry</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#719e07>{};</span> <span style=color:#586e75>// #13
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span><span style=color:#719e07>}</span>
+</span></span></code></pre></div><p>其中比较重要的有：</p><ol>
+<li>@Service 只能定义在一个类上，表示一个服务的具体实现</li><li>interfaceClass：指定服务提供方实现的 interface 的类</li><li>interfaceName：指定服务提供方实现的 interface 的类名</li><li>version：指定服务的版本号</li><li>group：指定服务的分组</li><li>export：是否暴露服务</li><li>registry：是否向注册中心注册服务</li><li>application：应用配置</li><li>module：模块配置</li><li>provider：服务提供方配置</li><li>protocol：协议配置</li><li>monitor：监控中心配置</li><li>registry：注册中心配置</li></ol><p>另外，需要注意的是，application、module、provider、protocol、monitor、registry（从 8 到 13）需要提供的是对应的 spring bean 的名字，而这些 bean 的组装要么通过传统的 XML 配置方式完成，要么通过现代的 Java Config 来完成。在本文中，将会展示 Java Config 的使用方式。</p><h3 id=reference>@Reference</h3><p><code>@Reference</code> 用来配置 Dubbo 的服务消费方，比如：</p><div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#268bd2>@Component</span>
+</span></span><span style=display:flex><span><span style=color:#268bd2>public</span> <span style=color:#268bd2>class</span> <span style=color:#268bd2>GreetingServiceConsumer</span> <span style=color:#719e07>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#268bd2>@Reference</span>
+</span></span><span style=display:flex><span>    <span style=color:#268bd2>private</span> GreetingService greetingService<span style=color:#719e07>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#268bd2>public</span> String <span style=color:#268bd2>doSayHello</span><span style=color:#719e07>(</span>String name<span style=color:#719e07>)</span> <span style=color:#719e07>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#719e07>return</span> greetingService<span style=color:#719e07>.</span>sayHello<span style=color:#719e07>(</span>name<span style=color:#719e07>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#719e07>}</span>
+</span></span><span style=display:flex><span><span style=color:#719e07>}</span>
+</span></span></code></pre></div><p>通过 <code>@Reference</code> 上提供的属性，可以进一步的定制化 Dubbo 的服务消费方：</p><div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#719e07>package</span> org.apache.dubbo.config.annotation<span style=color:#719e07>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#268bd2>@Documented</span>
+</span></span><span style=display:flex><span><span style=color:#268bd2>@Retention</span><span style=color:#719e07>(</span>RetentionPolicy<span style=color:#719e07>.</span>RUNTIME<span style=color:#719e07>)</span>
+</span></span><span style=display:flex><span><span style=color:#268bd2>@Target</span><span style=color:#719e07>({</span>ElementType<span style=color:#719e07>.</span>FIELD<span style=color:#719e07>,</span> ElementType<span style=color:#719e07>.</span>METHOD<span style=color:#719e07>,</span> ElementType<span style=color:#719e07>.</span>ANNOTATION_TYPE<span style=color:#719e07>})</span> <span style=color:#586e75>// #1
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span><span style=color:#268bd2>public</span> <span style=color:#268bd2>@interface</span> Reference <span style=color:#719e07>{</span>
+</span></span><span style=display:flex><span>    Class<span style=color:#719e07>&lt;?&gt;</span> interfaceClass<span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#dc322f>void</span><span style=color:#719e07>.</span>class<span style=color:#719e07>;</span> <span style=color:#586e75>// #2
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>    String <span style=color:#268bd2>interfaceName</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #3
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>    String <span style=color:#268bd2>version</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #4
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>    String <span style=color:#268bd2>group</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #5
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>    String <span style=color:#268bd2>url</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #6
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>    
+</span></span><span style=display:flex><span>    String <span style=color:#268bd2>application</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #7
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>    String <span style=color:#268bd2>module</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #8
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>    String <span style=color:#268bd2>consumer</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #9
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>    String <span style=color:#268bd2>protocol</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #10
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>    String <span style=color:#268bd2>monitor</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #11
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>    String<span style=color:#719e07>[]</span> <span style=color:#268bd2>registry</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#719e07>{};</span> <span style=color:#586e75>// #12
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span><span style=color:#719e07>}</span>
+</span></span></code></pre></div><p>其中比较重要的有：</p><ol>
+<li>@Reference 可以定义在类中的一个字段上，也可以定义在一个方法上，甚至可以用来修饰另一个 annotation，表示一个服务的引用。通常 @Reference 定义在一个字段上</li><li>interfaceClass：指定服务的 interface 的类</li><li>interfaceName：指定服务的 interface 的类名</li><li>version：指定服务的版本号</li><li>group：指定服务的分组</li><li>url：通过指定服务提供方的 URL 地址直接绕过注册中心发起调用</li><li>application：应用配置</li><li>module：模块配置</li><li>consumer：服务消费方配置</li><li>protocol：协议配置</li><li>monitor：监控中心配置</li><li>registry：注册中心配置</li></ol><p>另外，需要注意的是，application、module、consumer、protocol、monitor、registry（从 7 到 12）需要提供的是对应的 spring bean 的名字，而这些 bean 的组装要么通过传统的 XML 配置方式完成，要么通过现代的 Java Config 来完成。在本文中，将会展示 Java Config 的使用方式。</p><h2 id=示例实战>示例实战</h2><p>了解了 <code>@EnableDubbo</code>， <code>@Service</code>，<code>@Reference</code> 的作用，下面以一个实际的例子来展示如何使用 annotation 来开发 Dubbo 应用。以下的代码可以在 <a href=https://github.com/dubbo/dubbo-samples/tree/master/dubbo-samples-annotation>https://github.com/dubbo/dubbo-samples/tree/master/dubbo-samples-annotation</a> 中找到。</p><h3 id=1-接口定义>1. 接口定义</h3><p>定义一个简单的 <code>GreetingService</code> 接口，里面只有一个简单的方法 <code>sayHello</code> 向调用者问好。</p><div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#268bd2>public</span> <span style=color:#268bd2>interface</span> <span style=color:#268bd2>GreetingService</span> <span style=color:#719e07>{</span>
+</span></span><span style=display:flex><span>    String <span style=color:#268bd2>sayHello</span><span style=color:#719e07>(</span>String name<span style=color:#719e07>);</span>
+</span></span><span style=display:flex><span><span style=color:#719e07>}</span>
+</span></span></code></pre></div><h3 id=2-服务端服务实现>2. 服务端：服务实现</h3><p>实现 <code>GreetingService</code> 接口，并通过 <code>@Service</code> 来标注其为 Dubbo 的一个服务。</p><div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#268bd2>@Service</span>
+</span></span><span style=display:flex><span><span style=color:#268bd2>public</span> <span style=color:#268bd2>class</span> <span style=color:#268bd2>AnnotatedGreetingService</span> <span style=color:#268bd2>implements</span> GreetingService <span style=color:#719e07>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#268bd2>public</span> String <span style=color:#268bd2>sayHello</span><span style=color:#719e07>(</span>String name<span style=color:#719e07>)</span> <span style=color:#719e07>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#719e07>return</span> <span style=color:#2aa198>&#34;hello, &#34;</span> <span style=color:#719e07>+</span> name<span style=color:#719e07>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#719e07>}</span>
+</span></span><span style=display:flex><span><span style=color:#719e07>}</span>
+</span></span></code></pre></div><h3 id=3-服务端组装服务提供方>3. 服务端：组装服务提供方</h3><p>通过 Spring 中 Java Config 的技术（<code>@Configuration</code>）和 annotation 扫描（<code>@EnableDubbo</code>）来发现、组装、并向外提供 Dubbo 的服务。</p><div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#268bd2>@Configuration</span>
+</span></span><span style=display:flex><span><span style=color:#268bd2>@EnableDubbo</span><span style=color:#719e07>(</span>scanBasePackages <span style=color:#719e07>=</span> <span style=color:#2aa198>&#34;com.alibaba.dubbo.samples.impl&#34;</span><span style=color:#719e07>)</span>
+</span></span><span style=display:flex><span><span style=color:#268bd2>static</span> <span style=color:#268bd2>class</span> <span style=color:#268bd2>ProviderConfiguration</span> <span style=color:#719e07>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#268bd2>@Bean</span> <span style=color:#586e75>// #1
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>    <span style=color:#268bd2>public</span> ProviderConfig <span style=color:#268bd2>providerConfig</span><span style=color:#719e07>()</span> <span style=color:#719e07>{</span>
+</span></span><span style=display:flex><span>        ProviderConfig providerConfig <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ProviderConfig<span style=color:#719e07>();</span>
+</span></span><span style=display:flex><span>        providerConfig<span style=color:#719e07>.</span>setTimeout<span style=color:#719e07>(</span>1000<span style=color:#719e07>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#719e07>return</span> providerConfig<span style=color:#719e07>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#719e07>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#268bd2>@Bean</span> <span style=color:#586e75>// #2
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>    <span style=color:#268bd2>public</span> ApplicationConfig <span style=color:#268bd2>applicationConfig</span><span style=color:#719e07>()</span> <span style=color:#719e07>{</span>
+</span></span><span style=display:flex><span>        ApplicationConfig applicationConfig <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ApplicationConfig<span style=color:#719e07>();</span>
+</span></span><span style=display:flex><span>        applicationConfig<span style=color:#719e07>.</span>setName<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;dubbo-annotation-provider&#34;</span><span style=color:#719e07>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#719e07>return</span> applicationConfig<span style=color:#719e07>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#719e07>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#268bd2>@Bean</span> <span style=color:#586e75>// #3
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>    <span style=color:#268bd2>public</span> RegistryConfig <span style=color:#268bd2>registryConfig</span><span style=color:#719e07>()</span> <span style=color:#719e07>{</span>
+</span></span><span style=display:flex><span>        RegistryConfig registryConfig <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> RegistryConfig<span style=color:#719e07>();</span>
+</span></span><span style=display:flex><span>        registryConfig<span style=color:#719e07>.</span>setProtocol<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;zookeeper&#34;</span><span style=color:#719e07>);</span>
+</span></span><span style=display:flex><span>        registryConfig<span style=color:#719e07>.</span>setAddress<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;localhost&#34;</span><span style=color:#719e07>);</span>
+</span></span><span style=display:flex><span>        registryConfig<span style=color:#719e07>.</span>setPort<span style=color:#719e07>(</span>2181<span style=color:#719e07>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#719e07>return</span> registryConfig<span style=color:#719e07>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#719e07>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#268bd2>@Bean</span> <span style=color:#586e75>// #4
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>    <span style=color:#268bd2>public</span> ProtocolConfig <span style=color:#268bd2>protocolConfig</span><span style=color:#719e07>()</span> <span style=color:#719e07>{</span>
+</span></span><span style=display:flex><span>        ProtocolConfig protocolConfig <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ProtocolConfig<span style=color:#719e07>();</span>
+</span></span><span style=display:flex><span>        protocolConfig<span style=color:#719e07>.</span>setName<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;dubbo&#34;</span><span style=color:#719e07>);</span>
+</span></span><span style=display:flex><span>        protocolConfig<span style=color:#719e07>.</span>setPort<span style=color:#719e07>(</span>20880<span style=color:#719e07>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#719e07>return</span> protocolConfig<span style=color:#719e07>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#719e07>}</span>
+</span></span><span style=display:flex><span><span style=color:#719e07>}</span>
+</span></span></code></pre></div><p>说明：</p><ul>
+<li>
+<p>通过 <code>@EnableDubbo</code> 指定在 <code>com.alibaba.dubbo.samples.impl</code> 下扫描所有标注有 <code>@Service</code> 的类</p></li><li>
+<p>通过 <code>@Configuration</code> 将 ProviderConfiguration 中所有的 <code>@Bean</code> 通过 Java Config 的方式组装出来并注入给 Dubbo 服务，也就是标注有 <code>@Service</code> 的类。这其中就包括了：</p><ol>
+<li>ProviderConfig：服务提供方配置</li><li>ApplicationConfig：应用配置</li><li>RegistryConfig：注册中心配置</li><li>ProtocolConfig：协议配置</li></ol></li></ul><h3 id=4-服务端启动服务>4. 服务端：启动服务</h3><p>在 <code>main</code> 方法中通过启动一个 Spring Context 来对外提供 Dubbo 服务。</p><div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#268bd2>public</span> <span style=color:#268bd2>class</span> <span style=color:#268bd2>ProviderBootstrap</span> <span style=color:#719e07>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#268bd2>public</span> <span style=color:#268bd2>static</span> <span style=color:#dc322f>void</span> <span style=color:#268bd2>main</span><span style=color:#719e07>(</span>String<span style=color:#719e07>[]</span> args<span style=color:#719e07>)</span> <span style=color:#268bd2>throws</span> Exception <span style=color:#719e07>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#719e07>new</span> EmbeddedZooKeeper<span style=color:#719e07>(</span>2181<span style=color:#719e07>,</span> <span style=color:#cb4b16>false</span><span style=color:#719e07>).</span>start<span style=color:#719e07>();</span> <span style=color:#586e75>// #1
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>        AnnotationConfigApplicationContext context <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> AnnotationConfigApplicationContext<span style=color:#719e07>(</span>ProviderConfiguration<span style=color:#719e07>.</span>class<span style=color:#719e07>);</span> <span style=color:#586e75>// #2
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>        context<span style=color:#719e07>.</span>start<span style=color:#719e07>();</span> <span style=color:#586e75>// #3
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>        System<span style=color:#719e07>.</span>in<span style=color:#719e07>.</span>read<span style=color:#719e07>();</span> <span style=color:#586e75>// #4
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>    <span style=color:#719e07>}</span>
+</span></span><span style=display:flex><span><span style=color:#719e07>}</span>
+</span></span></code></pre></div><p>说明：</p><ol>
+<li>启动一个嵌入式的 zookeeper 在 2181 端口上提供注册中心的服务</li><li>初始化一个 <code>AnnotationConfigApplicationContext</code> 的示例，并将 <code>ProviderConfiguration</code> 传入以完成 Dubbo 服务的自动发现和装配</li><li>启动 Spring Context，开始提供对外的 Dubbo 服务</li><li>因为是服务端，需要通过阻塞主线程来防止进程退出</li></ol><p>启动服务端的 <code>main</code> 方法，将会看到下面的输出，代表服务端启动成功，并在注册中心（ZookeeperRegistry）上注册了 <code>GreetingService</code> 这个服务：</p><div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span><span style=color:#719e07>[</span>01/08/18 02:12:51:051 CST<span style=color:#719e07>]</span> main  INFO transport.AbstractServer:  <span style=color:#719e07>[</span>DUBBO<span style=color:#719e07>]</span> Start NettyServer <span style=color:#b58900>bind</span> /0.0.0.0:20880, <span style=color:#b58900>export</span> /192.168.99.1:20880, dubbo version: 2.6.2, current host: 192.168.99.1
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#719e07>[</span>01/08/18 02:12:51:051 CST<span style=color:#719e07>]</span> main  INFO zookeeper.ZookeeperRegistry:  <span style=color:#719e07>[</span>DUBBO<span style=color:#719e07>]</span> Register: dubbo://192.168.99.1:20880/com.alibaba.dubbo.samples.api.GreetingService?anyhost<span style=color:#719e07>=</span>true&amp;<span style=color:#268bd2>application</span><span style=color:#719e07>=</span>dubbo-annotation-provider&amp;default.timeout<span style=color:#719e07>=</span>1000&amp;<span style=color:#268bd2>dubbo</span><span style=color:#719e07>=</span>2.6.2&amp;<span style=color:#268bd2>generic</span><span style=color:#719e07>=</span>false&amp;<span style=color:#268bd2>interface</span><span style=color:#719e07>=</span>com.alibaba.dubbo.samples.api
+</span></span></code></pre></div><h3 id=5-客户端引用服务>5. 客户端：引用服务</h3><p>通过 <code>@Reference</code> 来标记 <code>GreetingService</code> 接口的成员变量 greetingService 是一个 Dubbo 服务的引用，也就是说，可以简单的通过该接口向远端的服务提供方发起调用，而客户端并没有实现 <code>GreetingService</code> 接口。</p><div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#268bd2>@Component</span><span style=color:#719e07>(</span><span style=color:#2aa198>&#34;annotatedConsumer&#34;</span><span style=color:#719e07>)</span>
+</span></span><span style=display:flex><span><span style=color:#268bd2>public</span> <span style=color:#268bd2>class</span> <span style=color:#268bd2>GreetingServiceConsumer</span> <span style=color:#719e07>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#268bd2>@Reference</span>
+</span></span><span style=display:flex><span>    <span style=color:#268bd2>private</span> GreetingService greetingService<span style=color:#719e07>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#268bd2>public</span> String <span style=color:#268bd2>doSayHello</span><span style=color:#719e07>(</span>String name<span style=color:#719e07>)</span> <span style=color:#719e07>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#719e07>return</span> greetingService<span style=color:#719e07>.</span>sayHello<span style=color:#719e07>(</span>name<span style=color:#719e07>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#719e07>}</span>
+</span></span><span style=display:flex><span><span style=color:#719e07>}</span>
+</span></span></code></pre></div><h3 id=6-客户端组装服务消费者>6. 客户端：组装服务消费者</h3><p>与 <strong>3. 服务端：组装服务提供方</strong> 类似，通过 Spring 中 Java Config 的技术（<code>@Configuration</code>）和 annotation 扫描（<code>@EnableDubbo</code>）来发现、组装 Dubbo 服务的消费者。</p><div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#268bd2>@Configuration</span>
+</span></span><span style=display:flex><span><span style=color:#268bd2>@EnableDubbo</span><span style=color:#719e07>(</span>scanBasePackages <span style=color:#719e07>=</span> <span style=color:#2aa198>&#34;com.alibaba.dubbo.samples.action&#34;</span><span style=color:#719e07>)</span>
+</span></span><span style=display:flex><span><span style=color:#268bd2>@ComponentScan</span><span style=color:#719e07>(</span>value <span style=color:#719e07>=</span> <span style=color:#719e07>{</span><span style=color:#2aa198>&#34;com.alibaba.dubbo.samples.action&#34;</span><span style=color:#719e07>})</span>
+</span></span><span style=display:flex><span><span style=color:#268bd2>static</span> <span style=color:#268bd2>class</span> <span style=color:#268bd2>ConsumerConfiguration</span> <span style=color:#719e07>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#268bd2>@Bean</span> <span style=color:#586e75>// #1
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>    <span style=color:#268bd2>public</span> ApplicationConfig <span style=color:#268bd2>applicationConfig</span><span style=color:#719e07>()</span> <span style=color:#719e07>{</span>
+</span></span><span style=display:flex><span>        ApplicationConfig applicationConfig <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ApplicationConfig<span style=color:#719e07>();</span>
+</span></span><span style=display:flex><span>        applicationConfig<span style=color:#719e07>.</span>setName<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;dubbo-annotation-consumer&#34;</span><span style=color:#719e07>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#719e07>return</span> applicationConfig<span style=color:#719e07>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#719e07>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#268bd2>@Bean</span> <span style=color:#586e75>// #2
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>    <span style=color:#268bd2>public</span> ConsumerConfig <span style=color:#268bd2>consumerConfig</span><span style=color:#719e07>()</span> <span style=color:#719e07>{</span>
+</span></span><span style=display:flex><span>        ConsumerConfig consumerConfig <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ConsumerConfig<span style=color:#719e07>();</span>
+</span></span><span style=display:flex><span>        consumerConfig<span style=color:#719e07>.</span>setTimeout<span style=color:#719e07>(</span>3000<span style=color:#719e07>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#719e07>return</span> consumerConfig<span style=color:#719e07>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#719e07>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#268bd2>@Bean</span> <span style=color:#586e75>// #3
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>    <span style=color:#268bd2>public</span> RegistryConfig <span style=color:#268bd2>registryConfig</span><span style=color:#719e07>()</span> <span style=color:#719e07>{</span>
+</span></span><span style=display:flex><span>        RegistryConfig registryConfig <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> RegistryConfig<span style=color:#719e07>();</span>
+</span></span><span style=display:flex><span>        registryConfig<span style=color:#719e07>.</span>setProtocol<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;zookeeper&#34;</span><span style=color:#719e07>);</span>
+</span></span><span style=display:flex><span>        registryConfig<span style=color:#719e07>.</span>setAddress<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;localhost&#34;</span><span style=color:#719e07>);</span>
+</span></span><span style=display:flex><span>        registryConfig<span style=color:#719e07>.</span>setPort<span style=color:#719e07>(</span>2181<span style=color:#719e07>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#719e07>return</span> registryConfig<span style=color:#719e07>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#719e07>}</span>
+</span></span><span style=display:flex><span><span style=color:#719e07>}</span>
+</span></span></code></pre></div><p>说明：</p><ul>
+<li>通过 <code>@EnableDubbo</code> 指定在 <code>com.alibaba.dubbo.samples.impl</code> 下扫描所有标注有 `@Reference 的类</li><li>通过 <code>@Configuration</code> 将 ConsumerConfiguration 中所有的 <code>@Bean</code> 通过 Java Config 的方式组装出来并注入给 Dubbo 服务消费者，也就是标注有 `@Reference 的类。这其中就包括了：
 <ol>
-<li>@Service 只能定义在一个类上，表示一个服务的具体实现</li>
-<li>interfaceClass：指定服务提供方实现的 interface 的类</li>
-<li>interfaceName：指定服务提供方实现的 interface 的类名</li>
-<li>version：指定服务的版本号</li>
-<li>group：指定服务的分组</li>
-<li>export：是否暴露服务</li>
-<li>registry：是否向注册中心注册服务</li>
-<li>application：应用配置</li>
-<li>module：模块配置</li>
-<li>provider：服务提供方配置</li>
-<li>protocol：协议配置</li>
-<li>monitor：监控中心配置</li>
-<li>registry：注册中心配置</li>
-</ol>
-<p>另外，需要注意的是，application、module、provider、protocol、monitor、registry（从 8 到 13）需要提供的是对应的 spring bean 的名字，而这些 bean 的组装要么通过传统的 XML 配置方式完成，要么通过现代的 Java Config 来完成。在本文中，将会展示 Java Config 的使用方式。</p>
-<h3 id=reference>@Reference</h3>
-<p><code>@Reference</code> 用来配置 Dubbo 的服务消费方，比如：</p>
-<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#268bd2>@Component</span>
-<span style=color:#268bd2>public</span> <span style=color:#268bd2>class</span> <span style=color:#268bd2>GreetingServiceConsumer</span> <span style=color:#719e07>{</span>
-    <span style=color:#268bd2>@Reference</span>
-    <span style=color:#268bd2>private</span> GreetingService greetingService<span style=color:#719e07>;</span>
-
-    <span style=color:#268bd2>public</span> String <span style=color:#268bd2>doSayHello</span><span style=color:#719e07>(</span>String name<span style=color:#719e07>)</span> <span style=color:#719e07>{</span>
-        <span style=color:#719e07>return</span> greetingService<span style=color:#719e07>.</span>sayHello<span style=color:#719e07>(</span>name<span style=color:#719e07>);</span>
-    <span style=color:#719e07>}</span>
-<span style=color:#719e07>}</span>
-</code></pre></div><p>通过 <code>@Reference</code> 上提供的属性，可以进一步的定制化 Dubbo 的服务消费方：</p>
-<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#719e07>package</span> org.apache.dubbo.config.annotation<span style=color:#719e07>;</span>
-
-<span style=color:#268bd2>@Documented</span>
-<span style=color:#268bd2>@Retention</span><span style=color:#719e07>(</span>RetentionPolicy<span style=color:#719e07>.</span>RUNTIME<span style=color:#719e07>)</span>
-<span style=color:#268bd2>@Target</span><span style=color:#719e07>({</span>ElementType<span style=color:#719e07>.</span>FIELD<span style=color:#719e07>,</span> ElementType<span style=color:#719e07>.</span>METHOD<span style=color:#719e07>,</span> ElementType<span style=color:#719e07>.</span>ANNOTATION_TYPE<span style=color:#719e07>})</span> <span style=color:#586e75>// #1
-</span><span style=color:#586e75></span><span style=color:#268bd2>public</span> <span style=color:#268bd2>@interface</span> Reference <span style=color:#719e07>{</span>
-    Class<span style=color:#719e07>&lt;?&gt;</span> interfaceClass<span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#dc322f>void</span><span style=color:#719e07>.</span>class<span style=color:#719e07>;</span> <span style=color:#586e75>// #2
-</span><span style=color:#586e75></span>    String <span style=color:#268bd2>interfaceName</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #3
-</span><span style=color:#586e75></span>    String <span style=color:#268bd2>version</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #4
-</span><span style=color:#586e75></span>    String <span style=color:#268bd2>group</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #5
-</span><span style=color:#586e75></span>    String <span style=color:#268bd2>url</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #6
-</span><span style=color:#586e75></span>    
-    String <span style=color:#268bd2>application</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #7
-</span><span style=color:#586e75></span>    String <span style=color:#268bd2>module</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #8
-</span><span style=color:#586e75></span>    String <span style=color:#268bd2>consumer</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #9
-</span><span style=color:#586e75></span>    String <span style=color:#268bd2>protocol</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #10
-</span><span style=color:#586e75></span>    String <span style=color:#268bd2>monitor</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#2aa198>&#34;&#34;</span><span style=color:#719e07>;</span> <span style=color:#586e75>// #11
-</span><span style=color:#586e75></span>    String<span style=color:#719e07>[]</span> <span style=color:#268bd2>registry</span><span style=color:#719e07>()</span> <span style=color:#719e07>default</span> <span style=color:#719e07>{};</span> <span style=color:#586e75>// #12
-</span><span style=color:#586e75></span><span style=color:#719e07>}</span>
-</code></pre></div><p>其中比较重要的有：</p>
-<ol>
-<li>@Reference 可以定义在类中的一个字段上，也可以定义在一个方法上，甚至可以用来修饰另一个 annotation，表示一个服务的引用。通常 @Reference 定义在一个字段上</li>
-<li>interfaceClass：指定服务的 interface 的类</li>
-<li>interfaceName：指定服务的 interface 的类名</li>
-<li>version：指定服务的版本号</li>
-<li>group：指定服务的分组</li>
-<li>url：通过指定服务提供方的 URL 地址直接绕过注册中心发起调用</li>
-<li>application：应用配置</li>
-<li>module：模块配置</li>
-<li>consumer：服务消费方配置</li>
-<li>protocol：协议配置</li>
-<li>monitor：监控中心配置</li>
-<li>registry：注册中心配置</li>
-</ol>
-<p>另外，需要注意的是，application、module、consumer、protocol、monitor、registry（从 7 到 12）需要提供的是对应的 spring bean 的名字，而这些 bean 的组装要么通过传统的 XML 配置方式完成，要么通过现代的 Java Config 来完成。在本文中，将会展示 Java Config 的使用方式。</p>
-<h2 id=示例实战>示例实战</h2>
-<p>了解了 <code>@EnableDubbo</code>， <code>@Service</code>，<code>@Reference</code> 的作用，下面以一个实际的例子来展示如何使用 annotation 来开发 Dubbo 应用。以下的代码可以在 <a href=https://github.com/dubbo/dubbo-samples/tree/master/dubbo-samples-annotation>https://github.com/dubbo/dubbo-samples/tree/master/dubbo-samples-annotation</a> 中找到。</p>
-<h3 id=1-接口定义>1. 接口定义</h3>
-<p>定义一个简单的 <code>GreetingService</code> 接口，里面只有一个简单的方法 <code>sayHello</code> 向调用者问好。</p>
-<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#268bd2>public</span> <span style=color:#268bd2>interface</span> <span style=color:#268bd2>GreetingService</span> <span style=color:#719e07>{</span>
-    String <span style=color:#268bd2>sayHello</span><span style=color:#719e07>(</span>String name<span style=color:#719e07>);</span>
-<span style=color:#719e07>}</span>
-</code></pre></div><h3 id=2-服务端服务实现>2. 服务端：服务实现</h3>
-<p>实现 <code>GreetingService</code> 接口，并通过 <code>@Service</code> 来标注其为 Dubbo 的一个服务。</p>
-<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#268bd2>@Service</span>
-<span style=color:#268bd2>public</span> <span style=color:#268bd2>class</span> <span style=color:#268bd2>AnnotatedGreetingService</span> <span style=color:#268bd2>implements</span> GreetingService <span style=color:#719e07>{</span>
-    <span style=color:#268bd2>public</span> String <span style=color:#268bd2>sayHello</span><span style=color:#719e07>(</span>String name<span style=color:#719e07>)</span> <span style=color:#719e07>{</span>
-        <span style=color:#719e07>return</span> <span style=color:#2aa198>&#34;hello, &#34;</span> <span style=color:#719e07>+</span> name<span style=color:#719e07>;</span>
-    <span style=color:#719e07>}</span>
-<span style=color:#719e07>}</span>
-</code></pre></div><h3 id=3-服务端组装服务提供方>3. 服务端：组装服务提供方</h3>
-<p>通过 Spring 中 Java Config 的技术（<code>@Configuration</code>）和 annotation 扫描（<code>@EnableDubbo</code>）来发现、组装、并向外提供 Dubbo 的服务。</p>
-<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#268bd2>@Configuration</span>
-<span style=color:#268bd2>@EnableDubbo</span><span style=color:#719e07>(</span>scanBasePackages <span style=color:#719e07>=</span> <span style=color:#2aa198>&#34;com.alibaba.dubbo.samples.impl&#34;</span><span style=color:#719e07>)</span>
-<span style=color:#268bd2>static</span> <span style=color:#268bd2>class</span> <span style=color:#268bd2>ProviderConfiguration</span> <span style=color:#719e07>{</span>
-    <span style=color:#268bd2>@Bean</span> <span style=color:#586e75>// #1
-</span><span style=color:#586e75></span>    <span style=color:#268bd2>public</span> ProviderConfig <span style=color:#268bd2>providerConfig</span><span style=color:#719e07>()</span> <span style=color:#719e07>{</span>
-        ProviderConfig providerConfig <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ProviderConfig<span style=color:#719e07>();</span>
-        providerConfig<span style=color:#719e07>.</span>setTimeout<span style=color:#719e07>(</span>1000<span style=color:#719e07>);</span>
-        <span style=color:#719e07>return</span> providerConfig<span style=color:#719e07>;</span>
-    <span style=color:#719e07>}</span>
-
-    <span style=color:#268bd2>@Bean</span> <span style=color:#586e75>// #2
-</span><span style=color:#586e75></span>    <span style=color:#268bd2>public</span> ApplicationConfig <span style=color:#268bd2>applicationConfig</span><span style=color:#719e07>()</span> <span style=color:#719e07>{</span>
-        ApplicationConfig applicationConfig <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ApplicationConfig<span style=color:#719e07>();</span>
-        applicationConfig<span style=color:#719e07>.</span>setName<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;dubbo-annotation-provider&#34;</span><span style=color:#719e07>);</span>
-        <span style=color:#719e07>return</span> applicationConfig<span style=color:#719e07>;</span>
-    <span style=color:#719e07>}</span>
-
-    <span style=color:#268bd2>@Bean</span> <span style=color:#586e75>// #3
-</span><span style=color:#586e75></span>    <span style=color:#268bd2>public</span> RegistryConfig <span style=color:#268bd2>registryConfig</span><span style=color:#719e07>()</span> <span style=color:#719e07>{</span>
-        RegistryConfig registryConfig <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> RegistryConfig<span style=color:#719e07>();</span>
-        registryConfig<span style=color:#719e07>.</span>setProtocol<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;zookeeper&#34;</span><span style=color:#719e07>);</span>
-        registryConfig<span style=color:#719e07>.</span>setAddress<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;localhost&#34;</span><span style=color:#719e07>);</span>
-        registryConfig<span style=color:#719e07>.</span>setPort<span style=color:#719e07>(</span>2181<span style=color:#719e07>);</span>
-        <span style=color:#719e07>return</span> registryConfig<span style=color:#719e07>;</span>
-    <span style=color:#719e07>}</span>
-
-    <span style=color:#268bd2>@Bean</span> <span style=color:#586e75>// #4
-</span><span style=color:#586e75></span>    <span style=color:#268bd2>public</span> ProtocolConfig <span style=color:#268bd2>protocolConfig</span><span style=color:#719e07>()</span> <span style=color:#719e07>{</span>
-        ProtocolConfig protocolConfig <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ProtocolConfig<span style=color:#719e07>();</span>
-        protocolConfig<span style=color:#719e07>.</span>setName<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;dubbo&#34;</span><span style=color:#719e07>);</span>
-        protocolConfig<span style=color:#719e07>.</span>setPort<span style=color:#719e07>(</span>20880<span style=color:#719e07>);</span>
-        <span style=color:#719e07>return</span> protocolConfig<span style=color:#719e07>;</span>
-    <span style=color:#719e07>}</span>
-<span style=color:#719e07>}</span>
-</code></pre></div><p>说明：</p>
-<ul>
+<li>ApplicationConfig：应用配置</li><li>ConsumerConfig：服务消费者配置</li><li>RegistryConfig：注册中心配置，注意：这里的配置需要与服务提供方启动的 EmbeddedZooKeeper 的配置信息保持一致</li></ol></li></ul><h3 id=7-客户端发起远程调用>7. 客户端：发起远程调用</h3><p>在 <code>main</code> 方法中通过启动一个 Spring Context，从其中查找到组装好的 Dubbo 的服务消费者，并发起一次远程调用。</p><div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#268bd2>public</span> <span style=color:#268bd2>class</span> <span style=color:#268bd2>ConsumerBootstrap</span> <span style=color:#719e07>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#268bd2>public</span> <span style=color:#268bd2>static</span> <span style=color:#dc322f>void</span> <span style=color:#268bd2>main</span><span style=color:#719e07>(</span>String<span style=color:#719e07>[]</span> args<span style=color:#719e07>)</span> <span style=color:#719e07>{</span>
+</span></span><span style=display:flex><span>        AnnotationConfigApplicationContext context <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> AnnotationConfigApplicationContext<span style=color:#719e07>(</span>ConsumerConfiguration<span style=color:#719e07>.</span>class<span style=color:#719e07>);</span> <span style=color:#586e75>// #1
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>        context<span style=color:#719e07>.</span>start<span style=color:#719e07>();</span> <span style=color:#586e75>// #2
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>        GreetingServiceConsumer greetingServiceConsumer <span style=color:#719e07>=</span> context<span style=color:#719e07>.</span>getBean<span style=color:#719e07>(</span>GreetingServiceConsumer<span style=color:#719e07>.</span>class<span style=color:#719e07>);</span> <span style=color:#586e75>// #3
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>        String hello <span style=color:#719e07>=</span> greetingServiceConsumer<span style=color:#719e07>.</span>doSayHello<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;annotation&#34;</span><span style=color:#719e07>);</span> <span style=color:#586e75>// #4
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>        System<span style=color:#719e07>.</span>out<span style=color:#719e07>.</span>println<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;result: &#34;</span> <span style=color:#719e07>+</span> hello<span style=color:#719e07>);</span> <span style=color:#586e75>// #5
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span>    <span style=color:#719e07>}</span>
+</span></span><span style=display:flex><span><span style=color:#719e07>}</span>
+</span></span></code></pre></div><p>说明：</p><ol>
 <li>
-<p>通过 <code>@EnableDubbo</code> 指定在 <code>com.alibaba.dubbo.samples.impl</code> 下扫描所有标注有 <code>@Service</code> 的类</p>
-</li>
-<li>
-<p>通过 <code>@Configuration</code> 将 ProviderConfiguration 中所有的 <code>@Bean</code> 通过 Java Config 的方式组装出来并注入给 Dubbo 服务，也就是标注有 <code>@Service</code> 的类。这其中就包括了：</p>
-<ol>
-<li>ProviderConfig：服务提供方配置</li>
-<li>ApplicationConfig：应用配置</li>
-<li>RegistryConfig：注册中心配置</li>
-<li>ProtocolConfig：协议配置</li>
-</ol>
-</li>
-</ul>
-<h3 id=4-服务端启动服务>4. 服务端：启动服务</h3>
-<p>在 <code>main</code> 方法中通过启动一个 Spring Context 来对外提供 Dubbo 服务。</p>
-<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#268bd2>public</span> <span style=color:#268bd2>class</span> <span style=color:#268bd2>ProviderBootstrap</span> <span style=color:#719e07>{</span>
-    <span style=color:#268bd2>public</span> <span style=color:#268bd2>static</span> <span style=color:#dc322f>void</span> <span style=color:#268bd2>main</span><span style=color:#719e07>(</span>String<span style=color:#719e07>[]</span> args<span style=color:#719e07>)</span> <span style=color:#268bd2>throws</span> Exception <span style=color:#719e07>{</span>
-        <span style=color:#719e07>new</span> EmbeddedZooKeeper<span style=color:#719e07>(</span>2181<span style=color:#719e07>,</span> <span style=color:#cb4b16>false</span><span style=color:#719e07>).</span>start<span style=color:#719e07>();</span> <span style=color:#586e75>// #1
-</span><span style=color:#586e75></span>        AnnotationConfigApplicationContext context <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> AnnotationConfigApplicationContext<span style=color:#719e07>(</span>ProviderConfiguration<span style=color:#719e07>.</span>class<span style=color:#719e07>);</span> <span style=color:#586e75>// #2
-</span><span style=color:#586e75></span>        context<span style=color:#719e07>.</span>start<span style=color:#719e07>();</span> <span style=color:#586e75>// #3
-</span><span style=color:#586e75></span>        System<span style=color:#719e07>.</span>in<span style=color:#719e07>.</span>read<span style=color:#719e07>();</span> <span style=color:#586e75>// #4
-</span><span style=color:#586e75></span>    <span style=color:#719e07>}</span>
-<span style=color:#719e07>}</span>
-</code></pre></div><p>说明：</p>
-<ol>
-<li>启动一个嵌入式的 zookeeper 在 2181 端口上提供注册中心的服务</li>
-<li>初始化一个 <code>AnnotationConfigApplicationContext</code> 的示例，并将 <code>ProviderConfiguration</code> 传入以完成 Dubbo 服务的自动发现和装配</li>
-<li>启动 Spring Context，开始提供对外的 Dubbo 服务</li>
-<li>因为是服务端，需要通过阻塞主线程来防止进程退出</li>
-</ol>
-<p>启动服务端的 <code>main</code> 方法，将会看到下面的输出，代表服务端启动成功，并在注册中心（ZookeeperRegistry）上注册了 <code>GreetingService</code> 这个服务：</p>
-<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=color:#719e07>[</span>01/08/18 02:12:51:051 CST<span style=color:#719e07>]</span> main  INFO transport.AbstractServer:  <span style=color:#719e07>[</span>DUBBO<span style=color:#719e07>]</span> Start NettyServer <span style=color:#b58900>bind</span> /0.0.0.0:20880, <span style=color:#b58900>export</span> /192.168.99.1:20880, dubbo version: 2.6.2, current host: 192.168.99.1
-
-<span style=color:#719e07>[</span>01/08/18 02:12:51:051 CST<span style=color:#719e07>]</span> main  INFO zookeeper.ZookeeperRegistry:  <span style=color:#719e07>[</span>DUBBO<span style=color:#719e07>]</span> Register: dubbo://192.168.99.1:20880/com.alibaba.dubbo.samples.api.GreetingService?anyhost<span style=color:#719e07>=</span>true&amp;<span style=color:#268bd2>application</span><span style=color:#719e07>=</span>dubbo-annotation-provider&amp;default.timeout<span style=color:#719e07>=</span>1000&amp;<span style=color:#268bd2>dubbo</span><span style=color:#719e07>=</span>2.6.2&amp;<span style=color:#268bd2>generic</span><span style=color:#719e07>=</span>false&amp;<span style=color:#268bd2>interface</span><span style=color:#719e07>=</span>com.alibaba.dubbo.samples.api
-</code></pre></div><h3 id=5-客户端引用服务>5. 客户端：引用服务</h3>
-<p>通过 <code>@Reference</code> 来标记 <code>GreetingService</code> 接口的成员变量 greetingService 是一个 Dubbo 服务的引用，也就是说，可以简单的通过该接口向远端的服务提供方发起调用，而客户端并没有实现 <code>GreetingService</code> 接口。</p>
-<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#268bd2>@Component</span><span style=color:#719e07>(</span><span style=color:#2aa198>&#34;annotatedConsumer&#34;</span><span style=color:#719e07>)</span>
-<span style=color:#268bd2>public</span> <span style=color:#268bd2>class</span> <span style=color:#268bd2>GreetingServiceConsumer</span> <span style=color:#719e07>{</span>
-    <span style=color:#268bd2>@Reference</span>
-    <span style=color:#268bd2>private</span> GreetingService greetingService<span style=color:#719e07>;</span>
-
-    <span style=color:#268bd2>public</span> String <span style=color:#268bd2>doSayHello</span><span style=color:#719e07>(</span>String name<span style=color:#719e07>)</span> <span style=color:#719e07>{</span>
-        <span style=color:#719e07>return</span> greetingService<span style=color:#719e07>.</span>sayHello<span style=color:#719e07>(</span>name<span style=color:#719e07>);</span>
-    <span style=color:#719e07>}</span>
-<span style=color:#719e07>}</span>
-</code></pre></div><h3 id=6-客户端组装服务消费者>6. 客户端：组装服务消费者</h3>
-<p>与 <strong>3. 服务端：组装服务提供方</strong> 类似，通过 Spring 中 Java Config 的技术（<code>@Configuration</code>）和 annotation 扫描（<code>@EnableDubbo</code>）来发现、组装 Dubbo 服务的消费者。</p>
-<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#268bd2>@Configuration</span>
-<span style=color:#268bd2>@EnableDubbo</span><span style=color:#719e07>(</span>scanBasePackages <span style=color:#719e07>=</span> <span style=color:#2aa198>&#34;com.alibaba.dubbo.samples.action&#34;</span><span style=color:#719e07>)</span>
-<span style=color:#268bd2>@ComponentScan</span><span style=color:#719e07>(</span>value <span style=color:#719e07>=</span> <span style=color:#719e07>{</span><span style=color:#2aa198>&#34;com.alibaba.dubbo.samples.action&#34;</span><span style=color:#719e07>})</span>
-<span style=color:#268bd2>static</span> <span style=color:#268bd2>class</span> <span style=color:#268bd2>ConsumerConfiguration</span> <span style=color:#719e07>{</span>
-    <span style=color:#268bd2>@Bean</span> <span style=color:#586e75>// #1
-</span><span style=color:#586e75></span>    <span style=color:#268bd2>public</span> ApplicationConfig <span style=color:#268bd2>applicationConfig</span><span style=color:#719e07>()</span> <span style=color:#719e07>{</span>
-        ApplicationConfig applicationConfig <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ApplicationConfig<span style=color:#719e07>();</span>
-        applicationConfig<span style=color:#719e07>.</span>setName<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;dubbo-annotation-consumer&#34;</span><span style=color:#719e07>);</span>
-        <span style=color:#719e07>return</span> applicationConfig<span style=color:#719e07>;</span>
-    <span style=color:#719e07>}</span>
-
-    <span style=color:#268bd2>@Bean</span> <span style=color:#586e75>// #2
-</span><span style=color:#586e75></span>    <span style=color:#268bd2>public</span> ConsumerConfig <span style=color:#268bd2>consumerConfig</span><span style=color:#719e07>()</span> <span style=color:#719e07>{</span>
-        ConsumerConfig consumerConfig <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> ConsumerConfig<span style=color:#719e07>();</span>
-        consumerConfig<span style=color:#719e07>.</span>setTimeout<span style=color:#719e07>(</span>3000<span style=color:#719e07>);</span>
-        <span style=color:#719e07>return</span> consumerConfig<span style=color:#719e07>;</span>
-    <span style=color:#719e07>}</span>
-
-    <span style=color:#268bd2>@Bean</span> <span style=color:#586e75>// #3
-</span><span style=color:#586e75></span>    <span style=color:#268bd2>public</span> RegistryConfig <span style=color:#268bd2>registryConfig</span><span style=color:#719e07>()</span> <span style=color:#719e07>{</span>
-        RegistryConfig registryConfig <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> RegistryConfig<span style=color:#719e07>();</span>
-        registryConfig<span style=color:#719e07>.</span>setProtocol<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;zookeeper&#34;</span><span style=color:#719e07>);</span>
-        registryConfig<span style=color:#719e07>.</span>setAddress<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;localhost&#34;</span><span style=color:#719e07>);</span>
-        registryConfig<span style=color:#719e07>.</span>setPort<span style=color:#719e07>(</span>2181<span style=color:#719e07>);</span>
-        <span style=color:#719e07>return</span> registryConfig<span style=color:#719e07>;</span>
-    <span style=color:#719e07>}</span>
-<span style=color:#719e07>}</span>
-</code></pre></div><p>说明：</p>
-<ul>
-<li>通过 <code>@EnableDubbo</code> 指定在 <code>com.alibaba.dubbo.samples.impl</code> 下扫描所有标注有 `@Reference 的类</li>
-<li>通过 <code>@Configuration</code> 将 ConsumerConfiguration 中所有的 <code>@Bean</code> 通过 Java Config 的方式组装出来并注入给 Dubbo 服务消费者，也就是标注有 `@Reference 的类。这其中就包括了：
-<ol>
-<li>ApplicationConfig：应用配置</li>
-<li>ConsumerConfig：服务消费者配置</li>
-<li>RegistryConfig：注册中心配置，注意：这里的配置需要与服务提供方启动的 EmbeddedZooKeeper 的配置信息保持一致</li>
-</ol>
-</li>
-</ul>
-<h3 id=7-客户端发起远程调用>7. 客户端：发起远程调用</h3>
-<p>在 <code>main</code> 方法中通过启动一个 Spring Context，从其中查找到组装好的 Dubbo 的服务消费者，并发起一次远程调用。</p>
-<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#268bd2>public</span> <span style=color:#268bd2>class</span> <span style=color:#268bd2>ConsumerBootstrap</span> <span style=color:#719e07>{</span>
-    <span style=color:#268bd2>public</span> <span style=color:#268bd2>static</span> <span style=color:#dc322f>void</span> <span style=color:#268bd2>main</span><span style=color:#719e07>(</span>String<span style=color:#719e07>[]</span> args<span style=color:#719e07>)</span> <span style=color:#719e07>{</span>
-        AnnotationConfigApplicationContext context <span style=color:#719e07>=</span> <span style=color:#719e07>new</span> AnnotationConfigApplicationContext<span style=color:#719e07>(</span>ConsumerConfiguration<span style=color:#719e07>.</span>class<span style=color:#719e07>);</span> <span style=color:#586e75>// #1
-</span><span style=color:#586e75></span>        context<span style=color:#719e07>.</span>start<span style=color:#719e07>();</span> <span style=color:#586e75>// #2
-</span><span style=color:#586e75></span>        GreetingServiceConsumer greetingServiceConsumer <span style=color:#719e07>=</span> context<span style=color:#719e07>.</span>getBean<span style=color:#719e07>(</span>GreetingServiceConsumer<span style=color:#719e07>.</span>class<span style=color:#719e07>);</span> <span style=color:#586e75>// #3
-</span><span style=color:#586e75></span>        String hello <span style=color:#719e07>=</span> greetingServiceConsumer<span style=color:#719e07>.</span>doSayHello<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;annotation&#34;</span><span style=color:#719e07>);</span> <span style=color:#586e75>// #4
-</span><span style=color:#586e75></span>        System<span style=color:#719e07>.</span>out<span style=color:#719e07>.</span>println<span style=color:#719e07>(</span><span style=color:#2aa198>&#34;result: &#34;</span> <span style=color:#719e07>+</span> hello<span style=color:#719e07>);</span> <span style=color:#586e75>// #5
-</span><span style=color:#586e75></span>    <span style=color:#719e07>}</span>
-<span style=color:#719e07>}</span>
-</code></pre></div><p>说明：</p>
-<ol>
-<li>
-<p>初始化一个 <code>AnnotationConfigApplicationContext</code> 的示例，并将 <code>ConsumerConfiguration</code> 传入以完成 Dubbo 服务消费者的自动发现和装配</p>
-</li>
-<li>
-<p>启动 Spring Context</p>
-</li>
-<li>
-<p>从 Context 中查找出类型为 <code>GreetingServiceConsumer</code> 的 Bean</p>
-</li>
-<li>
-<p>调用 <code>doSayHello</code> 方法，最终通过 Dubbo 的服务引用（由 <code>@Reference</code> 标注）发起一次远程调用</p>
-</li>
-<li>
-<p>打印调用结果</p>
-</li>
-</ol>
-<p>启动客户端的 <code>main</code> 方法，将会看到下面的输出，其中返回结果为 result: hello, annotation：</p>
-<div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=color:#719e07>[</span>01/08/18 02:38:40:040 CST<span style=color:#719e07>]</span> main  INFO config.AbstractConfig:  <span style=color:#719e07>[</span>DUBBO<span style=color:#719e07>]</span> Refer dubbo service com.alibaba.dubbo.samples.api.GreetingService from url zookeeper://localhost:2181/com.alibaba.dubbo.registry.RegistryService?anyhost<span style=color:#719e07>=</span>true&amp;<span style=color:#268bd2>application</span><span style=color:#719e07>=</span>dubbo-annotation-consumer&amp;<span style=color:#268bd2>check</span><span style=color:#719e07>=</span>false&amp;default.timeout<span style=color:#719e07>=</span>3000&amp;<span style=color:#268bd2>dubbo</span><span style=color:#719e07>=</span>2.6.2&amp;<span style=color:#268bd2>generic</span><span style=color:#719e07>=</span>false&amp;<span style=color:#268bd2>interface</span><span style=color:#719e07>=</span>com.alibaba.dubbo.samples.api.GreetingService&amp;<span style=color:#268bd2>methods</span><span style=color:#719e07>=</span>sayHello&amp;<span style=color:#268bd2>pid</span><span style=color:#719e07>=</span>33001&amp;register.ip<span style=color:#719e07>=</span>192.168.99.1&amp;remote.timestamp<span style=color:#719e07>=</span>1533105502086&amp;<span style=color:#268bd2>side</span><span style=color:#719e07>=</span>consumer&amp;<span style=color:#268bd2>timestamp</span><span style=color:#719e07>=</span>1533105519216, dubbo version: 2.6.2, current host: 192.168.99.1
-<span style=color:#719e07>[</span>01/08/18 02:38:40:040 CST<span style=color:#719e07>]</span> main  INFO annotation.ReferenceBeanBuilder: &lt;dubbo:reference <span style=color:#268bd2>object</span><span style=color:#719e07>=</span><span style=color:#2aa198>&#34;com.alibaba.dubbo.common.bytecode.proxy0@673be18f&#34;</span> <span style=color:#268bd2>singleton</span><span style=color:#719e07>=</span><span style=color:#2aa198>&#34;true&#34;</span> <span style=color:#268bd2>interface</span><span style=color:#719e07>=</span><span style=color:#2aa198>&#34;com.alibaba.dubbo.samples.api.GreetingService&#34;</span> <span style=color:#268bd2>uniqueServiceName</span><span style=color:#719e07>=</span><span style=color:#2aa198>&#34;com.alibaba.dubbo.samples.api.GreetingService&#34;</span> <span style=color:#268bd2>generic</span><span style=color:#719e07>=</span><span style=color:#2aa198>&#34;false&#34;</span> <span style=color:#268bd2>id</span><span style=color:#719e07>=</span><span style=color:#2aa198>&#34;com.alibaba.dubbo.samples.api.GreetingService&#34;</span> /&gt; has been built.
-result: hello, annotation
-</code></pre></div><h2 id=总结>总结</h2>
-<p>通过本文的学习，读者可以掌握 Dubbo 专属的 annotation <code>@EnableDubbo</code>、<code>@Service</code>、<code>@Reference</code> 的基本概念，并通过一个简单 Dubbo 应用的实战开发掌握其基本的用法。</p>
-<p>Spring 除了传统的 XML 配置之外，还提供了注解驱动、外部化配置、以及自动装配等更现代的配置方式。本文专注在介绍通过注解方式来开发 Dubbo 应用，可以看到，与 XML 配置相比，注解方式编程更加简洁明快。在今后的博文中，会进一步的介绍在 Dubbo 中使用外部化配置、以及自动装配的方法。</p>
-<ul class="list-unstyled d-flex justify-content-between align-items-center mb-0 pt-5">
+<p>初始化一个 <code>AnnotationConfigApplicationContext</code> 的示例，并将 <code>ConsumerConfiguration</code> 传入以完成 Dubbo 服务消费者的自动发现和装配</p></li><li>
+<p>启动 Spring Context</p></li><li>
+<p>从 Context 中查找出类型为 <code>GreetingServiceConsumer</code> 的 Bean</p></li><li>
+<p>调用 <code>doSayHello</code> 方法，最终通过 Dubbo 的服务引用（由 <code>@Reference</code> 标注）发起一次远程调用</p></li><li>
+<p>打印调用结果</p></li></ol><p>启动客户端的 <code>main</code> 方法，将会看到下面的输出，其中返回结果为 result: hello, annotation：</p><div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span><span style=color:#719e07>[</span>01/08/18 02:38:40:040 CST<span style=color:#719e07>]</span> main  INFO config.AbstractConfig:  <span style=color:#719e07>[</span>DUBBO<span style=color:#719e07>]</span> Refer dubbo service com.alibaba.dubbo.samples.api.GreetingService from url zookeeper://localhost:2181/com.alibaba.dubbo.registry.RegistryService?anyhost<span style=color:#719e07>=</span>true&amp;<span style=color:#268bd2>application</span><span style=color:#719e07>=</span>dubbo-annotation-consumer&amp;<span style=color:#268bd2>check</span><span style=color:#719e07>=</span>false&amp;default.timeout<span style=color:#719e07>=</span>3000&amp;<span style=color:#268bd2>dubbo</span><span style=color:#719e07>=</span>2.6.2&amp;<span style=color:#268bd2>generic</span><span style=color:#719e07>=</span>false&amp;<span style=color:#268bd2>interface</span><span style=color:#719e07>=</span>com.alibaba.dubbo.samples.api.GreetingService&amp;<span style=color:#268bd2>methods</span><span style=color:#719e07>=</span>sayHello&amp;<span style=color:#268bd2>pid</span><span style=color:#719e07>=</span>33001&amp;register.ip<span style=color:#719e07>=</span>192.168.99.1&amp;remote.timestamp<span style=color:#719e07>=</span>1533105502086&amp;<span style=color:#268bd2>side</span><span style=color:#719e07>=</span>consumer&amp;<span style=color:#268bd2>timestamp</span><span style=color:#719e07>=</span>1533105519216, dubbo version: 2.6.2, current host: 192.168.99.1
+</span></span><span style=display:flex><span><span style=color:#719e07>[</span>01/08/18 02:38:40:040 CST<span style=color:#719e07>]</span> main  INFO annotation.ReferenceBeanBuilder: &lt;dubbo:reference <span style=color:#268bd2>object</span><span style=color:#719e07>=</span><span style=color:#2aa198>&#34;com.alibaba.dubbo.common.bytecode.proxy0@673be18f&#34;</span> <span style=color:#268bd2>singleton</span><span style=color:#719e07>=</span><span style=color:#2aa198>&#34;true&#34;</span> <span style=color:#268bd2>interface</span><span style=color:#719e07>=</span><span style=color:#2aa198>&#34;com.alibaba.dubbo.samples.api.GreetingService&#34;</span> <span style=color:#268bd2>uniqueServiceName</span><span style=color:#719e07>=</span><span style=color:#2aa198>&#34;com.alibaba.dubbo.samples.api.GreetingService&#34;</span> <span style=color:#268bd2>generic</span><span style=color:#719e07>=</span><span style=color:#2aa198>&#34;false&#34;</span> <span style=color:#268bd2>id</span><span style=color:#719e07>=</span><span style=color:#2aa198>&#34;com.alibaba.dubbo.samples.api.GreetingService&#34;</span> /&gt; has been built.
+</span></span><span style=display:flex><span>result: hello, annotation
+</span></span></code></pre></div><h2 id=总结>总结</h2><p>通过本文的学习，读者可以掌握 Dubbo 专属的 annotation <code>@EnableDubbo</code>、<code>@Service</code>、<code>@Reference</code> 的基本概念，并通过一个简单 Dubbo 应用的实战开发掌握其基本的用法。</p><p>Spring 除了传统的 XML 配置之外，还提供了注解驱动、外部化配置、以及自动装配等更现代的配置方式。本文专注在介绍通过注解方式来开发 Dubbo 应用，可以看到，与 XML 配置相比，注解方式编程更加简洁明快。在今后的博文中，会进一步的介绍在 Dubbo 中使用外部化配置、以及自动装配的方法。</p><ul class="list-unstyled d-flex justify-content-between align-items-center mb-0 pt-5">
 <li>
 <a href=/zh/blog/2018/08/07/%E5%9C%A8-dubbo-%E5%BA%94%E7%94%A8%E4%B8%AD%E4%BD%BF%E7%94%A8-zookeeper/ aria-label="上一页 - 在 Dubbo 应用中使用 Zookeeper" class="btn btn-primary"><span class=mr-1>←</span>上一页</a>
-</li>
-<a href=/zh/blog/2018/08/07/%E4%BD%BF%E7%94%A8jdk17%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8Cdubbo-2.7.14%E9%A1%B9%E7%9B%AE/ aria-label="下一页 - 使用jdk17编译运行dubbo 2.7.14项目" class="btn btn-primary">下一页<span class=ml-1>→</span></a>
-</li>
-</ul>
-</div>
-</main>
-</div>
-</div>
-<footer class="bg-dark py-5 row d-print-none">
+</li><a href=/zh/blog/2018/08/07/%E4%BD%BF%E7%94%A8jdk17%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8Cdubbo-2.7.14%E9%A1%B9%E7%9B%AE/ aria-label="下一页 - 使用jdk17编译运行dubbo 2.7.14项目" class="btn btn-primary">下一页<span class=ml-1>→</span></a>
+</li></ul></div></main></div></div><footer class="bg-dark py-5 row d-print-none">
 <div class="container-fluid mx-sm-5">
 <div class=row>
 <div class="col-6 col-sm-4 text-xs-center order-sm-2">
@@ -621,54 +451,30 @@ result: hello, annotation
 <a class=text-white target=_blank rel="noopener noreferrer" href=https://lists.apache.org/list.html?dev@dubbo.apache.org>
 <i class="fa fa-envelope"></i>
 </a>
-</li>
-<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=Twitter aria-label=Twitter>
+</li><li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=Twitter aria-label=Twitter>
 <a class=text-white target=_blank rel="noopener noreferrer" href=https://twitter.com/ApacheDubbo>
 <i class="fab fa-twitter"></i>
 </a>
-</li>
-</ul>
-</div>
-<div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+</li></ul></div><div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
 <ul class="list-inline mb-0">
 <li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=GitHub aria-label=GitHub>
 <a class=text-white target=_blank rel="noopener noreferrer" href=https://github.com/apache/dubbo>
 <i class="fab fa-github"></i>
 </a>
-</li>
-<li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title="Subscribe to mailing list" aria-label="Subscribe to mailing list">
+</li><li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title="Subscribe to mailing list" aria-label="Subscribe to mailing list">
 <a class=text-white target=_blank rel="noopener noreferrer" href=mailto://dev-subscribe@dubbo.apache.org>
 <i class="fa fa-envelope"></i>
 </a>
-</li>
-</ul>
-</div>
-<div class="col-12 col-sm-4 text-center py-2 order-sm-2">
+</li></ul></div><div class="col-12 col-sm-4 text-center py-2 order-sm-2">
 <small class=text-white>&copy; 2022 The Apache Software Foundation. Apache and the Apache feather logo are trademarks of The Apache Software Foundation. All Rights Reserved</small>
-</div>
-</div>
-</div>
-</footer>
-<div class="row pt-2 pb-2">
+</div></div></div></footer><div class="row pt-2 pb-2">
 <div class="container-fluid mx-sm-5">
 <div class=text-center id=my-footer>
 <img style=float:left src=/imgs/apache_logo.png>
 <ul>
-<li><a href=http://www.apache.org>Foundation</a></li>
-<li><a href=http://www.apache.org/licenses/>License</a></li>
-<li><a href=https://www.apache.org/security/>Security</a></li>
-<li><a href=http://www.apache.org/events/current-event>Events</a></li>
-<li><a href=http://www.apache.org/foundation/sponsorship.html>Sponsorship</a></li>
-<li><a href=http://www.apache.org/foundation/thanks.html>Thanks</a></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<script src=/js/popper.min.js integrity=sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49 crossorigin=anonymous></script>
+<li><a href=http://www.apache.org>Foundation</a></li><li><a href=http://www.apache.org/licenses/>License</a></li><li><a href=https://www.apache.org/security/>Security</a></li><li><a href=http://www.apache.org/events/current-event>Events</a></li><li><a href=http://www.apache.org/foundation/sponsorship.html>Sponsorship</a></li><li><a href=http://www.apache.org/foundation/thanks.html>Thanks</a></li></ul></div></div></div></div><script src=/js/popper.min.js integrity=sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49 crossorigin=anonymous></script>
 <script src=/js/bootstrap.min.js integrity=sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy crossorigin=anonymous></script>
-<script src=/js/main.min.b1204cf86e8e9a67512f5a2424ceff1cf41fa3fea170a94a53582b7226e2044e.js integrity="sha256-sSBM+G6OmmdRL1okJM7/HPQfo/6hcKlKU1grcibiBE4=" crossorigin=anonymous></script>
+<script src=/js/main.min.d81780759155109ec6baa409583344232bd08794fbca50d0c34bfe7218d9dfb7.js integrity="sha256-2BeAdZFVEJ7GuqQJWDNEIyvQh5T7ylDQw0v+chjZ37c=" crossorigin=anonymous></script>
 <script src=https://cdn.jsdelivr.net/npm/docsearch.js@2.6.3/dist/cdn/docsearch.min.js></script>
-<script>docsearch({apiKey:'38eff7758162fbf70f2b8484932e62ae',indexName:'apache_dubbo',inputSelector:'.td-search-input',debug:!1})</script>
-</body>
-</html>
+<script>docsearch({apiKey:"38eff7758162fbf70f2b8484932e62ae",indexName:"apache_dubbo",inputSelector:".td-search-input",debug:!1})</script>
+</body></html>

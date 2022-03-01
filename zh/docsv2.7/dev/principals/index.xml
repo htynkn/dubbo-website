@@ -33,15 +33,17 @@
 &lt;p>而对于描述配置，因为要参与业务逻辑，通常会嵌到应用的生命周期管理中。现在使用 spring 的项目越来越多，直接使用 spring 配置的比较普遍，而且 spring 允许自定义 schema，配置简化后很方便。当然，也有它的缺点，就是强依赖 spring，可以提编程接口做了配套方案。&lt;/p>
 &lt;p>在 Dubbo 既存在描述配置也有环境配置。一部分用 spring 的 schema 做配置加载，一部分从 classpath 扫描 properties 做配置加载。在新版本中做了一个优先级约定，统一以 spring 的 schema 驱动配置加载，dubbo.properties作为配置补充。&lt;/p>
 &lt;p>同时，在 Spring 的场景下，除了使用 schema 外，还支持完全以 application.properties 的方式配置：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml"># Dubbo Application
-## The default value of dubbo.application.name is ${spring.application.name}
-## dubbo.application.name=${spring.application.name}
-# Dubbo Protocol
-dubbo.protocol.name=dubbo
-dubbo.protocol.port=12345
-## Dubbo Registry
-dubbo.registry.address=N/A
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>扩展配置，通常对配置的聚合要求比较高。因为产品需要发现第三方实现，将其加入产品内部。在 java 世界里，通常是约定在每个 jar 包下放一个指定文件加载，比如：eclipse 的 plugin.xml，struts2 的 struts-plugin.xml 等，这类配置可以考虑 java 标准的服务发现机制，即在 jar 包的 META-INF/services 下放置接口类全名文件，内容为每行一个实现类类名，就像 jdk 中的加密算法扩展，脚本引擎扩展，新的 JDBC 驱动等，都是采用这种方式。参见：&lt;a href="https://docs.oracle.com/javase/tutorial/sound/SPI-intro.html">ServiceProvider 规范&lt;/a>。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span># Dubbo Application
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## The default value of dubbo.application.name is ${spring.application.name}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## dubbo.application.name=${spring.application.name}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Dubbo Protocol
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.name=dubbo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port=12345
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## Dubbo Registry
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address=N/A
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>扩展配置，通常对配置的聚合要求比较高。因为产品需要发现第三方实现，将其加入产品内部。在 java 世界里，通常是约定在每个 jar 包下放一个指定文件加载，比如：eclipse 的 plugin.xml，struts2 的 struts-plugin.xml 等，这类配置可以考虑 java 标准的服务发现机制，即在 jar 包的 META-INF/services 下放置接口类全名文件，内容为每行一个实现类类名，就像 jdk 中的加密算法扩展，脚本引擎扩展，新的 JDBC 驱动等，都是采用这种方式。参见：&lt;a href="https://docs.oracle.com/javase/tutorial/sound/SPI-intro.html">ServiceProvider 规范&lt;/a>。&lt;/p>
 &lt;p>Dubbo 旧版本通过约定在每个 jar 包下，放置名为 dubbo-context.xml 的 spring 配置进行扩展与集成，新版本改成用 jdk 自带的 META-INF/services 方式，去掉过多的 spring 依赖。&lt;/p>
 &lt;h2 id="可编程配置">可编程配置&lt;/h2>
 &lt;p>配置的可编程性是非常必要的，不管你以何种方式加载配置文件，都应该提供一个编程的配置方式，允许用户不使用配置文件，直接用代码完成配置过程。因为一个产品，尤其是组件类产品，通常需要和其它产品协作使用，当用户集成你的产品时，可能需要适配配置方式。&lt;/p>
@@ -76,157 +78,172 @@ dubbo.registry.address=N/A
 &lt;p>最近有点痴呆，因为解决了太多的痴呆问题。服务框架实施面越来越广，已有 50 多个项目在使用，每天都要去帮应用查问题，来来回回，发现大部分都是配置错误，或者重复的文件或类，或者网络不通等，所以准备在新版本中加入防痴呆设计。估且这么叫吧，可能很简单，但对排错速度还是有点帮助，希望能抛砖引玉，也希望大家多给力，想出更多的防范措施共享出来。&lt;/p>
 &lt;h2 id="检查重复的jar包">检查重复的jar包&lt;/h2>
 &lt;p>最痴呆的问题，就是有多个版本的相同jar包，会出现新版本的 A 类，调用了旧版本的 B 类，而且和JVM加载顺序有关，问题带有偶然性，误导性，遇到这种莫名其妙的问题，最头疼，所以，第一条，先把它防住，在每个 jar 包中挑一个一定会加载的类，加上重复类检查，给个示例：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-Duplicate&lt;span style="color:#719e07">.&lt;/span>checkDuplicate&lt;span style="color:#719e07">(&lt;/span>Xxx&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>检查重复工具类：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">final&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">Duplicate&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">Duplicate&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{}&lt;/span>
-&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">checkDuplicate&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Class cls&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-checkDuplicate&lt;span style="color:#719e07">(&lt;/span>cls&lt;span style="color:#719e07">.&lt;/span>getName&lt;span style="color:#719e07">().&lt;/span>replace&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#39;.&amp;#39;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#2aa198">&amp;#39;/&amp;#39;&lt;/span>&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34;.class&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">checkDuplicate&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String path&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#719e07">try&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#586e75">// 在ClassPath搜文件
-&lt;/span>&lt;span style="color:#586e75">&lt;/span> Enumeration urls &lt;span style="color:#719e07">=&lt;/span> Thread&lt;span style="color:#719e07">.&lt;/span>currentThread&lt;span style="color:#719e07">().&lt;/span>getContextClassLoader&lt;span style="color:#719e07">().&lt;/span>getResources&lt;span style="color:#719e07">(&lt;/span>path&lt;span style="color:#719e07">);&lt;/span>
-Set files &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> HashSet&lt;span style="color:#719e07">();&lt;/span>
-&lt;span style="color:#719e07">while&lt;/span> &lt;span style="color:#719e07">(&lt;/span>urls&lt;span style="color:#719e07">.&lt;/span>hasMoreElements&lt;span style="color:#719e07">())&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-URL url &lt;span style="color:#719e07">=&lt;/span> urls&lt;span style="color:#719e07">.&lt;/span>nextElement&lt;span style="color:#719e07">();&lt;/span>
-&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>url &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span>&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-String file &lt;span style="color:#719e07">=&lt;/span> url&lt;span style="color:#719e07">.&lt;/span>getFile&lt;span style="color:#719e07">();&lt;/span>
-&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>file &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span> &lt;span style="color:#719e07">&amp;amp;&lt;/span>amp&lt;span style="color:#719e07">;&amp;amp;&lt;/span>amp&lt;span style="color:#719e07">;&lt;/span> file&lt;span style="color:#719e07">.&lt;/span>length&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">&amp;amp;&lt;/span>gt&lt;span style="color:#719e07">;&lt;/span> 0&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-files&lt;span style="color:#719e07">.&lt;/span>add&lt;span style="color:#719e07">(&lt;/span>file&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#586e75">// 如果有多个，就表示重复
-&lt;/span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>files&lt;span style="color:#719e07">.&lt;/span>size&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">&amp;amp;&lt;/span>gt&lt;span style="color:#719e07">;&lt;/span> 1&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-logger&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Duplicate class &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> path &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34; in &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> files&lt;span style="color:#719e07">.&lt;/span>size&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34; jar &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> files&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">catch&lt;/span> &lt;span style="color:#719e07">(&lt;/span>Throwable e&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span> &lt;span style="color:#586e75">// 防御性容错
-&lt;/span>&lt;span style="color:#586e75">&lt;/span> logger&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e07">(&lt;/span>e&lt;span style="color:#719e07">.&lt;/span>getMessage&lt;span style="color:#719e07">(),&lt;/span> e&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="检查重复的配置文件">检查重复的配置文件&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Duplicate&lt;span style="color:#719e07">.&lt;/span>checkDuplicate&lt;span style="color:#719e07">(&lt;/span>Xxx&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>检查重复工具类：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">final&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">Duplicate&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">Duplicate&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">checkDuplicate&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Class cls&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> checkDuplicate&lt;span style="color:#719e07">(&lt;/span>cls&lt;span style="color:#719e07">.&lt;/span>getName&lt;span style="color:#719e07">().&lt;/span>replace&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#39;.&amp;#39;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#2aa198">&amp;#39;/&amp;#39;&lt;/span>&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34;.class&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">checkDuplicate&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String path&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">try&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// 在ClassPath搜文件
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> Enumeration urls &lt;span style="color:#719e07">=&lt;/span> Thread&lt;span style="color:#719e07">.&lt;/span>currentThread&lt;span style="color:#719e07">().&lt;/span>getContextClassLoader&lt;span style="color:#719e07">().&lt;/span>getResources&lt;span style="color:#719e07">(&lt;/span>path&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Set files &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> HashSet&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">while&lt;/span> &lt;span style="color:#719e07">(&lt;/span>urls&lt;span style="color:#719e07">.&lt;/span>hasMoreElements&lt;span style="color:#719e07">())&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> URL url &lt;span style="color:#719e07">=&lt;/span> urls&lt;span style="color:#719e07">.&lt;/span>nextElement&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>url &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span>&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> String file &lt;span style="color:#719e07">=&lt;/span> url&lt;span style="color:#719e07">.&lt;/span>getFile&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>file &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span> &lt;span style="color:#719e07">&amp;amp;&lt;/span>amp&lt;span style="color:#719e07">;&amp;amp;&lt;/span>amp&lt;span style="color:#719e07">;&lt;/span> file&lt;span style="color:#719e07">.&lt;/span>length&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">&amp;amp;&lt;/span>gt&lt;span style="color:#719e07">;&lt;/span> 0&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> files&lt;span style="color:#719e07">.&lt;/span>add&lt;span style="color:#719e07">(&lt;/span>file&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// 如果有多个，就表示重复
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>files&lt;span style="color:#719e07">.&lt;/span>size&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">&amp;amp;&lt;/span>gt&lt;span style="color:#719e07">;&lt;/span> 1&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> logger&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Duplicate class &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> path &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34; in &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> files&lt;span style="color:#719e07">.&lt;/span>size&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34; jar &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> files&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">catch&lt;/span> &lt;span style="color:#719e07">(&lt;/span>Throwable e&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span> &lt;span style="color:#586e75">// 防御性容错
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> logger&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e07">(&lt;/span>e&lt;span style="color:#719e07">.&lt;/span>getMessage&lt;span style="color:#719e07">(),&lt;/span> e&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="检查重复的配置文件">检查重复的配置文件&lt;/h2>
 &lt;p>配置文件加载错，也是经常碰到的问题。用户通常会和你说：“我配置的很正确啊，不信我发给你看下，但就是报错”。然后查一圈下来，原来他发过来的配置根本没加载，平台很多产品都会在 classpath 下放一个约定的配置，如果项目中有多个，通常会取JVM加载的第一个，为了不被这么低级的问题折腾，和上面的重复jar包一样，在配置加载的地方，加上：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">Duplicate&lt;span style="color:#719e07">.&lt;/span>checkDuplicate&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;xxx.properties&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="检查所有可选配置">检查所有可选配置&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>Duplicate&lt;span style="color:#719e07">.&lt;/span>checkDuplicate&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;xxx.properties&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="检查所有可选配置">检查所有可选配置&lt;/h2>
 &lt;p>必填配置估计大家都会检查，因为没有的话，根本没法运行。但对一些可选参数，也应该做一些检查，比如：服务框架允许通过注册中心关联服务消费者和服务提供者，也允许直接配置服务提供者地址点对点直连，这时候，注册中心地址是可选的，但如果没有配点对点直连配置，注册中心地址就一定要配，这时候也要做相应检查。&lt;/p>
 &lt;h2 id="异常信息给出解决方案">异常信息给出解决方案&lt;/h2>
 &lt;p>在给应用排错时，最怕的就是那种只有简单的一句错误描述，啥信息都没有的异常信息。比如上次碰到一个 Failed to get session 异常，就这几个单词，啥都没有，哪个 session 出错? 什么原因 Failed? 看了都快疯掉，因是线上环境不好调试，而且有些场景不是每次都能重现。异常最基本要带有上下文信息，包括操作者，操作目标，原因等，最好的异常信息，应给出解决方案，比如上面可以给出：&amp;ldquo;从 10.20.16.3 到 10.20.130.20:20880 之间的网络不通，请在 10.20.16.3 使用 telnet 10.20.130.20 20880 测试一下网络，如果是跨机房调用，可能是防火墙阻挡，请联系 SA 开通访问权限&amp;rdquo; 等等，上面甚至可以根据 IP 段判断是不是跨机房。另外一个例子，是 spring-web 的 context 加载，如果在 getBean 时 spring 没有被启动，spring 会报一个错，错误信息写着：请在 web.xml 中加入: &lt;code>&amp;lt;listener&amp;gt;...&amp;lt;init-param&amp;gt;...&lt;/code>，多好的同学，看到错误的人复制一下就完事了，我们该学学。可以把常见的错误故意犯一遍，看看错误信息能否自我搞定问题，
 或者把平时支持应用时遇到的问题及解决办法都写到异常信息里。&lt;/p>
 &lt;h2 id="日志信息包含环境信息">日志信息包含环境信息&lt;/h2>
 &lt;p>每次应用一出错，应用的开发或测试就会把出错信息发过来，询问原因，这时候我都会问一大堆套话，用的哪个版本呀？是生产环境还是开发测试环境？哪个注册中心呀？哪个项目中的？哪台机器呀？哪个服务? 累啊，最主要的是，有些开发或测试人员根本分不清，没办法，只好提供上门服务，浪费的时间可不是浮云，所以，日志中最好把需要的环境信息一并打进去，最好给日志输出做个包装，统一处理掉，免得忘了。包装Logger接口如：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">error&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String msg&lt;span style="color:#719e07">,&lt;/span> Throwable e&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-delegate&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e07">(&lt;/span>msg &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34; on server &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> InetAddress&lt;span style="color:#719e07">.&lt;/span>getLocalHost&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34; using version &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> Version&lt;span style="color:#719e07">.&lt;/span>getVersion&lt;span style="color:#719e07">(),&lt;/span> e&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>获取版本号工具类：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">final&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">Version&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">Version&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{}&lt;/span>
-&lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#268bd2">final&lt;/span> Logger logger &lt;span style="color:#719e07">=&lt;/span> LoggerFactory&lt;span style="color:#719e07">.&lt;/span>getLogger&lt;span style="color:#719e07">(&lt;/span>Version&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#268bd2">final&lt;/span> Pattern VERSION_PATTERN &lt;span style="color:#719e07">=&lt;/span> Pattern&lt;span style="color:#719e07">.&lt;/span>compile&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;([0-9][0-9\\.\\-]*)\\.jar&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#268bd2">final&lt;/span> String VERSION &lt;span style="color:#719e07">=&lt;/span> getVersion&lt;span style="color:#719e07">(&lt;/span>Version&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#2aa198">&amp;#34;2.0.0&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> String &lt;span style="color:#268bd2">getVersion&lt;/span>&lt;span style="color:#719e07">(){&lt;/span>
-&lt;span style="color:#719e07">return&lt;/span> VERSION&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> String &lt;span style="color:#268bd2">getVersion&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Class cls&lt;span style="color:#719e07">,&lt;/span> String defaultVersion&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#719e07">try&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#586e75">// 首先查找MANIFEST.MF规范中的版本号
-&lt;/span>&lt;span style="color:#586e75">&lt;/span> String version &lt;span style="color:#719e07">=&lt;/span> cls&lt;span style="color:#719e07">.&lt;/span>getPackage&lt;span style="color:#719e07">().&lt;/span>getImplementationVersion&lt;span style="color:#719e07">();&lt;/span>
-&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>version &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span> &lt;span style="color:#719e07">||&lt;/span> version&lt;span style="color:#719e07">.&lt;/span>length&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">==&lt;/span> 0&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-version &lt;span style="color:#719e07">=&lt;/span> cls&lt;span style="color:#719e07">.&lt;/span>getPackage&lt;span style="color:#719e07">().&lt;/span>getSpecificationVersion&lt;span style="color:#719e07">();&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>version &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span> &lt;span style="color:#719e07">||&lt;/span> version&lt;span style="color:#719e07">.&lt;/span>length&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">==&lt;/span> 0&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#586e75">// 如果MANIFEST.MF规范中没有版本号，基于jar包名获取版本号
-&lt;/span>&lt;span style="color:#586e75">&lt;/span> String file &lt;span style="color:#719e07">=&lt;/span> cls&lt;span style="color:#719e07">.&lt;/span>getProtectionDomain&lt;span style="color:#719e07">().&lt;/span>getCodeSource&lt;span style="color:#719e07">().&lt;/span>getLocation&lt;span style="color:#719e07">().&lt;/span>getFile&lt;span style="color:#719e07">();&lt;/span>
-&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>file &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span> &lt;span style="color:#719e07">&amp;amp;&amp;amp;&lt;/span> file&lt;span style="color:#719e07">.&lt;/span>length&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">&amp;gt;&lt;/span> 0 &lt;span style="color:#719e07">&amp;amp;&amp;amp;&lt;/span> file&lt;span style="color:#719e07">.&lt;/span>endsWith&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;.jar&amp;#34;&lt;/span>&lt;span style="color:#719e07">))&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-Matcher matcher &lt;span style="color:#719e07">=&lt;/span> VERSION_PATTERN&lt;span style="color:#719e07">.&lt;/span>matcher&lt;span style="color:#719e07">(&lt;/span>file&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">while&lt;/span> &lt;span style="color:#719e07">(&lt;/span>matcher&lt;span style="color:#719e07">.&lt;/span>find&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">&amp;amp;&amp;amp;&lt;/span> matcher&lt;span style="color:#719e07">.&lt;/span>groupCount&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">&amp;gt;&lt;/span> 0&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-version &lt;span style="color:#719e07">=&lt;/span> matcher&lt;span style="color:#719e07">.&lt;/span>group&lt;span style="color:#719e07">(&lt;/span>1&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#586e75">// 返回版本号，如果为空返回缺省版本号
-&lt;/span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">return&lt;/span> version &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span> &lt;span style="color:#719e07">||&lt;/span> version&lt;span style="color:#719e07">.&lt;/span>length&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">==&lt;/span> 0 &lt;span style="color:#719e07">?&lt;/span> defaultVersion &lt;span style="color:#719e07">:&lt;/span> version&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">catch&lt;/span> &lt;span style="color:#719e07">(&lt;/span>Throwable e&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span> &lt;span style="color:#586e75">// 防御性容错
-&lt;/span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#586e75">// 忽略异常，返回缺省版本号
-&lt;/span>&lt;span style="color:#586e75">&lt;/span> logger&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e07">(&lt;/span>e&lt;span style="color:#719e07">.&lt;/span>getMessage&lt;span style="color:#719e07">(),&lt;/span> e&lt;span style="color:#719e07">);&lt;/span>
-&lt;span style="color:#719e07">return&lt;/span> defaultVersion&lt;span style="color:#719e07">;&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="kill-之前先-dump">kill 之前先 dump&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">error&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String msg&lt;span style="color:#719e07">,&lt;/span> Throwable e&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> delegate&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e07">(&lt;/span>msg &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34; on server &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> InetAddress&lt;span style="color:#719e07">.&lt;/span>getLocalHost&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34; using version &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> Version&lt;span style="color:#719e07">.&lt;/span>getVersion&lt;span style="color:#719e07">(),&lt;/span> e&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>获取版本号工具类：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">final&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">Version&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">Version&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#268bd2">final&lt;/span> Logger logger &lt;span style="color:#719e07">=&lt;/span> LoggerFactory&lt;span style="color:#719e07">.&lt;/span>getLogger&lt;span style="color:#719e07">(&lt;/span>Version&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#268bd2">final&lt;/span> Pattern VERSION_PATTERN &lt;span style="color:#719e07">=&lt;/span> Pattern&lt;span style="color:#719e07">.&lt;/span>compile&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;([0-9][0-9\\.\\-]*)\\.jar&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#268bd2">final&lt;/span> String VERSION &lt;span style="color:#719e07">=&lt;/span> getVersion&lt;span style="color:#719e07">(&lt;/span>Version&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#2aa198">&amp;#34;2.0.0&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> String &lt;span style="color:#268bd2">getVersion&lt;/span>&lt;span style="color:#719e07">(){&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> VERSION&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> String &lt;span style="color:#268bd2">getVersion&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Class cls&lt;span style="color:#719e07">,&lt;/span> String defaultVersion&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">try&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// 首先查找MANIFEST.MF规范中的版本号
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> String version &lt;span style="color:#719e07">=&lt;/span> cls&lt;span style="color:#719e07">.&lt;/span>getPackage&lt;span style="color:#719e07">().&lt;/span>getImplementationVersion&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>version &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span> &lt;span style="color:#719e07">||&lt;/span> version&lt;span style="color:#719e07">.&lt;/span>length&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">==&lt;/span> 0&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> version &lt;span style="color:#719e07">=&lt;/span> cls&lt;span style="color:#719e07">.&lt;/span>getPackage&lt;span style="color:#719e07">().&lt;/span>getSpecificationVersion&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>version &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span> &lt;span style="color:#719e07">||&lt;/span> version&lt;span style="color:#719e07">.&lt;/span>length&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">==&lt;/span> 0&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// 如果MANIFEST.MF规范中没有版本号，基于jar包名获取版本号
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> String file &lt;span style="color:#719e07">=&lt;/span> cls&lt;span style="color:#719e07">.&lt;/span>getProtectionDomain&lt;span style="color:#719e07">().&lt;/span>getCodeSource&lt;span style="color:#719e07">().&lt;/span>getLocation&lt;span style="color:#719e07">().&lt;/span>getFile&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>file &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span> &lt;span style="color:#719e07">&amp;amp;&amp;amp;&lt;/span> file&lt;span style="color:#719e07">.&lt;/span>length&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">&amp;gt;&lt;/span> 0 &lt;span style="color:#719e07">&amp;amp;&amp;amp;&lt;/span> file&lt;span style="color:#719e07">.&lt;/span>endsWith&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;.jar&amp;#34;&lt;/span>&lt;span style="color:#719e07">))&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Matcher matcher &lt;span style="color:#719e07">=&lt;/span> VERSION_PATTERN&lt;span style="color:#719e07">.&lt;/span>matcher&lt;span style="color:#719e07">(&lt;/span>file&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">while&lt;/span> &lt;span style="color:#719e07">(&lt;/span>matcher&lt;span style="color:#719e07">.&lt;/span>find&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">&amp;amp;&amp;amp;&lt;/span> matcher&lt;span style="color:#719e07">.&lt;/span>groupCount&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">&amp;gt;&lt;/span> 0&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> version &lt;span style="color:#719e07">=&lt;/span> matcher&lt;span style="color:#719e07">.&lt;/span>group&lt;span style="color:#719e07">(&lt;/span>1&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// 返回版本号，如果为空返回缺省版本号
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">return&lt;/span> version &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span> &lt;span style="color:#719e07">||&lt;/span> version&lt;span style="color:#719e07">.&lt;/span>length&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">==&lt;/span> 0 &lt;span style="color:#719e07">?&lt;/span> defaultVersion &lt;span style="color:#719e07">:&lt;/span> version&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">catch&lt;/span> &lt;span style="color:#719e07">(&lt;/span>Throwable e&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span> &lt;span style="color:#586e75">// 防御性容错
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#586e75">// 忽略异常，返回缺省版本号
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> logger&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e07">(&lt;/span>e&lt;span style="color:#719e07">.&lt;/span>getMessage&lt;span style="color:#719e07">(),&lt;/span> e&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> defaultVersion&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="kill-之前先-dump">kill 之前先 dump&lt;/h2>
 &lt;p>每次线上环境一出问题，大家就慌了，通常最直接的办法回滚重启，以减少故障时间，这样现场就被破坏了，要想事后查问题就麻烦了，有些问题必须在线上的大压力下才会发生，线下测试环境很难重现，不太可能让开发或 Appops 在重启前，先手工将出错现场所有数据备份一下，所以最好在 kill 脚本之前调用 dump，进行自动备份，这样就不会有人为疏忽。dump脚本示例：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-sh" data-lang="sh">&lt;span style="color:#268bd2">JAVA_HOME&lt;/span>&lt;span style="color:#719e07">=&lt;/span>/usr/java
-&lt;span style="color:#268bd2">OUTPUT_HOME&lt;/span>&lt;span style="color:#719e07">=&lt;/span>~/output
-&lt;span style="color:#268bd2">DEPLOY_HOME&lt;/span>&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#586e75">`&lt;/span>dirname &lt;span style="color:#268bd2">$0&lt;/span>&lt;span style="color:#586e75">`&lt;/span>
-&lt;span style="color:#268bd2">HOST_NAME&lt;/span>&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#586e75">`&lt;/span>hostname&lt;span style="color:#586e75">`&lt;/span>
-&lt;span style="color:#268bd2">DUMP_PIDS&lt;/span>&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#586e75">`&lt;/span>ps --no-heading -C java -f --width &lt;span style="color:#2aa198">1000&lt;/span> | grep &lt;span style="color:#2aa198">&amp;#34;&lt;/span>&lt;span style="color:#268bd2">$DEPLOY_HOME&lt;/span>&lt;span style="color:#2aa198">&amp;#34;&lt;/span> |awk &lt;span style="color:#2aa198">&amp;#39;{print $2}&amp;#39;&lt;/span>&lt;span style="color:#586e75">`&lt;/span>
-&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> -z &lt;span style="color:#2aa198">&amp;#34;&lt;/span>&lt;span style="color:#268bd2">$DUMP_PIDS&lt;/span>&lt;span style="color:#2aa198">&amp;#34;&lt;/span> &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
-&lt;span style="color:#b58900">echo&lt;/span> &lt;span style="color:#2aa198">&amp;#34;The server &lt;/span>&lt;span style="color:#268bd2">$HOST_NAME&lt;/span>&lt;span style="color:#2aa198"> is not started!&amp;#34;&lt;/span>
-&lt;span style="color:#b58900">exit&lt;/span> 1;
-&lt;span style="color:#719e07">fi&lt;/span>
-&lt;span style="color:#268bd2">DUMP_ROOT&lt;/span>&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#268bd2">$OUTPUT_HOME&lt;/span>/dump
-&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> ! -d &lt;span style="color:#268bd2">$DUMP_ROOT&lt;/span> &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
-mkdir &lt;span style="color:#268bd2">$DUMP_ROOT&lt;/span>
-&lt;span style="color:#719e07">fi&lt;/span>
-&lt;span style="color:#268bd2">DUMP_DATE&lt;/span>&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#586e75">`&lt;/span>date +%Y%m%d%H%M%S&lt;span style="color:#586e75">`&lt;/span>
-&lt;span style="color:#268bd2">DUMP_DIR&lt;/span>&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#268bd2">$DUMP_ROOT&lt;/span>/dump-&lt;span style="color:#268bd2">$DUMP_DATE&lt;/span>
-&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> ! -d &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span> &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
-mkdir &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>
-&lt;span style="color:#719e07">fi&lt;/span>
-&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;Dumping the server &lt;/span>&lt;span style="color:#268bd2">$HOST_NAME&lt;/span>&lt;span style="color:#2aa198"> ...\c&amp;#34;&lt;/span>
-&lt;span style="color:#719e07">for&lt;/span> PID in &lt;span style="color:#268bd2">$DUMP_PIDS&lt;/span> ; &lt;span style="color:#719e07">do&lt;/span>
-&lt;span style="color:#268bd2">$JAVA_HOME&lt;/span>/bin/jstack &lt;span style="color:#268bd2">$PID&lt;/span> &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/jstack-&lt;span style="color:#268bd2">$PID&lt;/span>.dump 2&amp;gt;&amp;amp;&lt;span style="color:#2aa198">1&lt;/span>
-&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
-&lt;span style="color:#268bd2">$JAVA_HOME&lt;/span>/bin/jinfo &lt;span style="color:#268bd2">$PID&lt;/span> &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/jinfo-&lt;span style="color:#268bd2">$PID&lt;/span>.dump 2&amp;gt;&amp;amp;&lt;span style="color:#2aa198">1&lt;/span>
-&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
-&lt;span style="color:#268bd2">$JAVA_HOME&lt;/span>/bin/jstat -gcutil &lt;span style="color:#268bd2">$PID&lt;/span> &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/jstat-gcutil-&lt;span style="color:#268bd2">$PID&lt;/span>.dump 2&amp;gt;&amp;amp;&lt;span style="color:#2aa198">1&lt;/span>
-&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
-&lt;span style="color:#268bd2">$JAVA_HOME&lt;/span>/bin/jstat -gccapacity &lt;span style="color:#268bd2">$PID&lt;/span> &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/jstat-gccapacity-&lt;span style="color:#268bd2">$PID&lt;/span>.dump 2&amp;gt;&amp;amp;&lt;span style="color:#2aa198">1&lt;/span>
-&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
-&lt;span style="color:#268bd2">$JAVA_HOME&lt;/span>/bin/jmap &lt;span style="color:#268bd2">$PID&lt;/span> &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/jmap-&lt;span style="color:#268bd2">$PID&lt;/span>.dump 2&amp;gt;&amp;amp;&lt;span style="color:#2aa198">1&lt;/span>
-&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
-&lt;span style="color:#268bd2">$JAVA_HOME&lt;/span>/bin/jmap -heap &lt;span style="color:#268bd2">$PID&lt;/span> &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/jmap-heap-&lt;span style="color:#268bd2">$PID&lt;/span>.dump 2&amp;gt;&amp;amp;&lt;span style="color:#2aa198">1&lt;/span>
-&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
-&lt;span style="color:#268bd2">$JAVA_HOME&lt;/span>/bin/jmap -histo &lt;span style="color:#268bd2">$PID&lt;/span> &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/jmap-histo-&lt;span style="color:#268bd2">$PID&lt;/span>.dump 2&amp;gt;&amp;amp;&lt;span style="color:#2aa198">1&lt;/span>
-&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
-&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> -r /usr/sbin/lsof &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
-/usr/sbin/lsof -p &lt;span style="color:#268bd2">$PID&lt;/span> &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/lsof-&lt;span style="color:#268bd2">$PID&lt;/span>.dump
-&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
-&lt;span style="color:#719e07">fi&lt;/span>
-&lt;span style="color:#719e07">done&lt;/span>
-&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> -r /usr/bin/sar &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
-/usr/bin/sar &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/sar.dump
-&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
-&lt;span style="color:#719e07">fi&lt;/span>
-&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> -r /usr/bin/uptime &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
-/usr/bin/uptime &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/uptime.dump
-&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
-&lt;span style="color:#719e07">fi&lt;/span>
-&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> -r /usr/bin/free &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
-/usr/bin/free -t &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/free.dump
-&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
-&lt;span style="color:#719e07">fi&lt;/span>
-&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> -r /usr/bin/vmstat &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
-/usr/bin/vmstat &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/vmstat.dump
-&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
-&lt;span style="color:#719e07">fi&lt;/span>
-&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> -r /usr/bin/mpstat &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
-/usr/bin/mpstat &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/mpstat.dump
-&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
-&lt;span style="color:#719e07">fi&lt;/span>
-&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> -r /usr/bin/iostat &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
-/usr/bin/iostat &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/iostat.dump
-&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
-&lt;span style="color:#719e07">fi&lt;/span>
-&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> -r /bin/netstat &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
-/bin/netstat &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/netstat.dump
-&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
-&lt;span style="color:#719e07">fi&lt;/span>
-&lt;span style="color:#b58900">echo&lt;/span> &lt;span style="color:#2aa198">&amp;#34;OK!&amp;#34;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docsv2.7: 谈谈扩充式扩展与增量式扩展</title><link>https://dubbo.apache.org/zh/docsv2.7/dev/principals/expansibility/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/dev/principals/expansibility/</guid><description>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">JAVA_HOME&lt;/span>&lt;span style="color:#719e07">=&lt;/span>/usr/java
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">OUTPUT_HOME&lt;/span>&lt;span style="color:#719e07">=&lt;/span>~/output
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">DEPLOY_HOME&lt;/span>&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#586e75">`&lt;/span>dirname &lt;span style="color:#268bd2">$0&lt;/span>&lt;span style="color:#586e75">`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">HOST_NAME&lt;/span>&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#586e75">`&lt;/span>hostname&lt;span style="color:#586e75">`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">DUMP_PIDS&lt;/span>&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#586e75">`&lt;/span>ps --no-heading -C java -f --width &lt;span style="color:#2aa198">1000&lt;/span> | grep &lt;span style="color:#2aa198">&amp;#34;&lt;/span>&lt;span style="color:#268bd2">$DEPLOY_HOME&lt;/span>&lt;span style="color:#2aa198">&amp;#34;&lt;/span> |awk &lt;span style="color:#2aa198">&amp;#39;{print $2}&amp;#39;&lt;/span>&lt;span style="color:#586e75">`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> -z &lt;span style="color:#2aa198">&amp;#34;&lt;/span>&lt;span style="color:#268bd2">$DUMP_PIDS&lt;/span>&lt;span style="color:#2aa198">&amp;#34;&lt;/span> &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">echo&lt;/span> &lt;span style="color:#2aa198">&amp;#34;The server &lt;/span>&lt;span style="color:#268bd2">$HOST_NAME&lt;/span>&lt;span style="color:#2aa198"> is not started!&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">exit&lt;/span> 1;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">DUMP_ROOT&lt;/span>&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#268bd2">$OUTPUT_HOME&lt;/span>/dump
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> ! -d &lt;span style="color:#268bd2">$DUMP_ROOT&lt;/span> &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mkdir &lt;span style="color:#268bd2">$DUMP_ROOT&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">DUMP_DATE&lt;/span>&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#586e75">`&lt;/span>date +%Y%m%d%H%M%S&lt;span style="color:#586e75">`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">DUMP_DIR&lt;/span>&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#268bd2">$DUMP_ROOT&lt;/span>/dump-&lt;span style="color:#268bd2">$DUMP_DATE&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> ! -d &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span> &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mkdir &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;Dumping the server &lt;/span>&lt;span style="color:#268bd2">$HOST_NAME&lt;/span>&lt;span style="color:#2aa198"> ...\c&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">for&lt;/span> PID in &lt;span style="color:#268bd2">$DUMP_PIDS&lt;/span> ; &lt;span style="color:#719e07">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">$JAVA_HOME&lt;/span>/bin/jstack &lt;span style="color:#268bd2">$PID&lt;/span> &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/jstack-&lt;span style="color:#268bd2">$PID&lt;/span>.dump 2&amp;gt;&amp;amp;&lt;span style="color:#2aa198">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">$JAVA_HOME&lt;/span>/bin/jinfo &lt;span style="color:#268bd2">$PID&lt;/span> &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/jinfo-&lt;span style="color:#268bd2">$PID&lt;/span>.dump 2&amp;gt;&amp;amp;&lt;span style="color:#2aa198">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">$JAVA_HOME&lt;/span>/bin/jstat -gcutil &lt;span style="color:#268bd2">$PID&lt;/span> &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/jstat-gcutil-&lt;span style="color:#268bd2">$PID&lt;/span>.dump 2&amp;gt;&amp;amp;&lt;span style="color:#2aa198">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">$JAVA_HOME&lt;/span>/bin/jstat -gccapacity &lt;span style="color:#268bd2">$PID&lt;/span> &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/jstat-gccapacity-&lt;span style="color:#268bd2">$PID&lt;/span>.dump 2&amp;gt;&amp;amp;&lt;span style="color:#2aa198">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">$JAVA_HOME&lt;/span>/bin/jmap &lt;span style="color:#268bd2">$PID&lt;/span> &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/jmap-&lt;span style="color:#268bd2">$PID&lt;/span>.dump 2&amp;gt;&amp;amp;&lt;span style="color:#2aa198">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">$JAVA_HOME&lt;/span>/bin/jmap -heap &lt;span style="color:#268bd2">$PID&lt;/span> &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/jmap-heap-&lt;span style="color:#268bd2">$PID&lt;/span>.dump 2&amp;gt;&amp;amp;&lt;span style="color:#2aa198">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">$JAVA_HOME&lt;/span>/bin/jmap -histo &lt;span style="color:#268bd2">$PID&lt;/span> &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/jmap-histo-&lt;span style="color:#268bd2">$PID&lt;/span>.dump 2&amp;gt;&amp;amp;&lt;span style="color:#2aa198">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> -r /usr/sbin/lsof &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> /usr/sbin/lsof -p &lt;span style="color:#268bd2">$PID&lt;/span> &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/lsof-&lt;span style="color:#268bd2">$PID&lt;/span>.dump
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">done&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> -r /usr/bin/sar &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/usr/bin/sar &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/sar.dump
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> -r /usr/bin/uptime &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/usr/bin/uptime &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/uptime.dump
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> -r /usr/bin/free &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/usr/bin/free -t &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/free.dump
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> -r /usr/bin/vmstat &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/usr/bin/vmstat &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/vmstat.dump
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> -r /usr/bin/mpstat &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/usr/bin/mpstat &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/mpstat.dump
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> -r /usr/bin/iostat &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/usr/bin/iostat &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/iostat.dump
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> -r /bin/netstat &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/bin/netstat &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/netstat.dump
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#b58900">echo&lt;/span> &lt;span style="color:#2aa198">&amp;#34;OK!&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docsv2.7: 谈谈扩充式扩展与增量式扩展</title><link>https://dubbo.apache.org/zh/docsv2.7/dev/principals/expansibility/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/dev/principals/expansibility/</guid><description>
 &lt;p>我们平台的产品越来越多，产品的功能也越来越多。平台的产品为了适应各 BU 和部门以及产品线的需求，势必会将很多不相干的功能凑在一起，客户可以选择性的使用。为了兼容更多的需求，每个产品，每个框架，都在不停的扩展，而我们经常会选择一些扩展的扩展方式，也就是将新旧功能扩展成一个通用实现。我想讨论是，有些情况下也可以考虑增量式的扩展方式，也就是保留原功能的简单性，新功能独立实现。我最近一直做分布式服务框架的开发，就拿我们项目中的问题开涮吧。&lt;/p>
 &lt;p>比如：远程调用框架，肯定少不了序列化功能，功能很简单，就是把流转成对象，对象转成流。但因有些地方可能会使用 osgi，这样序列化时，IO 所在的 ClassLoader 可能和业务方的 ClassLoader 是隔离的。需要将流转换成 byte[] 数组，然后传给业务方的 ClassLoader 进行序列化。为了适应 osgi 需求，把原来非 osgi 与 osgi 的场景扩展了一下，这样，不管是不是 osgi 环境，都先将流转成 byte[] 数组，拷贝一次。然而，大部分场景都用不上 osgi，却为 osgi 付出了代价。而如果采用增量式扩展方式，非 osgi 的代码原封不动，再加一个 osgi 的实现，要用 osgi 的时候，直接依赖 osgi 实现即可。&lt;/p>
 &lt;p>再比如：最开始，远程服务都是基于接口方法，进行透明化调用的。这样，扩展接口就是， invoke(Method method, Object[] args)，后来，有了无接口调用的需求，就是没有接口方法也能调用，并将 POJO 对象都转换成 Map 表示。因为 Method 对象是不能直接 new 出来的，我们不自觉选了一个扩展式扩展，把扩展接口改成了 invoke(String methodName, String[] parameterTypes, String returnTypes, Object[] args)，导致不管是不是无接口调用，都得把 parameterTypes 从 Class[] 转成 String[]。如果选用增量式扩展，应该是保持原有接口不变，增加一个 GeneralService 接口，里面有一个通用的 invoke() 方法，和其它正常业务上的接口一样的调用方式，扩展接口也不用变，只是 GeneralServiceImpl 的 invoke() 实现会将收到的调用转给目标接口，这样就能将新功能增量到旧功能上，并保持原来结构的简单性。&lt;/p>
@@ -252,44 +269,53 @@ mkdir &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/dev/design-step2.png" alt="design-step-2">&lt;/p>
 &lt;h2 id="第三步全管道式设计框架自身逻辑均使用截面拦截实现">第三步，全管道式设计，框架自身逻辑，均使用截面拦截实现&lt;/h2>
 &lt;p>现在很多的逻辑，都是放在基类中实现，然后通过模板方法回调子类的实现，包括：local, mock, generic, echo, token, accesslog, monitor, count, limit 等等，可以全部拆分使用 Filter 实现，每个功能都是调用链上的一环。 比如：(基类模板方法)&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">abstract&lt;/span> AbstractInvoker &lt;span style="color:#268bd2">implements&lt;/span> Invoker &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#268bd2">public&lt;/span> Result &lt;span style="color:#268bd2">invoke&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Invocation inv&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RpcException &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#586e75">// 伪代码
-&lt;/span>&lt;span style="color:#586e75">&lt;/span> active &lt;span style="color:#719e07">++;&lt;/span>
-&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>active &lt;span style="color:#719e07">&amp;gt;&lt;/span> max&lt;span style="color:#719e07">)&lt;/span>
-wait&lt;span style="color:#719e07">();&lt;/span>
-doInvoke&lt;span style="color:#719e07">(&lt;/span>inv&lt;span style="color:#719e07">);&lt;/span>
-active &lt;span style="color:#719e07">--;&lt;/span>
-notify&lt;span style="color:#719e07">();&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#268bd2">protected&lt;/span> &lt;span style="color:#268bd2">abstract&lt;/span> Result &lt;span style="color:#268bd2">doInvoke&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Invocation inv&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RpcException
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>改成：(链式过滤器)&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">abstract&lt;/span> LimitFilter &lt;span style="color:#268bd2">implements&lt;/span> Filter &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#268bd2">public&lt;/span> Result &lt;span style="color:#268bd2">invoke&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Invoker chain&lt;span style="color:#719e07">,&lt;/span> Invocation inv&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RpcException &lt;span style="color:#719e07">{&lt;/span>
-&lt;span style="color:#586e75">// 伪代码
-&lt;/span>&lt;span style="color:#586e75">&lt;/span> active &lt;span style="color:#719e07">++;&lt;/span>
-&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>active &lt;span style="color:#719e07">&amp;gt;&lt;/span> max&lt;span style="color:#719e07">)&lt;/span>
-wait&lt;span style="color:#719e07">();&lt;/span>
-chain&lt;span style="color:#719e07">.&lt;/span>invoke&lt;span style="color:#719e07">(&lt;/span>inv&lt;span style="color:#719e07">);&lt;/span>
-active &lt;span style="color:#719e07">--;&lt;/span>
-notify&lt;span style="color:#719e07">();&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;span style="color:#719e07">}&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="第四步最少概念一致性概念模型">第四步，最少概念，一致性概念模型&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">abstract&lt;/span> AbstractInvoker &lt;span style="color:#268bd2">implements&lt;/span> Invoker &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> Result &lt;span style="color:#268bd2">invoke&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Invocation inv&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RpcException &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// 伪代码
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> active &lt;span style="color:#719e07">++;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>active &lt;span style="color:#719e07">&amp;gt;&lt;/span> max&lt;span style="color:#719e07">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> wait&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> doInvoke&lt;span style="color:#719e07">(&lt;/span>inv&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> active &lt;span style="color:#719e07">--;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> notify&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">protected&lt;/span> &lt;span style="color:#268bd2">abstract&lt;/span> Result &lt;span style="color:#268bd2">doInvoke&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Invocation inv&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RpcException
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>改成：(链式过滤器)&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">abstract&lt;/span> LimitFilter &lt;span style="color:#268bd2">implements&lt;/span> Filter &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> Result &lt;span style="color:#268bd2">invoke&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Invoker chain&lt;span style="color:#719e07">,&lt;/span> Invocation inv&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RpcException &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// 伪代码
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> active &lt;span style="color:#719e07">++;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>active &lt;span style="color:#719e07">&amp;gt;&lt;/span> max&lt;span style="color:#719e07">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> wait&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> chain&lt;span style="color:#719e07">.&lt;/span>invoke&lt;span style="color:#719e07">(&lt;/span>inv&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> active &lt;span style="color:#719e07">--;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> notify&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="第四步最少概念一致性概念模型">第四步，最少概念，一致性概念模型&lt;/h2>
 &lt;p>保持尽可能少的概念，有助于理解，对于开放的系统尤其重要。另外，各接口都使用一致的概念模型，能相互指引，并减少模型转换，&lt;/p>
 &lt;p>比如，Invoker 的方法签名为:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">Result &lt;span style="color:#268bd2">invoke&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Invocation invocation&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RpcException&lt;span style="color:#719e07">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>而 Exporter 的方法签名为:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">Object &lt;span style="color:#268bd2">invoke&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Method method&lt;span style="color:#719e07">,&lt;/span> Object&lt;span style="color:#719e07">[]&lt;/span> args&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> Throwable&lt;span style="color:#719e07">;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>但它们的作用是一样的，只是一个在客户端，一个在服务器端，却采用了不一样的模型类。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>Result &lt;span style="color:#268bd2">invoke&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Invocation invocation&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RpcException&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>而 Exporter 的方法签名为:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>Object &lt;span style="color:#268bd2">invoke&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Method method&lt;span style="color:#719e07">,&lt;/span> Object&lt;span style="color:#719e07">[]&lt;/span> args&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> Throwable&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>但它们的作用是一样的，只是一个在客户端，一个在服务器端，却采用了不一样的模型类。&lt;/p>
 &lt;p>再比如，URL 以字符串传递，不停的解析和拼装，没有一个 URL 模型类， 而 URL 的参数，却时而 Map, 时而 Parameters 类包装，&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">export&lt;span style="color:#719e07">(&lt;/span>String url&lt;span style="color:#719e07">)&lt;/span>
-createExporter&lt;span style="color:#719e07">(&lt;/span>String host&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#dc322f">int&lt;/span> port&lt;span style="color:#719e07">,&lt;/span> Parameters params&lt;span style="color:#719e07">);&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>使用一致模型：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-java" data-lang="java">export&lt;span style="color:#719e07">(&lt;/span>URL url&lt;span style="color:#719e07">)&lt;/span>
-createExporter&lt;span style="color:#719e07">(&lt;/span>URL url&lt;span style="color:#719e07">);&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>再比如，现有的：Invoker, Exporter, InvocationHandler, FilterChain
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>export&lt;span style="color:#719e07">(&lt;/span>String url&lt;span style="color:#719e07">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>createExporter&lt;span style="color:#719e07">(&lt;/span>String host&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#dc322f">int&lt;/span> port&lt;span style="color:#719e07">,&lt;/span> Parameters params&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>使用一致模型：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>export&lt;span style="color:#719e07">(&lt;/span>URL url&lt;span style="color:#719e07">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>createExporter&lt;span style="color:#719e07">(&lt;/span>URL url&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>再比如，现有的：Invoker, Exporter, InvocationHandler, FilterChain
 其实都是 invoke 行为的不同阶段，完全可以抽象掉，统一为 Invoker，减少概念。&lt;/p>
 &lt;h2 id="第五步分层组合式扩展而不是泛化式扩展">第五步，分层，组合式扩展，而不是泛化式扩展&lt;/h2>
 &lt;p>原因参见：&lt;a href="../expansibility">谈谈扩充式扩展与增量式扩展&lt;/a>。&lt;/p>

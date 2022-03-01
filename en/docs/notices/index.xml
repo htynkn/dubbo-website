@@ -9,28 +9,28 @@
 &lt;ul>
 &lt;li>&lt;code>dubbo-common&lt;/code> optionally depends on &lt;code>log4j-core&lt;/code>. The only need to check is whether the project itself has enabled log4j dependency. If so, upgrade accordingly.&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">[INFO] --- maven-dependency-plugin:3.1. 2:tree (default-cli) @ dubbo-common ---
-[INFO] org. apache. dubbo:dubbo-common:jar:2.7. 14-SNAPSHOT
-[INFO] +- org. apache. logging. log4j:log4j-api:jar:2.11. 1:provided
-[INFO] \- org. apache. logging. log4j:log4j-core:jar:2.11. 1:provided
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>[INFO] --- maven-dependency-plugin:3.1. 2:tree (default-cli) @ dubbo-common ---
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[INFO] org. apache. dubbo:dubbo-common:jar:2.7. 14-SNAPSHOT
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[INFO] +- org. apache. logging. log4j:log4j-api:jar:2.11. 1:provided
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[INFO] \- org. apache. logging. log4j:log4j-core:jar:2.11. 1:provided
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>&lt;code>dubbo-spring-boot-starter&lt;/code> transfers log4j-api dependency through spring-boot. log4j-api itself has no security issue. But pay attention to compatibility with log4j-api when upgrading the log4j-core component&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">[INFO] org. apache. dubbo:dubbo-spring-boot-starter:jar:2.7. 14-SNAPSHOT
-[INFO] \- org. springframework. boot:spring-boot-starter:jar:2.3. 1.RELEASE:compile (optional)
-[INFO] \- org. springframework. boot:spring-boot-starter-logging:jar:2.3. 1.RELEASE:compile (optional)
-[INFO] \- org. apache. logging. log4j:log4j-to-slf4j:jar:2.13. 3:compile (optional)
-[INFO] \- org. apache. logging. log4j:log4j-api:jar:2.13. 3:compile (optional)
-&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>[INFO] org. apache. dubbo:dubbo-spring-boot-starter:jar:2.7. 14-SNAPSHOT
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[INFO] \- org. springframework. boot:spring-boot-starter:jar:2.3. 1.RELEASE:compile (optional)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[INFO] \- org. springframework. boot:spring-boot-starter-logging:jar:2.3. 1.RELEASE:compile (optional)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[INFO] \- org. apache. logging. log4j:log4j-to-slf4j:jar:2.13. 3:compile (optional)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[INFO] \- org. apache. logging. log4j:log4j-api:jar:2.13. 3:compile (optional)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>&lt;code>dubbo-spring-boot-actuator&lt;/code> transfers log4j-api dependency through spring-boot. log4j-api itself has no security issue. But pay attention to compatibility with log4j-api when upgrading the log4j-core component&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-xml" data-lang="xml">[INFO] org. apache. dubbo:dubbo-spring-boot-actuator:jar:2.7. 14-SNAPSHOT
-[INFO] \- org. springframework. boot:spring-boot-starter-web:jar:2.3. 1.RELEASE:compile (optional)
-[INFO] \- org. springframework. boot:spring-boot-starter:jar:2.3. 1.RELEASE:compile
-[INFO] \- org. springframework. boot:spring-boot-starter-logging:jar:2.3. 1.RELEASE:compile
-[INFO] \- org. apache. logging. log4j:log4j-to-slf4j:jar:2.13. 3:compile
-[INFO] \- org. apache. logging. log4j:log4j-api:jar:2.13. 3:compile
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="2-third-party-deserialization-library-vulnerabilities">2. Third-party Deserialization Library Vulnerabilities&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>[INFO] org. apache. dubbo:dubbo-spring-boot-actuator:jar:2.7. 14-SNAPSHOT
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[INFO] \- org. springframework. boot:spring-boot-starter-web:jar:2.3. 1.RELEASE:compile (optional)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[INFO] \- org. springframework. boot:spring-boot-starter:jar:2.3. 1.RELEASE:compile
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[INFO] \- org. springframework. boot:spring-boot-starter-logging:jar:2.3. 1.RELEASE:compile
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[INFO] \- org. apache. logging. log4j:log4j-to-slf4j:jar:2.13. 3:compile
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[INFO] \- org. apache. logging. log4j:log4j-api:jar:2.13. 3:compile
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="2-third-party-deserialization-library-vulnerabilities">2. Third-party Deserialization Library Vulnerabilities&lt;/h2>
 &lt;p>Dubbo supports the extension of serialization protocol. Theoretically, users can enable serialization protocol with arbitrary order based on the extension mechanism, which brings great flexibility, but at the same time, they should be aware of the potential security risks.
 Data deserialization is one of the most vulnerable links to be exploited by attackers. Attackers use it to steal or destroy server-side data, such as rce attack.
 Before switching the serialization protocol or implementation, the user should fully investigate the security guarantee of target serialization protocol and its framework implementation, and set corresponding security measures in advance (such as setting Black / white list). The Dubbo framework itself cannot guarantee the security of the target serialization mechanism.&lt;/p>
