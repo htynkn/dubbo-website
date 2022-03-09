@@ -2,7 +2,7 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
-<meta name=generator content="Hugo 0.93.2">
+<meta name=generator content="Hugo 0.93.3">
 <meta name=ROBOTS content="INDEX, FOLLOW">
 <link rel="shortcut icon" href=/favicons/favicon.ico>
 <link rel=apple-touch-icon href=/favicons/apple-touch-icon-180x180.png sizes=180x180>
@@ -1072,7 +1072,7 @@ Releases
 </span></span><span style=display:flex><span><span style=color:#719e07>}</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#268bd2>public</span> <span style=color:#268bd2>abstract</span> <span style=color:#719e07>&lt;</span>T<span style=color:#719e07>&gt;</span> T <span style=color:#268bd2>getProxy</span><span style=color:#719e07>(</span>Invoker<span style=color:#719e07>&lt;</span>T<span style=color:#719e07>&gt;</span> invoker<span style=color:#719e07>,</span> Class<span style=color:#719e07>&lt;?&gt;[]</span> types<span style=color:#719e07>);</span>
-</span></span></code></pre></div><p>如上，上面大段代码都是用来获取 interfaces 数组的，我们继续往下看。getProxy(Invoker, Class&lt;?>[]) 这个方法是一个抽象方法，下面我们到 JavassistProxyFactory 类中看一下该方法的实现代码。</p><div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#268bd2>public</span> <span style=color:#719e07>&lt;</span>T<span style=color:#719e07>&gt;</span> T <span style=color:#268bd2>getProxy</span><span style=color:#719e07>(</span>Invoker<span style=color:#719e07>&lt;</span>T<span style=color:#719e07>&gt;</span> invoker<span style=color:#719e07>,</span> Class<span style=color:#719e07>&lt;?&gt;[]</span> interfaces<span style=color:#719e07>)</span> <span style=color:#719e07>{</span>
+</span></span></code></pre></div><p>如上，上面大段代码都是用来获取 interfaces 数组的，我们继续往下看。getProxy(Invoker, Class[]) 这个方法是一个抽象方法，下面我们到 JavassistProxyFactory 类中看一下该方法的实现代码。</p><div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#268bd2>public</span> <span style=color:#719e07>&lt;</span>T<span style=color:#719e07>&gt;</span> T <span style=color:#268bd2>getProxy</span><span style=color:#719e07>(</span>Invoker<span style=color:#719e07>&lt;</span>T<span style=color:#719e07>&gt;</span> invoker<span style=color:#719e07>,</span> Class<span style=color:#719e07>&lt;?&gt;[]</span> interfaces<span style=color:#719e07>)</span> <span style=color:#719e07>{</span>
 </span></span><span style=display:flex><span>    <span style=color:#586e75>// 生成 Proxy 子类（Proxy 是抽象类）。并调用 Proxy 子类的 newInstance 方法创建 Proxy 实例
 </span></span></span><span style=display:flex><span><span style=color:#586e75></span>    <span style=color:#719e07>return</span> <span style=color:#719e07>(</span>T<span style=color:#719e07>)</span> Proxy<span style=color:#719e07>.</span>getProxy<span style=color:#719e07>(</span>interfaces<span style=color:#719e07>).</span>newInstance<span style=color:#719e07>(</span><span style=color:#719e07>new</span> InvokerInvocationHandler<span style=color:#719e07>(</span>invoker<span style=color:#719e07>));</span>
 </span></span><span style=display:flex><span><span style=color:#719e07>}</span>
