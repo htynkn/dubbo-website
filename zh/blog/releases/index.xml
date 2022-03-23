@@ -344,8 +344,8 @@
 &lt;/ul>
 &lt;h5 id="降级约定">降级约定&lt;/h5>
 &lt;ol>
-&lt;li>&lt;code>request.tag=tag1&lt;/code> 时优先选择 标记了 &lt;code>tag=tag1&lt;/code> 的 provider。若集群中不存在与请求标记对应的服务，默认将降级请求 tag 为空的 provider；如果要改变这种默认行为，即找不到匹配 tag1 的 provider 返回异常，需设置&lt;code>request.tag.force=true&lt;/code>。&lt;/li>
-&lt;li>&lt;code>request.tag&lt;/code> 未设置时，只会匹配 tag 为空的 provider。即使集群中存在可用的服务，若 tag 不匹配也就无法调用，这与约定 1 不同，携带标签的请求可以降级访问到无标签的服务，但不携带标签/携带其他种类标签的请求永远无法访问到其他标签的服务。&lt;/li>
+&lt;li>&lt;code>dubbo.tag=tag1&lt;/code> 时优先选择 标记了 &lt;code>tag=tag1&lt;/code> 的 provider。若集群中不存在与请求标记对应的服务，默认将降级请求 tag 为空的 provider；如果要改变这种默认行为，即找不到匹配 tag1 的 provider 返回异常，需设置&lt;code>dubbo.force.tag=true&lt;/code>。&lt;/li>
+&lt;li>&lt;code>dubbo.tag&lt;/code> 未设置时，只会匹配 tag 为空的 provider。即使集群中存在可用的服务，若 tag 不匹配也就无法调用，这与约定 1 不同，携带标签的请求可以降级访问到无标签的服务，但不携带标签/携带其他种类标签的请求永远无法访问到其他标签的服务。&lt;/li>
 &lt;/ol>
 &lt;h3 id="52-应用服务级条件路由">5.2 应用/服务级条件路由&lt;/h3>
 &lt;p>您可以在路由规则配置中配置多个条件路由及其粒度&lt;/p>
