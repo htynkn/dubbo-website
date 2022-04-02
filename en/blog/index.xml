@@ -377,6 +377,18 @@ Exactly the same as version 3.0.2, except for the following changes.&lt;/p>
 &lt;p>GitHub: &lt;a href="https://github.com/apache/dubbo">https://github.com/apache/dubbo&lt;/a> &lt;br>
 Release Notes: &lt;a href="https://github.com/apache/dubbo/releases">https://github.com/apache/dubbo/releases&lt;/a>&lt;/p>
 &lt;/blockquote>
+&lt;h3 id="307-2022-04-01">3.0.7 (2022-04-01)&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.7/apache-dubbo-3.0.7-src.zip">source&lt;/a> |
+&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.7/apache-dubbo-3.0.7-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.7/apache-dubbo-3.0.7-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="306-2022-02-28">3.0.6 (2022-02-28)&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.6/apache-dubbo-3.0.6-src.zip">source&lt;/a> |
+&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.6/apache-dubbo-3.0.6-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.6/apache-dubbo-3.0.6-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;/ul>
 &lt;h3 id="305-2021-12-30">3.0.5 (2021-12-30)&lt;/h3>
 &lt;ul>
 &lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.5/apache-dubbo-3.0.5-src.zip">source&lt;/a> |

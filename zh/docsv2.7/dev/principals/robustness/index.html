@@ -17,7 +17,7 @@ Dubbo 的服务注册中心 目前服务注册中心使用了数据库来保存�
 服务的消费者 服务消费者从注册中心拿到提供者列表后，会保存提供者列表到内存和磁盘文件中。这样注册中心宕机后消费者可以正常运转，甚至可以在注册中心宕机过程中重启消费者。消费者启动时，发现注册中心不可用，会读取保存在磁盘文件中提供者列表。重试逻辑保证注册中心恢复后，更新信息。
 重试延迟策略 上一点的子问题。Dubbo 中碰到有两个相关的场景。
 数据库上的活锁 注册中心会定时更新数据库一条记录的时间戳，这样集群中其它的注册中心感知它是存活。过期注册中心和它的相关数据 会被清除。数据库正常时，这个机制运行良好。但是数据库负荷高时，其上的每个操作都会很慢。这就出现：
-A 注册中心认为 B 过期，删除 B 的数据。 B 发现自己的数据没有了，重新写入自己的数据的反复操作。这些反复的操作又加重了数据库的负荷，恶化问题。"><meta property="og:type" content="article"><meta property="og:url" content="https://dubbo.apache.org/zh/docsv2.7/dev/principals/robustness/"><meta property="article:section" content="docsv2.7"><meta property="article:modified_time" content="2022-03-29T15:02:23+08:00"><meta property="og:site_name" content="Apache Dubbo"><meta itemprop=name content="设计实现的健壮性"><meta itemprop=description content="Dubbo 作为远程服务暴露、调用和治理的解决方案，是应用运转的经络，其本身实现健壮性的重要程度是不言而喻的。
+A 注册中心认为 B 过期，删除 B 的数据。 B 发现自己的数据没有了，重新写入自己的数据的反复操作。这些反复的操作又加重了数据库的负荷，恶化问题。"><meta property="og:type" content="article"><meta property="og:url" content="https://dubbo.apache.org/zh/docsv2.7/dev/principals/robustness/"><meta property="article:section" content="docsv2.7"><meta property="article:modified_time" content="2022-04-01T20:39:45+08:00"><meta property="og:site_name" content="Apache Dubbo"><meta itemprop=name content="设计实现的健壮性"><meta itemprop=description content="Dubbo 作为远程服务暴露、调用和治理的解决方案，是应用运转的经络，其本身实现健壮性的重要程度是不言而喻的。
 这里列出一些 Dubbo 用到的原则和方法。
 日志 日志是发现问题、查看问题一个最常用的手段。日志质量往往被忽视，没有日志使用上的明确约定。重视 Log 的使用，提高 Log 的信息浓度。日志过多、过于混乱，会导致有用的信息被淹没。
 要有效利用这个工具要注意：
@@ -36,7 +36,7 @@ Dubbo 的服务注册中心 目前服务注册中心使用了数据库来保存�
 服务的消费者 服务消费者从注册中心拿到提供者列表后，会保存提供者列表到内存和磁盘文件中。这样注册中心宕机后消费者可以正常运转，甚至可以在注册中心宕机过程中重启消费者。消费者启动时，发现注册中心不可用，会读取保存在磁盘文件中提供者列表。重试逻辑保证注册中心恢复后，更新信息。
 重试延迟策略 上一点的子问题。Dubbo 中碰到有两个相关的场景。
 数据库上的活锁 注册中心会定时更新数据库一条记录的时间戳，这样集群中其它的注册中心感知它是存活。过期注册中心和它的相关数据 会被清除。数据库正常时，这个机制运行良好。但是数据库负荷高时，其上的每个操作都会很慢。这就出现：
-A 注册中心认为 B 过期，删除 B 的数据。 B 发现自己的数据没有了，重新写入自己的数据的反复操作。这些反复的操作又加重了数据库的负荷，恶化问题。"><meta itemprop=dateModified content="2022-03-29T15:02:23+08:00"><meta itemprop=wordCount content="93"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="设计实现的健壮性"><meta name=twitter:description content="Dubbo 作为远程服务暴露、调用和治理的解决方案，是应用运转的经络，其本身实现健壮性的重要程度是不言而喻的。
+A 注册中心认为 B 过期，删除 B 的数据。 B 发现自己的数据没有了，重新写入自己的数据的反复操作。这些反复的操作又加重了数据库的负荷，恶化问题。"><meta itemprop=dateModified content="2022-04-01T20:39:45+08:00"><meta itemprop=wordCount content="93"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="设计实现的健壮性"><meta name=twitter:description content="Dubbo 作为远程服务暴露、调用和治理的解决方案，是应用运转的经络，其本身实现健壮性的重要程度是不言而喻的。
 这里列出一些 Dubbo 用到的原则和方法。
 日志 日志是发现问题、查看问题一个最常用的手段。日志质量往往被忽视，没有日志使用上的明确约定。重视 Log 的使用，提高 Log 的信息浓度。日志过多、过于混乱，会导致有用的信息被淹没。
 要有效利用这个工具要注意：
