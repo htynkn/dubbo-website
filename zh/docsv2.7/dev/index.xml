@@ -534,7 +534,68 @@
 &lt;li>Partner 以用户的方式运行一下功能&lt;/li>
 &lt;li>Partner 发现问题、添加测试（集成测试）直到不再复现；Owner 完成实现。（保证两方在Partner Check上的时间投入）&lt;/li>
 &lt;li>Owner 向 Partner 讲述一遍实现。&lt;/li>
-&lt;/ul></description></item><item><title>Docsv2.7: 坏味道</title><link>https://dubbo.apache.org/zh/docsv2.7/dev/code-smell/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/dev/code-smell/</guid><description>
+&lt;/ul></description></item><item><title>Docsv2.7: 编码约定</title><link>https://dubbo.apache.org/zh/docsv2.7/dev/coding/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/dev/coding/</guid><description>
+&lt;h2 id="代码风格">代码风格&lt;/h2>
+&lt;p>Dubbo 的源代码和 JavaDoc 遵循以下的规范：&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="http://www.oracle.com/technetwork/java/codeconvtoc-136057.html">Code Conventions for the Java Programming Language&lt;/a>&lt;/li>
+&lt;li>&lt;a href="http://www.oracle.com/technetwork/java/javase/documentation/index-137868.html">How to Write Doc Comments for the Javadoc Tool&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="异常和日志">异常和日志&lt;/h2>
+&lt;ul>
+&lt;li>尽可能携带完整的上下文信息，比如出错原因，出错的机器地址，调用对方的地址，连的注册中心地址，使用 Dubbo 的版本等。&lt;/li>
+&lt;li>尽量将直接原因写在最前面，所有上下文信息，在原因后用键值对显示。&lt;/li>
+&lt;li>抛出异常的地方不用打印日志，由最终处理异常者决定打印日志的级别，吃掉异常必需打印日志。&lt;/li>
+&lt;li>打印 &lt;code>ERROR&lt;/code> 日志表示需要报警，打印 &lt;code>WARN&lt;/code> 日志表示可以自动恢复，打印 &lt;code>INFO&lt;/code> 表示正常信息或完全不影响运行。&lt;/li>
+&lt;li>建议应用方在监控中心配置 &lt;code>ERROR&lt;/code> 日志实时报警，&lt;code>WARN&lt;/code> 日志每周汇总发送通知。&lt;/li>
+&lt;li>&lt;code>RpcException&lt;/code> 是 Dubbo 对外的唯一异常类型，所有内部异常，如果要抛出给用户，必须转为 &lt;code>RpcException&lt;/code>。&lt;/li>
+&lt;li>&lt;code>RpcException&lt;/code> 不能有子类型，所有类型信息用 ErrorCode 标识，以便保持兼容。&lt;/li>
+&lt;/ul>
+&lt;h2 id="配置和-url">配置和 URL&lt;/h2>
+&lt;ul>
+&lt;li>配置对象属性首字母小写，多个单词用驼峰命名 &lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>。&lt;/li>
+&lt;li>配置属性全部用小写，多个单词用&amp;quot;-&amp;ldquo;号分隔 &lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>。&lt;/li>
+&lt;li>URL参数全部用小写，多个单词用&amp;rdquo;.&amp;ldquo;号分隔 &lt;sup id="fnref:3">&lt;a href="#fn:3" class="footnote-ref" role="doc-noteref">3&lt;/a>&lt;/sup>。&lt;/li>
+&lt;li>尽可能用 URL 传参，不要自定义 Map 或其它上下文格式，配置信息也转成 URL 格式使用。&lt;/li>
+&lt;li>尽量减少 URL 嵌套，保持 URL 的简洁性。&lt;/li>
+&lt;/ul>
+&lt;h2 id="单元和集成测试">单元和集成测试&lt;/h2>
+&lt;ul>
+&lt;li>单元测试统一用 JUnit 和 EasyMock，集成测试用 TestNG，数据库测试用 DBUnit。&lt;/li>
+&lt;li>保持单元测试用例的运行速度，不要将性能和大的集成用例放在单元测试中。&lt;/li>
+&lt;li>保持单元测试的每个用例都用 &lt;code>try...finally&lt;/code> 或 &lt;code>tearDown&lt;/code> 释放资源。&lt;/li>
+&lt;li>减少 while 循环等待结果的测试用例，对定时器和网络的测试，用以将定时器中的逻辑抽为方法测试。&lt;/li>
+&lt;li>对于容错行为的测试，比如 failsafe 的测试，统一用 &lt;code>LogUtil&lt;/code> 断言日志输出。&lt;/li>
+&lt;/ul>
+&lt;h2 id="扩展点基类与-aop">扩展点基类与 AOP&lt;/h2>
+&lt;ul>
+&lt;li>AOP 类都命名为 &lt;code>XxxWrapper&lt;/code>，基类都命名为 &lt;code>AbstractXxx&lt;/code>。&lt;/li>
+&lt;li>扩展点之间的组合将关系由 AOP 完成，&lt;code>ExtensionLoader&lt;/code> 只负载加载扩展点，包括 AOP 扩展。&lt;/li>
+&lt;li>尽量采用 IoC 注入扩展点之间的依赖，不要直接依赖 &lt;code>ExtensionLoader&lt;/code> 的工厂方法。&lt;/li>
+&lt;li>尽量采用 AOP 实现扩展点的通用行为，而不要用基类，比如负载均衡之前的 &lt;code>isAvailable&lt;/code> 检查，它是独立于负载均衡之外的，不需要检查的是URL参数关闭。&lt;/li>
+&lt;li>对多种相似类型的抽象，用基类实现，比如 RMI, Hessian 等第三方协议都已生成了接口代理，只需将将接口代理转成 &lt;code>Invoker&lt;/code> 即可完成桥接，它们可以用公共基类实现此逻辑。&lt;/li>
+&lt;li>基类也是 SPI 的一部分，每个扩展点都应该有方便使用的基类支持。&lt;/li>
+&lt;/ul>
+&lt;h2 id="模块与分包">模块与分包&lt;/h2>
+&lt;ul>
+&lt;li>基于复用度分包，总是一起使用的放在同一包下，将接口和基类分成独立模块，大的实现也使用独立模块。&lt;/li>
+&lt;li>所有接口都放在模块的根包下，基类放在 support 子包下，不同实现用放在以扩展点名字命名的子包下。&lt;/li>
+&lt;li>尽量保持子包依赖父包，而不要反向。&lt;/li>
+&lt;/ul>
+&lt;section class="footnotes" role="doc-endnotes">
+&lt;hr>
+&lt;ol>
+&lt;li id="fn:1" role="doc-endnote">
+&lt;p>Java 约定&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li id="fn:2" role="doc-endnote">
+&lt;p>Spring 约定&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li id="fn:3" role="doc-endnote">
+&lt;p>Dubbo 约定&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/section></description></item><item><title>Docsv2.7: 坏味道</title><link>https://dubbo.apache.org/zh/docsv2.7/dev/code-smell/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/dev/code-smell/</guid><description>
 &lt;h2 id="url-转换">URL 转换&lt;/h2>
 &lt;h3 id="1-点对点暴露和引用服务">1. 点对点暴露和引用服务&lt;/h3>
 &lt;p>直接暴露服务：&lt;/p>
@@ -645,68 +706,7 @@
 &lt;li>如果第一步选择的服务提供者不可用，则从剩余服务提供者列表中继续选择，如果可用，进行后续调用&lt;/li>
 &lt;li>如果所有的服务提供者都不可用，重新遍历整个列表（优先从没有选过的列表中选择），判断是否有可用的服务提供者（选择过程中，不可用的服务提供者可能会恢复到可用状态），如果有，则进行后续调用&lt;/li>
 &lt;li>如果第三步没有选择出可用的服务提供者，会选第一步选出的 invoker 中的下一个（如果不是最后一个），避免碰撞。&lt;/li>
-&lt;/ol></description></item><item><title>Docsv2.7: 编码约定</title><link>https://dubbo.apache.org/zh/docsv2.7/dev/coding/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/dev/coding/</guid><description>
-&lt;h2 id="代码风格">代码风格&lt;/h2>
-&lt;p>Dubbo 的源代码和 JavaDoc 遵循以下的规范：&lt;/p>
-&lt;ul>
-&lt;li>&lt;a href="http://www.oracle.com/technetwork/java/codeconvtoc-136057.html">Code Conventions for the Java Programming Language&lt;/a>&lt;/li>
-&lt;li>&lt;a href="http://www.oracle.com/technetwork/java/javase/documentation/index-137868.html">How to Write Doc Comments for the Javadoc Tool&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h2 id="异常和日志">异常和日志&lt;/h2>
-&lt;ul>
-&lt;li>尽可能携带完整的上下文信息，比如出错原因，出错的机器地址，调用对方的地址，连的注册中心地址，使用 Dubbo 的版本等。&lt;/li>
-&lt;li>尽量将直接原因写在最前面，所有上下文信息，在原因后用键值对显示。&lt;/li>
-&lt;li>抛出异常的地方不用打印日志，由最终处理异常者决定打印日志的级别，吃掉异常必需打印日志。&lt;/li>
-&lt;li>打印 &lt;code>ERROR&lt;/code> 日志表示需要报警，打印 &lt;code>WARN&lt;/code> 日志表示可以自动恢复，打印 &lt;code>INFO&lt;/code> 表示正常信息或完全不影响运行。&lt;/li>
-&lt;li>建议应用方在监控中心配置 &lt;code>ERROR&lt;/code> 日志实时报警，&lt;code>WARN&lt;/code> 日志每周汇总发送通知。&lt;/li>
-&lt;li>&lt;code>RpcException&lt;/code> 是 Dubbo 对外的唯一异常类型，所有内部异常，如果要抛出给用户，必须转为 &lt;code>RpcException&lt;/code>。&lt;/li>
-&lt;li>&lt;code>RpcException&lt;/code> 不能有子类型，所有类型信息用 ErrorCode 标识，以便保持兼容。&lt;/li>
-&lt;/ul>
-&lt;h2 id="配置和-url">配置和 URL&lt;/h2>
-&lt;ul>
-&lt;li>配置对象属性首字母小写，多个单词用驼峰命名 &lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>。&lt;/li>
-&lt;li>配置属性全部用小写，多个单词用&amp;quot;-&amp;ldquo;号分隔 &lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>。&lt;/li>
-&lt;li>URL参数全部用小写，多个单词用&amp;rdquo;.&amp;ldquo;号分隔 &lt;sup id="fnref:3">&lt;a href="#fn:3" class="footnote-ref" role="doc-noteref">3&lt;/a>&lt;/sup>。&lt;/li>
-&lt;li>尽可能用 URL 传参，不要自定义 Map 或其它上下文格式，配置信息也转成 URL 格式使用。&lt;/li>
-&lt;li>尽量减少 URL 嵌套，保持 URL 的简洁性。&lt;/li>
-&lt;/ul>
-&lt;h2 id="单元和集成测试">单元和集成测试&lt;/h2>
-&lt;ul>
-&lt;li>单元测试统一用 JUnit 和 EasyMock，集成测试用 TestNG，数据库测试用 DBUnit。&lt;/li>
-&lt;li>保持单元测试用例的运行速度，不要将性能和大的集成用例放在单元测试中。&lt;/li>
-&lt;li>保持单元测试的每个用例都用 &lt;code>try...finally&lt;/code> 或 &lt;code>tearDown&lt;/code> 释放资源。&lt;/li>
-&lt;li>减少 while 循环等待结果的测试用例，对定时器和网络的测试，用以将定时器中的逻辑抽为方法测试。&lt;/li>
-&lt;li>对于容错行为的测试，比如 failsafe 的测试，统一用 &lt;code>LogUtil&lt;/code> 断言日志输出。&lt;/li>
-&lt;/ul>
-&lt;h2 id="扩展点基类与-aop">扩展点基类与 AOP&lt;/h2>
-&lt;ul>
-&lt;li>AOP 类都命名为 &lt;code>XxxWrapper&lt;/code>，基类都命名为 &lt;code>AbstractXxx&lt;/code>。&lt;/li>
-&lt;li>扩展点之间的组合将关系由 AOP 完成，&lt;code>ExtensionLoader&lt;/code> 只负载加载扩展点，包括 AOP 扩展。&lt;/li>
-&lt;li>尽量采用 IoC 注入扩展点之间的依赖，不要直接依赖 &lt;code>ExtensionLoader&lt;/code> 的工厂方法。&lt;/li>
-&lt;li>尽量采用 AOP 实现扩展点的通用行为，而不要用基类，比如负载均衡之前的 &lt;code>isAvailable&lt;/code> 检查，它是独立于负载均衡之外的，不需要检查的是URL参数关闭。&lt;/li>
-&lt;li>对多种相似类型的抽象，用基类实现，比如 RMI, Hessian 等第三方协议都已生成了接口代理，只需将将接口代理转成 &lt;code>Invoker&lt;/code> 即可完成桥接，它们可以用公共基类实现此逻辑。&lt;/li>
-&lt;li>基类也是 SPI 的一部分，每个扩展点都应该有方便使用的基类支持。&lt;/li>
-&lt;/ul>
-&lt;h2 id="模块与分包">模块与分包&lt;/h2>
-&lt;ul>
-&lt;li>基于复用度分包，总是一起使用的放在同一包下，将接口和基类分成独立模块，大的实现也使用独立模块。&lt;/li>
-&lt;li>所有接口都放在模块的根包下，基类放在 support 子包下，不同实现用放在以扩展点名字命名的子包下。&lt;/li>
-&lt;li>尽量保持子包依赖父包，而不要反向。&lt;/li>
-&lt;/ul>
-&lt;section class="footnotes" role="doc-endnotes">
-&lt;hr>
-&lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
-&lt;p>Java 约定&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
-&lt;/li>
-&lt;li id="fn:2" role="doc-endnote">
-&lt;p>Spring 约定&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
-&lt;/li>
-&lt;li id="fn:3" role="doc-endnote">
-&lt;p>Dubbo 约定&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
-&lt;/li>
-&lt;/ol>
-&lt;/section></description></item><item><title>Docsv2.7: 技术兼容性测试</title><link>https://dubbo.apache.org/zh/docsv2.7/dev/tck/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/dev/tck/</guid><description>
+&lt;/ol></description></item><item><title>Docsv2.7: 技术兼容性测试</title><link>https://dubbo.apache.org/zh/docsv2.7/dev/tck/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/dev/tck/</guid><description>
 &lt;p>Dubbo 的协议，通讯，序列化，注册中心，负载均策等扩展点，都有多种可选策略，以应对不同应用场景，而我们的测试用例很分散，当用户自己需要加一种新的实现时，总是不确定能否满足扩展点的完整契约。&lt;/p>
 &lt;p>所以，我们需要对核心扩展点写 &lt;a href="http://en.wikipedia.org/wiki/Technology_Compatibility_Kit">TCK&lt;/a> (Technology Compatibility Kit)，用户增加一种扩展实现，只需通过 TCK，即可确保与框架的其它部分兼容运行，可以有效提高整体健壮性，也方便第三方扩展者接入，加速开源社区的成熟。&lt;/p>
 &lt;p>开源社区的行知同学已着手研究这一块，他的初步想法是借鉴 JBoss 的 CDI-TCK，做一个 Dubbo 的 TCK 基础框架，在此之上实现 Dubbo 的扩展点 TCK 用例。&lt;/p>

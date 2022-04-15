@@ -67,12 +67,12 @@
 &lt;p>当前版本中未实现登录功能，会在后续版本加上&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Docsv2.7: 服务查询和详情展示</title><link>https://dubbo.apache.org/zh/docsv2.7/admin/ops/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/admin/ops/search/</guid><description>
+&lt;/section></description></item><item><title>Docsv2.7: 服务测试</title><link>https://dubbo.apache.org/zh/docsv2.7/admin/ops/test/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/admin/ops/test/</guid><description>
+&lt;p>请参考这篇&lt;a href="../../../../../blog//2019/08/26/service-test/">博客&lt;/a>&lt;/p></description></item><item><title>Docsv2.7: 服务查询和详情展示</title><link>https://dubbo.apache.org/zh/docsv2.7/admin/ops/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/admin/ops/search/</guid><description>
 &lt;p>服务查询是 Dubbo OPS 最基本的功能，目前支持服务，应用和 IP 三个维度的查询，并且服务和应用支持模糊查询和自动提示:&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/admin/searchResult.png" alt="searchResult">&lt;/p>
 &lt;p>其中详情页展示了服务提供者，消费者等信息，元数据信息需要在 Dubbo 2.7 及之后的版本才会展示:&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/admin/detail.jpg" alt="detail">&lt;/p></description></item><item><title>Docsv2.7: 服务测试</title><link>https://dubbo.apache.org/zh/docsv2.7/admin/ops/test/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/admin/ops/test/</guid><description>
-&lt;p>请参考这篇&lt;a href="../../../../../blog//2019/08/26/service-test/">博客&lt;/a>&lt;/p></description></item><item><title>Docsv2.7: API文档&amp;测试</title><link>https://dubbo.apache.org/zh/docsv2.7/admin/ops/apidocs/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/admin/ops/apidocs/</guid><description>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/admin/detail.jpg" alt="detail">&lt;/p></description></item><item><title>Docsv2.7: API文档&amp;测试</title><link>https://dubbo.apache.org/zh/docsv2.7/admin/ops/apidocs/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/admin/ops/apidocs/</guid><description>
 &lt;h2 id="dubbo-api-docs">dubbo api docs&lt;/h2>
 &lt;p>dubbo 接口文档、测试工具,根据注解生成文档,并提供测试功能.&lt;/p>
 &lt;p>增加一些注解就能生成类似swagger的文档, 不会把非web的dubbo项目变为web项目.&lt;/p>

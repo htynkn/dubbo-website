@@ -253,7 +253,112 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">cluster&lt;/span>: default
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">namespace&lt;/span>: demo-provider-config
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># 框架从 apollo 配置中最更新对应位置加载配置文件，并根据该配置文件启动&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>下一章：&lt;a href="../samples/samples_repo.html">【Dubbogo Samples 介绍】&lt;/a>&lt;/p></description></item><item><title>Docs: Dubbo-go 的注册中心</title><link>https://dubbo.apache.org/zh/docs/languages/golang/dubbo-go-3.0/concept/registry/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/languages/golang/dubbo-go-3.0/concept/registry/</guid><description>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>下一章：&lt;a href="../samples/samples_repo.html">【Dubbogo Samples 介绍】&lt;/a>&lt;/p></description></item><item><title>Docs: Dubbo-go 的网络协议</title><link>https://dubbo.apache.org/zh/docs/languages/golang/dubbo-go-3.0/concept/protocol/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/languages/golang/dubbo-go-3.0/concept/protocol/</guid><description>
+&lt;h1 id="网络协议">网络协议&lt;/h1>
+&lt;h2 id="1-网络协议是什么">1. 网络协议是什么&lt;/h2>
+&lt;p>对于 Dubbo-go 微服务框架，网络协议为远程过程调用中负责网络通信的模块，负责应用层到网络层的数据序列化、打包、请求发起、网络端口监听等功能。Dubbo-go 为协议抽象了一套接口如下：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">type&lt;/span> Protocol &lt;span style="color:#268bd2">interface&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// Export service for remote invocation
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#268bd2">Export&lt;/span>(invoker Invoker) Exporter
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// Refer a remote service
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#268bd2">Refer&lt;/span>(url &lt;span style="color:#719e07">*&lt;/span>common.URL) Invoker
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// Destroy will destroy all invoker and exporter, so it only is called once.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#268bd2">Destroy&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>该接口包含三个方法。其中 Export 方法负责服务的暴露过程。入参 invoker 为dubbo 的概念，其封装了一个可以被调用的实例。在具体网络协议（例如Triple）实现的 Export 方法中，会针对特定的协议，将封装有一定逻辑的可调用实例 Invoker 以网络端口监听的形式暴露给外部服务，来自外部针对该网络端口的请求将会被 Export 方法开启的监听协程获取，进而根据网络协议进行拆解包和反序列化，得到解析后的请求数据。&lt;/p>
+&lt;p>Refer 方法负责服务的引用过程，其入参 url 为 dubbo 框架通用的结构，可以描述一个希望引用的服务，url 参数中包含了多个希望引用服务的参数，例如对应服务的接口名(interface)，版本号(version)，使用协议(protocol) 等等。在具体网络协议（例如Triple）实现的 Refer 方法中，会将特定的网络协议封装到 Invoker 可调用实例的方法中，用户层发起的 RPC 调用即可直接通过返回的 Invoker 对象，发起特定协议的网络请求。&lt;/p>
+&lt;p>Destroy 方法作用为销毁当前暴露的服务，用于服务下线场景。Dubbo-go 框架有优雅下线机制，可以在服务进程终止前以监听信号的形式，下线所有已启动的服务。&lt;/p>
+&lt;h2 id="2-dubbo-go-30-支持的网络协议">2. Dubbo-go 3.0 支持的网络协议&lt;/h2>
+&lt;p>Dubbo-go 3.0 版本支持的网络协议和序列化方式如下：&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>协议&lt;/th>
+&lt;th>协议名 (用于配置)&lt;/th>
+&lt;th style="text-align:center">序列化方式&lt;/th>
+&lt;th>默认序列化方式&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Triple&lt;/td>
+&lt;td>tri&lt;/td>
+&lt;td style="text-align:center">pb hessian2 msgpack custome&lt;/td>
+&lt;td>pb&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Dubbo&lt;/td>
+&lt;td>dubbbo&lt;/td>
+&lt;td style="text-align:center">hessian2&lt;/td>
+&lt;td>hessian2&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>gRPC&lt;/td>
+&lt;td>grpc&lt;/td>
+&lt;td style="text-align:center">pb&lt;/td>
+&lt;td>pb&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>jsonRPC&lt;/td>
+&lt;td>jsonrpc&lt;/td>
+&lt;td style="text-align:center">json&lt;/td>
+&lt;td>json&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="3-如何配置网络协议">3. 如何配置网络协议&lt;/h2>
+&lt;p>在快速开始章节可以看到，在配置的过程中将 Protocol 设置为 tri，表明使用 Triple 协议进行服务暴露和服务调用。快速开始章节使用的配置 API 进行配置的写入，这样的好处是无需使用配置文件。我们摘取出和网络协议相关的内容进行说明。&lt;/p>
+&lt;h3 id="使用配置-api">使用配置 API&lt;/h3>
+&lt;ul>
+&lt;li>客户端使用配置 API 设置网络协议&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>rc &lt;span style="color:#719e07">:=&lt;/span> config.&lt;span style="color:#268bd2">NewRootConfigBuilder&lt;/span>().
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">SetConsumer&lt;/span>(config.&lt;span style="color:#268bd2">NewConsumerConfigBuilder&lt;/span>().
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">AddReference&lt;/span>(&lt;span style="color:#2aa198">&amp;#34;GreeterClientImpl&amp;#34;&lt;/span>, config.&lt;span style="color:#268bd2">NewReferenceConfigBuilder&lt;/span>().
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">SetInterface&lt;/span>(&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.UserProvider&amp;#34;&lt;/span>).
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">SetProtocol&lt;/span>(&lt;span style="color:#2aa198">&amp;#34;tri&amp;#34;&lt;/span>). &lt;span style="color:#586e75">// set reference protcol to triple
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#268bd2">Build&lt;/span>()).
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">Build&lt;/span>()).
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">Build&lt;/span>()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>服务端使用配置 API 设置网络协议&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>rc &lt;span style="color:#719e07">:=&lt;/span> config.&lt;span style="color:#268bd2">NewRootConfigBuilder&lt;/span>().
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">SetProvider&lt;/span>(config.&lt;span style="color:#268bd2">NewProviderConfigBuilder&lt;/span>().
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">AddService&lt;/span>(&lt;span style="color:#2aa198">&amp;#34;GreeterProvider&amp;#34;&lt;/span>, config.&lt;span style="color:#268bd2">NewServiceConfigBuilder&lt;/span>().
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">SetInterface&lt;/span>(&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.UserProvider&amp;#34;&lt;/span>).
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">SetProtocolIDs&lt;/span>(&lt;span style="color:#2aa198">&amp;#34;tripleProtocolKey&amp;#34;&lt;/span>). &lt;span style="color:#586e75">// use protocolID &amp;#39;tripleProtocolKey&amp;#39;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#268bd2">Build&lt;/span>()).
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">Build&lt;/span>()).
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">AddProtocol&lt;/span>(&lt;span style="color:#2aa198">&amp;#34;tripleProtocolKey&amp;#34;&lt;/span>, config.&lt;span style="color:#268bd2">NewProtocolConfigBuilder&lt;/span>(). &lt;span style="color:#586e75">// define protocol config with protocolID &amp;#39;tripleProtocolKey&amp;#39;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#268bd2">SetName&lt;/span>(&lt;span style="color:#2aa198">&amp;#34;tri&amp;#34;&lt;/span>). &lt;span style="color:#586e75">// set service protocol to triple
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#268bd2">Build&lt;/span>()).
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">Build&lt;/span>()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="使用配置文件">使用配置文件&lt;/h3>
+&lt;p>参考 samples/helloworld&lt;/p>
+&lt;ul>
+&lt;li>客户端使用配置文件设置网络协议&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">dubbo&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">consumer&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">references&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">GreeterClientImpl&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">protocol&lt;/span>: tri &lt;span style="color:#586e75"># set protcol to tri&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">interface&lt;/span>: com.apache.dubbo.sample.basic.IGreeter
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>服务端使用配置文件设置网络协议&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">dubbo&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">protocols&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">triple&lt;/span>: &lt;span style="color:#586e75"># define protcol-id &amp;#39;triple&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">name&lt;/span>: tri &lt;span style="color:#586e75"># set protcol to tri&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">port&lt;/span>: &lt;span style="color:#2aa198">20000&lt;/span> &lt;span style="color:#586e75"># set port to be listened&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">provider&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">services&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">GreeterProvider&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">protocol-ids&lt;/span>: triple &lt;span style="color:#586e75"># use protocol-ids named &amp;#39;triple&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">interface&lt;/span>: com.apache.dubbo.sample.basic.IGreeter
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>下一章：&lt;a href="./registry.html">【注册中心】&lt;/a>&lt;/p></description></item><item><title>Docs: Dubbo-go 的注册中心</title><link>https://dubbo.apache.org/zh/docs/languages/golang/dubbo-go-3.0/concept/registry/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/languages/golang/dubbo-go-3.0/concept/registry/</guid><description>
 &lt;h1 id="注册中心">注册中心&lt;/h1>
 &lt;h2 id="1-dubbo-的注册中心是什么">1. Dubbo 的注册中心是什么&lt;/h2>
 &lt;p>对于 Dubbo-go 微服务框架，注册中心在 RPC 场景下复杂保存 Provider 应用的服务信息。Provider 注册地址到注册中心，Consumer 从注册中心读取和订阅 Provider 地址列表。如图所示：&lt;/p>
@@ -410,109 +515,4 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">GreeterClientImpl&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">protocol&lt;/span>: tri
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">interface&lt;/span>: com.apache.dubbo.sample.basic.IGreeter
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>下一章：&lt;a href="./configuration.html">【框架配置介绍】&lt;/a>&lt;/p></description></item><item><title>Docs: Dubbo-go 的网络协议</title><link>https://dubbo.apache.org/zh/docs/languages/golang/dubbo-go-3.0/concept/protocol/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/languages/golang/dubbo-go-3.0/concept/protocol/</guid><description>
-&lt;h1 id="网络协议">网络协议&lt;/h1>
-&lt;h2 id="1-网络协议是什么">1. 网络协议是什么&lt;/h2>
-&lt;p>对于 Dubbo-go 微服务框架，网络协议为远程过程调用中负责网络通信的模块，负责应用层到网络层的数据序列化、打包、请求发起、网络端口监听等功能。Dubbo-go 为协议抽象了一套接口如下：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">type&lt;/span> Protocol &lt;span style="color:#268bd2">interface&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// Export service for remote invocation
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#268bd2">Export&lt;/span>(invoker Invoker) Exporter
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// Refer a remote service
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#268bd2">Refer&lt;/span>(url &lt;span style="color:#719e07">*&lt;/span>common.URL) Invoker
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// Destroy will destroy all invoker and exporter, so it only is called once.
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#268bd2">Destroy&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>该接口包含三个方法。其中 Export 方法负责服务的暴露过程。入参 invoker 为dubbo 的概念，其封装了一个可以被调用的实例。在具体网络协议（例如Triple）实现的 Export 方法中，会针对特定的协议，将封装有一定逻辑的可调用实例 Invoker 以网络端口监听的形式暴露给外部服务，来自外部针对该网络端口的请求将会被 Export 方法开启的监听协程获取，进而根据网络协议进行拆解包和反序列化，得到解析后的请求数据。&lt;/p>
-&lt;p>Refer 方法负责服务的引用过程，其入参 url 为 dubbo 框架通用的结构，可以描述一个希望引用的服务，url 参数中包含了多个希望引用服务的参数，例如对应服务的接口名(interface)，版本号(version)，使用协议(protocol) 等等。在具体网络协议（例如Triple）实现的 Refer 方法中，会将特定的网络协议封装到 Invoker 可调用实例的方法中，用户层发起的 RPC 调用即可直接通过返回的 Invoker 对象，发起特定协议的网络请求。&lt;/p>
-&lt;p>Destroy 方法作用为销毁当前暴露的服务，用于服务下线场景。Dubbo-go 框架有优雅下线机制，可以在服务进程终止前以监听信号的形式，下线所有已启动的服务。&lt;/p>
-&lt;h2 id="2-dubbo-go-30-支持的网络协议">2. Dubbo-go 3.0 支持的网络协议&lt;/h2>
-&lt;p>Dubbo-go 3.0 版本支持的网络协议和序列化方式如下：&lt;/p>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>协议&lt;/th>
-&lt;th>协议名 (用于配置)&lt;/th>
-&lt;th style="text-align:center">序列化方式&lt;/th>
-&lt;th>默认序列化方式&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>Triple&lt;/td>
-&lt;td>tri&lt;/td>
-&lt;td style="text-align:center">pb hessian2 msgpack custome&lt;/td>
-&lt;td>pb&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>Dubbo&lt;/td>
-&lt;td>dubbbo&lt;/td>
-&lt;td style="text-align:center">hessian2&lt;/td>
-&lt;td>hessian2&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>gRPC&lt;/td>
-&lt;td>grpc&lt;/td>
-&lt;td style="text-align:center">pb&lt;/td>
-&lt;td>pb&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>jsonRPC&lt;/td>
-&lt;td>jsonrpc&lt;/td>
-&lt;td style="text-align:center">json&lt;/td>
-&lt;td>json&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h2 id="3-如何配置网络协议">3. 如何配置网络协议&lt;/h2>
-&lt;p>在快速开始章节可以看到，在配置的过程中将 Protocol 设置为 tri，表明使用 Triple 协议进行服务暴露和服务调用。快速开始章节使用的配置 API 进行配置的写入，这样的好处是无需使用配置文件。我们摘取出和网络协议相关的内容进行说明。&lt;/p>
-&lt;h3 id="使用配置-api">使用配置 API&lt;/h3>
-&lt;ul>
-&lt;li>客户端使用配置 API 设置网络协议&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>rc &lt;span style="color:#719e07">:=&lt;/span> config.&lt;span style="color:#268bd2">NewRootConfigBuilder&lt;/span>().
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">SetConsumer&lt;/span>(config.&lt;span style="color:#268bd2">NewConsumerConfigBuilder&lt;/span>().
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">AddReference&lt;/span>(&lt;span style="color:#2aa198">&amp;#34;GreeterClientImpl&amp;#34;&lt;/span>, config.&lt;span style="color:#268bd2">NewReferenceConfigBuilder&lt;/span>().
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">SetInterface&lt;/span>(&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.UserProvider&amp;#34;&lt;/span>).
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">SetProtocol&lt;/span>(&lt;span style="color:#2aa198">&amp;#34;tri&amp;#34;&lt;/span>). &lt;span style="color:#586e75">// set reference protcol to triple
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#268bd2">Build&lt;/span>()).
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">Build&lt;/span>()).
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">Build&lt;/span>()
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>服务端使用配置 API 设置网络协议&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>rc &lt;span style="color:#719e07">:=&lt;/span> config.&lt;span style="color:#268bd2">NewRootConfigBuilder&lt;/span>().
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">SetProvider&lt;/span>(config.&lt;span style="color:#268bd2">NewProviderConfigBuilder&lt;/span>().
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">AddService&lt;/span>(&lt;span style="color:#2aa198">&amp;#34;GreeterProvider&amp;#34;&lt;/span>, config.&lt;span style="color:#268bd2">NewServiceConfigBuilder&lt;/span>().
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">SetInterface&lt;/span>(&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.UserProvider&amp;#34;&lt;/span>).
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">SetProtocolIDs&lt;/span>(&lt;span style="color:#2aa198">&amp;#34;tripleProtocolKey&amp;#34;&lt;/span>). &lt;span style="color:#586e75">// use protocolID &amp;#39;tripleProtocolKey&amp;#39;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#268bd2">Build&lt;/span>()).
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">Build&lt;/span>()).
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">AddProtocol&lt;/span>(&lt;span style="color:#2aa198">&amp;#34;tripleProtocolKey&amp;#34;&lt;/span>, config.&lt;span style="color:#268bd2">NewProtocolConfigBuilder&lt;/span>(). &lt;span style="color:#586e75">// define protocol config with protocolID &amp;#39;tripleProtocolKey&amp;#39;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#268bd2">SetName&lt;/span>(&lt;span style="color:#2aa198">&amp;#34;tri&amp;#34;&lt;/span>). &lt;span style="color:#586e75">// set service protocol to triple
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#268bd2">Build&lt;/span>()).
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">Build&lt;/span>()
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="使用配置文件">使用配置文件&lt;/h3>
-&lt;p>参考 samples/helloworld&lt;/p>
-&lt;ul>
-&lt;li>客户端使用配置文件设置网络协议&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">dubbo&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">consumer&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">references&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">GreeterClientImpl&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">protocol&lt;/span>: tri &lt;span style="color:#586e75"># set protcol to tri&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">interface&lt;/span>: com.apache.dubbo.sample.basic.IGreeter
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>服务端使用配置文件设置网络协议&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">dubbo&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">protocols&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">triple&lt;/span>: &lt;span style="color:#586e75"># define protcol-id &amp;#39;triple&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">name&lt;/span>: tri &lt;span style="color:#586e75"># set protcol to tri&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">port&lt;/span>: &lt;span style="color:#2aa198">20000&lt;/span> &lt;span style="color:#586e75"># set port to be listened&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">provider&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">services&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">GreeterProvider&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">protocol-ids&lt;/span>: triple &lt;span style="color:#586e75"># use protocol-ids named &amp;#39;triple&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">interface&lt;/span>: com.apache.dubbo.sample.basic.IGreeter
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>下一章：&lt;a href="./registry.html">【注册中心】&lt;/a>&lt;/p></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>下一章：&lt;a href="./configuration.html">【框架配置介绍】&lt;/a>&lt;/p></description></item></channel></rss>
