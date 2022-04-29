@@ -58,14 +58,14 @@ Same as Dubbo 2.7, you can set the addresses of metadata center and registry cen
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>the addresses in configuration center have higher priority than those in &lt;code>application.properties&lt;/code>&lt;/p>
 &lt;p>visit documents on github:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>https://github.com/apache/dubbo-admin
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;section class="footnotes" role="doc-endnotes">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>there&amp;rsquo;s no login module in the current version.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Docs: Service Search And Service Detail</title><link>https://dubbo.apache.org/en/docs/v2.7/admin/ops/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/admin/ops/search/</guid><description>
+&lt;/div></description></item><item><title>Docs: Service Search And Service Detail</title><link>https://dubbo.apache.org/en/docs/v2.7/admin/ops/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/admin/ops/search/</guid><description>
 &lt;p>Service search is the basic function of Dubbo OPS, you can search by service name, application name and IP address, the service name and application name support wildcard and autocomplete:&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/admin/searchResult.png" alt="searchResult">&lt;/p>
 &lt;p>the service detail page display providers, consumers, medata information is supported in Dubbo 2.7 or higher version:&lt;/p>

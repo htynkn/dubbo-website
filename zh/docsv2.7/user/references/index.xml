@@ -7,20 +7,20 @@
 &lt;li>性能调优：表示该配置项用于调优性能，不同的选项对性能会产生影响。&lt;/li>
 &lt;li>所有配置最终都将转换为 URL &lt;sup id="fnref:3">&lt;a href="#fn:3" class="footnote-ref" role="doc-noteref">3&lt;/a>&lt;/sup> 表示，并由服务提供方生成，经注册中心传递给消费方，各属性对应 URL 的参数，参见配置项一览表中的 &amp;ldquo;对应URL参数&amp;rdquo; 列。&lt;/li>
 &lt;/ul>
-&lt;section class="footnotes" role="doc-endnotes">
+&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>XML Schema: &lt;a href="http://dubbo.apache.org/schema/dubbo/dubbo.xsd">http://dubbo.apache.org/schema/dubbo/dubbo.xsd&lt;/a>&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:2" role="doc-endnote">
+&lt;li id="fn:2">
 &lt;p>注意：只有 group，interface，version 是服务的匹配条件，三者决定是不是同一个服务，其它配置项均为调优和治理参数。&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:3" role="doc-endnote">
+&lt;li id="fn:3">
 &lt;p>URL 格式：&lt;code>protocol://username:password@host:port/path?key=value&amp;amp;key=value&lt;/code>&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Docsv2.7: 协议参考手册</title><link>https://dubbo.apache.org/zh/docsv2.7/user/references/protocol/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/user/references/protocol/</guid><description>
+&lt;/div></description></item><item><title>Docsv2.7: 协议参考手册</title><link>https://dubbo.apache.org/zh/docsv2.7/user/references/protocol/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/user/references/protocol/</guid><description>
 &lt;p>推荐使用 Dubbo 协议。各协议的性能情况，请参见：&lt;a href="../../perf-test">性能测试报告&lt;/a>&lt;/p></description></item><item><title>Docsv2.7: 注册中心参考手册</title><link>https://dubbo.apache.org/zh/docsv2.7/user/references/registry/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/user/references/registry/</guid><description>
 &lt;p>推荐使用 &lt;a href="zookeeper">Zookeeper 注册中心&lt;/a>&lt;/p></description></item><item><title>Docsv2.7: 元数据参考手册</title><link>https://dubbo.apache.org/zh/docsv2.7/user/references/metadata/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/user/references/metadata/</guid><description>
 &lt;h2 id="背景">背景&lt;/h2>
@@ -592,33 +592,33 @@ Dubbo 中除这里声明以外的接口或类，都是内部接口或扩展接�
 &lt;/ol>
 &lt;h3 id="exit">&lt;code>exit&lt;/code>&lt;/h3>
 &lt;p>&lt;code>exit&lt;/code>: 退出当前 telnet 命令行&lt;/p>
-&lt;h3 id="shutdown-2">&lt;code>shutdown&lt;/code> &lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>&lt;/h3>
+&lt;h3 id="shutdown-2">&lt;code>shutdown&lt;/code> &lt;sup id="fnref1:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>&lt;/h3>
 &lt;ol start="0">
 &lt;li>&lt;code>shutdown&lt;/code>: 关闭 dubbo 应用&lt;/li>
 &lt;li>&lt;code>shutdown -t 1000&lt;/code>: 延迟 1000 毫秒关闭 dubbo 应用&lt;/li>
 &lt;/ol>
-&lt;section class="footnotes" role="doc-endnotes">
+&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
-&lt;p>&lt;code>2.7.1&lt;/code> 以上版本支持&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;li id="fn:1">
+&lt;p>&lt;code>2.7.1&lt;/code> 以上版本支持&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&amp;#160;&lt;a href="#fnref1:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:2" role="doc-endnote">
+&lt;li id="fn:2">
 &lt;p>&lt;code>2.0.6&lt;/code> 以上版本支持&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Docsv2.7: Maven 插件参考手册</title><link>https://dubbo.apache.org/zh/docsv2.7/user/references/maven/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/user/references/maven/</guid><description>
+&lt;/div></description></item><item><title>Docsv2.7: Maven 插件参考手册</title><link>https://dubbo.apache.org/zh/docsv2.7/user/references/maven/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/user/references/maven/</guid><description>
 &lt;h2 id="启动一个简易注册中心">启动一个简易注册中心&lt;/h2>
 &lt;p>以指定的 9099 端口启动一个简易注册中心 &lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>mvn dubbo:registry -Dport&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">9099&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="生成-demo-服务提供者应用">生成 demo 服务提供者应用&lt;/h2>
 &lt;p>生成指定接口和版本的服务提供者应用：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>mvn dubbo:create -Dapplication&lt;span style="color:#719e07">=&lt;/span>xxx -Dpackage&lt;span style="color:#719e07">=&lt;/span>com.alibaba.xxx -Dservice&lt;span style="color:#719e07">=&lt;/span>XxxService,YyyService -Dversion&lt;span style="color:#719e07">=&lt;/span>1.0.0
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;section class="footnotes" role="doc-endnotes">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>如果端口不指定，默认端口为 9090&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item></channel></rss>
+&lt;/div></description></item></channel></rss>

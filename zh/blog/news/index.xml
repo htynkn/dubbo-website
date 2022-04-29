@@ -7389,7 +7389,7 @@ Reactive Stream 引入 RPC，带来更丰富的通信语义和 API 编程模型�
 &lt;li>该规则作用在客户端&lt;/li>
 &lt;li>当错误发送时，对服务的调用返回默认值 &lt;em>configured-mock-value&lt;/em>&lt;/li>
 &lt;/ol>
-&lt;p>启动服务端 &lt;em>MockProvider&lt;/em> 之后，再执行例子&lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>中的 &lt;em>Configurator&lt;/em> 完成对服务降级规则的配置，然后再执行 &lt;em>MockConsumer&lt;/em> 就可以看到下面的结果：&lt;/p>
+&lt;p>启动服务端 &lt;em>MockProvider&lt;/em> 之后，再执行例子&lt;sup id="fnref1:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>中的 &lt;em>Configurator&lt;/em> 完成对服务降级规则的配置，然后再执行 &lt;em>MockConsumer&lt;/em> 就可以看到下面的结果：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">[&lt;/span>09/04/19 02:19:01:001 CST&lt;span style="color:#719e07">]&lt;/span> main INFO integration.AbstractConfiguratorListener: &lt;span style="color:#719e07">[&lt;/span>DUBBO&lt;span style="color:#719e07">]&lt;/span> Notification of overriding rule, change &lt;span style="color:#b58900">type&lt;/span> is: MODIFIED, raw config content is:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ---
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>configVersion: v2.7
@@ -7424,20 +7424,20 @@ Reactive Stream 引入 RPC，带来更丰富的通信语义和 API 编程模型�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">[&lt;/span>09/04/19 02:19:04:004 CST&lt;span style="color:#719e07">]&lt;/span> main INFO mock.MockConsumer: result: configured-mock-value
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="总结">总结&lt;/h2>
 &lt;p>本文介绍了 Dubbo 中本地存根和本地伪装的概念和用法。从本质来讲，本地存根和本地伪装等同于面向切面编程中的概念，通过诸如 Spring 框架提供的 &lt;em>AOP&lt;/em> 编程可以达到同样的目的。通过本文如何开发一个本地存根和本地伪装的示例，读者可以直观的感受到通过框架提供的机制更加方便快捷。同时，对于很多简单的场景和动态配置推送的场景，框架提供了仅通过配置而无需编码的方式来满足，进一步提升了框架使用者的效率。&lt;/p>
-&lt;section class="footnotes" role="doc-endnotes">
+&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-stub">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-stub&lt;/a>&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:2" role="doc-endnote">
-&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-mock">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-mock&lt;/a>&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;li id="fn:2">
+&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-mock">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-mock&lt;/a>&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&amp;#160;&lt;a href="#fnref1:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:3" role="doc-endnote">
+&lt;li id="fn:3">
 &lt;p>&lt;a href="http://dubbo.apache.org/zh-cn/docs/user/demos/local-mock.html">http://dubbo.apache.org/zh-cn/docs/user/demos/local-mock.html&lt;/a>&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Blog: Dubbo 中的 URL 统一模型</title><link>https://dubbo.apache.org/zh/blog/2019/10/17/dubbo-%E4%B8%AD%E7%9A%84-url-%E7%BB%9F%E4%B8%80%E6%A8%A1%E5%9E%8B/</link><pubDate>Thu, 17 Oct 2019 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2019/10/17/dubbo-%E4%B8%AD%E7%9A%84-url-%E7%BB%9F%E4%B8%80%E6%A8%A1%E5%9E%8B/</guid><description>
+&lt;/div></description></item><item><title>Blog: Dubbo 中的 URL 统一模型</title><link>https://dubbo.apache.org/zh/blog/2019/10/17/dubbo-%E4%B8%AD%E7%9A%84-url-%E7%BB%9F%E4%B8%80%E6%A8%A1%E5%9E%8B/</link><pubDate>Thu, 17 Oct 2019 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2019/10/17/dubbo-%E4%B8%AD%E7%9A%84-url-%E7%BB%9F%E4%B8%80%E6%A8%A1%E5%9E%8B/</guid><description>
 &lt;h3 id="定义">定义&lt;/h3>
 &lt;p>在不谈及 dubbo 时，我们大多数人对 URL 这个概念并不会感到陌生。统一资源定位器 (&lt;a href="https://www.ietf.org/rfc/rfc1738.txt">RFC1738&lt;/a>――Uniform Resource Locators (URL)）应该是最广为人知的一个 RFC 规范，它的定义也非常简单&lt;/p>
 &lt;blockquote>
@@ -8775,26 +8775,26 @@ Reactive Stream 引入 RPC，带来更丰富的通信语义和 API 编程模型�
 &lt;h2 id="总结">总结&lt;/h2>
 &lt;p>本文主要关注了在 Dubbo 中支持 REST 协议的情况。首先探索了 REST 概念的起源，澄清了 REST 是一种适合互联网的软件架构风格，进一步的说明了 REST 风格的架构可以与 HTTP 协议无关，但是 HTTP 协议的确是 REST 风格架构的最常用甚至是最佳的组合和搭档。然后讨论了如何在 Dubbo 中开发 REST HTTP 的几种典型用法，其中包括了通过不同的配置，如传统的 Spring XML，完全通过 annotation 来配置两种典型的用法，本文中没有涉及到的还有纯 API 编程方式，Spring Boot 配置方式也是完全可以的，因为篇幅原因没有提及；还讨论了如何通过不同的 REST server 来暴露 REST HTTP 服务，包括了 embedded tomcat，netty，以及外置的 servlet 容器等几种用法。最后，在外置的 servlet 容器的基础上，进一步的讨论了如何通过 Swagger 暴露 openAPI 以及集成 Swagger UI 的方法。&lt;/p>
 &lt;p>本文没有涉及的内容包含但不限于国际化支持、Dubbo REST 更高阶的注入扩展的用法、以及 Dubbo REST 支持未来的规划。其中 Dubbo REST 扩展的支持可以参考 &lt;a href="https://github.com/beiwei30/dubbo-rest-samples/tree/master/extensions">https://github.com/beiwei30/dubbo-rest-samples/tree/master/extensions&lt;/a> 中的演示。以后有机会会开专门的篇幅来探讨更高级的 Swagger 的支持、以及对未来的展望。&lt;/p>
-&lt;section class="footnotes" role="doc-endnotes">
+&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>&lt;a href="http://en.wikipedia.org/wiki/Roy_Fielding">http://en.wikipedia.org/wiki/Roy_Fielding&lt;/a>&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:2" role="doc-endnote">
+&lt;li id="fn:2">
 &lt;p>&lt;a href="http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm">http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm&lt;/a>&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:3" role="doc-endnote">
+&lt;li id="fn:3">
 &lt;p>&lt;a href="https://martinfowler.com/articles/richardsonMaturityModel.html">https://martinfowler.com/articles/richardsonMaturityModel.html&lt;/a>&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:4" role="doc-endnote">
+&lt;li id="fn:4">
 &lt;p>&lt;a href="https://github.com/dangdangdotcom/dubbox">https://github.com/dangdangdotcom/dubbox&lt;/a>&amp;#160;&lt;a href="#fnref:4" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:5" role="doc-endnote">
+&lt;li id="fn:5">
 &lt;p>&lt;a href="https://www.webjars.org/documentation#servlet3">https://www.webjars.org/documentation#servlet3&lt;/a>&amp;#160;&lt;a href="#fnref:5" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Blog: 使用 Dubbo 连接异构微服务体系</title><link>https://dubbo.apache.org/zh/blog/2019/06/22/%E4%BD%BF%E7%94%A8-dubbo-%E8%BF%9E%E6%8E%A5%E5%BC%82%E6%9E%84%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%BD%93%E7%B3%BB/</link><pubDate>Sat, 22 Jun 2019 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2019/06/22/%E4%BD%BF%E7%94%A8-dubbo-%E8%BF%9E%E6%8E%A5%E5%BC%82%E6%9E%84%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%BD%93%E7%B3%BB/</guid><description>
+&lt;/div></description></item><item><title>Blog: 使用 Dubbo 连接异构微服务体系</title><link>https://dubbo.apache.org/zh/blog/2019/06/22/%E4%BD%BF%E7%94%A8-dubbo-%E8%BF%9E%E6%8E%A5%E5%BC%82%E6%9E%84%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%BD%93%E7%B3%BB/</link><pubDate>Sat, 22 Jun 2019 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2019/06/22/%E4%BD%BF%E7%94%A8-dubbo-%E8%BF%9E%E6%8E%A5%E5%BC%82%E6%9E%84%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%BD%93%E7%B3%BB/</guid><description>
 &lt;p>从编程开发的角度来说，Dubbo 首先是一款 RPC 服务框架，它最大的优势在于提供了面向接口代理的服务编程模型，对开发者屏蔽了底层的远程通信细节。同时 Dubbo 也是一款服务治理框架，它为分布式部署的微服务提供了服务发现、流量调度等服务治理解决方案。&lt;/p>
 &lt;p>在这篇文章中，我们将以以上基础能力为背景，尝试突破 Dubbo 体系自身，探索如何利用 Dubbo 对多协议、多服务发现模型的支持，来实现异构微服务体系间的互联互通。在实际业务场景中，这可以用来解决异构技术体系共存场景下的通信问题，帮助公司实现在异构技术体系间作平滑迁移，解决大规模跨区域、多集群部署场景的地址发现及流量调度等问题。&lt;/p>
 &lt;h2 id="面向接口代理的透明服务开发框架">面向接口代理的透明服务开发框架&lt;/h2>

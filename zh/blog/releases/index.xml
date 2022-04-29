@@ -243,20 +243,20 @@
 &lt;p>（图 2 ）&lt;/p>
 &lt;p>以前的 dubbo-go RPC 层直接复用了 getty 框架 的 RPC[&lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>(https://github.com/AlexStocks/getty/tree/master/rpc)]，未能实现协议和应用通信地址的隔离。阿里中间件展图同学重构了 dubbo-go RPC 层，实现了连接复用：可以实现 consumer 与 provider 端的同一个 TCP 连接上进行多协议通信。相关 PR 业已合并，会在 dubbo-go v1.5.1 中发布。&lt;/p>
 &lt;p>目前下一个版本正在紧锣密鼓的开发中，具体规划及任务清单&lt;sup id="fnref:3">&lt;a href="#fn:3" class="footnote-ref" role="doc-noteref">3&lt;/a>&lt;/sup> ，都已经在 Github 上体现。&lt;/p>
-&lt;section class="footnotes" role="doc-endnotes">
+&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>&lt;a href="https://github.com/seata-golang/seata-golang">https://github.com/seata-golang/seata-golang&lt;/a>&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:2" role="doc-endnote">
+&lt;li id="fn:2">
 &lt;p>&lt;a href="https://github.com/AlexStocks/getty/tree/master/rpc">https://github.com/AlexStocks/getty/tree/master/rpc&lt;/a>&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:3" role="doc-endnote">
+&lt;li id="fn:3">
 &lt;p>&lt;a href="https://github.com/apache/dubbo-go/projects/8">https://github.com/apache/dubbo-go/projects/8&lt;/a>&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Blog: dubbo-go 1.5.1</title><link>https://dubbo.apache.org/zh/blog/2021/01/14/dubbo-go-1.5.1/</link><pubDate>Thu, 14 Jan 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/01/14/dubbo-go-1.5.1/</guid><description>
+&lt;/div></description></item><item><title>Blog: dubbo-go 1.5.1</title><link>https://dubbo.apache.org/zh/blog/2021/01/14/dubbo-go-1.5.1/</link><pubDate>Thu, 14 Jan 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/01/14/dubbo-go-1.5.1/</guid><description>
 &lt;p>近期我们发布了 dubbo-go v1.5.1，虽然是 v1.5 的一个子版本，但相比于 v1.5.0， 社区还是投入了很大人力添加了如下重大改进。&lt;/p>
 &lt;h2 id="1-应用维度注册模型">1 应用维度注册模型&lt;/h2>
 &lt;p>在新模型 release 后，我们发现 Provider 每个 URL 发布元数据都会注册 ServiceInstance，影响性能需要优化。&lt;/p>
@@ -392,14 +392,14 @@
 &lt;p>在&lt;strong>服务发现&lt;/strong>，会支持更加多的方式，如：文件、Consul。 从而使 Dubbo-go 在服务发现场景下，让用户有更多的选择，能适应更多的个性化场景。&lt;/p>
 &lt;p>另外 &lt;strong>易用性及质量保证&lt;/strong>，主要关注的是 samples 与自动化构建部分。可降低用户上手 Dubbo-go 的难度，提高代码质量。&lt;/p>
 &lt;p>目前下一个版本正在紧锣密鼓的开发中，具体规划及任务清单&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup> ，都已经在 Github 上体现。&lt;/p>
-&lt;section class="footnotes" role="doc-endnotes">
+&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>&lt;a href="https://github.com/apache/dubbo-go/projects/10">https://github.com/apache/dubbo-go/projects/10&lt;/a>&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Blog: dubbo-go-hessian2 v1.6.0</title><link>https://dubbo.apache.org/zh/blog/2021/01/14/dubbo-go-hessian2-v1.6.0/</link><pubDate>Thu, 14 Jan 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/01/14/dubbo-go-hessian2-v1.6.0/</guid><description>
+&lt;/div></description></item><item><title>Blog: dubbo-go-hessian2 v1.6.0</title><link>https://dubbo.apache.org/zh/blog/2021/01/14/dubbo-go-hessian2-v1.6.0/</link><pubDate>Thu, 14 Jan 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/01/14/dubbo-go-hessian2-v1.6.0/</guid><description>
 &lt;h2 id="1-增加缓存优化">1. 增加缓存优化&lt;/h2>
 &lt;p>dubbo-go-hessian2 在解析数据的数据大量使用到了 struct 的结构信息，这部分信息可以缓存起来反复利用，使得性能提升了一倍。优化过程记录可以详细阅读&lt;a href="https://mp.weixin.qq.com/s/ouVxldQAt0_4BET7srjJ6Q">《记一次对 dubbo-go-hessian2 的性能优化》&lt;/a>.&lt;/p>
 &lt;p>对应 pr &lt;a href="https://github.com/apache/dubbo-go-hessian2/pull/179">#179&lt;/a>，作者 &lt;a href="https://github.com/micln">micln&lt;/a>。&lt;/p>
@@ -667,23 +667,23 @@
 &lt;p>在可观测性上，我们计划在整个 dubbo-go 的框架内，引入更多的埋点，收集更加多的内部状态。这需要实际生产环境用户的使用反馈，从而知道该如何埋点，收集何种数据。&lt;/p>
 &lt;p>在限流和熔断上，可以进一步扩展。当下的限流算法，是一种静态的算法&amp;ndash;限流参数并没有实时根据当前服务器的状态来推断是否应该限流，它可能仅仅是用户的经验值。其缺点在于，用户难以把握应该如何配置，例如 TPS 究竟应该设置在多大。所以计划引入一种基于规则的限流和熔断。这种基于规则的限流和熔断，将允许用户设置一些系统状态的状态，如 CPU 使用率，磁盘 IO，网络 IO 等。当系统状态符合用户规则时，将触发熔断。&lt;/p>
 &lt;p>目前这些规划的 任务清单&lt;sup id="fnref:4">&lt;a href="#fn:4" class="footnote-ref" role="doc-noteref">4&lt;/a>&lt;/sup>，都已经放入在 dubbo-go 项目的 issue 里面，欢迎感兴趣的朋友认领参与开发。dubbo-go 社区在 &lt;strong>钉钉群 23331795&lt;/strong> 欢迎你的加入。&lt;/p>
-&lt;section class="footnotes" role="doc-endnotes">
+&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/golang/registry/kubernetes">https://github.com/apache/dubbo-samples/tree/master/golang/registry/kubernetes&lt;/a>&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:2" role="doc-endnote">
+&lt;li id="fn:2">
 &lt;p>&lt;a href="https://github.com/dubbogo/dubbo-samples/tree/master/golang/router/condition">https://github.com/dubbogo/dubbo-samples/tree/master/golang/router/condition&lt;/a>&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:3" role="doc-endnote">
+&lt;li id="fn:3">
 &lt;p>&lt;a href="https://github.com/dubbogo/dubbo-samples/tree/master/golang/configcenter/nacos">https://github.com/dubbogo/dubbo-samples/tree/master/golang/configcenter/nacos&lt;/a>&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:4" role="doc-endnote">
+&lt;li id="fn:4">
 &lt;p>&lt;a href="https://github.com/apache/dubbo-go/milestone/1">https://github.com/apache/dubbo-go/milestone/1&lt;/a>&amp;#160;&lt;a href="#fnref:4" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Blog: 2.7.5 功能解析</title><link>https://dubbo.apache.org/zh/blog/2020/05/18/2.7.5-%E5%8A%9F%E8%83%BD%E8%A7%A3%E6%9E%90/</link><pubDate>Mon, 18 May 2020 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2020/05/18/2.7.5-%E5%8A%9F%E8%83%BD%E8%A7%A3%E6%9E%90/</guid><description>
+&lt;/div></description></item><item><title>Blog: 2.7.5 功能解析</title><link>https://dubbo.apache.org/zh/blog/2020/05/18/2.7.5-%E5%8A%9F%E8%83%BD%E8%A7%A3%E6%9E%90/</link><pubDate>Mon, 18 May 2020 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2020/05/18/2.7.5-%E5%8A%9F%E8%83%BD%E8%A7%A3%E6%9E%90/</guid><description>
 &lt;p>近日，备受瞩目的 Dubbo 2.7.5 版本正式发布，在 2.7.5 版本中，Dubbo 引入了很多新的特性、对现有的很多功能做了增强、同时在性能上也有了非常大的提升，这个版本无论对 Dubbo 社区亦或是开发者来说，都将是一个里程碑式的版本。&lt;/p>
 &lt;ul>
 &lt;li>应用粒度服务注册【beta】&lt;/li>

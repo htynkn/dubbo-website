@@ -240,14 +240,14 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>reference&lt;span style="color:#719e07">.&lt;/span>setUrl&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;dubbo://10.20.130.230:20880/com.xxx.XxxService&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">...&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;section class="footnotes" role="doc-endnotes">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>When should we usd API: API is very useful for integrating with systems like OpenAPI, ESB, Test, Mock, etc. General Providers and Consumers, we still recommend use &lt;a href="../xml">XML Configuration&lt;/a>.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Docs: Annotation Configuration</title><link>https://dubbo.apache.org/en/docs/v2.7/user/configuration/annotation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/configuration/annotation/</guid><description>
+&lt;/div></description></item><item><title>Docs: Annotation Configuration</title><link>https://dubbo.apache.org/en/docs/v2.7/user/configuration/annotation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/configuration/annotation/</guid><description>
 &lt;div class="pageinfo pageinfo-primary">
 &lt;p>Requires&lt;code>2.6.3&lt;/code> or higher, click here to view the &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-annotation">complete sample&lt;/a>&lt;/p>
 &lt;/div>

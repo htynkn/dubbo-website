@@ -159,14 +159,14 @@ Such as: &lt;code>nacos://10.20.153.10:8848?preserved.heart.beat.timeout=15000&a
 &lt;p>The original designed data structure for zookeeper in &lt;code>2.0.8&lt;/code> has the limitation that data type cannot extended, it&amp;rsquo;s redesigned in &lt;code>2.0.9&lt;/code>. But at the same time incompatibility is introduced, thereby &lt;code>2.0.9&lt;/code> is required for all service providers and service consumers.&lt;/p>
 &lt;p>Since &lt;code>2.2.0&lt;/code> zkclient is used by default, therefore its dependency is needed.&lt;/p>
 &lt;p>Since &lt;code>2.3.0&lt;/code> curator is supported as alternative option.&lt;/p>
-&lt;section class="footnotes" role="doc-endnotes">
+&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>Suggest to use &lt;code>2.3.3&lt;/code> or above for zookeeper registry client&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Docs: Multicast Registry</title><link>https://dubbo.apache.org/en/docs/v2.7/user/references/registry/multicast/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/references/registry/multicast/</guid><description>
+&lt;/div></description></item><item><title>Docs: Multicast Registry</title><link>https://dubbo.apache.org/en/docs/v2.7/user/references/registry/multicast/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/references/registry/multicast/</guid><description>
 &lt;p>Multicast registry doesn&amp;rsquo;t require to setup any central node. Just like IP address broadcast, dubbo service providers and consumers can discover each other through this mechanism.&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/multicast.jpg" alt="/user-guide/images/multicast.jpg">&lt;/p>
 &lt;ol start="0">
@@ -237,20 +237,20 @@ Such as: &lt;code>nacos://10.20.153.10:8848?preserved.heart.beat.timeout=15000&a
 &lt;p>A home-brewed service registry server is used in Alibaba instead of redis server. Redis based registry center does not have long-run practice within Alibaba, therefore we cannot guarantee its reliability. This registry server implementation is provided for dubbo community, and its reliability relies on redis itself largely.&lt;/p>
 &lt;h2 id="installation">Installation&lt;/h2>
 &lt;p>Pls. refer to &lt;a href="http://dubbo.apache.org/en-us/docs/admin/install/redis.html">redis install manual&lt;/a> for how to install a redis based registry server. To set it up, specify &lt;code>dubbo.registry.address&lt;/code> to &lt;code>redis://127.0.0.1:6379&lt;/code> in &lt;code>conf/dubbo.properties&lt;/code> for both provider and consumer (you can refer to &lt;a href="../../quick-start.md">quick start&lt;/a>) after install a redis server.&lt;/p>
-&lt;section class="footnotes" role="doc-endnotes">
+&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>Support since &lt;code>2.1.0&lt;/code>&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:2" role="doc-endnote">
+&lt;li id="fn:2">
 &lt;p>&lt;a href="http://redis.io">Redis&lt;/a> is a high performance KV cache server&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:3" role="doc-endnote">
+&lt;li id="fn:3">
 &lt;p>Heartbeat mechanism is used to detect the dirty data in redis. It requires time among servers must be sync in advanced, otherwise expiration check may inaccurate, plus, heartbeats may add extra pressure on servers.&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Docs: Simple Registry Server</title><link>https://dubbo.apache.org/en/docs/v2.7/user/references/registry/simple/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/references/registry/simple/</guid><description>
+&lt;/div></description></item><item><title>Docs: Simple Registry Server</title><link>https://dubbo.apache.org/en/docs/v2.7/user/references/registry/simple/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/references/registry/simple/</guid><description>
 &lt;p>Simple registry server itself is a regular dubbo service. In this way, third-party dependency is unnecessary, and communication keeps consistent at the same moment.&lt;/p>
 &lt;h2 id="configuration">Configuration&lt;/h2>
 &lt;p>Register simple registry server as dubbo service:&lt;/p>

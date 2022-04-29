@@ -174,14 +174,14 @@
 &lt;p>阿里内部并没有采用 Zookeeper 做为注册中心，而是使用自己实现的基于数据库的注册中心，即：Zookeeper 注册中心并没有在阿里内部长时间运行的可靠性保障，此 Zookeeper 桥接实现只为开源版本提供，其可靠性依赖于 Zookeeper 本身的可靠性。&lt;/p>
 &lt;h2 id="兼容性声明">兼容性声明&lt;/h2>
 &lt;p>因 &lt;code>2.0.8&lt;/code> 最初设计的 zookeeper 存储结构不能扩充不同类型的数据，&lt;code>2.0.9&lt;/code> 版本做了调整，所以不兼容，需全部改用 &lt;code>2.0.9&lt;/code> 版本才行，以后的版本会保持兼容 &lt;code>2.0.9&lt;/code>。&lt;code>2.2.0&lt;/code> 版本改为基于 zkclient 实现，需增加 zkclient 的依赖包，&lt;code>2.3.0&lt;/code> 版本增加了基于 curator 的实现，作为可选实现策略。&lt;/p>
-&lt;section class="footnotes" role="doc-endnotes">
+&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>建议使用 &lt;code>2.3.3&lt;/code> 以上版本的 zookeeper 注册中心客户端&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Docsv2.7: Multicast 注册中心</title><link>https://dubbo.apache.org/zh/docsv2.7/user/references/registry/multicast/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/user/references/registry/multicast/</guid><description>
+&lt;/div></description></item><item><title>Docsv2.7: Multicast 注册中心</title><link>https://dubbo.apache.org/zh/docsv2.7/user/references/registry/multicast/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/user/references/registry/multicast/</guid><description>
 &lt;p>Multicast 注册中心不需要启动任何中心节点，只要广播地址一样，就可以互相发现。&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/multicast.jpg" alt="/user-guide/images/multicast.jpg">&lt;/p>
 &lt;ol start="0">
@@ -256,14 +256,14 @@
 &lt;p>阿里内部并没有采用 Redis 做为注册中心，而是使用自己实现的基于数据库的注册中心，即：Redis 注册中心并没有在阿里内部长时间运行的可靠性保障，此 Redis 桥接实现只为开源版本提供，其可靠性依赖于 Redis 本身的可靠性。&lt;/p>
 &lt;h2 id="安装">安装&lt;/h2>
 &lt;p>安装方式参见: &lt;a href="../../../admin/install/redis.md">Redis安装手册&lt;/a>，只需搭一个原生的 Redis 服务器，并将 &lt;a href="../../preface/usage.md">Quick Start&lt;/a> 中 Provider 和 Consumer 里的 &lt;code>conf/dubbo.properties&lt;/code> 中的 &lt;code>dubbo.registry.address&lt;/code> 的值改为 &lt;code>redis://127.0.0.1:6379&lt;/code> 即可使用。&lt;/p>
-&lt;section class="footnotes" role="doc-endnotes">
+&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>&lt;a href="http://redis.io">Redis&lt;/a> 是一个高效的 KV 存储服务器&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Docsv2.7: Simple 注册中心</title><link>https://dubbo.apache.org/zh/docsv2.7/user/references/registry/simple/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/user/references/registry/simple/</guid><description>
+&lt;/div></description></item><item><title>Docsv2.7: Simple 注册中心</title><link>https://dubbo.apache.org/zh/docsv2.7/user/references/registry/simple/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/user/references/registry/simple/</guid><description>
 &lt;p>Simple 注册中心本身就是一个普通的 Dubbo 服务，可以减少第三方依赖，使整体通讯方式一致。&lt;/p>
 &lt;h2 id="配置">配置&lt;/h2>
 &lt;p>将 Simple 注册中心暴露成 Dubbo 服务：&lt;/p>

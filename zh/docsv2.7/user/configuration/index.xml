@@ -113,17 +113,17 @@
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/dubbo-config-override.jpg" alt="dubbo-config-override">&lt;/p>
 &lt;p>（建议由服务提供方设置超时，因为一个方法需要执行多长时间，服务提供方更清楚，如果一个消费方同时引用多个服务，就不需要关心每个服务的超时设置）。&lt;/p>
 &lt;p>理论上 ReferenceConfig 中除了&lt;code>interface&lt;/code>这一项，其他所有配置项都可以缺省不配置，框架会自动使用ConsumerConfig，ServiceConfig, ProviderConfig等提供的缺省配置。&lt;/p>
-&lt;section class="footnotes" role="doc-endnotes">
+&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>&lt;code>2.1.0&lt;/code> 开始支持，注意声明：&lt;code>xmlns:p=&amp;quot;http://www.springframework.org/schema/p&amp;quot;&lt;/code>&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:2" role="doc-endnote">
+&lt;li id="fn:2">
 &lt;p>引用缺省是延迟初始化的，只有引用被注入到其它 Bean，或被 &lt;code>getBean()&lt;/code> 获取，才会初始化。如果需要饥饿加载，即没有人引用也立即生成动态代理，可以配置：&lt;code>&amp;lt;dubbo:reference ... init=&amp;quot;true&amp;quot; /&amp;gt;&lt;/code>&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Docsv2.7: 动态配置中心</title><link>https://dubbo.apache.org/zh/docsv2.7/user/configuration/config-center/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/user/configuration/config-center/</guid><description>
+&lt;/div></description></item><item><title>Docsv2.7: 动态配置中心</title><link>https://dubbo.apache.org/zh/docsv2.7/user/configuration/config-center/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/user/configuration/config-center/</guid><description>
 &lt;p>配置中心（v2.7.0）在 Dubbo 中承担两个职责：&lt;/p>
 &lt;ol>
 &lt;li>外部化配置。启动配置的集中式存储 （简单理解为 dubbo.properties 的外部化存储）。&lt;/li>
@@ -364,14 +364,14 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>reference&lt;span style="color:#719e07">.&lt;/span>setUrl&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;dubbo://10.20.130.230:20880/com.xxx.XxxService&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">...&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;section class="footnotes" role="doc-endnotes">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>API使用范围说明：API 仅用于 OpenAPI, ESB, Test, Mock 等系统集成，普通服务提供方或消费方，请采用&lt;a href="../xml">XML 配置&lt;/a>方式使用 Dubbo&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Docsv2.7: 注解配置</title><link>https://dubbo.apache.org/zh/docsv2.7/user/configuration/annotation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/user/configuration/annotation/</guid><description>
+&lt;/div></description></item><item><title>Docsv2.7: 注解配置</title><link>https://dubbo.apache.org/zh/docsv2.7/user/configuration/annotation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/user/configuration/annotation/</guid><description>
 &lt;div class="alert alert-primary" role="alert">
 &lt;h4 class="alert-heading">提示&lt;/h4>
 需要 &lt;code>2.6.3&lt;/code> 及以上版本支持。 点此查看 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-annotation">完整示例&lt;/a>

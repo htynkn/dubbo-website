@@ -175,20 +175,20 @@ If you prefer a registry like zookeeper, please check out examples &lt;a href="h
 &lt;li>&lt;a href="../../admin/install/provider-demo">Provider demo&lt;/a>&lt;/li>
 &lt;li>&lt;a href="../../admin/install/consumer-demo">Consumer demo&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;section class="footnotes" role="doc-endnotes">
+&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>The interface needs to be packaged separately, shared by the service provider and the consumer&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:2" role="doc-endnote">
+&lt;li id="fn:2">
 &lt;p>Hidden realization for service consumer&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:3" role="doc-endnote">
+&lt;li id="fn:3">
 &lt;p>IoC injection can also be used&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Docs: Dependencies</title><link>https://dubbo.apache.org/en/docs/v2.7/user/dependencies/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/dependencies/</guid><description>
+&lt;/div></description></item><item><title>Docs: Dependencies</title><link>https://dubbo.apache.org/en/docs/v2.7/user/dependencies/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/dependencies/</guid><description>
 &lt;h2 id="necessary-dependencies">Necessary dependencies&lt;/h2>
 &lt;p>JDK 1.6+ &lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>&lt;/p>
 &lt;h2 id="default-dependencies">Default dependencies&lt;/h2>
@@ -223,9 +223,9 @@ If you prefer a registry like zookeeper, please check out examples &lt;a href="h
 &lt;li>cxf: 3.0.14&lt;/li>
 &lt;li>thrift: 0.8.0&lt;/li>
 &lt;li>servlet: 3.0 &lt;sup id="fnref:5">&lt;a href="#fn:5" class="footnote-ref" role="doc-noteref">5&lt;/a>&lt;/sup>&lt;/li>
-&lt;li>validation-api: 1.1.0.GA &lt;sup id="fnref:5">&lt;a href="#fn:5" class="footnote-ref" role="doc-noteref">5&lt;/a>&lt;/sup>&lt;/li>
-&lt;li>jcache: 1.0.0 &lt;sup id="fnref:5">&lt;a href="#fn:5" class="footnote-ref" role="doc-noteref">5&lt;/a>&lt;/sup>&lt;/li>
-&lt;li>javax.el: 3.0.1-b08 &lt;sup id="fnref:5">&lt;a href="#fn:5" class="footnote-ref" role="doc-noteref">5&lt;/a>&lt;/sup>&lt;/li>
+&lt;li>validation-api: 1.1.0.GA &lt;sup id="fnref1:5">&lt;a href="#fn:5" class="footnote-ref" role="doc-noteref">5&lt;/a>&lt;/sup>&lt;/li>
+&lt;li>jcache: 1.0.0 &lt;sup id="fnref2:5">&lt;a href="#fn:5" class="footnote-ref" role="doc-noteref">5&lt;/a>&lt;/sup>&lt;/li>
+&lt;li>javax.el: 3.0.1-b08 &lt;sup id="fnref3:5">&lt;a href="#fn:5" class="footnote-ref" role="doc-noteref">5&lt;/a>&lt;/sup>&lt;/li>
 &lt;li>kryo: 4.0.1&lt;/li>
 &lt;li>kryo-serializers: 0.42&lt;/li>
 &lt;li>fst: 2.48-jdk-6&lt;/li>
@@ -234,26 +234,26 @@ If you prefer a registry like zookeeper, please check out examples &lt;a href="h
 &lt;li>slf4j: 1.7.25&lt;/li>
 &lt;li>log4j: 1.2.16&lt;/li>
 &lt;/ul>
-&lt;section class="footnotes" role="doc-endnotes">
+&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>In theory, Dubbo only depend on JDK, not depend on any 3rd party libs, you can finish logic by using JDK.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:2" role="doc-endnote">
+&lt;li id="fn:2">
 &lt;p>Bytecode generation&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:3" role="doc-endnote">
+&lt;li id="fn:3">
 &lt;p>Configuration parsing&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:4" role="doc-endnote">
+&lt;li id="fn:4">
 &lt;p>Network transmission&amp;#160;&lt;a href="#fnref:4" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:5" role="doc-endnote">
-&lt;p>JAVAEE&amp;#160;&lt;a href="#fnref:5" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;li id="fn:5">
+&lt;p>JAVAEE&amp;#160;&lt;a href="#fnref:5" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&amp;#160;&lt;a href="#fnref1:5" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&amp;#160;&lt;a href="#fnref2:5" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&amp;#160;&lt;a href="#fnref3:5" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Docs: Maturity</title><link>https://dubbo.apache.org/en/docs/v2.7/user/maturity/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/maturity/</guid><description>
+&lt;/div></description></item><item><title>Docs: Maturity</title><link>https://dubbo.apache.org/en/docs/v2.7/user/maturity/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/maturity/</guid><description>
 &lt;h2 id="function-maturity">Function maturity&lt;/h2>
 &lt;table>
 &lt;thead>
@@ -1004,26 +1004,26 @@ Configurated in &lt;code>dubbo:method&lt;/code>(method level configuration) , th
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.alibaba.xxx.XxxService&amp;#34;&lt;/span> check=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;/ol>
-&lt;section class="footnotes" role="doc-endnotes">
+&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>Overlay rules for configuration: 1) The method level configuration has a higher priority than the interface level, that is to say,small scope have a high priority 2) Consumer side configuration has a higher priority than provider side, better than global configuration, the last one is the Dubbo hard coded configuration value（&lt;a href="./configuration/properties.md">Dubbo configuration introduction&lt;/a>）&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:2" role="doc-endnote">
+&lt;li id="fn:2">
 &lt;p>With the first call, the call will be called 3 times&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:3" role="doc-endnote">
+&lt;li id="fn:3">
 &lt;p>How to select a service to call when there are multiple Provider services&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:4" role="doc-endnote">
+&lt;li id="fn:4">
 &lt;p>It means that consumer service can call the best provider service, and reduce to call the the slow provider service.&amp;#160;&lt;a href="#fnref:4" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:5" role="doc-endnote">
+&lt;li id="fn:5">
 &lt;p>&lt;code>timeout&lt;/code> Can be set in multiple places, configuration items and overlay rules： &lt;a href="../references/xml/">Dubbo Schema configuration introduction&lt;/a>&amp;#160;&lt;a href="#fnref:5" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Docs: Capacity plan</title><link>https://dubbo.apache.org/en/docs/v2.7/user/capacity-plan/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/capacity-plan/</guid><description>
+&lt;/div></description></item><item><title>Docs: Capacity plan</title><link>https://dubbo.apache.org/en/docs/v2.7/user/capacity-plan/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/capacity-plan/</guid><description>
 &lt;p>The following data for reference：&lt;/p>
 &lt;h2 id="use-member-service-project-of-dubbo">Use member service project of Dubbo&lt;/h2>
 &lt;ul>

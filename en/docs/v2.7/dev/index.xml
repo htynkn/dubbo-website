@@ -264,17 +264,17 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">XxxFilter&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> Filter &lt;span style="color:#719e07">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// ...
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;section class="footnotes" role="doc-endnotes">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>Note: The config file here is in you own jar file, not in dubbo release jar file, Dubbo will scan all jar files with the same filename in classpath and then merge them together&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:2" role="doc-endnote">
+&lt;li id="fn:2">
 &lt;p>Note: SPI will be loaded in singleton pattern(Please ensure thread safety), cached in &lt;code>ExtensionLoader&lt;/code>&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Docs: Implementation details</title><link>https://dubbo.apache.org/en/docs/v2.7/dev/implementation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/dev/implementation/</guid><description>
+&lt;/div></description></item><item><title>Docs: Implementation details</title><link>https://dubbo.apache.org/en/docs/v2.7/dev/implementation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/dev/implementation/</guid><description>
 &lt;h2 id="initialization-details">Initialization details&lt;/h2>
 &lt;h3 id="service-parsing">Service parsing&lt;/h3>
 &lt;p>Based on &lt;code>META-INF/spring.handlers&lt;/code> config in dubbo.jar, Spring calls &lt;code>DubboNamespaceHandler&lt;/code> when meeting dubbo namespace.&lt;/p>
@@ -435,26 +435,26 @@
 &lt;li>Dispather: &lt;code>all&lt;/code>, &lt;code>direct&lt;/code>, &lt;code>message&lt;/code>, &lt;code>execution&lt;/code>, &lt;code>connection&lt;/code>&lt;/li>
 &lt;li>ThreadPool: &lt;code>fixed&lt;/code>, &lt;code>cached&lt;/code>&lt;/li>
 &lt;/ul>
-&lt;section class="footnotes" role="doc-endnotes">
+&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>is &lt;code>&amp;lt;dubbo:service regisrty=&amp;quot;N/A&amp;quot; /&amp;gt;&lt;/code> or &lt;code>&amp;lt;dubbo:registry address=&amp;quot;N/A&amp;quot; /&amp;gt;&lt;/code>&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:2" role="doc-endnote">
+&lt;li id="fn:2">
 &lt;p>is &lt;code>&amp;lt;dubbo:registry address=&amp;quot;zookeeper://10.20.153.10:2181&amp;quot; /&amp;gt;&lt;/code>&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:3" role="doc-endnote">
+&lt;li id="fn:3">
 &lt;p>is &lt;code>&amp;lt;dubbo:reference url=&amp;quot;dubbo://service-host/com.foo.FooService?version=1.0.0&amp;quot; /&amp;gt;&lt;/code>&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:4" role="doc-endnote">
+&lt;li id="fn:4">
 &lt;p>is &lt;code>&amp;lt;dubbo:registry address=&amp;quot;zookeeper://10.20.153.10:2181&amp;quot; /&amp;gt;&lt;/code>&amp;#160;&lt;a href="#fnref:4" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:5" role="doc-endnote">
+&lt;li id="fn:5">
 &lt;p>is one of &lt;code>DubboInvoker&lt;/code>, &lt;code>HessianRpcInvoker&lt;/code>, &lt;code>InjvmInvoker&lt;/code>, &lt;code>RmiInvoker&lt;/code>, &lt;code>WebServiceInvoker&lt;/code>&amp;#160;&lt;a href="#fnref:5" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Docs: Dubbo Design Principals</title><link>https://dubbo.apache.org/en/docs/v2.7/dev/principals/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/dev/principals/</guid><description>
+&lt;/div></description></item><item><title>Docs: Dubbo Design Principals</title><link>https://dubbo.apache.org/en/docs/v2.7/dev/principals/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/dev/principals/</guid><description>
 &lt;p>The design principles in this chapter are taken from a series of articles published by Liang Fei on javaeye.&lt;/p></description></item><item><title>Docs: SPI Extension Implementations</title><link>https://dubbo.apache.org/en/docs/v2.7/dev/impls/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/dev/impls/</guid><description>
 &lt;p>SPI extension interface is used for system integration, it&amp;rsquo;s also useful for dubbo contributor to extend dubbo functionality.&lt;/p></description></item><item><title>Docs: Public Agreement</title><link>https://dubbo.apache.org/en/docs/v2.7/dev/contract/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/dev/contract/</guid><description>
 &lt;p>This document is Dubbo public agreement, we expect all extension points comply with it.&lt;/p>
@@ -678,20 +678,20 @@
 &lt;li>Put all interfaces under the base package of module, and put base classes in support subpackage, different implementations are placed under the subpackage named by extension point.&lt;/li>
 &lt;li>Try to keep subpackage dependent on parent package, NOT reverse.&lt;/li>
 &lt;/ul>
-&lt;section class="footnotes" role="doc-endnotes">
+&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>Java convention&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:2" role="doc-endnote">
+&lt;li id="fn:2">
 &lt;p>Spring convention&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:3" role="doc-endnote">
+&lt;li id="fn:3">
 &lt;p>Dubbo convention&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Docs: Compatibility Test</title><link>https://dubbo.apache.org/en/docs/v2.7/dev/tck/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/dev/tck/</guid><description>
+&lt;/div></description></item><item><title>Docs: Compatibility Test</title><link>https://dubbo.apache.org/en/docs/v2.7/dev/tck/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/dev/tck/</guid><description>
 &lt;p>Dubbo&amp;rsquo;s protocol, communication, serialization, registry, load balancing and other SPI all offer alternative strategies for different application scenarios while our test cases are very scattered. Ours is always uncertain whether it can satisfy the complete contract of the extension point when users need to add a new implementation.&lt;/p>
 &lt;p>Thus we need to use TCK (Technology Compatibility Kit) for the core extension points. When users add a new implementaion, compatibility with the rest of the framework can be ensured with TCK. This can effectively improve the overall health and also facilitate the access of the third party extenders, which accelerates the maturity of the open source community.&lt;/p>
 &lt;p>Xingzhi from the open source community is already working on this part. His preliminary idea is to build a TCK framework for Dubbo drawing on the CDI-TCK of JBoss first, then realize the TCK implementing case of Dubbo.&lt;/p>

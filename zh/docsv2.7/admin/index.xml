@@ -5,11 +5,11 @@
 &lt;p>你也可以增加运行 Simple Monitor 监控中心，它缺省配置为通过 Multicast 注册中心广播发现 Provider 和 Consumer，并展示出它们的依赖关系，以及它们之间调用的次数和时间。&lt;/p>
 &lt;p>你也可以将 Multicast 注册中心换成 Zookeeper 注册中心，安装 Zookeeper Registry 后，修改 Demo Proivder，Demo Consumer，Simple Monitor 三者安装目录下的 &lt;code>conf/dubbo.properties&lt;/code>，将 &lt;code>dubbo.registry.address&lt;/code> 的值改为 &lt;code>zookeeper://127.0.0.1:2181&lt;/code>，同理，如果换成 Redis Registry，值改为 &lt;code>redis://127.0.0.1:6379&lt;/code>，如果换成 Simple Registry，值改为 &lt;code>dubbo://127.0.0.1:9090&lt;/code>&lt;/p>
 &lt;p>推荐使用 Zookeeper 注册中心&lt;/p>
-&lt;section class="footnotes" role="doc-endnotes">
+&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>注意：multicast 地址不能配成 127.0.0.1，也不能配成机器的 IP 地址，必须是 D 段广播地址，也就是：224.0.0.0 到 239.255.255.255 之间的任意地址&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item></channel></rss>
+&lt;/div></description></item></channel></rss>

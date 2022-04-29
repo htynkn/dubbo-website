@@ -17,14 +17,14 @@
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>https://github.com/apache/dubbo-admin
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Visit [^2]:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>http://127.0.0.1:8080
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;section class="footnotes" role="doc-endnotes">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>There&amp;rsquo;s no login for current version, will be added later&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Docs: Background</title><link>https://dubbo.apache.org/en/docs/v2.7/user/preface/background/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/preface/background/</guid><description>
+&lt;/div></description></item><item><title>Docs: Background</title><link>https://dubbo.apache.org/en/docs/v2.7/user/preface/background/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/preface/background/</guid><description>
 &lt;h1 id="background">Background&lt;/h1>
 &lt;p>With the fast development of Internet, the scale of web applications expands unceasingly, and finally we find that the traditional vertical architecture(monolithic) can not handle this any more. Distributed service architecture and the flow computing architecture are imperative, and a governance system is urgently needed to ensure an orderly evolution of the architecture.&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/dubbo-architecture-roadmap.jpg" alt="image">&lt;/p>
@@ -3115,14 +3115,14 @@ into the project&amp;rsquo;s &lt;code>apps&lt;/code> directory.&lt;/li>
 &lt;p>The original designed data structure for zookeeper in &lt;code>2.0.8&lt;/code> has the limitation that data type cannot extended, it&amp;rsquo;s redesigned in &lt;code>2.0.9&lt;/code>. But at the same time incompatibility is introduced, thereby &lt;code>2.0.9&lt;/code> is required for all service providers and service consumers.&lt;/p>
 &lt;p>Since &lt;code>2.2.0&lt;/code> zkclient is used by default, therefore its dependency is needed.&lt;/p>
 &lt;p>Since &lt;code>2.3.0&lt;/code> curator is supported as alternative option.&lt;/p>
-&lt;section class="footnotes" role="doc-endnotes">
+&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>Suggest to use &lt;code>2.3.3&lt;/code> or above for zookeeper registry client&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Docs: CLA Signing Guide</title><link>https://dubbo.apache.org/en/docs/contribution-guidelines/contributor/cla-signing-guide_dev/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/contribution-guidelines/contributor/cla-signing-guide_dev/</guid><description>
+&lt;/div></description></item><item><title>Docs: CLA Signing Guide</title><link>https://dubbo.apache.org/en/docs/contribution-guidelines/contributor/cla-signing-guide_dev/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/contribution-guidelines/contributor/cla-signing-guide_dev/</guid><description>
 &lt;p>You are required to sign the Apache ICLA under the following condition:&lt;/p>
 &lt;ul>
 &lt;li>You have made lots of contribution to Dubbo before Dubbo get donated to Apache, and you haven&amp;rsquo;t sign the Alibaba-CLA before.&lt;/li>
@@ -3474,14 +3474,14 @@ Same as Dubbo 2.7, you can set the addresses of metadata center and registry cen
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>the addresses in configuration center have higher priority than those in &lt;code>application.properties&lt;/code>&lt;/p>
 &lt;p>visit documents on github:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>https://github.com/apache/dubbo-admin
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;section class="footnotes" role="doc-endnotes">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>there&amp;rsquo;s no login module in the current version.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Docs: Multicast Registry</title><link>https://dubbo.apache.org/en/docs/v2.7/user/references/registry/multicast/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/references/registry/multicast/</guid><description>
+&lt;/div></description></item><item><title>Docs: Multicast Registry</title><link>https://dubbo.apache.org/en/docs/v2.7/user/references/registry/multicast/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/references/registry/multicast/</guid><description>
 &lt;p>Multicast registry doesn&amp;rsquo;t require to setup any central node. Just like IP address broadcast, dubbo service providers and consumers can discover each other through this mechanism.&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/multicast.jpg" alt="/user-guide/images/multicast.jpg">&lt;/p>
 &lt;ol start="0">
@@ -3761,20 +3761,20 @@ If you prefer a registry like zookeeper, please check out examples &lt;a href="h
 &lt;li>&lt;a href="../../admin/install/provider-demo">Provider demo&lt;/a>&lt;/li>
 &lt;li>&lt;a href="../../admin/install/consumer-demo">Consumer demo&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;section class="footnotes" role="doc-endnotes">
+&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>The interface needs to be packaged separately, shared by the service provider and the consumer&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:2" role="doc-endnote">
+&lt;li id="fn:2">
 &lt;p>Hidden realization for service consumer&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:3" role="doc-endnote">
+&lt;li id="fn:3">
 &lt;p>IoC injection can also be used&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Docs: Release Guide</title><link>https://dubbo.apache.org/en/docs/contribution-guidelines/committer/release-guide_dev/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/contribution-guidelines/committer/release-guide_dev/</guid><description>
+&lt;/div></description></item><item><title>Docs: Release Guide</title><link>https://dubbo.apache.org/en/docs/contribution-guidelines/committer/release-guide_dev/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/contribution-guidelines/committer/release-guide_dev/</guid><description>
 &lt;h2 id="understanding-the-apache-release-cycle">Understanding the Apache Release Cycle&lt;/h2>
 &lt;p>In general, Source Release is the key and the required content of Apache. But Binary Release is optional, Dubbo can choose whether to release binary packages to the Apache repository or to the Maven central repository.&lt;/p>
 &lt;p>Please refer to the following links for more information on ASF&amp;rsquo;s release guide:&lt;/p>
@@ -4713,14 +4713,14 @@ The mail template to announce release:&lt;/li>
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>reference&lt;span style="color:#719e07">.&lt;/span>setUrl&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;dubbo://10.20.130.230:20880/com.xxx.XxxService&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">...&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;section class="footnotes" role="doc-endnotes">
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>When should we usd API: API is very useful for integrating with systems like OpenAPI, ESB, Test, Mock, etc. General Providers and Consumers, we still recommend use &lt;a href="../xml">XML Configuration&lt;/a>.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Docs: Architecture</title><link>https://dubbo.apache.org/en/docs/v2.7/user/preface/architecture/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/preface/architecture/</guid><description>
+&lt;/div></description></item><item><title>Docs: Architecture</title><link>https://dubbo.apache.org/en/docs/v2.7/user/preface/architecture/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/preface/architecture/</guid><description>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/dubbo-architecture.jpg" alt="dubbo-architucture">&lt;/p>
 &lt;h5 id="specification-of-nodes-role">Specification of Node&amp;rsquo;s Role&lt;/h5>
 &lt;table>
@@ -4871,9 +4871,9 @@ The mail template to announce release:&lt;/li>
 &lt;li>cxf: 3.0.14&lt;/li>
 &lt;li>thrift: 0.8.0&lt;/li>
 &lt;li>servlet: 3.0 &lt;sup id="fnref:5">&lt;a href="#fn:5" class="footnote-ref" role="doc-noteref">5&lt;/a>&lt;/sup>&lt;/li>
-&lt;li>validation-api: 1.1.0.GA &lt;sup id="fnref:5">&lt;a href="#fn:5" class="footnote-ref" role="doc-noteref">5&lt;/a>&lt;/sup>&lt;/li>
-&lt;li>jcache: 1.0.0 &lt;sup id="fnref:5">&lt;a href="#fn:5" class="footnote-ref" role="doc-noteref">5&lt;/a>&lt;/sup>&lt;/li>
-&lt;li>javax.el: 3.0.1-b08 &lt;sup id="fnref:5">&lt;a href="#fn:5" class="footnote-ref" role="doc-noteref">5&lt;/a>&lt;/sup>&lt;/li>
+&lt;li>validation-api: 1.1.0.GA &lt;sup id="fnref1:5">&lt;a href="#fn:5" class="footnote-ref" role="doc-noteref">5&lt;/a>&lt;/sup>&lt;/li>
+&lt;li>jcache: 1.0.0 &lt;sup id="fnref2:5">&lt;a href="#fn:5" class="footnote-ref" role="doc-noteref">5&lt;/a>&lt;/sup>&lt;/li>
+&lt;li>javax.el: 3.0.1-b08 &lt;sup id="fnref3:5">&lt;a href="#fn:5" class="footnote-ref" role="doc-noteref">5&lt;/a>&lt;/sup>&lt;/li>
 &lt;li>kryo: 4.0.1&lt;/li>
 &lt;li>kryo-serializers: 0.42&lt;/li>
 &lt;li>fst: 2.48-jdk-6&lt;/li>
@@ -4882,26 +4882,26 @@ The mail template to announce release:&lt;/li>
 &lt;li>slf4j: 1.7.25&lt;/li>
 &lt;li>log4j: 1.2.16&lt;/li>
 &lt;/ul>
-&lt;section class="footnotes" role="doc-endnotes">
+&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>In theory, Dubbo only depend on JDK, not depend on any 3rd party libs, you can finish logic by using JDK.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:2" role="doc-endnote">
+&lt;li id="fn:2">
 &lt;p>Bytecode generation&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:3" role="doc-endnote">
+&lt;li id="fn:3">
 &lt;p>Configuration parsing&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:4" role="doc-endnote">
+&lt;li id="fn:4">
 &lt;p>Network transmission&amp;#160;&lt;a href="#fnref:4" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:5" role="doc-endnote">
-&lt;p>JAVAEE&amp;#160;&lt;a href="#fnref:5" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;li id="fn:5">
+&lt;p>JAVAEE&amp;#160;&lt;a href="#fnref:5" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&amp;#160;&lt;a href="#fnref1:5" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&amp;#160;&lt;a href="#fnref2:5" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&amp;#160;&lt;a href="#fnref3:5" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></description></item><item><title>Docs: "Fool-proof" Design</title><link>https://dubbo.apache.org/en/docs/v2.7/dev/principals/dummy/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/dev/principals/dummy/</guid><description>
+&lt;/div></description></item><item><title>Docs: "Fool-proof" Design</title><link>https://dubbo.apache.org/en/docs/v2.7/dev/principals/dummy/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/dev/principals/dummy/</guid><description>
 &lt;blockquote>
 &lt;p>&lt;a href="http://javatar.iteye.com/blog/804187">http://javatar.iteye.com/blog/804187&lt;/a>&lt;/p>
 &lt;/blockquote>
