@@ -1,4 +1,286 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – Apache Dubbo</title><link>https://dubbo.apache.org/en/</link><description>Recent content on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/en/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: Makes it More Convenient for You to Proxy Dubbo Services in Apache APISIX</title><link>https://dubbo.apache.org/en/blog/2022/01/18/makes-it-more-convenient-for-you-to-proxy-dubbo-services-in-apache-apisix/</link><pubDate>Tue, 18 Jan 2022 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/blog/2022/01/18/makes-it-more-convenient-for-you-to-proxy-dubbo-services-in-apache-apisix/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – Apache Dubbo</title><link>https://dubbo.apache.org/en/</link><description>Recent content on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/en/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: How to proxy Dubbo service in Apache ShenYu Gateway</title><link>https://dubbo.apache.org/en/blog/2022/05/04/how-to-proxy-dubbo-service-in-apache-shenyu-gateway/</link><pubDate>Wed, 04 May 2022 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/blog/2022/05/04/how-to-proxy-dubbo-service-in-apache-shenyu-gateway/</guid><description>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/shenyu-dubbo/ApacheShenYu-Dubbo-en.png" alt="">&lt;/p>
+&lt;h2 id="1-introduction">1. Introduction&lt;/h2>
+&lt;ul>
+&lt;li>Apache ShenYu&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/shenyu-dubbo/shenyu.png" alt="">&lt;/p>
+&lt;p>&lt;a href="https://shenyu.apache.org/docs/index">Apache ShenYu(Incubating)&lt;/a> is an asynchronous, high-performance, cross-language, responsive &lt;code>API&lt;/code> gateway. Compatible with a variety of mainstream framework systems, support for hot-plugging, users can customize the development to meet the current and future needs of users in a variety of scenarios, experienced large-scale scenarios hammered.&lt;/p>
+&lt;p>In May 2021, &lt;code>ShenYu&lt;/code> was donated to the &lt;code>Apache&lt;/code> Software Foundation, and the Apache Foundation voted unanimously to enter the incubator.&lt;/p>
+&lt;ul>
+&lt;li>Apache Dubbo&lt;/li>
+&lt;/ul>
+&lt;p>&lt;code>Apache Dubbo&lt;/code> is a microservice development framework that provides two key capabilities, &lt;code>RPC&lt;/code> communication and microservice governance. This means that microservices developed with &lt;code>Dubbo&lt;/code> will have the ability to discover and communicate with each other remotely, and take advantage of the rich service governance capabilities provided by Dubbo to achieve service governance requirements such as service discovery, load balancing, traffic scheduling, and so on. At the same time &lt;code>Dubbo&lt;/code> is highly scalable, users can customize their own implementation at almost any point to change the default behavior of the framework to meet their business needs.&lt;/p>
+&lt;h2 id="2-quick-start-with-dubbo">2. Quick Start with Dubbo&lt;/h2>
+&lt;p>This section describes how to connect the &lt;code>Dubbo&lt;/code> service to the &lt;code>Shenyu&lt;/code> gateway. You can find the [sample code] for this section directly under the project (&lt;a href="https://github.com/apache/incubator-shenyu/tree/master/shenyu-examples/shenyu">https://github.com/apache/incubator-shenyu/tree/master/shenyu-examples/shenyu&lt;/a> -examples-dubbo/shenyu-examples-apache-dubbo-service).&lt;/p>
+&lt;h3 id="21-start-shenyu-admin">2.1 Start shenyu-admin&lt;/h3>
+&lt;p>&lt;code>shenyu-admin&lt;/code> is the &lt;code>Apache ShenYu&lt;/code> backend management system, there are various ways to start it, this article is started by &lt;a href="https://shenyu.apache.org/docs/deployment/deployment-local">local deployment&lt;/a> way. After successful startup, you need to set the &lt;code>dubbo&lt;/code> plugin to be on and set your registered address in the base configuration &lt;code>-&amp;gt;&lt;/code>Plugin Management&amp;rsquo;, please make sure the registration center has been opened.&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/shenyu-dubbo/dubbo-enable-en.png" alt="">&lt;/p>
+&lt;h3 id="22-start-shenyu-gateway">2.2 Start ShenYu Gateway&lt;/h3>
+&lt;p>Here it is started by way of &lt;a href="https://github.com/apache/incubator-shenyu/tree/master/shenyu-bootstrap">source&lt;/a> and runs directly &lt;code>shenyu-bootstrap&lt;/code> in &lt;code>shenyu-bootstrap&lt;/code>. ShenyuBootstrapApplication`.&lt;/p>
+&lt;p>Make sure the gateway has introduced the relevant dependencies before starting. If the client is &lt;code>apache dubbo&lt;/code> and the registry uses &lt;code>zookeeper&lt;/code>, please refer to the following configuration.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;!--&lt;/span> apache shenyu apache dubbo plugin start&lt;span style="color:#719e07">--&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>dependency&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>groupId&lt;span style="color:#719e07">&amp;gt;&lt;/span>org&lt;span style="color:#719e07">.&lt;/span>apache&lt;span style="color:#719e07">.&lt;/span>shenyu&lt;span style="color:#719e07">&amp;lt;/&lt;/span>groupId&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>artifactId&lt;span style="color:#719e07">&amp;gt;&lt;/span>shenyu&lt;span style="color:#719e07">-&lt;/span>spring&lt;span style="color:#719e07">-&lt;/span>boot&lt;span style="color:#719e07">-&lt;/span>starter&lt;span style="color:#719e07">-&lt;/span>plugin&lt;span style="color:#719e07">-&lt;/span>apache&lt;span style="color:#719e07">-&lt;/span>dubbo&lt;span style="color:#719e07">&amp;lt;/&lt;/span>artifactId&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>version&lt;span style="color:#719e07">&amp;gt;&lt;/span>$&lt;span style="color:#719e07">{&lt;/span>project&lt;span style="color:#719e07">.&lt;/span>version&lt;span style="color:#719e07">}&amp;lt;/&lt;/span>version&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;/&lt;/span>dependency&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>dependency&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>groupId&lt;span style="color:#719e07">&amp;gt;&lt;/span>org&lt;span style="color:#719e07">.&lt;/span>apache&lt;span style="color:#719e07">.&lt;/span>dubbo&lt;span style="color:#719e07">&amp;lt;/&lt;/span>groupId&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>artifactId&lt;span style="color:#719e07">&amp;gt;&lt;/span>dubbo&lt;span style="color:#719e07">&amp;lt;/&lt;/span>artifactId&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>version&lt;span style="color:#719e07">&amp;gt;&lt;/span>2&lt;span style="color:#719e07">.&lt;/span>7&lt;span style="color:#719e07">.&lt;/span>5&lt;span style="color:#719e07">&amp;lt;/&lt;/span>version&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;/&lt;/span>dependency&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;!--&lt;/span> Dubbo zookeeper registry dependency start &lt;span style="color:#719e07">--&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>dependency&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>groupId&lt;span style="color:#719e07">&amp;gt;&lt;/span>org&lt;span style="color:#719e07">.&lt;/span>apache&lt;span style="color:#719e07">.&lt;/span>curator&lt;span style="color:#719e07">&amp;lt;/&lt;/span>groupId&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>artifactId&lt;span style="color:#719e07">&amp;gt;&lt;/span>curator&lt;span style="color:#719e07">-&lt;/span>client&lt;span style="color:#719e07">&amp;lt;/&lt;/span>artifactId&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>version&lt;span style="color:#719e07">&amp;gt;&lt;/span>4&lt;span style="color:#719e07">.&lt;/span>0&lt;span style="color:#719e07">.&lt;/span>1&lt;span style="color:#719e07">&amp;lt;/&lt;/span>version&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>exclusions&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>exclusion&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>artifactId&lt;span style="color:#719e07">&amp;gt;&lt;/span>log4j&lt;span style="color:#719e07">&amp;lt;/&lt;/span>artifactId&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>groupId&lt;span style="color:#719e07">&amp;gt;&lt;/span>log4j&lt;span style="color:#719e07">&amp;lt;/&lt;/span>groupId&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;/&lt;/span>exclusion&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;/&lt;/span>exclusions&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;/&lt;/span>dependency&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>dependency&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>groupId&lt;span style="color:#719e07">&amp;gt;&lt;/span>org&lt;span style="color:#719e07">.&lt;/span>apache&lt;span style="color:#719e07">.&lt;/span>curator&lt;span style="color:#719e07">&amp;lt;/&lt;/span>groupId&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>artifactId&lt;span style="color:#719e07">&amp;gt;&lt;/span>curator&lt;span style="color:#719e07">-&lt;/span>framework&lt;span style="color:#719e07">&amp;lt;/&lt;/span>artifactId&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>version&lt;span style="color:#719e07">&amp;gt;&lt;/span>4&lt;span style="color:#719e07">.&lt;/span>0&lt;span style="color:#719e07">.&lt;/span>1&lt;span style="color:#719e07">&amp;lt;/&lt;/span>version&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;/&lt;/span>dependency&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>dependency&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>groupId&lt;span style="color:#719e07">&amp;gt;&lt;/span>org&lt;span style="color:#719e07">.&lt;/span>apache&lt;span style="color:#719e07">.&lt;/span>curator&lt;span style="color:#719e07">&amp;lt;/&lt;/span>groupId&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>artifactId&lt;span style="color:#719e07">&amp;gt;&lt;/span>curator&lt;span style="color:#719e07">-&lt;/span>recipes&lt;span style="color:#719e07">&amp;lt;/&lt;/span>artifactId&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>version&lt;span style="color:#719e07">&amp;gt;&lt;/span>4&lt;span style="color:#719e07">.&lt;/span>0&lt;span style="color:#719e07">.&lt;/span>1&lt;span style="color:#719e07">&amp;lt;/&lt;/span>version&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;/&lt;/span>dependency&lt;span style="color:#719e07">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;!--&lt;/span> Dubbo zookeeper registry dependency end &lt;span style="color:#719e07">--&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;!--&lt;/span> apache dubbo plugin end&lt;span style="color:#719e07">--&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="23-start-shenyu-examples-dubbo">2.3 Start shenyu-examples-dubbo&lt;/h3>
+&lt;p>Take the example provided on the official website &lt;a href="https://github.com/apache/incubator-shenyu/tree/master/shenyu-examples/shenyu-examples-dubbo/shenyu-examples-apache-dubbo-service">shenyu-examples-dubbo&lt;/a>. Suppose the &lt;code>dubbo&lt;/code> service is defined as follows.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> /* ...... * &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:application&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;test-dubbo-service&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;${dubbo.registry.address}&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;20888&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> timeout=&lt;span style="color:#2aa198">&amp;#34;10000&amp;#34;&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.shenyu.examples.dubbo.api.service.DubboTestService&amp;#34;&lt;/span> ref=&lt;span style="color:#2aa198">&amp;#34;dubboTestService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/beans&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Declare the application service name, register the center address, use the &lt;code>dubbo&lt;/code> protocol, declare the service interface, and the corresponding interface implementation class.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * DubboTestServiceImpl.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@Service&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;dubboTestService&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">DubboTestServiceImpl&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> DubboTestService &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Override&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@ShenyuDubboClient&lt;/span>&lt;span style="color:#719e07">(&lt;/span>path &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;/findById&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> desc &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;Query by Id&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> DubboTest &lt;span style="color:#268bd2">findById&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#268bd2">final&lt;/span> String id&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#719e07">new&lt;/span> DubboTest&lt;span style="color:#719e07">(&lt;/span>id&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#2aa198">&amp;#34;hello world shenyu Apache, findById&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">//......
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In the interface implementation class, use the annotation &lt;code>@ShenyuDubboClient&lt;/code> to register the service with &lt;code>shenyu-admin&lt;/code>.&lt;/p>
+&lt;p>Configuration information in the configuration file &lt;code>application.yml&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">server&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">port&lt;/span>: &lt;span style="color:#2aa198">8011&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">address&lt;/span>: &lt;span style="color:#2aa198">0.0.0.0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">servlet&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">context-path&lt;/span>: /
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">spring&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">main&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">allow-bean-definition-overriding&lt;/span>: &lt;span style="color:#cb4b16">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">dubbo&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">registry&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">address&lt;/span>: zookeeper://localhost:2181 &lt;span style="color:#586e75"># The registry used by dubbo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">shenyu&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">register&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">registerType&lt;/span>: http &lt;span style="color:#586e75">#Registration Method&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">serverLists&lt;/span>: http://localhost:9095 &lt;span style="color:#586e75">#Registration Address&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">props&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">username&lt;/span>: admin
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">password&lt;/span>: &lt;span style="color:#2aa198">123456&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">client&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">dubbo&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">props&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">contextPath&lt;/span>: /dubbo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">appName&lt;/span>: dubbo
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In the configuration file, declare the registry address used by &lt;code>dubbo&lt;/code>. The &lt;code>dubbo&lt;/code> service registers with &lt;code>shenyu-admin&lt;/code>, using the method &lt;code>http&lt;/code>, and the registration address is &lt;code>http://localhost:9095&lt;/code>.&lt;/p>
+&lt;p>See &lt;a href="https://shenyu.apache.org/docs/design/register-center-design/">Application Client Access&lt;/a> for more information on the use of the registration method.&lt;/p>
+&lt;h3 id="24-invoke-the-dubbo-service">2.4 Invoke the Dubbo service&lt;/h3>
+&lt;p>The &lt;code>shenyu-examples-dubbo&lt;/code> project will automatically register the interface methods annotated with &lt;code>@ShenyuDubboClient&lt;/code> to the gateway after it is successfully started.&lt;/p>
+&lt;p>Open &lt;code>Plugins List -&amp;gt; Proxy -&amp;gt; dubbo&lt;/code> to see the list of plugin rules configuration.&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/shenyu-dubbo/dubbo-service-list-en.png" alt="">&lt;/p>
+&lt;p>Information on the selectors for successful registration.&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/shenyu-dubbo/dubbo-selector-en.png" alt="">&lt;/p>
+&lt;p>Information on the rules for successful registration.&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/shenyu-dubbo/dubbo-rule-en.png" alt="">&lt;/p>
+&lt;blockquote>
+&lt;p>Selectors and rules are the soul of the &lt;code>Apache ShenYu&lt;/code> gateway. Mastering it well, you can manage any traffic. Corresponding to the matching conditions (conditions) inside the selectors and rules, we can handle various complex scenarios according to different traffic filtering rules. Traffic filtering can get data from &lt;code>Header&lt;/code>, &lt;code>URI&lt;/code>, &lt;code>Query&lt;/code>, &lt;code>Cookie&lt;/code> and so on Http requests.&lt;/p>
+&lt;p>Then you can use &lt;code>Match&lt;/code>, &lt;code>=&lt;/code>, &lt;code>Regex&lt;/code>, &lt;code>Groovy&lt;/code>, &lt;code>Exclude&lt;/code> and other matching methods to match the data you expect. Multi-group match additions can use the &lt;code>And/Or&lt;/code> matching strategy.&lt;/p>
+&lt;p>See: &lt;a href="https://shenyu.apache.org/docs/user-guide/admin-usage/selector-and-rule">Selector and Rule Management&lt;/a> for details and usage.&lt;/p>
+&lt;/blockquote>
+&lt;p>Initiate a &lt;code>GET&lt;/code> request to invoke the &lt;code>dubbo&lt;/code> service through the &lt;code>ShenYu&lt;/code> gateway.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:9195/dubbo/findById?id=100
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Accept: application/json
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>After a successful response, the result is as follows.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#34;name&amp;#34;: &amp;#34;hello world shenyu Apache, findById&amp;#34;,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#34;id&amp;#34;: &amp;#34;100&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>At this point, you can successfully access the &lt;code>dubbo&lt;/code> service via &lt;code>http&lt;/code> requests. The &lt;code>ShenYu&lt;/code> gateway converts the &lt;code>http&lt;/code> protocol to the &lt;code>dubbo&lt;/code> protocol via the &lt;code>shenyu-plugin-dubbo&lt;/code> module.&lt;/p>
+&lt;h2 id="3-understanding-of-dubbo-plugin">3. Understanding of Dubbo plugin&lt;/h2>
+&lt;p>During the process of running the above &lt;code>demo&lt;/code>, are there any questions about&lt;/p>
+&lt;ul>
+&lt;li>How does the &lt;code>dubbo&lt;/code> service register with &lt;code>shenyu-admin&lt;/code>?&lt;/li>
+&lt;li>How does &lt;code>shenyu-admin&lt;/code> synchronize data to the &lt;code>ShenYu&lt;/code> gateway?&lt;/li>
+&lt;li>How does the &lt;code>DubboPlugin&lt;/code> convert the &lt;code>http&lt;/code> protocol to the &lt;code>dubbo&lt;/code> protocol?&lt;/li>
+&lt;/ul>
+&lt;p>With these questions in mind, let&amp;rsquo;s dive into understanding the &lt;code>dubbo&lt;/code> plugin.&lt;/p>
+&lt;h3 id="31-application-client-access">3.1 Application Client Access&lt;/h3>
+&lt;p>Application client access refers to accessing microservices to the &lt;code>Apache ShenYu&lt;/code> gateway, which currently supports access to &lt;code>Http&lt;/code>, &lt;code>Dubbo&lt;/code>, &lt;code>Spring Cloud&lt;/code>, &lt;code>gRPC&lt;/code>, &lt;code>Motan&lt;/code>, &lt;code>Sofa&lt;/code>, &lt;code>Tars&lt;/code> and other protocols.&lt;/p>
+&lt;p>Accessing application clients to the &lt;code>Apache ShenYu&lt;/code> gateway is achieved through the registry, which involves client-side registration and server-side synchronization of data. The registry supports &lt;code>Http&lt;/code>, &lt;code>Zookeeper&lt;/code>, &lt;code>Etcd&lt;/code>, &lt;code>Consul&lt;/code> and &lt;code>Nacos&lt;/code>. The default is to register by &lt;code>Http&lt;/code>.&lt;/p>
+&lt;p>Please refer to &lt;a href="https://shenyu.apache.org/docs/user-guide/register-center-access">Client Access Configuration&lt;/a> for client access related configuration.&lt;/p>
+&lt;h4 id="311-client-side-registration">3.1.1 Client-side Registration&lt;/h4>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/shenyu-dubbo/register-client.png" alt="">&lt;/p>
+&lt;p>Declare the registry client type, such as &lt;code>Http&lt;/code> or &lt;code>Zookeeper&lt;/code>, in your microservice configuration.
+Load and initialize the corresponding registry client using the &lt;code>SPI&lt;/code> method when the application starts, and get the service interface information that needs to be registered in it by implementing the post-processor interface related to the &lt;code>Spring Bean&lt;/code>, and put the obtained information into the &lt;code>Disruptor&lt;/code>.&lt;/p>
+&lt;p>The registry client reads the data from &lt;code>Disruptor&lt;/code> and registers the interface information to &lt;code>shenyu-admin&lt;/code>, where &lt;code>Disruptor&lt;/code> plays the role of decoupling data and operations, which is convenient for extension.&lt;/p>
+&lt;h4 id="312-server-side-registration">3.1.2 Server-side Registration&lt;/h4>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/shenyu-dubbo/register-server.png" alt="">&lt;/p>
+&lt;p>Declare the registry server type, such as &lt;code>Http&lt;/code> or &lt;code>Zookeeper&lt;/code>, in the &lt;code>shenyu-admin&lt;/code> configuration. When &lt;code>shenyu-admin&lt;/code> starts, it will read the configuration type, load and initialize the corresponding registry server, and when the registry server receives the interface information registered by &lt;code>shenyu-client&lt;/code>, it will put it into &lt;code>Disruptor&lt;/code>, and then it will trigger the registration processing logic to update the service interface information and publish the synchronization event.&lt;/p>
+&lt;p>The &lt;code>Disruptor&lt;/code> plays a role in decoupling data and operation, which is good for extension. It also has a data buffering role if too many registration requests lead to registration exceptions.&lt;/p>
+&lt;h3 id="32-data-synchronization-principle">3.2 Data Synchronization Principle&lt;/h3>
+&lt;p>Data synchronization refers to the policy used to synchronize data to the &lt;code>Apache ShenYu&lt;/code> gateway after the &lt;code>shenyu-admin&lt;/code> backend has manipulated the data. The &lt;code>Apache ShenYu&lt;/code> gateway currently supports &lt;code>ZooKeeper&lt;/code>, &lt;code>WebSocket&lt;/code>, &lt;code>Http long polling&lt;/code>, &lt;code>Nacos&lt;/code>, &lt;code>Etcd&lt;/code> and &lt;code>Consul&lt;/code> for data synchronization. The default is to synchronize data via &lt;code>WebSocket&lt;/code>.&lt;/p>
+&lt;p>Please refer to &lt;a href="https://shenyu.apache.org/docs/user-guide/use-data-sync">Data Synchronization Configuration&lt;/a> for the configuration of data synchronization.&lt;/p>
+&lt;h4 id="321-the-significance-of-data-synchronization">3.2.1 The Significance of Data Synchronization&lt;/h4>
+&lt;p>The gateway is the entry point for traffic requests and plays a very important role in the microservices architecture, and the importance of high availability of the gateway is self-evident. In the process of using the gateway, in order to meet the business requirements, it is often necessary to change the configuration, such as flow control rules, routing rules and so on. Therefore, the dynamic configuration of the gateway is an important factor to ensure the high availability of the gateway.&lt;/p>
+&lt;p>The current data synchronization characteristics are as follows.&lt;/p>
+&lt;ul>
+&lt;li>All configurations are cached in the &lt;code>Apache ShenYu&lt;/code> gateway memory, and each request uses the local cache, which is very fast.&lt;/li>
+&lt;li>Users can change any data in the &lt;code>shenyu-admin&lt;/code> backend and it will be synchronized to the gateway memory immediately.&lt;/li>
+&lt;li>Supports data synchronization of plugins, selectors, rule data, metadata, signature data, etc. for &lt;code>Apache ShenYu&lt;/code>.&lt;/li>
+&lt;li>All plug-in selectors and rules are dynamically configured and take effect immediately, without restarting the service.&lt;/li>
+&lt;li>Data synchronization method supports &lt;code>Zookeeper&lt;/code>, &lt;code>Http long polling&lt;/code>, &lt;code>Websocket&lt;/code>, &lt;code>Nacos&lt;/code>, &lt;code>Etcd&lt;/code> and &lt;code>Consul&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;h4 id="322-data-synchronization-principle-analysis">3.2.2 Data Synchronization Principle Analysis&lt;/h4>
+&lt;p>The following diagram shows the flow of &lt;code>Apache ShenYu&lt;/code> data synchronization. The &lt;code>Apache ShenYu&lt;/code> gateway synchronizes configuration data from the configuration service when it starts, and supports push-pull mode to get configuration change information and then update the local cache. Administrators can change user permissions, rules, plugins, traffic configuration in the administration backend (&lt;code>shenyu-admin&lt;/code>) and synchronize the changes to the &lt;code>Apache ShenYu&lt;/code> gateway via push-pull mode, depending on which synchronization method is used.&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/shenyu-dubbo/data-sync.png" alt="">&lt;/p>
+&lt;p>In the original version, the configuration service relied on the &lt;code>Zookeeper&lt;/code> implementation, and the management backend &lt;code>pushed&lt;/code> the changes to the gateway. Now we can support &lt;code>WebSocket&lt;/code>, &lt;code>Http long polling&lt;/code>, &lt;code>Zookeeper&lt;/code>, &lt;code>Nacos&lt;/code>, &lt;code>Etcd&lt;/code> and &lt;code>Consul&lt;/code>, by setting &lt;code>shenyu.sync.${strategy}&lt;/code> in the configuration file to specify the corresponding synchronization strategy, the default is to use &lt;code>webosocket&lt;/code> synchronization strategy to achieve second-level data synchronization. However, one thing to note is that the &lt;code>Apache ShenYu&lt;/code> gateway and &lt;code>shenyu-admin&lt;/code> must use the same synchronization strategy.&lt;/p>
+&lt;p>As shown in the figure below, &lt;code>shenyu-admin&lt;/code> sends out configuration change notifications through &lt;code>EventPublisher&lt;/code> after a user makes a configuration change, and &lt;code>EventDispatcher&lt;/code> processes the change notification, and then synchronizes the data according to the configured synchronization policy (&lt;code>http, weboscket, zookeeper, naocs, etcd, consul&lt;/code>). etcd, consul`), the configuration is sent to the corresponding event handler.&lt;/p>
+&lt;ul>
+&lt;li>If it is a &lt;code>websocket&lt;/code> synchronization policy, the changed data will be actively pushed to &lt;code>shenyu-web&lt;/code> and there will be a corresponding &lt;code>WebsocketDataHandler&lt;/code> processor at the gateway layer to handle the data push from &lt;code>shenyu-admin&lt;/code>.&lt;/li>
+&lt;li>In case of &lt;code>zookeeper&lt;/code> synchronization policy, the change data will be updated to &lt;code>zookeeper&lt;/code>, and &lt;code>ZookeeperSyncCache&lt;/code> will listen to &lt;code>zookeeper&lt;/code> data changes and process them.&lt;/li>
+&lt;li>In case of &lt;code>http&lt;/code> synchronization policy, the gateway initiates a long polling request with &lt;code>90s&lt;/code> timeout by default, if &lt;code>shenyu-admin&lt;/code> has no data change, it will block the &lt;code>http&lt;/code> request, if there is data change, it will respond with the changed data information, if more than &lt;code>60s&lt;/code> there is still no data change, it will respond with empty data, after the gateway layer receives the response After receiving the response, the gateway layer continues to make &lt;code>http&lt;/code> requests, repeating the same requests.&lt;/li>
+&lt;/ul>
+&lt;h3 id="33-process-analysis">3.3 Process Analysis&lt;/h3>
+&lt;p>The process analysis shows the service registration process, data synchronization process and service invocation process from the source code perspective.&lt;/p>
+&lt;h4 id="331-service-registration-process">3.3.1 Service Registration Process&lt;/h4>
+&lt;ul>
+&lt;li>Reading dubbo services&lt;/li>
+&lt;/ul>
+&lt;p>Use the annotation &lt;code>@ShenyuDubboClient&lt;/code> to mark &lt;code>dubbo&lt;/code> services that need to be registered to the gateway.&lt;/p>
+&lt;p>Annotation scanning is done via the &lt;code>ApacheDubboServiceBeanListener&lt;/code>, which implements the &lt;code>ApplicationListener&amp;lt;ContextRefreshedEvent&amp;gt;&lt;/code> interface and starts executing the event handler method when a context refresh event occurs during the &lt;code>Spring&lt;/code> container startup &lt;code>onApplicationEvent()&lt;/code>. In the rewritten method logic, the &lt;code>Dubbo&lt;/code> service &lt;code>ServiceBean&lt;/code> is read, the metadata object and the &lt;code>URI&lt;/code> object are constructed and registered with &lt;code>shenyu-admin&lt;/code>.&lt;/p>
+&lt;p>The specific registration logic is implemented by the registry, please refer to &lt;a href="https://shenyu.apache.org/docs/design/register-center-design/">Client Access Principles&lt;/a> .&lt;/p>
+&lt;ul>
+&lt;li>Processing registration information&lt;/li>
+&lt;/ul>
+&lt;p>The metadata and &lt;code>URI&lt;/code> data registered by the client through the registration center are processed at the &lt;code>shenyu-admin&lt;/code> end, which is responsible for storing to the database and synchronizing to the &lt;code>shenyu&lt;/code> gateway. The client-side registration processing logic of the &lt;code>Dubbo&lt;/code> plugin is in the &lt;code>ShenyuClientRegisterDubboServiceImpl&lt;/code>. The inheritance relationship is as follows.&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/shenyu-dubbo/ShenyuClientRegisterDubboServiceImpl.png" alt="">&lt;/p>
+&lt;ul>
+&lt;li>ShenyuClientRegisterService: client registration service, top-level interface.&lt;/li>
+&lt;li>FallbackShenyuClientRegisterService: registration failure, provides retry operation.&lt;/li>
+&lt;li>AbstractShenyuClientRegisterServiceImpl: abstract class, implements part of the public registration logic.&lt;/li>
+&lt;li>ShenyuClientRegisterDubboServiceImpl: implements the registration of &lt;code>Dubbo&lt;/code> plug-ins.&lt;/li>
+&lt;/ul>
+&lt;p>Registration information including selectors, rules and metadata.&lt;/p>
+&lt;p>The overall &lt;code>dubbo&lt;/code> service registration process is as follows.&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/shenyu-dubbo/dubbo-register-en.png" alt="">&lt;/p>
+&lt;h4 id="332-data-synchronization-process">3.3.2 Data Synchronization Process&lt;/h4>
+&lt;ul>
+&lt;li>admin update data&lt;/li>
+&lt;/ul>
+&lt;p>Suppose in the backend management system, a new selector data is added, the request goes to the &lt;code>createSelector()&lt;/code> method in the &lt;code>SelectorController&lt;/code> class, which is responsible for verifying the data, adding or updating the data, and returning the result information.&lt;/p>
+&lt;p>In the &lt;code>SelectorServiceImpl&lt;/code> class, the &lt;code>createOrUpdate()&lt;/code> method completes the conversion of the data, saves it to the database, publishes events, and updates the &lt;code>upstream&lt;/code>.&lt;/p>
+&lt;p>Persistence of data is done in the &lt;code>Service&lt;/code> class, i.e. saving data to the database. Publishing the changed data is done by &lt;code>eventPublisher.publishEvent()&lt;/code>, the &lt;code>eventPublisher&lt;/code> object is an &lt;code>ApplicationEventPublisher&lt;/code> class, the fully qualified name of this class is &lt;code>org.springframework. ApplicationEventPublisher&lt;/code>, the function of publishing data is exactly what is done through &lt;code>Spring&lt;/code> related functions.&lt;/p>
+&lt;p>When the event is published, it automatically goes to the &lt;code>onApplicationEvent()&lt;/code> method in the &lt;code>DataChangedEventDispatcher&lt;/code> class, which handles the event according to the different data types and data synchronization methods.&lt;/p>
+&lt;ul>
+&lt;li>Gateway data synchronization&lt;/li>
+&lt;/ul>
+&lt;p>At startup, the gateway loads different configuration classes and initializes data synchronization-related classes according to the specified data synchronization method.&lt;/p>
+&lt;p>After receiving the data, it performs deserialization operation to read the data type and operation type. Different data types have different data processing methods, so there are different implementation classes. But they also have the same processing logic between them, so they can be implemented by template method design pattern. The same logic is put in the &lt;code>handle()&lt;/code> method in the abstract class &lt;code>AbstractDataHandler&lt;/code>, and the different logic is given to the respective implementation classes.&lt;/p>
+&lt;p>Adding a new selector data is a new operation that goes to the &lt;code>SelectorDataHandler.doUpdate()&lt;/code> concrete data processing logic.&lt;/p>
+&lt;p>In the common plugin data subscriber &lt;code>CommonPluginDataSubscriber&lt;/code>, which is responsible for handling all plugin, selector and rule information&lt;/p>
+&lt;p>Saves data to the gateway&amp;rsquo;s memory, &lt;code>BaseDataCache&lt;/code> is the class that ultimately caches the data, implemented through the singleton pattern. The selector data is then stored in &lt;code>SELECTOR_MAP&lt;/code>, a &lt;code>Map&lt;/code>. In the subsequent use, the data is also taken from here.&lt;/p>
+&lt;p>The above logic is represented in a flowchart as follows.&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/shenyu-dubbo/data-sync-seq-en.png" alt="">&lt;/p>
+&lt;h4 id="333-service-invocation-process">3.3.3 Service Invocation Process&lt;/h4>
+&lt;p>In the &lt;code>Dubbo&lt;/code> plugin system, the class extends relationship is as follows.&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/shenyu-dubbo/ApacheDubboPlugin.png" alt="">&lt;/p>
+&lt;blockquote>
+&lt;p>ShenyuPlugin: top-level interface, defining interface methods.&lt;/p>
+&lt;p>AbstractShenyuPlugin: abstract class that implements the common logic of the plugin; &amp;gt; AbstractShenyuPlugin: abstract class that implements the common logic of the plugin.&lt;/p>
+&lt;p>AbstractDubboPlugin: dubbo plug-in abstract class, implementing &lt;code>dubbo&lt;/code> common logic (ShenYu gateway supports ApacheDubbo and AlibabaDubbo).&lt;/p>
+&lt;p>ApacheDubboPlugin: ApacheDubbo plugin.&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>org.apache.shenyu.web.handler.ShenyuWebHandler.DefaultShenyuPluginChain#execute()&lt;/li>
+&lt;/ul>
+&lt;p>After passing the &lt;code>ShenYu&lt;/code> gateway proxy, the request entry is &lt;code>ShenyuWebHandler&lt;/code>, which implements the &lt;code>org.springframework.web.server.WebHandler&lt;/code> interface and connects all plugins through the chain-of-responsibility design pattern.&lt;/p>
+&lt;ul>
+&lt;li>org.apache.shenyu.plugin.base.AbstractShenyuPlugin#execute()&lt;/li>
+&lt;/ul>
+&lt;p>Determining whether a plugin is executed when a request is made to the gateway is done by the specified matching logic. The matching logic for selectors and rules is executed in the &lt;code>execute()&lt;/code> method.&lt;/p>
+&lt;ul>
+&lt;li>org.apache.shenyu.plugin.global.GlobalPlugin#execute()&lt;/li>
+&lt;/ul>
+&lt;p>The first to be executed is the &lt;code>GlobalPlugin&lt;/code> , which is a global plugin that constructs contextual information in the &lt;code>execute()&lt;/code> method.&lt;/p>
+&lt;ul>
+&lt;li>org.apache.shenyu.plugin.base.RpcParamTransformPlugin#execute()&lt;/li>
+&lt;/ul>
+&lt;p>Next to be executed is the &lt;code>RpcParamTransformPlugin&lt;/code>, which is responsible for reading the parameters from the &lt;code>http&lt;/code> request, saving them in the &lt;code>exchange&lt;/code> and passing them to the &lt;code>rpc&lt;/code> service. In the &lt;code>execute()&lt;/code> method, the core logic of the plugin is executed: it gets the request information from &lt;code>exchange&lt;/code> and processes the parameters according to the form of the content passed in the request.&lt;/p>
+&lt;ul>
+&lt;li>org.apache.shenyu.plugin.dubbo.common.AbstractDubboPlugin&lt;/li>
+&lt;/ul>
+&lt;p>Then what gets executed is the &lt;code>DubboPlugin&lt;/code> . In the &lt;code>doExecute()&lt;/code> method, the main focus is on checking metadata and parameters. In the &lt;code>doDubboInvoker()&lt;/code> method, special context information is set and then the generalized invocation of &lt;code>dubbo&lt;/code> is started.&lt;/p>
+&lt;p>In the &lt;code>genericInvoker()&lt;/code> method.&lt;/p>
+&lt;ul>
+&lt;li>Gets the &lt;code>ReferenceConfig&lt;/code> object.&lt;/li>
+&lt;li>obtains the generalization service &lt;code>GenericService&lt;/code> object.&lt;/li>
+&lt;li>Constructs the request parameter &lt;code>pair&lt;/code> object.&lt;/li>
+&lt;li>Initiate an asynchronous generalization invocation.&lt;/li>
+&lt;/ul>
+&lt;p>The generalization call enables you to call the &lt;code>dubbo&lt;/code> service at the gateway.&lt;/p>
+&lt;p>The &lt;code>ReferenceConfig&lt;/code> object is the key object that supports generalization calls, and its initialization is done during data synchronization.&lt;/p>
+&lt;ul>
+&lt;li>org.apache.shenyu.plugin.response.ResponsePlugin#execute()&lt;/li>
+&lt;/ul>
+&lt;p>The last one to be executed is &lt;code>ResponsePlugin&lt;/code>, which unifies the response result messages of the gateway. The processing type is determined by the &lt;code>MessageWriter&lt;/code>, and the class extends relationship is as follows.&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/shenyu-dubbo/MessageWriter.png" alt="">&lt;/p>
+&lt;blockquote>
+&lt;p>MessageWriter: interface that defines message processing methods.&lt;/p>
+&lt;p>NettyClientMessageWriter: Handles the results of &lt;code>Netty&lt;/code> calls.&lt;/p>
+&lt;p>RPCMessageWriter: processing the results of &lt;code>RPC&lt;/code> calls.&lt;/p>
+&lt;p>WebClientMessageWriter: processing the results of &lt;code>WebClient&lt;/code> calls;&lt;/p>
+&lt;/blockquote>
+&lt;p>The &lt;code>Dubbo&lt;/code> service is called and the result of processing is the &lt;code>RPCMessageWriter&lt;/code>.&lt;/p>
+&lt;ul>
+&lt;li>org.apache.shenyu.plugin.response.strategy.RPCMessageWriter#writeWith()&lt;/li>
+&lt;/ul>
+&lt;p>Process the response results in the &lt;code>writeWith()&lt;/code> method, get the results or handle exceptions.&lt;/p>
+&lt;p>At this point in the analysis, the source code analysis of the &lt;code>Dubbo&lt;/code> plugin is complete, and the analysis flowchart is as follows.&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/shenyu-dubbo/dubbo-execute-en.png" alt="">&lt;/p>
+&lt;h2 id="4-summary">4. Summary&lt;/h2>
+&lt;p>This article analyzes the proxy process of &lt;code>ShenYu&lt;/code> gateway to Dubbo service from a practical case. The main knowledge points involved are as follows.&lt;/p>
+&lt;ul>
+&lt;li>Implementing plug-ins through the chain-of-responsibility design pattern.&lt;/li>
+&lt;li>implementing &lt;code>AbstractShenyuPlugin&lt;/code> using the template method design pattern to handle generic operation types.&lt;/li>
+&lt;li>implementation of the cached data class &lt;code>BaseDataCache&lt;/code> using the singleton design pattern.&lt;/li>
+&lt;li>the ability to introduce different registries and number synchronization methods through the &lt;code>springboot starter&lt;/code>, which is very scalable.&lt;/li>
+&lt;li>support for hot updates of rules through &lt;code>admin&lt;/code> to facilitate traffic control.&lt;/li>
+&lt;li>&lt;code>Disruptor&lt;/code> queue is for data and operation decoupling, as well as data buffering.&lt;/li>
+&lt;/ul></description></item><item><title>Blog: Makes it More Convenient for You to Proxy Dubbo Services in Apache APISIX</title><link>https://dubbo.apache.org/en/blog/2022/01/18/makes-it-more-convenient-for-you-to-proxy-dubbo-services-in-apache-apisix/</link><pubDate>Tue, 18 Jan 2022 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/blog/2022/01/18/makes-it-more-convenient-for-you-to-proxy-dubbo-services-in-apache-apisix/</guid><description>
 &lt;h2 id="background">Background&lt;/h2>
 &lt;p>&lt;a href="https://dubbo.apache.org/en/">Apache Dubbo&lt;/a> is a MicroService development framework open sourced by Alibaba and donated to Apache, which provides two key capabilities of RPC communication and microservice governance. It has not only been validated by Ali&amp;rsquo;s massive traffic in e-commerce scenario, but also been widely implemented in domestic technology companies.&lt;/p>
 &lt;p>In practical application scenarios, Apache Dubbo is generally used as the implementation framework for RPC calls between back-end systems, and when HTTP interfaces need to be provided to the front-end, the Dubbo Service is packaged as an HTTP interface through a &amp;ldquo;glue layer&amp;rdquo; and then delivered to the front-end system.&lt;/p>
