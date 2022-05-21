@@ -1,0 +1,140 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – 其他</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/others/</link><description>Recent content in 其他 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/others/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs3-Building: 自定义服务容器</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/others/service-container/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/others/service-container/</guid><description>
+&lt;p>服务容器是一个 standalone 的启动程序，因为后台服务不需要 Tomcat 或 JBoss 等 Web 容器的功能，如果硬要用 Web 容器去加载服务提供方，增加复杂性，也浪费资源。&lt;/p>
+&lt;p>服务容器只是一个简单的 Main 方法，并加载一个简单的 Spring 容器，用于暴露服务。&lt;/p>
+&lt;p>服务容器的加载内容可以扩展，内置了 spring, jetty, log4j 等加载，可通过&lt;a href="../../references/spis/container">容器扩展点&lt;/a>进行扩展。配置配在 java 命令的 -D 参数或者 &lt;code>dubbo.properties&lt;/code> 中。&lt;/p>
+&lt;h2 id="容器类型">容器类型&lt;/h2>
+&lt;h3 id="spring-container">Spring Container&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>自动加载 &lt;code>META-INF/spring&lt;/code> 目录下的所有 Spring 配置。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>配置 spring 配置加载位置：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.spring.config=classpath*:META-INF/spring/*.xml
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;h3 id="jetty-container">Jetty Container&lt;/h3>
+&lt;ul>
+&lt;li>启动一个内嵌 Jetty，用于汇报状态。&lt;/li>
+&lt;li>配置：
+&lt;ul>
+&lt;li>&lt;code>dubbo.jetty.port=8080&lt;/code>：配置 jetty 启动端口&lt;/li>
+&lt;li>&lt;code>dubbo.jetty.directory=/foo/bar&lt;/code>：配置可通过 jetty 直接访问的目录，用于存放静态文件&lt;/li>
+&lt;li>&lt;code>dubbo.jetty.page=log,status,system&lt;/code>：配置显示的页面，缺省加载所有页面&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="log4j-container">Log4j Container&lt;/h3>
+&lt;ul>
+&lt;li>自动配置 log4j 的配置，在多进程启动时，自动给日志文件按进程分目录。&lt;/li>
+&lt;li>配置：
+&lt;ul>
+&lt;li>&lt;code>dubbo.log4j.file=/foo/bar.log&lt;/code>：配置日志文件路径&lt;/li>
+&lt;li>&lt;code>dubbo.log4j.level=WARN&lt;/code>：配置日志级别&lt;/li>
+&lt;li>&lt;code>dubbo.log4j.subdirectory=20880&lt;/code>：配置日志子目录，用于多进程启动，避免冲突&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="容器启动">容器启动&lt;/h2>
+&lt;p>缺省只加载 spring&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>java org.apache.dubbo.container.Main
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>通过 main 函数参数传入要加载的容器&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>java org.apache.dubbo.container.Main spring jetty log4j
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>通过 JVM 启动参数传入要加载的容器&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>java org.apache.dubbo.container.Main -Ddubbo.container&lt;span style="color:#719e07">=&lt;/span>spring,jetty,log4j
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>通过 classpath 下的 &lt;code>dubbo.properties&lt;/code> 配置传入要加载的容器&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.container=spring,jetty,log4j
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-Building: 优雅停机</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/others/graceful-shutdown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/others/graceful-shutdown/</guid><description>
+&lt;p>Dubbo 是通过 JDK 的 ShutdownHook 来完成优雅停机的，所以如果用户使用 &lt;code>kill -9 PID&lt;/code> 等强制关闭指令，是不会执行优雅停机的，只有通过 &lt;code>kill PID&lt;/code> 时，才会执行。&lt;/p>
+&lt;h2 id="原理">原理&lt;/h2>
+&lt;p>服务提供方&lt;/p>
+&lt;ul>
+&lt;li>停止时，先标记为不接收新请求，新请求过来时直接报错，让客户端重试其它机器。&lt;/li>
+&lt;li>然后，检测线程池中的线程是否正在运行，如果有，等待所有线程执行完成，除非超时，则强制关闭。&lt;/li>
+&lt;/ul>
+&lt;p>服务消费方&lt;/p>
+&lt;ul>
+&lt;li>停止时，不再发起新的调用请求，所有新的调用在客户端即报错。&lt;/li>
+&lt;li>然后，检测有没有请求的响应还没有返回，等待响应返回，除非超时，则强制关闭。&lt;/li>
+&lt;/ul>
+&lt;h2 id="设置方式">设置方式&lt;/h2>
+&lt;p>设置优雅停机超时时间，缺省超时时间是 10 秒，如果超时则强制关闭。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># dubbo.properties
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.service.shutdown.wait=15000
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果 ShutdownHook 不能生效，可以自行调用：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>DubboShutdownHook&lt;span style="color:#719e07">.&lt;/span>destroyAll&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
+&lt;div class="alert alert-primary" role="alert">
+&lt;h4 class="alert-heading">建议&lt;/h4>
+使用 tomcat 等容器部署的场景，建议通过扩展 ContextListener 等自行调用以下代码实现优雅停机
+&lt;/div></description></item><item><title>Docs3-Building: 主机地址自定义暴露</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/others/set-host/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/others/set-host/</guid><description>
+&lt;h2 id="背景">背景&lt;/h2>
+&lt;p>在 Dubbo 中， Provider 启动时主要做两个事情，一是启动 server，二是向注册中心注册服务。启动 server 时需要绑定 socket，向注册中心注册服务时也需要发送 socket 唯一标识服务地址。&lt;/p>
+&lt;ol>
+&lt;li>&lt;code>dubbo&lt;/code>中不设置&lt;code>host&lt;/code>时默认&lt;code>host&lt;/code>是什么?&lt;/li>
+&lt;li>那在&lt;code>dubbo&lt;/code>中如何指定服务的&lt;code>host&lt;/code>,我们是否可以用hostname或domain代替IP地址作为&lt;code>host&lt;/code>?&lt;/li>
+&lt;li>在使用docker时,有时需要设置端口映射,此时,启动server时绑定的socket和向注册中心注册的socket使用不同的端口号,此时又该如何设置?&lt;/li>
+&lt;/ol>
+&lt;h4 id="dubbo-中不设置-host-时默认-host-是什么">dubbo 中不设置 host 时默认 host 是什么&lt;/h4>
+&lt;p>一般的 dubbo 协议配置如下:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span> ...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;20890&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ...
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>可以看到,只配置了端口号,没有配置 host，此时设置的 host 又是什么呢?&lt;/p>
+&lt;p>查看代码发现,在 &lt;code>org.apache.dubbo.config.ServiceConfig#findConfigedHosts()&lt;/code> 中,通过 &lt;code>InetAddress.getLocalHost().getHostAddress()&lt;/code> 获取默认 host。其返回值如下：&lt;/p>
+&lt;ol>
+&lt;li>未联网时，返回 127.0.0.1&lt;/li>
+&lt;li>在阿里云服务器中，返回私有地址,如: 172.18.46.234&lt;/li>
+&lt;li>在本机测试时，返回公有地址，如: 30.5.10.11&lt;/li>
+&lt;/ol>
+&lt;h4 id="那在-dubbo-中如何指定服务的-socket">那在 dubbo 中如何指定服务的 socket?&lt;/h4>
+&lt;p>除此之外,可以通过 &lt;code>dubbo.protocol&lt;/code> 或 &lt;code>dubbo.provider &lt;/code>的 &lt;code>host&lt;/code> 属性对 &lt;code>host&lt;/code> 进行配置,支持IP地址和域名,如下:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span> ...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;20890&amp;#34;&lt;/span> host=&lt;span style="color:#2aa198">&amp;#34;www.example.com&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ...
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="在使用-docker-时有时需要设置端口映射此时启动-server-时绑定的-socket-和向注册中心注册的-socket-使用不同的端口号此时又该如何设置">在使用 docker 时，有时需要设置端口映射，此时，启动 server 时绑定的 socket 和向注册中心注册的 socket 使用不同的端口号，此时又该如何设置？&lt;/h4>
+&lt;p>见 &lt;a href="https://github.com/dubbo/dubbo-samples/tree/master/dubbo-samples-docker">dubbo 通过环境变量设置 host&lt;/a>&lt;/p>
+&lt;p>有些部署场景需要动态指定服务注册的地址，如 docker bridge 网络模式下要指定注册宿主机 ip 以实现外网通信。dubbo 提供了两对启动阶段的系统属性，用于设置对外通信的ip、port地址。&lt;/p>
+&lt;ul>
+&lt;li>DUBBO_IP_TO_REGISTRY &amp;mdash; 注册到注册中心的ip地址&lt;/li>
+&lt;li>DUBBO_PORT_TO_REGISTRY &amp;mdash; 注册到注册中心的port端口&lt;/li>
+&lt;li>DUBBO_IP_TO_BIND &amp;mdash; 监听ip地址&lt;/li>
+&lt;li>DUBBO_PORT_TO_BIND &amp;mdash; 监听port端口&lt;/li>
+&lt;/ul>
+&lt;p>以上四个配置项均为可选项，如不配置 dubbo 会自动获取 ip 与端口，请根据具体的部署场景灵活选择配置。
+dubbo 支持多协议，如果一个应用同时暴露多个不同协议服务，且需要为每个服务单独指定 ip 或 port，请分别在以上属性前加协议前缀。 如：&lt;/p>
+&lt;ul>
+&lt;li>HESSIAN_DUBBO_PORT_TO_BIND hessian协议绑定的port&lt;/li>
+&lt;li>DUBBO_DUBBO_PORT_TO_BIND dubbo协议绑定的port&lt;/li>
+&lt;li>HESSIAN_DUBBO_IP_TO_REGISTRY hessian协议注册的ip&lt;/li>
+&lt;li>DUBBO_DUBBO_PORT_TO_BIND dubbo协议注册的ip&lt;/li>
+&lt;/ul>
+&lt;p>PORT_TO_REGISTRY 或 IP_TO_REGISTRY 不会用作默认 PORT_TO_BIND 或 IP_TO_BIND，但是反过来是成立的
+如设置 PORT_TO_REGISTRY=20881 IP_TO_REGISTRY=30.5.97.6，则 PORT_TO_BIND IP_TO_BIND 不受影响
+如果设置 PORT_TO_BIND=20881 IP_TO_BIND=30.5.97.6，则默认 PORT_TO_REGISTRY=20881 IP_TO_REGISTRY=30.5.97.6&lt;/p>
+&lt;h2 id="总结">总结&lt;/h2>
+&lt;ol>
+&lt;li>可以通过&lt;code>dubbo.protocol&lt;/code>或&lt;code>dubbo.provider&lt;/code>的&lt;code>host&lt;/code>属性对&lt;code>host&lt;/code>进行配置,支持IP地址和域名.但此时注册到注册中心的IP地址和监听IP地址是同一个值&lt;/li>
+&lt;li>为了解决在虚拟环境或局域网内consumer无法与provider通信的问题,可以通过环境变量分别设置注册到注册中心的IP地址和监听IP地址,其优先级高于&lt;code>dubbo.protocol&lt;/code>或&lt;code>dubbo.provider&lt;/code>的&lt;code>host&lt;/code>配置&lt;/li>
+&lt;/ol>
+&lt;h2 id="参考">参考&lt;/h2>
+&lt;ol>
+&lt;li>&lt;a href="https://github.com/apache/dubbo/issues/2043">Proposal: support hostname or domain in service discovery.&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/dubbo/dubbo-samples/tree/master/dubbo-samples-docker">dubbo通过环境变量设置host&lt;/a>&lt;/li>
+&lt;/ol></description></item><item><title>Docs3-Building: 日志框架适配</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/others/logger-strategy/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/others/logger-strategy/</guid><description>
+&lt;p>自 &lt;code>2.2.1&lt;/code> 开始，dubbo 开始内置 log4j、slf4j、jcl、jdk 这些日志框架的适配[1]，也可以通过以下方式显式配置日志输出策略：&lt;/p>
+&lt;ol start="0">
+&lt;li>
+&lt;p>命令行&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span> java -Ddubbo.application.logger&lt;span style="color:#719e07">=&lt;/span>log4j
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>在 &lt;code>dubbo.properties&lt;/code> 中指定&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span> dubbo.application.logger=log4j
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>在 &lt;code>dubbo.xml&lt;/code> 中配置&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:application&lt;/span> logger=&lt;span style="color:#2aa198">&amp;#34;log4j&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;p>[1]: 自定义扩展可以参考 &lt;a href="../../../dev/impls/logger-adapter">日志适配扩展&lt;/a>&lt;/p></description></item><item><title>Docs3-Building: Kubernetes 生命周期探针</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/others/lifecycle/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/others/lifecycle/</guid><description/></item></channel></rss>

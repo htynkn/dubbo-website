@@ -1,0 +1,61 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – Redis</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/registry/redis/</link><description>Recent content in Redis on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/registry/redis/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs3-Building: 概述</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/registry/redis/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/registry/redis/overview/</guid><description/></item><item><title>Docs3-Building: 使用说明</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/registry/redis/guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/registry/redis/guide/</guid><description>
+&lt;p>基于 Redis &lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup> 实现的注册中心。&lt;/p>
+&lt;div class="alert alert-primary" role="alert">
+&lt;h4 class="alert-heading">提示&lt;/h4>
+&lt;p>从 &lt;code>2.1.0&lt;/code> 版本开始支持。&lt;/p>
+&lt;p>Redis 过期数据通过心跳的方式检测脏数据，服务器时间必须同步，并且对服务器有一定压力，否则过期检测会不准确&lt;/p>
+&lt;/div>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/dubbo-redis-registry.jpg" alt="/user-guide/images/dubbo-redis-registry.jpg">&lt;/p>
+&lt;p>使用 Redis 的 Key/Map 结构存储数据结构：&lt;/p>
+&lt;ul>
+&lt;li>主 Key 为服务名和类型&lt;/li>
+&lt;li>Map 中的 Key 为 URL 地址&lt;/li>
+&lt;li>Map 中的 Value 为过期时间，用于判断脏数据，脏数据由监控中心删除 [^3]&lt;/li>
+&lt;/ul>
+&lt;p>使用 Redis 的 Publish/Subscribe 事件通知数据变更：&lt;/p>
+&lt;ul>
+&lt;li>通过事件的值区分事件类型：&lt;code>register&lt;/code>, &lt;code>unregister&lt;/code>, &lt;code>subscribe&lt;/code>, &lt;code>unsubscribe&lt;/code>&lt;/li>
+&lt;li>普通消费者直接订阅指定服务提供者的 Key，只会收到指定服务的 &lt;code>register&lt;/code>, &lt;code>unregister&lt;/code> 事件&lt;/li>
+&lt;li>监控中心通过 &lt;code>psubscribe&lt;/code> 功能订阅 &lt;code>/dubbo/*&lt;/code>，会收到所有服务的所有变更事件&lt;/li>
+&lt;/ul>
+&lt;p>调用过程：&lt;/p>
+&lt;ol start="0">
+&lt;li>服务提供方启动时，向 &lt;code>Key:/dubbo/com.foo.BarService/providers&lt;/code> 下，添加当前提供者的地址&lt;/li>
+&lt;li>并向 &lt;code>Channel:/dubbo/com.foo.BarService/providers&lt;/code> 发送 &lt;code>register&lt;/code> 事件&lt;/li>
+&lt;li>服务消费方启动时，从 &lt;code>Channel:/dubbo/com.foo.BarService/providers&lt;/code> 订阅 &lt;code>register&lt;/code> 和 &lt;code>unregister&lt;/code> 事件&lt;/li>
+&lt;li>并向 &lt;code>Key:/dubbo/com.foo.BarService/consumers&lt;/code> 下，添加当前消费者的地址&lt;/li>
+&lt;li>服务消费方收到 &lt;code>register&lt;/code> 和 &lt;code>unregister&lt;/code> 事件后，从 &lt;code>Key:/dubbo/com.foo.BarService/providers&lt;/code> 下获取提供者地址列表&lt;/li>
+&lt;li>服务监控中心启动时，从 &lt;code>Channel:/dubbo/*&lt;/code> 订阅 &lt;code>register&lt;/code> 和 &lt;code>unregister&lt;/code>，以及 &lt;code>subscribe&lt;/code> 和&lt;code>unsubsribe &lt;/code>事件&lt;/li>
+&lt;li>服务监控中心收到 &lt;code>register&lt;/code> 和 &lt;code>unregister&lt;/code> 事件后，从 &lt;code>Key:/dubbo/com.foo.BarService/providers&lt;/code> 下获取提供者地址列表&lt;/li>
+&lt;li>服务监控中心收到 &lt;code>subscribe&lt;/code> 和 &lt;code>unsubsribe&lt;/code> 事件后，从 &lt;code>Key:/dubbo/com.foo.BarService/consumers&lt;/code> 下获取消费者地址列表&lt;/li>
+&lt;/ol>
+&lt;h2 id="配置">配置&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;redis://10.20.153.10:6379&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;redis://10.20.153.10:6379?backup=10.20.153.11:6379,10.20.153.12:6379&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;redis&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.153.10:6379&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;redis&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.153.10:6379,10.20.153.11:6379,10.20.153.12:6379&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="选项">选项&lt;/h2>
+&lt;ul>
+&lt;li>可通过 &lt;code>&amp;lt;dubbo:registry group=&amp;quot;dubbo&amp;quot; /&amp;gt;&lt;/code> 设置 redis 中 key 的前缀，缺省为 &lt;code>dubbo&lt;/code>。&lt;/li>
+&lt;li>可通过 &lt;code>&amp;lt;dubbo:registry cluster=&amp;quot;replicate&amp;quot; /&amp;gt;&lt;/code> 设置 redis 集群策略，缺省为 &lt;code>failover&lt;/code>：
+&lt;ul>
+&lt;li>&lt;code>failover&lt;/code>: 只写入和读取任意一台，失败时重试另一台，需要服务器端自行配置数据同步&lt;/li>
+&lt;li>&lt;code>replicate&lt;/code>: 在客户端同时写入所有服务器，只读取单台，服务器端不需要同步，注册中心集群增大，性能压力也会更大&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="可靠性声明">可靠性声明&lt;/h2>
+&lt;p>阿里内部并没有采用 Redis 做为注册中心，而是使用自己实现的基于数据库的注册中心，即：Redis 注册中心并没有在阿里内部长时间运行的可靠性保障，此 Redis 桥接实现只为开源版本提供，其可靠性依赖于 Redis 本身的可靠性。&lt;/p>
+&lt;h2 id="安装">安装&lt;/h2>
+&lt;p>安装方式参见: &lt;a href="../../../admin/install/redis.md">Redis安装手册&lt;/a>，只需搭一个原生的 Redis 服务器，并将 &lt;a href="../../preface/usage.md">Quick Start&lt;/a> 中 Provider 和 Consumer 里的 &lt;code>conf/dubbo.properties&lt;/code> 中的 &lt;code>dubbo.registry.address&lt;/code> 的值改为 &lt;code>redis://127.0.0.1:6379&lt;/code> 即可使用。&lt;/p>
+&lt;div class="footnotes" role="doc-endnotes">
+&lt;hr>
+&lt;ol>
+&lt;li id="fn:1">
+&lt;p>&lt;a href="http://redis.io">Redis&lt;/a> 是一个高效的 KV 存储服务器&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/div></description></item></channel></rss>

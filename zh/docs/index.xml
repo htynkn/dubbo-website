@@ -1,4 +1,41 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – 文档</title><link>https://dubbo.apache.org/zh/docs/</link><description>Recent content in 文档 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Docsv2.7: Dubbo SPI</title><link>https://dubbo.apache.org/zh/docsv2.7/dev/source/dubbo-spi/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/dev/source/dubbo-spi/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – 文档</title><link>https://dubbo.apache.org/zh/docs/</link><description>Recent content in 文档 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs3-Building: 2.x升级至3.x操作指南</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/upgrades-and-compatibility/2.x-to-3.x-compatibility-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/upgrades-and-compatibility/2.x-to-3.x-compatibility-guide/</guid><description>
+&lt;p>&lt;strong>无需改动任何代码，直接升级到 Dubbo 3.0。&lt;/strong>&lt;/p>
+&lt;p>在 3.0 版本的设计与开发之初，我们就定下了兼容老版本 Dubbo 用户（2.5、2.6、2.7）的目标。因此，往 3.0 版本的升级过程将会是完全透明的，用户无需做任何业务改造，升级 3.x 后的框架行为将保持与 2.x 版本完全一致。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.dubbo&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>3.0.0&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>但也要注意，透明升级仅仅是通往 3.0 的第一步，因为 &amp;ldquo;框架行为保持一致&amp;rdquo; 也就意味着用户将无法体验到 3.0 的新特性。&lt;strong>如果要启用 3.0 的带来的新特性，用户则需要进行一定的改造，我们称这个过程为迁移，这是一个按需开启的过程。&lt;/strong>&lt;/p>
+&lt;p>因此，对老用户而言，有两条不同的迁移路径：&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>分两步走，先以兼容模式推动业务升级到 3.0 版本（无需改造），之后在某些时机按需启用新特性（按需改造）；&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>升级与迁移同步完成，在业务升级到 3.0 版本的同时，完成改造并启用新特性；&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;p>Dubbo 3.0 提供的新特性包括：&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>新的地址发现模型（应用级服务发现）。&lt;/strong>
+&lt;ul>
+&lt;li>查看&lt;a href="../migration-service-discovery">应用级服务发现的迁移步骤&lt;/a>&lt;/li>
+&lt;li>查看&lt;a href="">应用级服务发现的使用方式&lt;/a>&lt;/li>
+&lt;li>查看&lt;a href="">应用级服务发现设计与实现&lt;/a>。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>下一代基于 HTTP/2 的 Triple 协议。&lt;/strong>
+&lt;ul>
+&lt;li>查看&lt;a href="../migration-triple">Triple 协议迁移步骤&lt;/a>&lt;/li>
+&lt;li>查看 &lt;a href="../../references/protocols/tri">Triple 协议使用方式&lt;/a>&lt;/li>
+&lt;li>查看 Triple 协议设计与实现。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>统一的路由规则。&lt;/strong>
+&lt;ul>
+&lt;li>查看&lt;a href="../migration-routingrule">统一路由规则的迁移步骤&lt;/a>&lt;/li>
+&lt;li>查看&lt;a href="../../references/routerule">统一路由规则使用方式&lt;/a>&lt;/li>
+&lt;li>查看统一路由规则设计与实现&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item><item><title>Docsv2.7: Dubbo SPI</title><link>https://dubbo.apache.org/zh/docsv2.7/dev/source/dubbo-spi/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/dev/source/dubbo-spi/</guid><description>
 &lt;h2 id="1简介">1.简介&lt;/h2>
 &lt;p>SPI 全称为 Service Provider Interface，是一种服务发现机制。SPI 的本质是将接口实现类的全限定名配置在文件中，并由服务加载器读取配置文件，加载实现类。这样可以在运行时，动态为接口替换实现类。正因此特性，我们可以很容易的通过 SPI 机制为我们的程序提供拓展功能。SPI 机制在第三方框架中也有所应用，比如 Dubbo 就是通过 SPI 机制加载所有的组件。不过，Dubbo 并未使用 Java 原生的 SPI 机制，而是对其进行了增强，使其能够更好的满足需求。在 Dubbo 中，SPI 是一个非常重要的模块。基于 SPI，我们可以很容易的对 Dubbo 进行拓展。如果大家想要学习 Dubbo 的源码，SPI 机制务必弄懂。接下来，我们先来了解一下 Java SPI 与 Dubbo SPI 的用法，然后再来分析 Dubbo SPI 的源码。&lt;/p>
 &lt;p>需要特别说明的是，本篇文章以及本系列其他文章所分析的源码版本均为 &lt;strong>dubbo-2.6.4&lt;/strong>。因此大家在阅读文章的过程中，需注意将代码版本切换到 dubbo-2.6.4 tag 上。&lt;/p>
@@ -5230,7 +5267,7 @@
 &lt;td>2.0.8以上版本&lt;/td>
 &lt;/tr>
 &lt;/tbody>
-&lt;/table></description></item><item><title>Docs: Nacos 注册中心</title><link>https://dubbo.apache.org/zh/docs/references/registry/nacos/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/references/registry/nacos/</guid><description>
+&lt;/table></description></item><item><title>Docs3-Building: Java SDK</title><link>https://dubbo.apache.org/zh/docs3-building/docs/mannual/java/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/docs/mannual/java/</guid><description/></item><item><title>Docs: Nacos 注册中心</title><link>https://dubbo.apache.org/zh/docs/references/registry/nacos/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/references/registry/nacos/</guid><description>
 &lt;p>Nacos 是 Dubbo 生态系统中重要的注册中心实现，其中 &lt;a href="https://github.com/apache/incubator-dubbo/tree/master/dubbo-registry/dubbo-registry-nacos">&lt;code>dubbo-registry-nacos&lt;/code>&lt;/a> 则是 Dubbo 融合 Nacos 注册中心的实现。&lt;/p>
 &lt;h2 id="预备工作">预备工作&lt;/h2>
 &lt;p>当您将 &lt;a href="https://github.com/apache/incubator-dubbo/tree/master/dubbo-registry/dubbo-registry-nacos">dubbo-registry-nacos&lt;/a> 整合到您的 Dubbo 工程之前，请确保后台已经启动 Nacos 服务。如果您尚且不熟悉 Nacos 的基本使用的话，可先行参考 &lt;a href="https://nacos.io/en-us/docs/quick-start.html">Nacos 快速入门&lt;/a>。建议使用 Nacos &lt;code>1.0.0&lt;/code> 及以上的版本。&lt;/p>
@@ -5577,7 +5614,35 @@ consumer端同样执行编译，在consumer的target下也会生成二进制文�
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>以正常方式启动，在项目的resources下建立文件夹META-INF.native-image，把在本地目录中生成的文件粘进去：&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo3.0-graalvm-support/resources.jpg" alt="">
 （可能会有缺漏没有生成的类信息，需要根据编译或运行时的报错信息手动添加。）&lt;/p>
-&lt;p>&lt;strong>完成以上几步后就可以进行项目的编译了。&lt;/strong>&lt;/p></description></item><item><title>Docsv2.7: XML 配置</title><link>https://dubbo.apache.org/zh/docsv2.7/user/configuration/xml/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/user/configuration/xml/</guid><description>
+&lt;p>&lt;strong>完成以上几步后就可以进行项目的编译了。&lt;/strong>&lt;/p></description></item><item><title>Docs3-Building: QOS 概述</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/qos/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/qos/overview/</guid><description/></item><item><title>Docs3-Building: TLS支持</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/security/tls/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/security/tls/</guid><description>
+&lt;p>2.7.5 版本在传输链路的安全性上做了很多工作，对于内置的 Dubbo Netty Server 和新引入的 gRPC 协议都提供了基于 TLS 的安全链路传输机制。&lt;/p>
+&lt;p>TLS 的配置都有统一的入口，如下所示：&lt;/p>
+&lt;h5 id="provider-端">Provider 端&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>SslConfig sslConfig &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> SslConfig&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sslConfig&lt;span style="color:#719e07">.&lt;/span>setServerKeyCertChainPath&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;path to cert&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sslConfig&lt;span style="color:#719e07">.&lt;/span>setServerPrivateKeyPath&lt;span style="color:#719e07">(&lt;/span>args&lt;span style="color:#719e07">[&lt;/span>1&lt;span style="color:#719e07">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// 如果开启双向 cert 认证
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>mutualTls&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sslConfig&lt;span style="color:#719e07">.&lt;/span>setServerTrustCertCollectionPath&lt;span style="color:#719e07">(&lt;/span>args&lt;span style="color:#719e07">[&lt;/span>2&lt;span style="color:#719e07">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ProtocolConfig protocolConfig &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ProtocolConfig&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;dubbo/grpc&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>protocolConfig&lt;span style="color:#719e07">.&lt;/span>setSslEnabled&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#cb4b16">true&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="consumer-端">Consumer 端&lt;/h5>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(!&lt;/span>mutualTls&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sslConfig&lt;span style="color:#719e07">.&lt;/span>setClientTrustCertCollectionPath&lt;span style="color:#719e07">(&lt;/span>args&lt;span style="color:#719e07">[&lt;/span>0&lt;span style="color:#719e07">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">else&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sslConfig&lt;span style="color:#719e07">.&lt;/span>setClientTrustCertCollectionPath&lt;span style="color:#719e07">(&lt;/span>args&lt;span style="color:#719e07">[&lt;/span>0&lt;span style="color:#719e07">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sslConfig&lt;span style="color:#719e07">.&lt;/span>setClientKeyCertChainPath&lt;span style="color:#719e07">(&lt;/span>args&lt;span style="color:#719e07">[&lt;/span>1&lt;span style="color:#719e07">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sslConfig&lt;span style="color:#719e07">.&lt;/span>setClientPrivateKeyPath&lt;span style="color:#719e07">(&lt;/span>args&lt;span style="color:#719e07">[&lt;/span>2&lt;span style="color:#719e07">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>为尽可能保证应用启动的灵活性，TLS Cert 的指定还能通过 -D 参数或环境变量等方式来在启动阶段根据部署环境动态指定，具体请参见 Dubbo 配置读取规则与 TLS 示例&lt;/p>
+&lt;div class="alert alert-primary" role="alert">
+&lt;h4 class="alert-heading">提示&lt;/h4>
+&lt;p>参考 Dubbo &lt;a href="../../configuration/configuration-load-process">配置读取规则&lt;/a>，TLS &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-ssl">示例&lt;/a>&lt;/p>
+&lt;p>如果要使用的是 gRPC 协议，在开启 TLS 时会使用到协议协商机制，因此必须使用支持 ALPN 机制的 Provider，推荐使用的是 netty-tcnative，具体可参见 gRPC Java 社区的&lt;a href="https://github.com/grpc/grpc-java/blob/master/SECURITY.md">总结&lt;/a>&lt;/p>
+&lt;/div>
+&lt;p>在服务调用的安全性上，Dubbo 在后续的版本中会持续投入，其中服务发现/调用的鉴权机制预计在接下来的版本中就会和大家见面。&lt;/p></description></item><item><title>Docsv2.7: XML 配置</title><link>https://dubbo.apache.org/zh/docsv2.7/user/configuration/xml/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/user/configuration/xml/</guid><description>
 &lt;p>有关 XML 的详细配置项，请参见：&lt;a href="../../references/xml">配置参考手册&lt;/a>。如果不想使用 Spring 配置，而希望通过 API 的方式进行调用，请参见：&lt;a href="../api">API配置&lt;/a>。想知道如何使用配置，请参见：&lt;a href="../../quick-start">快速启动&lt;/a>。&lt;/p>
 &lt;p>请在此查看文档描述的&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-basic">完整示例&lt;/a>&lt;/p>
 &lt;h2 id="providerxml-示例">provider.xml 示例&lt;/h2>
@@ -5894,7 +5959,57 @@ consumer端同样执行编译，在consumer的target下也会生成二进制文�
 &lt;p>建议使用 &lt;code>2.3.3&lt;/code> 以上版本的 zookeeper 注册中心客户端&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/div></description></item><item><title>Docsv2.7: 背景</title><link>https://dubbo.apache.org/zh/docsv2.7/user/preface/background/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/user/preface/background/</guid><description>
+&lt;/div></description></item><item><title>Users: 阿里巴巴</title><link>https://dubbo.apache.org/zh/users/alibaba/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/users/alibaba/</guid><description/></item><item><title>Docs3-Building: 背景</title><link>https://dubbo.apache.org/zh/docs3-building/docs/whatsnew/background/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/docs/whatsnew/background/</guid><description>
+&lt;p>Dubbo3 的设计与开发有两个大的背景。&lt;/p>
+&lt;p>&lt;strong>首先，如何更好的满足企业实践诉求。&lt;/strong> Dubbo 自 2011 由阿里巴巴捐献开源以来，一直是众多大型企业微服务实践的首选开源服务框架。在此期间，企业架构经历了从 SOA 架构到微服务架构变迁，Dubbo 社区自身也在不断的更新迭代以更好的满足企业诉求。然而 Dubbo2 架构上的局限逐渐在实践中凸显：1.协议，Dubbo2 协议以性能、简洁著称，但却在云原生时代遇到越来越多的通用性、穿透性问题；2.可伸缩性，Dubbo2 在可伸缩性上依旧远超很多其他框架，但随着微服务带来更多应用与实例我们不得不思考如何应对更大规模集群的实战；3.服务治理易用性，如更丰富的流量治理、可观测性、智能负载均衡等。&lt;/p>
+&lt;p>&lt;strong>其次，适配云原生技术栈的发展。&lt;/strong> 微服务让业务开发演进更灵活、快捷的同时，也带来了一些它独有的特征和需求：如微服务之后组件数量越来越多，如何解决各个组件的稳定性，如何快速的水平扩容等，以 Docker、Kubernetes、Service Mesh 为代表的云原生基础设施为解决这些问题带来了一些新的选择。随着更多的微服务组件及能力正下沉到以 Kubernetes 为代表的基础设施层，传统微服务开发框架应剔除一些冗余机制，积极的适配到基础设施层以做到能力复用，微服务框架生命周期、服务治理等能力应更好地与 Kubernetes 服务编排机制融合； 以 Service Mesh 为代表微服务架构给微服务开发带来的新的选择，Sidecar 给多语言、透明升级、流量管控等带来的优势，但同时也带来运维复杂性、性能损耗等弊端，因此基于服务框架的传统微服务体系还将是主流，长期仍将占据半壁江山，在长时间内将会维持混合部署将会维持混合部署状态。&lt;/p>
+&lt;h3 id="总体目标">总体目标&lt;/h3>
+&lt;p>Dubbo3 依旧保持了 2.x 的经典架构，以解决微服务进程间通信为主要职责，通过丰富的服务治理（如地址发现、流量管理等）能力来更好的管控微服务集群；Dubbo3 对原有框架的升级是全面的，体现在核心 Dubbo 特性的几乎每个环节，通过升级实现了稳定性、性能、伸缩性、易用性的全面提升。&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/concepts/architecture-1.png" alt="architecture-1">&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>通用的通信协议。&lt;/strong> 全新的 RPC 协议应摒弃私有协议栈，以更通用的 HTTP/2 协议为传输层载体，借助 HTTP 协议的标准化特性，解决流量通用性、穿透性等问题，让协议能更好的应对前后端对接、网关代理等场景；支持 Stream 通信模式，满足不同业务通信模型诉求的同时给集群带来更大的吞吐量。&lt;/li>
+&lt;li>&lt;strong>面向百万集群实例，集群高度可伸缩。&lt;/strong> 随着微服务实践的推广，微服务集群实例的规模也在不停的扩展，这得益于微服务轻量化、易于水平扩容的特性，同时也给整个集群容量带来了负担，尤其是一些中心化的服务治理组件；Dubbo3 需要解决实例规模扩展带来的种种资源瓶颈问题，实现真正的无限水平扩容。&lt;/li>
+&lt;li>&lt;strong>更丰富的编程模型，更小的业务侵入。&lt;/strong> 在开发态业务应用面向 Dubbo SDK 编程，在运行态 SDK 与业务应用运行在同一个进程，SDK 的易用性、稳定性与资源消耗将在很大程度上影响业务应用；因此 3.0 应该具备更抽象的 API、更友好的配置模式、更少的侵占业务应用资源、具备更高的可用性。&lt;/li>
+&lt;li>&lt;strong>更易用、更丰富的服务治理能力。&lt;/strong> 微服务的动态特性给治理工作带来了很高的复杂性，而 Dubbo 这方面一直做的不错，是最早的一批治理能力定义者与实践者；3.0 需面向更丰富的场景化，提供诸如可观测性、安全性、灰度发布、错误注入、外部化配置、统一的治理规则等能力。&lt;/li>
+&lt;li>&lt;strong>全面拥抱云原生。&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;h3 id="面向企业生产实践痛点">面向企业生产实践痛点&lt;/h3>
+&lt;p>Dubbo2 仍旧是国内首选开源服务框架，被广泛应用在互联网、金融保险、软件企业、传统企业等几乎所有数字化转型企业中，久经规模化生产环境检验。以 Dubbo2 的贡献者和典型用户阿里巴巴为例，阿里巴巴基于 Dubbo2 在内部维护的 HSF2 框架经历了历次双十一峰值考验，每天数十亿次的 RPC 调用，治理着超过千万的服务实例。在长期的优化和实践积累中，阿里巴巴有了对下一代服务框架的设想与方案，在内部开始了快速演进，并快速的被贡献到 Apache 社区，如同阿里巴巴一样，其他用户的实践诉求与痛点也在开源社区快速的积累，形成了一致的方向和技术方案，可以说 Dubbo3 的诞生就来自于超大基数的企业用户积累，为了更好的满足他们的实践诉求。&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/concepts/dubbo-hsf.png" alt="dubbo3-hsf">&lt;/p>
+&lt;p>Dubbo3 融合了阿里巴巴 HSF2 及其他社区企业的大量服务治理经验，当前 Dubbo3 已经被全面应用到生产实践环境，用户包括阿里巴巴电商、饿了么、钉钉、考拉、阿里云、小米、工商银行、风火递、平安健康等。社区与用户的合作形成的良性循环极大的促进了 Dubbo3 的发展，阿里巴巴已经以社区版 Dubbo3 完全取代了内部维护的 HSF2 框架，他们的实践经验一方面推动 Dubbo3 的稳定性，另一方面正够源源不断的将服务治理实践经验输出到开源社区。&lt;/p>
+&lt;h3 id="面向百万集群实例横向可扩容">面向百万集群实例，横向可扩容&lt;/h3>
+&lt;p>随着微服务实践经验的积累，微服务被拆分成更细粒度，部署到越来越多的机器实例，以支撑不断增长的业务规模。在众多的 Dubbo2 企业用户中，尤其是以金融保险、互联网为代表的规模化企业开始遇到集群容量瓶颈问题（典型的请参照&lt;a href="">工商银行实践案例&lt;/a>）：&lt;/p>
+&lt;ul>
+&lt;li>服务发现过程
+&lt;ul>
+&lt;li>注册中心数据存储规模达到容量瓶颈&lt;/li>
+&lt;li>数据注册&amp;amp;推送效率严重下降&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Dubbo 进程
+&lt;ul>
+&lt;li>侵占更多机器资源，导致业务资源利用率降低&lt;/li>
+&lt;li>频繁 GC 影响业务稳定性&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>Dubbo3 在设计上很好的解决了这些问题，通过全新设计实现的服务治理（服务发现）模型，可以实现服务发现链路上的数据传输、数据存储量平均下降 90% 左右；同时 Dubbo3 自身在业务进程中变得更轻量、更稳定，实现提升资源利用率 50%。&lt;/p>
+&lt;p>Dubbo3 一个更大的优势在于其对整体架构稳定性的提升，新的服务发现架构使得对于整个集群容量、可伸缩性评估变得更容易、更准确。&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/concepts/capacity.png" alt="capacity">&lt;/p>
+&lt;p>如果将应用开发粗略划分为业务开发、运维部署两个层次，其中变化比较频繁的因素包括服务（接口）、应用、机器实例。在 2.x 时代，所有这三个因素的增长都会影响微服务集群的总体容量，尤其是接口增减带来的波动，对整体容量评估是非常不透明的。而在 3.0 中集群容量变化仅与应用名、机器实例两个因素相关，而我们容量评估的对象往往都是应用与实例，因此整个集群集群变的更稳定透明。&lt;/p>
+&lt;h3 id="云原生">云原生&lt;/h3>
+&lt;p>在云原生时代，底层基础设施的变革正深刻影响应用的部署、运维甚至开发过程，往上也影响了 Dubbo3 微服务技术方案的选型与部署模式。&lt;/p>
+&lt;h4 id="下一待-rpc-协议">下一待 RPC 协议&lt;/h4>
+&lt;p>新一代的 Triple 协议基于 HTTP/2 作为传输层，具备更好的网关、代理穿透性，原生支持 Stream 通信语义，兼容 gRPC 协议。&lt;/p>
+&lt;h4 id="多语言友好">多语言友好&lt;/h4>
+&lt;p>Dubbo3 从服务定义、RPC 协议、序列化、服务治理等多个方面都已经将多语言友好性作为重点考量因素，目前提供了 Java、Golang 稳定的多语言版本，更多语言版本的 3.0 实现如 Rust、Javascript、C/C++、C# 等在开发建设中。&lt;/p>
+&lt;h4 id="kubernetes">Kubernetes&lt;/h4>
+&lt;p>Dubbo3 开发的应用可以原生部署到 Kubernetes 平台，Dubbo3 在地址、生命周期等已设计可与 Kubernetes 等容器调度平台对齐；对于要进一步复用 Kubernetes 底层基础设施能力的用户来说，Dubbo3 也已对接到了原生的 Kubernetes Service 体系。&lt;/p>
+&lt;h4 id="serivice-mesh">Serivice Mesh&lt;/h4>
+&lt;p>Service Mesh 强调控制面在微服务治理中的作用，在一定程度上推动了控制面通信协议、职责范围的扩展与标准化；传统 Mesh 架构下的 Sidecar 模型强调旁路代理对于流量的统一管控，以实现透明升级、多语言无感、无业务侵入等特性。&lt;/p>
+&lt;p>Dubbo3 提供了基于自身思考的 Dubbo Mesh 解决方案，强调了控制面对微服务集群的统一管控，而在部署架构上，同时支持 sicecar 与无 sidecar 的 proxyless 部署架构，使用 Dubbo Mesh 的用户基于自身的业务特点将有更多的部署架构选择。&lt;/p>
+&lt;h4 id="异构体系互通">异构体系互通&lt;/h4>
+&lt;p>我们正看到越来越多的异构微服务体系互通的诉求，典型如 Dubbo、Spring Cloud、gRPC 等。有些是因为技术栈迁移，有些是组织合并后需要实现业务互调，Dubbo3 借助于新的服务发现模型以及可灵活扩展的 RPC 协议，可以成为&lt;/p></description></item><item><title>Docsv2.7: 背景</title><link>https://dubbo.apache.org/zh/docsv2.7/user/preface/background/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/user/preface/background/</guid><description>
 &lt;p>随着互联网的发展，网站应用的规模不断扩大，常规的垂直应用架构已无法应对，分布式服务架构以及流动计算架构势在必行，亟需一个治理系统确保架构有条不紊的演进。&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/dubbo-architecture-roadmap.jpg" alt="image">&lt;/p>
 &lt;h4 id="单一应用架构">单一应用架构&lt;/h4>
@@ -5911,7 +6026,39 @@ consumer端同样执行编译，在consumer的target下也会生成二进制文�
 &lt;p>当您不熟悉ASF使用的开源的开发过程时，有时难以理解的一点，就是我们更重视社区而不是代码。一个强大而健康的社区将受到尊重，成为一个有趣和有益的地方。更重要的是，一个多元化和健康的社区可以长时间的持续支持代码，即使个别公司在这个领域来来往往，也是如此。&lt;/p>
 &lt;p>更多详细信息可以在&lt;a href="https://community.apache.org/contributors/">这里&lt;/a>找到。&lt;/p>
 &lt;h3 id="我可以贡献什么">我可以贡献什么？&lt;/h3>
-&lt;p>请参阅&lt;a href="https://dubbo.apache.org/zh/docs/contribution-guidelines/contributor/new-contributor-guide_dev">新的贡献者指南&lt;/a>。&lt;/p></description></item><item><title>Docs: 服务发现</title><link>https://dubbo.apache.org/zh/docs/concepts/service-discovery/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/concepts/service-discovery/</guid><description>
+&lt;p>请参阅&lt;a href="https://dubbo.apache.org/zh/docs/contribution-guidelines/contributor/new-contributor-guide_dev">新的贡献者指南&lt;/a>。&lt;/p></description></item><item><title>Docs3-Building: 分组聚合</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/rpc/group-merger/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/rpc/group-merger/</guid><description>
+&lt;p>通过分组对结果进行聚合并返回聚合后的结果，比如菜单服务，用group区分同一接口的多种实现，现在消费方需从每种group中调用一次并返回结果，对结果进行合并之后返回，这样就可以实现聚合菜单项。&lt;/p>
+&lt;p>相关代码可以参考 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-merge">dubbo 项目中的示例&lt;/a>&lt;/p>
+&lt;h2 id="配置">配置&lt;/h2>
+&lt;p>搜索所有分组&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.xxx.MenuService&amp;#34;&lt;/span> group=&lt;span style="color:#2aa198">&amp;#34;*&amp;#34;&lt;/span> merger=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>合并指定分组&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.xxx.MenuService&amp;#34;&lt;/span> group=&lt;span style="color:#2aa198">&amp;#34;aaa,bbb&amp;#34;&lt;/span> merger=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>指定方法合并结果，其它未指定的方法，将只调用一个 Group&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.xxx.MenuService&amp;#34;&lt;/span> group=&lt;span style="color:#2aa198">&amp;#34;*&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:method&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;getMenuItems&amp;#34;&lt;/span> merger=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dubbo:reference&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>某个方法不合并结果，其它都合并结果&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.xxx.MenuService&amp;#34;&lt;/span> group=&lt;span style="color:#2aa198">&amp;#34;*&amp;#34;&lt;/span> merger=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:method&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;getMenuItems&amp;#34;&lt;/span> merger=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dubbo:reference&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>指定合并策略，缺省根据返回值类型自动匹配，如果同一类型有两个合并器时，需指定合并器的名称&lt;/p>
+&lt;div class="alert alert-primary" role="alert">
+&lt;h4 class="alert-heading">提示&lt;/h4>
+参见：&lt;a href="../../../dev/impls/merger">合并结果扩展&lt;/a>
+&lt;/div>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.xxx.MenuService&amp;#34;&lt;/span> group=&lt;span style="color:#2aa198">&amp;#34;*&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:method&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;getMenuItems&amp;#34;&lt;/span> merger=&lt;span style="color:#2aa198">&amp;#34;mymerge&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dubbo:reference&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>指定合并方法，将调用返回结果的指定方法进行合并，合并方法的参数类型必须是返回结果类型本身&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.xxx.MenuService&amp;#34;&lt;/span> group=&lt;span style="color:#2aa198">&amp;#34;*&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:method&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;getMenuItems&amp;#34;&lt;/span> merger=&lt;span style="color:#2aa198">&amp;#34;.addAll&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dubbo:reference&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
+&lt;div class="alert alert-primary" role="alert">
+&lt;h4 class="alert-heading">提示&lt;/h4>
+从 &lt;code>2.1.0&lt;/code> 版本开始支持
+&lt;/div></description></item><item><title>Docs3-Building: 服务端线程模型</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/performance/threading-model/provider/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/performance/threading-model/provider/</guid><description/></item><item><title>Docs: 服务发现</title><link>https://dubbo.apache.org/zh/docs/concepts/service-discovery/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/concepts/service-discovery/</guid><description>
 &lt;p>服务发现，即消费端自动发现服务地址列表的能力，是微服务框架需要具备的关键能力，借助于自动化的服务发现，微服务之间可以在无需感知对端部署位置与 IP 地址的情况下实现通信。&lt;/p>
 &lt;p>实现服务发现的方式有很多种，Dubbo 提供的是一种 Client-Based 的服务发现机制，通常还需要部署额外的第三方注册中心组件来协调服务发现过程，如常用的 Nacos、Consul、Zookeeper 等，Dubbo 自身也提供了对多种注册中心组件的对接，用户可以灵活选择。&lt;/p>
 &lt;p>Dubbo 基于消费端的自动服务发现能力，其基本工作原理如下图：&lt;/p>
@@ -5959,7 +6106,29 @@ Dubbo3 特有的业务接口同步机制，是 Dubbo3 需要保留的优势，�
 对于 Dubbo3 来说，新的注册发现模型只需要 1 个服务（只和应用有关和接口无关）， 只注册和机器实例数相等的 1 * 100 = 100 个虚拟节点到注册中心。
 在这个简单的示例中，Dubbo 所注册的地址数量下降到了原来的 1 / 100，对于注册中心、订阅方的存储压力都是一个极大的释放。更重要的是，
 地址发现容量彻底与业务 RPC 定义解耦开来，整个集群的容量评估对运维来说将变得更加透明：部署多少台机器就会有多大负载，不会像 Dubbo2 一样，
-因为业务 RPC 重构就会影响到整个集群服务发现的稳定性。&lt;/p></description></item><item><title>Docsv2.7: 服务路由</title><link>https://dubbo.apache.org/zh/docsv2.7/dev/source/router/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/dev/source/router/</guid><description>
+因为业务 RPC 重构就会影响到整个集群服务发现的稳定性。&lt;/p></description></item><item><title>Docs3-Building: 服务分版本</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/service/multi-versions/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/service/multi-versions/</guid><description>
+&lt;p>当一个接口实现，出现不兼容升级时，可以用版本号过渡，版本号不同的服务相互间不引用。&lt;/p>
+&lt;p>可以按照以下的步骤进行版本迁移：&lt;/p>
+&lt;ol>
+&lt;li>在低压力时间段，先升级一半提供者为新版本&lt;/li>
+&lt;li>再将所有消费者升级为新版本&lt;/li>
+&lt;li>然后将剩下的一半提供者升级为新版本&lt;/li>
+&lt;/ol>
+&lt;p>老版本服务提供者配置：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> version=&lt;span style="color:#2aa198">&amp;#34;1.0.0&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>新版本服务提供者配置：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> version=&lt;span style="color:#2aa198">&amp;#34;2.0.0&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>老版本服务消费者配置：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;barService&amp;#34;&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> version=&lt;span style="color:#2aa198">&amp;#34;1.0.0&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>新版本服务消费者配置：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;barService&amp;#34;&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> version=&lt;span style="color:#2aa198">&amp;#34;2.0.0&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果不需要区分版本，可以按照以下的方式配置 [^1]：&lt;/p>
+&lt;div class="alert alert-primary" role="alert">
+&lt;h4 class="alert-heading">提示&lt;/h4>
+&lt;code>2.2.0&lt;/code> 以上版本支持
+&lt;/div>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;barService&amp;#34;&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> version=&lt;span style="color:#2aa198">&amp;#34;*&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docsv2.7: 服务路由</title><link>https://dubbo.apache.org/zh/docsv2.7/dev/source/router/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/dev/source/router/</guid><description>
 &lt;h2 id="1-简介">1. 简介&lt;/h2>
 &lt;p>上一篇文章分析了集群容错的第一部分 — 服务目录 Directory。服务目录在刷新 Invoker 列表的过程中，会通过 Router 进行服务路由，筛选出符合路由规则的服务提供者。在详细分析服务路由的源码之前，先来介绍一下服务路由是什么。服务路由包含一条路由规则，路由规则决定了服务消费者的调用目标，即规定了服务消费者可调用哪些服务提供者。Dubbo 目前提供了三种服务路由实现，分别为条件路由 ConditionRouter、脚本路由 ScriptRouter 和标签路由 TagRouter。其中条件路由是我们最常使用的，标签路由是一个新的实现，暂时还未发布，该实现预计会在 2.7.x 版本中发布。本篇文章将分析条件路由相关源码，脚本路由和标签路由这里就不分析了。&lt;/p>
 &lt;h2 id="2-源码分析">2. 源码分析&lt;/h2>
@@ -6376,668 +6545,4 @@ Dubbo3 特有的业务接口同步机制，是 Dubbo3 需要保留的优势，�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>以上就是 isMatchGlobPattern 两个重载方法的全部逻辑，这两个方法分别对普通的匹配过程，以及”引用消费者参数“和通配符匹配等特性提供了支持。这两个方法的逻辑不是很复杂，且代码中也进行了比较详细的注释，因此就不多说了。&lt;/p>
 &lt;h2 id="3-总结">3. 总结&lt;/h2>
-&lt;p>本篇文章对条件路由的表达式解析和服务路由过程进行了较为细致的分析。总的来说，条件路由的代码还是有一些复杂的，需要静下心来看。在阅读条件路由代码的过程中，要多调试。一般的框架都会有单元测试，Dubbo 也不例外，因此大家可以直接通过 ConditionRouterTest 对条件路由进行调试，无需重头构建测试用例。&lt;/p></description></item><item><title>Docsv2.7: 管理控制台安装</title><link>https://dubbo.apache.org/zh/docsv2.7/admin/install/admin-console/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/admin/install/admin-console/</guid><description>
-&lt;p>目前版本的管理控制台正在开发中，已经完成了服务查询和服务治理的功能，采用前后端分离的模式，具体的安装和使用步骤如下：&lt;/p>
-&lt;p>安装:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>git clone https://github.com/apache/dubbo-admin.git /var/tmp/dubbo-admin
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#b58900">cd&lt;/span> /var/tmp/dubbo-admin
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn clean package
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>配置 &lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>配置文件为：
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo-admin-server/src/main/resources/application.properties
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>主要的配置有：
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>admin.registry.address&lt;span style="color:#719e07">=&lt;/span>zookeeper://127.0.0.1:2181
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>admin.config-center&lt;span style="color:#719e07">=&lt;/span>zookeeper://127.0.0.1:2181
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>admin.metadata-report.address&lt;span style="color:#719e07">=&lt;/span>zookeeper://127.0.0.1:2181
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>mvn --projects dubbo-admin-server spring-boot:run
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>其他配置请访问 github 中的文档:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>https://github.com/apache/dubbo-admin
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>访问:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>http://127.0.0.1:8080
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="footnotes" role="doc-endnotes">
-&lt;hr>
-&lt;ol>
-&lt;li id="fn:1">
-&lt;p>当前版本中未实现登录功能，会在后续版本加上&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
-&lt;/li>
-&lt;/ol>
-&lt;/div></description></item><item><title>Docsv2.7: 管理控制台运维</title><link>https://dubbo.apache.org/zh/docsv2.7/admin/ops/functions/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/admin/ops/functions/</guid><description>
-&lt;h2 id="搜索页面">搜索页面&lt;/h2>
-&lt;p>当你需要管理 Dubbo 的服务时，首先要搜索到这个服务，然后打开它的管理页面&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/admin/dubbo-search.jpg" alt="/admin-guide/images/dubbo-search.png">&lt;/p>
-&lt;h2 id="服务提供者页面">服务提供者页面&lt;/h2>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/admin/dubbo-providers.jpg" alt="/admin-guide/images/dubbo-providers.png">&lt;/p>
-&lt;h2 id="服务消费者页面">服务消费者页面&lt;/h2>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/admin/dubbo-consumers.jpg" alt="/admin-guide/images/dubbo-consumers.png">&lt;/p>
-&lt;h2 id="添加路由规则页面">添加路由规则页面&lt;/h2>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/admin/dubbo-add-route.jpg" alt="/admin-guide/images/dubbo-add-route.png">&lt;/p>
-&lt;h2 id="添加动态配置页面">添加动态配置页面&lt;/h2>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/admin/dubbo-add-config.jpg" alt="/admin-guide/images/dubbo-add-config.png">&lt;/p></description></item><item><title>Docs: 基准测试</title><link>https://dubbo.apache.org/zh/docs/performance/benchmarking/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/performance/benchmarking/</guid><description>
-&lt;h2 id="1-benchmark-结论">1 Benchmark 结论&lt;/h2>
-&lt;p>对比 2.x 版本，Dubbo3 版本&lt;/p>
-&lt;ul>
-&lt;li>服务发现资源利用率显著提升。
-&lt;ul>
-&lt;li>对比接口级服务发现，单机常驻内存下降 50%，地址变更期 GC 消耗下降一个数量级 (百次 -&amp;gt; 十次)&lt;/li>
-&lt;li>对比应用级服务发现，单机常驻内存下降 75%，GC 次数趋零&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>Dubbo 协议性能持平，Triple 协议在网关、Stream吞吐量方面更具优势。
-&lt;ul>
-&lt;li>Dubbo协议 （3.0 vs 2.x），3.0 实现较 2.x 总体 qps rt 持平，略有提升&lt;/li>
-&lt;li>Triple协议 vs Dubbo协议，直连调用场景 Triple 性能并无优势，其优势在网关、Stream调用场景。&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;p>以下是详细压测过程与数据&lt;/p>
-&lt;h2 id="2-应用级服务发现地址推送链路">2 应用级服务发现（地址推送链路）&lt;/h2>
-&lt;p>此部分压测数据是由工商银行 Dubbo 团队基于内部生产数据给出，压测过程模拟了“生产环境地址+zookeeper”的服务发现架构。&lt;/p>
-&lt;h3 id="21-环境">2.1 环境&lt;/h3>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>&lt;/th>
-&lt;th>描述&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>&lt;strong>压测数据&lt;/strong>&lt;/td>
-&lt;td>提供者&lt;br/>500运行实例✖️8interface✖️5protocol，即每个提供者向注册中心注册40个URL，总计20000个URL，每个URL字符长度约1k。&lt;br/>&lt;br/>注册中心&lt;br/>2个独立zookeeper注册中心，服务提供者消费者采用并行配置。&lt;br/>&lt;br/>消费者&lt;br/>配置1c2g，xmx=768，开启GC，从2个注册中心订阅，每5秒调用一次服务。运行20小时。&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>&lt;strong>压测环境&lt;/strong>&lt;/td>
-&lt;td>Java version &amp;ldquo;1.8.0&amp;rdquo;&lt;br/>Java(TM) SE Runtime Enviroment (build pxa6480sr3fp12-20160919_01(SR3 FP12))&lt;br/>IBM J9 VM (Build 2.8, JRE 1.8.0 Linux amd64-64 Compressed References 20160915_318796, JIT enabled, AOT enabled)&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h3 id="22-数据分析">2.2 数据分析&lt;/h3>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/performance/registry-mem.svg" alt="//imgs/v3/performance/registry-mem.svg">&lt;/p>
-&lt;p>&lt;br />图一 服务发现模型内存占用变化&lt;br />&lt;br />&lt;/p>
-&lt;ul>
-&lt;li>Dubbo3 接口级服务发现模型，常驻内存较 2.x 版本下降约 50%&lt;/li>
-&lt;li>Dubbo3 应用级服务发现模型，常驻内存较 2.x 版本下降约 75%&lt;/li>
-&lt;/ul>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/performance/registry-gc.svg" alt="//imgs/v3/performance/registry-gc.svg">&lt;/p>
-&lt;p>&lt;br />图二 服务发现模型 GC 变化&lt;br />&lt;br />&lt;/p>
-&lt;ul>
-&lt;li>Dubbo3 接口级服务发现模型，YGC 次数 2.x 版本大幅下降，从数百次下降到十几次&lt;/li>
-&lt;li>Dubbo3 应用级服务发现模型，FGC 次数 2.x 版本大幅下降，从数百次下降到零次&lt;/li>
-&lt;/ul>
-&lt;h2 id="3-rpc-协议远程调用链路">3 RPC 协议（远程调用链路）&lt;/h2>
-&lt;ul>
-&lt;li>Dubbo3 的 _Dubbo协议 _实现与 Dubbo2 版本在性能上基本持平。&lt;/li>
-&lt;li>由于 Triple协议 本身是基于 HTTP/2 构建，因此在单条链路上的 RPC 调用并未比基于 TCP 的 Dubbo2 有提升，反而在某些调用场景出现一定下降。但 _Triple协议 _更大的优势在于网关穿透性、通用性，以及 Stream 通信模型带来的总体吞吐量提升。&lt;/li>
-&lt;li>Triple 预期在网关代理场景下一定会有更好的性能表现，鉴于当前压测环境，本轮 benchmark 暂未提供。&lt;/li>
-&lt;/ul>
-&lt;h3 id="31-环境">3.1 环境&lt;/h3>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>&lt;/th>
-&lt;th>描述&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>&lt;strong>机器&lt;/strong>&lt;/td>
-&lt;td>4C8G Linux JDK 1.8（Provider）4C8G Linux JDK 1.8 （Consumer）&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>&lt;strong>压测用例&lt;/strong>&lt;/td>
-&lt;td>RPC 方法类型包括：无参无返回值、普通pojo返回值、pojo列表返回值&lt;br />&lt;br />2.7 版本 Dubbo 协议（Hessian2 序列化）&lt;br />3.0 版本 Dubbo 协议（Hessian2 序列化）&lt;br />3.0 版本 Dubbo 协议（Protobuf 序列化）&lt;br />3.0 版本 Triple 协议（Protobuf 序列化）&lt;br />3.0 版本 Triple 协议（Protobuf 套 Hessian2 序列化）&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>&lt;strong>压测方法&lt;/strong>&lt;/td>
-&lt;td>单链接场景下，消费端起 32 并发线程（当前机器配置 qps rt 较均衡的并发数），持续压后采集压测数据&lt;br /> 压测数据通过 &lt;a href="https://github.com/apache/dubbo-benchmark">https://github.com/apache/dubbo-benchmark&lt;/a> 得出&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;br />
-&lt;h3 id="32-数据分析">3.2 数据分析&lt;/h3>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>&lt;/th>
-&lt;th>&lt;strong>Dubbo + Hessian2&lt;br />2.7&lt;/strong>&lt;/th>
-&lt;th>&lt;strong>Dubbo + Hessian2&lt;br />3.0&lt;/strong>&lt;/th>
-&lt;th>&lt;strong>Dubbo + Protobuf&lt;br />3.0&lt;/strong>&lt;/th>
-&lt;th>&lt;strong>Triple + Protobuf&lt;br />3.0&lt;/strong>&lt;/th>
-&lt;th>&lt;strong>Triple + Protobuf(Hessian)&lt;br />3.0&lt;/strong>&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>&lt;strong>无参方法&lt;/strong>&lt;/td>
-&lt;td>30333 ops/s&lt;br />2.5ms P99&lt;/td>
-&lt;td>30414 ops/s&lt;br />2.4ms P99&lt;/td>
-&lt;td>24123 ops/s&lt;br />3.2ms P99&lt;/td>
-&lt;td>7016 ops/s&lt;br />8.7ms P99&lt;/td>
-&lt;td>6635 ops/s&lt;br />9.1ms P99&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>&lt;strong>pojo返回值&lt;/strong>&lt;/td>
-&lt;td>8984 ops/s&lt;br />6.1 ms P99&lt;/td>
-&lt;td>12279 ops/s&lt;br />5.7 ms P99&lt;/td>
-&lt;td>21479 ops/s&lt;br />3.0 ms P99&lt;/td>
-&lt;td>6255 ops/s&lt;br />8.9 ms P99&lt;/td>
-&lt;td>6491 ops/s&lt;br />10 ms P99&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>&lt;strong>pojo列表返回值&lt;/strong>&lt;/td>
-&lt;td>1916 ops/s&lt;br />34 ms P99&lt;/td>
-&lt;td>2037 ops/s&lt;br />34 ms P99&lt;/td>
-&lt;td>12722 ops/s&lt;br />7.7 ms P99&lt;/td>
-&lt;td>6920 ops/s&lt;br />9.6 ms P99&lt;/td>
-&lt;td>2833 ops/s&lt;br />27 ms P99&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h4 id="321-dubbo-协议不同版本实现对比">3.2.1 Dubbo 协议不同版本实现对比&lt;/h4>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/performance/rpc-dubbo.svg" alt="//imgs/v3/performance/rpc-dubbo.svg">&lt;/p>
-&lt;p>&lt;br />图三 Dubbo协议在不同版本的实现对比&lt;br />&lt;/p>
-&lt;ul>
-&lt;li>就 Dubbo RPC + Hessian 的默认组合来说，Dubbo3 与 Dubbo2 在性能上在不同调用场景下基本持平&lt;/li>
-&lt;/ul>
-&lt;h4 id="322-dubbo协议-vs-triple协议">3.2.2 Dubbo协议 vs Triple协议&lt;/h4>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/performance/rpc-triple.svg" alt="//imgs/v3/performance/rpc-triple.svg">&lt;/p>
-&lt;p>&lt;br />图四 Triple vs Dubbo&lt;br />&lt;/p>
-&lt;ul>
-&lt;li>单纯看 Consumer &amp;lt;-&amp;gt; Provider 的点对点调用，可以看出 Triple 协议本身并不占优势，同样使用 Protobuf 序列化方式，Dubbo RPC 协议总体性能还是要优于 Triple。&lt;br />&lt;br />&lt;/li>
-&lt;li>Triple 实现在 3.0 版本中将会得到持续优化，但不能完全改变在某些场景下“基于 HTTP/2 的 RPC 协议”对比“基于 TCP 的 RPC 协议”处于劣势的局面&lt;/li>
-&lt;/ul>
-&lt;h4 id="323-补充网关场景">3.2.3 补充网关场景&lt;/h4>
-&lt;p>TBD&lt;br />&lt;br />&lt;/p>
-&lt;h4 id="334-模拟-stream-通信场景的吞吐量提升">3.3.4 模拟 Stream 通信场景的吞吐量提升&lt;/h4>
-&lt;p>TBD&lt;/p></description></item><item><title>Docs: Dubbo3 简介</title><link>https://dubbo.apache.org/zh/docs/introduction/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/introduction/</guid><description>
-&lt;p>Apache Dubbo 是一款微服务开发框架，它提供了 RPC通信 与 微服务治理 两大关键能力。这意味着，使用 Dubbo 开发的微服务，将具备相互之间的远程发现与通信能力，
-同时利用 Dubbo 提供的丰富服务治理能力，可以实现诸如服务发现、负载均衡、流量调度等服务治理诉求。同时 Dubbo 是高度可扩展的，用户几乎可以在任意功能点去定制自己的实现，以改变框架的默认行为来满足自己的业务需求。&lt;/p>
-&lt;p>Dubbo3 基于 Dubbo2 演进而来，在保持原有核心功能特性的同时， Dubbo3 在易用性、超大规模微服务实践、云原生基础设施适配、安全设计等几大方向上进行了全面升级。
-以下文档都将基于 Dubbo3 展开。&lt;/p>
-&lt;h2 id="what-dubbo3-is">What Dubbo3 is&lt;/h2>
-&lt;p>如开篇所述，Dubbo 提供了构建云原生微服务业务的一站式解决方案，可以使用 Dubbo 快速定义并发布微服务组件，同时基于 Dubbo 开箱即用的丰富特性及超强的扩展能力，构建运维整个微服务体系所需的各项服务治理能力，如 Tracing、Transaction 等，Dubbo 提供的基础能力包括：&lt;/p>
-&lt;ul>
-&lt;li>服务发现&lt;/li>
-&lt;li>流式通信&lt;/li>
-&lt;li>负载均衡&lt;/li>
-&lt;li>流量治理&lt;/li>
-&lt;li>&amp;hellip;..&lt;/li>
-&lt;/ul>
-&lt;p>Dubbo 计划提供丰富的多语言客户端实现，其中 Java、Golang 版本是当前稳定性、活跃度最好的版本，其他多语言客户端[]正在持续建设中。&lt;/p>
-&lt;p>自开源以来，Dubbo 就被一众大规模互联网、IT公司选型，经过多年企业实践积累了大量经验。Dubbo3 是站在巨人肩膀上的下一代产品，它汲取了上一代的优点并针对已知问题做了大量优化，因此，Dubbo 在解决业务落地与规模化实践方面有着无可比拟的优势：&lt;/p>
-&lt;ul>
-&lt;li>开箱即用
-&lt;ul>
-&lt;li>易用性高，如 Java 版本的面向接口代理特性能实现本地透明调用&lt;/li>
-&lt;li>功能丰富，基于原生库或轻量扩展即可实现绝大多数的微服务治理能力&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>超大规模微服务集群实践
-&lt;ul>
-&lt;li>高性能的跨进程通信协议&lt;/li>
-&lt;li>地址发现、流量治理层面，轻松支持百万规模集群实例&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>企业级微服务治理能力
-&lt;ul>
-&lt;li>服务测试&lt;/li>
-&lt;li>服务Mock&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;p>Dubbo3 是在云原生背景下诞生的，使用 Dubbo 构建的微服务遵循云原生思想，能更好的复用底层云原生基础设施、贴合云原生微服务架构。这体现在：&lt;/p>
-&lt;ul>
-&lt;li>服务支持部署在容器、Kubernetes平台，服务生命周期可实现与平台调度周期对齐；&lt;/li>
-&lt;li>支持经典 Service Mesh 微服务架构，引入了 Proxyless Mesh 架构，进一步简化 Mesh 的落地与迁移成本，提供更灵活的选择；&lt;/li>
-&lt;li>作为桥接层，支持与 SpringCloud、gRPC 等异构微服务体系的互调互通&lt;/li>
-&lt;/ul>
-&lt;h2 id="一站式微服务解决方案">一站式微服务解决方案&lt;/h2>
-&lt;p>Dubbo 提供了从服务定义、服务发现、服务通信到流量管控等几乎所有的服务治理能力，并且尝试从使用上对用户屏蔽底层细节，以提供更好的易用性。&lt;/p>
-&lt;p>定义服务在 Dubbo 中非常简单与直观，可以选择使用与某种语言绑定的方式（如 Java 中可直接定义 Interface），也可以使用 Protobuf IDL 语言中立的方式。无论选择哪种方式，站在服务消费方的视角，都可以通过 Dubbo 提供的透明代理直接编码。&lt;/p>
-&lt;blockquote>
-&lt;p>需要注意的是，在 Dubbo 中，我们提到服务时，通常是指 RPC 粒度的、提供某个具体业务增删改功能的接口或方法，与一些微服务概念书籍中泛指的服务并不是一个概念。&lt;/p>
-&lt;/blockquote>
-&lt;p>点对点的服务通信是 Dubbo 提供的另一项基本能力，Dubbo 以 RPC 的方式将请求数据（Request）发送给后端服务，并接收服务端返回的计算结果（Response）。RPC 通信对用户来说是完全透明的，使用者无需关心请求是如何发出去的、发到了哪里，每次调用只需要拿到正确的调用结果就行。同步的 Request-Response 是默认的通信模型，它最简单但却不能覆盖所有的场景，因此，Dubbo 提供更丰富的通信模型：&lt;/p>
-&lt;ul>
-&lt;li>消费端异步请求(Client Side Asynchronous Request-Response)&lt;/li>
-&lt;li>提供端异步执行（Server Side Asynchronous Request-Response）&lt;/li>
-&lt;li>消费端请求流（Request Streaming）&lt;/li>
-&lt;li>提供端响应流（Response Streaming）&lt;/li>
-&lt;li>双向流式通信（Bidirectional Streaming）&lt;/li>
-&lt;/ul>
-&lt;p>Dubbo 的服务发现机制，让微服务组件之间可以独立演进并任意部署，消费端可以在无需感知对端部署位置与 IP 地址的情况下完成通信。Dubbo 提供的是 Client-Based 的服务发现机制，使用者可以有多种方式启用服务发现：&lt;/p>
-&lt;ul>
-&lt;li>使用独立的注册中心组件，如 Nacos、Zookeeper、Consul、Etcd 等。&lt;/li>
-&lt;li>将服务的组织与注册交给底层容器平台，如 Kubernetes，这被理解是一种更云原生的方式&lt;/li>
-&lt;/ul>
-&lt;p>透明地址发现让 Dubbo 请求可以被发送到任意 IP 实例上，这个过程中流量被随机分配。当需要对流量进行更丰富、更细粒度的管控时，就可以用到 Dubbo 的流量管控策略，Dubbo 提供了包括负载均衡、流量路由、请求超时、流量降级、重试等策略，基于这些基础能力可以轻松的实现更多场景化的路由方案，包括金丝雀发布、A/B测试、权重路由、同区域优先等，更酷的是，Dubbo 支持流控策略在运行态动态生效，无需重新部署。&lt;/p>
-&lt;p>Dubbo 强大的服务治理能力不仅体现在核心框架上，还包括其优秀的扩展能力以及周边配套设施的支持。通过 Filter、Router、Protocol 等几乎存在于每一个关键流程上的扩展点定义，我们可以丰富 Dubbo 的功能或实现与其他微服务配套系统的对接，包括 Transaction、Tracing 目前都有通过 SPI 扩展的实现方案，具体可以参见 Dubbo 扩展性的详情，也可以在 &lt;a href="https://github.com/apache/dubbo-spi-extensions">apache/dubbo-spi-extensions&lt;/a> 项目中发现与更多的扩展实现。&lt;/p>
-&lt;h2 id="大规模企业微服务实践沉淀">大规模企业微服务实践沉淀&lt;/h2>
-&lt;p>Dubbo 最早诞生于阿里巴巴，随后加入 Apache 软件基金会，项目从设计之初就是为了解决企业的服务化问题，因此充分考虑了大规模集群场景下的服务开发与治理问题，如易用性、性能、流量管理、集群可伸缩性等。在 Dubbo 开源的将近 10 年时间内，Dubbo 几乎成为了国内微服务框架选型的首选框架，尤其受到大规模互联网、IT企业的认可，可以说作为开源服务框架，Dubbo 在支持微服务集群方面有着非常大的规模与非常久的实践经验积累，是最具有企业规模化微服务实践话语权的框架之一。采用 Dubbo 的企业涵盖互联网、传统IT、金融、生产制造业多个领域，一些典型用户包括阿里巴巴、携程、工商银行、中国人寿、海尔、金蝶等。&lt;/p>
-&lt;p>在企业大规模实践的过程中，Dubbo 的稳定性得到了验证，服务治理的易用性与丰富度也在不断提升，而也就是在这样的背景下催生了下一代的产品 - Dubbo3。Dubbo3 的整个设计与开发过程，始终有来自社区团队与众多企业用户的共同参与，因此 Dubbo3 的许多核心架构与功能都充分考虑了大规模微服务实践诉求。阿里巴巴是参与在 Dubbo3 中的核心力量之一，作为企业用户其主导了该版本许多核心功能的设计与开发，阿里巴巴把 Dubbo3 社区版本确定为其未来内部主推的服务框架，并选择将内部 HSF 通过 Dubbo3 的形式贡献到开源社区，在阿里巴巴内部，众多业务线包括电商系统的考拉、交易平台，以及饿了么、钉钉等都已经成功迁移到 Dubbo3 版本。同样全程参与在 Dubbo3 开发与验证试点过程中的企业用户包括工商银行、携程、斗鱼、小米等。&lt;/p>
-&lt;p>Dubbo 的大规模实践经验主要体现在：&lt;/p>
-&lt;ul>
-&lt;li>高性能通信&lt;/li>
-&lt;li>高可扩展性&lt;/li>
-&lt;li>超大规模集群实例水平扩展&lt;/li>
-&lt;li>丰富的服务治理能力&lt;/li>
-&lt;/ul>
-&lt;p>关于 Dubbo 调用性能、支持超大规模集群地址方面的评测数据，将在随后发布，敬请期待。&lt;/p>
-&lt;h2 id="云原生友好">云原生友好&lt;/h2>
-&lt;p>Dubbo 从设计上是完全遵循云原生微服务开发理念的，这体现在多个方面，首先是对云原生基础设施与部署架构的支持，包括 Kubernetes、Service Mesh 等，另一方面，Dubbo 众多核心组件都已面向云原生升级，包括 Triple 协议、统一路由规则、对多语言支持。值得一提的是，如何使用 Dubbo 支持弹性伸缩的服务如 Serverless 也在未来计划之中，这包括利用 Native Image 提高 Dubbo 的启动速度与资源消耗等。&lt;/p>
-&lt;p>结合当前版本，本节主要从以下两点展开 Dubbo 的云原生特性&lt;/p>
-&lt;ul>
-&lt;li>容器调度平台（Kubernetes）&lt;/li>
-&lt;li>Service Mesh&lt;/li>
-&lt;/ul>
-&lt;h3 id="kubernetes">Kubernetes&lt;/h3>
-&lt;p>Dubbo 微服务要支持 Kubernetes 平台调度，最基础的就是实现 dubbo 服务生命周期与容器生命周期的对齐，这包括 Dubbo 的启动、销毁、服务注册等生命周期事件。相比于以往 Dubbo 自行定义生命周期事件，并要求开发人员在运维实践过程中遵守约定，Kubernetes 底层基础设施定义了严格的组件生命周期事件(probe)，转而要求 Dubbo 去按约定适配。&lt;/p>
-&lt;p>Kubernetes Service 是另一个层面的适配，这体现了服务定义与注册向云原生底层基础设施下沉的趋势。在这种模式下，用户不再需要搭建额外的注册中心组件，Dubbo 消费端节点能自动对接到 Kubernetes（API-Server 或 DNS），根据服务名（Kubernetes Service Name） 查询到实例列表（Kubernetes endpoints）。 此时服务是通过标准的 Kubernetes Service API 定义，并被调度到各个节点。&lt;/p>
-&lt;h3 id="service-mesh">Service Mesh&lt;/h3>
-&lt;p>Service Mesh 在业界得到了广泛的传播与认可，并被认为是下一代的微服务架构，这主要是因为它解决了很多棘手的问题，包括透明升级、多语言、依赖冲突、流量治理等。Service Mesh 的典型架构是通过部署独立的 Sidecar 组件来拦截所有的出口与入口流量，并在 Sidecar 中集成丰富的流量治理策略如负载均衡、路由等，除此之外，Service Mesh 还需要一个控制面（Control Panel）来实现对 Sidecar 流量的管控，即各种策略下发。我们在这里称这种架构为经典 Mesh。&lt;/p>
-&lt;p>然而任何技术架构都不是完美的，经典 Mesh 在实施层面也面临成本过高的问题&lt;/p>
-&lt;ol>
-&lt;li>需要运维控制面（Control Panel）&lt;/li>
-&lt;li>需要运维 Sidecar&lt;/li>
-&lt;li>需要考虑如何从原有 SDK 迁移到 Sidecar&lt;/li>
-&lt;li>需要考虑引入 Sidecar 后整个链路的性能损耗&lt;/li>
-&lt;/ol>
-&lt;p>为了解决 Sidecar 引入的相关成本问题，Dubbo 引入了另一种变相的 Mesh 架构 - Proxyless Mesh，顾名思义，Proxyless Mesh 就是指没有 Sidecar 的部署，转而由 Dubbo SDK 直接与控制面交互，其架构图如下&lt;/p>
-&lt;p>可以设想，在不同的组织、不同的发展阶段，未来以 Dubbo 构建的微服务将会允许有三种部署架构：传统 SDK、基于 Sidecar 的 Service Mesh、脱离 Sidecar 的 Proxyless Mesh。基于 Sidecar 的 Service Mesh，即经典的 Mesh 架构，独立的 sidecar 运行时接管所有的流量，脱离 Sidecar 的 Proxyless Mesh，富 SDK 直接通过 xDS 与控制面通信。Dubbo 微服务允许部署在物理机、容器、Kubernetes 平台之上，能做到以 Admin 为控制面，以统一的流量治理规则进行治理。&lt;/p>
-&lt;h2 id="了解更多">了解更多&lt;/h2>
-&lt;p>&lt;a href="../new-in-dubbo3">What&amp;rsquo;s New in Dubbo3&lt;/a>&lt;/p>
-&lt;p>&lt;a href="../quick-start">体验 Dubbo3&lt;/a>&lt;/p>
-&lt;p>&lt;a href="../migration">迁移到 Dubbo3&lt;/a>&lt;/p></description></item><item><title>Docs: 快速开始</title><link>https://dubbo.apache.org/zh/docs/languages/erlang/quick-start/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/languages/erlang/quick-start/</guid><description>
-&lt;p>建议先使用 java 定义接口 jar，并使用 &lt;a href="https://github.com/apache/dubbo-erlang/tree/master/tools/erlanalysis">erlanalysis&lt;/a> 工具解析java接口至Erlang lib&lt;/p>
-&lt;h2 id="导入依赖库">导入依赖库&lt;/h2>
-&lt;h3 id="使用-rebar-编译工具">使用 Rebar 编译工具。&lt;/h3>
-&lt;p>Add dubblerl to rebar.config with your project&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-erlang" data-lang="erlang">&lt;span style="display:flex;">&lt;span>{deps, [
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {dubboerl, {git, &lt;span style="color:#2aa198">&amp;#34;https://github.com/apache/dubbo-erlang.git&amp;#34;&lt;/span>, {branch, &lt;span style="color:#2aa198">&amp;#34;master&amp;#34;&lt;/span>}}}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>]}.
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="使用-erlangmk-编译工具">使用 erlang.mk 编译工具&lt;/h3>
-&lt;p>&lt;code>待补充&lt;/code>&lt;/p>
-&lt;h2 id="导入接口库">导入接口库&lt;/h2>
-&lt;p>Suppose the interface lib you exported is called dubbo_service.&lt;/p>
-&lt;ul>
-&lt;li>If you didn&amp;rsquo;t upload your lib to your git repository, It is recommended that you copy the &lt;code>dubbo_service&lt;/code> lib
-into the project&amp;rsquo;s &lt;code>apps&lt;/code> directory.&lt;/li>
-&lt;li>If it is upload to your git repository, you can import like this:&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-erlang" data-lang="erlang">&lt;span style="display:flex;">&lt;span>{deps, [
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {dubboerl, {git, &lt;span style="color:#2aa198">&amp;#34;https://github.com/apache/dubbo-erlang.git&amp;#34;&lt;/span>, {branch, &lt;span style="color:#2aa198">&amp;#34;master&amp;#34;&lt;/span>}}},
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {dubbo_service,{git,&lt;span style="color:#2aa198">&amp;#34;${INTERFACE_LIB_URL}&amp;#34;&lt;/span>,{branch,&lt;span style="color:#2aa198">&amp;#34;master&amp;#34;&lt;/span>}}} &lt;span style="color:#586e75">%% replace ${INTERFACE_LIB_URL} with your lib git repos url
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>]}.
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="消费者配置">消费者配置&lt;/h2>
-&lt;p>Please reference &lt;a href="./reference.md">Reference Config&lt;/a>&lt;/p>
-&lt;h2 id="init-dubbolib-in-your-project">Init dubbolib in your project&lt;/h2>
-&lt;p>It is need you&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-erlang" data-lang="erlang">&lt;span style="display:flex;">&lt;span>dubboerl:&lt;span style="color:#268bd2">init&lt;/span>().
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="如何调用">如何调用？&lt;/h2>
-&lt;h3 id="同步调用">同步调用&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-erlang" data-lang="erlang">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">Request&lt;/span> &lt;span style="color:#719e07">=&lt;/span> #userInfoRequest{requestId &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">123&lt;/span>, username &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;testname&amp;#34;&lt;/span>},
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{ok,&lt;span style="color:#268bd2">RequestRef&lt;/span>,&lt;span style="color:#268bd2">Response&lt;/span>,&lt;span style="color:#268bd2">RpcContent&lt;/span>} &lt;span style="color:#719e07">=&lt;/span> userOperator:&lt;span style="color:#268bd2">queryUserInfo&lt;/span>(&lt;span style="color:#268bd2">Request&lt;/span>,#{sync&lt;span style="color:#719e07">=&amp;gt;&lt;/span> true}).
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>If it occur error, is reponse &lt;code>{error,Reason}&lt;/code>.&lt;/p>
-&lt;h3 id="异步调用">异步调用&lt;/h3>
-&lt;p>Default is Async call.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-erlang" data-lang="erlang">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">Request&lt;/span> &lt;span style="color:#719e07">=&lt;/span> #userInfoRequest{requestId &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">123&lt;/span>, username &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;testname&amp;#34;&lt;/span>},
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{ok,&lt;span style="color:#268bd2">RequestRef&lt;/span>} &lt;span style="color:#719e07">=&lt;/span> userOperator:&lt;span style="color:#268bd2">queryUserInfo&lt;/span>(&lt;span style="color:#268bd2">Request&lt;/span>).
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">%% you can receive the message after.
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#268bd2">handle_cast&lt;/span>({msg_back,&lt;span style="color:#268bd2">RequestRef&lt;/span>,&lt;span style="color:#268bd2">Response&lt;/span>,&lt;span style="color:#268bd2">RpcContent&lt;/span>},&lt;span style="color:#268bd2">State&lt;/span>).
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="示例">示例&lt;/h2>
-&lt;p>参考项目 &lt;a href="https://github.com/apache/dubbo-erlang/tree/master/samples">dubboerl_demo&lt;/a>&lt;/p></description></item><item><title>Docsv2.7: 快速开始</title><link>https://dubbo.apache.org/zh/docsv2.7/user/languages/erlang/quick-start/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/user/languages/erlang/quick-start/</guid><description>
-&lt;p>建议先使用 java 定义接口 jar，并使用 &lt;a href="https://github.com/apache/dubbo-erlang/tree/master/tools/erlanalysis">erlanalysis&lt;/a> 工具解析java接口至Erlang lib&lt;/p>
-&lt;h2 id="导入依赖库">导入依赖库&lt;/h2>
-&lt;h3 id="使用-rebar-编译工具">使用 Rebar 编译工具。&lt;/h3>
-&lt;p>Add dubblerl to rebar.config with your project&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-erlang" data-lang="erlang">&lt;span style="display:flex;">&lt;span>{deps, [
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {dubboerl, {git, &lt;span style="color:#2aa198">&amp;#34;https://github.com/apache/dubbo-erlang.git&amp;#34;&lt;/span>, {branch, &lt;span style="color:#2aa198">&amp;#34;master&amp;#34;&lt;/span>}}}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>]}.
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="使用-erlangmk-编译工具">使用 erlang.mk 编译工具&lt;/h3>
-&lt;p>&lt;code>待补充&lt;/code>&lt;/p>
-&lt;h2 id="导入接口库">导入接口库&lt;/h2>
-&lt;p>Suppose the interface lib you exported is called dubbo_service.&lt;/p>
-&lt;ul>
-&lt;li>If you didn&amp;rsquo;t upload your lib to your git repository, It is recommended that you copy the &lt;code>dubbo_service&lt;/code> lib
-into the project&amp;rsquo;s &lt;code>apps&lt;/code> directory.&lt;/li>
-&lt;li>If it is upload to your git repository, you can import like this:&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-erlang" data-lang="erlang">&lt;span style="display:flex;">&lt;span>{deps, [
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {dubboerl, {git, &lt;span style="color:#2aa198">&amp;#34;https://github.com/apache/dubbo-erlang.git&amp;#34;&lt;/span>, {branch, &lt;span style="color:#2aa198">&amp;#34;master&amp;#34;&lt;/span>}}},
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {dubbo_service,{git,&lt;span style="color:#2aa198">&amp;#34;${INTERFACE_LIB_URL}&amp;#34;&lt;/span>,{branch,&lt;span style="color:#2aa198">&amp;#34;master&amp;#34;&lt;/span>}}} &lt;span style="color:#586e75">%% replace ${INTERFACE_LIB_URL} with your lib git repos url
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>]}.
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="消费者配置">消费者配置&lt;/h2>
-&lt;p>Please reference &lt;a href="./reference.md">Reference Config&lt;/a>&lt;/p>
-&lt;h2 id="init-dubbolib-in-your-project">Init dubbolib in your project&lt;/h2>
-&lt;p>It is need you&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-erlang" data-lang="erlang">&lt;span style="display:flex;">&lt;span>dubboerl:&lt;span style="color:#268bd2">init&lt;/span>().
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="如何调用">如何调用？&lt;/h2>
-&lt;h3 id="同步调用">同步调用&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-erlang" data-lang="erlang">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">Request&lt;/span> &lt;span style="color:#719e07">=&lt;/span> #userInfoRequest{requestId &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">123&lt;/span>, username &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;testname&amp;#34;&lt;/span>},
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{ok,&lt;span style="color:#268bd2">RequestRef&lt;/span>,&lt;span style="color:#268bd2">Response&lt;/span>,&lt;span style="color:#268bd2">RpcContent&lt;/span>} &lt;span style="color:#719e07">=&lt;/span> userOperator:&lt;span style="color:#268bd2">queryUserInfo&lt;/span>(&lt;span style="color:#268bd2">Request&lt;/span>,#{sync&lt;span style="color:#719e07">=&amp;gt;&lt;/span> true}).
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>If it occur error, is reponse &lt;code>{error,Reason}&lt;/code>.&lt;/p>
-&lt;h3 id="异步调用">异步调用&lt;/h3>
-&lt;p>Default is Async call.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-erlang" data-lang="erlang">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">Request&lt;/span> &lt;span style="color:#719e07">=&lt;/span> #userInfoRequest{requestId &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">123&lt;/span>, username &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;testname&amp;#34;&lt;/span>},
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{ok,&lt;span style="color:#268bd2">RequestRef&lt;/span>} &lt;span style="color:#719e07">=&lt;/span> userOperator:&lt;span style="color:#268bd2">queryUserInfo&lt;/span>(&lt;span style="color:#268bd2">Request&lt;/span>).
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">%% you can receive the message after.
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#268bd2">handle_cast&lt;/span>({msg_back,&lt;span style="color:#268bd2">RequestRef&lt;/span>,&lt;span style="color:#268bd2">Response&lt;/span>,&lt;span style="color:#268bd2">RpcContent&lt;/span>},&lt;span style="color:#268bd2">State&lt;/span>).
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="示例">示例&lt;/h2>
-&lt;p>参考项目 &lt;a href="https://github.com/apache/dubbo-erlang/tree/master/samples">dubboerl_demo&lt;/a>&lt;/p></description></item><item><title>Docsv2.7: 魔鬼在细节</title><link>https://dubbo.apache.org/zh/docsv2.7/dev/principals/code-detail/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/dev/principals/code-detail/</guid><description>
-&lt;p>最近一直担心如果 Dubbo 分布式服务框架维护人员增多或变更，会出现质量的下降的问题， 我在想，有没有什么规则是需要大家共同遵守的。根据平时写代码时的一习惯，总结了以下在写代码过程中，尤其是框架代码，要时刻牢记的细节。可能下面要讲的这些，大家都会觉得很简单，很基础，但要做到时刻牢记。在每一行代码中都考虑这些因素，是需要很大耐心的， 大家经常说，魔鬼在细节中，确实如此。&lt;/p>
-&lt;h2 id="防止空指针和下标越界">防止空指针和下标越界&lt;/h2>
-&lt;p>这是我最不喜欢看到的异常，尤其在核心框架中，我更愿看到信息详细的参数不合法异常。这也是一个编写健壮程序的开发人员，在写每一行代码都应在潜意识中防止的异常。基本上要能确保每一次写完的代码，在不测试的情况下，都不会出现这两个异常才算合格。&lt;/p>
-&lt;h2 id="保证线程安全性和可见性">保证线程安全性和可见性&lt;/h2>
-&lt;p>对于框架的开发人员，对线程安全性和可见性的深入理解是最基本的要求。需要开发人员，在写每一行代码时都应在潜意识中确保其正确性。因为这种代码，在小并发下做功能测试时，会显得很正常。但在高并发下就会出现莫明其妙的问题，而且场景很难重现，极难排查。&lt;/p>
-&lt;h2 id="尽早失败和前置断言">尽早失败和前置断言&lt;/h2>
-&lt;p>尽早失败也应该成为潜意识，在有传入参数和状态变化时，均在入口处全部断言。一个不合法的值和状态，在第一时间就应报错，而不是等到要用时才报错。因为等到要用时，可能前面已经修改其它相关状态，而在程序中很少有人去处理回滚逻辑。这样报错后，其实内部状态可能已经混乱，极易在一个隐蔽分支上引发程序不可恢复。&lt;/p>
-&lt;h2 id="分离可靠操作和不可靠操作">分离可靠操作和不可靠操作&lt;/h2>
-&lt;p>这里的可靠是狭义的指是否会抛出异常或引起状态不一致，比如，写入一个线程安全的 Map，可以认为是可靠的，而写入数据库等，可以认为是不可靠的。开发人员必须在写每一行代码时，都注意它的可靠性与否，在代码中尽量划分开，并对失败做异常处理，并为容错，自我保护，自动恢复或切换等补偿逻辑提供清晰的切入点，保证后续增加的代码不至于放错位置，而导致原先的容错处理陷入混乱。&lt;/p>
-&lt;h2 id="异常防御但不忽略异常">异常防御，但不忽略异常&lt;/h2>
-&lt;p>这里讲的异常防御，指的是对非必须途径上的代码进行最大限度的容忍，包括程序上的 BUG，比如：获取程序的版本号，会通过扫描 Manifest 和 jar 包名称抓取版本号，这个逻辑是辅助性的，但代码却不少，初步测试也没啥问题，但应该在整个 getVersion() 中加上一个全函数的 try-catch 打印错误日志，并返回基本版本，因为 getVersion() 可能存在未知特定场景异常，或被其他的开发人员误修改逻辑(但一般人员不会去掉 try-catch)，而如果它抛出异常会导致主流程异常，这是我们不希望看到的。但这里要控制个度，不要随意 try-catch，更不要无声无息的吃掉异常。&lt;/p>
-&lt;h2 id="缩小可变域和尽量-final">缩小可变域和尽量 final&lt;/h2>
-&lt;p>如果一个类可以成为不变类(Immutable Class)，就优先将它设计成不变类。不变类有天然的并发共享优势，减少同步或复制，而且可以有效帮忙分析线程安全的范围。就算是可变类，对于从构造函数传入的引用，在类中持有时，最好将字段 final，以免被中途误修改引用。不要以为这个字段是私有的，这个类的代码都是我自己写的，不会出现对这个字段的重新赋值。要考虑的一个因素是，这个代码可能被其他人修改，他不知道你的这个弱约定，final 就是一个不变契约。&lt;/p>
-&lt;h2 id="降低修改时的误解性不埋雷">降低修改时的误解性，不埋雷&lt;/h2>
-&lt;p>前面不停的提到代码被其他人修改，这也开发人员要随时紧记的。这个其他人包括未来的自己，你要总想着这个代码可能会有人去改它。我应该给修改的人一点什么提示，让他知道我现在的设计意图，而不要在程序里面加潜规则，或埋一些容易忽视的雷，比如：你用 null 表示不可用，size 等于 0 表示黑名单，这就是一个雷，下一个修改者，包括你自己，都不会记得有这样的约定，可能后面为了改某个其它 BUG，不小心改到了这里，直接引爆故障。对于这个例子，一个原则就是永远不要区分 null 引用和 empty 值。&lt;/p>
-&lt;h2 id="提高代码的可测性">提高代码的可测性&lt;/h2>
-&lt;p>这里的可测性主要指 Mock 的容易程度，和测试的隔离性。至于测试的自动性，可重复性，非偶然性，无序性，完备性(全覆盖)，轻量性(可快速执行)，一般开发人员，加上 JUnit 等工具的辅助基本都能做到，也能理解它的好处，只是工作量问题。这里要特别强调的是测试用例的单一性(只测目标类本身)和隔离性(不传染失败)。现在的测试代码，过于强调完备性，大量重复交叉测试，看起来没啥坏处，但测试代码越多，维护代价越高。经常出现的问题是，修改一行代码或加一个判断条件，引起 100 多个测试用例不通过。时间一紧，谁有这个闲功夫去改这么多形态各异的测试用例？久而久之，这个测试代码就已经不能真实反应代码现在的状况，很多时候会被迫绕过。最好的情况是，修改一行代码，有且只有一行测试代码不通过。如果修改了代码而测试用例还能通过，那也不行，表示测试没有覆盖到。另外，可 Mock 性是隔离的基础，把间接依赖的逻辑屏蔽掉。可 Mock 性的一个最大的杀手就是静态方法，尽量少用。&lt;/p></description></item><item><title>Docs: 启动时检查</title><link>https://dubbo.apache.org/zh/docs/advanced/preflight-check/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/advanced/preflight-check/</guid><description>
-&lt;p>Dubbo 缺省会在启动时检查依赖的服务是否可用，不可用时会抛出异常，阻止 Spring 初始化完成，以便上线时，能及早发现问题，默认 &lt;code>check=&amp;quot;true&amp;quot;&lt;/code>。&lt;/p>
-&lt;p>可以通过 &lt;code>check=&amp;quot;false&amp;quot;&lt;/code> 关闭检查，比如，测试时，有些服务不关心，或者出现了循环依赖，必须有一方先启动。&lt;/p>
-&lt;p>另外，如果你的 Spring 容器是懒加载的，或者通过 API 编程延迟引用服务，请关闭 check，否则服务临时不可用时，会抛出异常，拿到 null 引用，如果 &lt;code>check=&amp;quot;false&amp;quot;&lt;/code>，总是会返回引用，当服务恢复时，能自动连上。&lt;/p>
-&lt;h2 id="示例">示例&lt;/h2>
-&lt;h3 id="通过-spring-配置文件">通过 spring 配置文件&lt;/h3>
-&lt;p>关闭某个服务的启动时检查 (没有提供者时报错)：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> check=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>关闭所有服务的启动时检查 (没有提供者时报错)：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:consumer&lt;/span> check=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>关闭注册中心启动时检查 (注册订阅失败时报错)：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> check=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="通过-dubboproperties">通过 dubbo.properties&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.reference.com.foo.BarService.check=false
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.consumer.check=false
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.check=false
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="通过--d-参数">通过 -D 参数&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>java -Ddubbo.reference.com.foo.BarService.check&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>java -Ddubbo.consumer.check&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>java -Ddubbo.registry.check&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">false&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="配置的含义">配置的含义&lt;/h2>
-&lt;p>&lt;code>dubbo.reference.com.foo.BarService.check&lt;/code>，覆盖 &lt;code>com.foo.BarService&lt;/code>的 reference 的 check 值，就算配置中有声明，也会被覆盖。&lt;/p>
-&lt;p>&lt;code>dubbo.consumer.check=false&lt;/code>，是设置reference的 &lt;code>check&lt;/code> 的缺省值，如果配置中有显式的声明，如：&lt;code>&amp;lt;dubbo:reference check=&amp;quot;true&amp;quot;/&amp;gt;&lt;/code>，不会受影响。&lt;/p>
-&lt;p>&lt;code>dubbo.registry.check=false&lt;/code>，前面两个都是指订阅成功，但提供者列表是否为空是否报错，如果注册订阅失败时，也允许启动，需使用此选项，将在后台定时重试。&lt;/p></description></item><item><title>Docsv2.7: 启动时检查</title><link>https://dubbo.apache.org/zh/docsv2.7/user/examples/preflight-check/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/user/examples/preflight-check/</guid><description>
-&lt;p>Dubbo 缺省会在启动时检查依赖的服务是否可用，不可用时会抛出异常，阻止 Spring 初始化完成，以便上线时，能及早发现问题，默认 &lt;code>check=&amp;quot;true&amp;quot;&lt;/code>。&lt;/p>
-&lt;p>可以通过 &lt;code>check=&amp;quot;false&amp;quot;&lt;/code> 关闭检查，比如，测试时，有些服务不关心，或者出现了循环依赖，必须有一方先启动。&lt;/p>
-&lt;p>另外，如果你的 Spring 容器是懒加载的，或者通过 API 编程延迟引用服务，请关闭 check，否则服务临时不可用时，会抛出异常，拿到 null 引用，如果 &lt;code>check=&amp;quot;false&amp;quot;&lt;/code>，总是会返回引用，当服务恢复时，能自动连上。&lt;/p>
-&lt;h2 id="示例">示例&lt;/h2>
-&lt;h3 id="通过-spring-配置文件">通过 spring 配置文件&lt;/h3>
-&lt;p>关闭某个服务的启动时检查 (没有提供者时报错)：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> check=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>关闭所有服务的启动时检查 (没有提供者时报错)：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:consumer&lt;/span> check=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>关闭注册中心启动时检查 (注册订阅失败时报错)：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> check=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="通过-dubboproperties">通过 dubbo.properties&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.reference.com.foo.BarService.check=false
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.reference.check=false
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.consumer.check=false
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.check=false
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="通过--d-参数">通过 -D 参数&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>java -Ddubbo.reference.com.foo.BarService.check&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>java -Ddubbo.reference.check&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>java -Ddubbo.consumer.check&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>java -Ddubbo.registry.check&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">false&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="配置的含义">配置的含义&lt;/h2>
-&lt;p>&lt;code>dubbo.reference.check=false&lt;/code>，强制改变所有 reference 的 check 值，就算配置中有声明，也会被覆盖。&lt;/p>
-&lt;p>&lt;code>dubbo.consumer.check=false&lt;/code>，是设置 check 的缺省值，如果配置中有显式的声明，如：&lt;code>&amp;lt;dubbo:reference check=&amp;quot;true&amp;quot;/&amp;gt;&lt;/code>，不会受影响。&lt;/p>
-&lt;p>&lt;code>dubbo.registry.check=false&lt;/code>，前面两个都是指订阅成功，但提供者列表是否为空是否报错，如果注册订阅失败时，也允许启动，需使用此选项，将在后台定时重试。&lt;/p></description></item><item><title>Docs: 协议扩展</title><link>https://dubbo.apache.org/zh/docs/references/spis/protocol/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/references/spis/protocol/</guid><description>
-&lt;h2 id="扩展说明">扩展说明&lt;/h2>
-&lt;p>RPC 协议扩展，封装远程调用细节。&lt;/p>
-&lt;p>契约：&lt;/p>
-&lt;ul>
-&lt;li>当用户调用 &lt;code>refer()&lt;/code> 所返回的 &lt;code>Invoker&lt;/code> 对象的 &lt;code>invoke()&lt;/code> 方法时，协议需相应执行同 URL 远端 &lt;code>export()&lt;/code> 传入的 &lt;code>Invoker&lt;/code> 对象的 &lt;code>invoke()&lt;/code> 方法。&lt;/li>
-&lt;li>其中，&lt;code>refer()&lt;/code> 返回的 &lt;code>Invoker&lt;/code> 由协议实现，协议通常需要在此 &lt;code>Invoker&lt;/code> 中发送远程请求，&lt;code>export()&lt;/code> 传入的 &lt;code>Invoker&lt;/code> 由框架实现并传入，协议不需要关心。&lt;/li>
-&lt;/ul>
-&lt;p>注意：&lt;/p>
-&lt;ul>
-&lt;li>协议不关心业务接口的透明代理，以 &lt;code>Invoker&lt;/code> 为中心，由外层将 &lt;code>Invoker&lt;/code> 转换为业务接口。&lt;/li>
-&lt;li>协议不一定要是 TCP 网络通讯，比如通过共享文件，IPC 进程间通讯等。&lt;/li>
-&lt;/ul>
-&lt;h2 id="扩展接口">扩展接口&lt;/h2>
-&lt;ul>
-&lt;li>&lt;code>org.apache.dubbo.rpc.Protocol&lt;/code>&lt;/li>
-&lt;li>&lt;code>org.apache.dubbo.rpc.Exporter&lt;/code>&lt;/li>
-&lt;li>&lt;code>org.apache.dubbo.rpc.Invoker&lt;/code>&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">Protocol&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">/**
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * 暴露远程服务：&amp;lt;br&amp;gt;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * 1. 协议在接收请求时，应记录请求来源方地址信息：RpcContext.getContext().setRemoteAddress();&amp;lt;br&amp;gt;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * 2. export()必须是幂等的，也就是暴露同一个URL的Invoker两次，和暴露一次没有区别。&amp;lt;br&amp;gt;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * 3. export()传入的Invoker由框架实现并传入，协议不需要关心。&amp;lt;br&amp;gt;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> *
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * @param &amp;lt;T&amp;gt; 服务的类型
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * @param invoker 服务的执行体
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * @return exporter 暴露服务的引用，用于取消暴露
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * @throws RpcException 当暴露服务出错时抛出，比如端口已占用
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> */&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> Exporter&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">export&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> invoker&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RpcException&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">/**
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * 引用远程服务：&amp;lt;br&amp;gt;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * 1. 当用户调用refer()所返回的Invoker对象的invoke()方法时，协议需相应执行同URL远端export()传入的Invoker对象的invoke()方法。&amp;lt;br&amp;gt;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * 2. refer()返回的Invoker由协议实现，协议通常需要在此Invoker中发送远程请求。&amp;lt;br&amp;gt;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * 3. 当url中有设置check=false时，连接失败不能抛出异常，需内部自动恢复。&amp;lt;br&amp;gt;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> *
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * @param &amp;lt;T&amp;gt; 服务的类型
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * @param type 服务的类型
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * @param url 远程服务的URL地址
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * @return invoker 服务的本地代理
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * @throws RpcException 当连接服务提供方失败时抛出
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> */&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">refer&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Class&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> type&lt;span style="color:#719e07">,&lt;/span> URL url&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RpcException&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="扩展配置">扩展配置&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&amp;lt;!-- 声明协议，如果没有配置id，将以name为id --&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;xxx1&amp;#34;&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;xxx&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&amp;lt;!-- 引用协议，如果没有配置protocol属性，将在ApplicationContext中自动扫描protocol配置 --&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;xxx1&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&amp;lt;!-- 引用协议缺省值，当&amp;lt;dubbo:service&amp;gt;没有配置prototol属性时，使用此配置 --&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:provider&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;xxx1&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="已知扩展">已知扩展&lt;/h2>
-&lt;ul>
-&lt;li>&lt;code>org.apache.dubbo.rpc.protocol.injvm.InjvmProtocol&lt;/code>&lt;/li>
-&lt;li>&lt;code>org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol&lt;/code>&lt;/li>
-&lt;li>&lt;code>org.apache.dubbo.rpc.protocol.rmi.RmiProtocol&lt;/code>&lt;/li>
-&lt;li>&lt;code>org.apache.dubbo.rpc.protocol.http.HttpProtocol&lt;/code>&lt;/li>
-&lt;li>&lt;code>org.apache.dubbo.rpc.protocol.http.hessian.HessianProtocol&lt;/code>&lt;/li>
-&lt;li>&lt;code>org.apache.dubbo.rpc.support.MockProtocol&lt;/code>&lt;/li>
-&lt;/ul>
-&lt;h2 id="扩展示例">扩展示例&lt;/h2>
-&lt;p>Maven项目结构：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>src
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-main
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-java
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-com
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-xxx
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-XxxProtocol.java (实现Protocol接口)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-XxxExporter.java (实现Exporter接口)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-XxxInvoker.java (实现Invoker接口)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-resources
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-META-INF
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-dubbo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-org.apache.dubbo.rpc.Protocol (纯文本文件，内容为：xxx=com.xxx.XxxProtocol)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>XxxProtocol.java：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">package&lt;/span> com.xxx&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.Protocol&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">XxxProtocol&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> Protocol &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> Exporter&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">export&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> invoker&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RpcException &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#719e07">new&lt;/span> XxxExporter&lt;span style="color:#719e07">(&lt;/span>invoker&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">refer&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Class&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> type&lt;span style="color:#719e07">,&lt;/span> URL url&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RpcException &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#719e07">new&lt;/span> XxxInvoker&lt;span style="color:#719e07">(&lt;/span>type&lt;span style="color:#719e07">,&lt;/span> url&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>XxxExporter.java：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">package&lt;/span> com.xxx&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.support.AbstractExporter&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">XxxExporter&lt;/span>&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">extends&lt;/span> AbstractExporter&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">XxxExporter&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> invoker&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RemotingException&lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">super&lt;/span>&lt;span style="color:#719e07">(&lt;/span>invoker&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// ...
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">unexport&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">super&lt;/span>&lt;span style="color:#719e07">.&lt;/span>unexport&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// ...
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>XxxInvoker.java：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">package&lt;/span> com.xxx&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.support.AbstractInvoker&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">XxxInvoker&lt;/span>&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">extends&lt;/span> AbstractInvoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">XxxInvoker&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Class&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> type&lt;span style="color:#719e07">,&lt;/span> URL url&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RemotingException&lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">super&lt;/span>&lt;span style="color:#719e07">(&lt;/span>type&lt;span style="color:#719e07">,&lt;/span> url&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Override&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">protected&lt;/span> Result &lt;span style="color:#268bd2">doInvoke&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Invocation invocation&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> Throwable &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// ...
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>META-INF/dubbo/org.apache.dubbo.rpc.Protocol：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>xxx=com.xxx.XxxProtocol
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docsv2.7: 协议扩展</title><link>https://dubbo.apache.org/zh/docsv2.7/dev/impls/protocol/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/dev/impls/protocol/</guid><description>
-&lt;h2 id="扩展说明">扩展说明&lt;/h2>
-&lt;p>RPC 协议扩展，封装远程调用细节。&lt;/p>
-&lt;p>契约：&lt;/p>
-&lt;ul>
-&lt;li>当用户调用 &lt;code>refer()&lt;/code> 所返回的 &lt;code>Invoker&lt;/code> 对象的 &lt;code>invoke()&lt;/code> 方法时，协议需相应执行同 URL 远端 &lt;code>export()&lt;/code> 传入的 &lt;code>Invoker&lt;/code> 对象的 &lt;code>invoke()&lt;/code> 方法。&lt;/li>
-&lt;li>其中，&lt;code>refer()&lt;/code> 返回的 &lt;code>Invoker&lt;/code> 由协议实现，协议通常需要在此 &lt;code>Invoker&lt;/code> 中发送远程请求，&lt;code>export()&lt;/code> 传入的 &lt;code>Invoker&lt;/code> 由框架实现并传入，协议不需要关心。&lt;/li>
-&lt;/ul>
-&lt;p>注意：&lt;/p>
-&lt;ul>
-&lt;li>协议不关心业务接口的透明代理，以 &lt;code>Invoker&lt;/code> 为中心，由外层将 &lt;code>Invoker&lt;/code> 转换为业务接口。&lt;/li>
-&lt;li>协议不一定要是 TCP 网络通讯，比如通过共享文件，IPC 进程间通讯等。&lt;/li>
-&lt;/ul>
-&lt;h2 id="扩展接口">扩展接口&lt;/h2>
-&lt;ul>
-&lt;li>&lt;code>org.apache.dubbo.rpc.Protocol&lt;/code>&lt;/li>
-&lt;li>&lt;code>org.apache.dubbo.rpc.Exporter&lt;/code>&lt;/li>
-&lt;li>&lt;code>org.apache.dubbo.rpc.Invoker&lt;/code>&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">Protocol&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">/**
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * 暴露远程服务：&amp;lt;br&amp;gt;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * 1. 协议在接收请求时，应记录请求来源方地址信息：RpcContext.getContext().setRemoteAddress();&amp;lt;br&amp;gt;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * 2. export()必须是幂等的，也就是暴露同一个URL的Invoker两次，和暴露一次没有区别。&amp;lt;br&amp;gt;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * 3. export()传入的Invoker由框架实现并传入，协议不需要关心。&amp;lt;br&amp;gt;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> *
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * @param &amp;lt;T&amp;gt; 服务的类型
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * @param invoker 服务的执行体
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * @return exporter 暴露服务的引用，用于取消暴露
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * @throws RpcException 当暴露服务出错时抛出，比如端口已占用
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> */&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> Exporter&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">export&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> invoker&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RpcException&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">/**
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * 引用远程服务：&amp;lt;br&amp;gt;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * 1. 当用户调用refer()所返回的Invoker对象的invoke()方法时，协议需相应执行同URL远端export()传入的Invoker对象的invoke()方法。&amp;lt;br&amp;gt;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * 2. refer()返回的Invoker由协议实现，协议通常需要在此Invoker中发送远程请求。&amp;lt;br&amp;gt;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * 3. 当url中有设置check=false时，连接失败不能抛出异常，需内部自动恢复。&amp;lt;br&amp;gt;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> *
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * @param &amp;lt;T&amp;gt; 服务的类型
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * @param type 服务的类型
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * @param url 远程服务的URL地址
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * @return invoker 服务的本地代理
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * @throws RpcException 当连接服务提供方失败时抛出
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> */&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">refer&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Class&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> type&lt;span style="color:#719e07">,&lt;/span> URL url&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RpcException&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="扩展配置">扩展配置&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&amp;lt;!-- 声明协议，如果没有配置id，将以name为id --&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;xxx1&amp;#34;&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;xxx&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&amp;lt;!-- 引用协议，如果没有配置protocol属性，将在ApplicationContext中自动扫描protocol配置 --&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;xxx1&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&amp;lt;!-- 引用协议缺省值，当&amp;lt;dubbo:service&amp;gt;没有配置prototol属性时，使用此配置 --&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:provider&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;xxx1&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="已知扩展">已知扩展&lt;/h2>
-&lt;ul>
-&lt;li>&lt;code>org.apache.dubbo.rpc.protocol.injvm.InjvmProtocol&lt;/code>&lt;/li>
-&lt;li>&lt;code>org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol&lt;/code>&lt;/li>
-&lt;li>&lt;code>org.apache.dubbo.rpc.protocol.rmi.RmiProtocol&lt;/code>&lt;/li>
-&lt;li>&lt;code>org.apache.dubbo.rpc.protocol.http.HttpProtocol&lt;/code>&lt;/li>
-&lt;li>&lt;code>org.apache.dubbo.rpc.protocol.http.hessian.HessianProtocol&lt;/code>&lt;/li>
-&lt;li>&lt;code>org.apache.dubbo.rpc.protocol.memcached.MemcachedProtocol&lt;/code>&lt;/li>
-&lt;li>&lt;code>org.apache.dubbo.rpc.support.MockProtocol&lt;/code>&lt;/li>
-&lt;li>&lt;code>org.apache.dubbo.rpc.protocol.redis.RedisProtocol&lt;/code>&lt;/li>
-&lt;li>&lt;code>org.apache.dubbo.rpc.protocol.nativethrift.ThriftProtocol&lt;/code>&lt;/li>
-&lt;/ul>
-&lt;h2 id="扩展示例">扩展示例&lt;/h2>
-&lt;p>Maven项目结构：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>src
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-main
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-java
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-com
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-xxx
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-XxxProtocol.java (实现Protocol接口)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-XxxExporter.java (实现Exporter接口)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-XxxInvoker.java (实现Invoker接口)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-resources
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-META-INF
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-dubbo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-org.apache.dubbo.rpc.Protocol (纯文本文件，内容为：xxx=com.xxx.XxxProtocol)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>XxxProtocol.java：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">package&lt;/span> com.xxx&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.Protocol&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">XxxProtocol&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> Protocol &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> Exporter&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">export&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> invoker&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RpcException &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#719e07">new&lt;/span> XxxExporter&lt;span style="color:#719e07">(&lt;/span>invoker&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">refer&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Class&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> type&lt;span style="color:#719e07">,&lt;/span> URL url&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RpcException &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#719e07">new&lt;/span> XxxInvoker&lt;span style="color:#719e07">(&lt;/span>type&lt;span style="color:#719e07">,&lt;/span> url&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>XxxExporter.java：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">package&lt;/span> com.xxx&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.support.AbstractExporter&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">XxxExporter&lt;/span>&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">extends&lt;/span> AbstractExporter&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">XxxExporter&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> invoker&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RemotingException&lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">super&lt;/span>&lt;span style="color:#719e07">(&lt;/span>invoker&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// ...
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">unexport&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">super&lt;/span>&lt;span style="color:#719e07">.&lt;/span>unexport&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// ...
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>XxxInvoker.java：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">package&lt;/span> com.xxx&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.support.AbstractInvoker&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">XxxInvoker&lt;/span>&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">extends&lt;/span> AbstractInvoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">XxxInvoker&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Class&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> type&lt;span style="color:#719e07">,&lt;/span> URL url&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> RemotingException&lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">super&lt;/span>&lt;span style="color:#719e07">(&lt;/span>type&lt;span style="color:#719e07">,&lt;/span> url&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Override&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">protected&lt;/span> Result &lt;span style="color:#268bd2">doInvoke&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Invocation invocation&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> Throwable &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// ...
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>META-INF/dubbo/org.apache.dubbo.rpc.Protocol：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>xxx=com.xxx.XxxProtocol
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+&lt;p>本篇文章对条件路由的表达式解析和服务路由过程进行了较为细致的分析。总的来说，条件路由的代码还是有一些复杂的，需要静下心来看。在阅读条件路由代码的过程中，要多调试。一般的框架都会有单元测试，Dubbo 也不例外，因此大家可以直接通过 ConditionRouterTest 对条件路由进行调试，无需重头构建测试用例。&lt;/p></description></item><item><title>Docs3-Building: 概述</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/contributing/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/contributing/overview/</guid><description/></item><item><title>Docs3-Building: 概述</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config-center/apollo/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config-center/apollo/overview/</guid><description/></item></channel></rss>

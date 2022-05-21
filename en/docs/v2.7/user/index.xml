@@ -1008,7 +1008,7 @@ Configurated in &lt;code>dubbo:method&lt;/code>(method level configuration) , th
 &lt;hr>
 &lt;ol>
 &lt;li id="fn:1">
-&lt;p>Overlay rules for configuration: 1) The method level configuration has a higher priority than the interface level, that is to say,small scope have a high priority 2) Consumer side configuration has a higher priority than provider side, better than global configuration, the last one is the Dubbo hard coded configuration value（&lt;a href="./configuration/properties.md">Dubbo configuration introduction&lt;/a>）&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>Overlay rules for configuration: 1) The method level configuration has a higher priority than the interface level, that is to say,small scope have a high priority 2) Consumer side configuration has a higher priority than provider side, better than global configuration, the last one is the Dubbo hard coded configuration value（&lt;a href="content/old/en/docs/v2.7/user/configuration/properties.md">Dubbo configuration introduction&lt;/a>）&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:2">
 &lt;p>With the first call, the call will be called 3 times&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>

@@ -1,0 +1,285 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – Properties 配置手册</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config/properties/</link><description>Recent content in Properties 配置手册 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config/properties/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs3-Building: 配置指南</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config/properties/guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config/properties/guide/</guid><description>
+&lt;p>Dubbo属性配置有两个职责：&lt;/p>
+&lt;ol>
+&lt;li>定义配置：根据属性创建配置组件实例，类似SpringBoot的&lt;code>@ConfigurationProperties&lt;/code>的作用。&lt;/li>
+&lt;li>属性覆盖：覆盖已存在的配置组件实例的属性值，类似Spring &lt;code>PropertyOverrideConfigurer&lt;/code> 的作用。&lt;/li>
+&lt;/ol>
+&lt;blockquote>
+&lt;p>一个属性配置的例子 &lt;a href="https://github.com/apache/dubbo-spring-boot-project/tree/master/dubbo-spring-boot-samples">dubbo-spring-boot-samples&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span> ## application.properties
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> # Spring boot application
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> spring.application.name=dubbo-externalized-configuration-provider-sample
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> # Base packages to scan Dubbo Component: @com.alibaba.dubbo.config.annotation.Service
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dubbo.scan.base-packages=com.alibaba.boot.dubbo.demo.provider.service
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> # Dubbo Application
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ## The default value of dubbo.application.name is ${spring.application.name}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ## dubbo.application.name=${spring.application.name}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> # Dubbo Protocol
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dubbo.protocol.name=dubbo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dubbo.protocol.port=12345
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ## Dubbo Registry
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dubbo.registry.address=N/A
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ## service default version
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dubbo.provider.version=1.0.0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="配置来源">配置来源&lt;/h2>
+&lt;p>从Dubbo支持的配置来源说起，默认有6种配置来源：&lt;/p>
+&lt;ul>
+&lt;li>JVM System Properties，JVM -D 参数&lt;/li>
+&lt;li>System environment，JVM进程的环境变量&lt;/li>
+&lt;li>Externalized Configuration，外部化配置，从配置中心读取&lt;/li>
+&lt;li>Application Configuration，应用的属性配置，从Spring应用的Environment中提取&amp;quot;dubbo&amp;quot;打头的属性集&lt;/li>
+&lt;li>API / XML /注解等编程接口采集的配置可以被理解成配置来源的一种，是直接面向用户编程的配置采集方式&lt;/li>
+&lt;li>从classpath读取配置文件 dubbo.properties&lt;/li>
+&lt;/ul>
+&lt;p>关于dubbo.properties属性：&lt;/p>
+&lt;ol>
+&lt;li>如果在 classpath 下有超过一个 dubbo.properties 文件，比如，两个 jar 包都各自包含了 dubbo.properties，dubbo 将随机选择一个加载，并且打印错误日志。&lt;/li>
+&lt;li>Dubbo 可以自动加载 classpath 根目录下的 dubbo.properties，但是你同样可以使用 JVM 参数来指定路径：&lt;code>-Ddubbo.properties.file=xxx.properties&lt;/code>。&lt;/li>
+&lt;/ol>
+&lt;h3 id="覆盖关系">覆盖关系&lt;/h3>
+&lt;p>下图展示了配置覆盖关系的优先级，从上到下优先级依次降低：&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/configuration.jpg" alt="覆盖关系">&lt;/p>
+&lt;p>请参考相关内容：&lt;a href="../properties#%E5%B1%9E%E6%80%A7%E8%A6%86%E7%9B%96">属性覆盖&lt;/a>。&lt;/p>
+&lt;h2 id="处理流程">处理流程&lt;/h2>
+&lt;p>属性配置处理流程请查看 &lt;a href="../overview#%E9%85%8D%E7%BD%AE%E5%8A%A0%E8%BD%BD%E6%B5%81%E7%A8%8B">配置加载流程&lt;/a>。&lt;/p>
+&lt;h2 id="配置格式">配置格式&lt;/h2>
+&lt;p>目前Dubbo支持的所有配置都是&lt;code>.properties&lt;/code>格式的，包括&lt;code>-D&lt;/code>、&lt;code>Externalized Configuration&lt;/code>等，&lt;code>.properties&lt;/code>中的所有配置项遵循一种&lt;code>path-based&lt;/code>的配置格式。&lt;/p>
+&lt;p>在Spring应用中也可以将属性配置放到&lt;code>application.yml&lt;/code>中，其树层次结构的方式可读性更好一些。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># 应用级配置（无id）
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.{config-type}.{config-item}={config-item-value}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 实例级配置（指定id或name）
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.{config-type}s.{config-id}.{config-item}={config-item-value}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.{config-type}s.{config-name}.{config-item}={config-item-value}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 服务接口配置
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.service.{interface-name}.{config-item}={config-item-value}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.reference.{interface-name}.{config-item}={config-item-value}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 方法配置
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.service.{interface-name}.{method-name}.{config-item}={config-item-value}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.reference.{interface-name}.{method-name}.{config-item}={config-item-value}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 方法argument配置
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.reference.{interface-name}.{method-name}.{argument-index}.{config-item}={config-item-value}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="应用级配置无id">应用级配置（无id）&lt;/h3>
+&lt;p>应用级配置的格式为：配置类型单数前缀，无id/name。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># 应用级配置（无id）
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.{config-type}.{config-item}={config-item-value}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>如果该类型的配置不存在任何实例时，则将使用应用级配置的属性创建默认实例。&lt;/li>
+&lt;li>如果该类型的配置存在一个或多个实例，且没有找到配置实例对应的配置时，则将应用级配置的属性用于属性覆盖。详细请参考&lt;a href="../properties#%E5%B1%9E%E6%80%A7%E8%A6%86%E7%9B%96">属性覆盖&lt;/a>。&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.application.name=demo-provider
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.qos-enable=false
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address=zookeeper://127.0.0.1:2181
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.name=dubbo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port=-1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="实例级配置指定id或name">实例级配置（指定id或name）&lt;/h3>
+&lt;p>针对某个实例的属性配置需要指定id或者name，其前缀格式为：配置类型复数前缀 + id/name。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># 实例级配置（指定id或name）
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.{config-type}s.{config-id}.{config-item}={config-item-value}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.{config-type}s.{config-name}.{config-item}={config-item-value}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>如果不存在该id或者name的实例，则根据属性创建配置组件实例。&lt;/li>
+&lt;li>如果已存在相同id或name的实例，则提取该前缀的属性集合用于属性覆盖。详细请参考&lt;a href="../properties#%E5%B1%9E%E6%80%A7%E8%A6%86%E7%9B%96">属性覆盖&lt;/a>。&lt;/li>
+&lt;li>具体的配置复数形式请参考&lt;a href="../properties#%E5%8D%95%E5%A4%8D%E6%95%B0%E9%85%8D%E7%BD%AE%E5%AF%B9%E7%85%A7%E8%A1%A8">单复数配置对照表&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.registries.unit1.address=zookeeper://127.0.0.1:2181
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registries.unit2.address=zookeeper://127.0.0.1:2182
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocols.dubbo.name=dubbo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocols.dubbo.port=20880
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocols.hessian.name=hessian
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocols.hessian.port=8089
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="服务接口配置">服务接口配置&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.service.org.apache.dubbo.samples.api.DemoService.timeout=5000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.reference.org.apache.dubbo.samples.api.DemoService.timeout=6000
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="方法配置">方法配置&lt;/h3>
+&lt;p>方法配置格式:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># 方法配置
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.service.{interface-name}.{method-name}.{config-item}={config-item-value}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.reference.{interface-name}.{method-name}.{config-item}={config-item-value}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 方法argument配置
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.reference.{interface-name}.{method-name}.{argument-index}.{config-item}={config-item-value}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>方法配置示例：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.reference.org.apache.dubbo.samples.api.DemoService.sayHello.timeout=7000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.reference.org.apache.dubbo.samples.api.DemoService.sayHello.oninvoke=notifyService.onInvoke
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.reference.org.apache.dubbo.samples.api.DemoService.sayHello.onreturn=notifyService.onReturn
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.reference.org.apache.dubbo.samples.api.DemoService.sayHello.onthrow=notifyService.onThrow
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.reference.org.apache.dubbo.samples.api.DemoService.sayHello.0.callback=true
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>等价于XML配置：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.api.DemoService&amp;#34;&lt;/span> &lt;span style="color:#268bd2">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:method&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;sayHello&amp;#34;&lt;/span> timeout=&lt;span style="color:#2aa198">&amp;#34;7000&amp;#34;&lt;/span> oninvoke=&lt;span style="color:#2aa198">&amp;#34;notifyService.onInvoke&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> onreturn=&lt;span style="color:#2aa198">&amp;#34;notifyService.onReturn&amp;#34;&lt;/span> onthrow=&lt;span style="color:#2aa198">&amp;#34;notifyService.onThrow&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:argument&lt;/span> index=&lt;span style="color:#2aa198">&amp;#34;0&amp;#34;&lt;/span> callback=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;/dubbo:method&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dubbo:reference&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="参数配置">参数配置&lt;/h3>
+&lt;p>parameters参数为map对象，支持xxx.parameters=[{key:value},{key:value}]方式进行配置。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.application.parameters=[{item1:value1},{item2:value2}]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.reference.org.apache.dubbo.samples.api.DemoService.parameters=[{item3:value3}]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="传输层配置">传输层配置&lt;/h3>
+&lt;p>triple协议采用Http2做底层通信协议，允许使用者自定义Http2的&lt;a href="https://datatracker.ietf.org/doc/html/rfc7540#section-6.5.2">6个settings参数&lt;/a>&lt;/p>
+&lt;p>配置格式如下：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># 通知对端header压缩索引表的上限个数
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.rpc.tri.header-table-size=4096
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 启用服务端推送功能
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.rpc.tri.enable-push=false
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 通知对端允许的最大并发流数
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.rpc.tri.max-concurrent-streams=2147483647
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 声明发送端的窗口大小
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.rpc.tri.initial-window-size=1048576
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 设置帧的最大字节数
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.rpc.tri.max-frame-size=32768
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 通知对端header未压缩的最大字节数
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.rpc.tri.max-header-list-size=8192
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>等价于yml配置：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">dubbo&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">rpc&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">tri&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">header-table-size&lt;/span>: &lt;span style="color:#2aa198">4096&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">enable-push&lt;/span>: &lt;span style="color:#cb4b16">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">max-concurrent-streams&lt;/span>: &lt;span style="color:#2aa198">2147483647&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">initial-window-size&lt;/span>: &lt;span style="color:#2aa198">1048576&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">max-frame-size&lt;/span>: &lt;span style="color:#2aa198">32768&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">max-header-list-size&lt;/span>: &lt;span style="color:#2aa198">8192&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="属性与xml配置映射规则">属性与XML配置映射规则&lt;/h3>
+&lt;p>可以将 xml 的 tag 名和属性名组合起来，用 ‘.’ 分隔。每行一个属性。&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>dubbo.application.name=foo&lt;/code> 相当于 &lt;code>&amp;lt;dubbo:application name=&amp;quot;foo&amp;quot; /&amp;gt;&lt;/code>&lt;/li>
+&lt;li>&lt;code>dubbo.registry.address=10.20.153.10:9090&lt;/code> 相当于 &lt;code>&amp;lt;dubbo:registry address=&amp;quot;10.20.153.10:9090&amp;quot; /&amp;gt; &lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>如果在 xml 配置中有超过一个的 tag，那么你可以使用 ‘id’ 进行区分。如果你不指定id，它将作用于所有 tag。&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>dubbo.protocols.rmi.port=1099&lt;/code> 相当于 &lt;code>&amp;lt;dubbo:protocol id=&amp;quot;rmi&amp;quot; name=&amp;quot;rmi&amp;quot; port=&amp;quot;1099&amp;quot; /&amp;gt; &lt;/code>&lt;/li>
+&lt;li>&lt;code>dubbo.registries.china.address=10.20.153.10:9090&lt;/code> 相当于 &lt;code>&amp;lt;dubbo:registry id=&amp;quot;china&amp;quot; address=&amp;quot;10.20.153.10:9090&amp;quot; /&amp;gt;&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h2 id="属性覆盖">属性覆盖&lt;/h2>
+&lt;p>属性覆盖是指用配置的属性值覆盖config bean实例的属性，类似Spring &lt;a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/config/PropertyOverrideConfigurer.html">PropertyOverrideConfigurer&lt;/a> 的作用。&lt;/p>
+&lt;blockquote>
+&lt;p>Property resource configurer that overrides bean property values in an application context definition. It pushes values from a properties file into bean definitions.
+Configuration lines are expected to be of the following form:&lt;/p>
+&lt;p>beanName.property=value&lt;/p>
+&lt;/blockquote>
+&lt;p>但与&lt;code>PropertyOverrideConfigurer&lt;/code>的不同之处是，Dubbo的属性覆盖有多个匹配格式，优先级从高到低依次是：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>#1. 指定id的实例级配置
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.{config-type}s.{config-id}.{config-item}={config-item-value}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#2. 指定name的实例级配置
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.{config-type}s.{config-name}.{config-item}={config-item-value}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#3. 应用级配置（单数配置）
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.{config-type}.{config-item}={config-item-value}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>属性覆盖处理流程：&lt;/p>
+&lt;p>按照优先级从高到低依次查找，如果找到此前缀开头的属性，则选定使用这个前缀提取属性，忽略后面的配置。&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/config/properties-override.svg" alt="属性覆盖流程">&lt;/p>
+&lt;h2 id="单复数配置对照表">单复数配置对照表&lt;/h2>
+&lt;p>复数配置的命名与普通单词变复数的规则相同：&lt;/p>
+&lt;ol>
+&lt;li>字母y结尾时，去掉y，改为ies&lt;/li>
+&lt;li>字母s结尾时，加es&lt;/li>
+&lt;li>其它加s&lt;/li>
+&lt;/ol>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Config Type&lt;/th>
+&lt;th>单数配置&lt;/th>
+&lt;th>复数配置&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>application&lt;/td>
+&lt;td>dubbo.application.xxx=xxx&lt;/td>
+&lt;td>dubbo.applications.{id}.xxx=xxx &lt;br/> dubbo.applications.{name}.xxx=xxx&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>protocol&lt;/td>
+&lt;td>dubbo.protocol.xxx=xxx&lt;/td>
+&lt;td>dubbo.protocols.{id}.xxx=xxx &lt;br/> dubbo.protocols.{name}.xxx=xxx&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>module&lt;/td>
+&lt;td>dubbo.module.xxx=xxx&lt;/td>
+&lt;td>dubbo.modules.{id}.xxx=xxx &lt;br/> dubbo.modules.{name}.xxx=xxx&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>registry&lt;/td>
+&lt;td>dubbo.registry.xxx=xxx&lt;/td>
+&lt;td>dubbo.registries.{id}.xxx=xxx&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>monitor&lt;/td>
+&lt;td>dubbo.monitor.xxx=xxx&lt;/td>
+&lt;td>dubbo.monitors.{id}.xxx=xxx&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>config-center&lt;/td>
+&lt;td>dubbo.config-center.xxx=xxx&lt;/td>
+&lt;td>dubbo.config-centers.{id}.xxx=xxx&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>metadata-report&lt;/td>
+&lt;td>dubbo.metadata-report.xxx=xxx&lt;/td>
+&lt;td>dubbo.metadata-reports.{id}.xxx=xxx&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ssl&lt;/td>
+&lt;td>dubbo.ssl.xxx=xxx&lt;/td>
+&lt;td>dubbo.ssls.{id}.xxx=xxx&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>metrics&lt;/td>
+&lt;td>dubbo.metrics.xxx=xxx&lt;/td>
+&lt;td>dubbo.metricses.{id}.xxx=xxx&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>provider&lt;/td>
+&lt;td>dubbo.provider.xxx=xxx&lt;/td>
+&lt;td>dubbo.providers.{id}.xxx=xxx&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>consumer&lt;/td>
+&lt;td>dubbo.consumer.xxx=xxx&lt;/td>
+&lt;td>dubbo.consumers.{id}.xxx=xxx&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>service&lt;/td>
+&lt;td>dubbo.service.{interfaceName}.xxx=xxx&lt;/td>
+&lt;td>无&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>reference&lt;/td>
+&lt;td>dubbo.reference.{interfaceName}.xxx=xxx&lt;/td>
+&lt;td>无&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>method&lt;/td>
+&lt;td>dubbo.service.{interfaceName}.{methodName}.xxx=xxx &lt;br/> dubbo.reference.{interfaceName}.{methodName}.xxx=xxx&lt;/td>
+&lt;td>无&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>argument&lt;/td>
+&lt;td>dubbo.service.{interfaceName}.{methodName}.{arg-index}.xxx=xxx&lt;/td>
+&lt;td>无&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item><item><title>Docs3-Building: 配置项描述</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config/properties/description/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config/properties/description/</guid><description/></item></channel></rss>

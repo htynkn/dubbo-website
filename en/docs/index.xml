@@ -24,7 +24,7 @@
 &lt;p>There&amp;rsquo;s no login for current version, will be added later&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/div></description></item><item><title>Docs: Background</title><link>https://dubbo.apache.org/en/docs/v2.7/user/preface/background/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/preface/background/</guid><description>
+&lt;/div></description></item><item><title>Latest: Advantage</title><link>https://dubbo.apache.org/en/latest/facade-docs/why/advantage/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/latest/facade-docs/why/advantage/</guid><description/></item><item><title>Docs: Background</title><link>https://dubbo.apache.org/en/docs/v2.7/user/preface/background/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/preface/background/</guid><description>
 &lt;h1 id="background">Background&lt;/h1>
 &lt;p>With the fast development of Internet, the scale of web applications expands unceasingly, and finally we find that the traditional vertical architecture(monolithic) can not handle this any more. Distributed service architecture and the flow computing architecture are imperative, and a governance system is urgently needed to ensure an orderly evolution of the architecture.&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/dubbo-architecture-roadmap.jpg" alt="image">&lt;/p>
@@ -2607,7 +2607,7 @@ If not discussed in the community (mailing list), just as it did not happen.&lt;
 &lt;p>One thing that is sometimes hard to understand when you are new to the open development process used at the ASF, is that we value the community more than the code. A strong and healthy community will be respectful and be a fun and rewarding place. More importantly, a diverse and healthy community can continue to support the code over the longer term, even as individual companies come and go from the field.&lt;/p>
 &lt;p>More details could be found &lt;a href="https://community.apache.org/contributors/">here&lt;/a>.&lt;/p>
 &lt;h3 id="what-can-i-contribute">What can I contribute?&lt;/h3>
-&lt;p>Please refer to the &lt;a href="https://dubbo.apache.org/en/docs/contribution-guidelines/contributor/new-contributor-guide_dev">new contributor guide&lt;/a>.&lt;/p></description></item><item><title>Docs: Nacos Registry Center</title><link>https://dubbo.apache.org/en/docs/v2.7/user/references/registry/nacos/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/references/registry/nacos/</guid><description>
+&lt;p>Please refer to the &lt;a href="https://dubbo.apache.org/en/docs/contribution-guidelines/contributor/new-contributor-guide_dev">new contributor guide&lt;/a>.&lt;/p></description></item><item><title>Latest: Introduction</title><link>https://dubbo.apache.org/en/latest/facade-docs/what/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/latest/facade-docs/what/overview/</guid><description/></item><item><title>Docs: Nacos Registry Center</title><link>https://dubbo.apache.org/en/docs/v2.7/user/references/registry/nacos/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/references/registry/nacos/</guid><description>
 &lt;p>Nacos is a very important registry center for Dubbo ecosystem, &lt;a href="https://github.com/apache/incubator-dubbo/tree/master/dubbo-registry/dubbo-registry-nacos">&lt;code>dubbo-registry-nacos&lt;/code>&lt;/a> is the implementation of Nacos integration to Nacos.&lt;/p>
 &lt;h2 id="prepare-work">Prepare Work&lt;/h2>
 &lt;p>When you integrate &lt;a href="https://github.com/apache/incubator-dubbo/tree/master/dubbo-registry/dubbo-registry-nacos">&lt;code>dubbo-registry-nacos&lt;/code>&lt;/a> into your Dubbo project, please Make sure the Nacos service is started in the background. If you are not familiar with the basic use of Nacos, you can refer to &lt;a href="https://nacos.io/en-us/docs/quick-start.html">Nacos Quick Start&lt;/a>. It is recommended to use the version equal or above Nacos &lt;code>1.0.0&lt;/code>.&lt;/p>
@@ -2865,7 +2865,7 @@ into the project&amp;rsquo;s &lt;code>apps&lt;/code> directory.&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {dubbo_service,{git,&lt;span style="color:#2aa198">&amp;#34;${INTERFACE_LIB_URL}&amp;#34;&lt;/span>,{branch,&lt;span style="color:#2aa198">&amp;#34;master&amp;#34;&lt;/span>}}} &lt;span style="color:#586e75">%% replace ${INTERFACE_LIB_URL} with your lib git repos url
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>]}.
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="consumer-configuration">Consumer configuration&lt;/h2>
-&lt;p>Please reference &lt;a href="./reference.md">Reference Config&lt;/a>&lt;/p>
+&lt;p>Please reference &lt;a href="content/old/en/docs/v3.0/languages/erlang/reference.md">Reference Config&lt;/a>&lt;/p>
 &lt;h2 id="init-dubbolib-in-your-project">Init dubbolib in your project&lt;/h2>
 &lt;p>It is need you&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-erlang" data-lang="erlang">&lt;span style="display:flex;">&lt;span>dubboerl:&lt;span style="color:#268bd2">init&lt;/span>().
@@ -2931,7 +2931,7 @@ into the project&amp;rsquo;s &lt;code>apps&lt;/code> directory.&lt;/li>
 &lt;p>&lt;strong>Then, the traffic becomes even heavier, the capacity problem of the service is exposed, how many machines are needed to support this service? When should the machine be added?&lt;/strong> To solve these problems, first, the daily service calls and the amount of response time should be counted as a reference for capacity planning. Second, dynamically adjust the weight, increase the weight of an online machine, and recorded the response time changes until it reaches the threshold, record the visits times at this time, then multiply this number of visits by the total number of machines to calculate the capacity in turn.&lt;/p>
 &lt;p>Above are the most basic requirements of Dubbo.&lt;/p></description></item><item><title>Docs: XML Configuration</title><link>https://dubbo.apache.org/en/docs/v2.7/user/configuration/xml/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/configuration/xml/</guid><description>
 &lt;blockquote>
-&lt;p>About the XML configuration items, see：&lt;a href="../references/xml">XML References&lt;/a>. If you prefer use API directly instead of using Spring, see &lt;a href="../api">API Configuration&lt;/a>. Want an example of how to use configuration, see &lt;a href="../../quick-start">Quick Start&lt;/a>.&lt;/p>
+&lt;p>About the XML configuration items, see：&lt;a href="content/old/en/docs/v2.7/user/references/xml">XML References&lt;/a>. If you prefer use API directly instead of using Spring, see &lt;a href="../api">API Configuration&lt;/a>. Want an example of how to use configuration, see &lt;a href="../../quick-start">Quick Start&lt;/a>.&lt;/p>
 &lt;/blockquote>
 &lt;h2 id="providerxml-demo">provider.xml demo&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span>
@@ -3108,7 +3108,7 @@ into the project&amp;rsquo;s &lt;code>apps&lt;/code> directory.&lt;/li>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;chinaRegistry&amp;#34;&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;zookeeper&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.153.10:2181&amp;#34;&lt;/span> group=&lt;span style="color:#2aa198">&amp;#34;china&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;intlRegistry&amp;#34;&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;zookeeper&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.153.10:2181&amp;#34;&lt;/span> group=&lt;span style="color:#2aa198">&amp;#34;intl&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="zookeeper-installation">Zookeeper Installation&lt;/h2>
-&lt;p>Pls. refer to &lt;a href="../../../admin/install/zookeeper.md">zookeeper install manual&lt;/a> for how to install zookeeper based registry server. To set it up, specify &lt;code>dubbo.registry.address&lt;/code> to &lt;code>zookeeper://127.0.0.1:2181&lt;/code> in &lt;code>conf/dubbo.properties&lt;/code> for both provider and consumer (you can refer to &lt;a href="../../quick-start.md">quick start&lt;/a>) after install a zookeeper server.&lt;/p>
+&lt;p>Pls. refer to &lt;a href="content/old/en/docs/v2.7/admin/install/zookeeper.md">zookeeper install manual&lt;/a> for how to install zookeeper based registry server. To set it up, specify &lt;code>dubbo.registry.address&lt;/code> to &lt;code>zookeeper://127.0.0.1:2181&lt;/code> in &lt;code>conf/dubbo.properties&lt;/code> for both provider and consumer (you can refer to &lt;a href="content/old/en/docs/v2.7/user/quick-start.md">quick start&lt;/a>) after install a zookeeper server.&lt;/p>
 &lt;h2 id="declaration-of-reliability">Declaration of Reliability&lt;/h2>
 &lt;p>A home-brewed service registry server is used in Alibaba instead of zookeeper server. Zookeeper based registry center does not have long-run practice within Alibaba, therefore we cannot guarantee its reliability. Zookeeper registry server is provided for dubbo community, and its reliability relies on zookeeper itself largely.&lt;/p>
 &lt;h2 id="declaration-of-compatibility">Declaration of Compatibility&lt;/h2>
@@ -3122,7 +3122,87 @@ into the project&amp;rsquo;s &lt;code>apps&lt;/code> directory.&lt;/li>
 &lt;p>Suggest to use &lt;code>2.3.3&lt;/code> or above for zookeeper registry client&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/div></description></item><item><title>Docs: CLA Signing Guide</title><link>https://dubbo.apache.org/en/docs/contribution-guidelines/contributor/cla-signing-guide_dev/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/contribution-guidelines/contributor/cla-signing-guide_dev/</guid><description>
+&lt;/div></description></item><item><title>Latest: 如何成为 Dubbo Committer</title><link>https://dubbo.apache.org/en/latest/contribution-guidelines/contributor/become-a-committer_dev/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/latest/contribution-guidelines/contributor/become-a-committer_dev/</guid><description>
+&lt;p>每个人都可以成为 Apache 项目的贡献者。作为一个贡献者只是意味着你对项目感兴趣并以某种方式做出贡献，从提出合理的问题（这些问题记录了项目并向开发人员提供反馈）到提供新的特性作为补丁。&lt;/p>
+&lt;p>如果你成为对一个项目有价值的贡献者，你有可能被邀请成为一个 committer。committer 是 ASF（Apache软件基金会）中用来表示提交特定项目的人的术语。它给你带来对项目仓库和资源写的权限。&lt;/p>
+&lt;p>在 Dubbo 社区，如果一个 committer 获得大量的优秀成绩，就可以被邀请加入项目管理委员会（PMC）。&lt;/p>
+&lt;p>当您不熟悉ASF使用的开源的开发过程时，有时难以理解的一点，就是我们更重视社区而不是代码。一个强大而健康的社区将受到尊重，成为一个有趣和有益的地方。更重要的是，一个多元化和健康的社区可以长时间的持续支持代码，即使个别公司在这个领域来来往往，也是如此。&lt;/p>
+&lt;p>更多详细信息可以在&lt;a href="https://community.apache.org/contributors/">这里&lt;/a>找到。&lt;/p>
+&lt;h3 id="我可以贡献什么">我可以贡献什么？&lt;/h3>
+&lt;p>请参阅&lt;a href="https://dubbo.apache.org/zh/docs/contribution-guidelines/contributor/new-contributor-guide_dev">新的贡献者指南&lt;/a>。&lt;/p></description></item><item><title>Latest: Apache 提交者注册流程</title><link>https://dubbo.apache.org/en/latest/contribution-guidelines/committer/new-committer-guide_dev/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/latest/contribution-guidelines/committer/new-committer-guide_dev/</guid><description>
+&lt;h2 id="一apache-提交者的产生">一、Apache 提交者的产生&lt;/h2>
+&lt;h3 id="项目孵化初始化提交者">项目孵化初始化提交者&lt;/h3>
+&lt;p>项目孵化阶段，在孵化项目提案中，会有初始化提交者列表这一选项。确认你是初始化提交者的一员。项目在 apache 孵化器社区投票通过后，提交者可以开始准备注册账户了。可以参看&lt;a href="https://wiki.apache.org/incubator/">孵化器 wiki&lt;/a>&lt;/p>
+&lt;h3 id="活跃的贡献者被选举为提交者">活跃的贡献者被选举为提交者&lt;/h3>
+&lt;p>在后期的开发过程中，活跃的贡献者可以被选举为提交者。见&lt;a href="https://www.apache.org/dev/new-committers-guide.html#becoming-a-committer">如何成为 committer&lt;/a>&lt;/p>
+&lt;h2 id="二个人开发者提交-icla">二、个人开发者提交 ICLA&lt;/h2>
+&lt;h3 id="1选择-apache-id">1、选择 apache id&lt;/h3>
+&lt;p>在&lt;a href="http://people.apache.org/committer-index.html"> apache 提交者列表页&lt;/a>查看已经注册过的 apache id，&lt;/p>
+&lt;h3 id="2个人提交者授权协议icla">2、个人提交者授权协议（ICLA）：&lt;/h3>
+&lt;p>下载&lt;a href="https://www.apache.org/licenses/icla.pdf"> ICLA 模板&lt;/a>，查找可用的 id。将 icla.pdf 个人信息填写正确后打印,签名、扫描、并当做附件发送邮件给秘书 &lt;a href="mailto:secretary@apache.org">secretary@apache.org&lt;/a>，秘书会帮忙创建 apache 用户 id。同时会创建一个 &lt;a href="mailto:your_id@apache.org">your_id@apache.org&lt;/a> 的邮箱，可以在&lt;a href="http://people.apache.org/committer-index.html"> apache 提交者列表页&lt;/a>查看查找用户是否已经创建。&lt;/p>
+&lt;h3 id="3导师帮助提交用户id创建请求">3、导师帮助提交用户id创建请求&lt;/h3>
+&lt;p>导师将帮助提交 apache 账户创建请求给 root 邮件组，会有人帮助建立 id。一般需要2天时间账户会建立，请等待并在&lt;a href="http://people.apache.org/committer-index.html"> apache 提交者列表页&lt;/a>查看查找用户是否已经创建。&lt;/p>
+&lt;h2 id="三加入apache开发者组">三、加入apache开发者组&lt;/h2>
+&lt;ol>
+&lt;li>登陆 &lt;a href="https://id.apache.org/">Apache 账户工具&lt;/a>，在登陆页面点击&amp;quot;忘记密码&amp;quot;设置始化密码，会有一封密码重置邮件发送到 forward 邮箱(在孵化项目提案中提交的开发者邮件)&lt;/li>
+&lt;li>关于 apache 邮箱：apache.org 邮箱并没有自己的邮件内容存储服务器。它需要借用其他邮件提供商的邮件内容存储、分发功能。在很多投票环节是建议使用 apache 邮箱的。
+这里就有一个问题，怎么在其它邮箱里面配置 apache.org 邮箱转发功能：
+&lt;ul>
+&lt;li>收件箱：收取发送到 apache.org 的邮件。这个在第一步配置好 Apache 账户工具的 forward 邮箱就可以用 forward 邮箱收取邮件了&lt;/li>
+&lt;li>发件箱：将发出的邮件显示发件邮箱为 apache.org 邮箱。请参考：&lt;a href="https://reference.apache.org/committer/email">设置 apache 邮箱指南&lt;/a>和&lt;a href="http://gmailblog.blogspot.com/2009/07/send-mail-from-another-address-without.html"> gmail 邮箱设置方式&lt;/a>。 其他邮箱服务的设置方式不方便找到，gmail 的最方便，建议换成 gmail 邮箱(不是广告)。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>修改编辑页面的 homepage url，&lt;a href="http://people.apache.org/committer-index.html">apache 提交者列表页&lt;/a>中你的账户能加主页链接。&lt;/li>
+&lt;li>修改编辑页面的 github 账户(username)，提交确认后两个小时内会有邮件邀请你加入 github.com/apache-committers 组。这期间可以阅读&lt;a href="http://www.apache.org/foundation/how-it-works.html#developers"> ASF 工作方式&lt;/a>以对 ASF 开发做一些基本了解。&lt;/li>
+&lt;/ol>
+&lt;h2 id="四提交者获得对项目的写权限">四、提交者获得对项目的写权限&lt;/h2>
+&lt;p>&lt;a href="https://gitbox.apache.org/setup/">GitBox 账户链接工具&lt;/a>的操作&lt;/p>
+&lt;h3 id="apache账户授权">Apache账户授权&lt;/h3>
+&lt;p>按照提示授权对 Apache 账户的 OAuth 协议登入&lt;/p>
+&lt;h3 id="github账户授权">Github账户授权&lt;/h3>
+&lt;p>按照提示授权对 github 账户的 OAuth 协议登入&lt;/p>
+&lt;h3 id="在-githubcom-设置-github-账户两因素授权2fa">在 github.com 设置 github 账户两因素授权（2FA）&lt;/h3>
+&lt;p>按照&lt;a href="https://help.github.com/articles/configuring-two-factor-authentication-via-a-totp-mobile-app/">授权 GitHub 2FA wiki&lt;/a> 操作如下：&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>在手机安装 “google 身份验证器” app&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>按照&lt;a href="https://help.github.com/articles/configuring-two-factor-authentication-via-a-totp-mobile-app/">授权 GitHub 2FA wiki&lt;/a> 一步一步操作。&lt;/p>
+&lt;p>在&lt;a href="https://github.com/settings/two_factor_authentication/verify">两因素授权验证&lt;/a>界面，不建议选择用手机扫描二维码，因为有些手机会扫描不出来。
+请打开手机 “google 身份验证器” app，点“+”选择“输入提供的秘钥”： 在“账户名” input 框写入 github 账户。在“您的秘钥” input 框写入:打开的网页中 &amp;ldquo;enter this text code&amp;rdquo; 链接里面的文本。在 app 中点击&amp;quot;添加&amp;quot; 后，将为此账户生成6位数字动态。将此6位数字写入网页中的文本框，然后点 “Enable”。这样 2FA 就设置成功了。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>退出并重新登陆 github，输入用户名、密码后会多一步动态密码的填写，该动态密码就是 google 身份验证器上面的动态密码&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>大概需要半个小时,会有邮件通知你已经加入了 xx project-committers 开发者组。你也可以进入 &lt;a href="https://github.com/orgs/apache/teams">apache teams&lt;/a> 页面查看。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>2FA 提交后，你已经 clone 的项目会有权限校验问题，解决方法为下面二选一：&lt;/p>
+&lt;ul>
+&lt;li>申请 Access Token：
+在 github 上生成 access token 后，指令行需要密码的地方就粘贴token。
+参考官网&lt;a href="https://help.github.com/articles/https-cloning-errors/#provide-access-token-if-2fa-enabled">帮助链接一&lt;/a>和&lt;a href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/">帮助链接二&lt;/a>&lt;/li>
+&lt;li>改用 ssh：
+在命令行执行 ssh-keygen 命令， 然后把pub文件中的内容粘贴到 github 上&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>注意：一定要保证 github 的 2FA 为 &amp;ldquo;enable&amp;rdquo; 状态。当你将 2FA 设置为 &amp;ldquo;off&amp;rdquo; 时候，将会被对应的 apache committer 写权限组除名，直到你再次设置成功为止。&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="五其他">五、其他&lt;/h2>
+&lt;h3 id="the-apache-way">The Apache Way&lt;/h3>
+&lt;p>详情请参考 &lt;a href="http://apache.org/foundation/governance/">wiki&lt;/a>&lt;/p>
+&lt;p>社区重于代码，如果某问题或者方案没有在社区(邮件列表)讨论过，就当没有发生过&lt;/p>
+&lt;h3 id="添加你的名字">添加你的名字&lt;/h3>
+&lt;p>请访问孵化器&lt;a href="https://incubator.apache.org/projects/dubbo.html">主页&lt;/a>将你的名字添加到上面. 具体可以参考这个&lt;a href="http://dubbo.apache.org/docs/3.0/zh-cn/docs/developers/committer-guide/apache-dubbo-page_dev.html">文档&lt;/a>.&lt;/p>
+&lt;p>请访问 Dubbo&lt;a href="http://dubbo.apache.org/docs/3.0/zh-cn/docs/developers/developers/developers_dev.html">官方网站&lt;/a> 将你的名字添加到上面.&lt;/p>
+&lt;h3 id="小福利">小福利&lt;/h3>
+&lt;p>Jetbrains 给 apache 提交者一个小福利，就是可以免费使用 idea 的全产品系列。具体注册地址为：https://www.jetbrains.com/shop/eform/apache?product=ALL&lt;/p>
+&lt;h3 id="相关-wiki">相关 wiki&lt;/h3>
+&lt;p>&lt;a href="https://www.apache.org/dev/new-committers-guide.html">https://www.apache.org/dev/new-committers-guide.html&lt;/a>&lt;/p></description></item><item><title>Docs: CLA Signing Guide</title><link>https://dubbo.apache.org/en/docs/contribution-guidelines/contributor/cla-signing-guide_dev/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/contribution-guidelines/contributor/cla-signing-guide_dev/</guid><description>
 &lt;p>You are required to sign the Apache ICLA under the following condition:&lt;/p>
 &lt;ul>
 &lt;li>You have made lots of contribution to Dubbo before Dubbo get donated to Apache, and you haven&amp;rsquo;t sign the Alibaba-CLA before.&lt;/li>
@@ -3148,6 +3228,32 @@ into the project&amp;rsquo;s &lt;code>apps&lt;/code> directory.&lt;/li>
 &lt;li>Mailing address: Your company address in English is preferred.&lt;/li>
 &lt;li>preferred apache id(s): if you are invited to become committers, you have to choose one apache id, otherwise you can leave it blank.&lt;/li>
 &lt;li>notify project: Dubbo (This means Dubbo is the project who notifies you to sign the ICLA)&lt;/li>
+&lt;/ul></description></item><item><title>Latest: CLA 签署向导</title><link>https://dubbo.apache.org/en/latest/contribution-guidelines/contributor/cla-signing-guide_dev/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/latest/contribution-guidelines/contributor/cla-signing-guide_dev/</guid><description>
+&lt;p>以下情况，需要您签署 Apache ICLA：&lt;/p>
+&lt;ul>
+&lt;li>在 Dubbo 被捐赠给 Apache 之前，您已经为 Dubbo 作出了很多贡献，并且您以前没有签署过 Alibaba-CLA。&lt;/li>
+&lt;li>您已经为 Dubbo 作出了很多贡献，并且您被邀请成为 Dubbo 提交者，且之前没有签署过 Alibaba-CLA 或者 Apache ICLA。&lt;/li>
+&lt;/ul>
+&lt;h3 id="步骤">步骤&lt;/h3>
+&lt;ul>
+&lt;li>下载这篇 &lt;a href="https://www.apache.org/licenses/icla.pdf">pdf 文档&lt;/a>&lt;/li>
+&lt;li>编辑该文档，在必要的空格处填上适当的内容&lt;/li>
+&lt;li>打印&lt;/li>
+&lt;li>在打印好的文件上签字&lt;/li>
+&lt;li>扫描&lt;/li>
+&lt;li>发送一封邮件到secretary@apache.org，并抄送给private@dubbo.apache.org：
+&lt;ul>
+&lt;li>邮件标题为“ICLA submission”&lt;/li>
+&lt;li>请在邮件正文附上您的github账号链接&lt;/li>
+&lt;li>请记得将您的ICLA文档放入邮件的附件里&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="空格填写必要说明">空格填写必要说明&lt;/h3>
+&lt;ul>
+&lt;li>Mailing address：首选英文格式的公司地址&lt;/li>
+&lt;li>preferred apache id(s)：如果您被邀请成为一名提交者，那么需要您填写一个apache账号，否则，可以不填&lt;/li>
+&lt;li>notify project：Dubbo（意思就是Dubbo就是通知您签署ICLA的项目）&lt;/li>
 &lt;/ul></description></item><item><title>Docs: The Configuration Design</title><link>https://dubbo.apache.org/en/docs/v2.7/dev/principals/configuration/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/dev/principals/configuration/</guid><description>
 &lt;blockquote>
 &lt;p>&lt;a href="http://javatar.iteye.com/blog/949527">http://javatar.iteye.com/blog/949527&lt;/a>&lt;/p>
@@ -3222,7 +3328,7 @@ Dubbo, moreover, the old version all the timeout, retries, load balancing strate
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> {&lt;span style="color:#719e07">&amp;lt;&amp;lt;&lt;/span>&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.erlang.sample.service.facade.UserOperator&amp;#34;&lt;/span>&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span>,[]},
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ]}
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>]}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Option is to be added.&lt;/p></description></item><item><title>Docs: Install Demo Provider</title><link>https://dubbo.apache.org/en/docs/v2.7/admin/install/provider-demo/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/admin/install/provider-demo/</guid><description>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Option is to be added.&lt;/p></description></item><item><title>Latest: Core Concepts</title><link>https://dubbo.apache.org/en/latest/facade-docs/what/core-concepts/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/latest/facade-docs/what/core-concepts/</guid><description/></item><item><title>Docs: Install Demo Provider</title><link>https://dubbo.apache.org/en/docs/v2.7/admin/install/provider-demo/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/admin/install/provider-demo/</guid><description>
 &lt;p>install:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>$ git clone https://github.com/apache/dubbo.git
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ &lt;span style="color:#b58900">cd&lt;/span> dubbo/dubbo-demo/dubbo-demo-xml
@@ -4613,500 +4719,4 @@ The mail template to announce release:&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后将这个ExceptionMapper添加到XML配置中即可：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;rest&amp;#34;&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;8888&amp;#34;&lt;/span> extension=&lt;span style="color:#2aa198">&amp;#34;xxx.MyValidationExceptionMapper&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: API Configuration</title><link>https://dubbo.apache.org/en/docs/v2.7/user/configuration/api/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/configuration/api/</guid><description>
-&lt;blockquote>
-&lt;p>All API properties have counterparts in XML, see &lt;a href="../../references/xml/">XML References&lt;/a> for details. For example &lt;code>ApplicationConfig.setName(&amp;quot;xxx&amp;quot;)&lt;/code> equals to &lt;code>&amp;lt;dubbo:application name=&amp;quot;xxx&amp;quot; /&amp;gt;&lt;/code> &lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>&lt;/p>
-&lt;/blockquote>
-&lt;h2 id="provider-side">Provider Side&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.config.ApplicationConfig&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.config.RegistryConfig&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.config.ProviderConfig&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.config.ServiceConfig&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> com.xxx.XxxService&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> com.xxx.XxxServiceImpl&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// Implementation
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>XxxService xxxService &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> XxxServiceImpl&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// Application Info
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>ApplicationConfig application &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ApplicationConfig&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>application&lt;span style="color:#719e07">.&lt;/span>setName&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;xxx&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// Registry Info
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>RegistryConfig registry &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> RegistryConfig&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>registry&lt;span style="color:#719e07">.&lt;/span>setAddress&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;10.20.130.230:9090&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>registry&lt;span style="color:#719e07">.&lt;/span>setUsername&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;aaa&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>registry&lt;span style="color:#719e07">.&lt;/span>setPassword&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;bbb&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// Protocol
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>ProtocolConfig protocol &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ProtocolConfig&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>protocol&lt;span style="color:#719e07">.&lt;/span>setName&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>protocol&lt;span style="color:#719e07">.&lt;/span>setPort&lt;span style="color:#719e07">(&lt;/span>12345&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>protocol&lt;span style="color:#719e07">.&lt;/span>setThreads&lt;span style="color:#719e07">(&lt;/span>200&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// NOTES: ServiceConfig holds the serversocket instance and keeps connections to registry, please cache it for performance.
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// Exporting
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>ServiceConfig&lt;span style="color:#719e07">&amp;lt;&lt;/span>XxxService&lt;span style="color:#719e07">&amp;gt;&lt;/span> service &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ServiceConfig&lt;span style="color:#719e07">&amp;lt;&lt;/span>XxxService&lt;span style="color:#719e07">&amp;gt;();&lt;/span> &lt;span style="color:#586e75">// In case of memory leak, please cache.
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>service&lt;span style="color:#719e07">.&lt;/span>setApplication&lt;span style="color:#719e07">(&lt;/span>application&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>service&lt;span style="color:#719e07">.&lt;/span>setRegistry&lt;span style="color:#719e07">(&lt;/span>registry&lt;span style="color:#719e07">);&lt;/span> &lt;span style="color:#586e75">// Use setRegistries() for multi-registry case
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>service&lt;span style="color:#719e07">.&lt;/span>setProtocol&lt;span style="color:#719e07">(&lt;/span>protocol&lt;span style="color:#719e07">);&lt;/span> &lt;span style="color:#586e75">// Use setProtocols() for multi-protocol case
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>service&lt;span style="color:#719e07">.&lt;/span>setInterface&lt;span style="color:#719e07">(&lt;/span>XxxService&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>service&lt;span style="color:#719e07">.&lt;/span>setRef&lt;span style="color:#719e07">(&lt;/span>xxxService&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>service&lt;span style="color:#719e07">.&lt;/span>setVersion&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;1.0.0&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// Local export and register
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>service&lt;span style="color:#719e07">.&lt;/span>export&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="consumer-side">Consumer Side&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.config.ApplicationConfig&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.config.RegistryConfig&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.config.ConsumerConfig&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.config.ReferenceConfig&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> com.xxx.XxxService&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// Application Info
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>ApplicationConfig application &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ApplicationConfig&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>application&lt;span style="color:#719e07">.&lt;/span>setName&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;yyy&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// Registry Info
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>RegistryConfig registry &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> RegistryConfig&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>registry&lt;span style="color:#719e07">.&lt;/span>setAddress&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;10.20.130.230:9090&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>registry&lt;span style="color:#719e07">.&lt;/span>setUsername&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;aaa&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>registry&lt;span style="color:#719e07">.&lt;/span>setPassword&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;bbb&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// NOTES: ReferenceConfig holds the connections to registry and providers, please cache it for performance.
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// Refer remote service
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>ReferenceConfig&lt;span style="color:#719e07">&amp;lt;&lt;/span>XxxService&lt;span style="color:#719e07">&amp;gt;&lt;/span> reference &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ReferenceConfig&lt;span style="color:#719e07">&amp;lt;&lt;/span>XxxService&lt;span style="color:#719e07">&amp;gt;();&lt;/span> &lt;span style="color:#586e75">// In case of memory leak, please cache.
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>reference&lt;span style="color:#719e07">.&lt;/span>setApplication&lt;span style="color:#719e07">(&lt;/span>application&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reference&lt;span style="color:#719e07">.&lt;/span>setRegistry&lt;span style="color:#719e07">(&lt;/span>registry&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reference&lt;span style="color:#719e07">.&lt;/span>setInterface&lt;span style="color:#719e07">(&lt;/span>XxxService&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reference&lt;span style="color:#719e07">.&lt;/span>setVersion&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;1.0.0&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// Use xxxService just like a local bean
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>XxxService xxxService &lt;span style="color:#719e07">=&lt;/span> reference&lt;span style="color:#719e07">.&lt;/span>get&lt;span style="color:#719e07">();&lt;/span> &lt;span style="color:#586e75">// NOTES: Please cache this proxy instance.
-&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="specials">Specials&lt;/h2>
-&lt;p>Only care about the differences:&lt;/p>
-&lt;h3 id="configuration-of-method-level">Configuration of Method level&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">...&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// Method level config
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>List&lt;span style="color:#719e07">&amp;lt;&lt;/span>MethodConfig&lt;span style="color:#719e07">&amp;gt;&lt;/span> methods &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ArrayList&lt;span style="color:#719e07">&amp;lt;&lt;/span>MethodConfig&lt;span style="color:#719e07">&amp;gt;();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>MethodConfig method &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> MethodConfig&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>method&lt;span style="color:#719e07">.&lt;/span>setName&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;createXxx&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>method&lt;span style="color:#719e07">.&lt;/span>setTimeout&lt;span style="color:#719e07">(&lt;/span>10000&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>method&lt;span style="color:#719e07">.&lt;/span>setRetries&lt;span style="color:#719e07">(&lt;/span>0&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>methods&lt;span style="color:#719e07">.&lt;/span>add&lt;span style="color:#719e07">(&lt;/span>method&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// Referring
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>ReferenceConfig&lt;span style="color:#719e07">&amp;lt;&lt;/span>XxxService&lt;span style="color:#719e07">&amp;gt;&lt;/span> reference &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ReferenceConfig&lt;span style="color:#719e07">&amp;lt;&lt;/span>XxxService&lt;span style="color:#719e07">&amp;gt;();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">...&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reference&lt;span style="color:#719e07">.&lt;/span>setMethods&lt;span style="color:#719e07">(&lt;/span>methods&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">...&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="peer-to-peer">Peer to Peer&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">...&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ReferenceConfig&lt;span style="color:#719e07">&amp;lt;&lt;/span>XxxService&lt;span style="color:#719e07">&amp;gt;&lt;/span> reference &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ReferenceConfig&lt;span style="color:#719e07">&amp;lt;&lt;/span>XxxService&lt;span style="color:#719e07">&amp;gt;();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// If you know the address of the provider and want to bypass the registry, use `reference.setUrl()` to specify the provider directly. Refer [How to Invoke a specific provider](../demos/explicit-target.md) for details.
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>reference&lt;span style="color:#719e07">.&lt;/span>setUrl&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;dubbo://10.20.130.230:20880/com.xxx.XxxService&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">...&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="footnotes" role="doc-endnotes">
-&lt;hr>
-&lt;ol>
-&lt;li id="fn:1">
-&lt;p>When should we usd API: API is very useful for integrating with systems like OpenAPI, ESB, Test, Mock, etc. General Providers and Consumers, we still recommend use &lt;a href="../xml">XML Configuration&lt;/a>.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
-&lt;/li>
-&lt;/ol>
-&lt;/div></description></item><item><title>Docs: Architecture</title><link>https://dubbo.apache.org/en/docs/v2.7/user/preface/architecture/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/preface/architecture/</guid><description>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/dubbo-architecture.jpg" alt="dubbo-architucture">&lt;/p>
-&lt;h5 id="specification-of-nodes-role">Specification of Node&amp;rsquo;s Role&lt;/h5>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Node&lt;/th>
-&lt;th>Role Spec&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>&lt;code>Provider&lt;/code>&lt;/td>
-&lt;td>The provider exposes remote services&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>&lt;code>Consumer&lt;/code>&lt;/td>
-&lt;td>The consumer calls the remote services&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>&lt;code>Registry&lt;/code>&lt;/td>
-&lt;td>The registry is responsible for service discovery and configuration&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>&lt;code>Monitor&lt;/code>&lt;/td>
-&lt;td>The monitor counts the number of service invocations and time-consuming&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>&lt;code>Container&lt;/code>&lt;/td>
-&lt;td>The container manages the services&amp;rsquo;s lifetime&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h5 id="service-relationship">Service relationship&lt;/h5>
-&lt;ol start="0">
-&lt;li>&lt;code>Container&lt;/code> is responsible for launching, loading, and running the service &lt;code>Provider&lt;/code>.&lt;/li>
-&lt;li>&lt;code>Provider&lt;/code> registers its services to &lt;code>Register&lt;/code> at the time it starts.&lt;/li>
-&lt;li>&lt;code>Consumer&lt;/code> subscribes the services it needs from the &lt;code>Register&lt;/code> when it starts.&lt;/li>
-&lt;li>&lt;code>Register&lt;/code> returns the &lt;code>Provider&lt;/code>s list to &lt;code>Consumer&lt;/code>, when it changes, the &lt;code>Register&lt;/code> will push the changed data to &lt;code>Consumer&lt;/code> through long connection.&lt;/li>
-&lt;li>&lt;code>Consumer&lt;/code> selects one of the &lt;code>Provider&lt;/code>s based on soft load balancing algorithm and executes the invocation, if fails, it will choose another &lt;code>Provider&lt;/code>.&lt;/li>
-&lt;li>Both &lt;code>Consumer&lt;/code> and &lt;code>Provider&lt;/code> will count the number service invocations and time-consuming in memory, and send the statistics to &lt;code>Monitor&lt;/code> every minute.&lt;/li>
-&lt;/ol>
-&lt;p>Dubbo has the following features: Connectivity, Robustness, Scalability and Upgradeability.&lt;/p>
-&lt;h2 id="connectivity">Connectivity&lt;/h2>
-&lt;ul>
-&lt;li>&lt;code>Register&lt;/code> is responsible for the registration and search of service addresses, like directory services, &lt;code>Provider&lt;/code> and &lt;code>Consumer&lt;/code> only interact with the registry during startup, and the registry does not forward requests, so it is less stressed&lt;/li>
-&lt;li>&amp;lsquo;Monitor&amp;rsquo; is responsible for counting the number of service invocations and time-consuming, the statistics will assembles in &lt;code>Provider&lt;/code>&amp;rsquo;s and &lt;code>Consumer&lt;/code>&amp;rsquo;s memory first and then sent to &lt;code>Monitor&lt;/code>&lt;/li>
-&lt;li>&amp;lsquo;Provider&amp;rsquo; registers services to &amp;lsquo;Register&amp;rsquo; and report time-consuming statistic(not include network overhead) to &amp;lsquo;Monitor&amp;rsquo;&lt;/li>
-&lt;li>&amp;lsquo;Consumer&amp;rsquo; gets a list of service provider addresses from &lt;code>Registry&lt;/code>, call the provider directly according to the LB algorithm, report the time-consuming statistic to &lt;code>Monitor&lt;/code>, which includes network overhead&lt;/li>
-&lt;li>The connections between &lt;code>Register&lt;/code>, &lt;code>Provider&lt;/code> and &lt;code>Consumer&lt;/code> are long connections, &lt;code>Moniter&lt;/code> is an exception&lt;/li>
-&lt;li>&lt;code>Register&lt;/code> is aware of the existence of &lt;code>Provider&lt;/code> through the long connection, when &lt;code>Provider&lt;/code> gets down, &lt;code>Register&lt;/code> will push the event to &lt;code>Consumer&lt;/code>&lt;/li>
-&lt;li>It doesn&amp;rsquo;t affect the already running instances of &lt;code>Provider&lt;/code> and &lt;code>Consumer&lt;/code> even all of the &lt;code>Register&lt;/code> and &lt;code>Monitor&lt;/code> get down, since &lt;code>Consumer&lt;/code> got a cache of &lt;code>Provider&lt;/code>s list&lt;/li>
-&lt;li>&lt;code>Register&lt;/code> and &lt;code>Monitor&lt;/code> are optional, &lt;code>Consumer&lt;/code> can connect &lt;code>Provider&lt;/code> directly&lt;/li>
-&lt;/ul>
-&lt;h2 id="robustness">Robustness&lt;/h2>
-&lt;ul>
-&lt;li>&lt;code>Monitor&lt;/code>&amp;rsquo;s downtime doesn&amp;rsquo;t affect the usage, only lose some sampling data&lt;/li>
-&lt;li>When the DB server goes down, &lt;code>Register&lt;/code> can return service &lt;code>Provider&lt;/code>s list to &lt;code>Consumer&lt;/code> by checking its cache, but new &lt;code>Provider&lt;/code> cannot register any services&lt;/li>
-&lt;li>&lt;code>Register&lt;/code> is a peer cluster, it will automatically switch to another when any instance goes down&lt;/li>
-&lt;li>Even all &lt;code>Register&lt;/code>&amp;rsquo;s instances go down, &lt;code>Provider&lt;/code> and &lt;code>Consumer&lt;/code> can still conmunicate by checking their local cache&lt;/li>
-&lt;li>Service &lt;code>Provider&lt;/code>s are stateless, one instance&amp;rsquo;s downtime doesn&amp;rsquo;t affect the usage&lt;/li>
-&lt;li>After all the &lt;code>Provider&lt;/code>s of one service go down, &lt;code>Consumer&lt;/code> can not use that service, and infinitely reconnect to wait for service &lt;code>Provider&lt;/code> to recover&lt;/li>
-&lt;/ul>
-&lt;h2 id="scalability">Scalability&lt;/h2>
-&lt;ul>
-&lt;li>&lt;code>Register&lt;/code> is a peer cluster that can dynamically increases its instances, all clients will automatically discover the new instances.&lt;/li>
-&lt;li>&lt;code>Provider&lt;/code> is stateless, it can dynamically increases the deployment instances, and the registry will push the new service provider information to the &lt;code>Consumer&lt;/code>.&lt;/li>
-&lt;/ul>
-&lt;h2 id="upgradeablity">Upgradeablity&lt;/h2>
-&lt;p>When the service cluster is further expanded and the IT governance structure is further upgraded, dynamic deployment is needed, and the current distributed service architecture will not bring resistance. Here is a possible future architecture:&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/dubbo-architecture-future.jpg" alt="dubbo-architucture-futures">&lt;/p>
-&lt;h5 id="specification-of-nodes-role-1">Specification of Node&amp;rsquo;s Role&lt;/h5>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Node&lt;/th>
-&lt;th>Role Spec&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>&lt;code>Deployer &lt;/code>&lt;/td>
-&lt;td>Local proxy for automatic services deployment&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>&lt;code>Repository&lt;/code>&lt;/td>
-&lt;td>The repository is used to store application packages&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>&lt;code>Scheduler&lt;/code>&lt;/td>
-&lt;td>The scheduler automatically increases or decreases service providers based on the access pressure&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>&lt;code>Admin&lt;/code>&lt;/td>
-&lt;td>Unified management console&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>&lt;code>Registry&lt;/code>&lt;/td>
-&lt;td>the registry is responsible for service discovery and configuration&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>&lt;code>Monitor&lt;/code>&lt;/td>
-&lt;td>The monitor counts the service call times and time-consuming&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table></description></item><item><title>Docs: Install Demo Consumer</title><link>https://dubbo.apache.org/en/docs/v2.7/admin/install/consumer-demo/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/admin/install/consumer-demo/</guid><description>
-&lt;p>Install:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>$ git clone https://github.com/apache/dubbo.git
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ &lt;span style="color:#b58900">cd&lt;/span> dubbo/dubbo-demo/dubbo-demo-xml
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># run org.apache.dubbo.demo.consumer.Application under dubbo-demo-xml-consumer module&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># please start Provider first&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># add -Djava.net.preferIPv4Stack=true if your IDE is Intellij Idea&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Configuration:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># resources/spring/dubbo-consumer.xml&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># change dubbo:registry to the real registry center address, for example:&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># &amp;lt;dubbo:registry address=&amp;#34;zookeeper://127.0.0.1:2181&amp;#34;/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Dependencies</title><link>https://dubbo.apache.org/en/docs/v2.7/user/dependencies/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/dependencies/</guid><description>
-&lt;h2 id="necessary-dependencies">Necessary dependencies&lt;/h2>
-&lt;p>JDK 1.6+ &lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>&lt;/p>
-&lt;h2 id="default-dependencies">Default dependencies&lt;/h2>
-&lt;p>use &lt;code>mvn dependency:tree &amp;gt; dep.log&lt;/code> command to analysis，Dubbo default depends on the following 3rd party libraries：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">[&lt;/span>INFO&lt;span style="color:#719e07">]&lt;/span> +- com.alibaba:dubbo:jar:2.5.9-SNAPSHOT:compile
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">[&lt;/span>INFO&lt;span style="color:#719e07">]&lt;/span> | +- org.springframework:spring-context:jar:4.3.10.RELEASE:compile
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">[&lt;/span>INFO&lt;span style="color:#719e07">]&lt;/span> | +- org.javassist:javassist:jar:3.21.0-GA:compile
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">[&lt;/span>INFO&lt;span style="color:#719e07">]&lt;/span> | &lt;span style="color:#cb4b16">\-&lt;/span> org.jboss.netty:netty:jar:3.2.5.Final:compile
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>All dependencies here are selected for the default configuration of the Dubbo, which are based on stability and performance considerations.&lt;/p>
-&lt;ul>
-&lt;li>javassist.jar &lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>: if &lt;code>&amp;lt;dubbo:provider proxy=&amp;quot;jdk&amp;quot; /&amp;gt;&lt;/code> or &lt;code>&amp;lt;dubbo:consumer proxy=&amp;quot;jdk&amp;quot; /&amp;gt;&lt;/code>，or &lt;code>&amp;lt;dubbo:application compiler=&amp;quot;jdk&amp;quot; /&amp;gt;&lt;/code>， is not required.&lt;/li>
-&lt;li>spring-context.jar &lt;sup id="fnref:3">&lt;a href="#fn:3" class="footnote-ref" role="doc-noteref">3&lt;/a>&lt;/sup>: If you are using &lt;code>ServiceConfig&lt;/code> and &lt;code>ReferenceConfig&lt;/code> API calls, is not required.&lt;/li>
-&lt;li>netty.jar &lt;sup id="fnref:4">&lt;a href="#fn:4" class="footnote-ref" role="doc-noteref">4&lt;/a>&lt;/sup>: if &lt;code>&amp;lt;dubbo:protocol server=&amp;quot;mina&amp;quot;/&amp;gt;&lt;/code> or &lt;code>&amp;lt;dubbo:protocol server=&amp;quot;grizzly&amp;quot;/&amp;gt;&lt;/code>，Then change to mina.jar or grizzly.jar. If &lt;code>&amp;lt;protocol name=&amp;quot;rmi&amp;quot;/&amp;gt;&lt;/code>， is not required.&lt;/li>
-&lt;/ul>
-&lt;h2 id="optional-dependencies">Optional dependencies&lt;/h2>
-&lt;p>These dependencies needs to be added to project manually，when you need them.&lt;/p>
-&lt;ul>
-&lt;li>netty-all 4.0.35.Final&lt;/li>
-&lt;li>mina: 1.1.7&lt;/li>
-&lt;li>grizzly: 2.1.4&lt;/li>
-&lt;li>httpclient: 4.5.3&lt;/li>
-&lt;li>hessian_lite: 3.2.1-fixed&lt;/li>
-&lt;li>fastjson: 1.2.31&lt;/li>
-&lt;li>zookeeper: 3.4.9&lt;/li>
-&lt;li>jedis: 2.9.0&lt;/li>
-&lt;li>xmemcached: 1.3.6&lt;/li>
-&lt;li>hessian: 4.0.38&lt;/li>
-&lt;li>jetty: 6.1.26&lt;/li>
-&lt;li>hibernate-validator: 5.4.1.Final&lt;/li>
-&lt;li>zkclient: 0.2&lt;/li>
-&lt;li>curator: 2.12.0&lt;/li>
-&lt;li>cxf: 3.0.14&lt;/li>
-&lt;li>thrift: 0.8.0&lt;/li>
-&lt;li>servlet: 3.0 &lt;sup id="fnref:5">&lt;a href="#fn:5" class="footnote-ref" role="doc-noteref">5&lt;/a>&lt;/sup>&lt;/li>
-&lt;li>validation-api: 1.1.0.GA &lt;sup id="fnref1:5">&lt;a href="#fn:5" class="footnote-ref" role="doc-noteref">5&lt;/a>&lt;/sup>&lt;/li>
-&lt;li>jcache: 1.0.0 &lt;sup id="fnref2:5">&lt;a href="#fn:5" class="footnote-ref" role="doc-noteref">5&lt;/a>&lt;/sup>&lt;/li>
-&lt;li>javax.el: 3.0.1-b08 &lt;sup id="fnref3:5">&lt;a href="#fn:5" class="footnote-ref" role="doc-noteref">5&lt;/a>&lt;/sup>&lt;/li>
-&lt;li>kryo: 4.0.1&lt;/li>
-&lt;li>kryo-serializers: 0.42&lt;/li>
-&lt;li>fst: 2.48-jdk-6&lt;/li>
-&lt;li>resteasy: 3.0.19.Final&lt;/li>
-&lt;li>tomcat-embed-core: 8.0.11&lt;/li>
-&lt;li>slf4j: 1.7.25&lt;/li>
-&lt;li>log4j: 1.2.16&lt;/li>
-&lt;/ul>
-&lt;div class="footnotes" role="doc-endnotes">
-&lt;hr>
-&lt;ol>
-&lt;li id="fn:1">
-&lt;p>In theory, Dubbo only depend on JDK, not depend on any 3rd party libs, you can finish logic by using JDK.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
-&lt;/li>
-&lt;li id="fn:2">
-&lt;p>Bytecode generation&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
-&lt;/li>
-&lt;li id="fn:3">
-&lt;p>Configuration parsing&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
-&lt;/li>
-&lt;li id="fn:4">
-&lt;p>Network transmission&amp;#160;&lt;a href="#fnref:4" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
-&lt;/li>
-&lt;li id="fn:5">
-&lt;p>JAVAEE&amp;#160;&lt;a href="#fnref:5" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&amp;#160;&lt;a href="#fnref1:5" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&amp;#160;&lt;a href="#fnref2:5" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&amp;#160;&lt;a href="#fnref3:5" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
-&lt;/li>
-&lt;/ol>
-&lt;/div></description></item><item><title>Docs: "Fool-proof" Design</title><link>https://dubbo.apache.org/en/docs/v2.7/dev/principals/dummy/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/dev/principals/dummy/</guid><description>
-&lt;blockquote>
-&lt;p>&lt;a href="http://javatar.iteye.com/blog/804187">http://javatar.iteye.com/blog/804187&lt;/a>&lt;/p>
-&lt;/blockquote>
-&lt;p>Recently I was feeling stupid because I solved too many stupid problems. The service framework is becoming more widely used. Every day, I have to help the endpoint user to resolve problems. Gradually, it is found that most of the problems are configuration errors, or duplicated files or classes, or network failure. So I prepare to add some &amp;ldquo;fool-proof&amp;rdquo; design to the further version. It may be very simple, but it is still a little help for troubleshooting speed. I hope that I can throw a brick to attract jade, and everyone can help to come up with more preventive measures to share.&lt;/p>
-&lt;h2 id="check-for-duplicated-jars">Check for duplicated jars&lt;/h2>
-&lt;p>The most annoying problem is that, if we have several jars with different version number at the same time, there will be a problem. Imagine that, a new version of the Class A may invoke a old version of the Class B, it&amp;rsquo;s related to the JVM loading order. The problem may encounter occasionally and hard to resolve. So the first, let&amp;rsquo;s try to avoid it. For each jar package, pick a class that will be loaded, check it for duplication for example:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Duplicate&lt;span style="color:#719e07">.&lt;/span>checkDuplicate&lt;span style="color:#719e07">(&lt;/span>Xxx&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Utility class for check duplication：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">final&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">Duplicate&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">Duplicate&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">checkDuplicate&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Class cls&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> checkDuplicate&lt;span style="color:#719e07">(&lt;/span>cls&lt;span style="color:#719e07">.&lt;/span>getName&lt;span style="color:#719e07">().&lt;/span>replace&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#39;.&amp;#39;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#2aa198">&amp;#39;/&amp;#39;&lt;/span>&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34;.class&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">checkDuplicate&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String path&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">try&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// search from ClassPath
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> Enumeration urls &lt;span style="color:#719e07">=&lt;/span> Thread&lt;span style="color:#719e07">.&lt;/span>currentThread&lt;span style="color:#719e07">().&lt;/span>getContextClassLoader&lt;span style="color:#719e07">().&lt;/span>getResources&lt;span style="color:#719e07">(&lt;/span>path&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Set files &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> HashSet&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">while&lt;/span> &lt;span style="color:#719e07">(&lt;/span>urls&lt;span style="color:#719e07">.&lt;/span>hasMoreElements&lt;span style="color:#719e07">())&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> URL url &lt;span style="color:#719e07">=&lt;/span> urls&lt;span style="color:#719e07">.&lt;/span>nextElement&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>url &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span>&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> String file &lt;span style="color:#719e07">=&lt;/span> url&lt;span style="color:#719e07">.&lt;/span>getFile&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>file &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span> &lt;span style="color:#719e07">&amp;amp;&lt;/span>amp&lt;span style="color:#719e07">;&amp;amp;&lt;/span>amp&lt;span style="color:#719e07">;&lt;/span> file&lt;span style="color:#719e07">.&lt;/span>length&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">&amp;amp;&lt;/span>gt&lt;span style="color:#719e07">;&lt;/span> 0&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> files&lt;span style="color:#719e07">.&lt;/span>add&lt;span style="color:#719e07">(&lt;/span>file&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// if there are more than one indicates duplication
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>files&lt;span style="color:#719e07">.&lt;/span>size&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">&amp;amp;&lt;/span>gt&lt;span style="color:#719e07">;&lt;/span> 1&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> logger&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Duplicate class &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> path &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34; in &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> files&lt;span style="color:#719e07">.&lt;/span>size&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34; jar &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> files&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">catch&lt;/span> &lt;span style="color:#719e07">(&lt;/span>Throwable e&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span> &lt;span style="color:#586e75">// safe guard
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> logger&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e07">(&lt;/span>e&lt;span style="color:#719e07">.&lt;/span>getMessage&lt;span style="color:#719e07">(),&lt;/span> e&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="check-for-duplicate-configuration-files">Check for duplicate configuration files&lt;/h2>
-&lt;p>It is also a frequently encountered problem that the configuration file is loaded incorrectly. Users often complain that they have the right configuration but program says something is wrong. After some troubleshooting, found that the configuration file is not even loaded. Many products put a default configuration file under classpath, if there are several, usually the first one loaded by JVM is effective. In order not to be bothered by such problem, just like checking duplicate jars, add this:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>Duplicate&lt;span style="color:#719e07">.&lt;/span>checkDuplicate&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;xxx.properties&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="check-for-optional-configuration">Check for optional configuration&lt;/h2>
-&lt;p>The required configuration is estimated to be checked by everyone, because without it the program may not even start. However, for some optional parameters, some checks should also be made. For example, the service framework allows the service consumers and service providers to be associated with the registry, and allows direct configuring the service provider address to point-to-point direct connect. At this time, the registry address is optional, but if there is no point-to-point direct connect configured, the registry center address must be matched, and this time you have to check accordingly.&lt;/p>
-&lt;h2 id="provide-error-message-with-a-solution-if-possible">Provide error message with a solution if possible&lt;/h2>
-&lt;p>It&amp;rsquo;s hard to troubleshooting problem with a simple error message which has no detail information. For example, the last time I encountered a &amp;ldquo;Failed to get session&amp;rdquo; exception, just the few words. I&amp;rsquo;m wondering which session is wrong? What is the reason Failed? It makes me crazy, the problem happens in an production environment and it&amp;rsquo;s hard to reproduce. The exception should have some basic context information, such as author info, operation system, failed reason. The best exception information should be given a solution, such as the above: &amp;ldquo;From 10.20.16.3 to 10.20.130.20:20880 The network is unreachable. Please use telnet 10.20.130.20 20880 to test the network at 10.20.16.3. If it is called across data center, it may be blocked by the firewall. Please contact SA to grant access permission.&amp;rdquo; etc. The above can even judge whether it is cross data center based on IP address. Another example is the spring-web context loading, If spring is not started when getBean, spring will report an error. The error message says: &amp;ldquo;Please add: &lt;code>&amp;lt;listener&amp;gt;...&amp;lt;init-param&amp;gt;...&lt;/code>&amp;rdquo;, just copy and paste. We should learn from it. You can deliberately make a common mistake and see if you can solve the problem yourself by the error message. Or we can write some solution of common problems in error message.&lt;/p>
-&lt;h2 id="and-also-the-environment-information">And also the environment information&lt;/h2>
-&lt;p>Every time an application error occurs, the developer or QA will send the error message and ask the reason. At this time, I will ask some question again, which version is used? Is it a production environment or a development environment? Which registry center? Which project is it? Which machine? And which service? The problem is, some developers or QA can&amp;rsquo;t tell the difference, it waste me a lot of time. So, it is best to log some environment information, we can make a wrapper. Decorate the Logger interface such as:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">error&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String msg&lt;span style="color:#719e07">,&lt;/span> Throwable e&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> delegate&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e07">(&lt;/span>msg &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34; on server &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> InetAddress&lt;span style="color:#719e07">.&lt;/span>getLocalHost&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34; using version &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> Version&lt;span style="color:#719e07">.&lt;/span>getVersion&lt;span style="color:#719e07">(),&lt;/span> e&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Utility class for retrieve version：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">final&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">Version&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">Version&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#268bd2">final&lt;/span> Logger logger &lt;span style="color:#719e07">=&lt;/span> LoggerFactory&lt;span style="color:#719e07">.&lt;/span>getLogger&lt;span style="color:#719e07">(&lt;/span>Version&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#268bd2">final&lt;/span> Pattern VERSION_PATTERN &lt;span style="color:#719e07">=&lt;/span> Pattern&lt;span style="color:#719e07">.&lt;/span>compile&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;([0-9][0-9\\.\\-]*)\\.jar&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#268bd2">final&lt;/span> String VERSION &lt;span style="color:#719e07">=&lt;/span> getVersion&lt;span style="color:#719e07">(&lt;/span>Version&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#2aa198">&amp;#34;2.0.0&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> String &lt;span style="color:#268bd2">getVersion&lt;/span>&lt;span style="color:#719e07">(){&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> VERSION&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> String &lt;span style="color:#268bd2">getVersion&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Class cls&lt;span style="color:#719e07">,&lt;/span> String defaultVersion&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">try&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// search version number from MANIFEST.MF
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> String version &lt;span style="color:#719e07">=&lt;/span> cls&lt;span style="color:#719e07">.&lt;/span>getPackage&lt;span style="color:#719e07">().&lt;/span>getImplementationVersion&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>version &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span> &lt;span style="color:#719e07">||&lt;/span> version&lt;span style="color:#719e07">.&lt;/span>length&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">==&lt;/span> 0&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> version &lt;span style="color:#719e07">=&lt;/span> cls&lt;span style="color:#719e07">.&lt;/span>getPackage&lt;span style="color:#719e07">().&lt;/span>getSpecificationVersion&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>version &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span> &lt;span style="color:#719e07">||&lt;/span> version&lt;span style="color:#719e07">.&lt;/span>length&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">==&lt;/span> 0&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// if not found, extract from jar name
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> String file &lt;span style="color:#719e07">=&lt;/span> cls&lt;span style="color:#719e07">.&lt;/span>getProtectionDomain&lt;span style="color:#719e07">().&lt;/span>getCodeSource&lt;span style="color:#719e07">().&lt;/span>getLocation&lt;span style="color:#719e07">().&lt;/span>getFile&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>file &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span> &lt;span style="color:#719e07">&amp;amp;&lt;/span>amp&lt;span style="color:#719e07">;&amp;amp;&lt;/span>amp&lt;span style="color:#719e07">;&lt;/span> file&lt;span style="color:#719e07">.&lt;/span>length&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">&amp;amp;&lt;/span>gt&lt;span style="color:#719e07">;&lt;/span> 0 &lt;span style="color:#719e07">&amp;amp;&lt;/span>amp&lt;span style="color:#719e07">;&amp;amp;&lt;/span>amp&lt;span style="color:#719e07">;&lt;/span> file&lt;span style="color:#719e07">.&lt;/span>endsWith&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;.jar&amp;#34;&lt;/span>&lt;span style="color:#719e07">))&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Matcher matcher &lt;span style="color:#719e07">=&lt;/span> VERSION_PATTERN&lt;span style="color:#719e07">.&lt;/span>matcher&lt;span style="color:#719e07">(&lt;/span>file&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">while&lt;/span> &lt;span style="color:#719e07">(&lt;/span>matcher&lt;span style="color:#719e07">.&lt;/span>find&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">&amp;amp;&lt;/span>amp&lt;span style="color:#719e07">;&amp;amp;&lt;/span>amp&lt;span style="color:#719e07">;&lt;/span> matcher&lt;span style="color:#719e07">.&lt;/span>groupCount&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">&amp;amp;&lt;/span>gt&lt;span style="color:#719e07">;&lt;/span> 0&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> version &lt;span style="color:#719e07">=&lt;/span> matcher&lt;span style="color:#719e07">.&lt;/span>group&lt;span style="color:#719e07">(&lt;/span>1&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// return version, return default if null
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">return&lt;/span> version &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span> &lt;span style="color:#719e07">||&lt;/span> version&lt;span style="color:#719e07">.&lt;/span>length&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">==&lt;/span> 0 &lt;span style="color:#719e07">?&lt;/span> defaultVersion &lt;span style="color:#719e07">:&lt;/span> version&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">catch&lt;/span> &lt;span style="color:#719e07">(&lt;/span>Throwable e&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// ignore exception, return default version
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> logger&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e07">(&lt;/span>e&lt;span style="color:#719e07">.&lt;/span>getMessage&lt;span style="color:#719e07">(),&lt;/span> e&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> defaultVersion&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="dump-before-kill">Dump before kill&lt;/h2>
-&lt;p>Every time there is a problem with the production environment, everyone panics. Usually the most direct way is to rollback and restart, to reduce the downtime. So that the scene is destroyed, and it&amp;rsquo;s hard to check the problem afterwards. Some problem is hard to reproduce in development environment and may happen under hard pressure. It is unlikely let the developer or Appops manually backup all the data before. Therefore, it is best to call dump before the kill script to backup automatically and avoid mistake. Dump script for example:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">JAVA_HOME&lt;/span>&lt;span style="color:#719e07">=&lt;/span>/usr/java
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">OUTPUT_HOME&lt;/span>&lt;span style="color:#719e07">=&lt;/span>~/output
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">DEPLOY_HOME&lt;/span>&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#586e75">`&lt;/span>dirname &lt;span style="color:#268bd2">$0&lt;/span>&lt;span style="color:#586e75">`&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">HOST_NAME&lt;/span>&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#586e75">`&lt;/span>hostname&lt;span style="color:#586e75">`&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">DUMP_PIDS&lt;/span>&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#586e75">`&lt;/span>ps --no-heading -C java -f --width &lt;span style="color:#2aa198">1000&lt;/span> | grep &lt;span style="color:#2aa198">&amp;#34;&lt;/span>&lt;span style="color:#268bd2">$DEPLOY_HOME&lt;/span>&lt;span style="color:#2aa198">&amp;#34;&lt;/span> |awk &lt;span style="color:#2aa198">&amp;#39;{print $2}&amp;#39;&lt;/span>&lt;span style="color:#586e75">`&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> -z &lt;span style="color:#2aa198">&amp;#34;&lt;/span>&lt;span style="color:#268bd2">$DUMP_PIDS&lt;/span>&lt;span style="color:#2aa198">&amp;#34;&lt;/span> &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">echo&lt;/span> &lt;span style="color:#2aa198">&amp;#34;The server &lt;/span>&lt;span style="color:#268bd2">$HOST_NAME&lt;/span>&lt;span style="color:#2aa198"> is not started!&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">exit&lt;/span> 1;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">fi&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">DUMP_ROOT&lt;/span>&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#268bd2">$OUTPUT_HOME&lt;/span>/dump
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> ! -d &lt;span style="color:#268bd2">$DUMP_ROOT&lt;/span> &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mkdir &lt;span style="color:#268bd2">$DUMP_ROOT&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">fi&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">DUMP_DATE&lt;/span>&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#586e75">`&lt;/span>date +%Y%m%d%H%M%S&lt;span style="color:#586e75">`&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">DUMP_DIR&lt;/span>&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#268bd2">$DUMP_ROOT&lt;/span>/dump-&lt;span style="color:#268bd2">$DUMP_DATE&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> ! -d &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span> &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mkdir &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">fi&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;Dumping the server &lt;/span>&lt;span style="color:#268bd2">$HOST_NAME&lt;/span>&lt;span style="color:#2aa198"> ...\c&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">for&lt;/span> PID in &lt;span style="color:#268bd2">$DUMP_PIDS&lt;/span> ; &lt;span style="color:#719e07">do&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">$JAVA_HOME&lt;/span>/bin/jstack &lt;span style="color:#268bd2">$PID&lt;/span> &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/jstack-&lt;span style="color:#268bd2">$PID&lt;/span>.dump 2&amp;gt;&amp;amp;&lt;span style="color:#2aa198">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">$JAVA_HOME&lt;/span>/bin/jinfo &lt;span style="color:#268bd2">$PID&lt;/span> &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/jinfo-&lt;span style="color:#268bd2">$PID&lt;/span>.dump 2&amp;gt;&amp;amp;&lt;span style="color:#2aa198">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">$JAVA_HOME&lt;/span>/bin/jstat -gcutil &lt;span style="color:#268bd2">$PID&lt;/span> &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/jstat-gcutil-&lt;span style="color:#268bd2">$PID&lt;/span>.dump 2&amp;gt;&amp;amp;&lt;span style="color:#2aa198">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">$JAVA_HOME&lt;/span>/bin/jstat -gccapacity &lt;span style="color:#268bd2">$PID&lt;/span> &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/jstat-gccapacity-&lt;span style="color:#268bd2">$PID&lt;/span>.dump 2&amp;gt;&amp;amp;&lt;span style="color:#2aa198">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">$JAVA_HOME&lt;/span>/bin/jmap &lt;span style="color:#268bd2">$PID&lt;/span> &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/jmap-&lt;span style="color:#268bd2">$PID&lt;/span>.dump 2&amp;gt;&amp;amp;&lt;span style="color:#2aa198">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">$JAVA_HOME&lt;/span>/bin/jmap -heap &lt;span style="color:#268bd2">$PID&lt;/span> &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/jmap-heap-&lt;span style="color:#268bd2">$PID&lt;/span>.dump 2&amp;gt;&amp;amp;&lt;span style="color:#2aa198">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">$JAVA_HOME&lt;/span>/bin/jmap -histo &lt;span style="color:#268bd2">$PID&lt;/span> &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/jmap-histo-&lt;span style="color:#268bd2">$PID&lt;/span>.dump 2&amp;gt;&amp;amp;&lt;span style="color:#2aa198">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> -r /usr/sbin/lsof &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> /usr/sbin/lsof -p &lt;span style="color:#268bd2">$PID&lt;/span> &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/lsof-&lt;span style="color:#268bd2">$PID&lt;/span>.dump
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">fi&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">done&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> -r /usr/bin/sar &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/usr/bin/sar &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/sar.dump
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">fi&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> -r /usr/bin/uptime &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/usr/bin/uptime &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/uptime.dump
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">fi&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> -r /usr/bin/free &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/usr/bin/free -t &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/free.dump
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">fi&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> -r /usr/bin/vmstat &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/usr/bin/vmstat &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/vmstat.dump
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">fi&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> -r /usr/bin/mpstat &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/usr/bin/mpstat &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/mpstat.dump
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">fi&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> -r /usr/bin/iostat &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/usr/bin/iostat &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/iostat.dump
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">fi&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">[&lt;/span> -r /bin/netstat &lt;span style="color:#719e07">]&lt;/span>; &lt;span style="color:#719e07">then&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/bin/netstat &amp;gt; &lt;span style="color:#268bd2">$DUMP_DIR&lt;/span>/netstat.dump
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#b58900">echo&lt;/span> -e &lt;span style="color:#2aa198">&amp;#34;.\c&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">fi&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#b58900">echo&lt;/span> &lt;span style="color:#2aa198">&amp;#34;OK!&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: http protocol</title><link>https://dubbo.apache.org/en/docs/v2.7/user/references/protocol/http/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/references/protocol/http/</guid><description>
-&lt;p>Dubbo http protocol is base on HTTP form and Spring&amp;rsquo;s HttpInvoker&lt;/p>
-&lt;h2 id="features">Features&lt;/h2>
-&lt;ul>
-&lt;li>Number of connections: multiple connections&lt;/li>
-&lt;li>Connection: short connection&lt;/li>
-&lt;li>Transmission protocol: HTTP&lt;/li>
-&lt;li>Transmission: synchronous transmission&lt;/li>
-&lt;li>Serialization: form serialization&lt;/li>
-&lt;li>Scope of application: Available browser view, the form or URL can be passed parameters, Temporary files are not supported.&lt;/li>
-&lt;li>Applicable scenarios: Services that need to be available to both application and browser&lt;/li>
-&lt;/ul>
-&lt;h2 id="constraint">Constraint&lt;/h2>
-&lt;ul>
-&lt;li>Parameters and return values must be consistent with Bean specifications&lt;/li>
-&lt;/ul>
-&lt;h2 id="configuration">Configuration&lt;/h2>
-&lt;p>configure http protocol：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;http&amp;#34;&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;8080&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>configure Jetty Server (default)：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> ... server=&lt;span style="color:#2aa198">&amp;#34;jetty&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>configure Servlet Bridge Server (recommend)：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> ... server=&lt;span style="color:#2aa198">&amp;#34;servlet&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>configure DispatcherServlet：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;servlet&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;servlet-name&amp;gt;&lt;/span>dubbo&lt;span style="color:#268bd2">&amp;lt;/servlet-name&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;servlet-class&amp;gt;&lt;/span>org.apache.dubbo.remoting.http.servlet.DispatcherServlet&lt;span style="color:#268bd2">&amp;lt;/servlet-class&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;load-on-startup&amp;gt;&lt;/span>1&lt;span style="color:#268bd2">&amp;lt;/load-on-startup&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/servlet&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;servlet-mapping&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;servlet-name&amp;gt;&lt;/span>dubbo&lt;span style="color:#268bd2">&amp;lt;/servlet-name&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;url-pattern&amp;gt;&lt;/span>/*&lt;span style="color:#268bd2">&amp;lt;/url-pattern&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/servlet-mapping&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note that if you use servlets to dispatch requests:&lt;/p>
-&lt;ul>
-&lt;li>the port of protocol &lt;code>&amp;lt;dubbo:protocol port=&amp;quot;8080&amp;quot; /&amp;gt;&lt;/code> must same as servlet container&amp;rsquo;s.&lt;/li>
-&lt;li>the context path of protocol &lt;code>&amp;lt;dubbo:protocol contextpath=&amp;quot;foo&amp;quot; /&amp;gt;&lt;/code> must same as servlet application&amp;rsquo;s.&lt;/li>
-&lt;/ul></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

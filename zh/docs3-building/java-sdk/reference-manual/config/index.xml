@@ -1,0 +1,149 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – 配置说明手册</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config/</link><description>Recent content in 配置说明手册 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs3-Building: 配置概述</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config/overview/</guid><description>
+&lt;p>本文主要介绍Dubbo配置概况，包括配置组件、配置来源、配置方式及配置加载流程。&lt;/p>
+&lt;h2 id="配置组件">配置组件&lt;/h2>
+&lt;p>Dubbo框架的配置项比较繁多，为了更好地管理各种配置，将其按照用途划分为不同的组件，最终所有配置项都会汇聚到URL中，传递给后续处理模块。&lt;/p>
+&lt;p>常用配置组件如下：&lt;/p>
+&lt;ul>
+&lt;li>application: Dubbo应用配置&lt;/li>
+&lt;li>registry: 注册中心&lt;/li>
+&lt;li>protocol: 服务提供者RPC协议&lt;/li>
+&lt;li>config-center: 配置中心&lt;/li>
+&lt;li>metadata-report: 元数据中心&lt;/li>
+&lt;li>service: 服务提供者配置&lt;/li>
+&lt;li>reference: 远程服务引用配置&lt;/li>
+&lt;li>provider: service的默认配置或分组配置&lt;/li>
+&lt;li>consumer: reference的默认配置或分组配置&lt;/li>
+&lt;li>module: 模块配置&lt;/li>
+&lt;li>monitor: 监控配置&lt;/li>
+&lt;li>metrics: 指标配置&lt;/li>
+&lt;li>ssl: SSL/TLS配置&lt;/li>
+&lt;/ul>
+&lt;h3 id="consumer-与-reference的关系">consumer 与 reference的关系&lt;/h3>
+&lt;p>reference可以指定具体的consumer，如果没有指定consumer则会自动使用全局默认的consumer配置。&lt;/p>
+&lt;p>consumer的属性是reference属性的默认值，可以体现在两个地方：&lt;/p>
+&lt;ol>
+&lt;li>在刷新属性(属性覆盖)时，先提取其consumer的属性，然后提取reference自身的属性覆盖上去，叠加后的属性集合作为配置来源之一。&lt;/li>
+&lt;li>在组装reference的URL参数时，先附加其consumer的属性，然后附加reference自身的属性。&lt;/li>
+&lt;/ol>
+&lt;blockquote>
+&lt;p>可以将consumer组件理解为reference组件的虚拟分组，根据需要可以定义多个不同的consumer，不同的consumer设置特定的默认值，
+然后在reference中指定consumer或者将&amp;lt;dubbo:reference /&amp;gt; 标签嵌套在&amp;lt;dubbo:consumer /&amp;gt;标签之中。&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="provider-与-service的关系">provider 与 service的关系&lt;/h3>
+&lt;p>service可以指定具体的provider，如果没有指定则会自动使用全局默认的provider配置。
+provider的属性是service属性的默认值，覆盖规则类似上面的consumer与reference，也可以将provider理解为service的虚拟分组。&lt;/p>
+&lt;h2 id="配置来源">配置来源&lt;/h2>
+&lt;p>从Dubbo支持的配置来源说起，默认有6种配置来源：&lt;/p>
+&lt;ul>
+&lt;li>JVM System Properties，JVM -D 参数&lt;/li>
+&lt;li>System environment，JVM进程的环境变量&lt;/li>
+&lt;li>Externalized Configuration，外部化配置，从配置中心读取&lt;/li>
+&lt;li>Application Configuration，应用的属性配置，从Spring应用的Environment中提取&amp;quot;dubbo&amp;quot;打头的属性集&lt;/li>
+&lt;li>API / XML /注解等编程接口采集的配置可以被理解成配置来源的一种，是直接面向用户编程的配置采集方式&lt;/li>
+&lt;li>从classpath读取配置文件 dubbo.properties&lt;/li>
+&lt;/ul>
+&lt;h3 id="覆盖关系">覆盖关系&lt;/h3>
+&lt;p>下图展示了配置覆盖关系的优先级，从上到下优先级依次降低：&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/configuration.jpg" alt="覆盖关系">&lt;/p>
+&lt;p>请参考相关内容：&lt;a href="../properties#%E5%B1%9E%E6%80%A7%E8%A6%86%E7%9B%96">属性覆盖&lt;/a>。&lt;/p>
+&lt;h2 id="配置方式">配置方式&lt;/h2>
+&lt;p>按照驱动方式可以分为以下四种方式：&lt;/p>
+&lt;h3 id="api配置">API配置&lt;/h3>
+&lt;p>以Java编码的方式组织配置，包括Raw API和Bootstrap API，具体请参考&lt;a href="../api">API配置&lt;/a>。&lt;/p>
+&lt;h3 id="xml配置">XML配置&lt;/h3>
+&lt;p>以XML方式配置各种组件，支持与Spring无缝集成，具体请参考&lt;a href="../xml">XML配置&lt;/a>。&lt;/p>
+&lt;h3 id="annotation配置">Annotation配置&lt;/h3>
+&lt;p>以注解方式暴露服务和引用服务接口，支持与Spring无缝集成，具体请参考&lt;a href="../annotation">Annotation配置&lt;/a>。&lt;/p>
+&lt;h3 id="属性配置">属性配置&lt;/h3>
+&lt;p>根据属性Key-value生成配置组件，类似SpringBoot的ConfigurationProperties，具体请参考&lt;a href="../properties">属性配置&lt;/a>。&lt;/p>
+&lt;p>属性配置的另外一个重要的功能特性是&lt;a href="../properties#%E5%B1%9E%E6%80%A7%E8%A6%86%E7%9B%96">属性覆盖&lt;/a>，使用外部属性的值覆盖已创建的配置组件属性。&lt;/p>
+&lt;p>如果要将属性配置放到外部的配置中心，请参考&lt;a href="../external-config">外部化配置&lt;/a>。&lt;/p>
+&lt;p>除了外围驱动方式上的差异，Dubbo的配置读取总体上遵循了以下几个原则：&lt;/p>
+&lt;ol>
+&lt;li>Dubbo 支持了多层级的配置，并按预定优先级自动实现配置间的覆盖，最终所有配置汇总到数据总线URL后驱动后续的服务暴露、引用等流程。&lt;/li>
+&lt;li>配置格式以 Properties 为主，在配置内容上遵循约定的 &lt;code>path-based&lt;/code> 的&lt;a href="../properties#%E9%85%8D%E7%BD%AE%E6%A0%BC%E5%BC%8F">命名规范&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;h2 id="配置加载流程">配置加载流程&lt;/h2>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/config/config-load.svg" alt="配置加载流程">&lt;/p>
+&lt;p>从上图可以看出，配置加载大概分为两个阶段：&lt;/p>
+&lt;ul>
+&lt;li>第一阶段为DubboBootstrap初始化之前，在Spring context启动时解析处理XML配置/注解配置/Java-config 或者是执行API配置代码，创建config bean并且加入到ConfigManager中。&lt;/li>
+&lt;li>第二阶段为DubboBootstrap初始化过程，从配置中心读取外部配置，依次处理实例级属性配置和应用级属性配置，最后刷新所有配置实例的属性，也就是&lt;a href="../properties#%E5%B1%9E%E6%80%A7%E8%A6%86%E7%9B%96">属性覆盖&lt;/a>。&lt;/li>
+&lt;/ul>
+&lt;h2 id="几种编程配置方式">几种编程配置方式&lt;/h2>
+&lt;p>接下来，我们看一下选择不同的开发方式时，对应到 ServiceConfig、ReferenceConfig 等编程接口采集的配置的变化。&lt;/p>
+&lt;h4 id="spring-xml">Spring XML&lt;/h4>
+&lt;blockquote>
+&lt;p>参见&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-basic">示例&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">&amp;lt;!-- dubbo-provier.xml --&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:application&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;demo-provider&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:config-center&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://127.0.0.1:2181&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://127.0.0.1:2181&amp;#34;&lt;/span> simplified=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:metadata-report&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;redis://127.0.0.1:6379&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;20880&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;bean&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;demoService&amp;#34;&lt;/span> class=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.basic.impl.DemoServiceImpl&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.basic.api.DemoService&amp;#34;&lt;/span> ref=&lt;span style="color:#2aa198">&amp;#34;demoService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="spring-annotation">Spring Annotation&lt;/h4>
+&lt;blockquote>
+&lt;p>参见&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-annotation">示例&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// AnnotationService服务实现
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Service&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">AnnotationServiceImpl&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> AnnotationService &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Override&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> String &lt;span style="color:#268bd2">sayHello&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String name&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;async provider received: &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> name&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#2aa198">&amp;#34;annotation: hello, &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> name&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span> ## dubbo.properties
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.name=annotation-provider
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address=zookeeper://127.0.0.1:2181
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.name=dubbo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port=20880
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="spring-boot">Spring Boot&lt;/h4>
+&lt;blockquote>
+&lt;p>参见&lt;a href="https://github.com/apache/dubbo-spring-boot-project/tree/master/dubbo-spring-boot-samples">示例&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span> ## application.properties
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Spring boot application
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>spring.application.name=dubbo-externalized-configuration-provider-sample
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Base packages to scan Dubbo Component: @com.alibaba.dubbo.config.annotation.Service
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.scan.base-packages=com.alibaba.boot.dubbo.demo.provider.service
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Dubbo Application
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## The default value of dubbo.application.name is ${spring.application.name}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## dubbo.application.name=${spring.application.name}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Dubbo Protocol
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.name=dubbo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port=12345
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## Dubbo Registry
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address=N/A
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## DemoService version
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>demo.service.version=1.0.0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="api">API&lt;/h4>
+&lt;blockquote>
+&lt;p>参考&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-api">示例&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">main&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String&lt;span style="color:#719e07">[]&lt;/span> args&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> IOException &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ServiceConfig&lt;span style="color:#719e07">&amp;lt;&lt;/span>GreetingsService&lt;span style="color:#719e07">&amp;gt;&lt;/span> service &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ServiceConfig&lt;span style="color:#719e07">&amp;lt;&amp;gt;();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> service&lt;span style="color:#719e07">.&lt;/span>setApplication&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">new&lt;/span> ApplicationConfig&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;first-dubbo-provider&amp;#34;&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> service&lt;span style="color:#719e07">.&lt;/span>setRegistry&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">new&lt;/span> RegistryConfig&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;multicast://224.5.6.7:1234&amp;#34;&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> service&lt;span style="color:#719e07">.&lt;/span>setInterface&lt;span style="color:#719e07">(&lt;/span>GreetingsService&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> service&lt;span style="color:#719e07">.&lt;/span>setRef&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">new&lt;/span> GreetingsServiceImpl&lt;span style="color:#719e07">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> service&lt;span style="color:#719e07">.&lt;/span>export&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;first-dubbo-provider is running.&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>in&lt;span style="color:#719e07">.&lt;/span>read&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-Building: API 配置手册</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config/api/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config/api/</guid><description/></item><item><title>Docs3-Building: XML 配置手册</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config/xml/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config/xml/</guid><description/></item><item><title>Docs3-Building: YAML 配置手册</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config/yaml/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config/yaml/</guid><description/></item><item><title>Docs3-Building: Annotation 配置手册</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config/annotation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config/annotation/</guid><description/></item><item><title>Docs3-Building: Properties 配置手册</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config/properties/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config/properties/</guid><description/></item><item><title>Docs3-Building: 环境变量配置手册</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config/env/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config/env/</guid><description/></item></channel></rss>
