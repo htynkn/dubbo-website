@@ -48,7 +48,19 @@
 &lt;p>Service Mesh 强调控制面在微服务治理中的作用，在一定程度上推动了控制面通信协议、职责范围的扩展与标准化；传统 Mesh 架构下的 Sidecar 模型强调旁路代理对于流量的统一管控，以实现透明升级、多语言无感、无业务侵入等特性。&lt;/p>
 &lt;p>Dubbo3 提供了基于自身思考的 Dubbo Mesh 解决方案，强调了控制面对微服务集群的统一管控，而在部署架构上，同时支持 sicecar 与无 sidecar 的 proxyless 部署架构，使用 Dubbo Mesh 的用户基于自身的业务特点将有更多的部署架构选择。&lt;/p>
 &lt;h4 id="异构体系互通">异构体系互通&lt;/h4>
-&lt;p>我们正看到越来越多的异构微服务体系互通的诉求，典型如 Dubbo、Spring Cloud、gRPC 等。有些是因为技术栈迁移，有些是组织合并后需要实现业务互调，Dubbo3 借助于新的服务发现模型以及可灵活扩展的 RPC 协议，可以成为&lt;/p></description></item><item><title>Docs3-Building: Triple 协议</title><link>https://dubbo.apache.org/zh/docs3-building/docs/whatsnew/triple/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/docs/whatsnew/triple/</guid><description/></item><item><title>Docs3-Building: 应用级服务发现</title><link>https://dubbo.apache.org/zh/docs3-building/docs/whatsnew/service-discovery/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/docs/whatsnew/service-discovery/</guid><description/></item><item><title>Docs3-Building: Dubbo Mesh</title><link>https://dubbo.apache.org/zh/docs3-building/docs/whatsnew/mesh/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/docs/whatsnew/mesh/</guid><description>
+&lt;p>我们正看到越来越多的异构微服务体系互通的诉求，典型如 Dubbo、Spring Cloud、gRPC 等。有些是因为技术栈迁移，有些是组织合并后需要实现业务互调，Dubbo3 借助于新的服务发现模型以及可灵活扩展的 RPC 协议，可以成为&lt;/p></description></item><item><title>Docs3-Building: Triple 协议</title><link>https://dubbo.apache.org/zh/docs3-building/docs/whatsnew/triple/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/docs/whatsnew/triple/</guid><description>
+&lt;p>Triple 是 Dubbo3 提出的基于 HTTP2 的开放协议，旨在解决 Dubbo2 私有协议带来的互通性问题。相比于原有 Dubbo2 协议，Triple 有以下优势:&lt;/p>
+&lt;ol>
+&lt;li>原生和 gRPC 协议互通。打通 gRPC 生态，降低从 gRPC 至 Dubbo 的迁移成本。&lt;/li>
+&lt;li>增强多语言生态。避免因 CPP/C#/RUST 等语言的 Dubbo SDK 能力不足导致业务难以选型适配的问题。&lt;/li>
+&lt;li>网关友好。网关无需参与序列化，方便用户从传统的 HTTP 转泛化 Dubbo 调用网关升级至开源或云厂商的 Ingress 方案。&lt;/li>
+&lt;li>完善的异步和流式支持。带来从底层协议到上层业务的性能提升，易于构建全链路异步以及严格保证消息顺序的流式服务。&lt;/li>
+&lt;/ol>
+&lt;p>目前 Java 和 Go 的 Dubbo SDK 已全面支持 Triple 协议。在阿里巴巴，Triple 协议广泛用于跨环境、跨语言、跨生态互通，已有数十万容器生产级使用。&lt;/p>
+&lt;p>使用方式上，Java SDK 支持 &lt;a href="TBD">IDL 生成 Stub(TBD)&lt;/a> 和 &lt;a href="TBD">Java Interface(TBD)&lt;/a> 两种方式，多语言、生态互通、流式需求推荐使用 IDL 方式，现有服务平滑升级推荐使用 Interface 方式。&lt;/p>
+&lt;p>现有服务升级 Triple 协议请参考&lt;a href="TBD">从现有协议升级至 Triple&lt;/a>&lt;/p>
+&lt;p>新服务使用 Triple 协议请参考&lt;a href="../../java-sdk/quick-start/_index.md">Dubbo3 Triple Quick Start&lt;/a>&lt;/p>
+&lt;p>深入了解 Triple 协议原理请参考&lt;a href="TBD">Dubbo3 Triple 协议设计与原理&lt;/a>&lt;/p></description></item><item><title>Docs3-Building: 应用级服务发现</title><link>https://dubbo.apache.org/zh/docs3-building/docs/whatsnew/service-discovery/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/docs/whatsnew/service-discovery/</guid><description/></item><item><title>Docs3-Building: Dubbo Mesh</title><link>https://dubbo.apache.org/zh/docs3-building/docs/whatsnew/mesh/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/docs/whatsnew/mesh/</guid><description>
 &lt;p>通过以下示例快速查看使用&amp;amp;部署示例&lt;/p>
 &lt;ul>
 &lt;li>&lt;a href="../../tasks/dubbo-mesh-sidecar">Dubbo Sidecar Mesh&lt;/a>&lt;/li>
