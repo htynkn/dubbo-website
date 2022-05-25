@@ -7,7 +7,7 @@ tickTime=2000 initLimit=10 syncLimit=5 dataDir=/home/dubbo/zookeeper-3.3.3/data 
 tickTime=2000 initLimit=10 syncLimit=5 dataDir=/home/dubbo/zookeeper-3.3.3/data clientPort=2181 server.1=10.20.153.10:2555:3555 server.2=10.20.153.11:2555:3555 并在 data 目录 4 下放置 myid 文件：
 mkdir data vi myid myid 指明自己的 id，对应上面 zoo.cfg 中 server. 后的数字，第一台的内容为 1，第二台的内容为 2，内容如下：
 1 启动:
-./bin/zkServer.sh start 停止:"><meta property="og:type" content="article"><meta property="og:url" content="https://dubbo.apache.org/zh/docsv2.7/admin/install/zookeeper/"><meta property="article:section" content="docsv2.7"><meta property="article:modified_time" content="2022-05-23T14:57:24+08:00"><meta property="og:site_name" content="Apache Dubbo"><meta itemprop=name content="Zookeeper 注册中心安装"><meta itemprop=description content="建议使用 dubbo-2.3.3 以上版本的 zookeeper 1 注册中心客户端。
+./bin/zkServer.sh start 停止:"><meta property="og:type" content="article"><meta property="og:url" content="https://dubbo.apache.org/zh/docsv2.7/admin/install/zookeeper/"><meta property="article:section" content="docsv2.7"><meta property="article:modified_time" content="2022-05-24T16:18:32+08:00"><meta property="og:site_name" content="Apache Dubbo"><meta itemprop=name content="Zookeeper 注册中心安装"><meta itemprop=description content="建议使用 dubbo-2.3.3 以上版本的 zookeeper 1 注册中心客户端。
 Dubbo 未对 Zookeeper 服务器端做任何侵入修改，只需安装原生的 Zookeeper 服务器即可，所有注册中心逻辑适配都在调用 Zookeeper 客户端时完成。
 安装:
 wget http://archive.apache.org/dist/zookeeper/zookeeper-3.3.3/zookeeper-3.3.3.tar.gz tar zxvf zookeeper-3.3.3.tar.gz cd zookeeper-3.3.3 cp conf/zoo_sample.cfg conf/zoo.cfg 配置:
@@ -16,7 +16,7 @@ tickTime=2000 initLimit=10 syncLimit=5 dataDir=/home/dubbo/zookeeper-3.3.3/data 
 tickTime=2000 initLimit=10 syncLimit=5 dataDir=/home/dubbo/zookeeper-3.3.3/data clientPort=2181 server.1=10.20.153.10:2555:3555 server.2=10.20.153.11:2555:3555 并在 data 目录 4 下放置 myid 文件：
 mkdir data vi myid myid 指明自己的 id，对应上面 zoo.cfg 中 server. 后的数字，第一台的内容为 1，第二台的内容为 2，内容如下：
 1 启动:
-./bin/zkServer.sh start 停止:"><meta itemprop=dateModified content="2022-05-23T14:57:24+08:00"><meta itemprop=wordCount content="110"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="Zookeeper 注册中心安装"><meta name=twitter:description content="建议使用 dubbo-2.3.3 以上版本的 zookeeper 1 注册中心客户端。
+./bin/zkServer.sh start 停止:"><meta itemprop=dateModified content="2022-05-24T16:18:32+08:00"><meta itemprop=wordCount content="110"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="Zookeeper 注册中心安装"><meta name=twitter:description content="建议使用 dubbo-2.3.3 以上版本的 zookeeper 1 注册中心客户端。
 Dubbo 未对 Zookeeper 服务器端做任何侵入修改，只需安装原生的 Zookeeper 服务器即可，所有注册中心逻辑适配都在调用 Zookeeper 客户端时完成。
 安装:
 wget http://archive.apache.org/dist/zookeeper/zookeeper-3.3.3/zookeeper-3.3.3.tar.gz tar zxvf zookeeper-3.3.3.tar.gz cd zookeeper-3.3.3 cp conf/zoo_sample.cfg conf/zoo.cfg 配置:
