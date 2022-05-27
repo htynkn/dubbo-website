@@ -211,8 +211,8 @@
 &lt;p>启动服务端&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span> $ mvn org.codehaus.mojo:exec-maven-plugin:3.0.0:java -Dexec.mainClass=&amp;#34;org.apache.dubbo.MyDubboServer&amp;#34;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Dubbo triple stub server started
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>$ mvn org.codehaus.mojo:exec-maven-plugin:3.0.0:java -Dexec.mainClass=&amp;#34;org.apache.dubbo.MyDubboServer&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Dubbo triple stub server started
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="11">
 &lt;li>打开新的终端，启动客户端&lt;/li>
 &lt;/ol>
@@ -360,12 +360,12 @@ POJO on Triple 原理请参考&lt;a href="TBD">POJO on Triple&lt;/a>&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>启动服务端&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>$ mvn org.codehaus.mojo:exec-maven-plugin:3.0.0:java -Dexec.mainClass=&amp;#34;org.apache.dubbo.MyDubboServer&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Dubbo triple pojo server started
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>打开新的终端，启动客户端&lt;/p>
 &lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span> $ mvn org.codehaus.mojo:exec-maven-plugin:3.0.0:java -Dexec.mainClass=&amp;#34;org.apache.dubbo.MyDubboServer&amp;#34;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Dubbo triple pojo server started
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="11">
-&lt;li>打开新的终端，启动客户端&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>$ mvn org.codehaus.mojo:exec-maven-plugin:3.0.0:java -Dexec.mainClass=&amp;#34;org.apache.dubbo.MyDubboClient&amp;#34;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Received reply:message: &amp;#34;Hello,Demo!&amp;#34;

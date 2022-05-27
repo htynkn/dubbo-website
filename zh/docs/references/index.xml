@@ -59,7 +59,7 @@
 &lt;li>configurators，&lt;a href="../../examples/config-rule">覆盖规则&lt;/a>&lt;/li>
 &lt;li>tag-router，&lt;a href="../../examples/routing-rule">标签路由&lt;/a>&lt;/li>
 &lt;li>condition-router，&lt;a href="../../examples/condition-router">条件路由&lt;/a>&lt;/li>
-&lt;li>migration, &lt;a href="../../examples/todo">迁移规则&lt;/a>&lt;/li>
+&lt;li>migration，&lt;a href="../../migration/migration-service-discovery">迁移规则&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h4 id="nacos">Nacos&lt;/h4>
 &lt;p>所有的服务治理规则都是全局的，默认从 namespace: &lt;code>public&lt;/code> 下进行读取， 通过 dataId: &lt;code>interface name&lt;/code> 以及 group: &lt;code>dubbo&lt;/code> 去读取和订阅：&lt;/p>
@@ -69,7 +69,7 @@
 &lt;li>configurators，&lt;a href="../../examples/config-rule">覆盖规则&lt;/a>&lt;/li>
 &lt;li>tag-router，&lt;a href="../../examples/routing-rule">标签路由&lt;/a>&lt;/li>
 &lt;li>condition-router，&lt;a href="../../examples/condition-router">条件路由&lt;/a>&lt;/li>
-&lt;li>migration, &lt;a href="../../examples/todo">迁移规则&lt;/a>&lt;/li>
+&lt;li>migration，&lt;a href="../../migration/migration-service-discovery">迁移规则&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Docs: 注册中心参考手册</title><link>https://dubbo.apache.org/zh/docs/references/registry/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/references/registry/</guid><description>
 &lt;p>推荐使用 &lt;a href="zookeeper">Zookeeper 注册中心&lt;/a>&lt;/p></description></item><item><title>Docs: SPI 扩展实现</title><link>https://dubbo.apache.org/zh/docs/references/spis/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/references/spis/</guid><description>
 &lt;p>SPI 扩展接口仅用于系统集成，或 Contributor 扩展功能插件。&lt;/p></description></item><item><title>Docs: Dubbo 配置</title><link>https://dubbo.apache.org/zh/docs/references/configuration/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/references/configuration/</guid><description/></item><item><title>Docs: 元数据参考手册</title><link>https://dubbo.apache.org/zh/docs/references/metadata/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/references/metadata/</guid><description>
