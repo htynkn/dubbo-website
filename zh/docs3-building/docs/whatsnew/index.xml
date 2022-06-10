@@ -61,14 +61,45 @@
 和 &lt;a href="../../../java-sdk/reference-manual/protocol/triple/idl">Java Interface&lt;/a> 两种方式，多语言、生态互通、流式需求推荐使用 IDL 方式，现有服务平滑升级推荐使用
 Interface 方式。&lt;/p>
 &lt;ul>
-&lt;li>已有服务参考&lt;a href="TBD">从现有协议升级至 Triple&lt;/a>&lt;/li>
-&lt;li>新服务参考&lt;a href="../../../java-sdk/quick-start">Dubbo3 Triple Quick Start&lt;/a>&lt;/li>
-&lt;li>深入了解 Triple 协议:&lt;a href="TBD">Dubbo3 Triple 协议设计与原理&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Docs3-Building: 应用级服务发现</title><link>https://dubbo.apache.org/zh/docs3-building/docs/whatsnew/service-discovery/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/docs/whatsnew/service-discovery/</guid><description/></item><item><title>Docs3-Building: Dubbo Mesh</title><link>https://dubbo.apache.org/zh/docs3-building/docs/whatsnew/mesh/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/docs/whatsnew/mesh/</guid><description>
+&lt;li>Dubbo2 老用户如何&lt;a href="TBD">从现有协议升级至 Triple&lt;/a>&lt;/li>
+&lt;li>新用户或业务参考&lt;a href="../../../java-sdk/quick-start">Dubbo3 Triple Quick Start&lt;/a>&lt;/li>
+&lt;li>深入了解 Triple 协议:&lt;a href="https://github.com/apache/dubbo-awesome/blob/master/proposals/D0-triple.md">Dubbo3 Triple 协议设计与原理&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs3-Building: 应用级服务发现</title><link>https://dubbo.apache.org/zh/docs3-building/docs/whatsnew/service-discovery/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/docs/whatsnew/service-discovery/</guid><description>
+&lt;p>在这里查看更多文档&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/apache/dubbo-awesome/blob/master/proposals/D1-application-level-service-discovery.md">应用级服务发现详细设计&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://dubbo.apache.org/zh/blog/2021/06/02/dubbo3-%E5%BA%94%E7%94%A8%E7%BA%A7%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0/">应用级服务发现解读 (blog)&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../java-sdk/upgrades-and-compatibility/migration-service-discovery">如何从接口级服务发现迁移到应用级服务发现&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../../users/eleme">饿了么应用级服务发现迁移指南&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../../../users/icbc">工商银行应用级服务发现&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>概括来说，Dubbo3 引入的应用级服务发现主要有以下优势&lt;/p>
+&lt;ul>
+&lt;li>适配云原生微服务变革。云原生时代的基础设施能力不断向上释放，像 Kubernetes 等平台都集成了微服务概念抽象，Dubbo3 的应用级服务发现是适配各种微服务体系的通用模型。&lt;/li>
+&lt;li>提升性能与可伸缩性。支持超大规模集群的服务治理一直以来都是 Dubbo 的优势，通过引入应用级服务发现模型，从本质上解决了注册中心地址数据的存储与推送压力，相应的 Consumer 侧的地址计算压力也成数量级下降；集群规模也开始变得可预测、可评估（与 RPC 接口数量无关，只与实例部署规模相关）。&lt;/li>
+&lt;/ul>
+&lt;p>下图是 Dubbo2 的服务发现模型：Provider 注册服务地址，Consumer 经过注册中心协调并发现服务地址，进而对地址发起通信，这是被绝大多数微服务框架的经典服务发现流程。而 Dubbo2 的特殊之处在于，它把 “RPC 接口”的信息也融合在了地址发现过程中，而这部分信息往往是和具体的业务定义密切相关的。&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/concepts/servicediscovery_old.png" alt="//imgs/v3/concepts/servicediscovery_old.png">&lt;/p>
+&lt;p>而在接入云原生基础设施后，基础设施融入了微服务概念的抽象，容器化微服务被编排、调度的过程即完成了在基础设施层面的注册。如下图所示，基础设施既承担了注册中心的职责，又完成了服务注册的动作，而 “RPC 接口”这部分信息，由于与具体的业务相关，不可能也不适合被基础设施托管。&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/concepts/servicediscovery_k8s.png" alt="//imgs/v3/concepts/servicediscovery_k8s.png">&lt;/p>
+&lt;p>在这样的场景下，对 Dubbo3 的服务注册发现机制提出了两个要求：
+Dubbo3 需要在原有服务发现流程中抽象出通用的、与业务逻辑无关的地址映射模型，并确保这部分模型足够合理，以支持将地址的注册行为和存储委托给下层基础设施
+Dubbo3 特有的业务接口同步机制，是 Dubbo3 需要保留的优势，需要在 Dubbo3 中定义的新地址模型之上，通过框架内的自有机制予以解决。&lt;/p>
+&lt;p>这样设计的全新的服务发现模型，在架构兼容性、可伸缩性上都给 Dubbo3 带来了更大的优势。&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/concepts/servicediscovery_mem.png" alt="//imgs/v3/concepts/servicediscovery_mem.png">&lt;/p>
+&lt;p>在架构兼容性上，如上文所述，Dubbo3 复用下层基础设施的服务抽象能力成为了可能；另一方面，如 Spring Cloud 等业界其它微服务解决方案也沿用这种模型，
+在打通了地址发现之后，使得用户探索用 Dubbo 连接异构的微服务体系成为了一种可能。&lt;/p>
+&lt;p>Dubbo3 服务发现模型更适合构建可伸缩的服务体系，这点要如何理解？
+这里先举个简单的例子，来直观的对比 Dubbo2 与 Dubbo3 在地址发现流程上的数据流量变化：假设一个微服务应用定义了 100 个接口（Dubbo 中的服务），
+则需要往注册中心中注册 100 个服务，如果这个应用被部署在了 100 台机器上，那这 100 个服务总共会产生 100 * 100 = 10000 个虚拟节点；而同样的应用，
+对于 Dubbo3 来说，新的注册发现模型只需要 1 个服务（只和应用有关和接口无关）， 只注册和机器实例数相等的 1 * 100 = 100 个虚拟节点到注册中心。
+在这个简单的示例中，Dubbo 所注册的地址数量下降到了原来的 1 / 100，对于注册中心、订阅方的存储压力都是一个极大的释放。更重要的是，
+地址发现容量彻底与业务 RPC 定义解耦开来，整个集群的容量评估对运维来说将变得更加透明：部署多少台机器就会有多大负载，不会像 Dubbo2 一样，
+因为业务 RPC 重构就会影响到整个集群服务发现的稳定性。&lt;/p></description></item><item><title>Docs3-Building: Dubbo Mesh</title><link>https://dubbo.apache.org/zh/docs3-building/docs/whatsnew/mesh/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/docs/whatsnew/mesh/</guid><description>
 &lt;p>通过以下示例快速查看使用&amp;amp;部署示例&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="../../tasks/dubbo-mesh-sidecar">Dubbo Sidecar Mesh&lt;/a>&lt;/li>
-&lt;li>&lt;a href="../../tasks/dubbo-mesh-sidecar">Dubbo Proxyless Mesh&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../tasks/dubbo-mesh">Dubbo Sidecar Mesh&lt;/a>&lt;/li>
+&lt;li>&lt;a href="../../tasks/dubbo-mesh">Dubbo Proxyless Mesh&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="service-mesh">Service Mesh&lt;/h2>
 &lt;p>在云原生背景下，如果我们将 Service Mesh 理解为底层基础设施，则在 Mesh 架构中，以往耦合在业务进程中的微服务治理部分能力正被 Mesh 接管，传统微服务框架更注重 RPC 协议与编程模型。以下是时下流行的 Mesh 产品 Istio 的架构图：&lt;/p>
@@ -104,4 +135,4 @@ Proxyless 模式使得微服务又回到了 2.x 时代的部署架构，如下�
 &lt;li>适用于几乎所有的部署环境&lt;/li>
 &lt;/ul>
 &lt;h3 id="高级用法">高级用法&lt;/h3>
-&lt;p>Dubbo SDK 提供了非常灵活的配置来控制服务治理行为，如接口粒度的服务地址发现能力、接口粒度的配置同步等，这些能力让应用的开发和部署更加灵活。而在通用的 Mesh 部署方案或产品下一些高级功能可能受限，从总体上影响了易用性与灵活性，为此 Dubbo 计划提供了一些变种的部署方案或控制面定制产品，以满足深度用户的一些高级需求。&lt;/p></description></item></channel></rss>
+&lt;p>Dubbo SDK 提供了非常灵活的配置来控制服务治理行为，如接口粒度的服务地址发现能力、接口粒度的配置同步等，这些能力让应用的开发和部署更加灵活。而在通用的 Mesh 部署方案或产品下一些高级功能可能受限，从总体上影响了易用性与灵活性。为此 Dubbo 计划提供自研控制面产品，以最大化的在 Mesh 体系发挥 Dubbo3 能力。&lt;/p></description></item></channel></rss>

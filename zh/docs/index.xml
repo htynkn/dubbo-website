@@ -6666,7 +6666,18 @@ consumer端同样执行编译，在consumer的target下也会生成二进制文�
 &lt;p>建议使用 &lt;code>2.3.3&lt;/code> 以上版本的 zookeeper 注册中心客户端&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/div></description></item><item><title>Users: 阿里巴巴</title><link>https://dubbo.apache.org/zh/users/alibaba/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/users/alibaba/</guid><description/></item><item><title>Docs3-Building: 安装 Dubbo-go 开发环境</title><link>https://dubbo.apache.org/zh/docs3-building/golang-sdk/quickstart/install/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/golang-sdk/quickstart/install/</guid><description>
+&lt;/div></description></item><item><title>Users: 阿里巴巴升级 Dubbo3 全面取代 HSF2</title><link>https://dubbo.apache.org/zh/users/alibaba/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/users/alibaba/</guid><description>
+&lt;p>作为 Dubbo3 的主要定义者以及核心用户，阿里巴巴内部的核心业务线目前均已或正在迁移到 Dubbo3 版本。众所周知，阿里巴巴内部业务一直运行在自研 HSF2 框架之上，HSF2 与 Dubbo2 之间有很深的渊源，两者之间在设计理念上有很多相似之处，但实际上经过多年的发展已经演进成两个完全不同的框架，在 Dubbo3 设计的过程中完全汲取了 HSF2 与 Dubbo2两者的优势，尤其是 HSF2 在阿里内部多年超大规模集群实践的经验。&lt;/p>
+&lt;p>阿里巴巴是如何用开源的 Dubbo3 取代 HSF2的那？一些企业内部特有的诉求并不能完全开源，这一点是怎么做到的？答案就是通过 SPI 扩展，所以在阿里内部也启动了一个全新的 HSF3 项目，HSF3 与以往的 HSF2 完全不同，HSF3 完全就是基于标准 Dubbo3 的 SPI 扩展库，因此它更像是一个 SPI 的插件扩展仓库，汇聚了诸如注册中心扩展、路由组件扩展、监控组件扩展等一系列扩展实现，而其他配置组装、服务暴露、服务发现、地址解析等核心流程都已经完全跑在开源 Dubbo3 之上；在这样的模式下，阿里巴巴的内部实践诉求已经完全体现在开源 Dubbo3 之上，包括内部开发人员也工作在开源 Dubbo3 之上，这对于开源社区的发展是一个很大的保障与补充。&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/concepts/dubbo-hsf.png" alt="dubbo-hsf">&lt;/p>
+&lt;p>阿里巴巴的业务线非常广泛，而 Dubbo3 当前也在几乎所有的业务线都已经开始升级。阿里生态如本地生活饿了么、钉钉、考拉等都已经全面升级 Dubbo3；天猫、淘宝等电商核心链路也已完成 Dubbo3 升级，2022 双 11 整个系统将和 Dubbo3 一起迎来第一个峰值考验；阿里云的微服务平台以及多条产品线目前也是基于 Dubbo3 构建。&lt;/p>
+&lt;p>对于阿里巴巴而言，其关注的核心特性包括：&lt;/p>
+&lt;ul>
+&lt;li>应用级服务发现，用于解决超大规模集群下的注册中心容量、消费端实例资源占用问题&lt;/li>
+&lt;li>Triple 协议，解决跨网关 RPC 通信 以及提供 Reactive Stream 通信模型。&lt;/li>
+&lt;li>统一的流量治理规则，通过统一的流量治理规则及控制面实现服务治理能力的统一&lt;/li>
+&lt;/ul>
+&lt;p>关于 Dubbo3 的升级经验与收益分享将持续在此发布。&lt;/p></description></item><item><title>Docs3-Building: 安装 Dubbo-go 开发环境</title><link>https://dubbo.apache.org/zh/docs3-building/golang-sdk/quickstart/install/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/golang-sdk/quickstart/install/</guid><description>
 &lt;h2 id="1-安装go语言环境">1. 安装Go语言环境&lt;/h2>
 &lt;p>建议使用最新版 go 1.17&lt;/p>
 &lt;p>go version &amp;gt;= go 1.15&lt;/p>
