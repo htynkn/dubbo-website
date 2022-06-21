@@ -32,4 +32,60 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>INFO stub.TriStubClient: tri-stub Unary reply &amp;lt;-message: &amp;#34;hello,name&amp;#34;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;/ol>
-&lt;p>恭喜，一个简单的客户端-服务端 Dubbo 应用运行成功了&lt;/p></description></item><item><title>Docs3-Building: 概念和架构</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/concepts-and-architecture/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/concepts-and-architecture/</guid><description/></item><item><title>Docs3-Building: 高级特性和用法</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/</guid><description/></item><item><title>Docs3-Building: 参考手册</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/</guid><description/></item><item><title>Docs3-Building: 升级和兼容性</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/upgrades-and-compatibility/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/upgrades-and-compatibility/</guid><description/></item><item><title>Docs3-Building: 参与贡献</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/contributing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/contributing/</guid><description/></item></channel></rss>
+&lt;p>恭喜，一个简单的客户端-服务端 Dubbo 应用运行成功了&lt;/p></description></item><item><title>Docs3-Building: 概念和架构</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/concepts-and-architecture/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/concepts-and-architecture/</guid><description/></item><item><title>Docs3-Building: 高级特性和用法</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/</guid><description/></item><item><title>Docs3-Building: 参考手册</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/</guid><description/></item><item><title>Docs3-Building: 升级和兼容性</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/upgrades-and-compatibility/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/upgrades-and-compatibility/</guid><description/></item><item><title>Docs3-Building: 参与贡献</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/contributing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/contributing/</guid><description/></item><item><title>Docs3-Building:</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/dobbo3-container/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/dobbo3-container/</guid><description>
+&lt;h1 id="customize-dobbo3-service-container">customize dobbo3 service container&lt;/h1>
+&lt;p>了解 dobbo3 中服务自定义容器类型和使用&lt;/p>
+&lt;h2 id="特性说明">特性说明：&lt;/h2>
+&lt;p>Dobbo3 的服务容器是一个 standalone 的启动程序，因为后台服务不需要 Tomcat 或 JBoss 等 Web 容器的功能，如果硬要用 Web 容器去加载服务提供方，增加复杂性，也浪费资源。所以服务通常不需要Tomcat/JBoss等Web容器的特性，没必要用Web容器去加载服务。&lt;/p>
+&lt;p>Dobbo3 服务容器只是一个简单的 Main 方法，并加载一个简单的 Spring 容器，用于暴露服务。&lt;/p>
+&lt;p>服务容器的加载内容可以扩展，内置了 spring, jetty, log4j 等加载，可通过&lt;a href="https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/references/spis/container">容器扩展点&lt;/a>进行扩展。配置配在 java 命令的 -D 参数或者 &lt;code>dubbo.properties&lt;/code> 中。&lt;/p>
+&lt;h2 id="dobbo3-自定义容器类型">Dobbo3 自定义容器类型：&lt;/h2>
+&lt;ul>
+&lt;li>Spring Container&lt;/li>
+&lt;li>Jetty Container&lt;/li>
+&lt;li>Log4j Container&lt;/li>
+&lt;/ul>
+&lt;h2 id="使用场景">使用场景&lt;/h2>
+&lt;h2 id="使用方式">使用方式：&lt;/h2>
+&lt;h3 id="spring-container">Spring Container&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>自动加载 &lt;code>META-INF/spring&lt;/code> 目录下的所有 Spring 配置。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>配置 spring 配置加载位置：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.spring.config=classpath*:META-INF/spring/*.xml
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;h3 id="jetty-container">Jetty Container&lt;/h3>
+&lt;ul>
+&lt;li>启动一个内嵌 Jetty，用于汇报状态。&lt;/li>
+&lt;li>配置：
+&lt;ul>
+&lt;li>&lt;code>dubbo.jetty.port=8080&lt;/code>：配置 jetty 启动端口&lt;/li>
+&lt;li>&lt;code>dubbo.jetty.directory=/foo/bar&lt;/code>：配置可通过 jetty 直接访问的目录，用于存放静态文件&lt;/li>
+&lt;li>&lt;code>dubbo.jetty.page=log,status,system&lt;/code>：配置显示的页面，缺省加载所有页面&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="log4j-container">Log4j Container&lt;/h3>
+&lt;ul>
+&lt;li>自动配置 log4j 的配置，在多进程启动时，自动给日志文件按进程分目录。&lt;/li>
+&lt;li>配置：
+&lt;ul>
+&lt;li>&lt;code>dubbo.log4j.file=/foo/bar.log&lt;/code>：配置日志文件路径&lt;/li>
+&lt;li>&lt;code>dubbo.log4j.level=WARN&lt;/code>：配置日志级别&lt;/li>
+&lt;li>&lt;code>dubbo.log4j.subdirectory=20880&lt;/code>：配置日志子目录，用于多进程启动，避免冲突&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h4 id="启动容器加载说明">启动容器加载说明：&lt;/h4>
+&lt;p>缺省只加载 spring&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>java org.apache.dubbo.container.Main
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>通过 main 函数参数传入要加载的容器&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>java org.apache.dubbo.container.Main spring jetty log4j
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>通过 JVM 启动参数传入要加载的容器&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>java org.apache.dubbo.container.Main -Ddubbo.container&lt;span style="color:#719e07">=&lt;/span>spring,jetty,log4j
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>通过 classpath 下的 &lt;code>dubbo.properties&lt;/code> 配置传入要加载的容器&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.container=spring,jetty,log4j
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
