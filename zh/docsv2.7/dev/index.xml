@@ -105,10 +105,10 @@
 &lt;p>展开总设计图的红色调用链，如下：&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/dev/dubbo-extension.jpg" alt="/dev-guide/images/dubbo-extension.jpg">&lt;/p>
 &lt;h2 id="暴露服务时序">暴露服务时序&lt;/h2>
-&lt;p>展开总设计图左边服务提供方暴露服务的蓝色初始化链，时序图如下：&lt;/p>
+&lt;p>展开总设计图右边服务提供方暴露服务的蓝色初始化链，时序图如下：&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/dev/dubbo-export.jpg" alt="/dev-guide/images/dubbo-export.jpg">&lt;/p>
 &lt;h2 id="引用服务时序">引用服务时序&lt;/h2>
-&lt;p>展开总设计图右边服务消费方引用服务的绿色初始化链，时序图如下：&lt;/p>
+&lt;p>展开总设计图左边服务消费方引用服务的绿色初始化链，时序图如下：&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/dev/dubbo-refer.jpg" alt="/dev-guide/images/dubbo-refer.jpg">&lt;/p>
 &lt;h2 id="领域模型">领域模型&lt;/h2>
 &lt;p>在 Dubbo 的核心领域模型中：&lt;/p>
