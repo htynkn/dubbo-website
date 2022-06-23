@@ -778,9 +778,18 @@ path, group, version, dubbo, token, timeout 几个 key 是保留字段，请使�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">assert&lt;/span>&lt;span style="color:#719e07">(&lt;/span>status&lt;span style="color:#719e07">.&lt;/span>equals&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;OK&amp;#34;&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-Building: 调用信息记录</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/rpc/accesslog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/rpc/accesslog/</guid><description>
-&lt;p>如果你想记录每一次请求信息，可开启访问日志，类似于apache的访问日志。&lt;strong>注意&lt;/strong>：此日志量比较大，请注意磁盘容量。&lt;/p>
-&lt;p>将访问日志输出到当前应用的log4j日志：&lt;/p>
+&lt;h2 id="特性说明">特性说明:&lt;/h2>
+&lt;p>在 dubbo3 日志分为日志适配和访问日志，如果想记录每一次请求信息，可开启访问日志，类似于 apache 的访问日志。&lt;/p>
+&lt;h2 id="访问日志输出类型">访问日志输出类型：&lt;/h2>
+&lt;ul>
+&lt;li>log4j 日志&lt;/li>
+&lt;li>指定文件&lt;/li>
+&lt;/ul>
+&lt;h2 id="使用场景">使用场景:&lt;/h2>
+&lt;h2 id="使用方式">使用方式:&lt;/h2>
+&lt;p>将访问日志输出到当前应用的 log4j 日志：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> accesslog=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>将访问日志输出到指定文件：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> accesslog=&lt;span style="color:#2aa198">&amp;#34;http://10.20.160.198/wiki/display/dubbo/foo/bar.log&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="注意">注意:&lt;/h4>
+&lt;p>此日志量比较大，请注意磁盘容量。&lt;/p></description></item></channel></rss>
