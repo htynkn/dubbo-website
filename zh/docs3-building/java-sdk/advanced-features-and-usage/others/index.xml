@@ -1,9 +1,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – 其他</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/others/</link><description>Recent content in 其他 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/others/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs3-Building: 自定义服务容器</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/others/service-container/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/others/service-container/</guid><description>
-&lt;p>服务容器是一个 standalone 的启动程序，因为后台服务不需要 Tomcat 或 JBoss 等 Web 容器的功能，如果硬要用 Web 容器去加载服务提供方，增加复杂性，也浪费资源。&lt;/p>
-&lt;p>服务容器只是一个简单的 Main 方法，并加载一个简单的 Spring 容器，用于暴露服务。&lt;/p>
-&lt;p>服务容器的加载内容可以扩展，内置了 spring, jetty, log4j 等加载，可通过&lt;a href="../../references/spis/container">容器扩展点&lt;/a>进行扩展。配置配在 java 命令的 -D 参数或者 &lt;code>dubbo.properties&lt;/code> 中。&lt;/p>
-&lt;h2 id="容器类型">容器类型&lt;/h2>
+&lt;h2 id="特性说明">特性说明：&lt;/h2>
+&lt;p>Dubbo3 的服务容器是一个 standalone 的启动程序，因为后台服务不需要 Tomcat 或 JBoss 等 Web 容器的功能，如果硬要用 Web 容器去加载服务提供方，增加复杂性，也浪费资源。所以服务通常不需要 Tomcat/JBoss 等 Web 容器的特性，没必要用 Web 容器去加载服务。&lt;/p>
+&lt;p>Dubbo3 服务容器只是一个简单的 Main 方法，并加载一个简单的 Spring 容器，用于暴露服务。&lt;/p>
+&lt;p>服务容器的加载内容可以扩展，内置了 spring, jetty, log4j 等加载，可通过&lt;a href="../../../java-sdk/reference-manual/spi/description/container">容器扩展点&lt;/a>进行扩展。配置配在 java 命令的 -D 参数或者 &lt;code>dubbo.properties&lt;/code> 中。&lt;/p>
+&lt;h2 id="dubbo3-自定义容器类型">Dubbo3 自定义容器类型：&lt;/h2>
 &lt;h3 id="spring-container">Spring Container&lt;/h3>
+&lt;h3 id="jetty-container">Jetty Container&lt;/h3>
+&lt;h3 id="log4j-container">Log4j Container&lt;/h3>
+&lt;h2 id="使用场景">使用场景&lt;/h2>
+&lt;h2 id="使用方式">使用方式：&lt;/h2>
+&lt;h3 id="spring-container-1">Spring Container&lt;/h3>
 &lt;ul>
 &lt;li>
 &lt;p>自动加载 &lt;code>META-INF/spring&lt;/code> 目录下的所有 Spring 配置。&lt;/p>
@@ -13,7 +19,7 @@
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.spring.config=classpath*:META-INF/spring/*.xml
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;/ul>
-&lt;h3 id="jetty-container">Jetty Container&lt;/h3>
+&lt;h3 id="jetty-container-1">Jetty Container&lt;/h3>
 &lt;ul>
 &lt;li>启动一个内嵌 Jetty，用于汇报状态。&lt;/li>
 &lt;li>配置：
@@ -24,7 +30,7 @@
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
-&lt;h3 id="log4j-container">Log4j Container&lt;/h3>
+&lt;h3 id="log4j-container-1">Log4j Container&lt;/h3>
 &lt;ul>
 &lt;li>自动配置 log4j 的配置，在多进程启动时，自动给日志文件按进程分目录。&lt;/li>
 &lt;li>配置：
@@ -35,7 +41,7 @@
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
-&lt;h2 id="容器启动">容器启动&lt;/h2>
+&lt;h4 id="容器加载说明">容器加载说明：&lt;/h4>
 &lt;p>缺省只加载 spring&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>java org.apache.dubbo.container.Main
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>通过 main 函数参数传入要加载的容器&lt;/p>

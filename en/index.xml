@@ -659,23 +659,35 @@ Exactly the same as version 3.0.2, except for the following changes.&lt;/p>
 &lt;p>GitHub: &lt;a href="https://github.com/apache/dubbo">https://github.com/apache/dubbo&lt;/a> &lt;br>
 Release Notes: &lt;a href="https://github.com/apache/dubbo/releases">https://github.com/apache/dubbo/releases&lt;/a>&lt;/p>
 &lt;/blockquote>
+&lt;h3 id="309-2022-06-23">3.0.9 (2022-06-23)&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.9/apache-dubbo-3.0.9-src.zip">source&lt;/a> |
+&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.9/apache-dubbo-3.0.9-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.9/apache-dubbo-3.0.9-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="308-2022-05-11">3.0.8 (2022-05-11)&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/3.0.8/apache-dubbo-3.0.8-src.zip">source&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/3.0.8/apache-dubbo-3.0.8-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/3.0.8/apache-dubbo-3.0.8-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;/ul>
 &lt;h3 id="307-2022-04-01">3.0.7 (2022-04-01)&lt;/h3>
 &lt;ul>
-&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.7/apache-dubbo-3.0.7-src.zip">source&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.7/apache-dubbo-3.0.7-src.zip.asc">asc&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.7/apache-dubbo-3.0.7-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/3.0.7/apache-dubbo-3.0.7-src.zip">source&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/3.0.7/apache-dubbo-3.0.7-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/3.0.7/apache-dubbo-3.0.7-src.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="306-2022-02-28">3.0.6 (2022-02-28)&lt;/h3>
 &lt;ul>
-&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.6/apache-dubbo-3.0.6-src.zip">source&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.6/apache-dubbo-3.0.6-src.zip.asc">asc&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.6/apache-dubbo-3.0.6-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/3.0.6/apache-dubbo-3.0.6-src.zip">source&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/3.0.6/apache-dubbo-3.0.6-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/3.0.6/apache-dubbo-3.0.6-src.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="305-2021-12-30">3.0.5 (2021-12-30)&lt;/h3>
 &lt;ul>
-&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.5/apache-dubbo-3.0.5-src.zip">source&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.5/apache-dubbo-3.0.5-src.zip.asc">asc&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.5/apache-dubbo-3.0.5-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/3.0.5/apache-dubbo-3.0.5-src.zip">source&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/3.0.5/apache-dubbo-3.0.5-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/3.0.5/apache-dubbo-3.0.5-src.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="2715-2021-12-29">2.7.15 (2021-12-29)&lt;/h3>
 &lt;ul>
@@ -691,21 +703,21 @@ Release Notes: &lt;a href="https://github.com/apache/dubbo/releases">https://git
 &lt;/ul>
 &lt;h3 id="304-2021-10-24">3.0.4 (2021-10-24)&lt;/h3>
 &lt;ul>
-&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.4/apache-dubbo-3.0.4-src.zip">source&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.4/apache-dubbo-3.0.4-src.zip.asc">asc&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.4/apache-dubbo-3.0.4-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/3.0.4/apache-dubbo-3.0.4-src.zip">source&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/3.0.4/apache-dubbo-3.0.4-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/3.0.4/apache-dubbo-3.0.4-src.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="303-2021-09-27">3.0.3 (2021-09-27)&lt;/h3>
 &lt;ul>
-&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.3/apache-dubbo-3.0.3-src.zip">source&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.3/apache-dubbo-3.0.3-src.zip.asc">asc&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.3/apache-dubbo-3.0.3-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/3.0.3/apache-dubbo-3.0.3-src.zip">source&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/3.0.3/apache-dubbo-3.0.3-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/3.0.3/apache-dubbo-3.0.3-src.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="2714-2021-09-20">2.7.14 (2021-09-20)&lt;/h3>
 &lt;ul>
-&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.14/apache-dubbo-2.7.14-src.zip">source&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.14/apache-dubbo-2.7.14-src.zip.asc">asc&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.14/apache-dubbo-2.7.14-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/2.7.14/apache-dubbo-2.7.14-src.zip">source&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/2.7.14/apache-dubbo-2.7.14-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/2.7.14/apache-dubbo-2.7.14-src.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="2611-2021-09-18">2.6.11 (2021-09-18)&lt;/h3>
 &lt;ul>
@@ -715,99 +727,99 @@ Release Notes: &lt;a href="https://github.com/apache/dubbo/releases">https://git
 &lt;/ul>
 &lt;h3 id="3021-2021-08-23">3.0.2.1 (2021-08-23)&lt;/h3>
 &lt;ul>
-&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.2.1/apache-dubbo-3.0.2.1-src.zip">source&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.2.1/apache-dubbo-3.0.2.1-src.zip.asc">asc&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.2.1/apache-dubbo-3.0.2.1-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/3.0.2.1/apache-dubbo-3.0.2.1-src.zip">source&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/3.0.2.1/apache-dubbo-3.0.2.1-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/3.0.2.1/apache-dubbo-3.0.2.1-src.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="302-2021-08-16">3.0.2 (2021-08-16)&lt;/h3>
 &lt;ul>
-&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.2/apache-dubbo-3.0.2-src.zip">source&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.2/apache-dubbo-3.0.2-src.zip.asc">asc&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.2/apache-dubbo-3.0.2-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/3.0.2/apache-dubbo-3.0.2-src.zip">source&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/3.0.2/apache-dubbo-3.0.2-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/3.0.2/apache-dubbo-3.0.2-src.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="2713-2021-08-05">2.7.13 (2021-08-05)&lt;/h3>
 &lt;ul>
-&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.13/apache-dubbo-2.7.13-src.zip">source&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.13/apache-dubbo-2.7.13-src.zip.asc">asc&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.13/apache-dubbo-2.7.13-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/2.7.13/apache-dubbo-2.7.13-src.zip">source&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/2.7.13/apache-dubbo-2.7.13-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/2.7.13/apache-dubbo-2.7.13-src.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="301-2021-07-02">3.0.1 (2021-07-02)&lt;/h3>
 &lt;ul>
-&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.1/apache-dubbo-3.0.1-src.zip">source&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.1/apache-dubbo-3.0.1-src.zip.asc">asc&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.1/apache-dubbo-3.0.1-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/3.0.1/apache-dubbo-3.0.1-src.zip">source&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/3.0.1/apache-dubbo-3.0.1-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/3.0.1/apache-dubbo-3.0.1-src.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="300-2021-06-16">3.0.0 (2021-06-16)&lt;/h3>
 &lt;ul>
-&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.0/apache-dubbo-3.0.0-src.zip">source&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.0/apache-dubbo-3.0.0-src.zip.asc">asc&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.0/apache-dubbo-3.0.0-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/3.0.0/apache-dubbo-3.0.0-src.zip">source&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/3.0.0/apache-dubbo-3.0.0-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/3.0.0/apache-dubbo-3.0.0-src.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="2712-2021-06-11">2.7.12 (2021-06-11)&lt;/h3>
 &lt;ul>
-&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.12/apache-dubbo-2.7.12-src.zip">source&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.12/apache-dubbo-2.7.12-src.zip.asc">asc&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.12/apache-dubbo-2.7.12-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/2.7.12/apache-dubbo-2.7.12-src.zip">source&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/2.7.12/apache-dubbo-2.7.12-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/2.7.12/apache-dubbo-2.7.12-src.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="26101-2021-05-30">2.6.10.1 (2021-05-30)&lt;/h3>
 &lt;ul>
-&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.6.10.1/apache-dubbo-2.6.10.1-source-release.zip">source&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.6.10.1/apache-dubbo-2.6.10.1-source-release.zip.asc">asc&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.6.10.1/apache-dubbo-2.6.10.1-source-release.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/2.6.10.1/apache-dubbo-2.6.10.1-source-release.zip">source&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/2.6.10.1/apache-dubbo-2.6.10.1-source-release.zip.asc">asc&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/2.6.10.1/apache-dubbo-2.6.10.1-source-release.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="2711-2021-05-12">2.7.11 (2021-05-12)&lt;/h3>
 &lt;ul>
-&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.11/apache-dubbo-2.7.11-src.zip">source&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.11/apache-dubbo-2.7.11-src.zip.asc">asc&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.11/apache-dubbo-2.7.11-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/2.7.11/apache-dubbo-2.7.11-src.zip">source&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/2.7.11/apache-dubbo-2.7.11-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/2.7.11/apache-dubbo-2.7.11-src.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="2710-2021-04-08">2.7.10 (2021-04-08)&lt;/h3>
 &lt;ul>
-&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.10/apache-dubbo-2.7.10-src.zip">source&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.10/apache-dubbo-2.7.10-src.zip.asc">asc&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.10/apache-dubbo-2.7.10-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/2.7.10/apache-dubbo-2.7.10-src.zip">source&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/2.7.10/apache-dubbo-2.7.10-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/2.7.10/apache-dubbo-2.7.10-src.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="279-2020-02-23">2.7.9 (2020-02-23)&lt;/h3>
 &lt;ul>
-&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.9/apache-dubbo-2.7.9-src.zip">source&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.9/apache-dubbo-2.7.9-src.zip.asc">asc&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.9/apache-dubbo-2.7.9-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/2.7.9/apache-dubbo-2.7.9-src.zip">source&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/2.7.9/apache-dubbo-2.7.9-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/2.7.9/apache-dubbo-2.7.9-src.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="278-2020-07-28">2.7.8 (2020-07-28)&lt;/h3>
 &lt;ul>
-&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.8/apache-dubbo-2.7.8-source-release.zip">source&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.8/apache-dubbo-2.7.8-source-release.zip.asc">asc&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.8/apache-dubbo-2.7.8-source-release.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/2.7.8/apache-dubbo-2.7.8-source-release.zip">source&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/2.7.8/apache-dubbo-2.7.8-source-release.zip.asc">asc&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/2.7.8/apache-dubbo-2.7.8-source-release.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="277-2020-05-18">2.7.7 (2020-05-18)&lt;/h3>
 &lt;ul>
-&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.7/apache-dubbo-2.7.7-src.zip">source&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.7/apache-dubbo-2.7.7-src.zip.asc">asc&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.7/apache-dubbo-2.7.7-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/2.7.7/apache-dubbo-2.7.7-src.zip">source&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/2.7.7/apache-dubbo-2.7.7-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/2.7.7/apache-dubbo-2.7.7-src.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="275-2019-12-29">2.7.5 (2019-12-29)&lt;/h3>
 &lt;ul>
-&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.5/apache-dubbo-2.7.5-src.zip">source&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.5/apache-dubbo-2.7.5-src.zip.asc">asc&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.5/apache-dubbo-2.7.5-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/2.7.5/apache-dubbo-2.7.5-src.zip">source&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/2.7.5/apache-dubbo-2.7.5-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/2.7.5/apache-dubbo-2.7.5-src.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="2741-2019-10-27">2.7.4.1 (2019-10-27)&lt;/h3>
 &lt;ul>
-&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.4.1/apache-dubbo-2.7.4.1-src.zip">source&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.4.1/apache-dubbo-2.7.4.1-src.zip.asc">asc&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.4.1/apache-dubbo-2.7.4.1-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/2.7.4.1/apache-dubbo-2.7.4.1-src.zip">source&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/2.7.4.1/apache-dubbo-2.7.4.1-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/2.7.4.1/apache-dubbo-2.7.4.1-src.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="274-2019-10-19">2.7.4 (2019-10-19)&lt;/h3>
 &lt;ul>
-&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.4/apache-dubbo-2.7.4-src.zip">source&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.4/apache-dubbo-2.7.4-src.zip.asc">asc&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.4/apache-dubbo-2.7.4-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/2.7.4/apache-dubbo-2.7.4-src.zip">source&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/2.7.4/apache-dubbo-2.7.4-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/2.7.4/apache-dubbo-2.7.4-src.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="273-2019-07-19">2.7.3 (2019-07-19)&lt;/h3>
 &lt;ul>
-&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.3/apache-dubbo-2.7.3-src.zip">source&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.3/apache-dubbo-2.7.3-src.zip.asc">asc&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.3/apache-dubbo-2.7.3-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/2.7.3/apache-dubbo-2.7.3-src.zip">source&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/2.7.3/apache-dubbo-2.7.3-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/2.7.3/apache-dubbo-2.7.3-src.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="272-2019-06-06">2.7.2 (2019-06-06)&lt;/h3>
 &lt;ul>
@@ -890,7 +902,7 @@ Release Notes: &lt;a href="https://github.com/apache/dubbo/releases">https://git
 &lt;h2 id="dubbo-spring-boot-starter">Dubbo Spring Boot Starter&lt;/h2>
 &lt;blockquote>
 &lt;p>GitHub: &lt;a href="https://github.com/apache/incubator-dubbo-spring-boot-project">https://github.com/apache/incubator-dubbo-spring-boot-project&lt;/a> &lt;br>
-Release Notes: &lt;a href="https://github.com/apache/incubator-dubbo-spring-boot-project/releases">https://github.com/apache/incubator-dubbo-spring-boot-project/releases&lt;/a>&lt;/p>
+发布说明：https://github.com/apache/incubator-dubbo-spring-boot-project/releases&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="271-2019-04-09">2.7.1 (2019-04-09)&lt;/h3>
 &lt;ul>

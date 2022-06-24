@@ -6840,7 +6840,7 @@ consumer端同样执行编译，在consumer的target下也会生成二进制文�
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>指定合并策略，缺省根据返回值类型自动匹配，如果同一类型有两个合并器时，需指定合并器的名称&lt;/p>
 &lt;div class="alert alert-primary" role="alert">
 &lt;h4 class="alert-heading">提示&lt;/h4>
-参见：&lt;a href="../../../dev/impls/merger">合并结果扩展&lt;/a>
+参见：&lt;a href="../../../java-sdk/reference-manual/spi/description/merger">合并结果扩展&lt;/a>
 &lt;/div>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.xxx.MenuService&amp;#34;&lt;/span> group=&lt;span style="color:#2aa198">&amp;#34;*&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:method&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;getMenuItems&amp;#34;&lt;/span> merger=&lt;span style="color:#2aa198">&amp;#34;mymerge&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
