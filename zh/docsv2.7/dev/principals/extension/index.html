@@ -10,7 +10,7 @@
 第二步，每个扩展点只封装一个变化因子，最大化复用 每个扩展点的实现者，往往都只是关心一件事，现在的扩展点，并没有完全分离。比如：Failover, Route, LoadBalance, Directory 没有完全分开，全由 RoutingInvokerGroup 写死了。
 再比如，协议扩展，扩展者可能只是想替换序列化方式，或者只替换传输方式，并且 Remoting 和 Http 也能复用序列化等实现。这样，需为传输方式，客户端实现，服务器端实现，协议头解析，数据序列化，都留出不同扩展点。
 拆分后，设计如下：
-第三步，全管道式设计，框架自身逻辑，均使用截面拦截实现 现在很多的逻辑，都是放在基类中实现，然后通过模板方法回调子类的实现，包括：local, mock, generic, echo, token, accesslog, monitor, count, limit 等等，可以全部拆分使用 Filter 实现，每个功能都是调用链上的一环。 比如：(基类模板方法)"><meta property="og:type" content="article"><meta property="og:url" content="https://dubbo.apache.org/zh/docsv2.7/dev/principals/extension/"><meta property="article:section" content="docsv2.7"><meta property="article:modified_time" content="2022-06-28T17:58:45+08:00"><meta property="og:site_name" content="Apache Dubbo"><meta itemprop=name content="扩展点重构"><meta itemprop=description content="随着服务化的推广，网站对Dubbo服务框架的需求逐渐增多，Dubbo 的现有开发人员能实现的需求有限，很多需求都被 delay，而网站的同学也希望参与进来，加上领域的推动，所以平台计划将部分项目对公司内部开放，让大家一起来实现，Dubbo 为试点项目之一。
+第三步，全管道式设计，框架自身逻辑，均使用截面拦截实现 现在很多的逻辑，都是放在基类中实现，然后通过模板方法回调子类的实现，包括：local, mock, generic, echo, token, accesslog, monitor, count, limit 等等，可以全部拆分使用 Filter 实现，每个功能都是调用链上的一环。 比如：(基类模板方法)"><meta property="og:type" content="article"><meta property="og:url" content="https://dubbo.apache.org/zh/docsv2.7/dev/principals/extension/"><meta property="article:section" content="docsv2.7"><meta property="article:modified_time" content="2022-06-29T09:43:24+08:00"><meta property="og:site_name" content="Apache Dubbo"><meta itemprop=name content="扩展点重构"><meta itemprop=description content="随着服务化的推广，网站对Dubbo服务框架的需求逐渐增多，Dubbo 的现有开发人员能实现的需求有限，很多需求都被 delay，而网站的同学也希望参与进来，加上领域的推动，所以平台计划将部分项目对公司内部开放，让大家一起来实现，Dubbo 为试点项目之一。
 既然要开放，那 Dubbo 就要留一些扩展点，让参与者尽量黑盒扩展，而不是白盒的修改代码，否则分支，质量，合并，冲突都会很难管理。
 先看一下 Dubbo 现有的设计：
 这里面虽然有部分扩展接口，但并不能很好的协作，而且扩展点的加载和配置都没有统一处理，所以下面对它进行重构。
@@ -22,7 +22,7 @@
 第二步，每个扩展点只封装一个变化因子，最大化复用 每个扩展点的实现者，往往都只是关心一件事，现在的扩展点，并没有完全分离。比如：Failover, Route, LoadBalance, Directory 没有完全分开，全由 RoutingInvokerGroup 写死了。
 再比如，协议扩展，扩展者可能只是想替换序列化方式，或者只替换传输方式，并且 Remoting 和 Http 也能复用序列化等实现。这样，需为传输方式，客户端实现，服务器端实现，协议头解析，数据序列化，都留出不同扩展点。
 拆分后，设计如下：
-第三步，全管道式设计，框架自身逻辑，均使用截面拦截实现 现在很多的逻辑，都是放在基类中实现，然后通过模板方法回调子类的实现，包括：local, mock, generic, echo, token, accesslog, monitor, count, limit 等等，可以全部拆分使用 Filter 实现，每个功能都是调用链上的一环。 比如：(基类模板方法)"><meta itemprop=dateModified content="2022-06-28T17:58:45+08:00"><meta itemprop=wordCount content="240"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="扩展点重构"><meta name=twitter:description content="随着服务化的推广，网站对Dubbo服务框架的需求逐渐增多，Dubbo 的现有开发人员能实现的需求有限，很多需求都被 delay，而网站的同学也希望参与进来，加上领域的推动，所以平台计划将部分项目对公司内部开放，让大家一起来实现，Dubbo 为试点项目之一。
+第三步，全管道式设计，框架自身逻辑，均使用截面拦截实现 现在很多的逻辑，都是放在基类中实现，然后通过模板方法回调子类的实现，包括：local, mock, generic, echo, token, accesslog, monitor, count, limit 等等，可以全部拆分使用 Filter 实现，每个功能都是调用链上的一环。 比如：(基类模板方法)"><meta itemprop=dateModified content="2022-06-29T09:43:24+08:00"><meta itemprop=wordCount content="240"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="扩展点重构"><meta name=twitter:description content="随着服务化的推广，网站对Dubbo服务框架的需求逐渐增多，Dubbo 的现有开发人员能实现的需求有限，很多需求都被 delay，而网站的同学也希望参与进来，加上领域的推动，所以平台计划将部分项目对公司内部开放，让大家一起来实现，Dubbo 为试点项目之一。
 既然要开放，那 Dubbo 就要留一些扩展点，让参与者尽量黑盒扩展，而不是白盒的修改代码，否则分支，质量，合并，冲突都会很难管理。
 先看一下 Dubbo 现有的设计：
 这里面虽然有部分扩展接口，但并不能很好的协作，而且扩展点的加载和配置都没有统一处理，所以下面对它进行重构。
