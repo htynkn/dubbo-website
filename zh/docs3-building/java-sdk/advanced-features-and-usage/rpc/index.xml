@@ -621,12 +621,18 @@ Dubbo 默认支持 hibernate-validator 版本 &amp;lt;=6.x，若使用 hibernate
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>${dubbo.version}&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>从服务元数据中也可以比较容易构建泛化调用对象。&lt;/p></description></item><item><title>Docs3-Building: 调用链路传递隐式参数</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/rpc/attachment/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/rpc/attachment/</guid><description>
+&lt;h2 id="特性说明">特性说明&lt;/h2>
 &lt;p>可以通过 &lt;code>RpcContext&lt;/code> 上的 &lt;code>setAttachment&lt;/code> 和 &lt;code>getAttachment&lt;/code> 在服务消费方和提供方之间进行参数的隐式传递。&lt;/p>
-&lt;div class="alert alert-primary" role="alert">
-&lt;h4 class="alert-heading">注意&lt;/h4>
-path, group, version, dubbo, token, timeout 几个 key 是保留字段，请使用其它值。
-&lt;/div>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/context.png" alt="/user-guide/images/context.png">&lt;/p>
+&lt;h4 id="注意">注意：&lt;/h4>
+&lt;p>path, group, version, dubbo, token, timeout 几个 key 是保留字段，请使用其它值。&lt;/p>
+&lt;h4 id="隐式参数配置">隐式参数配置：&lt;/h4>
+&lt;ul>
+&lt;li>服务消费方&lt;/li>
+&lt;li>服务提供方&lt;/li>
+&lt;/ul>
+&lt;h2 id="使用场景">使用场景&lt;/h2>
+&lt;h2 id="使用方式">使用方式&lt;/h2>
 &lt;h4 id="在服务消费方端设置隐式参数">在服务消费方端设置隐式参数&lt;/h4>
 &lt;p>&lt;code>setAttachment&lt;/code> 设置的 KV 对，在完成下面一次远程调用会被清空，即多次远程调用要多次设置。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>RpcContext.getContext().setAttachment(&amp;#34;index&amp;#34;, &amp;#34;1&amp;#34;); // 隐式传参，后面的远程调用都会隐式将这些参数发送到服务器端，类似cookie，用于框架集成，不建议常规业务使用
@@ -641,9 +647,17 @@ path, group, version, dubbo, token, timeout 几个 key 是保留字段，请使�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-Building: RPC调用上下文</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/rpc/context/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/rpc/context/</guid><description>
-&lt;p>上下文中存放的是当前调用过程中所需的环境信息。所有配置信息都将转换为 URL 的参数，参见 &lt;a href="../../v3.0/references/xml">Schema 配置参考手册&lt;/a> 中的&lt;strong>对应URL参数&lt;/strong>一列。&lt;/p>
+&lt;h2 id="特性说明">特性说明&lt;/h2>
+&lt;p>上下文中存放的是当前调用过程中所需的环境信息。所有配置信息都将转换为 URL 的参数，参见 &lt;a href="../../../v3.0/references/xml">schema 配置参考手册&lt;/a> 中的&lt;strong>对应URL参数&lt;/strong>一列。&lt;/p>
 &lt;p>RpcContext 是一个 ThreadLocal 的临时状态记录器，当接收到 RPC 请求，或发起 RPC 请求时，RpcContext 的状态都会变化。比如：A 调 B，B 再调 C，则 B 机器上，在 B 调 C 之前，RpcContext 记录的是 A 调 B 的信息，在 B 调 C 之后，RpcContext 记录的是 B 调 C 的信息。&lt;/p>
-&lt;h2 id="服务消费方">服务消费方&lt;/h2>
+&lt;h4 id="类型">类型：&lt;/h4>
+&lt;ul>
+&lt;li>服务消费方&lt;/li>
+&lt;li>服务提供方&lt;/li>
+&lt;/ul>
+&lt;h2 id="使用场景">使用场景&lt;/h2>
+&lt;h2 id="使用方式">使用方式&lt;/h2>
+&lt;h4 id="服务消费方">服务消费方&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// 远程调用
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>xxxService&lt;span style="color:#719e07">.&lt;/span>xxx&lt;span style="color:#719e07">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// 本端是否为消费端，这里会返回true
@@ -654,7 +668,7 @@ path, group, version, dubbo, token, timeout 几个 key 是保留字段，请使�
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>String application &lt;span style="color:#719e07">=&lt;/span> RpcContext&lt;span style="color:#719e07">.&lt;/span>getContext&lt;span style="color:#719e07">().&lt;/span>getUrl&lt;span style="color:#719e07">().&lt;/span>getParameter&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;application&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// 注意：每发起RPC调用，上下文状态会变化
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>yyyService&lt;span style="color:#719e07">.&lt;/span>yyy&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="服务提供方">服务提供方&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="服务提供方">服务提供方&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">XxxServiceImpl&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> XxxService &lt;span style="color:#719e07">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">xxx&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
@@ -671,26 +685,25 @@ path, group, version, dubbo, token, timeout 几个 key 是保留字段，请使�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-Building: 调用结果缓存</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/rpc/result-cache/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/rpc/result-cache/</guid><description>
+&lt;h2 id="特性说明">特性说明&lt;/h2>
 &lt;p>结果缓存，用于加速热门数据的访问速度，Dubbo 提供声明式缓存，以减少用户加缓存的工作量。&lt;/p>
-&lt;h2 id="缓存类型">缓存类型&lt;/h2>
+&lt;h4 id="缓存类型">缓存类型&lt;/h4>
 &lt;ul>
 &lt;li>&lt;code>lru&lt;/code> 基于最近最少使用原则删除多余缓存，保持最热的数据被缓存。&lt;/li>
 &lt;li>&lt;code>threadlocal&lt;/code> 当前线程缓存，比如一个页面渲染，用到很多 portal，每个 portal 都要去查用户信息，通过线程缓存，可以减少这种多余访问。&lt;/li>
 &lt;li>&lt;code>jcache&lt;/code> 与 &lt;a href="http://jcp.org/en/jsr/detail?id=107%27">JSR107&lt;/a> 集成，可以桥接各种缓存实现。&lt;/li>
 &lt;/ul>
-&lt;p>缓存类型可扩展，参见：&lt;a href="../../references/spis/cache">缓存扩展&lt;/a>&lt;/p>
-&lt;h2 id="配置">配置&lt;/h2>
+&lt;p>缓存类型可扩展 &lt;a href="../../../reference-manual/spi/description/cache">缓存扩展&lt;/a>&lt;/p>
+&lt;p>关于 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-cache">示例代码&lt;/a>&lt;/p>
+&lt;h2 id="使用场景">使用场景&lt;/h2>
+&lt;h2 id="使用方式">使用方式&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> cache=&lt;span style="color:#2aa198">&amp;#34;lru&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:method&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;findBar&amp;#34;&lt;/span> cache=&lt;span style="color:#2aa198">&amp;#34;lru&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dubbo:reference&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
-&lt;div class="alert alert-primary" role="alert">
-&lt;h4 class="alert-heading">提示&lt;/h4>
-&lt;p>&lt;code>2.1.0&lt;/code> 以上版本支持。&lt;/p>
-&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-cache">示例代码&lt;/a>&lt;/p>
-&lt;/div></description></item><item><title>Docs3-Building: 调用触发事件通知</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/rpc/events-notify/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/rpc/events-notify/</guid><description>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="提示">提示：&lt;/h4>
+&lt;p>&lt;code>2.1.0&lt;/code> 以上版本支持。&lt;/p></description></item><item><title>Docs3-Building: 调用触发事件通知</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/rpc/events-notify/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/rpc/events-notify/</guid><description>
 &lt;h2 id="特性说明">特性说明&lt;/h2>
 &lt;p>在调用之前、调用之后、出现异常时，会触发 &lt;code>oninvoke&lt;/code>、&lt;code>onreturn&lt;/code>、&lt;code>onthrow&lt;/code> 三个事件，可以配置当事件发生时，通知哪个类的哪个方法。&lt;/p>
 &lt;h4 id="提示">提示：&lt;/h4>
