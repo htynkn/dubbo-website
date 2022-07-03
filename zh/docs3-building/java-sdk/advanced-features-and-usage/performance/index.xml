@@ -192,11 +192,11 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动 provider 的 main 方法之后，查看 zookeeper 的叶子节点（路径为：/dubbo/org.apache.dubbo.samples.simplified.registry.nosimple.api.DemoService/providers 目录下）的内容如下：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo%3A%2F%2F30.5.124.158%3A20880%2Forg.apache.dubbo.samples.simplified.registry.nosimple.api.DemoService
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>%3Fanyhost%3Dtrue%26application%3Dsimplified-registry-xml-provider%26async%3Dtrue%26dubbo%3D
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2.0.2%26**executes**%3D4500%26generic%3Dfalse%26group%3Ddubbo-simple%26interface%3D
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2.0.2%26executes%3D4500%26generic%3Dfalse%26group%3Ddubbo-simple%26interface%3D
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>org.apache.dubbo.samples.simplified.registry.nosimple.api.DemoService%26methods%3D
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sayHello%26**owner**%3Dvict%26pid%3D2767%26**retries**%3D7%26revision%3D1.2.3%26side%3D
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>provider%26**timeout**%3D5300%26timestamp%3D1542361152795%26valid%3Dtrue%26version%3D1.2.3
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>从加粗字体中能看到有：executes, retries, owner, timeout。但是这些字段不是每个都需要传递给 dubbo ops 或者 dubbo consumer。 同样的，consumer 也有这个问题，可以在例子中启动 Consumer 的 main 方法进行查看。&lt;/p>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sayHello%26owner%3Dvict%26pid%3D2767%26retries%3D7%26revision%3D1.2.3%26side%3D
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>provider%26timeout%3D5300%26timestamp%3D1542361152795%26valid%3Dtrue%26version%3D1.2.3
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>从中能看到有：&lt;code>executes&lt;/code>, &lt;code>retries&lt;/code>, &lt;code>owner&lt;/code>, &lt;code>timeout&lt;/code>。但是这些字段不是每个都需要传递给 dubbo ops 或者 dubbo consumer。 同样的，consumer 也有这个问题，可以在例子中启动 Consumer 的 main 方法进行查看。&lt;/p>
 &lt;h3 id="方式1-配置-dubboproperties">方式1. 配置 dubbo.properties&lt;/h3>
 &lt;p>sample 在 dubbo-samples-simplified-registry/dubbo-samples-simplified-registry-xml 工程下 （跑 sample 前，先跑下ZKClean 进行配置项清理）&lt;/p>
 &lt;h5 id="dubboproperties">dubbo.properties&lt;/h5>
@@ -228,8 +228,8 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/beans&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>得到的 zookeeper 的叶子节点的值：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo%3A%2F%2F30.5.124.149%3A20880%2Forg.apache.dubbo.samples.simplified.registry.nosimple.api.DemoService%3F
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>application%3Dsimplified-registry-xml-provider%26dubbo%3D2.0.2%26group%3Ddubbo-simple%26**owner**%3D
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vict%26**retries**%3D7%26**timeout**%3D5300%26timestamp%3D1542594503305%26version%3D1.2.3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>application%3Dsimplified-registry-xml-provider%26dubbo%3D2.0.2%26group%3Ddubbo-simple%26owner%3D
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vict%26retries%3D7%26timeout%3D5300%26timestamp%3D1542594503305%26version%3D1.2.3
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="consumer-端配置">consumer 端配置&lt;/h4>
 &lt;ul>
 &lt;li>配置：dubbo.registry.simplified=true&lt;/li>
