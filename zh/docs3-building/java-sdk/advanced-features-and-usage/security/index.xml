@@ -43,6 +43,7 @@
 &lt;li>服务级别设置&lt;/li>
 &lt;/ul>
 &lt;h2 id="使用场景">使用场景&lt;/h2>
+&lt;p>在一定程度上实现客户端和服务端的可信鉴权，避免任意客户端都可以访问，降低出现安全问题的风险。&lt;/p>
 &lt;h2 id="使用方式">使用方式：&lt;/h2>
 &lt;p>全局设置开启令牌验证：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&amp;lt;!--随机token令牌，使用UUID生成--&amp;gt;&lt;/span>
