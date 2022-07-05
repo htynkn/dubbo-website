@@ -322,4 +322,14 @@ Grpc 使用 &lt;code>compiler&lt;/code> 将编写的 &lt;code>proto&lt;/code> �
 &lt;li>&amp;hellip;&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>stub&lt;/code> 用一种统一的使用方式帮我们屏蔽了不同调用方式的细节。不过目前 &lt;code>Dubbo3&lt;/code> 暂时只支持传统定义接口并进行调用的使用方式。&lt;/p>
-&lt;p>在不久的未来，&lt;code>Triple&lt;/code> 也将实现各种常用的 &lt;code>Stub&lt;/code>，让用户写一份&lt;code>proto&lt;/code>文件，通过 &lt;code>comipler&lt;/code> 可以在任意场景方便的使用，请拭目以待。&lt;/p></description></item><item><title>Docs3-Building: 应用级服务发现</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/upgrades-and-compatibility/service-discovery/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/upgrades-and-compatibility/service-discovery/</guid><description/></item></channel></rss>
+&lt;p>在不久的未来，&lt;code>Triple&lt;/code> 也将实现各种常用的 &lt;code>Stub&lt;/code>，让用户写一份&lt;code>proto&lt;/code>文件，通过 &lt;code>comipler&lt;/code> 可以在任意场景方便的使用，请拭目以待。&lt;/p></description></item><item><title>Docs3-Building: 应用级服务发现</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/upgrades-and-compatibility/service-discovery/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/upgrades-and-compatibility/service-discovery/</guid><description/></item><item><title>Docs3-Building: 3.0升级至3.1操作指南</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/upgrades-and-compatibility/3.0-to-3.1-compatibility-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/upgrades-and-compatibility/3.0-to-3.1-compatibility-guide/</guid><description>
+&lt;h2 id="功能修改点">功能修改点&lt;/h2>
+&lt;h3 id="1-nacos-group-对齐应用级服务发现">1. Nacos Group 对齐（应用级服务发现）&lt;/h3>
+&lt;p>在 Dubbo 2.7.x 中，配置在 Nacos Registry URL 上的 group 值是对齐 Nacos 注册中心中的 group 分组的。（group 可以当成类似 namespace 的软隔离）&lt;/p>
+&lt;p>在 Dubbo 3.0.x 中，配置在 Nacos Registry URL 上的 group 默认不使用，全部使用 DEFAULT_GROUP。（group 不再提供隔离功能）&lt;/p>
+&lt;p>在 Dubbo 3.1.x 中，配置在 Nacos Registry URL 上的 group 值将会重新对齐 Nacos 注册中心中的 group 分组的。&lt;/p>
+&lt;p>注意事项：&lt;/p>
+&lt;ol>
+&lt;li>请检查注册中心 URL 上是否已经配置了 group 属性，如果是的话需要检查服务端和消费端的 group 是否都一致，如果不一致请修改为一致&lt;/li>
+&lt;li>如果不希望 group 重新对齐到 Nacos 注册中心中的 group 分组，可以配置 &lt;code>dubbo.nacos-service-discovery.use-default-group=false&lt;/code> 全局属性值忽略该功能&lt;/li>
+&lt;/ol></description></item></channel></rss>
