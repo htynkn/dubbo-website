@@ -688,7 +688,6 @@ Dubbo 默认支持 hibernate-validator 版本 &amp;lt;=6.x，若使用 hibernate
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-Building: 调用结果缓存</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/rpc/result-cache/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/rpc/result-cache/</guid><description>
 &lt;h2 id="特性说明">特性说明&lt;/h2>
-&lt;p>结果缓存，用于加速热门数据的访问速度，Dubbo 提供声明式缓存，以减少用户加缓存的工作量。&lt;/p>
 &lt;h4 id="缓存类型">缓存类型&lt;/h4>
 &lt;ul>
 &lt;li>&lt;code>lru&lt;/code> 基于最近最少使用原则删除多余缓存，保持最热的数据被缓存。&lt;/li>
@@ -698,6 +697,7 @@ Dubbo 默认支持 hibernate-validator 版本 &amp;lt;=6.x，若使用 hibernate
 &lt;p>缓存类型可扩展 &lt;a href="../../../reference-manual/spi/description/cache">缓存扩展&lt;/a>&lt;/p>
 &lt;p>关于 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-cache">示例代码&lt;/a>&lt;/p>
 &lt;h2 id="使用场景">使用场景&lt;/h2>
+&lt;p>结果缓存，用于加速热门数据的访问速度，Dubbo 提供声明式缓存，以减少用户加缓存的工作量。&lt;/p>
 &lt;h2 id="使用方式">使用方式&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> cache=&lt;span style="color:#2aa198">&amp;#34;lru&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或：&lt;/p>
