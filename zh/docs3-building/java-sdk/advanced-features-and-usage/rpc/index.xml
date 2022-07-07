@@ -658,6 +658,7 @@ Dubbo 默认支持 hibernate-validator 版本 &amp;lt;=6.x，若使用 hibernate
 &lt;li>服务提供方&lt;/li>
 &lt;/ul>
 &lt;h2 id="使用场景">使用场景&lt;/h2>
+&lt;p>全局链路追踪和隐藏参数。&lt;/p>
 &lt;h2 id="使用方式">使用方式&lt;/h2>
 &lt;h4 id="服务消费方">服务消费方&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// 远程调用
