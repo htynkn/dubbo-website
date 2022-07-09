@@ -18,7 +18,7 @@
 这里就有一个问题，怎么在其它邮箱里面配置 apache.org 邮箱转发功能：
 &lt;ul>
 &lt;li>收件箱：收取发送到 apache.org 的邮件。这个在第一步配置好 Apache 账户工具的 forward 邮箱就可以用 forward 邮箱收取邮件了&lt;/li>
-&lt;li>发件箱：将发出的邮件显示发件邮箱为 apache.org 邮箱。请参考：&lt;a href="https://reference.apache.org/committer/email">设置 apache 邮箱指南&lt;/a>和&lt;a href="http://gmailblog.blogspot.com/2009/07/send-mail-from-another-address-without.html"> gmail 邮箱设置方式&lt;/a>。 其他邮箱服务的设置方式不方便找到，gmail 的最方便，建议换成 gmail 邮箱(不是广告)。&lt;/li>
+&lt;li>发件箱：将发出的邮件显示发件邮箱为 apache.org 邮箱。请参考：&lt;a href="https://reference.apache.org/committer/email">设置 apache 邮箱指南&lt;/a>和&lt;a href="https://support.google.com/mail/answer/22370"> gmail 邮箱设置方式&lt;/a>。 其他邮箱服务的设置方式不方便找到，gmail 的最方便，建议换成 gmail 邮箱(不是广告)。&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>修改编辑页面的 homepage url，&lt;a href="http://people.apache.org/committer-index.html">apache 提交者列表页&lt;/a>中你的账户能加主页链接。&lt;/li>
@@ -38,7 +38,7 @@
 &lt;/li>
 &lt;li>
 &lt;p>按照&lt;a href="https://help.github.com/articles/configuring-two-factor-authentication-via-a-totp-mobile-app/">授权 GitHub 2FA wiki&lt;/a> 一步一步操作。&lt;/p>
-&lt;p>在&lt;a href="https://github.com/settings/two_factor_authentication/verify">两因素授权验证&lt;/a>界面，不建议选择用手机扫描二维码，因为有些手机会扫描不出来。
+&lt;p>在&lt;a href="https://github.com/settings/security">两因素授权验证&lt;/a>界面，不建议选择用手机扫描二维码，因为有些手机会扫描不出来。
 请打开手机 “google 身份验证器” app，点“+”选择“输入提供的秘钥”： 在“账户名” input 框写入 github 账户。在“您的秘钥” input 框写入:打开的网页中 &amp;ldquo;enter this text code&amp;rdquo; 链接里面的文本。在 app 中点击&amp;quot;添加&amp;quot; 后，将为此账户生成6位数字动态。将此6位数字写入网页中的文本框，然后点 “Enable”。这样 2FA 就设置成功了。&lt;/p>
 &lt;/li>
 &lt;li>

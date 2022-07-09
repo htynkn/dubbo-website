@@ -1,4 +1,145 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – Apache Dubbo</title><link>https://dubbo.apache.org/zh/</link><description>Recent content on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: 如何通过 Apache ShenYu 网关代理 Dubbo 服务</title><link>https://dubbo.apache.org/zh/blog/2022/05/04/%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87-apache-shenyu-%E7%BD%91%E5%85%B3%E4%BB%A3%E7%90%86-dubbo-%E6%9C%8D%E5%8A%A1/</link><pubDate>Wed, 04 May 2022 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2022/05/04/%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87-apache-shenyu-%E7%BD%91%E5%85%B3%E4%BB%A3%E7%90%86-dubbo-%E6%9C%8D%E5%8A%A1/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – Apache Dubbo</title><link>https://dubbo.apache.org/zh/</link><description>Recent content on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: 浅析 Dubbo 3.0 中接口级地址推送性能的优化</title><link>https://dubbo.apache.org/zh/blog/2022/06/23/%E6%B5%85%E6%9E%90-dubbo-3.0-%E4%B8%AD%E6%8E%A5%E5%8F%A3%E7%BA%A7%E5%9C%B0%E5%9D%80%E6%8E%A8%E9%80%81%E6%80%A7%E8%83%BD%E7%9A%84%E4%BC%98%E5%8C%96/</link><pubDate>Thu, 23 Jun 2022 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2022/06/23/%E6%B5%85%E6%9E%90-dubbo-3.0-%E4%B8%AD%E6%8E%A5%E5%8F%A3%E7%BA%A7%E5%9C%B0%E5%9D%80%E6%8E%A8%E9%80%81%E6%80%A7%E8%83%BD%E7%9A%84%E4%BC%98%E5%8C%96/</guid><description>
+&lt;h2 id="url-简介">URL 简介&lt;/h2>
+&lt;p>在阐述地址推送性能的具体优化之前，我们有必要先了解一下与之息息相关的内容 &amp;mdash; URL。&lt;/p>
+&lt;h3 id="定义">定义&lt;/h3>
+&lt;p>在不谈及 dubbo 时，我们大多数人对 URL 这个概念并不会感到陌生。统一资源定位器 (&lt;a href="https://link.zhihu.com/?target=https%3A//www.ietf.org/rfc/rfc1738.txt">RFC1738&lt;/a>――Uniform Resource Locators (URL))应该是最广为人知的一个 RFC 规范，它的定义也非常简单。&lt;/p>
+&lt;blockquote>
+&lt;p>因特网上的可用资源可以用简单字符串来表示，该文档就是描述了这种字符串的语法和语 义。而这些字符串则被称为：“统一资源定位器”（URL）&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;strong>一个标准的 URL 格式&lt;/strong>至多可以包含如下的几个部分&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>protocol://username:password@host:port/path?key=value&amp;amp;key=value
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>一些典型 URL&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>http://www.facebook.com/friends?param1=value1&amp;amp;amp;param2=value2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>https://username:password@10.20.130.230:8080/list?version=1.0.0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ftp://username:password@192.168.1.7:21/1/read.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>当然，也有一些&lt;strong>不太符合常规的 URL&lt;/strong>，也被归类到了 URL 之中&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>192.168.1.3:20880
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>url protocol = null, url host = 192.168.1.3, port = 20880, url path = null
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>file:///home/user1/router.js?type=script
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>url protocol = file, url host = null, url path = home/user1/router.js
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>file://home/user1/router.js?type=script&amp;lt;br&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>url protocol = file, url host = home, url path = user1/router.js
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>file:///D:/1/router.js?type=script
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>url protocol = file, url host = null, url path = D:/1/router.js
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>file:/D:/1/router.js?type=script
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>同上 file:///D:/1/router.js?type=script
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/home/user1/router.js?type=script
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>url protocol = null, url host = null, url path = home/user1/router.js
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>home/user1/router.js?type=script
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>url protocol = null, url host = home, url path = user1/router.js
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="dubbo-中的-url">Dubbo 中的 URL&lt;/h3>
+&lt;p>在 dubbo 中，也使用了类似的 URL，主要用于在各个扩展点之间传递数据，组成此 URL 对象的具体参数如下:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>protocol：一般是 dubbo 中的各种协议 如：dubbo thrift http zk&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>username/password：用户名/密码&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>host/port：主机/端口&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>path：接口名称&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>parameters：参数键值对&lt;/p>
+&lt;p>&lt;strong>一些典型的 Dubbo URL&lt;/strong>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo://192.168.1.6:20880/moe.cnkirito.sample.HelloService?timeout=3000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>描述一个 dubbo 协议的服务
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>zookeeper://127.0.0.1:2181/org.apache.dubbo.registry.RegistryService?application=demo-consumer&amp;amp;dubbo=2.0.2&amp;amp;interface=org.apache.dubbo.registry.RegistryService&amp;amp;pid=1214&amp;amp;qos.port=33333&amp;amp;timestamp=1545721981946
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>描述一个 zookeeper 注册中心
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>consumer://30.5.120.217/org.apache.dubbo.demo.DemoService?application=demo-consumer&amp;amp;category=consumers&amp;amp;check=false&amp;amp;dubbo=2.0.2&amp;amp;interface=org.apache.dubbo.demo.DemoService&amp;amp;methods=sayHello&amp;amp;pid=1209&amp;amp;qos.port=33333&amp;amp;side=consumer&amp;amp;timestamp=1545721827784
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>描述一个消费者
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>可以说，任意的一个领域中的一个实现都可以认为是一类 URL，dubbo 使用 URL 来统一描述了元数据，配置信息，贯穿在整个框架之中。&lt;/p>
+&lt;h2 id="dubbo-27">Dubbo 2.7&lt;/h2>
+&lt;h3 id="url-结构">URL 结构&lt;/h3>
+&lt;p>在 Dubbo 2.7 中，URL 的结构非常简单，一个类就涵盖了所有内容，如下图所示。
+&lt;img src="https://cdn.nlark.com/yuque/0/2021/png/1921386/1626684355065-047f2b60-0d02-41fb-8f57-ef7c89d625a5.png#clientId=u77103d46-bf79-4&amp;amp;from=ui&amp;amp;id=ub3498039&amp;amp;margin=%5Bobject%20Object%5D&amp;amp;name=Dubbo2%20URL%E7%B1%BB%E5%9B%BE.png&amp;amp;originHeight=212&amp;amp;originWidth=201&amp;amp;originalType=binary&amp;amp;ratio=1&amp;amp;size=14586&amp;amp;status=done&amp;amp;style=none&amp;amp;taskId=u4e81299b-9890-41ff-b1e5-0f430096690" alt="Dubbo2 URL类图.png">&lt;/p>
+&lt;h3 id="地址推送模型">地址推送模型&lt;/h3>
+&lt;p>接下来我们再来看看 Dubbo 2.7 中的地址推送模型方案，主要性能问题由下列过程引起。
+&lt;img src="https://cdn.nlark.com/yuque/0/2021/png/1921386/1626684380374-8c7f1087-5251-44ab-b1ef-36d3350dbc67.png#clientId=u77103d46-bf79-4&amp;amp;from=ui&amp;amp;id=ufea40a0b&amp;amp;margin=%5Bobject%20Object%5D&amp;amp;name=Dubbo2%20%E5%9C%B0%E5%9D%80%E6%8E%A8%E9%80%81%E6%A8%A1%E5%9E%8B.png&amp;amp;originHeight=629&amp;amp;originWidth=654&amp;amp;originalType=binary&amp;amp;ratio=1&amp;amp;size=50785&amp;amp;status=done&amp;amp;style=none&amp;amp;taskId=u6ef56cee-840d-48fb-bf06-85c9ee3d8bd" alt="Dubbo2 地址推送模型.png">&lt;/p>
+&lt;p>上图中主要的流程为
+1、用户新增/删除DemoService的某个具体Provider实例（常见于扩容缩容、网络波动等原因）
+2、ZooKeeper将DemoService下所有实例推送给Consumer端
+3、Consumer端根据Zookeeper推送的数据重新全量生成URL
+根据该方案可以看出在Provider实例数量较小时，Consumer端的影响比较小，但当某个接口有大量Provider实例时，便会有大量不必要的URL创建过程。
+而Dubbo 3.0中则主要针对上述推送流程进行了一系列的优化，接下来我们便对其进行具体的讲解。&lt;/p>
+&lt;h2 id="dubbo-30">Dubbo 3.0&lt;/h2>
+&lt;h3 id="url-结构-1">URL 结构&lt;/h3>
+&lt;p>当然，地址推送模型的优化依然离不开 URL 的优化，下图是Dubbo 3.0中优化地址推送模型的过程中使用的新的URL结构。
+&lt;img src="https://cdn.nlark.com/yuque/0/2021/png/1921386/1626684404347-633f5a87-0e12-4760-b38b-374e1b4c85a0.png#clientId=u77103d46-bf79-4&amp;amp;from=ui&amp;amp;id=u59706a31&amp;amp;margin=%5Bobject%20Object%5D&amp;amp;name=Dubbo3%20URL%E7%B1%BB%E5%9B%BE.png&amp;amp;originHeight=329&amp;amp;originWidth=1221&amp;amp;originalType=binary&amp;amp;ratio=1&amp;amp;size=54053&amp;amp;status=done&amp;amp;style=none&amp;amp;taskId=uba60500c-0a03-46f7-a85b-2eb574777b2" alt="Dubbo3 URL类图.png">
+根据上图我们可以看出，在 Dubbo 2.7 的 URL 中的几个重要属性在 Dubbo 3.0 中已经不存在了，取而代之的是 URLAddress 和 URLParam 两个类。原来的 parameters 属性被移动到了 URLParam 中的 params，其他的属性则移动到了 URLAddress 及其子类中。
+再来介绍 URL 新增的 3 个子类，其中 InstanceAddressURL 属于应用级接口地址，本篇章中不做介绍。
+而 ServiceConfigURL 及 ServiceAddressURL 主要的差别就是，ServiceConfigURL 是程序读取配置文件时生成的 URL。而 ServiceAddressURL 则是注册中心推送一些信息（如 providers）过来时生成的 URL。
+在这里我们顺便提一下为什么会有 DubboServiceAddressURL 这个子类，按照目前的结构来看，ServiceAddressURL 只有这一个子类，所以完全可以将他们两个的属性全都放到 ServiceAddressURL 中，那么为什么还要有这个子类呢？其实是 Dubbo 3.0 为了兼容 HSF 框架所设计的，抽象出了一个 ServiceAddressURL，而 HSF 框架则可以继承这个类，使用 HSFServiceAddressURL，当然，这个类目前没有体现出来，所以此处我们简单一提，不过多讲解。
+那么，我们接下来就讨论一下 Dubbo 3.0 为什么要改为此种数据结构，并且该结构和地址推送模型的优化有何关联性吧！&lt;/p>
+&lt;h3 id="地址推送模型的优化">地址推送模型的优化&lt;/h3>
+&lt;h4 id="url-结构上的优化">URL 结构上的优化&lt;/h4>
+&lt;p>我们在上小节中的类图里看到虽然原来的属性都被移到了 URLAddress 和 URLParam 里，但是 URL 的子类依然多了几个属性，这几个属性自然也是为了优化而新增的，那么这里就讲讲这几个属性的作用。
+&lt;strong>ServiceConfigURL&lt;/strong>：这个子类中新增了 attribute 这个属性，这个属性主要是针对 URLParam 的 params 做了冗余，仅仅只是将 value 的类型从 String 改为了 Object，减少了代码中每次获取 parameters 的格式转换消耗。
+&lt;strong>ServiceAddressURL&lt;/strong>：这个子类及其对应的其他子类中则新增了 overrideURL 和 consumerURL 属性。其中 consumerURL 是针对 consumer 端的配置信息，overrideURL 则是在 Dubbo Admin 上进行动态配置时写入的值，当我们调用 URL 的 getParameter() 方法时，优先级为 &lt;code>overrideURL &amp;gt; consumerURL &amp;gt; urlParam&lt;/code>。在 Dubbo 2.7 时，动态配置属性会替换 URL 中的属性，及当你有大量 URL 时消耗也是不可忽视的，而此处的 overrideURL 则避免了这种消耗，因为所有 URL 都会共同使用同一个对象。&lt;/p>
+&lt;h4 id="多级缓存">多级缓存&lt;/h4>
+&lt;p>缓存是 Dubbo 3.0 在 URL 上做的优化的重点，同时这部分也是直接针对地址推送模型所做的优化，那么接下来我们就开始来介绍一下多级缓存的具体实现。
+首先，多级缓存主要体现在 CacheableFailbackRegistry 这个类之中，它直接继承于 FailbackRegistry，以 Zookeeper 为例，我们看看 Dubbo 2.7 和 Dubbo 3.0 继承结构的区别。
+&lt;img src="https://cdn.nlark.com/yuque/0/2021/png/1921386/1626684433702-091378b5-5f80-4ac7-b755-5dab707051da.png#clientId=u77103d46-bf79-4&amp;amp;from=ui&amp;amp;id=u9118b5a9&amp;amp;margin=%5Bobject%20Object%5D&amp;amp;name=Dubbo3%20CacheableFailbackRegistry%E7%BC%93%E5%AD%98.png&amp;amp;originHeight=361&amp;amp;originWidth=751&amp;amp;originalType=binary&amp;amp;ratio=1&amp;amp;size=32461&amp;amp;status=done&amp;amp;style=none&amp;amp;taskId=ub04aaa61-0d89-457e-a555-47edd7e39a0" alt="Dubbo3 CacheableFailbackRegistry缓存.png">
+可以看到在 CacheableFailbackRegistry 缓存中，我们新增了 3 个缓存属性 &lt;code>stringAddress&lt;/code>，&lt;code>stringParam&lt;/code> 和 &lt;code>stringUrls&lt;/code>。我们通过下图来描述这 3 个缓存的具体使用场景。
+&lt;img src="https://cdn.nlark.com/yuque/0/2021/png/1921386/1626684457488-ccb22d6c-3ade-4aec-a21a-c71c381a9734.png#clientId=u77103d46-bf79-4&amp;amp;from=ui&amp;amp;id=ue0c6b8dc&amp;amp;margin=%5Bobject%20Object%5D&amp;amp;name=%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98.png&amp;amp;originHeight=622&amp;amp;originWidth=926&amp;amp;originalType=binary&amp;amp;ratio=1&amp;amp;size=73539&amp;amp;status=done&amp;amp;style=none&amp;amp;taskId=u47ede71a-33bd-4405-bd98-30d40e1b32c" alt="多级缓存.png">
+在该方案下，我们使用了 3 个纬度的缓存数据(URL 字符串缓存、URL 地址缓存、URL 参数缓存)，这样一来，在大部分情况下都能有效利用到缓存中的数据，减少了 Zookeeper 重复通知的消耗。&lt;/p>
+&lt;h4 id="延迟通知">延迟通知&lt;/h4>
+&lt;p>除了上面提到的优化之外，其实另外还有两个小小的优化。
+第一个是解析 URL 时可以直接使用编码后的 URL 字符串字节进行解析，而在 Dubbo 2.7 中，所有编码后的 URL 字符串都需要经过解码才可以正常解析为 URL 对象。该方式也直接减少了 URL 解码过程的开销。
+第二个则是 URL 变更后的通知机制增加了延迟，下图以Zookeeper为例讲解了实现细节。
+&lt;img src="https://cdn.nlark.com/yuque/0/2021/png/1921386/1626684474208-db533419-6352-4d25-bcbe-21e473673828.png#clientId=u77103d46-bf79-4&amp;amp;from=ui&amp;amp;id=u9d0b8bd3&amp;amp;margin=%5Bobject%20Object%5D&amp;amp;name=%E5%BB%B6%E8%BF%9F%E9%80%9A%E7%9F%A5.png&amp;amp;originHeight=402&amp;amp;originWidth=352&amp;amp;originalType=binary&amp;amp;ratio=1&amp;amp;size=30489&amp;amp;status=done&amp;amp;style=none&amp;amp;taskId=u14d9d5be-4b1c-448a-8452-c975f3e8679" alt="延迟通知.png">
+在该方案中，当 Consumer 接收 Zookeeper 的变更通知后会主动休眠一段时间，而这段时间内的变更在休眠结束后只会保留最后一次变更，Consumer 便会使用最后一次变更来进行监听实例的更新，以此方法来减少大量 URL 的创建开销。&lt;/p>
+&lt;h4 id="字符串重用">字符串重用&lt;/h4>
+&lt;p>在旧版本实现中，不同的 URL 中属性相同的字符串会存储在堆内不同的地址中，如 protocol、path 等，当有大量 provider 的情况下，Consumer 端的堆内会存在大量的重复字符串，导致内存利用率低下，所以此处提供了另一个优化方式，即字符串重用。
+而它的实现方式也非常的简单，让我们来看看对应的代码片段。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">URLItemCache&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#268bd2">final&lt;/span> Map&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">,&lt;/span> String&lt;span style="color:#719e07">&amp;gt;&lt;/span> PATH_CACHE &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> LRUCache&lt;span style="color:#719e07">&amp;lt;&amp;gt;(&lt;/span>10000&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#268bd2">final&lt;/span> Map&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">,&lt;/span> String&lt;span style="color:#719e07">&amp;gt;&lt;/span> PROTOCOL_CACHE &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ConcurrentHashMap&lt;span style="color:#719e07">&amp;lt;&amp;gt;();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// 省略无关代码片段
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> String &lt;span style="color:#268bd2">checkProtocol&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String _protocol&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>_protocol &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span>&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> _protocol&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> String cachedProtocol &lt;span style="color:#719e07">=&lt;/span> PROTOCOL_CACHE&lt;span style="color:#719e07">.&lt;/span>putIfAbsent&lt;span style="color:#719e07">(&lt;/span>_protocol&lt;span style="color:#719e07">,&lt;/span> _protocol&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>cachedProtocol &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span>&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> cachedProtocol&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> _protocol&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> String &lt;span style="color:#268bd2">checkPath&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String _path&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>_path &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span>&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> _path&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> String cachedPath &lt;span style="color:#719e07">=&lt;/span> PATH_CACHE&lt;span style="color:#719e07">.&lt;/span>putIfAbsent&lt;span style="color:#719e07">(&lt;/span>_path&lt;span style="color:#719e07">,&lt;/span> _path&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>cachedPath &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span>&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> cachedPath&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> _path&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>由如上代码片段可以得知，字符串重用即为简单地使用了 Map 来存储对应的缓存值，当你使用了相同的字符串时，便会从 Map 中获取早已存在的对象返回给调用方，由此便可以减少堆内存中重复的字符串数以达到优化的效果。&lt;/p>
+&lt;h3 id="优化结果">优化结果&lt;/h3>
+&lt;p>这里优化结果我引用了&lt;a href="https://zhuanlan.zhihu.com/p/345626851">《Dubbo 3.0 前瞻：服务发现支持百万集群，带来可伸缩微服务架构》&lt;/a>这篇文章中的两副图来说明，下图模拟了在&lt;strong>220万&lt;/strong>个 Provider 接口的情况下，接口数据不断变更导致的 Consumer 端的消耗，我们看到整个 Consumer 端几乎被 Full GC 占满了，严重影响了性能。
+&lt;img src="https://cdn.nlark.com/yuque/0/2021/png/1921386/1626684502762-bbe06025-ec68-460f-9169-d8fcd5d9589c.png#clientId=u77103d46-bf79-4&amp;amp;from=ui&amp;amp;id=u627fbc4e&amp;amp;margin=%5Bobject%20Object%5D&amp;amp;name=Dubbo2%20%E6%8E%A5%E5%8F%A3%E7%BA%A7%E5%9C%B0%E5%9D%80%E6%A8%A1%E5%9E%8B.png&amp;amp;originHeight=829&amp;amp;originWidth=1440&amp;amp;originalType=binary&amp;amp;ratio=1&amp;amp;size=163554&amp;amp;status=done&amp;amp;style=none&amp;amp;taskId=ucce3e68c-f033-455b-9944-eba82ef078c" alt="Dubbo2 接口级地址模型.png">
+那么我们再来看看 Dubbo 3.0 中对 URL 进行优化后同一个环境下的压测结果，如下图所示。
+&lt;img src="https://cdn.nlark.com/yuque/0/2021/png/1921386/1626684517859-7c42871f-5f98-48c2-8815-bf8f5e992efb.png#clientId=u77103d46-bf79-4&amp;amp;from=ui&amp;amp;id=ua17678af&amp;amp;margin=%5Bobject%20Object%5D&amp;amp;name=Dubbo3%20%E6%8E%A5%E5%8F%A3%E7%BA%A7%E5%9C%B0%E5%9D%80%E6%A8%A1%E5%9E%8B.png&amp;amp;originHeight=690&amp;amp;originWidth=1440&amp;amp;originalType=binary&amp;amp;ratio=1&amp;amp;size=185862&amp;amp;status=done&amp;amp;style=none&amp;amp;taskId=u137b18a8-0c04-48ca-bb14-f6e1c9e8f7a" alt="Dubbo3 接口级地址模型.png">
+我们明显可以看到 Full GC 的频率减少到了只有 3 次，大大提升了性能。当然，该文章中还有其他方面的对比，此处便不一一引用了，感兴趣的读者可以自行去阅读该文章。&lt;/p></description></item><item><title>Blog: 如何通过 Apache ShenYu 网关代理 Dubbo 服务</title><link>https://dubbo.apache.org/zh/blog/2022/05/04/%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87-apache-shenyu-%E7%BD%91%E5%85%B3%E4%BB%A3%E7%90%86-dubbo-%E6%9C%8D%E5%8A%A1/</link><pubDate>Wed, 04 May 2022 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2022/05/04/%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87-apache-shenyu-%E7%BD%91%E5%85%B3%E4%BB%A3%E7%90%86-dubbo-%E6%9C%8D%E5%8A%A1/</guid><description>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/shenyu-dubbo/ApacheShenYu-Dubbo-zh.png" alt="">&lt;/p>
 &lt;h2 id="1-介绍">1. 介绍&lt;/h2>
 &lt;ul>
@@ -8163,568 +8304,4 @@ Reactive Stream 引入 RPC，带来更丰富的通信语义和 API 编程模型�
 &lt;ul>
 &lt;li>客户端异步的出发点就是请求发出和响应处理本身为两个不同的独立事件，响应如何被处理和在哪个线程中处理等都是不需要和请求发出事件的业务逻辑线程做耦合绑定。&lt;/li>
 &lt;li>响应事件回调的处理逻辑在哪个线程中做处理是需要根据情况来选择。建议，如果回调逻辑比较简单，建议直接在IO线程中；如果包含了远程访问或者DB访问等IO型的__同步__操作，建议在独立的线程池做处理。&lt;/li>
-&lt;/ul></description></item><item><title>Blog: Dubbo 在跨语言和协议穿透性方向上的探索：支持 HTTP/2 gRPC 和 Protobuf</title><link>https://dubbo.apache.org/zh/blog/2019/10/28/dubbo-%E5%9C%A8%E8%B7%A8%E8%AF%AD%E8%A8%80%E5%92%8C%E5%8D%8F%E8%AE%AE%E7%A9%BF%E9%80%8F%E6%80%A7%E6%96%B9%E5%90%91%E4%B8%8A%E7%9A%84%E6%8E%A2%E7%B4%A2%E6%94%AF%E6%8C%81-http/2-grpc-%E5%92%8C-protobuf/</link><pubDate>Mon, 28 Oct 2019 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2019/10/28/dubbo-%E5%9C%A8%E8%B7%A8%E8%AF%AD%E8%A8%80%E5%92%8C%E5%8D%8F%E8%AE%AE%E7%A9%BF%E9%80%8F%E6%80%A7%E6%96%B9%E5%90%91%E4%B8%8A%E7%9A%84%E6%8E%A2%E7%B4%A2%E6%94%AF%E6%8C%81-http/2-grpc-%E5%92%8C-protobuf/</guid><description>
-&lt;p>本文总体上可分为基础产品简介、Dubbo 对 gRPC (HTTP/2) 和 Protobuf 的支持及示例演示三部分，在简介部分介绍了 Dubbo、HTTP/2、gRPC、Protobuf 的基本概念和特点；第二部分介绍了 Dubbo 为何要支持 gRPC (HTTP/2) 和 Protobuf，以及这种支持为 gRPC 和 Dubbo 开发带来的好处与不同；第三部分通过两个实例分别演示了 Dubbo gRPC 和 Dubbo Protobuf 的使用方式。&lt;/p>
-&lt;h2 id="基本介绍">基本介绍&lt;/h2>
-&lt;h3 id="dubbo-协议">Dubbo 协议&lt;/h3>
-&lt;p>从协议层面展开，以下是当前 2.7 版本支持的 Dubbo 协议&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/grpc/dubbo-ptotocol.png" alt="image-20191029103919557">&lt;/p>
-&lt;p>众所周知，Dubbo 协议是直接定义在 TCP 传输层协议之上，由于 TCP 高可靠全双工的特点，为 Dubbo 协议的定义提供了最大的灵活性，但同时也正是因为这样的灵活性，RPC 协议普遍都是定制化的私有协议，Dubbo 同样也面临这个问题。在这里我们着重讲一下 Dubbo 在协议通用性方面值得改进的地方，关于协议详细解析请参见&lt;a href="http://dubbo.apache.org/zh-cn/blog/dubbo-protocol.html">官网博客&lt;/a>&lt;/p>
-&lt;ul>
-&lt;li>Dubbo 协议体 Body 中有一个可扩展的 attachments 部分，这给 RPC 方法之外额外传递附加属性提供了可能，是一个很好的设计。但是类似的 Header 部分，却缺少类似的可扩展 attachments，这点可参考 HTTP 定义的 Ascii Header 设计，将 Body Attachments 和 Header Attachments 做职责划分。&lt;/li>
-&lt;li>Body 协议体中的一些 RPC 请求定位符如 Service Name、Method Name、Version 等，可以提到 Header 中，和具体的序列化协议解耦，以更好的被网络基础设施识别或用于流量管控。&lt;/li>
-&lt;li>扩展性不够好，欠缺协议升级方面的设计，如 Header 头中没有预留的状态标识位，或者像 HTTP 有专为协议升级或协商设计的特殊 packet。&lt;/li>
-&lt;li>在 Java 版本的代码实现上，不够精简和通用。如在链路传输中，存在一些语言绑定的内容；消息体中存在冗余内容，如 Service Name 在 Body 和 Attachments 中都存在。&lt;/li>
-&lt;/ul>
-&lt;h3 id="http1">HTTP/1&lt;/h3>
-&lt;p>相比于直接构建与 TPC 传输层的私有 RPC 协议，构建于 HTTP 之上的远程调用解决方案会有更好的通用性，如WebServices 或 REST 架构，使用 HTTP + JSON 可以说是一个事实标准的解决方案。&lt;/p>
-&lt;p>之所有选择构建在 HTTP 之上，我认为有两个最大的优势：&lt;/p>
-&lt;ol>
-&lt;li>HTTP 的语义和可扩展性能很好的满足 RPC 调用需求。&lt;/li>
-&lt;li>通用性，HTTP 协议几乎被网络上的所有设备所支持，具有很好的协议穿透性。&lt;/li>
-&lt;/ol>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/grpc/http1.png" alt="image-20191029113404906">&lt;/p>
-&lt;p>具体来说，HTTP/1 的优势和限制是：&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>典型的 Request – Response 模型，一个链路上一次只能有一个等待的 Request 请求&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>HTTP/1 支持 Keep-Alive 链接，避免了链接重复创建开销&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Human Readable Headers，使用更通用、更易于人类阅读的头部传输格式&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>无直接 Server Push 支持，需要使用 Polling Long-Polling 等变通模式&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;h3 id="http2">HTTP/2&lt;/h3>
-&lt;p>HTTP/2 保留了 HTTP/1 的所有语义，在保持兼容的同时，在通信模型和传输效率上做了很大的改进。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/grpc/http2.png" alt="image-20191029113416731">&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>支持单条链路上的 Multiplexing，相比于 Request - Response 独占链路，基于 Frame 实现更高效利用链路&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Request - Stream 语义，原生支持 Server Push 和 Stream 数据传输&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Flow Control，单条 Stream 粒度的和整个链路粒度的流量控制&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>头部压缩 HPACK&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Binary Frame&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>原生 TLS 支持&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;h3 id="grpc">gRPC&lt;/h3>
-&lt;p>上面提到了在 HTTP 及 TCP 协议之上构建 RPC 协议各自的优缺点，相比于 Dubbo 构建于 TPC 传输层之上，Google 选择将 gRPC 直接定义在 HTTP/2 协议之上，关于 gRPC 的 [基本介绍](&lt;a href="https://platformlab.stanford.edu/Seminar">https://platformlab.stanford.edu/Seminar&lt;/a> Talks/gRPC.pdf)和 &lt;a href="https://grpc.io/blog/principles/?spm=ata.13261165.0.0.2be55017XbUhs8">设计愿景&lt;/a> 请参考以上两篇文章，我这里仅摘取 设计愿景 中几个能反映 gRPC 设计目的特性来做简单说明。&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>Coverage &amp;amp; Simplicity，协议设计和框架实现要足够通用和简单，能运行在任何设备之上，甚至一些资源首先的如 IoT、Mobile 等设备。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Interoperability &amp;amp; Reach，要构建在更通用的协议之上，协议本身要能被网络上几乎所有的基础设施所支持。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>General Purpose &amp;amp; Performant，要在场景和性能间做好平衡，首先协议本身要是适用于各种场景的，同时也要尽量有高的性能。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Payload Agnostic，协议上传输的负载要保持语言和平台中立。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Streaming，要支持 Request - Response、Request - Stream、Bi-Steam 等通信模型。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Flow Control，协议自身具备流量感知和限制的能力。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Metadata Exchange，在 RPC 服务定义之外，提供额外附加数据传输的能力。&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;p>总的来说，在这样的设计理念指导下，gRPC 最终被设计为一个跨语言、跨平台的、通用的、高性能的、基于 HTTP/2 的 RPC 协议和框架。&lt;/p>
-&lt;h3 id="protobuf">Protobuf&lt;/h3>
-&lt;p>&lt;a href="https://developers.google.com/protocol-buffers/docs/overview">Protocol buffers (Protobuf)&lt;/a> 是 Google 推出的一个跨平台、语言中立的结构化数据描述和序列化的产品，它定义了一套结构化数据定义的协议，同时也提供了相应的 &lt;a href="https://github.com/protocolbuffers/protobuf/releases/tag/v3.10.0">Compiler&lt;/a> 工具，用来将语言中立的描述转化为相应语言的具体描述。&lt;/p>
-&lt;p>它的一些特性包括：&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>跨语言 跨平台，语言中立的数据描述格式，默认提供了生成多种语言的 Compiler 工具。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>安全性，由于反序列化的范围和输出内容格式都是 Compiler 在编译时预生成的，因此绕过了类似 Java Deserialization Vulnarability 的问题。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>二进制 高性能&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>强类型&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>字段变更向后兼容&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>message Person {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> required string name = 1;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> required int32 id = 2;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> optional string email = 3;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> enum PhoneType {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> MOBILE = 0;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> HOME = 1;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> WORK = 2;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> message PhoneNumber {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> required string number = 1;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> optional PhoneType type = 2 [default = HOME];
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> repeated PhoneNumber phone = 4;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>除了结构化数据描述之外，Protobuf 还支持定义 RPC 服务，它允许我们定义一个 &lt;code>.proto&lt;/code> 的服务描述文件，进而利用 Protobuf Compiler 工具生成特定语言和 RPC 框架的接口和 stub。后续将要具体讲到的 gRPC + Protobuf、Dubbo-gRPC + Protobuf 以及 Dubbo + Protobuf 都是通过定制 Compiler 类实现的。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>service SearchService {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> rpc Search (SearchRequest) returns (SearchResponse);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="dubbo-所做的支持">Dubbo 所做的支持&lt;/h2>
-&lt;p>跨语言的服务开发涉及到多个方面，从服务定义、RPC 协议到序列化协议都要做到语言中立，同时还针对每种语言有对应的 SDK 实现。虽然得益于社区的贡献，现在 Dubbo 在多语言 SDK 实现上逐步有了起色，已经提供了包括 Java, Go, PHP, C#, Python, NodeJs, C 等版本的客户端或全量实现版本，但在以上提到的跨语言友好型方面，以上三点还是有很多可改进之处。&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>协议，上面我们已经分析过 Dubbo 协议既有的缺点，如果能在 HTTP/2 之上构建应用层协议，则无疑能避免这些弊端，同时最大可能的提高协议的穿透性，避免网关等协议转换组件的存在，更有利于链路上的流量管控。考虑到 gRPC 是构建在 HTTP/2 之上，并且已经是云原生领域推荐的通信协议，Dubbo 在第一阶段选择了直接支持 gRPC 协议作为当前的 HTTP/2 解决方案。我们也知道 gRPC 框架自身的弊端在于易用性不足以及服务治理能力欠缺（这也是目前绝大多数厂商不会直接裸用 gRPC 框架的原因），通过将其集成进 Dubbo 框架，用户可以方便的使用 Dubbo 编程模型 + Dubbo 服务治理 + gRPC 协议通信的组合。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>服务定义，当前 Dubbo 的服务定义和具体的编程语言绑定，没有提供一种语言中立的服务描述格式，比如 Java 就是定义 Interface 接口，到了其他语言又得重新以另外的格式定义一遍。因此 Dubbo 通过支持 Protobuf 实现了语言中立的服务定义。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>序列化，Dubbo 当前支持的序列化包括 Json、Hessian2、Kryo、FST、Java 等，而这其中支持跨语言的只有 Json、Hessian2，通用的 Json 有固有的性能问题，而 Hessian2 无论在效率还是多语言 SDK 方面都有所欠缺。为此，Dubbo 通过支持 Protobuf 序列化来提供更高效、易用的跨语言序列化方案。&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;h2 id="示例">示例&lt;/h2>
-&lt;h3 id="示例-1使用-dubbo-开发-grpc-服务">示例 1，使用 Dubbo 开发 gRPC 服务&lt;/h3>
-&lt;p>&lt;a href="https://grpc.io/">gRPC&lt;/a> 是 Google 开源的构建在 HTTP/2 之上的一个 PRC 通信协议。Dubbo 依赖其灵活的协议扩展机制，增加了对 gRPC (HTTP/2) 协议的支持。&lt;/p>
-&lt;p>目前的支持限定在 Dubbo Java 语言版本，后续 Go 语言或其他语言版本将会以类似方式提供支持。下面，通过一个&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-grpc">简单的示例&lt;/a>来演示如何在 Dubbo 中使用 gRPC 协议通信。&lt;/p>
-&lt;h4 id="1-定义服务-idl">1. 定义服务 IDL&lt;/h4>
-&lt;p>首先，通过标准的 Protobuf 协议定义服务如下：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>syntax = &lt;span style="color:#2aa198">&amp;#34;proto3&amp;#34;&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>option java_multiple_files = &lt;span style="color:#cb4b16">true&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>option java_package = &lt;span style="color:#2aa198">&amp;#34;io.grpc.examples.helloworld&amp;#34;&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>option java_outer_classname = &lt;span style="color:#2aa198">&amp;#34;HelloWorldProto&amp;#34;&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>option objc_class_prefix = &lt;span style="color:#2aa198">&amp;#34;HLW&amp;#34;&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">package&lt;/span> helloworld;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// The greeting service definition.
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>service Greeter {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// Sends a greeting
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> rpc &lt;span style="color:#268bd2">SayHello&lt;/span> (HelloRequest) &lt;span style="color:#268bd2">returns&lt;/span> (HelloReply) {}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// The request message containing the user&amp;#39;s name.
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>message HelloRequest {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#dc322f">string&lt;/span> name = &lt;span style="color:#2aa198">1&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// The response message containing the greetings
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>message HelloReply {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#dc322f">string&lt;/span> message = &lt;span style="color:#2aa198">1&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在此，我们定义了一个只有一个方法 sayHello 的 Greeter 服务，同时定义了方法的入参和出参，&lt;/p>
-&lt;h4 id="2-pcompiler-生成-stub">2. PCompiler 生成 Stub&lt;/h4>
-&lt;ol>
-&lt;li>定义 Maven Protobuf Compiler 插件工具。这里我们扩展了 Protobuf 的 Compiler 工具，以用来生成 Dubbo 特有的 RPC stub，此当前以 Maven 插件的形式发布。&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;plugin&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.xolstice.maven.plugins&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>protobuf-maven-plugin&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>0.5.1&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;configuration&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;protocArtifact&amp;gt;&lt;/span>com.google.protobuf:protoc:3.7.1:exe:${os.detected.classifier}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;/protocArtifact&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;pluginId&amp;gt;&lt;/span>dubbo-grpc-java&lt;span style="color:#268bd2">&amp;lt;/pluginId&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;pluginArtifact&amp;gt;&lt;/span>org.apache.dubbo:protoc-gen-dubbo-java:1.19.0-SNAPSHOT:exe:${os.detected.classifier}&lt;span style="color:#268bd2">&amp;lt;/pluginArtifact&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;outputDirectory&amp;gt;&lt;/span>build/generated/source/proto/main/java&lt;span style="color:#268bd2">&amp;lt;/outputDirectory&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;clearOutputDirectory&amp;gt;&lt;/span>false&lt;span style="color:#268bd2">&amp;lt;/clearOutputDirectory&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;pluginParameter&amp;gt;&lt;/span>grpc&lt;span style="color:#268bd2">&amp;lt;/pluginParameter&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;/configuration&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;executions&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;execution&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;goals&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;goal&amp;gt;&lt;/span>compile&lt;span style="color:#268bd2">&amp;lt;/goal&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;goal&amp;gt;&lt;/span>compile-custom&lt;span style="color:#268bd2">&amp;lt;/goal&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;/goals&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;/execution&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;/executions&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/plugin&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中，&lt;/p>
-&lt;p>pluginArtifact 指定了 Dubbo 定制版本的 Java Protobuf Compiler 插件，通过这个插件来在编译过程中生成 Dubbo 定制版本的 gRPC stub。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;pluginArtifact&amp;gt;&lt;/span>org.apache.dubbo:protoc-gen-dubbo-java:1.19.0-SNAPSHOT:exe:${os.detected.classifier}&lt;span style="color:#268bd2">&amp;lt;/pluginArtifact&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>由于 &lt;code>protoc-gen-dubbo-java&lt;/code> 支持 gRPC 和 Dubbo 两种协议，可生成的 stub 类型，默认值是 gRPC，关于 dubbo 协议的使用可参见 &lt;a href="">使用 Protobuf 开发 Dubbo 服务&lt;/a>。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;pluginParameter&amp;gt;&lt;/span>grpc&lt;span style="color:#268bd2">&amp;lt;/pluginParameter&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
-&lt;li>
-&lt;p>生成 Java Bean 和 Dubbo-gRPC stub&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># 运行以下 maven 命令&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ mvn clean compile
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>生成的 Stub 和消息类 如下：
-&lt;img src="https://dubbo.apache.org/imgs/blog/grpc/compiler-classes.png" alt="image-20191026130516896">&lt;/p>
-&lt;p>重点关注 GreeterGrpc ，包含了所有 gRPC 标准的 stub 类/方法，同时增加了 Dubbo 特定的接口，之后 Provider 端的服务暴露和 Consumer 端的服务调用都将依赖这个接口。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">/**
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * Code generated for Dubbo
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> */&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">IGreeter&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">default&lt;/span> &lt;span style="color:#268bd2">public&lt;/span> io&lt;span style="color:#719e07">.&lt;/span>grpc&lt;span style="color:#719e07">.&lt;/span>examples&lt;span style="color:#719e07">.&lt;/span>helloworld&lt;span style="color:#719e07">.&lt;/span>HelloReply &lt;span style="color:#268bd2">sayHello&lt;/span>&lt;span style="color:#719e07">(&lt;/span>io&lt;span style="color:#719e07">.&lt;/span>grpc&lt;span style="color:#719e07">.&lt;/span>examples&lt;span style="color:#719e07">.&lt;/span>helloworld&lt;span style="color:#719e07">.&lt;/span>HelloRequest request&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">throw&lt;/span> &lt;span style="color:#719e07">new&lt;/span> UnsupportedOperationException&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;No need to override this method, extend XxxImplBase and override all methods it allows.&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">default&lt;/span> &lt;span style="color:#268bd2">public&lt;/span> com&lt;span style="color:#719e07">.&lt;/span>google&lt;span style="color:#719e07">.&lt;/span>common&lt;span style="color:#719e07">.&lt;/span>util&lt;span style="color:#719e07">.&lt;/span>concurrent&lt;span style="color:#719e07">.&lt;/span>ListenableFuture&lt;span style="color:#719e07">&amp;lt;&lt;/span>io&lt;span style="color:#719e07">.&lt;/span>grpc&lt;span style="color:#719e07">.&lt;/span>examples&lt;span style="color:#719e07">.&lt;/span>helloworld&lt;span style="color:#719e07">.&lt;/span>HelloReply&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">sayHelloAsync&lt;/span>&lt;span style="color:#719e07">(&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> io&lt;span style="color:#719e07">.&lt;/span>grpc&lt;span style="color:#719e07">.&lt;/span>examples&lt;span style="color:#719e07">.&lt;/span>helloworld&lt;span style="color:#719e07">.&lt;/span>HelloRequest request&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">throw&lt;/span> &lt;span style="color:#719e07">new&lt;/span> UnsupportedOperationException&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;No need to override this method, extend XxxImplBase and override all methods it allows.&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">sayHello&lt;/span>&lt;span style="color:#719e07">(&lt;/span>io&lt;span style="color:#719e07">.&lt;/span>grpc&lt;span style="color:#719e07">.&lt;/span>examples&lt;span style="color:#719e07">.&lt;/span>helloworld&lt;span style="color:#719e07">.&lt;/span>HelloRequest request&lt;span style="color:#719e07">,&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> io&lt;span style="color:#719e07">.&lt;/span>grpc&lt;span style="color:#719e07">.&lt;/span>stub&lt;span style="color:#719e07">.&lt;/span>StreamObserver&lt;span style="color:#719e07">&amp;lt;&lt;/span>io&lt;span style="color:#719e07">.&lt;/span>grpc&lt;span style="color:#719e07">.&lt;/span>examples&lt;span style="color:#719e07">.&lt;/span>helloworld&lt;span style="color:#719e07">.&lt;/span>HelloReply&lt;span style="color:#719e07">&amp;gt;&lt;/span> responseObserver&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;/ol>
-&lt;h4 id="3-业务逻辑开发">3. 业务逻辑开发&lt;/h4>
-&lt;p>继承 &lt;code>GreeterGrpc.GreeterImplBase&lt;/code> （来自第 2 步），编写业务逻辑，这点和原生 gRPC 是一致的。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">package&lt;/span> org.apache.dubbo.samples.basic.impl&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> io.grpc.examples.helloworld.GreeterGrpc&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> io.grpc.examples.helloworld.HelloReply&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> io.grpc.examples.helloworld.HelloRequest&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> io.grpc.stub.StreamObserver&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">GrpcGreeterImpl&lt;/span> &lt;span style="color:#268bd2">extends&lt;/span> GreeterGrpc&lt;span style="color:#719e07">.&lt;/span>GreeterImplBase &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Override&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">sayHello&lt;/span>&lt;span style="color:#719e07">(&lt;/span>HelloRequest request&lt;span style="color:#719e07">,&lt;/span> StreamObserver&lt;span style="color:#719e07">&amp;lt;&lt;/span>HelloReply&lt;span style="color:#719e07">&amp;gt;&lt;/span> responseObserver&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Received request from client.&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Executing thread is &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> Thread&lt;span style="color:#719e07">.&lt;/span>currentThread&lt;span style="color:#719e07">().&lt;/span>getName&lt;span style="color:#719e07">());&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> HelloReply reply &lt;span style="color:#719e07">=&lt;/span> HelloReply&lt;span style="color:#719e07">.&lt;/span>newBuilder&lt;span style="color:#719e07">()&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">.&lt;/span>setMessage&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Hello &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> request&lt;span style="color:#719e07">.&lt;/span>getName&lt;span style="color:#719e07">()).&lt;/span>build&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> responseObserver&lt;span style="color:#719e07">.&lt;/span>onNext&lt;span style="color:#719e07">(&lt;/span>reply&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> responseObserver&lt;span style="color:#719e07">.&lt;/span>onCompleted&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="4-provider-端暴露-dubbo-服务">4. Provider 端暴露 Dubbo 服务&lt;/h4>
-&lt;p>以 Spring XML 为例&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:application&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;demo-provider&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&amp;lt;!-- 指定服务暴露协议为 gRPC --&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;grpc&amp;#34;&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;grpc&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://${zookeeper.address:127.0.0.1}:2181&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;bean&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;greeter&amp;#34;&lt;/span> class=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.basic.impl.GrpcGreeterImpl&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&amp;lt;!-- 指定 protoc-gen-dubbo-java 生成的接口 --&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;io.grpc.examples.helloworld.GreeterGrpc$IGreeter&amp;#34;&lt;/span> ref=&lt;span style="color:#2aa198">&amp;#34;greeter&amp;#34;&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;grpc&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">main&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String&lt;span style="color:#719e07">[]&lt;/span> args&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> Exception &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ClassPathXmlApplicationContext context &lt;span style="color:#719e07">=&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">new&lt;/span> ClassPathXmlApplicationContext&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;spring/dubbo-demo-provider.xml&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> context&lt;span style="color:#719e07">.&lt;/span>start&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;dubbo service started&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">new&lt;/span> CountDownLatch&lt;span style="color:#719e07">(&lt;/span>1&lt;span style="color:#719e07">).&lt;/span>await&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="5-引用-dubbo-服务">5. 引用 Dubbo 服务&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:application&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;demo-consumer&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://${zookeeper.address:127.0.0.1}:2181&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&amp;lt;!-- 指定 protoc-gen-dubbo-java 生成的接口 --&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;greeter&amp;#34;&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;io.grpc.examples.helloworld.GreeterGrpc$IGreeter&amp;#34;&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;grpc&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">main&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String&lt;span style="color:#719e07">[]&lt;/span> args&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> IOException &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ClassPathXmlApplicationContext context &lt;span style="color:#719e07">=&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">new&lt;/span> ClassPathXmlApplicationContext&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;spring/dubbo-demo-consumer.xml&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> context&lt;span style="color:#719e07">.&lt;/span>start&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> GreeterGrpc&lt;span style="color:#719e07">.&lt;/span>IGreeter greeter &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">(&lt;/span>GreeterGrpc&lt;span style="color:#719e07">.&lt;/span>IGreeter&lt;span style="color:#719e07">)&lt;/span> context&lt;span style="color:#719e07">.&lt;/span>getBean&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;greeter&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> HelloReply reply &lt;span style="color:#719e07">=&lt;/span> greeter&lt;span style="color:#719e07">.&lt;/span>sayHello&lt;span style="color:#719e07">(&lt;/span>HelloRequest&lt;span style="color:#719e07">.&lt;/span>newBuilder&lt;span style="color:#719e07">().&lt;/span>setName&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;world!&amp;#34;&lt;/span>&lt;span style="color:#719e07">).&lt;/span>build&lt;span style="color:#719e07">());&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Result: &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> reply&lt;span style="color:#719e07">.&lt;/span>getMessage&lt;span style="color:#719e07">());&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>in&lt;span style="color:#719e07">.&lt;/span>read&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="示例1附高级用法">示例1附：高级用法&lt;/h4>
-&lt;p>&lt;strong>一、异步调用&lt;/strong>&lt;/p>
-&lt;p>再来看一遍 &lt;code>protoc-gen-dubbo-java&lt;/code> 生成的接口：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">/**
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * Code generated for Dubbo
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> */&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">IGreeter&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">default&lt;/span> &lt;span style="color:#268bd2">public&lt;/span> HelloReply &lt;span style="color:#268bd2">sayHello&lt;/span>&lt;span style="color:#719e07">(&lt;/span>HelloRequest request&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// ......
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">default&lt;/span> &lt;span style="color:#268bd2">public&lt;/span> ListenableFuture&lt;span style="color:#719e07">&amp;lt;&lt;/span>HelloReply&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">sayHelloAsync&lt;/span>&lt;span style="color:#719e07">(&lt;/span>HelloRequest request&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// ......
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">sayHello&lt;/span>&lt;span style="color:#719e07">(&lt;/span>HelloRequest request&lt;span style="color:#719e07">,&lt;/span> StreamObserver&lt;span style="color:#719e07">&amp;lt;&lt;/span>HelloReply&lt;span style="color:#719e07">&amp;gt;&lt;/span> responseObserver&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这里为 sayHello 方法生成了三种类型的重载方法，分别用于同步调用、异步调用和流式调用，如果消费端要进行异步调用，直接调用 sayHelloAsync() 即可：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">main&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String&lt;span style="color:#719e07">[]&lt;/span> args&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> IOException &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// ...
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> GreeterGrpc&lt;span style="color:#719e07">.&lt;/span>IGreeter greeter &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">(&lt;/span>GreeterGrpc&lt;span style="color:#719e07">.&lt;/span>IGreeter&lt;span style="color:#719e07">)&lt;/span> context&lt;span style="color:#719e07">.&lt;/span>getBean&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;greeter&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ListenableFuture&lt;span style="color:#719e07">&amp;lt;&lt;/span>HelloReply&lt;span style="color:#719e07">&amp;gt;&lt;/span> future &lt;span style="color:#719e07">=&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> greeter&lt;span style="color:#719e07">.&lt;/span>sayHAsyncello&lt;span style="color:#719e07">(&lt;/span>HelloRequest&lt;span style="color:#719e07">.&lt;/span>newBuilder&lt;span style="color:#719e07">().&lt;/span>setName&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;world!&amp;#34;&lt;/span>&lt;span style="color:#719e07">).&lt;/span>build&lt;span style="color:#719e07">());&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// ...
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>二、高级配置&lt;/strong>&lt;/p>
-&lt;p>由于当前实现方式是直接集成了 gRPC-java SDK，因此很多配置还没有和 Dubbo 侧对齐，或者还没有以 Dubbo 的配置形式开放，因此，为了提供最大的灵活性，我们直接把 gRPC-java 的配置接口暴露了出来。&lt;/p>
-&lt;p>绝大多数场景下，你可能并不会用到以下扩展，因为它们更多的是对 gRPC 协议的拦截或者 HTTP/2 层面的配置。同时使用这些扩展点可能需要对 HTTP/2 或 gRPC 有基本的了解。&lt;/p>
-&lt;p>&lt;strong>扩展点&lt;/strong>&lt;/p>
-&lt;p>目前支持的扩展点如下：&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>org.apache.dubbo.rpc.protocol.grpc.interceptors.ClientInterceptor&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>org.apache.dubbo.rpc.protocol.grpc.interceptors.GrpcConfigurator&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>org.apache.dubbo.rpc.protocol.grpc.interceptors.ServerInterceptor&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>org.apache.dubbo.rpc.protocol.grpc.interceptors.ServerTransportFilter&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;p>GrpcConfigurator 是最通用的扩展点，我们以此为例来说明一下，其基本定义如下：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">GrpcConfigurator&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// 用来定制 gRPC NettyServerBuilder
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">default&lt;/span> NettyServerBuilder &lt;span style="color:#268bd2">configureServerBuilder&lt;/span>&lt;span style="color:#719e07">(&lt;/span>NettyServerBuilder builder&lt;span style="color:#719e07">,&lt;/span> URL url&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> builder&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// 用来定制 gRPC NettyChannelBuilder
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">default&lt;/span> NettyChannelBuilder &lt;span style="color:#268bd2">configureChannelBuilder&lt;/span>&lt;span style="color:#719e07">(&lt;/span>NettyChannelBuilder builder&lt;span style="color:#719e07">,&lt;/span> URL url&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> builder&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// 用来定制 gRPC CallOptions, 定义某个服务在每次请求间传递数据
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">default&lt;/span> CallOptions &lt;span style="color:#268bd2">configureCallOptions&lt;/span>&lt;span style="color:#719e07">(&lt;/span>CallOptions options&lt;span style="color:#719e07">,&lt;/span> URL url&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> options&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>以下是一个示例扩展实现：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">MyGrpcConfigurator&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> GrpcConfigurator &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">final&lt;/span> ExecutorService executor &lt;span style="color:#719e07">=&lt;/span> Executors
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">.&lt;/span>newFixedThreadPool&lt;span style="color:#719e07">(&lt;/span>200&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#719e07">new&lt;/span> NamedThreadFactory&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Customized-grpc&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#cb4b16">true&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Override&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> NettyServerBuilder &lt;span style="color:#268bd2">configureServerBuilder&lt;/span>&lt;span style="color:#719e07">(&lt;/span>NettyServerBuilder builder&lt;span style="color:#719e07">,&lt;/span> URL url&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> builder&lt;span style="color:#719e07">.&lt;/span>executor&lt;span style="color:#719e07">(&lt;/span>executor&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Override&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> NettyChannelBuilder &lt;span style="color:#268bd2">configureChannelBuilder&lt;/span>&lt;span style="color:#719e07">(&lt;/span>NettyChannelBuilder builder&lt;span style="color:#719e07">,&lt;/span> URL url&lt;span style="color:#719e07">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> builder&lt;span style="color:#719e07">.&lt;/span>flowControlWindow&lt;span style="color:#719e07">(&lt;/span>10&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Override&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> CallOptions &lt;span style="color:#268bd2">configureCallOptions&lt;/span>&lt;span style="color:#719e07">(&lt;/span>CallOptions options&lt;span style="color:#719e07">,&lt;/span> URL url&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> options&lt;span style="color:#719e07">.&lt;/span>withOption&lt;span style="color:#719e07">(&lt;/span>CallOptions&lt;span style="color:#719e07">.&lt;/span>Key&lt;span style="color:#719e07">.&lt;/span>create&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;key&amp;#34;&lt;/span>&lt;span style="color:#719e07">),&lt;/span> &lt;span style="color:#2aa198">&amp;#34;value&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>配置为 Dubbo SPI，`resources/META-INF/services 增加配置文件&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>default=org.apache.dubbo.samples.basic.comtomize.MyGrpcConfigurator
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol>
-&lt;li>
-&lt;p>指定 Provider 端线程池&lt;/p>
-&lt;p>默认用的是 Dubbo 的线程池，有 fixed (默认)、cached、direct 等类型。以下演示了切换为业务自定义线程池。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">final&lt;/span> ExecutorService executor &lt;span style="color:#719e07">=&lt;/span> Executors
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">.&lt;/span>newFixedThreadPool&lt;span style="color:#719e07">(&lt;/span>200&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#719e07">new&lt;/span> NamedThreadFactory&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Customized-grpc&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#cb4b16">true&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> NettyServerBuilder &lt;span style="color:#268bd2">configureServerBuilder&lt;/span>&lt;span style="color:#719e07">(&lt;/span>NettyServerBuilder builder&lt;span style="color:#719e07">,&lt;/span> URL url&lt;span style="color:#719e07">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> builder&lt;span style="color:#719e07">.&lt;/span>executor&lt;span style="color:#719e07">(&lt;/span>executor&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;li>
-&lt;p>指定 Consumer 端限流值&lt;/p>
-&lt;p>设置 Consumer 限流值为 10&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@Override&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> NettyChannelBuilder &lt;span style="color:#268bd2">configureChannelBuilder&lt;/span>&lt;span style="color:#719e07">(&lt;/span>NettyChannelBuilder builder&lt;span style="color:#719e07">,&lt;/span> URL url&lt;span style="color:#719e07">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> builder&lt;span style="color:#719e07">.&lt;/span>flowControlWindow&lt;span style="color:#719e07">(&lt;/span>10&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;li>
-&lt;p>传递附加参数&lt;/p>
-&lt;p>DemoService 服务调用传递 key&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@Override&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> CallOptions &lt;span style="color:#268bd2">configureCallOptions&lt;/span>&lt;span style="color:#719e07">(&lt;/span>CallOptions options&lt;span style="color:#719e07">,&lt;/span> URL url&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>url&lt;span style="color:#719e07">.&lt;/span>getServiceInterface&lt;span style="color:#719e07">().&lt;/span>equals&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;xxx.DemoService&amp;#34;&lt;/span>&lt;span style="color:#719e07">))&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> options&lt;span style="color:#719e07">.&lt;/span>withOption&lt;span style="color:#719e07">(&lt;/span>CallOptions&lt;span style="color:#719e07">.&lt;/span>Key&lt;span style="color:#719e07">.&lt;/span>create&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;key&amp;#34;&lt;/span>&lt;span style="color:#719e07">),&lt;/span> &lt;span style="color:#2aa198">&amp;#34;value&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">else&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> options&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;/ol>
-&lt;p>&lt;strong>三、TLS 配置&lt;/strong>&lt;/p>
-&lt;p>配置方式和 Dubbo 提供的通用的 &lt;a href="">TLS 支持&lt;/a>一致，具体请参见文档&lt;/p>
-&lt;h3 id="示例-2-使用-protobuf-开发-dubbo-服务">示例 2， 使用 Protobuf 开发 Dubbo 服务&lt;/h3>
-&lt;p>下面，我们以一个&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-protobuf">具体的示例&lt;/a>来看一下基于 Protobuf 的 Dubbo 服务开发流程。&lt;/p>
-&lt;h4 id="1-定义服务">1. 定义服务&lt;/h4>
-&lt;p>通过标准 Protobuf 定义服务&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>syntax = &lt;span style="color:#2aa198">&amp;#34;proto3&amp;#34;&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>option java_multiple_files = &lt;span style="color:#cb4b16">true&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>option java_package = &lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.demo&amp;#34;&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>option java_outer_classname = &lt;span style="color:#2aa198">&amp;#34;DemoServiceProto&amp;#34;&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>option objc_class_prefix = &lt;span style="color:#2aa198">&amp;#34;DEMOSRV&amp;#34;&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">package&lt;/span> demoservice;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// The demo service definition.
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>service DemoService {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> rpc &lt;span style="color:#268bd2">SayHello&lt;/span> (HelloRequest) &lt;span style="color:#268bd2">returns&lt;/span> (HelloReply) {}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// The request message containing the user&amp;#39;s name.
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>message HelloRequest {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#dc322f">string&lt;/span> name = &lt;span style="color:#2aa198">1&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// The response message containing the greetings
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>message HelloReply {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#dc322f">string&lt;/span> message = &lt;span style="color:#2aa198">1&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这里定义了一个 DemoService 服务，服务只包含一个 sayHello 方法，同时定义了方法的入参和出参。&lt;/p>
-&lt;h4 id="2-compiler-编译服务">2. Compiler 编译服务&lt;/h4>
-&lt;ol>
-&lt;li>引入 Protobuf Compiler Maven 插件，同时指定 &lt;code>protoc-gen-dubbo-java&lt;/code> RPC 扩展&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;plugin&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.xolstice.maven.plugins&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>protobuf-maven-plugin&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>0.5.1&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;configuration&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;protocArtifact&amp;gt;&lt;/span>com.google.protobuf:protoc:3.7.1:exe:${os.detected.classifier}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;/protocArtifact&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;pluginId&amp;gt;&lt;/span>dubbo-grpc-java&lt;span style="color:#268bd2">&amp;lt;/pluginId&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;pluginArtifact&amp;gt;&lt;/span>org.apache.dubbo:protoc-gen-dubbo-java:1.19.0-SNAPSHOT:exe:${os.detected.classifier}&lt;span style="color:#268bd2">&amp;lt;/pluginArtifact&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;outputDirectory&amp;gt;&lt;/span>build/generated/source/proto/main/java&lt;span style="color:#268bd2">&amp;lt;/outputDirectory&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;clearOutputDirectory&amp;gt;&lt;/span>false&lt;span style="color:#268bd2">&amp;lt;/clearOutputDirectory&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;pluginParameter&amp;gt;&lt;/span>dubbo&lt;span style="color:#268bd2">&amp;lt;/pluginParameter&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;/configuration&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;executions&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;execution&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;goals&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;goal&amp;gt;&lt;/span>compile&lt;span style="color:#268bd2">&amp;lt;/goal&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;goal&amp;gt;&lt;/span>compile-custom&lt;span style="color:#268bd2">&amp;lt;/goal&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;/goals&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;/execution&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;/executions&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/plugin&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>注意，这里与 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-grpc">Dubbo 对 gRPC&lt;/a> 支持部分的区别在于：
-&lt;code> &amp;lt;pluginParameter&amp;gt;dubbo&amp;lt;/pluginParameter&amp;gt;&lt;/code>&lt;/p>
-&lt;ol start="2">
-&lt;li>
-&lt;p>生成 Dubbo stub&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># 运行以下 maven 命令&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">$mvn&lt;/span> clean compile
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>生成的 Java 类如下：&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/grpc/compiler-protobuf.png" alt="image-20191028201240976">&lt;/p>
-&lt;p>DemoServiceDubbo 为 Dubbo 定制的 stub&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">final&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">DemoServiceDubbo&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#268bd2">final&lt;/span> AtomicBoolean registered &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> AtomicBoolean&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> Class&lt;span style="color:#719e07">&amp;lt;?&amp;gt;&lt;/span> init&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Class&lt;span style="color:#719e07">&amp;lt;?&amp;gt;&lt;/span> clazz &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">try&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> clazz &lt;span style="color:#719e07">=&lt;/span> Class&lt;span style="color:#719e07">.&lt;/span>forName&lt;span style="color:#719e07">(&lt;/span>DemoServiceDubbo&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">.&lt;/span>getName&lt;span style="color:#719e07">());&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>registered&lt;span style="color:#719e07">.&lt;/span>compareAndSet&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#cb4b16">false&lt;/span>&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#cb4b16">true&lt;/span>&lt;span style="color:#719e07">))&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> org&lt;span style="color:#719e07">.&lt;/span>apache&lt;span style="color:#719e07">.&lt;/span>dubbo&lt;span style="color:#719e07">.&lt;/span>common&lt;span style="color:#719e07">.&lt;/span>serialize&lt;span style="color:#719e07">.&lt;/span>protobuf&lt;span style="color:#719e07">.&lt;/span>support&lt;span style="color:#719e07">.&lt;/span>ProtobufUtils&lt;span style="color:#719e07">.&lt;/span>marshaller&lt;span style="color:#719e07">(&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> org&lt;span style="color:#719e07">.&lt;/span>apache&lt;span style="color:#719e07">.&lt;/span>dubbo&lt;span style="color:#719e07">.&lt;/span>demo&lt;span style="color:#719e07">.&lt;/span>HelloRequest&lt;span style="color:#719e07">.&lt;/span>getDefaultInstance&lt;span style="color:#719e07">());&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> org&lt;span style="color:#719e07">.&lt;/span>apache&lt;span style="color:#719e07">.&lt;/span>dubbo&lt;span style="color:#719e07">.&lt;/span>common&lt;span style="color:#719e07">.&lt;/span>serialize&lt;span style="color:#719e07">.&lt;/span>protobuf&lt;span style="color:#719e07">.&lt;/span>support&lt;span style="color:#719e07">.&lt;/span>ProtobufUtils&lt;span style="color:#719e07">.&lt;/span>marshaller&lt;span style="color:#719e07">(&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> org&lt;span style="color:#719e07">.&lt;/span>apache&lt;span style="color:#719e07">.&lt;/span>dubbo&lt;span style="color:#719e07">.&lt;/span>demo&lt;span style="color:#719e07">.&lt;/span>HelloReply&lt;span style="color:#719e07">.&lt;/span>getDefaultInstance&lt;span style="color:#719e07">());&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">catch&lt;/span> &lt;span style="color:#719e07">(&lt;/span>ClassNotFoundException e&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// ignore
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> clazz&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">DemoServiceDubbo&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#268bd2">final&lt;/span> String SERVICE_NAME &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;demoservice.DemoService&amp;#34;&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">/**
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * Code generated for Dubbo
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> */&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">IDemoService&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">static&lt;/span> Class&lt;span style="color:#719e07">&amp;lt;?&amp;gt;&lt;/span> clazz &lt;span style="color:#719e07">=&lt;/span> init&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> org&lt;span style="color:#719e07">.&lt;/span>apache&lt;span style="color:#719e07">.&lt;/span>dubbo&lt;span style="color:#719e07">.&lt;/span>demo&lt;span style="color:#719e07">.&lt;/span>HelloReply &lt;span style="color:#268bd2">sayHello&lt;/span>&lt;span style="color:#719e07">(&lt;/span>org&lt;span style="color:#719e07">.&lt;/span>apache&lt;span style="color:#719e07">.&lt;/span>dubbo&lt;span style="color:#719e07">.&lt;/span>demo&lt;span style="color:#719e07">.&lt;/span>HelloRequest request&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> java&lt;span style="color:#719e07">.&lt;/span>util&lt;span style="color:#719e07">.&lt;/span>concurrent&lt;span style="color:#719e07">.&lt;/span>CompletableFuture&lt;span style="color:#719e07">&amp;lt;&lt;/span>org&lt;span style="color:#719e07">.&lt;/span>apache&lt;span style="color:#719e07">.&lt;/span>dubbo&lt;span style="color:#719e07">.&lt;/span>demo&lt;span style="color:#719e07">.&lt;/span>HelloReply&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">sayHelloAsync&lt;/span>&lt;span style="color:#719e07">(&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> org&lt;span style="color:#719e07">.&lt;/span>apache&lt;span style="color:#719e07">.&lt;/span>dubbo&lt;span style="color:#719e07">.&lt;/span>demo&lt;span style="color:#719e07">.&lt;/span>HelloRequest request&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>最值得注意的是 &lt;code>IDemoService&lt;/code> 接口，它会作为 Dubbo 服务定义基础接口。&lt;/p>
-&lt;/li>
-&lt;/ol>
-&lt;h4 id="3-开发业务逻辑">3. 开发业务逻辑&lt;/h4>
-&lt;p>从这一步开始，所有开发流程就和直接定义 Java 接口一样了。实现接口定义业务逻辑。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">DemoServiceImpl&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> DemoServiceDubbo&lt;span style="color:#719e07">.&lt;/span>IDemoService &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#268bd2">final&lt;/span> Logger logger &lt;span style="color:#719e07">=&lt;/span> LoggerFactory&lt;span style="color:#719e07">.&lt;/span>getLogger&lt;span style="color:#719e07">(&lt;/span>DemoServiceImpl&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Override&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> HelloReply &lt;span style="color:#268bd2">sayHello&lt;/span>&lt;span style="color:#719e07">(&lt;/span>HelloRequest request&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> logger&lt;span style="color:#719e07">.&lt;/span>info&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Hello &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> request&lt;span style="color:#719e07">.&lt;/span>getName&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34;, request from consumer: &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> RpcContext&lt;span style="color:#719e07">.&lt;/span>getContext&lt;span style="color:#719e07">().&lt;/span>getRemoteAddress&lt;span style="color:#719e07">());&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> HelloReply&lt;span style="color:#719e07">.&lt;/span>newBuilder&lt;span style="color:#719e07">()&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">.&lt;/span>setMessage&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Hello &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> request&lt;span style="color:#719e07">.&lt;/span>getName&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34;, response from provider: &amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">+&lt;/span> RpcContext&lt;span style="color:#719e07">.&lt;/span>getContext&lt;span style="color:#719e07">().&lt;/span>getLocalAddress&lt;span style="color:#719e07">())&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">.&lt;/span>build&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Override&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> CompletableFuture&lt;span style="color:#719e07">&amp;lt;&lt;/span>HelloReply&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">sayHelloAsync&lt;/span>&lt;span style="color:#719e07">(&lt;/span>HelloRequest request&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> CompletableFuture&lt;span style="color:#719e07">.&lt;/span>completedFuture&lt;span style="color:#719e07">(&lt;/span>sayHello&lt;span style="color:#719e07">(&lt;/span>request&lt;span style="color:#719e07">));&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="4-配置-provider">4. 配置 Provider&lt;/h4>
-&lt;p>暴露 Dubbo 服务&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:application&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;demo-provider&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://127.0.0.1:2181&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;bean&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;demoService&amp;#34;&lt;/span> class=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.demo.provider.DemoServiceImpl&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.demo.DemoServiceDubbo$IDemoService&amp;#34;&lt;/span> ref=&lt;span style="color:#2aa198">&amp;#34;demoService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">main&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String&lt;span style="color:#719e07">[]&lt;/span> args&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> Exception &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ClassPathXmlApplicationContext context &lt;span style="color:#719e07">=&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">new&lt;/span> ClassPathXmlApplicationContext&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;spring/dubbo-provider.xml&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> context&lt;span style="color:#719e07">.&lt;/span>start&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>in&lt;span style="color:#719e07">.&lt;/span>read&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="5-配置-consumer">5. 配置 Consumer&lt;/h4>
-&lt;p>引用 Dubbo 服务&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:application&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;demo-consumer&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://127.0.0.1:2181&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;demoService&amp;#34;&lt;/span> check=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.demo.DemoServiceDubbo$IDemoService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">main&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String&lt;span style="color:#719e07">[]&lt;/span> args&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> Exception &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ClassPathXmlApplicationContext context &lt;span style="color:#719e07">=&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">new&lt;/span> ClassPathXmlApplicationContext&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;spring/dubbo-consumer.xml&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> context&lt;span style="color:#719e07">.&lt;/span>start&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> IDemoService demoService &lt;span style="color:#719e07">=&lt;/span> context&lt;span style="color:#719e07">.&lt;/span>getBean&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;demoService&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> IDemoService&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> HelloRequest request &lt;span style="color:#719e07">=&lt;/span> HelloRequest&lt;span style="color:#719e07">.&lt;/span>newBuilder&lt;span style="color:#719e07">().&lt;/span>setName&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Hello&amp;#34;&lt;/span>&lt;span style="color:#719e07">).&lt;/span>build&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> HelloReply reply &lt;span style="color:#719e07">=&lt;/span> demoService&lt;span style="color:#719e07">.&lt;/span>sayHello&lt;span style="color:#719e07">(&lt;/span>request&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;result: &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> reply&lt;span style="color:#719e07">.&lt;/span>getMessage&lt;span style="color:#719e07">());&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>in&lt;span style="color:#719e07">.&lt;/span>read&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+&lt;/ul></description></item></channel></rss>
