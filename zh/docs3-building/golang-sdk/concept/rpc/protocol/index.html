@@ -6,7 +6,7 @@
 序列化协议是需要开发者在业务开发过程中关注的，序列化协议往往需要特定的对象标注：
 一个由 protoc-gen-go 生成的 protobuf 序列对象的例子：
 type HelloRequest struct { state protoimpl.MessageState sizeCache protoimpl.SizeCache unknownFields protoimpl.UnknownFields Name string `protobuf:&#34;bytes,1,opt,name=name,proto3&#34; json:&#34;name,omitempty&#34;` } 一个可与 java 服务互通的 hessian2 序列化对象
-type HelloRequest struct { Name string `hessian:&#34;name&#34;` } func (u *HelloRequest) JavaClassName() string { return &#34;org."><meta property="og:type" content="article"><meta property="og:url" content="https://dubbo.apache.org/zh/docs3-building/golang-sdk/concept/rpc/protocol/"><meta property="article:section" content="docs3-building"><meta property="article:modified_time" content="2022-07-08T15:42:47+08:00"><meta property="og:site_name" content="Apache Dubbo"><meta itemprop=name content="网络协议"><meta itemprop=description content="1. RPC 服务框架与网络协议 网络协议在 RPC 场景十分重要，在微服务场景下，服务进程之间的通信依赖可以连通的网络，以及client与server 端保持一致的网络协议。网络协议是一个抽象的概念，站在 Dubbo-go 应用开发的角度，不妨把我们关注的协议分为三个维度来讨论。
+type HelloRequest struct { Name string `hessian:&#34;name&#34;` } func (u *HelloRequest) JavaClassName() string { return &#34;org."><meta property="og:type" content="article"><meta property="og:url" content="https://dubbo.apache.org/zh/docs3-building/golang-sdk/concept/rpc/protocol/"><meta property="article:section" content="docs3-building"><meta property="article:modified_time" content="2022-07-10T20:59:20+08:00"><meta property="og:site_name" content="Apache Dubbo"><meta itemprop=name content="网络协议"><meta itemprop=description content="1. RPC 服务框架与网络协议 网络协议在 RPC 场景十分重要，在微服务场景下，服务进程之间的通信依赖可以连通的网络，以及client与server 端保持一致的网络协议。网络协议是一个抽象的概念，站在 Dubbo-go 应用开发的角度，不妨把我们关注的协议分为三个维度来讨论。
 1.1 打解包协议 Dubbo-go 服务框架内置的打解包协议都是基于 TCP/IP 协议栈的，在此基础之上，封装/引入了多种协议，例如 Triple(dubbo3)、Dubbo、gRPC。
 这一类协议重点关注 TCP 报文的封装和拆解过程，保证点对点的可靠通信。
 在 dubbo-go 生态中，支持多种网络往往值得这一类协议。
@@ -14,7 +14,7 @@ type HelloRequest struct { Name string `hessian:&#34;name&#34;` } func (u *Hello
 序列化协议是需要开发者在业务开发过程中关注的，序列化协议往往需要特定的对象标注：
 一个由 protoc-gen-go 生成的 protobuf 序列对象的例子：
 type HelloRequest struct { state protoimpl.MessageState sizeCache protoimpl.SizeCache unknownFields protoimpl.UnknownFields Name string `protobuf:&#34;bytes,1,opt,name=name,proto3&#34; json:&#34;name,omitempty&#34;` } 一个可与 java 服务互通的 hessian2 序列化对象
-type HelloRequest struct { Name string `hessian:&#34;name&#34;` } func (u *HelloRequest) JavaClassName() string { return &#34;org."><meta itemprop=dateModified content="2022-07-08T15:42:47+08:00"><meta itemprop=wordCount content="216"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="网络协议"><meta name=twitter:description content="1. RPC 服务框架与网络协议 网络协议在 RPC 场景十分重要，在微服务场景下，服务进程之间的通信依赖可以连通的网络，以及client与server 端保持一致的网络协议。网络协议是一个抽象的概念，站在 Dubbo-go 应用开发的角度，不妨把我们关注的协议分为三个维度来讨论。
+type HelloRequest struct { Name string `hessian:&#34;name&#34;` } func (u *HelloRequest) JavaClassName() string { return &#34;org."><meta itemprop=dateModified content="2022-07-10T20:59:20+08:00"><meta itemprop=wordCount content="216"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="网络协议"><meta name=twitter:description content="1. RPC 服务框架与网络协议 网络协议在 RPC 场景十分重要，在微服务场景下，服务进程之间的通信依赖可以连通的网络，以及client与server 端保持一致的网络协议。网络协议是一个抽象的概念，站在 Dubbo-go 应用开发的角度，不妨把我们关注的协议分为三个维度来讨论。
 1.1 打解包协议 Dubbo-go 服务框架内置的打解包协议都是基于 TCP/IP 协议栈的，在此基础之上，封装/引入了多种协议，例如 Triple(dubbo3)、Dubbo、gRPC。
 这一类协议重点关注 TCP 报文的封装和拆解过程，保证点对点的可靠通信。
 在 dubbo-go 生态中，支持多种网络往往值得这一类协议。
