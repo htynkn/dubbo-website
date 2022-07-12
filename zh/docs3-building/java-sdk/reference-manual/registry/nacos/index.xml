@@ -4,6 +4,7 @@
 &lt;h4 id="预备工作">预备工作&lt;/h4>
 &lt;p>当您将 &lt;a href="https://github.com/apache/incubator-dubbo/tree/master/dubbo-registry/dubbo-registry-nacos">dubbo-registry-nacos&lt;/a> 整合到您的 Dubbo 工程之前，请确保后台已经启动 Nacos 服务。如果您尚且不熟悉 Nacos 的基本使用的话，可先行参考 &lt;a href="https://nacos.io/en-us/docs/quick-start.html">Nacos 快速入门&lt;/a>。建议使用 Nacos &lt;code>1.0.0&lt;/code> 及以上的版本。&lt;/p>
 &lt;h2 id="使用场景">使用场景&lt;/h2>
+&lt;p>动态服务发现、服务配置、服务元数据及流量管理。&lt;/p>
 &lt;h2 id="使用方式">使用方式&lt;/h2>
 &lt;h4 id="快速上手">快速上手&lt;/h4>
 &lt;p>Dubbo 融合 Nacos 成为注册中心的操作步骤非常简单，大致步骤可分为“增加 Maven 依赖”以及“配置注册中心“。&lt;/p>
