@@ -8,7 +8,7 @@ nohup ./src/redis-server redis.conf & 停止:
 killall redis-server 命令行 3: ./src/redis-cli hgetall /dubbo/com.foo.BarService/providers 或者：
 telnet 127.0.0.1 6379 hgetall /dubbo/com.foo.BarService/providers Redis 是一个高效的 KV 存储服务器，参见：http://redis.io/topics/quickstart&#160;&#8617;&#xfe0e;
 2.1.0 以上版本支持&#160;&#8617;&#xfe0e;
-参见: http://redis.io/commands&#160;&#8617;&#xfe0e;"><meta property="og:type" content="article"><meta property="og:url" content="https://dubbo.apache.org/zh/docsv2.7/admin/install/redis/"><meta property="article:section" content="docsv2.7"><meta property="article:modified_time" content="2022-07-13T17:42:31+08:00"><meta property="og:site_name" content="Apache Dubbo"><meta itemprop=name content="Redis 注册中心安装"><meta itemprop=description content="Redis 1 使用方式参见: Redis 注册中心参考手册。
+参见: http://redis.io/commands&#160;&#8617;&#xfe0e;"><meta property="og:type" content="article"><meta property="og:url" content="https://dubbo.apache.org/zh/docsv2.7/admin/install/redis/"><meta property="article:section" content="docsv2.7"><meta property="article:modified_time" content="2022-07-14T14:55:15+08:00"><meta property="og:site_name" content="Apache Dubbo"><meta itemprop=name content="Redis 注册中心安装"><meta itemprop=description content="Redis 1 使用方式参见: Redis 注册中心参考手册。
 只需搭一个原生的 Redis 服务器，并将快速启动中 Provider 和 Consumer 里的 conf/dubbo.properties 中的 dubbo.registry.address 的值改为 redis://127.0.0.1:6379 即可使用。
 Redis 注册中心集群 2 采用在客户端同时写入多个服务器，读取单个服务器的策略实现。
 安装:
@@ -18,7 +18,7 @@ nohup ./src/redis-server redis.conf & 停止:
 killall redis-server 命令行 3: ./src/redis-cli hgetall /dubbo/com.foo.BarService/providers 或者：
 telnet 127.0.0.1 6379 hgetall /dubbo/com.foo.BarService/providers Redis 是一个高效的 KV 存储服务器，参见：http://redis.io/topics/quickstart&#160;&#8617;&#xfe0e;
 2.1.0 以上版本支持&#160;&#8617;&#xfe0e;
-参见: http://redis.io/commands&#160;&#8617;&#xfe0e;"><meta itemprop=dateModified content="2022-07-13T17:42:31+08:00"><meta itemprop=wordCount content="61"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="Redis 注册中心安装"><meta name=twitter:description content="Redis 1 使用方式参见: Redis 注册中心参考手册。
+参见: http://redis.io/commands&#160;&#8617;&#xfe0e;"><meta itemprop=dateModified content="2022-07-14T14:55:15+08:00"><meta itemprop=wordCount content="61"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="Redis 注册中心安装"><meta name=twitter:description content="Redis 1 使用方式参见: Redis 注册中心参考手册。
 只需搭一个原生的 Redis 服务器，并将快速启动中 Provider 和 Consumer 里的 conf/dubbo.properties 中的 dubbo.registry.address 的值改为 redis://127.0.0.1:6379 即可使用。
 Redis 注册中心集群 2 采用在客户端同时写入多个服务器，读取单个服务器的策略实现。
 安装:
