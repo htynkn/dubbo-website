@@ -159,12 +159,12 @@ provider的属性是service属性的默认值，覆盖规则类似上面的consu
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>in&lt;span style="color:#719e07">.&lt;/span>read&lt;span style="color:#719e07">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-Building: API 配置</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config/api/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config/api/</guid><description>
-&lt;p>通过API编码方式组装配置、启动 Dubbo、发布及订阅服务。此方式可以支持动态创建 ReferenceConfig/ServiceConfig，结合泛化调用可以满足 API Gateway 或测试平台的需要。&lt;/p>
+&lt;p>通过 API 编码方式组装配置、启动 Dubbo、发布及订阅服务。此方式可以支持动态创建 ReferenceConfig/ServiceConfig，结合泛化调用可以满足 API Gateway 或测试平台的需要。&lt;/p>
 &lt;blockquote>
-&lt;p>参考&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-api">API示例&lt;/a>&lt;/p>
+&lt;p>参考 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-api">API示例&lt;/a>&lt;/p>
 &lt;/blockquote>
 &lt;h2 id="服务提供者">服务提供者&lt;/h2>
-&lt;p>通过ServiceConfig暴露服务接口，发布服务接口到注册中心。&lt;/p>
+&lt;p>通过 ServiceConfig 暴露服务接口，发布服务接口到注册中心。&lt;/p>
 &lt;blockquote>
 &lt;p>注意：为了更好支持 Dubbo3 应用级服务发现，推荐使用新的 &lt;a href="#bootstrap-api">DubboBootstrap API&lt;/a>。&lt;/p>
 &lt;/blockquote>
@@ -247,7 +247,7 @@ provider的属性是service属性的默认值，覆盖规则类似上面的consu
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="bootstrap-api">Bootstrap API&lt;/h2>
-&lt;p>通过 DubboBootstrap API 可以减少重复配置，更好控制启动过程，支持批量发布/订阅服务接口，还可以更好支持Dubbo3的应用级服务发现。&lt;/p>
+&lt;p>通过 DubboBootstrap API 可以减少重复配置，更好控制启动过程，支持批量发布/订阅服务接口，还可以更好支持 Dubbo3 的应用级服务发现。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.config.bootstrap.DubboBootstrap&lt;span style="color:#719e07">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.config.ApplicationConfig&lt;span style="color:#719e07">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.config.RegistryConfig&lt;span style="color:#719e07">;&lt;/span>
@@ -335,9 +335,14 @@ provider的属性是service属性的默认值，覆盖规则类似上面的consu
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="其它配置">其它配置&lt;/h2>
+&lt;ul>
+&lt;li>基本配置&lt;/li>
+&lt;li>方法级配置&lt;/li>
+&lt;li>点对点直连&lt;/li>
+&lt;/ul>
 &lt;p>API 提供了最灵活丰富的配置能力，以下是一些可配置组件示例。&lt;/p>
-&lt;h3 id="基本配置">基本配置&lt;/h3>
-&lt;p>可以在DubboBootstrap中设置全局基本配置，包括应用配置、协议配置、注册中心、配置中心、元数据中心、模块、监控、SSL、provider配置、consumer配置等。&lt;/p>
+&lt;h4 id="基本配置">基本配置&lt;/h4>
+&lt;p>可以在 DubboBootstrap 中设置全局基本配置，包括应用配置、协议配置、注册中心、配置中心、元数据中心、模块、监控、SSL、provider 配置、consumer 配置等。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// 注册中心
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>RegistryConfig registry &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> RegistryConfig&lt;span style="color:#719e07">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>registry&lt;span style="color:#719e07">.&lt;/span>setAddress&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;zookeeper://192.168.10.1:2181&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
@@ -397,7 +402,7 @@ provider的属性是service属性的默认值，覆盖规则类似上面的consu
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">.&lt;/span>consumer&lt;span style="color:#719e07">(&lt;/span>consumer&lt;span style="color:#719e07">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">...&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">.&lt;/span>start&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="方法级设置">方法级设置&lt;/h3>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="方法级设置">方法级设置&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">...&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// 方法级配置
@@ -414,7 +419,7 @@ provider的属性是service属性的默认值，覆盖规则类似上面的consu
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reference&lt;span style="color:#719e07">.&lt;/span>setMethods&lt;span style="color:#719e07">(&lt;/span>methods&lt;span style="color:#719e07">);&lt;/span> &lt;span style="color:#586e75">// 设置方法级配置
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">...&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="点对点直连">点对点直连&lt;/h3>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="点对点直连">点对点直连&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">...&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>

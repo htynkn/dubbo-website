@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – 配置中心参考手册</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config-center/</link><description>Recent content in 配置中心参考手册 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config-center/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs3-Building: 配置中心概述</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config-center/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config-center/overview/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – 配置中心</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config-center/</link><description>Recent content in 配置中心 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config-center/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs3-Building: 配置中心概述</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config-center/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config-center/overview/</guid><description>
 &lt;p>配置中心在 Dubbo 中承担3个职责：&lt;/p>
 &lt;ol>
 &lt;li>外部化配置：启动配置的集中式存储 （简单理解为 dubbo.properties 的外部化存储）。&lt;/li>
@@ -14,7 +14,14 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>configCenter&lt;span style="color:#719e07">.&lt;/span>setAddress&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;zookeeper://127.0.0.1:2181&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
 &lt;p>为了兼容 2.6.x 版本配置，在使用 Zookeeper 作为注册中心，且没有显示配置配置中心的情况下，Dubbo 框架会默认将此 Zookeeper 用作配置中心，但将只作服务治理用途。&lt;/p>
-&lt;/blockquote>
+&lt;/blockquote></description></item><item><title>Docs3-Building: Zookeeper</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config-center/zookeeper/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config-center/zookeeper/</guid><description>
+&lt;h2 id="开启-zookeeper-配置中心">开启 Zookeeper 配置中心&lt;/h2>
+&lt;p>使用以下任一配置方式，启用 Zookeeper 配置中心&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="高级配置">高级配置&lt;/h2>
+&lt;h3 id="隔离">隔离&lt;/h3>
+&lt;h3 id="heading">&lt;/h3>
+&lt;h3 id="隔离-1">隔离&lt;/h3>
+&lt;h2 id="工作原理">工作原理&lt;/h2></description></item><item><title>Docs3-Building: Nacos</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config-center/nacos/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config-center/nacos/</guid><description>
 &lt;h2 id="外部化配置">外部化配置&lt;/h2>
 &lt;p>请参考文档 &lt;a href="../configuration/external-config">外部化配置&lt;/a>&lt;/p>
 &lt;h2 id="动态配置">动态配置&lt;/h2>
@@ -48,4 +55,4 @@
 &lt;li>tag-router，&lt;a href="../../examples/routing-rule">标签路由&lt;/a>&lt;/li>
 &lt;li>condition-router，&lt;a href="../../examples/condition-router">条件路由&lt;/a>&lt;/li>
 &lt;li>migration, &lt;a href="../../examples/todo">迁移规则&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Docs3-Building: Zookeeper</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config-center/zookeeper/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config-center/zookeeper/</guid><description/></item><item><title>Docs3-Building: Nacos</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config-center/nacos/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config-center/nacos/</guid><description/></item><item><title>Docs3-Building: Apollo</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config-center/apollo/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config-center/apollo/</guid><description/></item></channel></rss>
+&lt;/ul></description></item><item><title>Docs3-Building: Apollo</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config-center/apollo/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config-center/apollo/</guid><description/></item></channel></rss>
