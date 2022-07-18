@@ -37,7 +37,7 @@
 可以防止消费者绕过注册中心访问提供者，
 另外通过注册中心可灵活改变授权方式，而不需修改或升级提供者。&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/dubbo-token.jpg" alt="/user-guide/images/dubbo-token.jpg">&lt;/p>
-&lt;h3 id="设置类型">设置类型：&lt;/h3>
+&lt;h4 id="设置类型">设置类型：&lt;/h4>
 &lt;ul>
 &lt;li>全局设置&lt;/li>
 &lt;li>服务级别设置&lt;/li>
