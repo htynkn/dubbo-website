@@ -23,7 +23,7 @@
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>KeyGenerator keyGenerator &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> &lt;span style="color:#719e07">...&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ReferenceConfigCache cache &lt;span style="color:#719e07">=&lt;/span> ReferenceConfigCache&lt;span style="color:#719e07">.&lt;/span>getCache&lt;span style="color:#719e07">(&lt;/span>keyGenerator&lt;span style="color:#719e07">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-Building: 注册信息简化</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/performance/simplify-registry-data/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/advanced-features-and-usage/performance/simplify-registry-data/</guid><description>
-&lt;h2 id="特性说明">特性说明：&lt;/h2>
+&lt;h2 id="特性说明">特性说明&lt;/h2>
 &lt;p>Dubbo provider 中的服务配置项有接近 &lt;a href="https://dubbo.apache.org/zh/docs/references/xml/dubbo-parameter">30 个配置项&lt;/a>。 排除注册中心服务治理需要之外，很大一部分配置项是 provider 自己使用，不需要透传给消费者。这部分数据不需要进入注册中心，而只需要以 key-value 形式持久化存储。&lt;/p>
 &lt;p>Dubbo consumer 中的配置项也有 &lt;a href="https://dubbo.apache.org/zh/docs/references/xml/dubbo-consumer">20+个配置项&lt;/a>。在注册中心之中，服务消费者列表中只需要关注 application，version，group，ip，dubbo 版本等少量配置，其他配置也可以以 key-value 形式持久化存储。 &lt;br>
 这些数据是以服务为维度注册进入注册中心，导致了数据量的膨胀，进而引发注册中心(如 zookeeper)的网络开销增大，性能降低。&lt;/p>
@@ -124,19 +124,19 @@
 &lt;td>&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>TIMESTAMP_KEY&lt;/td>
-&lt;td>timestamp&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
 &lt;td>DUBBO_VERSION_KEY&lt;/td>
 &lt;td>dubbo&lt;/td>
 &lt;td>&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>SPECIFICATION_VERSION_KEY&lt;/td>
-&lt;td>&lt;strong>specVersion&lt;/strong>&lt;/td>
-&lt;td>新增，用于表述dubbo版本，如2.7.0&lt;/td>
+&lt;td>RELEASE_KEY&lt;/td>
+&lt;td>release&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>SIDE_KEY&lt;/td>
+&lt;td>side&lt;/td>
+&lt;td>&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
@@ -169,11 +169,6 @@
 &lt;td>DUBBO_VERSION_KEY&lt;/td>
 &lt;td>dubbo&lt;/td>
 &lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>SPECIFICATION_VERSION_KEY&lt;/td>
-&lt;td>&lt;strong>specVersion&lt;/strong>&lt;/td>
-&lt;td>新增，用于表述dubbo版本，如2.7.0&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
