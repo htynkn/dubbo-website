@@ -6322,7 +6322,141 @@ consumer端同样执行编译，在consumer的target下也会生成二进制文�
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>以正常方式启动，在项目的resources下建立文件夹META-INF.native-image，把在本地目录中生成的文件粘进去：&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo3.0-graalvm-support/resources.jpg" alt="">
 （可能会有缺漏没有生成的类信息，需要根据编译或运行时的报错信息手动添加。）&lt;/p>
-&lt;p>&lt;strong>完成以上几步后就可以进行项目的编译了。&lt;/strong>&lt;/p></description></item><item><title>Docs3-Building: QOS 概述</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/qos/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/qos/overview/</guid><description/></item><item><title>Docs3-Building: Spring Boot</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/quick-start/spring-boot/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/quick-start/spring-boot/</guid><description>
+&lt;p>&lt;strong>完成以上几步后就可以进行项目的编译了。&lt;/strong>&lt;/p></description></item><item><title>Docs3-Building: QOS 概述</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/qos/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/qos/overview/</guid><description>
+&lt;h2 id="特性说明">特性说明&lt;/h2>
+&lt;p>dubbo &lt;code>2.5.8&lt;/code> 新版本增加了 QOS 模块，提供了新的 telnet 命令支持。&lt;/p>
+&lt;h4 id="相关参数说明">相关参数说明&lt;/h4>
+&lt;p>QoS 提供了一些启动参数，来对启动进行配置，他们主要包括：&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>参数&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>qos-enable&lt;/td>
+&lt;td>是否启动QoS&lt;/td>
+&lt;td>true&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>qos-port&lt;/td>
+&lt;td>启动QoS绑定的端口&lt;/td>
+&lt;td>22222&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>qos-accept-foreign-ip&lt;/td>
+&lt;td>是否允许远程访问&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;blockquote>
+&lt;p>注意，从2.6.4/2.7.0开始，qos-accept-foreign-ip默认配置改为false，如果qos-accept-foreign-ip设置为true，有可能带来安全风险，请仔细评估后再打开。&lt;/p>
+&lt;/blockquote>
+&lt;h4 id="qos-参数配置">QoS 参数配置&lt;/h4>
+&lt;ul>
+&lt;li>系统属性&lt;/li>
+&lt;li>dubbo.properties&lt;/li>
+&lt;li>XML方式&lt;/li>
+&lt;li>Spring-boot 自动装配方式&lt;/li>
+&lt;/ul>
+&lt;p>其中，上述方式的优先顺序为系统属性 &amp;gt; dubbo.properties &amp;gt; XML/Spring-boot 自动装配方式。&lt;/p>
+&lt;h2 id="使用说明">使用说明&lt;/h2>
+&lt;h4 id="端口">端口&lt;/h4>
+&lt;p>新版本的 telnet 端口 与 dubbo 协议的端口是不同的端口，默认为 &lt;code>22222&lt;/code>&lt;/p>
+&lt;p>可以通过配置文件&lt;code>dubbo.properties&lt;/code> 修改:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.application.qos-port=33333
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者
+可以通过设置 JVM 参数:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>-Ddubbo.application.qos-port=33333
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="安全">安全&lt;/h4>
+&lt;p>默认情况下，dubbo 接收任何主机发起的命令&lt;/p>
+&lt;p>可以通过配置文件&lt;code>dubbo.properties&lt;/code> 修改:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.application.qos-accept-foreign-ip=false
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者&lt;/p>
+&lt;p>可以通过设置 JVM 参数:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>-Ddubbo.application.qos-accept-foreign-ip=false
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>拒绝远端主机发出的命令，只允许服务本机执行。&lt;/p>
+&lt;h4 id="telnet-与-http-协议">telnet 与 http 协议&lt;/h4>
+&lt;p>telnet 模块现在同时支持 http 协议和 telnet 协议，方便各种情况的使用
+示例：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>➜ ~ telnet localhost 22222
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Trying ::1...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>telnet: connect to address ::1: Connection refused
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Trying 127.0.0.1...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connected to localhost.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Escape character is &amp;#39;^]&amp;#39;.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ████████▄ ███ █▄ ▀█████████▄ ▀█████████▄ ▄██████▄
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ███ ▀███ ███ ███ ███ ███ ███ ███ ███ ███
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ███ ███ ███ ███ ███ ███ ███ ███ ███ ███
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ███ ███ ███ ███ ▄███▄▄▄██▀ ▄███▄▄▄██▀ ███ ███
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ███ ███ ███ ███ ▀▀███▀▀▀██▄ ▀▀███▀▀▀██▄ ███ ███
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ███ ███ ███ ███ ███ ██▄ ███ ██▄ ███ ███
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ███ ▄███ ███ ███ ███ ███ ███ ███ ███ ███
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ████████▀ ████████▀ ▄█████████▀ ▄█████████▀ ▀██████▀
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;ls
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>As Provider side:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+----------------------------------+---+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>| Provider Service Name |PUB|
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+----------------------------------+---+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>|org.apache.dubbo.demo.DemoService| N |
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+----------------------------------+---+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>As Consumer side:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+---------------------+---+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>|Consumer Service Name|NUM|
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+---------------------+---+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>➜ ~ curl &amp;#34;localhost:22222/ls?arg1=xxx&amp;amp;arg2=xxxx&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>As Provider side:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+----------------------------------+---+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>| Provider Service Name |PUB|
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+----------------------------------+---+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>|org.apache.dubbo.demo.DemoService| N |
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+----------------------------------+---+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>As Consumer side:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+---------------------+---+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>|Consumer Service Name|NUM|
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+---------------------+---+
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="使用系统属性方式配置">使用系统属性方式配置&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>-Ddubbo.application.qos-enable=true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-Ddubbo.application.qos-port=33333
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-Ddubbo.application.qos-accept-foreign-ip=false
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="使用-dubboproperties-文件配置">使用 dubbo.properties 文件配置&lt;/h4>
+&lt;p>在项目的&lt;code>src/main/resources&lt;/code>目录下添加 dubbo.properties文件，内容如下:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.application.qos-enable=true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.qos-port=33333
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.qos-accept-foreign-ip=false
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="使用xml方法配置">使用XML方法配置&lt;/h4>
+&lt;p>如果要通过 XML 配置响应的QoS相关的参数，可以进行如下配置：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> xmlns=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> xmlns:xsi=&lt;span style="color:#2aa198">&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> xmlns:dubbo=&lt;span style="color:#2aa198">&amp;#34;http://dubbo.apache.org/schema/dubbo&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> xsi:schemaLocation=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#2aa198"> http://www.springframework.org/schema/beans/spring-beans.xsd
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#2aa198"> http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:application&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;demo-provider&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:parameter&lt;/span> key=&lt;span style="color:#2aa198">&amp;#34;qos-enable&amp;#34;&lt;/span> value=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:parameter&lt;/span> key=&lt;span style="color:#2aa198">&amp;#34;qos-accept-foreign-ip&amp;#34;&lt;/span> value=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:parameter&lt;/span> key=&lt;span style="color:#2aa198">&amp;#34;qos-port&amp;#34;&lt;/span> value=&lt;span style="color:#2aa198">&amp;#34;33333&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;/dubbo:application&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;multicast://224.5.6.7:1234&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;20880&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.demo.provider.DemoService&amp;#34;&lt;/span> ref=&lt;span style="color:#2aa198">&amp;#34;demoService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;bean&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;demoService&amp;#34;&lt;/span> class=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.demo.provider.DemoServiceImpl&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/beans&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="使用-spring-boot-自动装配方式配置">使用 spring-boot 自动装配方式配置&lt;/h4>
+&lt;p>如果是 spring-boot 的应用，可以在&lt;code>application.properties&lt;/code>或者&lt;code>application.yml&lt;/code>上配置:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.application.qos-enable=true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.qos-port=33333
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.qos-accept-foreign-ip=false
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-Building: Spring Boot</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/quick-start/spring-boot/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/quick-start/spring-boot/</guid><description>
 &lt;blockquote>
 &lt;p>Dubbo 还提供了包括&lt;a href="../../reference-manual/config/xml">XML&lt;/a>、&lt;a href="../../reference-manual/config/api">API&lt;/a>等多种启动与接入方式，更多开发方式和配置细节可参见&lt;a href="../../reference-manual/config/">配置手册&lt;/a>。&lt;/p>
 &lt;/blockquote>

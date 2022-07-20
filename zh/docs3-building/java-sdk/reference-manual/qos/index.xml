@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – QOS 操作手册</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/qos/</link><description>Recent content in QOS 操作手册 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/qos/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs3-Building: QOS 概述</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/qos/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/qos/overview/</guid><description/></item><item><title>Docs3-Building: QOS 命令手册</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/qos/command/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/qos/command/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – QOS 操作手册</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/qos/</link><description>Recent content in QOS 操作手册 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/qos/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs3-Building: QOS 概述</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/qos/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/qos/overview/</guid><description>
 &lt;h2 id="特性说明">特性说明&lt;/h2>
 &lt;p>dubbo &lt;code>2.5.8&lt;/code> 新版本增加了 QOS 模块，提供了新的 telnet 命令支持。&lt;/p>
 &lt;h4 id="相关参数说明">相关参数说明&lt;/h4>
@@ -40,11 +40,6 @@
 &lt;li>Spring-boot 自动装配方式&lt;/li>
 &lt;/ul>
 &lt;p>其中，上述方式的优先顺序为系统属性 &amp;gt; dubbo.properties &amp;gt; XML/Spring-boot 自动装配方式。&lt;/p>
-&lt;h2 id="使用场景">使用场景&lt;/h2>
-&lt;ul>
-&lt;li>当线上的 QPS 比较高的时候，当刚重启机器的时候，由于没有进行 JIT 预热或相关资源没有预热，可能会导致大量超时，这个时候，可通过分批发布服务，逐渐加大流量。&lt;/li>
-&lt;li>当由于某台机器由于某种原因，需要下线服务，然后又需要重新上线服务。&lt;/li>
-&lt;/ul>
 &lt;h2 id="使用说明">使用说明&lt;/h2>
 &lt;h4 id="端口">端口&lt;/h4>
 &lt;p>新版本的 telnet 端口 与 dubbo 协议的端口是不同的端口，默认为 &lt;code>22222&lt;/code>&lt;/p>
@@ -104,52 +99,6 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+---------------------+---+
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>|Consumer Service Name|NUM|
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+---------------------+---+
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="支持的命令">支持的命令&lt;/h4>
-&lt;h4 id="ls-列出消费者和提供者">ls 列出消费者和提供者&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;ls
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>As Provider side:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+----------------------------------+---+
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>| Provider Service Name |PUB|
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+----------------------------------+---+
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>|org.apache.dubbo.demo.DemoService| Y |
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+----------------------------------+---+
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>As Consumer side:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+---------------------+---+
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>|Consumer Service Name|NUM|
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+---------------------+---+
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>列出 dubbo 的所提供的服务和消费的服务，以及消费的服务地址数&lt;/p>
-&lt;h4 id="online-上线服务命令">Online 上线服务命令&lt;/h4>
-&lt;p>当使用延迟发布功能的时候(通过设置 org.apache.dubbo.config.AbstractServiceConfig#register 为 false)，后续需要上线的时候，可通过 Online 命令&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>//上线所有服务
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;online
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>OK
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>//根据正则，上线部分服务
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;online com.*
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>OK
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="offline-下线服务命令">Offline 下线服务命令&lt;/h4>
-&lt;p>由于故障等原因，需要临时下线服务保持现场，可以使用 Offline 下线命令。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>//下线所有服务
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;offline
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>OK
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>//根据正则，下线部分服务
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;offline com.*
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>OK
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="help-命令">help 命令&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>//列出所有命令
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;help
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>//列出单个命令的具体使用情况
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;help online
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+--------------+----------------------------------------------------------------------------------+
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>| COMMAND NAME | online |
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+--------------+----------------------------------------------------------------------------------+
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>| EXAMPLE | online dubbo |
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>| | online xx.xx.xxx.service |
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+--------------+----------------------------------------------------------------------------------+
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="使用系统属性方式配置">使用系统属性方式配置&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>-Ddubbo.application.qos-enable=true
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-Ddubbo.application.qos-port=33333
@@ -183,6 +132,99 @@
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.application.qos-enable=true
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.qos-port=33333
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.qos-accept-foreign-ip=false
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-Building: 基础命令手册</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/qos/command/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/qos/command/</guid><description>
+&lt;h2 id="help-命令">help 命令&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>//列出所有命令
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;help
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>//列出单个命令的具体使用情况
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;help online
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+--------------+----------------------------------------------------------------------------------+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>| COMMAND NAME | online |
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+--------------+----------------------------------------------------------------------------------+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>| EXAMPLE | online dubbo |
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>| | online xx.xx.xxx.service |
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+--------------+----------------------------------------------------------------------------------+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="version-命令">version 命令&lt;/h2>
+&lt;p>显示当前运行的 Dubbo 的版本号&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;version
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo version &amp;#34;3.0.10-SNAPSHOT&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="quit-命令">quit 命令&lt;/h2>
+&lt;p>退出命令状态&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;quit
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BYE!
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Connection closed by foreign host.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-Building: 服务管理命令</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/qos/service-management/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/qos/service-management/</guid><description>
+&lt;h2 id="ls-命令">ls 命令&lt;/h2>
+&lt;p>列出消费者和提供者&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;ls
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>As Provider side:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+------------------------------------------------------------------------+---------------------+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>| Provider Service Name | PUB |
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+------------------------------------------------------------------------+---------------------+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>|DubboInternal - UserRead/org.apache.dubbo.metadata.MetadataService:1.0.0| |
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+------------------------------------------------------------------------+---------------------+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>| com.dubbo.dubbointegration.UserReadService |nacos-A(Y)/nacos-I(Y)|
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+------------------------------------------------------------------------+---------------------+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>As Consumer side:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+-----------------------------------------+-----------------+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>| Consumer Service Name | NUM |
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+-----------------------------------------+-----------------+
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>|com.dubbo.dubbointegration.BackendService|nacos-AF(I-2,A-2)|
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>+-----------------------------------------+-----------------+
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>列出 dubbo 的所提供的服务和消费的服务，以及消费的服务地址数。&lt;/p>
+&lt;p>注：&lt;/p>
+&lt;ul>
+&lt;li>带有 &lt;code>DubboInternal&lt;/code> 前缀的服务是 Dubbo 内置的服务，默认不向注册中心中注册。&lt;/li>
+&lt;li>服务发布状态中的 &lt;code>nacos-A(Y)&lt;/code> 第一部分是对应的注册中心名，第二部分是注册的模式（&lt;code>A&lt;/code> 代表应用级地址注册，&lt;code>I&lt;/code> 代表接口级地址注册），第三部分代表对应模式是否已经注册&lt;/li>
+&lt;li>服务订阅状态中的 &lt;code>nacos-AF(I-2,A-2)&lt;/code> 第一部分是对应的注册中心名，第二部分是订阅的模式（&lt;code>AF&lt;/code> 代表双订阅模式，&lt;code>FA&lt;/code> 代表仅应用级订阅，&lt;code>FI&lt;/code> 代表仅接口级订阅），第三部分中前半部分代表地址模式来源（&lt;code>A&lt;/code> 代表应用级地址，&lt;code>I&lt;/code> 代表接口级地址）后半部分代表对应的地址数量&lt;/li>
+&lt;/ul>
+&lt;h1 id="上线">上线&lt;/h1>
+&lt;h2 id="online-命令">online 命令&lt;/h2>
+&lt;p>Online 上线服务命令&lt;/p>
+&lt;p>当使用延迟发布功能的时候(通过设置 org.apache.dubbo.config.AbstractServiceConfig#register 为 false)，后续需要上线的时候，可通过 Online 命令&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>//上线所有服务
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;online
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>OK
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>//根据正则，上线部分服务
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;online com.*
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>OK
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="下线">下线&lt;/h1>
+&lt;h2 id="offline-命令">offline 命令&lt;/h2>
+&lt;p>下线服务命令&lt;/p>
+&lt;p>由于故障等原因，需要临时下线服务保持现场，可以使用 Offline 下线命令。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>//下线所有服务
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;offline
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>OK
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>//根据正则，下线部分服务
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;offline com.*
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>OK
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-Building: 框架状态命令</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/qos/probe/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/qos/probe/</guid><description>
+&lt;p>参考文档：&lt;a href="../../../advanced-features-and-usage/others/dubbo-kubernetes-probe/">Kubernetes 生命周期探针&lt;/a>&lt;/p>
+&lt;h2 id="startup-命令">startup 命令&lt;/h2>
+&lt;p>检测当前框架是否已经启动完毕&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;startup
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="ready-命令">ready 命令&lt;/h2>
+&lt;p>检测当前框架是否能正常提供服务（可能是临时下线）&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;ready
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="live-命令">live 命令&lt;/h2>
+&lt;p>检测当前框架是否正常运行（可能是永久异常）&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;live
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-Building: 日志框架运行时管理</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/qos/logger-management/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/qos/logger-management/</guid><description>
 &lt;h2 id="日志框架运行时管理">日志框架运行时管理&lt;/h2>
 &lt;p>自 &lt;code>3.0.10&lt;/code> 开始，dubbo-qos 运行时管控支持查询日志配置以及动态修改使用的日志框架和日志级别。&lt;/p>
@@ -242,4 +284,113 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>OK
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;loggerInfo
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Available logger adapters: [jcl, slf4j, log4j, jdk]. Current Adapter: [slf4j]. Log level: INFO
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-Building: 性能采样命令</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/qos/profiler/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/qos/profiler/</guid><description>
+&lt;p>性能采样功能可以对 Dubbo 处理链路上的各处耗时进行检测，在出现超时的时候 &lt;code>( usageTime / timeout &amp;gt; profilerWarnPercent * 100 )&lt;/code> 通过日志记录调用的耗时。&lt;/p>
+&lt;p>此功能分为 &lt;code>simple profiler&lt;/code> 和 &lt;code>detail profiler&lt;/code> 两个模式，其中 &lt;code>simple profiler&lt;/code> 模式默认开启，&lt;code>detail profiler&lt;/code> 模式默认关闭。
+&lt;code>detail profiler&lt;/code> 相较 &lt;code>simple profiler&lt;/code> 模式多采集了每个 filter 的处理耗时、协议上的具体耗时等。
+在 &lt;code>simple profiler&lt;/code> 模式下如果发现 Dubbo 框架内部存在耗时长的情况，可以开启 &lt;code>detail profiler&lt;/code> 模式，以便更好地排查问题。&lt;/p>
+&lt;p>参考链接：&lt;a href="../../../advanced-features-and-usage/observability/profiler/">请求耗时采样&lt;/a>&lt;/p>
+&lt;h2 id="enablesimpleprofiler-命令">enableSimpleProfiler 命令&lt;/h2>
+&lt;p>开启 &lt;code>simple profiler&lt;/code> 模式，默认开启&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;enableSimpleProfiler
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>OK
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="disablesimpleprofiler-命令">disableSimpleProfiler 命令&lt;/h2>
+&lt;p>关闭 &lt;code>simple profiler&lt;/code> 模式，关闭后 &lt;code>detail profiler&lt;/code> 也将不启用&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;disableSimpleProfiler
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>OK
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="enabledetailprofiler-命令">enableDetailProfiler 命令&lt;/h2>
+&lt;p>开启 &lt;code>detail profiler&lt;/code> 模式，默认关闭，需要开启 &lt;code>simple profiler&lt;/code> 模式才会真实开启&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;enableDetailProfiler
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>OK. This will cause performance degradation, please be careful!
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="disabledetailprofiler-命令">disableDetailProfiler 命令&lt;/h2>
+&lt;p>关闭 &lt;code>detail profiler&lt;/code> 模式，关闭后不影响 &lt;code>simple profiler&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;disableDetailProfiler
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>OK
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="setprofilerwarnpercent-命令">setProfilerWarnPercent 命令&lt;/h2>
+&lt;p>设置超时时间的警告百分比&lt;/p>
+&lt;p>命令：&lt;code>setProfilerWarnPercent {profilerWarnPercent}&lt;/code>&lt;/p>
+&lt;p>profilerWarnPercent: 超时时间的警告百分比，取值范围 0.0 ~ 1.0，默认值为 0.75&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;setProfilerWarnPercent 0.75
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>OK
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-Building: 路由状态命令</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/qos/router-snapshot/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/qos/router-snapshot/</guid><description>
+&lt;p>Dubbo 的很多流量治理能力是基于 Router 进行实现的，在生产环境中，如果出现流量结果不符合预期的情况，可以通过路由状态命令来查看路由的状态，以此来定位可能存在的问题。&lt;/p>
+&lt;p>参考链接：&lt;a href="../../../advanced-features-and-usage/observability/router-snapshot/">路由状态采集&lt;/a>&lt;/p>
+&lt;h2 id="getroutersnapshot-命令">getRouterSnapshot 命令&lt;/h2>
+&lt;p>获取当前的每层路由的分组状态。（仅支持 StateRouter）&lt;/p>
+&lt;p>命令：&lt;code>getRouterSnapshot {serviceName}&lt;/code>&lt;/p>
+&lt;p>&lt;code>serviceName&lt;/code> 为需要采集的服务名，支持匹配&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;getRouterSnapshot com.dubbo.dubbointegration.BackendService
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>com.dubbo.dubbointegration.BackendService@2c2e824a
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[ All Invokers:2 ] [ Valid Invokers: 2 ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>MockInvokersSelector Total: 2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[ Mocked -&amp;gt; Empty (Total: 0) ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[ Normal -&amp;gt; 172.18.111.187:20880,172.18.111.183:20880 (Total: 2) ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ↓
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>StandardMeshRuleRouter not support
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ↓
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>TagStateRouter not support
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ↓
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ServiceStateRouter not support
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ↓
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>AppStateRouter not support
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ↓
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>TailStateRouter End
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="enableroutersnapshot-命令">enableRouterSnapshot 命令&lt;/h2>
+&lt;p>开启路由结果采集模式&lt;/p>
+&lt;p>命令：&lt;code>enableRouterSnapshot {serviceName}&lt;/code>&lt;/p>
+&lt;p>&lt;code>serviceName&lt;/code> 为需要采集的服务名，支持匹配&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;enableRouterSnapshot com.dubbo.*
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>OK. Found service count: 1. This will cause performance degradation, please be careful!
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="disableroutersnapshot-命令">disableRouterSnapshot 命令&lt;/h2>
+&lt;p>关闭路由结果采集模式&lt;/p>
+&lt;p>命令：&lt;code>disableRouterSnapshot {serviceName}&lt;/code>&lt;/p>
+&lt;p>&lt;code>serviceName&lt;/code> 为需要采集的服务名，支持匹配&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;disableRouterSnapshot com.dubbo.*
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>OK. Found service count: 1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="getenabledroutersnapshot-命令">getEnabledRouterSnapshot 命令&lt;/h2>
+&lt;p>获取当前已经开启采集的服务&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;getEnabledRouterSnapshot
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>com.dubbo.dubbointegration.BackendService
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="getrecentroutersnapshot-命令">getRecentRouterSnapshot 命令&lt;/h2>
+&lt;p>通过 qos 命令获取历史的路由状态。（最多存储 32 个结果）&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;getRecentRouterSnapshot
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1658224330156 - Router snapshot service com.dubbo.dubbointegration.BackendService from registry 172.18.111.184 on the consumer 172.18.111.184 using the dubbo version 3.0.9 is below:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[ Parent (Input: 2) (Current Node Output: 2) (Chain Node Output: 2) ] Input: 172.18.111.187:20880,172.18.111.183:20880 -&amp;gt; Chain Node Output: 172.18.111.187:20880,172.18.111.183:20880
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [ MockInvokersSelector (Input: 2) (Current Node Output: 2) (Chain Node Output: 2) Router message: invocation.need.mock not set. Return normal Invokers. ] Current Node Output: 172.18.111.187:20880,172.18.111.183:20880
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [ StandardMeshRuleRouter (Input: 2) (Current Node Output: 2) (Chain Node Output: 2) Router message: MeshRuleCache has not been built. Skip route. ] Current Node Output: 172.18.111.187:20880,172.18.111.183:20880
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [ TagStateRouter (Input: 2) (Current Node Output: 2) (Chain Node Output: 2) Router message: Disable Tag Router. Reason: tagRouterRule is invalid or disabled ] Current Node Output: 172.18.111.187:20880,172.18.111.183:20880
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [ ServiceStateRouter (Input: 2) (Current Node Output: 2) (Chain Node Output: 2) Router message: Directly return. Reason: Invokers from previous router is empty or conditionRouters is empty. ] Current Node Output: 172.18.111.187:20880,172.18.111.183:20880
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [ AppStateRouter (Input: 2) (Current Node Output: 2) (Chain Node Output: 2) Router message: Directly return. Reason: Invokers from previous router is empty or conditionRouters is empty. ] Current Node Output: 172.18.111.187:20880,172.18.111.183:20880
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1658224330156 - Router snapshot service com.dubbo.dubbointegration.BackendService from registry 172.18.111.184 on the consumer 172.18.111.184 using the dubbo version 3.0.9 is below:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[ Parent (Input: 2) (Current Node Output: 2) (Chain Node Output: 2) ] Input: 172.18.111.187:20880,172.18.111.183:20880 -&amp;gt; Chain Node Output: 172.18.111.187:20880,172.18.111.183:20880
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [ MockInvokersSelector (Input: 2) (Current Node Output: 2) (Chain Node Output: 2) Router message: invocation.need.mock not set. Return normal Invokers. ] Current Node Output: 172.18.111.187:20880,172.18.111.183:20880
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [ StandardMeshRuleRouter (Input: 2) (Current Node Output: 2) (Chain Node Output: 2) Router message: MeshRuleCache has not been built. Skip route. ] Current Node Output: 172.18.111.187:20880,172.18.111.183:20880
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [ TagStateRouter (Input: 2) (Current Node Output: 2) (Chain Node Output: 2) Router message: Disable Tag Router. Reason: tagRouterRule is invalid or disabled ] Current Node Output: 172.18.111.187:20880,172.18.111.183:20880
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [ ServiceStateRouter (Input: 2) (Current Node Output: 2) (Chain Node Output: 2) Router message: Directly return. Reason: Invokers from previous router is empty or conditionRouters is empty. ] Current Node Output: 172.18.111.187:20880,172.18.111.183:20880
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [ AppStateRouter (Input: 2) (Current Node Output: 2) (Chain Node Output: 2) Router message: Directly return. Reason: Invokers from previous router is empty or conditionRouters is empty. ] Current Node Output: 172.18.111.187:20880,172.18.111.183:20880
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>···
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

@@ -173,6 +173,9 @@
 &lt;li>了解 &lt;a href="../../../quick-start/spring-boot/">Dubbo 基本开发步骤&lt;/a>&lt;/li>
 &lt;li>安装并启动 &lt;a href="https://nacos.io/zh-cn/docs/quick-start.html">Nacos 服务&lt;/a>&lt;/li>
 &lt;/ul>
+&lt;blockquote>
+&lt;p>当Dubbo使用&lt;code>3.0.0&lt;/code>及以上版本时，需要使用Nacos &lt;code>2.0.0&lt;/code>及以上版本。&lt;/p>
+&lt;/blockquote>
 &lt;h2 id="2-使用说明">2 使用说明&lt;/h2>
 &lt;p>在此查看&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-nacos/dubbo-samples-nacos-registry/">完整示例代码&lt;/a>&lt;/p>
 &lt;h3 id="21-增加依赖">2.1 增加依赖&lt;/h3>
@@ -197,6 +200,9 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> --&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependencies&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>增加 Dubbo 与 Nacos 依赖&lt;/p>
+&lt;blockquote>
+&lt;p>Dubbo &lt;code>3.0.0&lt;/code>及以上版本，dubbo-registry-nacos引入nacos-client&lt;code>2.0.0&lt;/code>及以上版本&lt;/p>
+&lt;/blockquote>
 &lt;h3 id="22-配置并启用-nacos">2.2 配置并启用 Nacos&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># application.yml (Spring Boot)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo
@@ -217,34 +223,183 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># dubbo.properties
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address: nacos://nacos:nacos@localhost:8848
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="31-自定义命名空间">3.1 自定义命名空间&lt;/h3>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="32-自定义命名空间">3.2 自定义命名空间&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># application.yml (Spring Boot)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> registry
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">dubbo&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">registry&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">address&lt;/span>: nacos://localhost:8848?namespace=5cbb70a5-xxx-xxx-xxx-d43479ae0932
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># application.yml (Spring Boot)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> registry
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">dubbo&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">registry&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">address&lt;/span>: nacos://localhost:8848
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">parameters.namespace&lt;/span>: 5cbb70a5-xxx-xxx-xxx-d43479ae0932
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="32-自定义分组">3.2 自定义分组&lt;/h3>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="33-自定义分组">3.3 自定义分组&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># application.yml&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> registry
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">dubbo&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">registry&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">address&lt;/span>: nacos://localhost:8848
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">group&lt;/span>: dubbo
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
 &lt;p>如果不配置的话，group 是由 Nacos 默认指定。group 和 namespace 在 Nacos 中代表不同的隔离层次，通常来说 namespace 用来隔离不同的用户或环境，group 用来对同一环境内的数据做进一步归组。&lt;/p>
 &lt;/blockquote>
-&lt;h3 id="33-更多配置">3.3 更多配置&lt;/h3>
+&lt;h3 id="34-注册接口级消费者">3.4 注册接口级消费者&lt;/h3>
+&lt;p>Dubbo3.0.0版本以后，增加了是否注册消费者的参数，如果需要将消费者注册到nacos注册中心上，需要将参数(register-consumer-url)设置为true，默认是false。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># application.yml&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">dubbo&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">registry&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">address&lt;/span>: nacos://localhost:8848?register-consumer-url=true
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># application.yml&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">dubbo&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">registry&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">address&lt;/span>: nacos://localhost:8848
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">parameters.register-consumer-url&lt;/span>: &lt;span style="color:#cb4b16">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="35-更多配置">3.5 更多配置&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>参数名&lt;/th>
+&lt;th>中文描述&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>username&lt;/td>
+&lt;td>连接Nacos Server的用户名&lt;/td>
+&lt;td>nacos&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>paasword&lt;/td>
+&lt;td>连接Nacos Server的密码&lt;/td>
+&lt;td>nacos&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>backup&lt;/td>
+&lt;td>备用地址&lt;/td>
+&lt;td>空&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>namespace&lt;/td>
+&lt;td>命名空间的ID&lt;/td>
+&lt;td>public&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>group&lt;/td>
+&lt;td>分组名称&lt;/td>
+&lt;td>DEFAULT_GROUP&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>register-consumer-url&lt;/td>
+&lt;td>是否注册消费端&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>com.alibaba.nacos.naming.log.filename&lt;/td>
+&lt;td>初始化日志文件名&lt;/td>
+&lt;td>naming.log&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>endpoint&lt;/td>
+&lt;td>连接Nacos Server指定的连接点，可参考&lt;a href="https://nacos.io/zh-cn/blog/address-server.html">文档&lt;/a>&lt;/td>
+&lt;td>空&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>endpointPort&lt;/td>
+&lt;td>连接Nacos Server指定的连接点端口，可以参考&lt;a href="https://nacos.io/zh-cn/blog/address-server.html">文档&lt;/a>&lt;/td>
+&lt;td>空&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>endpointQueryParams&lt;/td>
+&lt;td>endpoint查参数询&lt;/td>
+&lt;td>空&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>isUseCloudNamespaceParsing&lt;/td>
+&lt;td>是否解析云环境中的namespace参数&lt;/td>
+&lt;td>true&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>isUseEndpointParsingRule&lt;/td>
+&lt;td>是否开启endpoint 参数规则解析&lt;/td>
+&lt;td>true&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>namingLoadCacheAtStart&lt;/td>
+&lt;td>启动时是否优先读取本地缓存&lt;/td>
+&lt;td>true&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>namingCacheRegistryDir&lt;/td>
+&lt;td>指定缓存子目录，位置为 &amp;hellip;/nacos/{SUB_DIR}/naming&lt;/td>
+&lt;td>空&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>namingClientBeatThreadCount&lt;/td>
+&lt;td>客户端心跳的线程池大小&lt;/td>
+&lt;td>机器的CPU数的一半&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>namingPollingThreadCount&lt;/td>
+&lt;td>客户端定时轮询数据更新的线程池大小&lt;/td>
+&lt;td>机器的CPU数的一半&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>namingRequestDomainMaxRetryCount&lt;/td>
+&lt;td>client通过HTTP向Nacos Server请求的重试次数&lt;/td>
+&lt;td>3&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>namingPushEmptyProtection&lt;/td>
+&lt;td>在服务没有有效（健康）实例时，是否开启保护，开启后则会使用旧的服务实例&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>push.receiver.udp.port&lt;/td>
+&lt;td>客户端UDP的端口&lt;/td>
+&lt;td>空&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
 &lt;p>在nacos-server@&lt;code>1.0.0&lt;/code>版本后，支持客户端通过上报一些包含特定的元数据的实例到服务端来控制实例的一些行为。&lt;/p>
-&lt;p>例如:&lt;/p>
-&lt;p>&lt;code>preserved.heart.beat.timeout&lt;/code> : 该实例在不发送心跳后，从健康到不健康的时间。（单位:毫秒）
-&lt;code>preserved.ip.delete.timeout&lt;/code> : 该实例在不发送心跳后，被服务端下掉该实例的时间。（单位:毫秒）
-&lt;code>preserved.heart.beat.interval&lt;/code> : 该实例在客户端上报心跳的间隔时间。（单位:毫秒）
-&lt;code>preserved.instance.id.generator&lt;/code>: 该实例的id生成策略，值为&lt;code>snowflake&lt;/code>时，从0开始增加。
-&lt;code>preserved.register.source&lt;/code> : 保留键，目前未使用。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>参数名&lt;/th>
+&lt;th>中文描述&lt;/th>
+&lt;th>默认值&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>preserved.heart.beat.timeout&lt;/td>
+&lt;td>该实例在不发送心跳后，从健康到不健康的时间（毫秒）&lt;/td>
+&lt;td>15000&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>preserved.ip.delete.timeout&lt;/td>
+&lt;td>该实例在不发送心跳后，被服务端下掉该实例的时间(毫秒)&lt;/td>
+&lt;td>30000&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>preserved.heart.beat.interval&lt;/td>
+&lt;td>该实例在客户端上报心跳的间隔时间(毫秒)&lt;/td>
+&lt;td>5000&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>preserved.instance.id.generator&lt;/td>
+&lt;td>该实例的id生成策略，值为&lt;code>snowflake&lt;/code>时，从0开始增加&lt;/td>
+&lt;td>simple&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>preserved.register.source&lt;/td>
+&lt;td>注册实例注册时服务框架类型（例如Dubbo,Spring Cloud等）&lt;/td>
+&lt;td>空&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
 &lt;p>这些参数都可以类似 &lt;code>namespace&lt;/code> 的方式通过通过参数扩展配置到 Nacos，如&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.registry.parameters.preserved.heart.beat.timeout=5000
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="4-工作原理">4 工作原理&lt;/h2>

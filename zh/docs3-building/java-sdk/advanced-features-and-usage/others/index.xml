@@ -237,15 +237,15 @@ dubbo 支持多协议，如果一个应用同时暴露多个不同协议服务�
 &lt;/ul>
 &lt;p>接口将自动获取当前应用所有 SPI 的实现，对应接口的 SPI 实现均成功就绪则接口返回成功。
 SPI的介绍见&lt;a href="https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/spi/description/">Dubbo SPI扩展&lt;/a>&lt;/p>
-&lt;h4 id="存活检测httpsdubboapacheorgzhdocsreferenceslifecyclebriefe5ad98e6b4bbe6a380e6b58b">存活检测&lt;a href="https://dubbo.apache.org/zh/docs/references/lifecycle/brief/#%E5%AD%98%E6%B4%BB%E6%A3%80%E6%B5%8B">&lt;/a>&lt;/h4>
+&lt;h4 id="存活检测">存活检测&lt;/h4>
 &lt;p>对于 livenessProbe 存活检测，由于 Dubbo3 框架本身无法获取到应用的存活状态，因此本接口无默认实现，且默认返回成功。开发者可以根据 SPI 定义对此 SPI 接口进行拓展，从应用层次对是否存活进行判断。&lt;/p>
-&lt;h4 id="就绪检测httpsdubboapacheorgzhdocsreferenceslifecyclebriefe5b0b1e7bbaae6a380e6b58b">就绪检测&lt;a href="https://dubbo.apache.org/zh/docs/references/lifecycle/brief/#%E5%B0%B1%E7%BB%AA%E6%A3%80%E6%B5%8B">&lt;/a>&lt;/h4>
+&lt;h4 id="就绪检测">就绪检测&lt;/h4>
 &lt;p>对于 readinessProbe 就绪检测，目前 Dubbo3 默认提供了两个检测维度，一是对 Dubbo3 服务自身是否启停做判断，另外是对所有服务是否存在已注册接口，如果所有服务均已从注册中心下线（可以通过 QOS 运维进行操作）将返回未就绪的状态。&lt;/p>
-&lt;h4 id="启动检测httpsdubboapacheorgzhdocsreferenceslifecyclebriefe590afe58aa8e6a380e6b58b">启动检测&lt;a href="https://dubbo.apache.org/zh/docs/references/lifecycle/brief/#%E5%90%AF%E5%8A%A8%E6%A3%80%E6%B5%8B">&lt;/a>&lt;/h4>
+&lt;h4 id="启动检测">启动检测&lt;/h4>
 &lt;p>对于 startupProbe 启动检测，目前 Dubbo3 默认提供了一个检测维度，即是在所有启动流程（接口暴露、注册中心写入等）均结束后返回已就绪状态。&lt;/p>
-&lt;p>关于 &lt;a href="https://dubbo.apache.org/zh/docs/references/lifecycle/liveness/">liveness 存活探针&lt;/a> 扩展示例&lt;/p>
-&lt;p>关于 &lt;a href="https://dubbo.apache.org/zh/docs/references/lifecycle/readiness/">readiness 就绪探针&lt;/a> 扩展示例&lt;/p>
-&lt;p>关于 &lt;a href="https://dubbo.apache.org/zh/docs/references/lifecycle/startup/">startup 启动探针&lt;/a> 扩展示例&lt;/p>
+&lt;p>关于 &lt;a href="../../../reference-manual/spi/description/liveness/">liveness 存活探针&lt;/a> 扩展示例&lt;/p>
+&lt;p>关于 &lt;a href="../../../reference-manual/spi/description/readiness/">readiness 就绪探针&lt;/a> 扩展示例&lt;/p>
+&lt;p>关于 &lt;a href="../../../reference-manual/spi/description/startup/">startup 启动探针&lt;/a> 扩展示例&lt;/p>
 &lt;h2 id="使用场景">使用场景&lt;/h2>
 &lt;ul>
 &lt;li>kubelet 使用 &lt;code>liveness probe&lt;/code> 来确定你的应用程序是否正在运行，查看是否存活。一般来说，如果你的程序一旦崩溃了， Kubernetes 就会立刻知道这个程序已经终止了，然后就会重启这个程序。而我们的 liveness probe 的目的就是来捕获到当前应用程序还没有终止，还没有崩溃，如果出现了这些情况，那么就重启处于该状态下的容器，使应用程序在存在 bug 的情况下依然能够继续运行下去。&lt;/li>

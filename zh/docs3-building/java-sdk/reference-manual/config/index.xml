@@ -432,19 +432,15 @@ provider的属性是service属性的默认值，覆盖规则类似上面的consu
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">...&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-Building: Annotation 配置</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config/annotation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config/annotation/</guid><description>
-&lt;div class="alert alert-primary" role="alert">
-&lt;h4 class="alert-heading">提示&lt;/h4>
-本文以 Spring Boot + Annotation 模式描述 Dubbo 应用开发，在此查看无 Spring Boot 的 Spring 注解开发模式 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-annotation">完整示例&lt;/a>
-&lt;/div>
+&lt;p>本文以 Spring Boot + Annotation 模式描述 Dubbo 应用开发，在此查看无 Spring Boot 的 Spring 注解开发模式 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-annotation">完整示例&lt;/a>&lt;/p>
 &lt;p>在 Dubbo Spring Boot 开发中，你只需要增加几个注解，并配置 &lt;code>application.properties&lt;/code> 或 &lt;code>application.yml&lt;/code> 文件即可完成 Dubbo 服务定义：&lt;/p>
 &lt;ul>
 &lt;li>注解有 &lt;code>@DubboService&lt;/code>、&lt;code>@DubboReference&lt;/code> 与 &lt;code>EnableDubbo&lt;/code>。其中 &lt;code>@DubboService&lt;/code> 与 &lt;code>@DubboReference&lt;/code> 用于标记 Dubbo 服务，&lt;code>EnableDubbo&lt;/code> 启动 Dubbo 相关配置并指定 Spring Boot 扫描包路径。&lt;/li>
 &lt;li>配置文件 &lt;code>application.properties&lt;/code> 或 &lt;code>application.yml&lt;/code>&lt;/li>
 &lt;/ul>
-&lt;h2 id="使用讲解">使用讲解&lt;/h2>
 &lt;p>以下内容的完整示例请参考 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-spring-boot">dubbo-samples&lt;/a>&lt;/p>
 &lt;h3 id="增加-maven-依赖">增加 Maven 依赖&lt;/h3>
-&lt;p>使用 Dubbo Spring Boot Starter 首先引入以下下 Maven 依赖&lt;/p>
+&lt;p>使用 Dubbo Spring Boot Starter 首先引入以下 Maven 依赖&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dependencyManagement&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dependencies&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">&amp;lt;!-- Spring Boot --&amp;gt;&lt;/span>
@@ -502,9 +498,8 @@ provider的属性是service属性的默认值，覆盖规则类似上面的consu
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>spring-boot-autoconfigure&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;/dependencies&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>注意区分上面的 &lt;dependenciesManagement/> 与 &lt;dependencies/>&lt;/p>
-&lt;/blockquote>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="注意">注意：&lt;/h4>
+&lt;p>区分上面的 &lt;strong>与&lt;/strong>&lt;/p>
 &lt;h3 id="applicationyml-或-applicationproperties">application.yml 或 application.properties&lt;/h3>
 &lt;p>除 service、reference 之外的组件都可以在 application.yml 文件中设置，如果要扩展 service 或 reference 的注解配置，则需要增加 &lt;code>dubbo.properties&lt;/code> 配置文件或使用其他非注解如 Java Config 方式，具体请看下文 &lt;a href="#%E6%89%A9%E5%B1%95%E6%B3%A8%E8%A7%A3%E7%9A%84%E9%85%8D%E7%BD%AE">扩展注解的配置&lt;/a>。&lt;/p>
 &lt;p>service、reference 组件也可以通过 &lt;code>id&lt;/code> 与 application 中的全局组件做关联，以下面配置为例：&lt;/p>
@@ -534,7 +529,14 @@ provider的属性是service属性的默认值，覆盖规则类似上面的consu
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> service&lt;span style="color:#719e07">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="dubboservice-注解">@DubboService 注解&lt;/h3>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="注解">注解&lt;/h2>
+&lt;ul>
+&lt;li>@DubboService 注解&lt;/li>
+&lt;li>@DubboReference 注解&lt;/li>
+&lt;li>@EnableDubbo 注解&lt;/li>
+&lt;li>扩展注解&lt;/li>
+&lt;/ul>
+&lt;h4 id="dubboservice-注解">@DubboService 注解&lt;/h4>
 &lt;blockquote>
 &lt;p>&lt;code>@Service&lt;/code> 注解从 3.0 版本开始就已经废弃，改用 &lt;code>@DubboService&lt;/code>，以区别于 Spring 的 &lt;code>@Service&lt;/code> 注解&lt;/p>
 &lt;/blockquote>
@@ -544,7 +546,7 @@ provider的属性是service属性的默认值，覆盖规则类似上面的consu
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果要设置服务参数，&lt;code>@DubboService&lt;/code> 也提供了常用参数的设置方式。如果有更复杂的参数设置需求，则可以考虑使用其他设置方式&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@DubboService&lt;/span>&lt;span style="color:#719e07">(&lt;/span>version &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;1.0.0&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> group &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;dev&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> timeout &lt;span style="color:#719e07">=&lt;/span> 5000&lt;span style="color:#719e07">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">DemoServiceImpl&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> DemoService &lt;span style="color:#719e07">{}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="dubboreference-注解">@DubboReference 注解&lt;/h3>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="dubboreference-注解">@DubboReference 注解&lt;/h4>
 &lt;blockquote>
 &lt;p>&lt;code>@Reference&lt;/code> 注解从 3.0 版本开始就已经废弃，改用 &lt;code>@DubboReference&lt;/code>，以区别于 Spring 的 &lt;code>@Reference&lt;/code> 注解&lt;/p>
 &lt;/blockquote>
@@ -554,7 +556,7 @@ provider的属性是service属性的默认值，覆盖规则类似上面的consu
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> DemoService demoService&lt;span style="color:#719e07">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>@DubboReference&lt;/code> 注解将自动注入为 Dubbo 服务代理实例，使用 demoService 即可发起远程服务调用&lt;/p>
-&lt;h3 id="enabledubbo-注解">@EnableDubbo 注解&lt;/h3>
+&lt;h4 id="enabledubbo-注解">@EnableDubbo 注解&lt;/h4>
 &lt;p>&lt;code>@EnableDubbo&lt;/code> 注解必须配置，否则将无法加载 Dubbo 注解定义的服务，&lt;code>@EnableDubbo&lt;/code> 可以定义在主类上&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@SpringBootApplication&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@EnableDubbo&lt;/span>
@@ -564,7 +566,7 @@ provider的属性是service属性的默认值，覆盖规则类似上面的consu
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Spring Boot 注解默认只会扫描 main 类所在的 package，如果服务定义在其它 package 中，需要增加配置 &lt;code>EnableDubbo(scanBasePackages = {&amp;quot;org.apache.dubbo.springboot.demo.provider&amp;quot;})&lt;/code>&lt;/p>
-&lt;h3 id="扩展注解的配置">扩展注解的配置&lt;/h3>
+&lt;h4 id="扩展注解配置">扩展注解配置&lt;/h4>
 &lt;p>虽然可以通过 &lt;code>@DubboService&lt;/code> 和 &lt;code>DubboReference&lt;/code> 调整配置参数（如下代码片段所示），但总体来说注解提供的配置项还是非常有限。在这种情况下，如果有更复杂的参数设置需求，可以使用 &lt;code>Java Config&lt;/code> 或 &lt;code>dubbo.properties&lt;/code> 两种方式。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@DubboService&lt;/span>&lt;span style="color:#719e07">(&lt;/span>version &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;1.0.0&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> group &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;dev&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> timeout &lt;span style="color:#719e07">=&lt;/span> 5000&lt;span style="color:#719e07">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@DubboReference&lt;/span>&lt;span style="color:#719e07">(&lt;/span>version &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;1.0.0&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> group &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;dev&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> timeout &lt;span style="color:#719e07">=&lt;/span> 5000&lt;span style="color:#719e07">)&lt;/span>
@@ -589,22 +591,20 @@ provider的属性是service属性的默认值，覆盖规则类似上面的consu
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.service.org.apache.dubbo.springboot.demo.DemoService.timeout=5000
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.service.org.apache.dubbo.springboot.demo.DemoService.parameters=[{myKey:myValue},{anotherKey:anotherValue}]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.reference.org.apache.dubbo.springboot.demo.DemoService.timeout=6000
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>properties 格式配置目前结构性不太强，比如体现在 key 字段冗余较多，后续会考虑提供对于 yaml 格式的支持。&lt;/p>
-&lt;/blockquote></description></item><item><title>Docs3-Building: XML 配置</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config/xml/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config/xml/</guid><description>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="提示">提示：&lt;/h4>
+&lt;p>properties 格式配置目前结构性不太强，比如体现在 key 字段冗余较多，后续会考虑提供对于 yaml 格式的支持。&lt;/p></description></item><item><title>Docs3-Building: XML 配置</title><link>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config/xml/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/config/xml/</guid><description>
 &lt;p>Dubbo 有基于 Spring Schema 扩展的自定义配置组件，使用 XML 能达到的配置能力总体与 &lt;a href="../properties">配置参考手册&lt;/a> 对等。&lt;/p>
-&lt;h2 id="使用讲解">使用讲解&lt;/h2>
 &lt;p>以下内容的完整示例请参考 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-basic">dubbo-samples&lt;/a>&lt;/p>
-&lt;h3 id="服务提供者">服务提供者&lt;/h3>
-&lt;h3 id="定义服务接口">定义服务接口&lt;/h3>
-&lt;p>DemoService.java [^1]：&lt;/p>
+&lt;h2 id="服务提供者">服务提供者&lt;/h2>
+&lt;h4 id="定义服务接口">定义服务接口&lt;/h4>
+&lt;p>DemoService.java：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">package&lt;/span> org.apache.dubbo.demo&lt;span style="color:#719e07">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">DemoService&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> String &lt;span style="color:#268bd2">sayHello&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String name&lt;span style="color:#719e07">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="在服务提供方实现接口">在服务提供方实现接口&lt;/h3>
-&lt;p>DemoServiceImpl.java [^2]：&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="在服务提供方实现接口">在服务提供方实现接口&lt;/h4>
+&lt;p>DemoServiceImpl.java：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">package&lt;/span> org.apache.dubbo.demo.provider&lt;span style="color:#719e07">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.demo.DemoService&lt;span style="color:#719e07">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -613,7 +613,7 @@ provider的属性是service属性的默认值，覆盖规则类似上面的consu
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#2aa198">&amp;#34;Hello &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> name&lt;span style="color:#719e07">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="用-spring-配置声明暴露服务">用 Spring 配置声明暴露服务&lt;/h3>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="用-spring-配置声明暴露服务">用 Spring 配置声明暴露服务&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> xmlns:xsi=&lt;span style="color:#2aa198">&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> xmlns:dubbo=&lt;span style="color:#2aa198">&amp;#34;http://dubbo.apache.org/schema/dubbo&amp;#34;&lt;/span>
@@ -633,7 +633,7 @@ provider的属性是service属性的默认值，覆盖规则类似上面的consu
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.basic.api.DemoService&amp;#34;&lt;/span> ref=&lt;span style="color:#2aa198">&amp;#34;demoService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/beans&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="加载-spring-配置">加载 Spring 配置&lt;/h3>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="加载-spring-配置">加载 Spring 配置&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">DemoServiceImpl&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> DemoService &lt;span style="color:#719e07">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Override&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> String &lt;span style="color:#268bd2">sayHello&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String name&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
@@ -642,7 +642,7 @@ provider的属性是service属性的默认值，覆盖规则类似上面的consu
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#2aa198">&amp;#34;Hello &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> name &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34;, response from provider: &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> RpcContext&lt;span style="color:#719e07">.&lt;/span>getContext&lt;span style="color:#719e07">().&lt;/span>getLocalAddress&lt;span style="color:#719e07">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="服务消费者">服务消费者&lt;/h3>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="服务消费者">服务消费者&lt;/h2>
 &lt;h4 id="通过-spring-配置引用远程服务">通过 Spring 配置引用远程服务&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> xmlns:xsi=&lt;span style="color:#2aa198">&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span>
