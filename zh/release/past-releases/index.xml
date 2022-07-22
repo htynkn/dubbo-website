@@ -6,7 +6,23 @@
 &lt;p>GitHub: &lt;a href="https://github.com/apache/dubbo">https://github.com/apache/dubbo&lt;/a> &lt;br>
 发布说明: &lt;a href="https://github.com/apache/dubbo/releases">https://github.com/apache/dubbo/releases&lt;/a>&lt;/p>
 &lt;/blockquote>
-&lt;h3 id="308-2022-05-11">3.0.8 (2022-05-11)&lt;/h3>
+&lt;h3 id="309-2022-06-23">3.0.9 (2022-06-23)&lt;/h3>
+&lt;h4 id="source-release">Source Release&lt;/h4>
+&lt;ul>
+&lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/3.0.9/apache-dubbo-3.0.9-src.zip">source&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/3.0.9/apache-dubbo-3.0.9-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/3.0.9/apache-dubbo-3.0.9-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="maven-release">Maven Release&lt;/h4>
+&lt;ul>
+&lt;li>&lt;a href="https://search.maven.org/artifact/org.apache.dubbo/dubbo/3.0.9/jar">org.apache.dubbo:dubbo:3.0.9&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.dubbo&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>3.0.9&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="308-2022-05-11">3.0.8 (2022-05-11)&lt;/h3>
 &lt;ul>
 &lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/3.0.8/apache-dubbo-3.0.8-src.zip">source&lt;/a> |
 &lt;a href="https://archive.apache.org/dist/dubbo/3.0.8/apache-dubbo-3.0.8-src.zip.asc">asc&lt;/a> |
