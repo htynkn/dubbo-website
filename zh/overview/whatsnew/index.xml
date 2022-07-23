@@ -62,7 +62,7 @@
 Interface 方式。&lt;/p>
 &lt;ul>
 &lt;li>Dubbo2 老用户如何&lt;a href="TBD">从现有协议升级至 Triple&lt;/a>&lt;/li>
-&lt;li>新用户或业务参考&lt;a href="../../../java-sdk/quick-start">Dubbo3 Triple Quick Start&lt;/a>&lt;/li>
+&lt;li>新用户或业务参考&lt;a href="../../../docs3-v2/java-sdk/quick-start">Dubbo3 Triple Quick Start&lt;/a>&lt;/li>
 &lt;li>深入了解 Triple 协议:&lt;a href="https://github.com/apache/dubbo-awesome/blob/master/proposals/D0-triple.md">Dubbo3 Triple 协议设计与原理&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Overview: 应用级服务发现</title><link>https://dubbo.apache.org/zh/overview/whatsnew/service-discovery/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/overview/whatsnew/service-discovery/</guid><description>
 &lt;p>在这里查看更多文档&lt;/p>

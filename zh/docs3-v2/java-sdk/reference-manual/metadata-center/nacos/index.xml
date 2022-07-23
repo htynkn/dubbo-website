@@ -6,7 +6,10 @@ Dubbo provider中的服务配置项有接近&lt;a href="https://dubbo.apache.org
 &lt;p>除了上述配置项的存储之外，Dubbo服务元数据信息也需要被存储下来。元数据信息包括服务接口列表和接口的方法信息，这些信息将被用于服务mock和服务测试。&lt;/p>
 &lt;p>使用Dubbo&lt;code>3.0.0&lt;/code>及以上版本时，引入了应用元数据的概念，并且引入了服务自省映射，用于应用级别的服务发现。&lt;/p>
 &lt;h1 id="预备工作">预备工作&lt;/h1>
-&lt;p>Dubbo使用nacos注册中心之前，需先成功启动nacos server，操作步骤请参考&lt;a href="https://nacos.io/zh-cn/docs/quick-start.html">nacos快速入门&lt;/a>。&lt;/p>
+&lt;ul>
+&lt;li>了解&lt;a href="https://dubbo.apache.org/zh/docs3-building/java-sdk/quick-start/spring-boot/">Dubbo基本开发步骤&lt;/a>&lt;/li>
+&lt;li>启动nacos server，请参考&lt;a href="https://nacos.io/zh-cn/docs/quick-start.html">nacos快速入门&lt;/a>&lt;/li>
+&lt;/ul>
 &lt;blockquote>
 &lt;p>当Dubbo使用&lt;code>3.0.0&lt;/code>及以上版本时，需要使用Nacos &lt;code>2.0.0&lt;/code>及以上版本&lt;/p>
 &lt;/blockquote>
@@ -37,8 +40,13 @@ Dubbo provider中的服务配置项有接近&lt;a href="https://dubbo.apache.org
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ...
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependencies&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="配置元数据中心">配置元数据中心&lt;/h2>
-&lt;p>如果Dubbo使用 Spring Framework 装配，有三种配置方法分别为：Dubbo Spring 外部化配置、Spring XML 配置文件和API配置，推荐使用第一种配置方式。&lt;/p>
-&lt;h3 id="dubbo-spring外部化配置">Dubbo Spring外部化配置&lt;/h3>
+&lt;p>如果Dubbo使用 Spring Framework 装配，有三种配置方法分别为：&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="#method1">Dubbo Spring 外部化配置&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#method2">Spring XML 配置文件&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#method3">API配置&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h3 id="a-idmethod1dubbo-spring外部化配置a">&lt;a id="method1">Dubbo Spring外部化配置&lt;/a>&lt;/h3>
 &lt;p>Dubbo Spring 外部化配置是由 Dubbo 2.5.8引入的新特性，可通过 Spring Environment 属性自动地生成并绑定 Dubbo 配置 Bean，实现配置简化，并且降低微服务开发门槛。&lt;/p>
 &lt;p>当Dubbo使用Nacos为注册中心，假设启动服务器IP为：10.20.153.10，端口号为：8848，则在Dubbo外部化配置文件中添加以下配置：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>## application
@@ -101,7 +109,7 @@ Dubbo provider中的服务配置项有接近&lt;a href="https://dubbo.apache.org
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-metadata-nacos-3.png" alt="image-dubbo-metadata-nacos-3.png">&lt;/p>
 &lt;p>Consumers接口元信息详情：&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-metadata-nacos-4.png" alt="image-dubbo-metadata-nacos-4.png">&lt;/p>
-&lt;h3 id="spring-xml配置文件">Spring XML配置文件&lt;/h3>
+&lt;h3 id="a-idmethod2spring-xml配置文件a">&lt;a id="method2">Spring XML配置文件&lt;/a>&lt;/h3>
 &lt;p>同样，当Dubbo使用Nacos为注册中心，假设启动服务器IP为：10.20.153.10，端口号为：8848，则在Spring Bean在XML文件中添加以下配置：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> xmlns=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans&amp;#34;&lt;/span>
@@ -183,7 +191,7 @@ Dubbo provider中的服务配置项有接近&lt;a href="https://dubbo.apache.org
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-metadata-nacos-3.png" alt="image-dubbo-metadata-nacos-3.png">&lt;/p>
 &lt;p>Consumers接口元信息详情：&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-metadata-nacos-4.png" alt="image-dubbo-metadata-nacos-4.png">&lt;/p>
-&lt;h3 id="api配置">API配置&lt;/h3>
+&lt;h3 id="a-idmethod3api配置a">&lt;a id="method3">API配置&lt;/a>&lt;/h3>
 &lt;p>同样，当Dubbo使用Nacos为注册中心，假设启动服务器IP为：10.20.153.10，端口号为：8848，则在Spring Bean在XML文件中添加以下配置：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">ProviderBootstrap&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -313,7 +321,7 @@ Dubbo provider中的服务配置项有接近&lt;a href="https://dubbo.apache.org
 &lt;/tr>
 &lt;tr>
 &lt;td>timeout&lt;/td>
-&lt;td>连接元数据中心超时时间（ms）&lt;/td>
+&lt;td>请求元数据中心超时时间（ms）&lt;/td>
 &lt;td>&lt;/td>
 &lt;/tr>
 &lt;tr>

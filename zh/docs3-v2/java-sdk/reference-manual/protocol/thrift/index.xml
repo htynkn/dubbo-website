@@ -4,6 +4,7 @@
 &lt;p>&lt;a href="http://thrift.apache.org">Thrift&lt;/a> 是 Facebook 捐给 Apache 的一个 RPC 框架。&lt;/p>
 &lt;p>使用 dubbo thrift 协议同样需要使用 thrift 的 idl compiler 编译生成相应的 java 代码，后续版本中会在这方面做一些增强。&lt;/p>
 &lt;h2 id="使用场景">使用场景&lt;/h2>
+&lt;p>适用于 SOA 标准 RPC 框架。&lt;/p>
 &lt;h2 id="使用方式">使用方式&lt;/h2>
 &lt;h4 id="依赖">依赖&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
