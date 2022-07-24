@@ -1,4 +1,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – 基本概念</title><link>https://dubbo.apache.org/zh/docs/languages/golang/dubbo-go-3.0/concept/</link><description>Recent content in 基本概念 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/docs/languages/golang/dubbo-go-3.0/concept/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Dubbo-go 的应用和接口</title><link>https://dubbo.apache.org/zh/docs/languages/golang/dubbo-go-3.0/concept/app_and_interface/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/languages/golang/dubbo-go-3.0/concept/app_and_interface/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>此文档已经不再维护。您当前查看的是快照版本。如果想要查看最新版本的文档，请参阅&lt;a href="../../../../../../docs3-v2/golang-sdk/concept/more/app_and_interface/">最新版本&lt;/a>。&lt;/p>
+&lt;/div>
 &lt;h1 id="dubbo-go-服务层级">Dubbo-go 服务层级&lt;/h1>
 &lt;p>Dubbo-go 服务层级为两个级别：分别是应用级别(App Level)和接口级别(Interface Level)，该服务分层与&lt;strong>框架配置&lt;/strong>结构息息相关。&lt;/p>
 &lt;p>如下图所示，可以看到，应用级别的组件以浅红色标注，接建立如下文件目录口级别的组件以浅蓝色标注：&lt;/p>
@@ -59,6 +62,9 @@
 &lt;h2 id="3-说明">3. 说明&lt;/h2>
 &lt;p>暴露的服务是接口级别的，一个用户定义的 Provider Struct/一个用户定义的Consumer Struct，对应一个Service/Reference 模块，一个应用可以同时存在Consumer 模块和 Provider 模块，因此可以同时存在多个Service/Reference 模块。&lt;/p>
 &lt;p>下一章：&lt;a href="./protocol.html">【网络协议】&lt;/a>&lt;/p></description></item><item><title>Docs: Dubbo-go的配置</title><link>https://dubbo.apache.org/zh/docs/languages/golang/dubbo-go-3.0/concept/configuration/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/languages/golang/dubbo-go-3.0/concept/configuration/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>此文档已经不再维护。您当前查看的是快照版本。如果想要查看最新版本的文档，请参阅&lt;a href="../../../../../../docs3-v2/golang-sdk/concept/config/basic_concept/">最新版本&lt;/a>。&lt;/p>
+&lt;/div>
 &lt;h1 id="dubbo-go-配置项">Dubbo-go 配置项&lt;/h1>
 &lt;h2 id="1-配置结构">1. 配置结构&lt;/h2>
 &lt;h3 id="11-框架配置结构">1.1 框架配置结构&lt;/h3>
@@ -254,6 +260,9 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">namespace&lt;/span>: demo-provider-config
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># 框架从 apollo 配置中最更新对应位置加载配置文件，并根据该配置文件启动&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>下一章：&lt;a href="../samples/samples_repo.html">【Dubbogo Samples 介绍】&lt;/a>&lt;/p></description></item><item><title>Docs: Dubbo-go 的网络协议</title><link>https://dubbo.apache.org/zh/docs/languages/golang/dubbo-go-3.0/concept/protocol/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/languages/golang/dubbo-go-3.0/concept/protocol/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>此文档已经不再维护。您当前查看的是快照版本。如果想要查看最新版本的文档，请参阅&lt;a href="../../../../../../docs3-v2/golang-sdk/concept/rpc/protocol/">最新版本&lt;/a>。&lt;/p>
+&lt;/div>
 &lt;h1 id="网络协议">网络协议&lt;/h1>
 &lt;h2 id="1-网络协议是什么">1. 网络协议是什么&lt;/h2>
 &lt;p>对于 Dubbo-go 微服务框架，网络协议为远程过程调用中负责网络通信的模块，负责应用层到网络层的数据序列化、打包、请求发起、网络端口监听等功能。Dubbo-go 为协议抽象了一套接口如下：&lt;/p>
@@ -359,6 +368,9 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">protocol-ids&lt;/span>: triple &lt;span style="color:#586e75"># use protocol-ids named &amp;#39;triple&amp;#39;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">interface&lt;/span>: com.apache.dubbo.sample.basic.IGreeter
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>下一章：&lt;a href="./registry.html">【注册中心】&lt;/a>&lt;/p></description></item><item><title>Docs: Dubbo-go 的注册中心</title><link>https://dubbo.apache.org/zh/docs/languages/golang/dubbo-go-3.0/concept/registry/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/languages/golang/dubbo-go-3.0/concept/registry/</guid><description>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>此文档已经不再维护。您当前查看的是快照版本。如果想要查看最新版本的文档，请参阅&lt;a href="../../../../../../docs3-v2/golang-sdk/concept/service_management/registry/">最新版本&lt;/a>。&lt;/p>
+&lt;/div>
 &lt;h1 id="注册中心">注册中心&lt;/h1>
 &lt;h2 id="1-dubbo-的注册中心是什么">1. Dubbo 的注册中心是什么&lt;/h2>
 &lt;p>对于 Dubbo-go 微服务框架，注册中心在 RPC 场景下复杂保存 Provider 应用的服务信息。Provider 注册地址到注册中心，Consumer 从注册中心读取和订阅 Provider 地址列表。如图所示：&lt;/p>
