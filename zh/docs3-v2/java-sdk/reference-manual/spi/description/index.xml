@@ -1274,6 +1274,47 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>META-INF/dubbo/org.apache.dubbo.remoting.exchange.Exchanger：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>xxx=com.xxx.XxxExchanger
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-V2: 对等网络节点组网器扩展</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/description/page/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/description/page/</guid><description>
+&lt;h1 id="页面扩展">页面扩展&lt;/h1>
+&lt;h2 id="扩展说明">扩展说明&lt;/h2>
+&lt;p>对等网络节点组网器。&lt;/p>
+&lt;h2 id="扩展接口">扩展接口&lt;/h2>
+&lt;p>&lt;code>org.apache.dubbo.container.page.PageHandler&lt;/code>&lt;/p>
+&lt;h2 id="扩展配置">扩展配置&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> page=&lt;span style="color:#2aa198">&amp;#34;xxx,yyy&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&amp;lt;!-- 缺省值设置，当&amp;lt;dubbo:protocol&amp;gt;没有配置page属性时，使用此配置 --&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:provider&lt;/span> page=&lt;span style="color:#2aa198">&amp;#34;xxx,yyy&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="已知扩展">已知扩展&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>org.apache.dubbo.container.page.pages.HomePageHandler&lt;/code>&lt;/li>
+&lt;li>&lt;code>org.apache.dubbo.container.page.pages.StatusPageHandler&lt;/code>&lt;/li>
+&lt;li>&lt;code>org.apache.dubbo.container.page.pages.LogPageHandler&lt;/code>&lt;/li>
+&lt;li>&lt;code>org.apache.dubbo.container.page.pages.SystemPageHandler&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h2 id="扩展示例">扩展示例&lt;/h2>
+&lt;p>Maven 项目结构：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>src
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-main
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-java
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-com
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-xxx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-XxxPageHandler.java (实现PageHandler接口)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-resources
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-META-INF
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-dubbo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-org.apache.dubbo.container.page.PageHandler (纯文本文件，内容为：xxx=com.xxx.XxxPageHandler)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>XxxPageHandler.java：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">package&lt;/span> com.xxx&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.container.page.PageHandler&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">XxxPageHandler&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> PageHandler &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> Group &lt;span style="color:#268bd2">lookup&lt;/span>&lt;span style="color:#719e07">(&lt;/span>URL url&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// ...
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>META-INF/dubbo/org.apache.dubbo.container.page.PageHandler：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>xxx=com.xxx.XxxPageHandler
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-V2: 组网扩展</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/description/networker/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/description/networker/</guid><description>
 &lt;h2 id="扩展说明">扩展说明&lt;/h2>
 &lt;p>对等网络节点组网器。&lt;/p>
@@ -1608,47 +1649,6 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>META-INF/dubbo/org.apache.dubbo.common.logger.LoggerAdapter：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>xxx=com.xxx.XxxLoggerAdapter
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-V2:</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/description/page/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/description/page/</guid><description>
-&lt;h1 id="页面扩展">页面扩展&lt;/h1>
-&lt;h2 id="扩展说明">扩展说明&lt;/h2>
-&lt;p>对等网络节点组网器。&lt;/p>
-&lt;h2 id="扩展接口">扩展接口&lt;/h2>
-&lt;p>&lt;code>org.apache.dubbo.container.page.PageHandler&lt;/code>&lt;/p>
-&lt;h2 id="扩展配置">扩展配置&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> page=&lt;span style="color:#2aa198">&amp;#34;xxx,yyy&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&amp;lt;!-- 缺省值设置，当&amp;lt;dubbo:protocol&amp;gt;没有配置page属性时，使用此配置 --&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:provider&lt;/span> page=&lt;span style="color:#2aa198">&amp;#34;xxx,yyy&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="已知扩展">已知扩展&lt;/h2>
-&lt;ul>
-&lt;li>&lt;code>org.apache.dubbo.container.page.pages.HomePageHandler&lt;/code>&lt;/li>
-&lt;li>&lt;code>org.apache.dubbo.container.page.pages.StatusPageHandler&lt;/code>&lt;/li>
-&lt;li>&lt;code>org.apache.dubbo.container.page.pages.LogPageHandler&lt;/code>&lt;/li>
-&lt;li>&lt;code>org.apache.dubbo.container.page.pages.SystemPageHandler&lt;/code>&lt;/li>
-&lt;/ul>
-&lt;h2 id="扩展示例">扩展示例&lt;/h2>
-&lt;p>Maven 项目结构：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>src
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-main
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-java
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-com
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-xxx
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-XxxPageHandler.java (实现PageHandler接口)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-resources
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-META-INF
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-dubbo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-org.apache.dubbo.container.page.PageHandler (纯文本文件，内容为：xxx=com.xxx.XxxPageHandler)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>XxxPageHandler.java：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">package&lt;/span> com.xxx&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.container.page.PageHandler&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">XxxPageHandler&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> PageHandler &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> Group &lt;span style="color:#268bd2">lookup&lt;/span>&lt;span style="color:#719e07">(&lt;/span>URL url&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// ...
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>META-INF/dubbo/org.apache.dubbo.container.page.PageHandler：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>xxx=com.xxx.XxxPageHandler
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-V2: 扩展点开发指南</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/description/dubbo-spi/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/description/dubbo-spi/</guid><description>
 &lt;h2 id="1简介">1.简介&lt;/h2>
 &lt;p>SPI 全称为 Service Provider Interface，是一种服务发现机制。SPI 的本质是将接口实现类的全限定名配置在文件中，并由服务加载器读取配置文件，加载实现类。这样可以在运行时，动态为接口替换实现类。正因此特性，我们可以很容易的通过 SPI 机制为我们的程序提供拓展功能。SPI 机制在第三方框架中也有所应用，比如 Dubbo 就是通过 SPI 机制加载所有的组件。不过，Dubbo 并未使用 Java 原生的 SPI 机制，而是对其进行了增强，使其能够更好的满足需求。在 Dubbo 中，SPI 是一个非常重要的模块。基于 SPI，我们可以很容易的对 Dubbo 进行拓展。

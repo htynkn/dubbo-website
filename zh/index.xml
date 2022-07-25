@@ -421,7 +421,170 @@
 &lt;li>通过&lt;code>springboot starter&lt;/code>即可引入不同的注册中心和数同步方式，扩展性很好；&lt;/li>
 &lt;li>通过&lt;code>admin&lt;/code>支持规则热更新，方便流量管控；&lt;/li>
 &lt;li>&lt;code>Disruptor&lt;/code>队列是为了数据与操作解耦，以及数据缓冲。&lt;/li>
-&lt;/ul></description></item><item><title>Blog: 从原理到操作，让你在 Apache APISIX 中代理 Dubbo 服务更便捷</title><link>https://dubbo.apache.org/zh/blog/2022/01/18/%E4%BB%8E%E5%8E%9F%E7%90%86%E5%88%B0%E6%93%8D%E4%BD%9C%E8%AE%A9%E4%BD%A0%E5%9C%A8-apache-apisix-%E4%B8%AD%E4%BB%A3%E7%90%86-dubbo-%E6%9C%8D%E5%8A%A1%E6%9B%B4%E4%BE%BF%E6%8D%B7/</link><pubDate>Tue, 18 Jan 2022 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2022/01/18/%E4%BB%8E%E5%8E%9F%E7%90%86%E5%88%B0%E6%93%8D%E4%BD%9C%E8%AE%A9%E4%BD%A0%E5%9C%A8-apache-apisix-%E4%B8%AD%E4%BB%A3%E7%90%86-dubbo-%E6%9C%8D%E5%8A%A1%E6%9B%B4%E4%BE%BF%E6%8D%B7/</guid><description>
+&lt;/ul></description></item><item><title>Blog: 谈谈Pixiu的Filter</title><link>https://dubbo.apache.org/zh/blog/2022/02/19/%E8%B0%88%E8%B0%88pixiu%E7%9A%84filter/</link><pubDate>Sat, 19 Feb 2022 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2022/02/19/%E8%B0%88%E8%B0%88pixiu%E7%9A%84filter/</guid><description>
+&lt;h2 id="filter的生命周期">&lt;strong>Filter的生命周期&lt;/strong>&lt;/h2>
+&lt;p>Pixiu作为一个面向云原生的gateway，通过简单的配置即可代理Http to Dubbo 2、Tripe甚至是Spring Cloud的请求。那Filter是怎样运行的呢？&lt;/p>
+&lt;p>首先&lt;strong>Filter Plugin&lt;/strong>向&lt;strong>Filter Manager&lt;/strong>注册自己**，&lt;strong>然后&lt;/strong>Filter Manager&lt;strong>根据配置创建好&lt;/strong>Filter Factory&lt;strong>并持有它们，等待请求来临时，&lt;strong>Manager&lt;/strong>创建一个一次性的用于此次请求的Filter Chain，然后利用&lt;/strong>Factory&lt;strong>创建好&lt;/strong>Decode/Encode Filter&lt;strong>并把它们加入链中，然后按照顺序去运行Decode Filter，然后去请求&lt;/strong>Upstream**，拿到Response再反向运行Encode Filter，让Filter可以访问到Response。&lt;/p>
+&lt;p>几个关键的概念：&lt;/p>
+&lt;p>&lt;strong>Filter Manager&lt;/strong>&lt;/p>
+&lt;blockquote>
+&lt;p>Filter的Manger。。。&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// FilterManager manage filters
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#268bd2">type&lt;/span> FilterManager &lt;span style="color:#268bd2">struct&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> filters &lt;span style="color:#268bd2">map&lt;/span>[&lt;span style="color:#dc322f">string&lt;/span>]HttpFilterFactory
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> filtersArray []&lt;span style="color:#719e07">*&lt;/span>HttpFilterFactory
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Filter Plugin&lt;/strong>：定义了Filter的（唯一的）名字和描述如何去创建一个Filter Factory。&lt;/p>
+&lt;blockquote>
+&lt;p>其实结合Filter Factory的定义，可以认为Plugin是Filter Factory的Factory&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// HttpFilterPlugin describe plugin
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>HttpFilterPlugin &lt;span style="color:#268bd2">interface&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// Kind returns the unique kind name to represent itself.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#268bd2">Kind&lt;/span>() &lt;span style="color:#dc322f">string&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// CreateFilterFactory return the filter factory
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#268bd2">CreateFilterFactory&lt;/span>() (HttpFilterFactory, &lt;span style="color:#dc322f">error&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Filter Factory&lt;/strong>：定义了Filter自身的配置，并且在请求来临时创建真实的Filter并把它添加到FilterChain中&lt;/p>
+&lt;blockquote>
+&lt;ul>
+&lt;li>Config() 的目的是能让Filter Manager能够有机会把配置交给Factory（此时golang泛型还没有落地）&lt;/li>
+&lt;li>Apply() 在配置被注入到Factory后，有机会对config做一些检查和提前做一些初始化的工作&lt;/li>
+&lt;li>PrepareFilterChain() 创建Filter并加入Filter Chain&lt;/li>
+&lt;/ul>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// HttpFilterFactory describe http filter
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>HttpFilterFactory &lt;span style="color:#268bd2">interface&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// Config Expose the config so that Filter Manger can inject it, so it must be a pointer
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#268bd2">Config&lt;/span>() &lt;span style="color:#268bd2">interface&lt;/span>{}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// Apply After the config is injected, check it or make it to default
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#268bd2">Apply&lt;/span>() &lt;span style="color:#dc322f">error&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// PrepareFilterChain create filter and append it to FilterChain
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#586e75">//
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#586e75">// Be Careful !!! Do not pass the Factory&amp;#39;s config pointer to the Filter instance,
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#586e75">// Factory&amp;#39;s config may be updated by FilterManager
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#268bd2">PrepareFilterChain&lt;/span>(ctx &lt;span style="color:#719e07">*&lt;/span>http.HttpContext, chain FilterChain) &lt;span style="color:#dc322f">error&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>Decode/Encode Filter：&lt;strong>Filter分为两个部分，&lt;strong>Decode&lt;/strong>在实际请求&lt;/strong>Upstream&lt;/strong>之前，所以可以做一些鉴权、限流，把请求在gateway层拦截掉。&lt;strong>Eecode&lt;/strong>则运行在获得&lt;strong>Upstream&lt;/strong>的Response之后，所以可以对返回Log甚至修改Response。&lt;/p>
+&lt;blockquote>
+&lt;p>一个Filter可以即是Decode Filter，又是Encode Filter，没有限制！&lt;/p>
+&lt;p>假设有A、B、C三个Filter，都是Decode/Encode Filter，如果配置的顺序是A、B、C，那么运行将会是下面这样&lt;/p>
+&lt;p>在Decode阶段 A-&amp;gt;B-&amp;gt;C，而在Encode阶段，顺序将会反过来！C-&amp;gt;B-&amp;gt;A&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// decode filters will be invoked in the config order: A、B、C, and decode filters will be
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// invoked in the reverse order: C、B、A
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>HttpDecodeFilter &lt;span style="color:#268bd2">interface&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">Decode&lt;/span>(ctx &lt;span style="color:#719e07">*&lt;/span>http.HttpContext) FilterStatus
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// HttpEncodeFilter after invoke upstream,
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// decode filters will be invoked in the reverse order
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>HttpEncodeFilter &lt;span style="color:#268bd2">interface&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">Encode&lt;/span>(ctx &lt;span style="color:#719e07">*&lt;/span>http.HttpContext) FilterStatus
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>更详细的，每个Decode/Encode Filter可以返回一个FilterStatus来决定继续还是就在这里停下！比如JWT鉴权，token无效时就要及时把401返回给Downstream。当然Decode Filter发出的停止命令只会终止Decode阶段，至于为什么？想想如何做一个Access Log Filter，能在请求失败时也把失败的结果记录下吧来！&lt;/p>
+&lt;h2 id="怎样编写一个自定义filter">&lt;strong>怎样编写一个自定义Filter&lt;/strong>&lt;/h2>
+&lt;p>我们来尝试写一个简单的Filter，这个Filter将会有简单的配置，在Decode阶段把请求的Body Log出来，并翻转后作为Mock的返回值。最后在Encode阶段根据配置把返回值Log出来。&lt;/p>
+&lt;p>1.首先创建一个Filter&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">type&lt;/span> DemoFilter &lt;span style="color:#268bd2">struct&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> logPrefix &lt;span style="color:#dc322f">string&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">func&lt;/span> (f &lt;span style="color:#719e07">*&lt;/span>DemoFilter) &lt;span style="color:#268bd2">Decode&lt;/span>(ctx &lt;span style="color:#719e07">*&lt;/span>contexthttp.HttpContext) filter.FilterStatus {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> body, _ &lt;span style="color:#719e07">:=&lt;/span> ioutil.&lt;span style="color:#268bd2">ReadAll&lt;/span>(ctx.Request.Body)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> logger.&lt;span style="color:#268bd2">Infof&lt;/span>(&lt;span style="color:#2aa198">&amp;#34;request body: %s&amp;#34;&lt;/span>, body)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">//reverse res str
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> runes &lt;span style="color:#719e07">:=&lt;/span> []&lt;span style="color:#b58900">rune&lt;/span>(&lt;span style="color:#b58900">string&lt;/span>(body))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">for&lt;/span> i &lt;span style="color:#719e07">:=&lt;/span> &lt;span style="color:#2aa198">0&lt;/span>; i &amp;lt; &lt;span style="color:#b58900">len&lt;/span>(runes)&lt;span style="color:#719e07">/&lt;/span>&lt;span style="color:#2aa198">2&lt;/span>; i &lt;span style="color:#719e07">+=&lt;/span> &lt;span style="color:#2aa198">1&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> runes[i], runes[&lt;span style="color:#b58900">len&lt;/span>(runes)&lt;span style="color:#719e07">-&lt;/span>&lt;span style="color:#2aa198">1&lt;/span>&lt;span style="color:#719e07">-&lt;/span>i] = runes[&lt;span style="color:#b58900">len&lt;/span>(runes)&lt;span style="color:#719e07">-&lt;/span>&lt;span style="color:#2aa198">1&lt;/span>&lt;span style="color:#719e07">-&lt;/span>i], runes[i]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> reverse &lt;span style="color:#719e07">:=&lt;/span> &lt;span style="color:#b58900">string&lt;/span>(runes)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">//mock response
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> ctx.&lt;span style="color:#268bd2">SendLocalReply&lt;/span>(&lt;span style="color:#2aa198">200&lt;/span>, []&lt;span style="color:#b58900">byte&lt;/span>(reverse))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> filter.Stop
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">func&lt;/span> (f &lt;span style="color:#719e07">*&lt;/span>DemoFilter) &lt;span style="color:#268bd2">Encode&lt;/span>(ctx &lt;span style="color:#719e07">*&lt;/span>contexthttp.HttpContext) filter.FilterStatus {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> res &lt;span style="color:#719e07">:=&lt;/span> ctx.SourceResp.(&lt;span style="color:#dc322f">string&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> logger.&lt;span style="color:#268bd2">Infof&lt;/span>(&lt;span style="color:#2aa198">&amp;#34;%s: %s&amp;#34;&lt;/span>, f.logPrefix, res)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> filter.Continue
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>2.创建Filter Factory&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">type&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> DemoFilterFactory &lt;span style="color:#268bd2">struct&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> conf &lt;span style="color:#719e07">*&lt;/span>Config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// Config describe the config of Filter
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> Config &lt;span style="color:#268bd2">struct&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> LogPrefix &lt;span style="color:#dc322f">string&lt;/span> &lt;span style="color:#2aa198">`yaml:&amp;#34;logPrefix,omitempty&amp;#34;`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">func&lt;/span> (f &lt;span style="color:#719e07">*&lt;/span>DemoFilterFactory) &lt;span style="color:#268bd2">PrepareFilterChain&lt;/span>(ctx &lt;span style="color:#719e07">*&lt;/span>contexthttp.HttpContext, chain filter.FilterChain) &lt;span style="color:#dc322f">error&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> demo &lt;span style="color:#719e07">:=&lt;/span> &lt;span style="color:#719e07">&amp;amp;&lt;/span>DemoFilter{logPrefix: f.conf.LogPrefix}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> chain.&lt;span style="color:#268bd2">AppendDecodeFilters&lt;/span>(demo)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> chain.&lt;span style="color:#268bd2">AppendEncodeFilters&lt;/span>(demo)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#cb4b16">nil&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">func&lt;/span> (f &lt;span style="color:#719e07">*&lt;/span>DemoFilterFactory) &lt;span style="color:#268bd2">Config&lt;/span>() &lt;span style="color:#268bd2">interface&lt;/span>{} {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> f.conf
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">func&lt;/span> (f &lt;span style="color:#719e07">*&lt;/span>DemoFilterFactory) &lt;span style="color:#268bd2">Apply&lt;/span>() &lt;span style="color:#dc322f">error&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#cb4b16">nil&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>3.创建Filter Plugin，并注册自己&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">//important
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#268bd2">func&lt;/span> &lt;span style="color:#268bd2">init&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> filter.&lt;span style="color:#268bd2">RegisterHttpFilter&lt;/span>(&lt;span style="color:#719e07">&amp;amp;&lt;/span>Plugin{})
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">type&lt;/span> Plugin &lt;span style="color:#268bd2">struct&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">func&lt;/span> (p &lt;span style="color:#719e07">*&lt;/span>Plugin) &lt;span style="color:#268bd2">Kind&lt;/span>() &lt;span style="color:#dc322f">string&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#2aa198">&amp;#34;dgp.filters.demo&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">func&lt;/span> (p &lt;span style="color:#719e07">*&lt;/span>Plugin) &lt;span style="color:#268bd2">CreateFilterFactory&lt;/span>() (filter.HttpFilterFactory, &lt;span style="color:#dc322f">error&lt;/span>) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#719e07">&amp;amp;&lt;/span>DemoFilterFactory{conf: &lt;span style="color:#719e07">&amp;amp;&lt;/span>Config{}}, &lt;span style="color:#cb4b16">nil&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>4.配置文件中配置此Filter，并启动Pixiu&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">static_resources&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">listeners&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">name&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;net/http&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">protocol_type&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;HTTP&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">address&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">socket_address&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">address&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;0.0.0.0&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">port&lt;/span>: &lt;span style="color:#2aa198">8888&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">filter_chains&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">filters&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">name&lt;/span>: dgp.filter.httpconnectionmanager
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">config&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">route_config&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">routes&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">match&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">prefix&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;/&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">http_filters&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">name&lt;/span>: dgp.filters.demo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">config&lt;/span>:
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>5.访问并查看日志与结果&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>curl localhost:8888/demo -d &lt;span style="color:#2aa198">&amp;#34;eiv al tse’c&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>c’est la vie%
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>日志&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>2022-02-19T20:20:11.900+0800 INFO demo/demo.go:62 request body: eiv al tse’c
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2022-02-19T20:20:11.900+0800 INFO demo/demo.go:71 : eiv al tse’c
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Blog: 从原理到操作，让你在 Apache APISIX 中代理 Dubbo 服务更便捷</title><link>https://dubbo.apache.org/zh/blog/2022/01/18/%E4%BB%8E%E5%8E%9F%E7%90%86%E5%88%B0%E6%93%8D%E4%BD%9C%E8%AE%A9%E4%BD%A0%E5%9C%A8-apache-apisix-%E4%B8%AD%E4%BB%A3%E7%90%86-dubbo-%E6%9C%8D%E5%8A%A1%E6%9B%B4%E4%BE%BF%E6%8D%B7/</link><pubDate>Tue, 18 Jan 2022 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2022/01/18/%E4%BB%8E%E5%8E%9F%E7%90%86%E5%88%B0%E6%93%8D%E4%BD%9C%E8%AE%A9%E4%BD%A0%E5%9C%A8-apache-apisix-%E4%B8%AD%E4%BB%A3%E7%90%86-dubbo-%E6%9C%8D%E5%8A%A1%E6%9B%B4%E4%BE%BF%E6%8D%B7/</guid><description>
 &lt;h2 id="背景">背景&lt;/h2>
 &lt;p>&lt;a href="https://dubbo.apache.org/zh/">Apache Dubbo&lt;/a> 是由阿里巴巴开源并捐赠给 Apache 的微服务开发框架，它提供了 RPC 通信与微服务治理两大关键能力。不仅经过了阿里电商场景中海量流量的验证，也在国内的技术公司中被广泛落地。&lt;/p>
 &lt;p>在实际应用场景中，Apache Dubbo 一般会作为后端系统间 RPC 调用的实现框架，当需要提供 HTTP 接口给到前端时，会通过一个「胶水层」将 Dubbo Service 包装成 HTTP 接口，再交付到前端系统。&lt;/p>
@@ -8237,71 +8400,4 @@ Reactive Stream 引入 RPC，带来更丰富的通信语义和 API 编程模型�
 &lt;li>要用服务端异步，建议服务端的线程策略采用same thread模式+协程包。&lt;/li>
 &lt;/ul>
 &lt;h2 id="小结">小结&lt;/h2>
-&lt;p>Dubbo在支持业务应用时，会碰到千奇百怪的需求场景，服务端异步为用户提供了一种解决ThreadPool Full的方案。当发生ThreadPool Full的情况下，如果当前系统瓶颈是CPU，不建议用这种方案；如果系统Load不高，调高worker的线程数目，或者采用服务端异步，都是可以考虑的。&lt;/p></description></item><item><title>Blog: Dubbo客户端异步接口的实现背景和实践</title><link>https://dubbo.apache.org/zh/blog/2019/11/01/dubbo%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%82%E6%AD%A5%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%AE%9E%E7%8E%B0%E8%83%8C%E6%99%AF%E5%92%8C%E5%AE%9E%E8%B7%B5/</link><pubDate>Fri, 01 Nov 2019 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2019/11/01/dubbo%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BC%82%E6%AD%A5%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%AE%9E%E7%8E%B0%E8%83%8C%E6%99%AF%E5%92%8C%E5%AE%9E%E8%B7%B5/</guid><description>
-&lt;h2 id="铺垫">铺垫&lt;/h2>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubboasyn_client/1.png" alt="image | left">&lt;/p>
-&lt;p>先简单介绍下一次完整的Dubbo调用所经历的线程阶段。几个信息这里罗列下&lt;/p>
-&lt;ol>
-&lt;li>
-&lt;p>Biz~代表业务线程，即便是业务逻辑处理所处的线程，Biz~线程池可能是业务自己创建维护，大多数的可能是系统框架自身管理的（比如web型的业务系统跑在Tomcat容器下，Biz~线程就是Tomcat维护）；IO~代表网络数据处理线程，是IO框架（比如Netty，Grizzly）创建维护，Dubbo Remoting所默认Netty实现是NioEventloopLoopGroup；另外按照Channel与IO线程的绑定关系，也可以直接把IO~看成一个可接受事件消息的Channel。像Biz和IO这样的异步处理阶段在JDK8中有个很精确地抽象描述，叫CompletionStage。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>大家知道，线程与线程之间做数据通信的方式是共享变量，Biz和IO两个stage之间的数据通信是Queue，具体到Dubbo实现，在客户端一侧的实现（即上图中用1所标注的步骤）中Biz是通过向EventLoop的LinkedBlockingQueue放置一个Task，而EventLoop有对应的Thread会不停的迭代Queue来执行Task中所包含的信息，具体代码可以看SingleThreadEventExecutor（顺便提下，Netty中默认是用无上限的LinkedBlockingQueue，在Biz的速率高于网络速率情况下，似乎好像有Memory Leak的风险）。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>如上图所示，标准的一次RPC调用经过了图中所示的1,2,3,4的四次消息(事件)传递，分别是客户端业务线程到IO线程的请求发出，服务端IO线程到业务逻辑线程的__请求接受，__服务端处理完成后由业务逻辑线程到IO线程的响应写出，客户端收到结果后从IO线程到业务逻辑的响应处理。除了1与4之间一般需要维护响应和请求的映射对应关系，四次的事件处理都是完全独立的，所以一次RPC调用天然是异步的，而同步是基于异步而来。&lt;/p>
-&lt;/li>
-&lt;/ol>
-&lt;h2 id="客户端异步">客户端异步&lt;/h2>
-&lt;h3 id="实现背景">实现背景&lt;/h3>
-&lt;p>在Java语言（其他语言不清楚）下一次本地接口的调用可以透明地通过代理机制转为远程RPC的调用，大多数业务方也比较喜欢这种与本地接口类似的编程方式做远程服务集成，所以虽然RPC内部天然是异步的，但使用Dubbo的用户使用最广泛的还是同步，而异步反而成为小众的使用场景。同步的优点是编程模型更加符合业务方的“传统”习惯，代价是在图中的1代表的请求发出事件后需要阻塞当前的Biz~线程，一直等到4代表的响应处理后才能唤醒。在这个短则微秒级别，长则秒级的1,2,3,4处理过程中都要阻塞Biz~线程，就会消耗线程资源，增加系统资源的开销。&lt;/p>
-&lt;p>所以，客户端异步的出发点是节省线程资源开销，代价是需要了解下异步的使用方式:)。在同步方式下API接口的返回类型是代表着某个业务类，而当异步情况下，响应返回与请求发出是完全独立的两个事件，需要API接口的返回类型变为上述中说的CompletionStage才是最贴合的，这是Dubbo在异步上支持的必然异步。回到最近的Dubbo发布版，是不改变接口的情况下，需要在服务创建时注册一个回调接口来处理响应返回事件。&lt;/p>
-&lt;p>下面以示例来说。&lt;/p>
-&lt;h3 id="示例">示例&lt;/h3>
-&lt;p>事件通知的示例代码请参考：&lt;a href="https://github.com/dubbo/dubbo-samples/tree/master/dubbo-samples-notify">https://github.com/dubbo/dubbo-samples/tree/master/dubbo-samples-notify&lt;/a>&lt;/p>
-&lt;p>事件通知允许 Consumer 端在调用之前、调用正常返回之后或调用出现异常时，触发 &lt;code>oninvoke&lt;/code>、&lt;code>onreturn&lt;/code>、&lt;code>onthrow&lt;/code> 三个事件。&lt;/p>
-&lt;p>可以通过在配置 Consumer 时，指定事件需要通知的方法，如：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;bean&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;demoCallback&amp;#34;&lt;/span> class=&lt;span style="color:#2aa198">&amp;#34;com.alibaba.dubbo.samples.notify.impl.NotifyImpl&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;demoService&amp;#34;&lt;/span> check=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.alibaba.dubbo.samples.notify.api.DemoService&amp;#34;&lt;/span> version=&lt;span style="color:#2aa198">&amp;#34;1.0.0&amp;#34;&lt;/span> group=&lt;span style="color:#2aa198">&amp;#34;cn&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:method&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;sayHello&amp;#34;&lt;/span> onreturn=&lt;span style="color:#2aa198">&amp;#34;demoCallback.onreturn&amp;#34;&lt;/span> onthrow=&lt;span style="color:#2aa198">&amp;#34;demoCallback.onthrow&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dubbo:reference&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中，NotifyImpl 的代码如下：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">NotifyImpl&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> Notify&lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> Map&lt;span style="color:#719e07">&amp;lt;&lt;/span>Integer&lt;span style="color:#719e07">,&lt;/span> String&lt;span style="color:#719e07">&amp;gt;&lt;/span> ret &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> HashMap&lt;span style="color:#719e07">&amp;lt;&lt;/span>Integer&lt;span style="color:#719e07">,&lt;/span> String&lt;span style="color:#719e07">&amp;gt;();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">onreturn&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String name&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#dc322f">int&lt;/span> id&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ret&lt;span style="color:#719e07">.&lt;/span>put&lt;span style="color:#719e07">(&lt;/span>id&lt;span style="color:#719e07">,&lt;/span> name&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;onreturn: &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> name&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">onthrow&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Throwable ex&lt;span style="color:#719e07">,&lt;/span> String name&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#dc322f">int&lt;/span> id&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;onthrow: &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> name&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这里要强调一点，自定义 Notify 接口中的三个方法的参数规则如下：&lt;/p>
-&lt;ul>
-&lt;li>&lt;code>oninvoke&lt;/code> 方法参数与调用方法的参数相同；&lt;/li>
-&lt;li>&lt;code>onreturn&lt;/code>方法第一个参数为调用方法的返回值，其余为调用方法的参数；&lt;/li>
-&lt;li>&lt;code>onthrow&lt;/code>方法第一个参数为调用异常，其余为调用方法的参数。&lt;/li>
-&lt;/ul>
-&lt;p>上述配置中，&lt;code>sayHello&lt;/code>方法为同步调用，因此事件通知方法的执行也是同步执行。可以配置 &lt;code>async=true&lt;/code>让方法调用为异步，这时事件通知的方法也是异步执行的。特别强调一下，&lt;code>oninvoke&lt;/code>方法不管是否异步调用，都是同步执行的。&lt;/p>
-&lt;h3 id="实践建议">实践建议&lt;/h3>
-&lt;ul>
-&lt;li>
-&lt;div data-type="alignment" data-value="justify" style="text-align:justify">
-&lt;div data-type="p">RPC调用后的逻辑非强依赖结果：异步回调是在客户端&lt;strong>非强依赖服务端的结果&lt;/strong>情况下，是适用客户端的异步调用。&lt;/div>
-&lt;/div>
-&lt;/li>
-&lt;li>
-&lt;div data-type="alignment" data-value="justify" style="text-align:justify">
-&lt;div data-type="p">rx场景：自从了解到reactive的编程模型后，认为只要编程思维能够拥抱reactive，并且业务模型的状态机设计能做适当的调整，任何场景下都比较适用异步来解决，从而得到更好的终端响应体验。 对于Dubbo来说，当下的异步接口模型是需要像reactive的模型接口做改进，才能使得用户更自然地适用异步接口。&lt;/div>
-&lt;/div>
-&lt;/li>
-&lt;/ul>
-&lt;h3 id="小结">小结&lt;/h3>
-&lt;ul>
-&lt;li>客户端异步的出发点就是请求发出和响应处理本身为两个不同的独立事件，响应如何被处理和在哪个线程中处理等都是不需要和请求发出事件的业务逻辑线程做耦合绑定。&lt;/li>
-&lt;li>响应事件回调的处理逻辑在哪个线程中做处理是需要根据情况来选择。建议，如果回调逻辑比较简单，建议直接在IO线程中；如果包含了远程访问或者DB访问等IO型的__同步__操作，建议在独立的线程池做处理。&lt;/li>
-&lt;/ul></description></item></channel></rss>
+&lt;p>Dubbo在支持业务应用时，会碰到千奇百怪的需求场景，服务端异步为用户提供了一种解决ThreadPool Full的方案。当发生ThreadPool Full的情况下，如果当前系统瓶颈是CPU，不建议用这种方案；如果系统Load不高，调高worker的线程数目，或者采用服务端异步，都是可以考虑的。&lt;/p></description></item></channel></rss>

@@ -194,4 +194,17 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>···
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>注：由于日志框架不匹配导致的日志为空可以参考&lt;a href="../../others/logger-management/">日志框架适配及运行时管理&lt;/a>动态修改日志输出框架。&lt;/p></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>注：由于日志框架不匹配导致的日志为空可以参考&lt;a href="../../others/logger-management/">日志框架适配及运行时管理&lt;/a>动态修改日志输出框架。&lt;/p></description></item><item><title>Docs3-V2: 导出线程堆栈</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/observability/dump/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/observability/dump/</guid><description>
+&lt;p>当业务线程池满时，我们需要知道线程都在等待哪些资源、条件，以找到系统的瓶颈点或异常点。dubbo 通过 Jstack 自动导出线程堆栈来保留现场，方便排查问题。&lt;/p>
+&lt;p>默认策略:&lt;/p>
+&lt;ul>
+&lt;li>导出路径，user.home标识的用户主目录&lt;/li>
+&lt;li>导出间隔，最短间隔允许每隔10分钟导出一次&lt;/li>
+&lt;/ul>
+&lt;p>指定导出路径：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># dubbo.properties
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.dump.directory=/tmp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:application&lt;/span> ...&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:parameter&lt;/span> key=&lt;span style="color:#2aa198">&amp;#34;dump.directory&amp;#34;&lt;/span> value=&lt;span style="color:#2aa198">&amp;#34;/tmp&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dubbo:application&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

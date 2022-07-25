@@ -322,7 +322,251 @@ Grpc 使用 &lt;code>compiler&lt;/code> 将编写的 &lt;code>proto&lt;/code> �
 &lt;li>&amp;hellip;&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>stub&lt;/code> 用一种统一的使用方式帮我们屏蔽了不同调用方式的细节。不过目前 &lt;code>Dubbo3&lt;/code> 暂时只支持传统定义接口并进行调用的使用方式。&lt;/p>
-&lt;p>在不久的未来，&lt;code>Triple&lt;/code> 也将实现各种常用的 &lt;code>Stub&lt;/code>，让用户写一份&lt;code>proto&lt;/code>文件，通过 &lt;code>comipler&lt;/code> 可以在任意场景方便的使用，请拭目以待。&lt;/p></description></item><item><title>Docs3-V2: 应用级服务发现</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/service-discovery/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/service-discovery/</guid><description/></item><item><title>Docs3-V2: 3.0升级至3.1操作指南</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/3.0-to-3.1-compatibility-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/3.0-to-3.1-compatibility-guide/</guid><description>
+&lt;p>在不久的未来，&lt;code>Triple&lt;/code> 也将实现各种常用的 &lt;code>Stub&lt;/code>，让用户写一份&lt;code>proto&lt;/code>文件，通过 &lt;code>comipler&lt;/code> 可以在任意场景方便的使用，请拭目以待。&lt;/p></description></item><item><title>Docs3-V2: 应用级服务发现</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/service-discovery/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/service-discovery/</guid><description/></item><item><title>Docs3-V2: Protobuf与Interface对比</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/protobufinterface/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/protobufinterface/</guid><description>
+&lt;h1 id="protobuf与interface这2种idl的差异">Protobuf与Interface这2种IDL的差异&lt;/h1>
+&lt;h2 id="1-数据类型">1. 数据类型&lt;/h2>
+&lt;h3 id="11-基本类型">1.1. 基本类型&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>ptoto类型&lt;/th>
+&lt;th>java类型&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>double&lt;/td>
+&lt;td>double&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>float&lt;/td>
+&lt;td>float&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>int32&lt;/td>
+&lt;td>int&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>int64&lt;/td>
+&lt;td>long&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>uint32&lt;/td>
+&lt;td>int[注]&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>uint64&lt;/td>
+&lt;td>long[注]&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>sint32&lt;/td>
+&lt;td>int&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>sint64&lt;/td>
+&lt;td>long&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>fixed32&lt;/td>
+&lt;td>int[注]&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>fixed64&lt;/td>
+&lt;td>long[注]&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>sfixed32&lt;/td>
+&lt;td>int&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>sfixed64&lt;/td>
+&lt;td>long&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>bool&lt;/td>
+&lt;td>boolean&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>string&lt;/td>
+&lt;td>String&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>bytes&lt;/td>
+&lt;td>ByteString&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;blockquote>
+&lt;p>[注]在Java中，无符号的32位和64位整数使用它们的有符号对数来表示，顶部位只存储在符号位中。&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="12-复合类型">1.2. 复合类型&lt;/h3>
+&lt;h4 id="121-枚举">1.2.1. 枚举&lt;/h4>
+&lt;ul>
+&lt;li>原始pb代码&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>enum TrafficLightColor {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> TRAFFIC_LIGHT_COLOR_INVALID = 0;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> TRAFFIC_LIGHT_COLOR_UNSET = 1;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> TRAFFIC_LIGHT_COLOR_GREEN = 2;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> TRAFFIC_LIGHT_COLOR_YELLOW = 3;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> TRAFFIC_LIGHT_COLOR_RED = 4;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>生成的java代码&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://user-images.githubusercontent.com/22830937/124234531-b96c2c80-db46-11eb-8155-a77dbe059f07.png" alt="image">&lt;/p>
+&lt;blockquote>
+&lt;p>枚举是常量，因此采用大写&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="122-数组">1.2.2. 数组&lt;/h3>
+&lt;ul>
+&lt;li>原始pb代码&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>message VipIDToRidReq &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> repeated uint32 vipID &lt;span style="color:#719e07">=&lt;/span> 1&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>生成的java代码&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://user-images.githubusercontent.com/22830937/124234564-c4bf5800-db46-11eb-94fc-a056af6089cb.png" alt="image">&lt;/p>
+&lt;blockquote>
+&lt;p>底层实际上是1个ArrayList&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="223-集合">2.2.3. 集合&lt;/h3>
+&lt;p>PB不支持无序、不重复的集合，只能 &lt;code>借用数组实现&lt;/code>，需要 &lt;code>自行去重&lt;/code>。&lt;/p>
+&lt;h3 id="224-字典">2.2.4. 字典&lt;/h3>
+&lt;ul>
+&lt;li>原始pb代码&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>message BatchOnlineRes &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> map&lt;span style="color:#719e07">&amp;lt;&lt;/span>uint32&lt;span style="color:#719e07">,&lt;/span> uint32&lt;span style="color:#719e07">&amp;gt;&lt;/span> onlineMap &lt;span style="color:#719e07">=&lt;/span> 1&lt;span style="color:#719e07">;&lt;/span>&lt;span style="color:#586e75">//在线状态
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>生成的java代码&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://user-images.githubusercontent.com/22830937/124234654-e4568080-db46-11eb-9700-b30022ebee21.png" alt="image">&lt;/p>
+&lt;h3 id="225-嵌套">2.2.5. 嵌套&lt;/h3>
+&lt;ul>
+&lt;li>原始pb代码&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>message BatchAnchorInfoRes &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> map&lt;span style="color:#719e07">&amp;lt;&lt;/span>uint32&lt;span style="color:#719e07">,&lt;/span> AnchorInfo&lt;span style="color:#719e07">&amp;gt;&lt;/span> list &lt;span style="color:#719e07">=&lt;/span> 1&lt;span style="color:#719e07">;&lt;/span> &lt;span style="color:#586e75">//用户信息map列表
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">/*
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">* 对应接口的功能: 批量或单个获取用户信息
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">*/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>message AnchorInfo &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> uint32 ownerUid &lt;span style="color:#719e07">=&lt;/span> 1 &lt;span style="color:#719e07">[&lt;/span>json_name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">&amp;#34;uid&amp;#34;&lt;/span>&lt;span style="color:#719e07">];&lt;/span> &lt;span style="color:#586e75">//用户id
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> string nickName &lt;span style="color:#719e07">=&lt;/span> 2 &lt;span style="color:#719e07">[&lt;/span>json_name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">&amp;#34;nn&amp;#34;&lt;/span>&lt;span style="color:#719e07">];&lt;/span> &lt;span style="color:#586e75">//用户昵称
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> string smallAvatar &lt;span style="color:#719e07">=&lt;/span> 3 &lt;span style="color:#719e07">[&lt;/span>json_name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">&amp;#34;savt&amp;#34;&lt;/span>&lt;span style="color:#719e07">];&lt;/span> &lt;span style="color:#586e75">//用户头像全路径-小
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> string middleAvatar &lt;span style="color:#719e07">=&lt;/span> 4 &lt;span style="color:#719e07">[&lt;/span>json_name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">&amp;#34;mavt&amp;#34;&lt;/span>&lt;span style="color:#719e07">];&lt;/span> &lt;span style="color:#586e75">//用户头像全路径-中
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> string bigAvatar &lt;span style="color:#719e07">=&lt;/span> 5 &lt;span style="color:#719e07">[&lt;/span>json_name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">&amp;#34;bavt&amp;#34;&lt;/span>&lt;span style="color:#719e07">];&lt;/span> &lt;span style="color:#586e75">//用户头像全路径-大
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> string avatar &lt;span style="color:#719e07">=&lt;/span> 6 &lt;span style="color:#719e07">[&lt;/span>json_name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">&amp;#34;avt&amp;#34;&lt;/span>&lt;span style="color:#719e07">];&lt;/span> &lt;span style="color:#586e75">//用户头像
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>生成的java代码&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://user-images.githubusercontent.com/22830937/124234723-f89a7d80-db46-11eb-82d0-a8aee5322098.png" alt="image">&lt;/p>
+&lt;h2 id="3-字段默认值">3. 字段默认值&lt;/h2>
+&lt;ul>
+&lt;li>对于字符串，默认值为空字符串。&lt;/li>
+&lt;li>对于字节，默认值为空字节。&lt;/li>
+&lt;li>对于bools，默认值为false。&lt;/li>
+&lt;li>对于数字类型，默认值为零。&lt;/li>
+&lt;li>对于枚举，默认值为第一个定义的枚举值，它必须为0。&lt;/li>
+&lt;li>对于消息字段，未设置字段。 它的确切值是语言相关的。 有关详细信息，请参阅生成的代码指南。&lt;/li>
+&lt;/ul>
+&lt;h2 id="4-整体结构">4. 整体结构&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Feature&lt;/th>
+&lt;th>Java Interface&lt;/th>
+&lt;th>Protobuf&lt;/th>
+&lt;th>备注&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>方法重载&lt;/td>
+&lt;td>√&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>泛型/模板化&lt;/td>
+&lt;td>√&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>方法继承&lt;/td>
+&lt;td>√&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>嵌套定义&lt;/td>
+&lt;td>√&lt;/td>
+&lt;td>部分支持&lt;/td>
+&lt;td>PB仅支持message和enum嵌套&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>import文件&lt;/td>
+&lt;td>√&lt;/td>
+&lt;td>√&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>字段为null&lt;/td>
+&lt;td>√&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>多个入参&lt;/td>
+&lt;td>√&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>PB仅支持单入参&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>0个入参&lt;/td>
+&lt;td>√&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>PB必须有入参&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>0个出参&lt;/td>
+&lt;td>√&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>PB必须有出参&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>入参/出参为抽象类&lt;/td>
+&lt;td>√&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>PB的入参/出参必须为具象类&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>入参/出参为接口&lt;/td>
+&lt;td>√&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>PB的入参/出参必须为具象类&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>入参/出参为基础类型&lt;/td>
+&lt;td>√&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>PB的入参/出参必须为结构体&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="5-社区资料">5. 社区资料&lt;/h2>
+&lt;ul>
+&lt;li>社区主页地址：https://developers.google.cn/protocol-buffers/&lt;/li>
+&lt;li>社区开源地址：https://github.com/google/protobuf&lt;/li>
+&lt;li>相关jar的maven：http://mvnrepository.com/artifact/com.google.protobuf&lt;/li>
+&lt;/ul></description></item><item><title>Docs3-V2: 3.0升级至3.1操作指南</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/3.0-to-3.1-compatibility-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/3.0-to-3.1-compatibility-guide/</guid><description>
 &lt;h2 id="功能修改点">功能修改点&lt;/h2>
 &lt;h3 id="1-nacos-group-对齐应用级服务发现">1. Nacos Group 对齐（应用级服务发现）&lt;/h3>
 &lt;p>在 Dubbo 2.7.x 中，配置在 Nacos Registry URL 上的 group 值是对齐 Nacos 注册中心中的 group 分组的。（group 可以当成类似 namespace 的软隔离）&lt;/p>

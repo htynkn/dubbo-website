@@ -1,45 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – SDK 手册</title><link>https://dubbo.apache.org/zh/docs3-v2/</link><description>Recent content in SDK 手册 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/docs3-v2/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs3-V2:</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/description/page/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/description/page/</guid><description>
-&lt;h1 id="页面扩展">页面扩展&lt;/h1>
-&lt;h2 id="扩展说明">扩展说明&lt;/h2>
-&lt;p>对等网络节点组网器。&lt;/p>
-&lt;h2 id="扩展接口">扩展接口&lt;/h2>
-&lt;p>&lt;code>org.apache.dubbo.container.page.PageHandler&lt;/code>&lt;/p>
-&lt;h2 id="扩展配置">扩展配置&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> page=&lt;span style="color:#2aa198">&amp;#34;xxx,yyy&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&amp;lt;!-- 缺省值设置，当&amp;lt;dubbo:protocol&amp;gt;没有配置page属性时，使用此配置 --&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:provider&lt;/span> page=&lt;span style="color:#2aa198">&amp;#34;xxx,yyy&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="已知扩展">已知扩展&lt;/h2>
-&lt;ul>
-&lt;li>&lt;code>org.apache.dubbo.container.page.pages.HomePageHandler&lt;/code>&lt;/li>
-&lt;li>&lt;code>org.apache.dubbo.container.page.pages.StatusPageHandler&lt;/code>&lt;/li>
-&lt;li>&lt;code>org.apache.dubbo.container.page.pages.LogPageHandler&lt;/code>&lt;/li>
-&lt;li>&lt;code>org.apache.dubbo.container.page.pages.SystemPageHandler&lt;/code>&lt;/li>
-&lt;/ul>
-&lt;h2 id="扩展示例">扩展示例&lt;/h2>
-&lt;p>Maven 项目结构：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>src
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-main
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-java
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-com
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-xxx
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-XxxPageHandler.java (实现PageHandler接口)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-resources
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-META-INF
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-dubbo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> |-org.apache.dubbo.container.page.PageHandler (纯文本文件，内容为：xxx=com.xxx.XxxPageHandler)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>XxxPageHandler.java：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">package&lt;/span> com.xxx&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.container.page.PageHandler&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">XxxPageHandler&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> PageHandler &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> Group &lt;span style="color:#268bd2">lookup&lt;/span>&lt;span style="color:#719e07">(&lt;/span>URL url&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// ...
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>META-INF/dubbo/org.apache.dubbo.container.page.PageHandler：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>xxx=com.xxx.XxxPageHandler
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-V2: dubbogo 3.0 柔性服务</title><link>https://dubbo.apache.org/zh/docs3-v2/golang-sdk/samples/adaptive-service/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/golang-sdk/samples/adaptive-service/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – SDK 手册</title><link>https://dubbo.apache.org/zh/docs3-v2/</link><description>Recent content in SDK 手册 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/docs3-v2/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs3-V2: dubbogo 3.0 柔性服务</title><link>https://dubbo.apache.org/zh/docs3-v2/golang-sdk/samples/adaptive-service/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/golang-sdk/samples/adaptive-service/</guid><description>
 &lt;h1 id="柔性负载均衡-柔性服务">柔性负载均衡 (柔性服务)&lt;/h1>
 &lt;p>柔性服务是一种去中心化的智能负载均衡组件，同时也是 Dubbo-go 3.0 版本中重磅新特性之一。柔性服务尚处于早期实验阶段，该特性将在后续版本中持续优化，与 Dubbo 社区共同探索出一套适合微服务场景的最佳实践。&lt;/p>
 &lt;p>传统的负载均衡算法是由随机节点、RoundRobin 等算法实现，他们的局限性在于不知道当前服务提供者的负载情况，算法总是以尽可能公平的概率调用不同的服务提供者。在实践中，公平不等于高性能，集群服务性能还与服务负载、任务复杂度等多因素相关。为解决传统负载均衡算法的不足，Dubbo-go 在 3.0 版本中引入了柔性服务，实现了容量动态评估和分流功能。&lt;/p>

@@ -60,4 +60,25 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&amp;lt;!--固定token令牌，相当于密码--&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> token=&lt;span style="color:#2aa198">&amp;#34;123456&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-V2: 服务鉴权</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/security/auth/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/security/auth/</guid><description>
+&lt;h1 id="服务鉴权">服务鉴权&lt;/h1>
+&lt;p>类似支付之类的对安全性敏感的业务可能会有限制匿名调用的需求。在加固安全性方面，2.7.5 引入了基于AK/SK机制的认证鉴权机制，并且引入了鉴权服务中心，主要原理是消费端在请求需要鉴权的服务时，会通过SK、请求元数据、时间戳、参数等信息来生成对应的请求签名，通过Dubbo的Attahcment机制携带到对端进行验签，验签通过才进行业务逻辑处理。如下图所示：&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/Ooo0oO0o0oO/res/master/auth.png" alt="">&lt;/p>
+&lt;p>具体的接入方式也并不复杂：&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>使用者需要在微服务站点上填写自己的应用信息，并为该应用生成唯一的证书凭证。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>之后在管理站点上提交工单，申请某个敏感业务服务的使用权限，并由对应业务管理者进行审批，审批通过之后，会生成对应的AK/SK到鉴权服务中心。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>导入该证书到对应的应用下，并且进行配置。配置方式也十分简单，以注解方式为例：&lt;/p>
+&lt;p>服务提供端，只需要设置&lt;code>service.auth&lt;/code>为true，表示该服务的调用需要鉴权认证通过。&lt;code>param.sign&lt;/code>为&lt;code>true&lt;/code>表示需要对参数也进行校验。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@Service&lt;/span>&lt;span style="color:#719e07">(&lt;/span>parameters &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">{&lt;/span>&lt;span style="color:#2aa198">&amp;#34;service.auth&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span>&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span>&lt;span style="color:#2aa198">&amp;#34;param.sign&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span>&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>&lt;span style="color:#719e07">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">AuthDemoServiceImpl&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> AuthService &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>服务消费端，只需要配置好对应的证书等信息即可，之后会自动地在对这些需要认证的接口发起调用前进行签名操作，通过与鉴权服务的交互，用户无需在代码中配置AK/SK这些敏感信息，并且在不重启应用的情况下刷新AK/SK，达到权限动态下发的目的。&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>该方案目前已经提交给Dubbo开源社区，并且完成了基本框架的合并，除了AK/SK的鉴权方式之外，通过SPI机制支持用户可定制化的鉴权认证以及适配公司内部基础设施的密钥存储。&lt;/p></description></item></channel></rss>

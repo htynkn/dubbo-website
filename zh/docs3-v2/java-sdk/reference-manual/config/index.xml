@@ -4534,4 +4534,99 @@ Configuration lines are expected to be of the following form:&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>DUBBO_ENV_KEYS = &amp;#34;DUBBO_TAG1, DUBBO_TAG2&amp;#34;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>最终生成的 URL 会包含 DUBBO_TAG1、DUBBO_TAG2 两个 key: &lt;code>dubbo://xxx?DUBBO_TAG1=value1&amp;amp;DUBBO_TAG2=value2&lt;/code>&lt;/p>
 &lt;/li>
+&lt;/ol></description></item><item><title>Docs3-V2: 外部化配置</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config/external-config/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config/external-config/</guid><description>
+&lt;h3 id="外部化配置">外部化配置&lt;/h3>
+&lt;p>外部化配置目的之一是实现配置的集中式管理，这部分业界已经有很多成熟的专业配置系统如 Apollo, Nacos 等，Dubbo 所做的主要是保证能配合这些系统正常工作。&lt;/p>
+&lt;p>外部化配置和其他本地配置在内容和格式上并无区别，可以简单理解为 &lt;code>dubbo.properties&lt;/code> 的外部化存储，配置中心更适合将一些公共配置如注册中心、元数据中心配置等抽取以便做集中管理。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># 将注册中心地址、元数据中心地址等配置集中管理，可以做到统一环境、减少开发侧感知。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address=zookeeper://127.0.0.1:2181
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.simplified=true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.metadata-report.address=zookeeper://127.0.0.1:2181
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.name=dubbo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port=20880
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.qos.port=33333
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>
+&lt;p>优先级&lt;/p>
+&lt;p>外部化配置默认较本地配置有更高的优先级，因此这里配置的内容会覆盖本地配置值，关于 各配置形式间的&lt;a href="../overview#%E8%A6%86%E7%9B%96%E5%85%B3%E7%B3%BB">覆盖关系&lt;/a> 有单独一章说明。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>作用域&lt;/p>
+&lt;p>外部化配置有全局和应用两个级别，全局配置是所有应用共享的，应用级配置是由每个应用自己维护且只对自身可见的。当前已支持的扩展实现有Zookeeper、Apollo、Nacos。&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="配置中心">配置中心&lt;/h3>
+&lt;p>从配置中心读取外部化配置，可以按照下面的方法指定配置中心：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:config-center&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://127.0.0.1:2181&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.config-center.address=zookeeper://127.0.0.1:2181
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>ConfigCenterConfig configCenter &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ConfigCenterConfig&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>configCenter&lt;span style="color:#719e07">.&lt;/span>setAddress&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;zookeeper://127.0.0.1:2181&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="zookeeper">Zookeeper&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:config-center&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://127.0.0.1:2181&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>默认所有的配置都存储在 &lt;code>/dubbo/config&lt;/code> 节点，具体节点结构图如下：&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/zk-configcenter.jpg" alt="zk-configcenter.jpg">&lt;/p>
+&lt;ul>
+&lt;li>namespace，用于不同配置的环境隔离。&lt;/li>
+&lt;li>config，Dubbo约定的固定节点，不可更改，所有配置和服务治理规则都存储在此节点下。&lt;/li>
+&lt;li>dubbo/application，分别用来隔离全局配置、应用级别配置：dubbo是默认group值，application对应应用名&lt;/li>
+&lt;li>dubbo.properties，此节点的node value存储具体配置内容&lt;/li>
+&lt;/ul>
+&lt;h4 id="apollo">Apollo&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:config-center&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;apollo&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;127.0.0.1:2181&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Apollo中的一个核心概念是命名空间 - namespace（和上面zookeeper的namespace概念不同），在这里全局和应用级别配置就是通过命名空间来区分的。&lt;/p>
+&lt;p>默认情况下，Dubbo会从名叫&lt;code>dubbo&lt;/code>（由于 Apollo 不支持特殊后缀 &lt;code>.properties&lt;/code> ）的命名空间中读取全局配置（&lt;code>&amp;lt;dubbo:config-center namespace=&amp;quot;your namespace&amp;quot;&amp;gt;&lt;/code>）&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/apollo-configcenter-dubbo.png" alt="apollo-configcenter-dubbo.png">&lt;/p>
+&lt;p>由于 Apollo 也默认将会在 &lt;code>dubbo&lt;/code> namespace 中存储服务治理规则（如路由规则），建议通过单独配置 &lt;code>group&lt;/code> 将服务治理和配置文件托管分离开，以 XML 配置方式为例：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo&lt;/span> namespace=&lt;span style="color:#2aa198">&amp;#34;governance&amp;#34;&lt;/span> group =&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这里，服务治理规则将存储在 governance namespace，而配置文件将存储在 dubbo namespace，如下图所示：
+&lt;img src="https://dubbo.apache.org/imgs/user/apollo-configcenter-governance-dubbo.png" alt="apollo-configcenter-governance-dubbo.png">&lt;/p>
+&lt;blockquote>
+&lt;p>关于文件配置托管，相当于是把 &lt;code>dubbo.properties&lt;/code> 配置文件的内容存储在了 Apollo 中，应用通过关联共享的 &lt;code>dubbo&lt;/code> namespace 继承公共配置,
+应用也可以按照 Apollo 的做法来覆盖个别配置项。&lt;/p>
+&lt;/blockquote>
+&lt;h4 id="nacos">Nacos&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:config-center&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;nacos://127.0.0.1:8848?username=nacos&amp;amp;password=nacos&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dubbo:config-center&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Nacos虽然也存在命名空间 - namespace 的概念，但在 namespace 之下，还存在 group 概念。即通过 namespace 和 group 以及 dataId 去定位一个配置项，在不指定 namespace 的情况下，默认使用 &lt;code>public&lt;/code> 作为默认的命名空间。&lt;/p>
+&lt;p>在默认情况下，全局配置会读取 namespace : &lt;code>public&lt;/code>，dataId: &lt;code>dubbo.properties&lt;/code>，group: &lt;code>dubbo&lt;/code> 配置项中的内容作为全局配置。应用级别的 group 和全局级别的 group 存在一点差异， 应用级别会读取 namespace: &lt;code>public&lt;/code>，dataId: &lt;code>dubbo.properties&lt;/code>，group: &lt;code>your application name&lt;/code> 作为应用级别的配置。&lt;/p>
+&lt;p>全局：
+&lt;img src="https://dubbo.apache.org/imgs/user/nacos-configcenter-global-properties.png" alt="nacos-configcenter-global-properties.png">&lt;/p>
+&lt;p>应用级别：
+&lt;img src="https://dubbo.apache.org/imgs/user/nacos-configcenter-application-properties.png" alt="nacos-configcenter-application-properties.png">&lt;/p>
+&lt;h3 id="自己加载外部化配置">自己加载外部化配置&lt;/h3>
+&lt;p>所谓 Dubbo 对配置中心的支持，本质上就是把 &lt;code>.properties&lt;/code> 从远程拉取到本地，然后和本地的配置做一次融合。理论上只要 Dubbo 框架能拿到需要的配置就可以正常的启动，它并不关心这些配置是自己加载到的还是应用直接塞给它的，所以Dubbo还提供了以下API，让用户将自己组织好的配置塞给 Dubbo 框架（配置加载的过程是用户要完成的），这样 Dubbo 框架就不再直接和 Apollo 或 Zookeeper 做读取配置交互。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// 应用自行加载配置
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>Map&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">,&lt;/span> String&lt;span style="color:#719e07">&amp;gt;&lt;/span> dubboConfigurations &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> HashMap&lt;span style="color:#719e07">&amp;lt;&amp;gt;();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubboConfigurations&lt;span style="color:#719e07">.&lt;/span>put&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;dubbo.registry.address&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#2aa198">&amp;#34;zookeeper://127.0.0.1:2181&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubboConfigurations&lt;span style="color:#719e07">.&lt;/span>put&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;dubbo.registry.simplified&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">//将组织好的配置塞给Dubbo框架
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>ConfigCenterConfig configCenter &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ConfigCenterConfig&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>configCenter&lt;span style="color:#719e07">.&lt;/span>setExternalConfig&lt;span style="color:#719e07">(&lt;/span>dubboConfigurations&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-V2: 自动加载环境变量</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config/environment-variables/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config/environment-variables/</guid><description>
+&lt;p>从 2.7.3 版本开始，Dubbo 会自动从约定 key 中读取配置，并将配置以 Key-Value 的形式写入到URL中。&lt;/p>
+&lt;p>支持的 key 有以下两个：&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;code>dubbo.labels&lt;/code>，指定一些列配置到 URL 中的键值对，通常通过 JVM -D 或系统环境变量指定。&lt;/p>
+&lt;p>增加以下配置：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># JVM
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-Ddubbo.labels = &amp;#34;tag1=value1; tag2=value2&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 环境变量
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>DUBBO_LABELS = &amp;#34;tag1=value1; tag2=value2&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>最终生成的 URL 会包含 tag1、tag2 两个 key: &lt;code>dubbo://xxx?tag1=value1&amp;amp;tag2=value2&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>dubbo.env.keys&lt;/code>，指定环境变量 key 值，Dubbo 会尝试从环境变量加载每个 key&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># JVM
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-Ddubbo.env.keys = &amp;#34;DUBBO_TAG1, DUBBO_TAG2&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 环境变量
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>DUBBO_ENV_KEYS = &amp;#34;DUBBO_TAG1, DUBBO_TAG2&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>最终生成的 URL 会包含 DUBBO_TAG1、DUBBO_TAG2 两个 key: &lt;code>dubbo://xxx?DUBBO_TAG1=value1&amp;amp;DUBBO_TAG2=value2&lt;/code>&lt;/p>
+&lt;/li>
 &lt;/ol></description></item></channel></rss>
