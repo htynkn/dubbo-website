@@ -915,7 +915,7 @@
 &lt;h3 id="etcd--consul">Etcd &amp;amp; Consul&lt;/h3>
 &lt;p>Etcd 和 Consul 本质上也是一种类似 zookeeper 的树状存储结构，实现请参考 zookeeper。&lt;/p>
 &lt;h3 id="nacos">Nacos&lt;/h3>
-&lt;p>Nacos 作为一个专业的第三方配置中心，拥有专门为配置中心设计的存储结构，包括内置的 namespace、group、dataid 等概念。并且这几个概念基本上与 Dubbo 框架抽象的配置中心是一一对应的。&lt;/p>
+&lt;p>&lt;a href="https://nacos.io/">Nacos&lt;/a> 作为一个专业的第三方配置中心，拥有专门为配置中心设计的存储结构，包括内置的 namespace、group、dataid 等概念。并且这几个概念基本上与 Dubbo 框架抽象的配置中心是一一对应的。&lt;/p>
 &lt;p>与 Zookeeper 实现的对应关系如下：&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/dev/configcenter_nacos_model.jpg" alt="image-20190127225608553">&lt;/p>
 &lt;p>参考上文关于 zookeeper 实现中描述的示例，这里的 dataid 可能为：&lt;/p>

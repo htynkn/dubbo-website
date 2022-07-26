@@ -469,7 +469,7 @@ Consumer存储内容，为Map格式。从Consumer端注册到注册中心的URL�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">numChildren&lt;/span> &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">0&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="redis-1">Redis&lt;/h4>
 &lt;p>Redis 元数据中心目前还不支持应用级别元数据，但已提上日程，会在近期进行实现。&lt;/p>
-&lt;h5 id="nacos-1">Nacos&lt;/h5>
+&lt;h5 id="nacoshttpsnacosio">&lt;a href="https://nacos.io/">Nacos&lt;/a>&lt;/h5>
 &lt;p>Nacos 应用级别的元数据位于 namespace: &amp;lsquo;public&amp;rsquo;, dataId: &amp;lsquo;{application name}&amp;rsquo;, group: &amp;lsquo;{revision}&amp;rsquo;&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/nacos-metadata-report-application-metadata.png" alt="nacos-metadata-report-application-metadata.png">&lt;/p>
 &lt;h4 id="服务自省映射---service-name-mapping">服务自省映射 - Service Name Mapping&lt;/h4>
@@ -498,7 +498,7 @@ Consumer存储内容，为Map格式。从Consumer端注册到注册中心的URL�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">numChildren&lt;/span> &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">0&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="redis-2">Redis&lt;/h5>
 &lt;p>Redis 元数据中心目前还不支持服务自省映射，但已提上日程，会在近期进行实现。&lt;/p>
-&lt;h5 id="nacos-2">Nacos&lt;/h5>
+&lt;h5 id="nacos-1">Nacos&lt;/h5>
 &lt;p>在上面提到，service name 和 application name 可能是一对多的，在 nacos 中，使用单个 key-value 进行保存，多个 application name 通过英文逗号&lt;code>,&lt;/code>隔开。由于是单个 key-value 去保存数据，在多客户端的情况下可能会存在并发覆盖的问题。因此，我们使用 nacos 中 publishConfigCas 的能力去解决该问题。在 nacos 中，使用 publishConfigCas 会让用户传递一个参数 casMd5，该值的含义是之前配置内容的 md5 值。不同客户端在更新之前，先去查一次 nacos 的 content 的值，计算出 md5 值，当作本地凭证。在更新时，把凭证 md5 传到服务端比对 md5 值, 如果不一致说明在次期间被其他客户端修改过，重新获取凭证再进行重试(CAS)。目前如果重试6次都失败的话，放弃本次更新映射行为。&lt;/p>
 &lt;p>Nacos api:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>ConfigService configService &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">...&lt;/span>

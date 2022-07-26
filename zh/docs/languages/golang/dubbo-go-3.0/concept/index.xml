@@ -24,7 +24,7 @@
 &lt;/li>
 &lt;li>
 &lt;p>注册中心（Registry）模块&lt;/p>
-&lt;p>注册中心模块负责定义好所要使用的一系列注册中心，例如框架支持的ZK、Nacos、ETCD等中间件。应用级别的注册模块只负责声明，由接口级别的组件进行引用，引用时以用户自定义的注册中心ID（registryID) 作为索引。&lt;/p>
+&lt;p>注册中心模块负责定义好所要使用的一系列注册中心，例如框架支持的ZK、&lt;a href="https://nacos.io/">Nacos&lt;/a>、ETCD等中间件。应用级别的注册模块只负责声明，由接口级别的组件进行引用，引用时以用户自定义的注册中心ID（registryID) 作为索引。&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>协议（Protocol）模块&lt;/p>
@@ -249,7 +249,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">AddRegistry&lt;/span>(&lt;span style="color:#2aa198">&amp;#34;zookeeper&amp;#34;&lt;/span>, registryConfig).
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">Build&lt;/span>()
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="23-从配置中心读取">2.3 从配置中心读取&lt;/h3>
-&lt;p>Dubbo-go 服务框架支持将配置文件 &amp;lsquo;dubbogo.yml&amp;rsquo; 的内容预先放入配置中心，再通过配置注册中心的地址。在本地 dubbogo.yml 配置文件内只需写入配置中心的信息即可，目前支持作为配置中心的中间件有：apollo、nacos、zookeeper&lt;/p>
+&lt;p>Dubbo-go 服务框架支持将配置文件 &amp;lsquo;dubbogo.yml&amp;rsquo; 的内容预先放入配置中心，再通过配置注册中心的地址。在本地 dubbogo.yml 配置文件内只需写入配置中心的信息即可，目前支持作为配置中心的中间件有：apollo、&lt;a href="https://nacos.io/">Nacos&lt;/a>、zookeeper&lt;/p>
 &lt;p>可参考&lt;a href="https://github.com/apache/dubbo-go-samples/tree/master/configcenter">配置中心Samples&lt;/a>，凡是正确配置了config-center 配置的服务，都会优先从配置中心加载整个配置文件。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">dubbo&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">config-center&lt;/span>:

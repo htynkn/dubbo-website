@@ -498,7 +498,7 @@ key 为服务名，value 为服务提供者 url，此配置优先级最高，&lt
 &lt;hr>
 &lt;ol>
 &lt;li id="fn:1">
-&lt;p>可以自行扩展注册中心，参见：&lt;a href="../../references/spis/registry">注册中心扩展&lt;/a>&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>可以自行扩展注册中心，参见：&lt;a href="../../../reference-manual/spi/description/registry">注册中心扩展&lt;/a>&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;/div></description></item><item><title>Docs3-V2: 回声测试</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/echo-service/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/echo-service/</guid><description>
