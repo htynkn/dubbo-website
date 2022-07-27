@@ -64,11 +64,11 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>可以说，任意的一个领域中的一个实现都可以认为是一类 URL，dubbo 使用 URL 来统一描述了元数据，配置信息，贯穿在整个框架之中。&lt;/p>
 &lt;h2 id="dubbo-27">Dubbo 2.7&lt;/h2>
 &lt;h3 id="url-结构">URL 结构&lt;/h3>
-&lt;p>在 Dubbo 2.7 中，URL 的结构非常简单，一个类就涵盖了所有内容，如下图所示。
-&lt;img src="https://cdn.nlark.com/yuque/0/2021/png/1921386/1626684355065-047f2b60-0d02-41fb-8f57-ef7c89d625a5.png#clientId=u77103d46-bf79-4&amp;amp;from=ui&amp;amp;id=ub3498039&amp;amp;margin=%5Bobject%20Object%5D&amp;amp;name=Dubbo2%20URL%E7%B1%BB%E5%9B%BE.png&amp;amp;originHeight=212&amp;amp;originWidth=201&amp;amp;originalType=binary&amp;amp;ratio=1&amp;amp;size=14586&amp;amp;status=done&amp;amp;style=none&amp;amp;taskId=u4e81299b-9890-41ff-b1e5-0f430096690" alt="Dubbo2 URL类图.png">&lt;/p>
+&lt;p>在 Dubbo 2.7 中，URL 的结构非常简单，一个类就涵盖了所有内容，如下图所示。&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/url-perf-tuning-1.png" alt="Dubbo2 URL类图.png">&lt;/p>
 &lt;h3 id="地址推送模型">地址推送模型&lt;/h3>
-&lt;p>接下来我们再来看看 Dubbo 2.7 中的地址推送模型方案，主要性能问题由下列过程引起。
-&lt;img src="https://cdn.nlark.com/yuque/0/2021/png/1921386/1626684380374-8c7f1087-5251-44ab-b1ef-36d3350dbc67.png#clientId=u77103d46-bf79-4&amp;amp;from=ui&amp;amp;id=ufea40a0b&amp;amp;margin=%5Bobject%20Object%5D&amp;amp;name=Dubbo2%20%E5%9C%B0%E5%9D%80%E6%8E%A8%E9%80%81%E6%A8%A1%E5%9E%8B.png&amp;amp;originHeight=629&amp;amp;originWidth=654&amp;amp;originalType=binary&amp;amp;ratio=1&amp;amp;size=50785&amp;amp;status=done&amp;amp;style=none&amp;amp;taskId=u6ef56cee-840d-48fb-bf06-85c9ee3d8bd" alt="Dubbo2 地址推送模型.png">&lt;/p>
+&lt;p>接下来我们再来看看 Dubbo 2.7 中的地址推送模型方案，主要性能问题由下列过程引起。&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/url-perf-tuning-2.png" alt="Dubbo2 地址推送模型.png">&lt;/p>
 &lt;p>上图中主要的流程为
 1、用户新增/删除DemoService的某个具体Provider实例（常见于扩容缩容、网络波动等原因）
 2、ZooKeeper将DemoService下所有实例推送给Consumer端
@@ -77,9 +77,9 @@
 而Dubbo 3.0中则主要针对上述推送流程进行了一系列的优化，接下来我们便对其进行具体的讲解。&lt;/p>
 &lt;h2 id="dubbo-30">Dubbo 3.0&lt;/h2>
 &lt;h3 id="url-结构-1">URL 结构&lt;/h3>
-&lt;p>当然，地址推送模型的优化依然离不开 URL 的优化，下图是Dubbo 3.0中优化地址推送模型的过程中使用的新的URL结构。
-&lt;img src="https://cdn.nlark.com/yuque/0/2021/png/1921386/1626684404347-633f5a87-0e12-4760-b38b-374e1b4c85a0.png#clientId=u77103d46-bf79-4&amp;amp;from=ui&amp;amp;id=u59706a31&amp;amp;margin=%5Bobject%20Object%5D&amp;amp;name=Dubbo3%20URL%E7%B1%BB%E5%9B%BE.png&amp;amp;originHeight=329&amp;amp;originWidth=1221&amp;amp;originalType=binary&amp;amp;ratio=1&amp;amp;size=54053&amp;amp;status=done&amp;amp;style=none&amp;amp;taskId=uba60500c-0a03-46f7-a85b-2eb574777b2" alt="Dubbo3 URL类图.png">
-根据上图我们可以看出，在 Dubbo 2.7 的 URL 中的几个重要属性在 Dubbo 3.0 中已经不存在了，取而代之的是 URLAddress 和 URLParam 两个类。原来的 parameters 属性被移动到了 URLParam 中的 params，其他的属性则移动到了 URLAddress 及其子类中。
+&lt;p>当然，地址推送模型的优化依然离不开 URL 的优化，下图是Dubbo 3.0中优化地址推送模型的过程中使用的新的URL结构。&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/url-perf-tuning-3.png" alt="Dubbo3 URL类图.png">&lt;/p>
+&lt;p>根据上图我们可以看出，在 Dubbo 2.7 的 URL 中的几个重要属性在 Dubbo 3.0 中已经不存在了，取而代之的是 URLAddress 和 URLParam 两个类。原来的 parameters 属性被移动到了 URLParam 中的 params，其他的属性则移动到了 URLAddress 及其子类中。
 再来介绍 URL 新增的 3 个子类，其中 InstanceAddressURL 属于应用级接口地址，本篇章中不做介绍。
 而 ServiceConfigURL 及 ServiceAddressURL 主要的差别就是，ServiceConfigURL 是程序读取配置文件时生成的 URL。而 ServiceAddressURL 则是注册中心推送一些信息（如 providers）过来时生成的 URL。
 在这里我们顺便提一下为什么会有 DubboServiceAddressURL 这个子类，按照目前的结构来看，ServiceAddressURL 只有这一个子类，所以完全可以将他们两个的属性全都放到 ServiceAddressURL 中，那么为什么还要有这个子类呢？其实是 Dubbo 3.0 为了兼容 HSF 框架所设计的，抽象出了一个 ServiceAddressURL，而 HSF 框架则可以继承这个类，使用 HSFServiceAddressURL，当然，这个类目前没有体现出来，所以此处我们简单一提，不过多讲解。
@@ -91,17 +91,17 @@
 &lt;strong>ServiceAddressURL&lt;/strong>：这个子类及其对应的其他子类中则新增了 overrideURL 和 consumerURL 属性。其中 consumerURL 是针对 consumer 端的配置信息，overrideURL 则是在 Dubbo Admin 上进行动态配置时写入的值，当我们调用 URL 的 getParameter() 方法时，优先级为 &lt;code>overrideURL &amp;gt; consumerURL &amp;gt; urlParam&lt;/code>。在 Dubbo 2.7 时，动态配置属性会替换 URL 中的属性，及当你有大量 URL 时消耗也是不可忽视的，而此处的 overrideURL 则避免了这种消耗，因为所有 URL 都会共同使用同一个对象。&lt;/p>
 &lt;h4 id="多级缓存">多级缓存&lt;/h4>
 &lt;p>缓存是 Dubbo 3.0 在 URL 上做的优化的重点，同时这部分也是直接针对地址推送模型所做的优化，那么接下来我们就开始来介绍一下多级缓存的具体实现。
-首先，多级缓存主要体现在 CacheableFailbackRegistry 这个类之中，它直接继承于 FailbackRegistry，以 Zookeeper 为例，我们看看 Dubbo 2.7 和 Dubbo 3.0 继承结构的区别。
-&lt;img src="https://cdn.nlark.com/yuque/0/2021/png/1921386/1626684433702-091378b5-5f80-4ac7-b755-5dab707051da.png#clientId=u77103d46-bf79-4&amp;amp;from=ui&amp;amp;id=u9118b5a9&amp;amp;margin=%5Bobject%20Object%5D&amp;amp;name=Dubbo3%20CacheableFailbackRegistry%E7%BC%93%E5%AD%98.png&amp;amp;originHeight=361&amp;amp;originWidth=751&amp;amp;originalType=binary&amp;amp;ratio=1&amp;amp;size=32461&amp;amp;status=done&amp;amp;style=none&amp;amp;taskId=ub04aaa61-0d89-457e-a555-47edd7e39a0" alt="Dubbo3 CacheableFailbackRegistry缓存.png">
-可以看到在 CacheableFailbackRegistry 缓存中，我们新增了 3 个缓存属性 &lt;code>stringAddress&lt;/code>，&lt;code>stringParam&lt;/code> 和 &lt;code>stringUrls&lt;/code>。我们通过下图来描述这 3 个缓存的具体使用场景。
-&lt;img src="https://cdn.nlark.com/yuque/0/2021/png/1921386/1626684457488-ccb22d6c-3ade-4aec-a21a-c71c381a9734.png#clientId=u77103d46-bf79-4&amp;amp;from=ui&amp;amp;id=ue0c6b8dc&amp;amp;margin=%5Bobject%20Object%5D&amp;amp;name=%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98.png&amp;amp;originHeight=622&amp;amp;originWidth=926&amp;amp;originalType=binary&amp;amp;ratio=1&amp;amp;size=73539&amp;amp;status=done&amp;amp;style=none&amp;amp;taskId=u47ede71a-33bd-4405-bd98-30d40e1b32c" alt="多级缓存.png">
-在该方案下，我们使用了 3 个纬度的缓存数据(URL 字符串缓存、URL 地址缓存、URL 参数缓存)，这样一来，在大部分情况下都能有效利用到缓存中的数据，减少了 Zookeeper 重复通知的消耗。&lt;/p>
+首先，多级缓存主要体现在 CacheableFailbackRegistry 这个类之中，它直接继承于 FailbackRegistry，以 Zookeeper 为例，我们看看 Dubbo 2.7 和 Dubbo 3.0 继承结构的区别。&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/url-perf-tuning-4.png" alt="Dubbo3 CacheableFailbackRegistry缓存.png">&lt;/p>
+&lt;p>可以看到在 CacheableFailbackRegistry 缓存中，我们新增了 3 个缓存属性 &lt;code>stringAddress&lt;/code>，&lt;code>stringParam&lt;/code> 和 &lt;code>stringUrls&lt;/code>。我们通过下图来描述这 3 个缓存的具体使用场景。&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/url-perf-tuning-5.png" alt="多级缓存.png">&lt;/p>
+&lt;p>在该方案下，我们使用了 3 个纬度的缓存数据(URL 字符串缓存、URL 地址缓存、URL 参数缓存)，这样一来，在大部分情况下都能有效利用到缓存中的数据，减少了 Zookeeper 重复通知的消耗。&lt;/p>
 &lt;h4 id="延迟通知">延迟通知&lt;/h4>
 &lt;p>除了上面提到的优化之外，其实另外还有两个小小的优化。
 第一个是解析 URL 时可以直接使用编码后的 URL 字符串字节进行解析，而在 Dubbo 2.7 中，所有编码后的 URL 字符串都需要经过解码才可以正常解析为 URL 对象。该方式也直接减少了 URL 解码过程的开销。
-第二个则是 URL 变更后的通知机制增加了延迟，下图以Zookeeper为例讲解了实现细节。
-&lt;img src="https://cdn.nlark.com/yuque/0/2021/png/1921386/1626684474208-db533419-6352-4d25-bcbe-21e473673828.png#clientId=u77103d46-bf79-4&amp;amp;from=ui&amp;amp;id=u9d0b8bd3&amp;amp;margin=%5Bobject%20Object%5D&amp;amp;name=%E5%BB%B6%E8%BF%9F%E9%80%9A%E7%9F%A5.png&amp;amp;originHeight=402&amp;amp;originWidth=352&amp;amp;originalType=binary&amp;amp;ratio=1&amp;amp;size=30489&amp;amp;status=done&amp;amp;style=none&amp;amp;taskId=u14d9d5be-4b1c-448a-8452-c975f3e8679" alt="延迟通知.png">
-在该方案中，当 Consumer 接收 Zookeeper 的变更通知后会主动休眠一段时间，而这段时间内的变更在休眠结束后只会保留最后一次变更，Consumer 便会使用最后一次变更来进行监听实例的更新，以此方法来减少大量 URL 的创建开销。&lt;/p>
+第二个则是 URL 变更后的通知机制增加了延迟，下图以Zookeeper为例讲解了实现细节。&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/url-perf-tuning-6.png" alt="延迟通知.png">&lt;/p>
+&lt;p>在该方案中，当 Consumer 接收 Zookeeper 的变更通知后会主动休眠一段时间，而这段时间内的变更在休眠结束后只会保留最后一次变更，Consumer 便会使用最后一次变更来进行监听实例的更新，以此方法来减少大量 URL 的创建开销。&lt;/p>
 &lt;h4 id="字符串重用">字符串重用&lt;/h4>
 &lt;p>在旧版本实现中，不同的 URL 中属性相同的字符串会存储在堆内不同的地址中，如 protocol、path 等，当有大量 provider 的情况下，Consumer 端的堆内会存在大量的重复字符串，导致内存利用率低下，所以此处提供了另一个优化方式，即字符串重用。
 而它的实现方式也非常的简单，让我们来看看对应的代码片段。&lt;/p>
@@ -135,11 +135,11 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>由如上代码片段可以得知，字符串重用即为简单地使用了 Map 来存储对应的缓存值，当你使用了相同的字符串时，便会从 Map 中获取早已存在的对象返回给调用方，由此便可以减少堆内存中重复的字符串数以达到优化的效果。&lt;/p>
 &lt;h3 id="优化结果">优化结果&lt;/h3>
-&lt;p>这里优化结果我引用了&lt;a href="https://zhuanlan.zhihu.com/p/345626851">《Dubbo 3.0 前瞻：服务发现支持百万集群，带来可伸缩微服务架构》&lt;/a>这篇文章中的两副图来说明，下图模拟了在&lt;strong>220万&lt;/strong>个 Provider 接口的情况下，接口数据不断变更导致的 Consumer 端的消耗，我们看到整个 Consumer 端几乎被 Full GC 占满了，严重影响了性能。
-&lt;img src="https://cdn.nlark.com/yuque/0/2021/png/1921386/1626684502762-bbe06025-ec68-460f-9169-d8fcd5d9589c.png#clientId=u77103d46-bf79-4&amp;amp;from=ui&amp;amp;id=u627fbc4e&amp;amp;margin=%5Bobject%20Object%5D&amp;amp;name=Dubbo2%20%E6%8E%A5%E5%8F%A3%E7%BA%A7%E5%9C%B0%E5%9D%80%E6%A8%A1%E5%9E%8B.png&amp;amp;originHeight=829&amp;amp;originWidth=1440&amp;amp;originalType=binary&amp;amp;ratio=1&amp;amp;size=163554&amp;amp;status=done&amp;amp;style=none&amp;amp;taskId=ucce3e68c-f033-455b-9944-eba82ef078c" alt="Dubbo2 接口级地址模型.png">
-那么我们再来看看 Dubbo 3.0 中对 URL 进行优化后同一个环境下的压测结果，如下图所示。
-&lt;img src="https://cdn.nlark.com/yuque/0/2021/png/1921386/1626684517859-7c42871f-5f98-48c2-8815-bf8f5e992efb.png#clientId=u77103d46-bf79-4&amp;amp;from=ui&amp;amp;id=ua17678af&amp;amp;margin=%5Bobject%20Object%5D&amp;amp;name=Dubbo3%20%E6%8E%A5%E5%8F%A3%E7%BA%A7%E5%9C%B0%E5%9D%80%E6%A8%A1%E5%9E%8B.png&amp;amp;originHeight=690&amp;amp;originWidth=1440&amp;amp;originalType=binary&amp;amp;ratio=1&amp;amp;size=185862&amp;amp;status=done&amp;amp;style=none&amp;amp;taskId=u137b18a8-0c04-48ca-bb14-f6e1c9e8f7a" alt="Dubbo3 接口级地址模型.png">
-我们明显可以看到 Full GC 的频率减少到了只有 3 次，大大提升了性能。当然，该文章中还有其他方面的对比，此处便不一一引用了，感兴趣的读者可以自行去阅读该文章。&lt;/p></description></item><item><title>Blog: 如何通过 Apache ShenYu 网关代理 Dubbo 服务</title><link>https://dubbo.apache.org/zh/blog/2022/05/04/%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87-apache-shenyu-%E7%BD%91%E5%85%B3%E4%BB%A3%E7%90%86-dubbo-%E6%9C%8D%E5%8A%A1/</link><pubDate>Wed, 04 May 2022 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2022/05/04/%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87-apache-shenyu-%E7%BD%91%E5%85%B3%E4%BB%A3%E7%90%86-dubbo-%E6%9C%8D%E5%8A%A1/</guid><description>
+&lt;p>这里优化结果我引用了&lt;a href="https://zhuanlan.zhihu.com/p/345626851">《Dubbo 3.0 前瞻：服务发现支持百万集群，带来可伸缩微服务架构》&lt;/a>这篇文章中的两副图来说明，下图模拟了在&lt;strong>220万&lt;/strong>个 Provider 接口的情况下，接口数据不断变更导致的 Consumer 端的消耗，我们看到整个 Consumer 端几乎被 Full GC 占满了，严重影响了性能。&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/url-perf-tuning-7.png" alt="Dubbo2 接口级地址模型.png">&lt;/p>
+&lt;p>那么我们再来看看 Dubbo 3.0 中对 URL 进行优化后同一个环境下的压测结果，如下图所示。&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/url-perf-tuning-8.png" alt="Dubbo3 接口级地址模型.png">&lt;/p>
+&lt;p>我们明显可以看到 Full GC 的频率减少到了只有 3 次，大大提升了性能。当然，该文章中还有其他方面的对比，此处便不一一引用了，感兴趣的读者可以自行去阅读该文章。&lt;/p></description></item><item><title>Blog: 如何通过 Apache ShenYu 网关代理 Dubbo 服务</title><link>https://dubbo.apache.org/zh/blog/2022/05/04/%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87-apache-shenyu-%E7%BD%91%E5%85%B3%E4%BB%A3%E7%90%86-dubbo-%E6%9C%8D%E5%8A%A1/</link><pubDate>Wed, 04 May 2022 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2022/05/04/%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87-apache-shenyu-%E7%BD%91%E5%85%B3%E4%BB%A3%E7%90%86-dubbo-%E6%9C%8D%E5%8A%A1/</guid><description>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/shenyu-dubbo/ApacheShenYu-Dubbo-zh.png" alt="">&lt;/p>
 &lt;h2 id="1-介绍">1. 介绍&lt;/h2>
 &lt;ul>

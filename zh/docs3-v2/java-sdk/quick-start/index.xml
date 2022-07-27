@@ -3,7 +3,7 @@
 &lt;p>Dubbo 还提供了包括&lt;a href="../../reference-manual/config/xml">XML&lt;/a>、&lt;a href="../../reference-manual/config/api">API&lt;/a>等多种启动与接入方式，更多开发方式和配置细节可参见&lt;a href="../../reference-manual/config/">配置手册&lt;/a>。&lt;/p>
 &lt;/blockquote>
 &lt;h2 id="下载示例代码">下载示例代码&lt;/h2>
-&lt;p>完整示例代码在 &lt;a href="https://github.com/apache/dubbo-samples/dubbo-samples-spring-boot">dubbo-samples&lt;/a> 中&lt;/p>
+&lt;p>完整示例代码在 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-spring-boot">dubbo-samples&lt;/a> 中&lt;/p>
 &lt;ol>
 &lt;li>下载源码&lt;/li>
 &lt;/ol>

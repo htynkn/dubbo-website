@@ -165,7 +165,7 @@ dubbo 支持多协议，如果一个应用同时暴露多个不同协议服务�
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:application&lt;/span> logger=&lt;span style="color:#2aa198">&amp;#34;log4j&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;/ol>
-&lt;p>[1]: 自定义扩展可以参考 &lt;a href="../../../dev/impls/logger-adapter">日志适配扩展&lt;/a>&lt;/p>
+&lt;p>[1]: 自定义扩展可以参考 &lt;a href="../../../reference-manual/spi/description/logger-adapter">日志适配扩展&lt;/a>&lt;/p>
 &lt;h2 id="日志框架运行时管理">日志框架运行时管理&lt;/h2>
 &lt;p>自 &lt;code>3.0.10&lt;/code> 开始，dubbo-qos 运行时管控支持查询日志配置以及动态修改使用的日志框架和日志级别。&lt;/p>
 &lt;p>注：通过 dubbo-qos 修改的日志配置不进行持久化存储，在应用重启后将会失效。&lt;/p>

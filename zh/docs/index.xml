@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – 文档</title><link>https://dubbo.apache.org/zh/docs/</link><description>Recent content in 文档 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs3-V2: 1 - 地址找不到</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/1/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – 文档</title><link>https://dubbo.apache.org/zh/docs/</link><description>Recent content in 文档 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs3-V2: 1-1 - 地址非法</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/1/</guid><description>
 &lt;h2 id="地址找不到异常">地址找不到异常&lt;/h2></description></item><item><title>Docs3-V2: 2-1 - 路由选址执行失败</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/1/</guid><description>
 &lt;h2 id="路由选址执行失败">路由选址执行失败&lt;/h2></description></item><item><title>Docs3-V2: 2.x升级至3.x操作指南</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/2.x-to-3.x-compatibility-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/2.x-to-3.x-compatibility-guide/</guid><description>
 &lt;p>&lt;strong>无需改动任何代码，直接升级到 Dubbo 3.0。&lt;/strong>&lt;/p>
@@ -51,6 +51,22 @@
 &lt;ol>
 &lt;li>检查提供方和消费方双方的协议配置。&lt;/li>
 &lt;li>更新注册中心的版本。&lt;/li>
+&lt;/ol>
+&lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 4-1 - 不支持的协议</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/4/1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/4/1/</guid><description>
+&lt;h2 id="可能的原因">可能的原因&lt;/h2>
+&lt;h2 id="对策">对策&lt;/h2>
+&lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 5-1 - 配置中心连接失败</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/5/1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/5/1/</guid><description>
+&lt;h2 id="可能的原因">可能的原因&lt;/h2>
+&lt;ol>
+&lt;li>配置中心所在的服务器关机或宕机。&lt;/li>
+&lt;li>IP 或者端口号写错。&lt;/li>
+&lt;li>防火墙错误拦截了配置中心的端口。&lt;/li>
+&lt;/ol>
+&lt;h2 id="对策">对策&lt;/h2>
+&lt;ol>
+&lt;li>检查配置中心 IP 以及端口的配置。&lt;/li>
+&lt;li>检查服务器是否开机，是否正常工作。&lt;/li>
+&lt;li>检查防火墙等是否放行配置中心所用的端口。&lt;/li>
 &lt;/ol>
 &lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Overview: Dubbo Mesh</title><link>https://dubbo.apache.org/zh/overview/tasks/dubbo-mesh/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/overview/tasks/dubbo-mesh/</guid><description/></item><item><title>Docsv2.7: Dubbo SPI</title><link>https://dubbo.apache.org/zh/docsv2.7/dev/source/dubbo-spi/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/dev/source/dubbo-spi/</guid><description>
 &lt;h2 id="1简介">1.简介&lt;/h2>
@@ -6993,7 +7009,7 @@ Pixiu 的整体设计遵守以下原则：&lt;/p>
 &lt;p>Dubbo 还提供了包括&lt;a href="../../reference-manual/config/xml">XML&lt;/a>、&lt;a href="../../reference-manual/config/api">API&lt;/a>等多种启动与接入方式，更多开发方式和配置细节可参见&lt;a href="../../reference-manual/config/">配置手册&lt;/a>。&lt;/p>
 &lt;/blockquote>
 &lt;h2 id="下载示例代码">下载示例代码&lt;/h2>
-&lt;p>完整示例代码在 &lt;a href="https://github.com/apache/dubbo-samples/dubbo-samples-spring-boot">dubbo-samples&lt;/a> 中&lt;/p>
+&lt;p>完整示例代码在 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-spring-boot">dubbo-samples&lt;/a> 中&lt;/p>
 &lt;ol>
 &lt;li>下载源码&lt;/li>
 &lt;/ol>
@@ -7369,111 +7385,4 @@ Pixiu 的整体设计遵守以下原则：&lt;/p>
 &lt;p>建议使用 &lt;code>2.3.3&lt;/code> 以上版本的 zookeeper 注册中心客户端&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/div></description></item><item><title>Docsv2.7: Zookeeper 注册中心</title><link>https://dubbo.apache.org/zh/docsv2.7/user/references/registry/zookeeper/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/user/references/registry/zookeeper/</guid><description>
-&lt;p>&lt;a href="http://zookeeper.apache.org">Zookeeper&lt;/a> 是 Apache Hadoop 的子项目，是一个树型的目录服务，支持变更推送，适合作为 Dubbo 服务的注册中心，工业强度较高，可用于生产环境，并推荐使用 &lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/zookeeper.jpg" alt="/user-guide/images/zookeeper.jpg">&lt;/p>
-&lt;p>流程说明：&lt;/p>
-&lt;ul>
-&lt;li>服务提供者启动时: 向 &lt;code>/dubbo/com.foo.BarService/providers&lt;/code> 目录下写入自己的 URL 地址&lt;/li>
-&lt;li>服务消费者启动时: 订阅 &lt;code>/dubbo/com.foo.BarService/providers&lt;/code> 目录下的提供者 URL 地址。并向 &lt;code>/dubbo/com.foo.BarService/consumers&lt;/code> 目录下写入自己的 URL 地址&lt;/li>
-&lt;li>监控中心启动时: 订阅 &lt;code>/dubbo/com.foo.BarService&lt;/code> 目录下的所有提供者和消费者 URL 地址。&lt;/li>
-&lt;/ul>
-&lt;p>支持以下功能：&lt;/p>
-&lt;ul>
-&lt;li>当提供者出现断电等异常停机时，注册中心能自动删除提供者信息&lt;/li>
-&lt;li>当注册中心重启时，能自动恢复注册数据，以及订阅请求&lt;/li>
-&lt;li>当会话过期时，能自动恢复注册数据，以及订阅请求&lt;/li>
-&lt;li>当设置 &lt;code>&amp;lt;dubbo:registry check=&amp;quot;false&amp;quot; /&amp;gt;&lt;/code> 时，记录失败注册和订阅请求，后台定时重试&lt;/li>
-&lt;li>可通过 &lt;code>&amp;lt;dubbo:registry username=&amp;quot;admin&amp;quot; password=&amp;quot;1234&amp;quot; /&amp;gt;&lt;/code> 设置 zookeeper 登录信息&lt;/li>
-&lt;li>可通过 &lt;code>&amp;lt;dubbo:registry group=&amp;quot;dubbo&amp;quot; /&amp;gt;&lt;/code> 设置 zookeeper 的根节点，不配置将使用默认的根节点。&lt;/li>
-&lt;li>支持 &lt;code>*&lt;/code> 号通配符 &lt;code>&amp;lt;dubbo:reference group=&amp;quot;*&amp;quot; version=&amp;quot;*&amp;quot; /&amp;gt;&lt;/code>，可订阅服务的所有分组和所有版本的提供者&lt;/li>
-&lt;/ul>
-&lt;h2 id="使用">使用&lt;/h2>
-&lt;p>在 provider 和 consumer 中增加 zookeeper 客户端 jar 包依赖：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.zookeeper&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>zookeeper&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>3.8.0&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或直接&lt;a href="http://repo1.maven.org/maven2/org/apache/zookeeper/zookeeper">下载&lt;/a>。&lt;/p>
-&lt;p>Dubbo 支持 zkclient 和 curator 两种 Zookeeper 客户端实现：&lt;/p>
-&lt;p>&lt;strong>注意:在2.7.x的版本中已经移除了zkclient的实现,如果要使用zkclient客户端,需要自行拓展&lt;/strong>&lt;/p>
-&lt;h3 id="使用-zkclient-客户端">使用 zkclient 客户端&lt;/h3>
-&lt;p>从 &lt;code>2.2.0&lt;/code> 版本开始缺省为 zkclient 实现，以提升 zookeeper 客户端的健壮性。&lt;a href="https://github.com/sgroschupf/zkclient">zkclient&lt;/a> 是 Datameer 开源的一个 Zookeeper 客户端实现。&lt;/p>
-&lt;p>缺省配置：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> ... client=&lt;span style="color:#2aa198">&amp;#34;zkclient&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>dubbo.registry.client&lt;span style="color:#719e07">=&lt;/span>zkclient
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>zookeeper://10.20.153.10:2181?client&lt;span style="color:#719e07">=&lt;/span>zkclient
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>需依赖或直接&lt;a href="http://repo1.maven.org/maven2/com/github/sgroschupf/zkclient">下载&lt;/a>：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>com.github.sgroschupf&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>zkclient&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>0.11&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="使用-curator-客户端">使用 curator 客户端&lt;/h3>
-&lt;p>从 &lt;code>2.3.0&lt;/code> 版本开始支持可选 curator 实现。&lt;a href="https://github.com/apache/curator">Curator&lt;/a> 是 Netflix 开源的一个 Zookeeper 客户端实现。&lt;/p>
-&lt;p>如果需要改为 curator 实现，请配置：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> ... client=&lt;span style="color:#2aa198">&amp;#34;curator&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>dubbo.registry.client&lt;span style="color:#719e07">=&lt;/span>curator
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>zookeeper://10.20.153.10:2181?client&lt;span style="color:#719e07">=&lt;/span>curator
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>需依赖或直接下载&lt;a href="https://repo1.maven.org/maven2/org/apache/curator/curator-framework/">curator-framework&lt;/a>, &lt;a href="https://repo1.maven.org/maven2/org/apache/curator/curator-recipes/">curator-recipes&lt;/a>：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;properties&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;curator.version&amp;gt;&lt;/span>5.2.1&lt;span style="color:#268bd2">&amp;lt;/curator.version&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/properties&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.curator&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>curator-framework&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>${curator.version}&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.curator&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>curator-recipes&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>${curator.version}&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.curator&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>curator-x-discovery&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>${curator.version}&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Zookeeper 单机配置:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://10.20.153.10:2181&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;zookeeper&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.153.10:2181&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Zookeeper 集群配置：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://10.20.153.10:2181?backup=10.20.153.11:2181,10.20.153.12:2181&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;zookeeper&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.153.10:2181,10.20.153.11:2181,10.20.153.12:2181&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>同一 Zookeeper，分成多组注册中心:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;chinaRegistry&amp;#34;&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;zookeeper&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.153.10:2181&amp;#34;&lt;/span> group=&lt;span style="color:#2aa198">&amp;#34;china&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;intlRegistry&amp;#34;&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;zookeeper&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.153.10:2181&amp;#34;&lt;/span> group=&lt;span style="color:#2aa198">&amp;#34;intl&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="zookeeper-安装">zookeeper 安装&lt;/h2>
-&lt;p>安装方式参见: &lt;a href="../../../../admin/install/zookeeper">Zookeeper安装手册&lt;/a>，只需搭一个原生的 Zookeeper 服务器，并将 &lt;a href="../../../quick-start">Quick Start&lt;/a> 中 Provider 和 Consumer 里的 &lt;code>conf/dubbo.properties&lt;/code> 中的 &lt;code>dubbo.registry.address&lt;/code> 的值改为 &lt;code>zookeeper://127.0.0.1:2181&lt;/code> 即可使用。&lt;/p>
-&lt;h2 id="可靠性声明">可靠性声明&lt;/h2>
-&lt;p>阿里内部并没有采用 Zookeeper 做为注册中心，而是使用自己实现的基于数据库的注册中心，即：Zookeeper 注册中心并没有在阿里内部长时间运行的可靠性保障，此 Zookeeper 桥接实现只为开源版本提供，其可靠性依赖于 Zookeeper 本身的可靠性。&lt;/p>
-&lt;h2 id="兼容性声明">兼容性声明&lt;/h2>
-&lt;p>因 &lt;code>2.0.8&lt;/code> 最初设计的 zookeeper 存储结构不能扩充不同类型的数据，&lt;code>2.0.9&lt;/code> 版本做了调整，所以不兼容，需全部改用 &lt;code>2.0.9&lt;/code> 版本才行，以后的版本会保持兼容 &lt;code>2.0.9&lt;/code>。&lt;code>2.2.0&lt;/code> 版本改为基于 zkclient 实现，需增加 zkclient 的依赖包，&lt;code>2.3.0&lt;/code> 版本增加了基于 curator 的实现，作为可选实现策略。&lt;/p>
-&lt;div class="footnotes" role="doc-endnotes">
-&lt;hr>
-&lt;ol>
-&lt;li id="fn:1">
-&lt;p>建议使用 &lt;code>2.3.3&lt;/code> 以上版本的 zookeeper 注册中心客户端&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
-&lt;/li>
-&lt;/ol>
-&lt;/div></description></item><item><title>Users: 阿里巴巴升级 Dubbo3 全面取代 HSF2</title><link>https://dubbo.apache.org/zh/users/alibaba/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/users/alibaba/</guid><description>
-&lt;p>作为 Dubbo3 的主要定义者以及核心用户，阿里巴巴内部的核心业务线目前均已或正在迁移到 Dubbo3 版本。众所周知，阿里巴巴内部业务一直运行在自研 HSF2 框架之上，HSF2 与 Dubbo2 之间有很深的渊源，两者之间在设计理念上有很多相似之处，但实际上经过多年的发展已经演进成两个完全不同的框架，在 Dubbo3 设计的过程中完全汲取了 HSF2 与 Dubbo2两者的优势，尤其是 HSF2 在阿里内部多年超大规模集群实践的经验。&lt;/p>
-&lt;p>阿里巴巴是如何用开源的 Dubbo3 取代 HSF2的那？一些企业内部特有的诉求并不能完全开源，这一点是怎么做到的？答案就是通过 SPI 扩展，所以在阿里内部也启动了一个全新的 HSF3 项目，HSF3 与以往的 HSF2 完全不同，HSF3 完全就是基于标准 Dubbo3 的 SPI 扩展库，因此它更像是一个 SPI 的插件扩展仓库，汇聚了诸如注册中心扩展、路由组件扩展、监控组件扩展等一系列扩展实现，而其他配置组装、服务暴露、服务发现、地址解析等核心流程都已经完全跑在开源 Dubbo3 之上；在这样的模式下，阿里巴巴的内部实践诉求已经完全体现在开源 Dubbo3 之上，包括内部开发人员也工作在开源 Dubbo3 之上，这对于开源社区的发展是一个很大的保障与补充。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/concepts/dubbo-hsf.png" alt="dubbo-hsf">&lt;/p>
-&lt;p>阿里巴巴的业务线非常广泛，而 Dubbo3 当前也在几乎所有的业务线都已经开始升级。阿里生态如本地生活饿了么、钉钉、考拉等都已经全面升级 Dubbo3；天猫、淘宝等电商核心链路也已完成 Dubbo3 升级，2022 双 11 整个系统将和 Dubbo3 一起迎来第一个峰值考验；阿里云的微服务平台以及多条产品线目前也是基于 Dubbo3 构建。&lt;/p>
-&lt;p>对于阿里巴巴而言，其关注的核心特性包括：&lt;/p>
-&lt;ul>
-&lt;li>应用级服务发现，用于解决超大规模集群下的注册中心容量、消费端实例资源占用问题&lt;/li>
-&lt;li>Triple 协议，解决跨网关 RPC 通信 以及提供 Reactive Stream 通信模型。&lt;/li>
-&lt;li>统一的流量治理规则，通过统一的流量治理规则及控制面实现服务治理能力的统一&lt;/li>
-&lt;/ul>
-&lt;p>关于 Dubbo3 的升级经验与收益分享将持续在此发布。&lt;/p></description></item></channel></rss>
+&lt;/div></description></item></channel></rss>

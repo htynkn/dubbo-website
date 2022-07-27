@@ -178,6 +178,7 @@
 &lt;li>会抛异常的情况：枚举值一边多一种，一边少一种，正好使用了差别的那种，或者属性名相同，类型不同。&lt;/li>
 &lt;/ul>
 &lt;h2 id="使用场景">使用场景&lt;/h2>
+&lt;p>适合大并发小数据量的服务调用，服务消费者远大于服务提供者的情景。&lt;/p>
 &lt;h2 id="使用方式">使用方式&lt;/h2>
 &lt;p>配置协议&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;20880&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
