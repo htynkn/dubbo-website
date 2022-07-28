@@ -24,6 +24,13 @@
 &lt;li>用户可以使用 Dubbo 风格的，基于接口的编程风格来定义和使用远程服务&lt;/li>
 &lt;/ul>
 &lt;h2 id="使用场景">使用场景&lt;/h2>
+&lt;ul>
+&lt;li>需要立即响应才能继续处理的同步后端微服务到微服务通信。&lt;/li>
+&lt;li>需要支持混合编程平台的 Polyglot 环境。&lt;/li>
+&lt;li>性能至关重要的低延迟和高吞吐量通信。&lt;/li>
+&lt;li>点到点实时通信 - gRPC 无需轮询即可实时推送消息，并且能对双向流式处理提供出色的支持。&lt;/li>
+&lt;li>网络受约束环境 - 二进制 gRPC 消息始终小于等效的基于文本的 JSON 消息。&lt;/li>
+&lt;/ul>
 &lt;h2 id="使用方式">使用方式&lt;/h2>
 &lt;h4 id="如何在-dubbo-中使用-grpc">如何在 Dubbo 中使用 gRPC&lt;/h4>
 &lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-grpc">示例&lt;/a>&lt;/p>
