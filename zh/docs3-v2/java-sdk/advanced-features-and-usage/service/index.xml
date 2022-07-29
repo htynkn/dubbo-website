@@ -64,8 +64,13 @@
 &lt;h2 id="参考用例">参考用例&lt;/h2>
 &lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-group">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-group&lt;/a>&lt;/p>
 &lt;h2 id="使用方式">使用方式&lt;/h2>
-&lt;p>Dubbo 服务分组可选择使用 &lt;a href="#properties1">注解配置&lt;/a>、 &lt;a href="#properties2">xml配置&lt;/a> 或 &lt;a href="#properties3">API配置&lt;/a> 方式&lt;/p>
-&lt;h4 id="注解配置">&lt;strong>注解配置&lt;/strong>&lt;/h4>
+&lt;p>Dubbo 服务分组可选择使用方式&lt;/p>
+&lt;ul>
+&lt;li>注解配置&lt;/li>
+&lt;li>xml配置&lt;/li>
+&lt;li>API配置&lt;/li>
+&lt;/ul>
+&lt;h3 id="注解配置">注解配置&lt;/h3>
 &lt;h4 id="服务提供端">服务提供端&lt;/h4>
 &lt;p>使用 @DubboService 注解，添加 group 参数&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@DubboService&lt;/span>&lt;span style="color:#719e07">(&lt;/span>group &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;demo&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
@@ -92,7 +97,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">private&lt;/span> DemoService demoService2&lt;span style="color:#719e07">;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>同样启动 Dubbo 服务后，可在注册中心看到相同服务名不同分组的引用者，以 Nacos 作为注册中心为例，显示如下内容：
 &lt;img src="https://dubbo.apache.org/imgs/blog/service-group-2.png" alt="image-service-group-2.png">&lt;/p>
-&lt;h4 id="xml配置">&lt;strong>xml配置&lt;/strong>&lt;/h4>
+&lt;h3 id="xml配置">xml配置&lt;/h3>
 &lt;h4 id="服务提供端-1">服务提供端&lt;/h4>
 &lt;p>使用 &amp;lt;dubbo:service /&amp;gt; 标签，添加 group 参数&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span>
@@ -133,7 +138,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/beans&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>同样启动 Dubbo 服务后，可在注册中心看到相同服务名不同分组的引用者，以 Nacos 作为注册中心为例，显示如下内容：&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/service-group-2.png" alt="image-service-group-2.png">&lt;/p>
-&lt;h4 id="api配置">&lt;strong>API配置&lt;/strong>&lt;/h4>
+&lt;h3 id="api配置">API配置&lt;/h3>
 &lt;h4 id="服务提供端-2">服务提供端&lt;/h4>
 &lt;p>使用 org.apache.dubbo.config.ServiceConfig 类，添加 group 参数&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// ServiceConfig为重对象，内部封装了与注册中心的连接，以及开启服务端口
