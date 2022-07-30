@@ -1311,7 +1311,7 @@ Configuration lines are expected to be of the following form:&lt;/p>
 &lt;td>可选&lt;/td>
 &lt;td>dubbo&lt;/td>
 &lt;td>服务治理&lt;/td>
-&lt;td>如 metadataType 配置为 remote，则该属性设置 MetadataService 服务所用的通信协议，默认为 dubbo&lt;/td>
+&lt;td>如 metadataType 配置为 local，则该属性设置 MetadataService 服务所用的通信协议，默认为 dubbo&lt;/td>
 &lt;td>3.0.0以上版本&lt;/td>
 &lt;/tr>
 &lt;tr>
@@ -1321,7 +1321,7 @@ Configuration lines are expected to be of the following form:&lt;/p>
 &lt;td>可选&lt;/td>
 &lt;td>&lt;/td>
 &lt;td>服务治理&lt;/td>
-&lt;td>如 metadataType 配置为 remote，则该属性设置 MetadataService 服务所用的端口号&lt;/td>
+&lt;td>如 metadataType 配置为 local，则该属性设置 MetadataService 服务所用的端口号&lt;/td>
 &lt;td>2.7.9以上版本&lt;/td>
 &lt;/tr>
 &lt;tr>
