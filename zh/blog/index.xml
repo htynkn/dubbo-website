@@ -1,4 +1,102 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – Apache Dubbo 博客</title><link>https://dubbo.apache.org/zh/blog/</link><description>Recent content in Apache Dubbo 博客 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: 浅析 Dubbo 3.0 中接口级地址推送性能的优化</title><link>https://dubbo.apache.org/zh/blog/2022/06/23/%E6%B5%85%E6%9E%90-dubbo-3.0-%E4%B8%AD%E6%8E%A5%E5%8F%A3%E7%BA%A7%E5%9C%B0%E5%9D%80%E6%8E%A8%E9%80%81%E6%80%A7%E8%83%BD%E7%9A%84%E4%BC%98%E5%8C%96/</link><pubDate>Thu, 23 Jun 2022 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2022/06/23/%E6%B5%85%E6%9E%90-dubbo-3.0-%E4%B8%AD%E6%8E%A5%E5%8F%A3%E7%BA%A7%E5%9C%B0%E5%9D%80%E6%8E%A8%E9%80%81%E6%80%A7%E8%83%BD%E7%9A%84%E4%BC%98%E5%8C%96/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – Apache Dubbo 博客</title><link>https://dubbo.apache.org/zh/blog/</link><description>Recent content in Apache Dubbo 博客 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: 01 从一个服务提供者的Demo说起</title><link>https://dubbo.apache.org/zh/blog/2022/07/30/01-%E4%BB%8E%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E6%8F%90%E4%BE%9B%E8%80%85%E7%9A%84demo%E8%AF%B4%E8%B5%B7/</link><pubDate>Sat, 30 Jul 2022 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2022/07/30/01-%E4%BB%8E%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E6%8F%90%E4%BE%9B%E8%80%85%E7%9A%84demo%E8%AF%B4%E8%B5%B7/</guid><description>
+&lt;h1 id="1-从一个服务提供者的demo说起">1 从一个服务提供者的Demo说起&lt;/h1>
+&lt;p>为了更方便了解原理,我们先来编写一个Demo,从例子中来看源码实现:&lt;/p>
+&lt;h2 id="11-启动zookeeper">1.1 启动Zookeeper&lt;/h2>
+&lt;p>为了Demo可以正常启动,需要我们先在本地启动一个Zookeeper如下图所示:
+&lt;img src="https://dubbo.apache.org/imgs/blog/source-blog/1-zookeeper.png" alt="在这里插入图片描述">&lt;/p>
+&lt;h2 id="12-服务提供者">1.2 服务提供者&lt;/h2>
+&lt;p>接下来给大家贴一下示例源码,这个源码来源于Dubbo源码目录的 dubbo-demo/dubbo-demo-api 目录下面的dubbo-demo-api-provider子项目,这里我做了删减,方便看核心代码:
+首先我们定义一个服务接口如下所示:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> java.util.concurrent.CompletableFuture&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">DemoService&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * 同步处理的服务方法
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * @param name
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * @return
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> String &lt;span style="color:#268bd2">sayHello&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String name&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * 用于异步处理的服务方法
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * @param name
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * @return
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">default&lt;/span> CompletableFuture&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">sayHelloAsync&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String name&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> CompletableFuture&lt;span style="color:#719e07">.&lt;/span>completedFuture&lt;span style="color:#719e07">(&lt;/span>sayHello&lt;span style="color:#719e07">(&lt;/span>name&lt;span style="color:#719e07">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>服务实现类如下:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.rpc.RpcContext&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.slf4j.Logger&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.slf4j.LoggerFactory&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> java.util.concurrent.CompletableFuture&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">DemoServiceImpl&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> DemoService &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#268bd2">final&lt;/span> Logger logger &lt;span style="color:#719e07">=&lt;/span> LoggerFactory&lt;span style="color:#719e07">.&lt;/span>getLogger&lt;span style="color:#719e07">(&lt;/span>DemoServiceImpl&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Override&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> String &lt;span style="color:#268bd2">sayHello&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String name&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> logger&lt;span style="color:#719e07">.&lt;/span>info&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Hello &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> name &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34;, request from consumer: &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> RpcContext&lt;span style="color:#719e07">.&lt;/span>getServiceContext&lt;span style="color:#719e07">().&lt;/span>getRemoteAddress&lt;span style="color:#719e07">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#2aa198">&amp;#34;Hello &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> name &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34;, response from provider: &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> RpcContext&lt;span style="color:#719e07">.&lt;/span>getServiceContext&lt;span style="color:#719e07">().&lt;/span>getLocalAddress&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Override&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> CompletableFuture&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">sayHelloAsync&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String name&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="13-启用服务">1.3 启用服务&lt;/h2>
+&lt;p>有了服务接口之后我们来启用服务,启用服务的源码如下:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.common.constants.CommonConstants&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.config.ApplicationConfig&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.config.MetadataReportConfig&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.config.ProtocolConfig&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.config.RegistryConfig&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.config.ServiceConfig&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.config.bootstrap.DubboBootstrap&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.demo.DemoService&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">Application&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">main&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String&lt;span style="color:#719e07">[]&lt;/span> args&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> Exception &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> startWithBootstrap&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">startWithBootstrap&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ServiceConfig&lt;span style="color:#719e07">&amp;lt;&lt;/span>DemoServiceImpl&lt;span style="color:#719e07">&amp;gt;&lt;/span> service &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ServiceConfig&lt;span style="color:#719e07">&amp;lt;&amp;gt;();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> service&lt;span style="color:#719e07">.&lt;/span>setInterface&lt;span style="color:#719e07">(&lt;/span>DemoService&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> service&lt;span style="color:#719e07">.&lt;/span>setRef&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">new&lt;/span> DemoServiceImpl&lt;span style="color:#719e07">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> DubboBootstrap bootstrap &lt;span style="color:#719e07">=&lt;/span> DubboBootstrap&lt;span style="color:#719e07">.&lt;/span>getInstance&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> bootstrap&lt;span style="color:#719e07">.&lt;/span>application&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">new&lt;/span> ApplicationConfig&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;dubbo-demo-api-provider&amp;#34;&lt;/span>&lt;span style="color:#719e07">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">.&lt;/span>registry&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">new&lt;/span> RegistryConfig&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;zookeeper://127.0.0.1:2181&amp;#34;&lt;/span>&lt;span style="color:#719e07">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">.&lt;/span>protocol&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">new&lt;/span> ProtocolConfig&lt;span style="color:#719e07">(&lt;/span>CommonConstants&lt;span style="color:#719e07">.&lt;/span>DUBBO&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#719e07">-&lt;/span>1&lt;span style="color:#719e07">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">.&lt;/span>service&lt;span style="color:#719e07">(&lt;/span>service&lt;span style="color:#719e07">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">.&lt;/span>start&lt;span style="color:#719e07">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">.&lt;/span>await&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="14-启用服务后写入zookeeper的节点数据">1.4 启用服务后写入Zookeeper的节点数据&lt;/h2>
+&lt;p>启动服务,这个时候我们打开Zookeeper图形化客户端来看看这个服务在Zookeeper上面写入来哪些数据,如下图:
+&lt;img src="https://dubbo.apache.org/imgs/blog/source-blog/1-zookeeper-data.png" alt="在这里插入图片描述">
+写入Zookeper上的节点用于服务在分布式场景下的协调,这些节点是比较重要的。&lt;/p>
+&lt;p>如果了解过Dubbo的同学,应该会知道Dubbo在低版本的时候会向注册中心中写入服务接口,具体路径在上面的 &lt;strong>dubbo目录下&lt;/strong> ,然后在 &lt;strong>/dubbo/服务接口/&lt;/strong> 路径下写入如下信息:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>服务提供者&lt;/strong>配置信息URL形式&lt;/li>
+&lt;li>&lt;strong>服务消费者&lt;/strong>的配置信息URL形式&lt;/li>
+&lt;li>服务&lt;strong>路由信息&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>配置信息&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;p>上面这个图就是Dubbo3的注册信息了,后面我们也会围绕细节来说明下,这里可以看下新增了:&lt;/p>
+&lt;ul>
+&lt;li>/dubbo/metadata &lt;strong>元数据信息&lt;/strong>&lt;/li>
+&lt;li>/dubbo/mapping 服务和应用的&lt;strong>映射信息&lt;/strong>&lt;/li>
+&lt;li>/dubbo/config &lt;strong>注册中心配置&lt;/strong>&lt;/li>
+&lt;li>/services目录&lt;strong>应用信息&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;p>在这里可以大致了解下,在后面会有更详细的源码解析这个示例代码.通过透析代码来看透Dubbo3服务注册原理,服务提供原理。&lt;/p>
+&lt;p>原文： &lt;a href="https://blog.elastic.link/2022/07/10/dubbo/1-cong-yi-ge-demo-shuo-qi/">&amp;laquo;从一个服务提供者的Demo说起&amp;raquo;&lt;/a>&lt;/p></description></item><item><title>Blog: 浅析 Dubbo 3.0 中接口级地址推送性能的优化</title><link>https://dubbo.apache.org/zh/blog/2022/06/23/%E6%B5%85%E6%9E%90-dubbo-3.0-%E4%B8%AD%E6%8E%A5%E5%8F%A3%E7%BA%A7%E5%9C%B0%E5%9D%80%E6%8E%A8%E9%80%81%E6%80%A7%E8%83%BD%E7%9A%84%E4%BC%98%E5%8C%96/</link><pubDate>Thu, 23 Jun 2022 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2022/06/23/%E6%B5%85%E6%9E%90-dubbo-3.0-%E4%B8%AD%E6%8E%A5%E5%8F%A3%E7%BA%A7%E5%9C%B0%E5%9D%80%E6%8E%A8%E9%80%81%E6%80%A7%E8%83%BD%E7%9A%84%E4%BC%98%E5%8C%96/</guid><description>
 &lt;h2 id="url-简介">URL 简介&lt;/h2>
 &lt;p>在阐述地址推送性能的具体优化之前，我们有必要先了解一下与之息息相关的内容 &amp;mdash; URL。&lt;/p>
 &lt;h3 id="定义">定义&lt;/h3>
@@ -8335,69 +8433,4 @@ Reactive Stream 引入 RPC，带来更丰富的通信语义和 API 编程模型�
 &lt;li>建议大家根据实际业务场景来慎重权衡sidecar模式下运维复杂性和收益回报。&lt;/li>
 &lt;li>一定把servicemesh设定在云原生的上下文中才具意义，离开了Kubernetes谈servicemesh的实践是不建议的大跃进。
 最后希望大家一起共建共享的Dubbo开源社区，谢谢。&lt;/li>
-&lt;/ol></description></item><item><title>Blog: Dubbo服务端异步接口的实现背景和实践</title><link>https://dubbo.apache.org/zh/blog/2019/11/02/dubbo%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%BC%82%E6%AD%A5%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%AE%9E%E7%8E%B0%E8%83%8C%E6%99%AF%E5%92%8C%E5%AE%9E%E8%B7%B5/</link><pubDate>Sat, 02 Nov 2019 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2019/11/02/dubbo%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%BC%82%E6%AD%A5%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%AE%9E%E7%8E%B0%E8%83%8C%E6%99%AF%E5%92%8C%E5%AE%9E%E8%B7%B5/</guid><description>
-&lt;h2 id="铺垫">铺垫&lt;/h2>
-&lt;p>建议先对Dubbo的处理过程中涉及的线程阶段先做个了解，具体可参考&lt;a href="http://dubbo.apache.org/zh-cn/blog/dubboAsync_client.html">Dubbo客户端异步接口的实现背景和使用场景&lt;/a>。&lt;/p>
-&lt;h2 id="实现背景">实现背景&lt;/h2>
-&lt;p>有必要比较详细点的介绍下服务端的线程策略来加深用户在选择服务端异步的判断依据，同时有必要引出协程这一在服务端异步中常常会用到的“秘密武器”。&lt;/p>
-&lt;h3 id="服务端的线程策略">服务端的线程策略&lt;/h3>
-&lt;p>Dubbo支持多种NIO框架来做Remoting的协议实现，无论是Netty，Mina或者Grizzly，实现都大同小异，都是基于事件驱动的方式来做网络通道建立，数据流读取的。其中以Grizzly对于&lt;a href="https://javaee.github.io/grizzly/iostrategies.html">线程策略&lt;/a>的介绍为例，通常支持以下四种。Dubbo作为一个RPC框架，默认选择的是第一种策略，原因在于业务服务是CPU密集型还是IO阻塞型，是无法断定的，第一种策略是最保险的策略。当然，对于这几种策略有了了解后，再结合业务场景做针对性的选择是最完美的。&lt;/p>
-&lt;ol>
-&lt;li>&lt;strong>Worker-thread策略&lt;/strong>&lt;/li>
-&lt;/ol>
-&lt;p>最常用最普适的策略，其中IO线程将NIO事件处理委托给工作线程。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubboasyn_server/1.png" alt="workerthread-strategy.png">&lt;/p>
-&lt;p>此策略具有很高的伸缩性。我们可以根据需要更改IO和worker线程池的大小，并且不存在在特定NIO事件处理期间可能发生的，同一Selector各个Channel之间相互干扰的风险。&lt;/p>
-&lt;p>缺点是有线程上下文切换的代价。&lt;/p>
-&lt;ol start="2">
-&lt;li>&lt;strong>Same-thread策略&lt;/strong>&lt;/li>
-&lt;/ol>
-&lt;p>可能是最有效的策略。与第一种不同，同一线程处理当前线程中的NIO事件，避免了昂贵的线程上下文切换。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubboasyn_server/2.png" alt="samethread-strategy.png">&lt;/p>
-&lt;p>这个策略可以调整IO线程池大小，也是具备可伸缩性；缺点也很明显，它要求业务处理中一定不要有阻塞处理，因为它可能会阻止在同一个IO线程上发生的其他NIO事件的处理。&lt;/p>
-&lt;ol start="3">
-&lt;li>&lt;strong>Dynamic策略&lt;/strong>&lt;/li>
-&lt;/ol>
-&lt;p>如前所述，前两种策略具有明显的优点和缺点。但是，如果策略可以尝试在运行时根据当前条件（负载，收集的统计信息等）巧妙地交换它们，何如？&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubboasyn_server/3.png" alt="dynamic-strategy.png">&lt;/p>
-&lt;p>这种策略可能会带来很多好处，能更好地控制资源，前提是不要使条件评估逻辑过载，防止评估判断的复杂性会使这种策略效率低下。
-多说一句，希望大家对这个策略多留意一下，它可能是Dubbo服务端异步方式的最佳搭配。我也多扯个淡，这几天关注了些adaptive XX或者predictive XX，这里看到dynamic真是亲切，Dubbo作为产品级生产级的微服务解决方案，是必须既要adaptive，又要predictive，还要dynamic，哈哈。&lt;/p>
-&lt;ol start="4">
-&lt;li>&lt;strong>Leader-follower策略&lt;/strong>&lt;/li>
-&lt;/ol>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubboasyn_server/4.png" alt="leaderfollower-strategy.png">&lt;/p>
-&lt;p>此策略类似于第一种，但它不是将NIO事件处理传递给worker线程，而是通过将控制传递给Selector给工作线程，并将实际NIO事件处理当前IO线程中。这种策略其实是把worker和IO线程阶段做了混淆，个人不建议。&lt;/p>
-&lt;h3 id="协程与线程">协程与线程&lt;/h3>
-&lt;p>在CPU资源的管理上，OS和JVM的最小调度单位都是线程，业务应用通过扩展实现的协程包是可以具备独立的运行单位，事实上也是基于线程来做的，核心应该是遇到IO阻塞，或者锁等待时，保存上下文，然后切换到另一个协程。至于说的协程开销低，能更高效的使用CPU，这些考虑到协程库的用户态实现和上下文设计是支持的，但也建议大家结合实际业务场景做性能测试。&lt;/p>
-&lt;p>&lt;strong>在默认的Dubbo线程策略中，是有worker线程池来执行业务逻辑，但也常常会发生ThreadPool Full的问题，为了尽快释放worker线程，在业务服务的实现中会另起线程。代价是再次增加线程上下文切换，同时需要考虑链路级别的数据传送(比如tracing信息)和流控的出口控制等等。当然，如果Dubbo能够切换到Same-thread策略，再配合协程库的支持，服务端异步是一种值得推荐的使用方式。&lt;/strong>&lt;/p>
-&lt;h2 id="示例">示例&lt;/h2>
-&lt;p>通过示例来体验下Dubbo服务端异步接口。Demo代码请访问github之&lt;a href="https://github.com/dubbo/dubbo-samples/tree/master/dubbo-samples-notify">https://github.com/dubbo/dubbo-samples/tree/master/dubbo-samples-notify&lt;/a>。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">AsyncServiceImpl&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> AsyncService &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Override&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> String &lt;span style="color:#268bd2">sayHello&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String name&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Main sayHello() method start.&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">final&lt;/span> AsyncContext asyncContext &lt;span style="color:#719e07">=&lt;/span> RpcContext&lt;span style="color:#719e07">.&lt;/span>startAsync&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">new&lt;/span> Thread&lt;span style="color:#719e07">(()&lt;/span> &lt;span style="color:#719e07">-&amp;gt;&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> asyncContext&lt;span style="color:#719e07">.&lt;/span>signalContextSwitch&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Attachment from consumer: &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> RpcContext&lt;span style="color:#719e07">.&lt;/span>getContext&lt;span style="color:#719e07">().&lt;/span>getAttachment&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;consumer-key1&amp;#34;&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34; -- Async start.&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">try&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Thread&lt;span style="color:#719e07">.&lt;/span>sleep&lt;span style="color:#719e07">(&lt;/span>500&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">catch&lt;/span> &lt;span style="color:#719e07">(&lt;/span>InterruptedException e&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> e&lt;span style="color:#719e07">.&lt;/span>printStackTrace&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> asyncContext&lt;span style="color:#719e07">.&lt;/span>write&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Hello &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> name &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34;, response from provider.&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34; -- Async end.&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}).&lt;/span>start&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Main sayHello() method end.&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#2aa198">&amp;#34;hello, &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> name&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="实践建议">实践建议&lt;/h2>
-&lt;ul>
-&lt;li>不要迷信服务端异步。&lt;/li>
-&lt;li>服务端异步在Event-Driven或者Reactive面前基本是伪命题.&lt;span data-type="color" style="color:rgb(36, 41, 46)">&lt;span data-type="background" style="background-color:rgb(255, 255, 255)">补充下原因：服务端异步初衷是说Dubbo的服务端业务线程数（默认是200个）不够，但其实在event-driven模式下，200个肯定不需要那么多，只需要cpu核数那样就可以。只要业务实现是非阻塞的纯异步方式的业务逻辑处理，用再多的线程数都是浪费资源。&lt;/span>&lt;/span>&lt;/li>
-&lt;li>要用服务端异步，建议服务端的线程策略采用same thread模式+协程包。&lt;/li>
-&lt;/ul>
-&lt;h2 id="小结">小结&lt;/h2>
-&lt;p>Dubbo在支持业务应用时，会碰到千奇百怪的需求场景，服务端异步为用户提供了一种解决ThreadPool Full的方案。当发生ThreadPool Full的情况下，如果当前系统瓶颈是CPU，不建议用这种方案；如果系统Load不高，调高worker的线程数目，或者采用服务端异步，都是可以考虑的。&lt;/p></description></item></channel></rss>
+&lt;/ol></description></item></channel></rss>

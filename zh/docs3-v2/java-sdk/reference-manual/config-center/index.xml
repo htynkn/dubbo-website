@@ -1,42 +1,174 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – 配置中心</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config-center/</link><description>Recent content in 配置中心 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config-center/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs3-V2: 配置中心概述</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config-center/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config-center/overview/</guid><description>
-&lt;p>配置中心在 Dubbo 中承担3个职责：&lt;/p>
-&lt;ol>
-&lt;li>外部化配置：启动配置的集中式存储 （简单理解为 dubbo.properties 的外部化存储）。&lt;/li>
-&lt;li>服务治理：服务治理规则的存储与通知。&lt;/li>
-&lt;li>动态配置：控制动态开关或者动态变更属性值&lt;/li>
-&lt;/ol>
-&lt;p>启用动态配置，以 Zookeeper 为例，可查看 &lt;a href="../../references/xml/dubbo-config-center">配置中心属性详解&lt;/a>&lt;/p>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – 配置中心</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config-center/</link><description>Recent content in 配置中心 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config-center/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs3-V2: Zookeeper</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config-center/zookeeper/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config-center/zookeeper/</guid><description>
+&lt;h2 id="1-前置条件">1 前置条件&lt;/h2>
+&lt;ul>
+&lt;li>了解 &lt;a href="../../../quick-start/spring-boot/">Dubbo 基本开发步骤&lt;/a>&lt;/li>
+&lt;li>安装并启动 &lt;a href="https://zookeeper.apache.org/">Zookeeper&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="2-使用说明">2 使用说明&lt;/h2>
+&lt;p>在此查看&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-configcenter/dubbo-samples-configcenter-annotation">完整示例代码&lt;/a>&lt;/p>
+&lt;h3 id="21-增加-maven-依赖">2.1 增加 Maven 依赖&lt;/h3>
+&lt;p>如果项目已经启用 Zookeeper 作为注册中心，则无需增加任何额外配置。&lt;/p>
+&lt;p>如果未使用 Zookeeper 注册中心，则请参考 &lt;a href="../../registry/zookeeper/#21-%E5%A2%9E%E5%8A%A0-maven-%E4%BE%9D%E8%B5%96">为注册中心增加 Zookeeper 相关依赖&lt;/a>。&lt;/p>
+&lt;h3 id="22-启用-zookeeper-配置中心">2.2 启用 Zookeeper 配置中心&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:config-center&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;zookeeper://127.0.0.1:2181&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>dubbo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> config-center
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">address&lt;/span>: zookeeper://127.0.0.1:2181
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.config-center.address=zookeeper://127.0.0.1:2181
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>ConfigCenterConfig configCenter &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ConfigCenterConfig&lt;span style="color:#719e07">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>configCenter&lt;span style="color:#719e07">.&lt;/span>setAddress&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;zookeeper://127.0.0.1:2181&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>为了兼容 2.6.x 版本配置，在使用 Zookeeper 作为注册中心，且没有显示配置配置中心的情况下，Dubbo 框架会默认将此 Zookeeper 用作配置中心，但将只作服务治理用途。&lt;/p>
-&lt;/blockquote></description></item><item><title>Docs3-V2: Zookeeper</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config-center/zookeeper/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config-center/zookeeper/</guid><description>
-&lt;h2 id="开启-zookeeper-配置中心">开启 Zookeeper 配置中心&lt;/h2>
-&lt;p>使用以下任一配置方式，启用 Zookeeper 配置中心&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="高级配置">高级配置&lt;/h2>
-&lt;h3 id="隔离">隔离&lt;/h3>
-&lt;h3 id="heading">&lt;/h3>
-&lt;h3 id="隔离-1">隔离&lt;/h3>
-&lt;h2 id="工作原理">工作原理&lt;/h2></description></item><item><title>Docs3-V2: Nacos</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config-center/nacos/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config-center/nacos/</guid><description>
-&lt;h2 id="外部化配置">外部化配置&lt;/h2>
-&lt;p>请参考文档 &lt;a href="../configuration/external-config">外部化配置&lt;/a>&lt;/p>
-&lt;h2 id="动态配置">动态配置&lt;/h2>
-&lt;p>[TODO 待完善]&lt;/p>
-&lt;h2 id="服务治理">服务治理&lt;/h2>
-&lt;h4 id="zookeeper">Zookeeper&lt;/h4>
-&lt;p>默认节点结构：&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>address&lt;/code> 格式请参考 &lt;a href="../../registry/zookeeper/#22-%E9%85%8D%E7%BD%AE%E5%B9%B6%E5%90%AF%E7%94%A8-zookeeper">zookeeper 注册中心 - 启用配置&lt;/a>&lt;/p>
+&lt;h2 id="3-高级配置">3 高级配置&lt;/h2>
+&lt;p>如要开启认证鉴权，请参考 &lt;a href="../../registry/zookeeper/#31-%E8%AE%A4%E8%AF%81%E4%B8%8E%E9%89%B4%E6%9D%83">zookeeper 注册中心 - 启用认证鉴权&lt;/a>&lt;/p>
+&lt;h3 id="31-外部化配置">3.1 外部化配置&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>dubbo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> config-center
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">address&lt;/span>: zookeeper://127.0.0.1:2181
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">config-file&lt;/span>: dubbo.properties
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>config-file&lt;/code> - 外部化配置文件 key 值，默认 &lt;code>dubbo.properties&lt;/code>。&lt;code>config-file&lt;/code> 代表将 Dubbo 配置文件存储在远端注册中心时，文件在配置中心对应的 key 值，通常不建议修改此配置项。&lt;/p>
+&lt;h3 id="31-设置-group-与-namespace">3.1 设置 group 与 namespace&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>dubbo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> config-center
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">address&lt;/span>: zookeeper://127.0.0.1:2181
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">group&lt;/span>: dubbo-cluster1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">namespace&lt;/span>: dev1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>对配置中心而言，&lt;code>group&lt;/code> 与 &lt;code>namespace&lt;/code> 应该是全公司（集群）统一的，应该避免不同应用使用不同的值。&lt;/p>
+&lt;h2 id="4-工作原理">4 工作原理&lt;/h2>
+&lt;h3 id="41-外部化配置">4.1 外部化配置&lt;/h3>
+&lt;p>外部化配置的存储结构如下图所示&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/zk-configcenter.jpg" alt="zk-configcenter.jpg">&lt;/p>
+&lt;ul>
+&lt;li>namespace，用于不同配置的环境隔离。&lt;/li>
+&lt;li>config，Dubbo约定的固定节点，不可更改，所有配置和流量治理规则都存储在此节点下。&lt;/li>
+&lt;li>dubbo 与 application，分别用来隔离全局配置、应用级别配置：dubbo 是默认 group 值，application 对应应用名&lt;/li>
+&lt;li>dubbo.properties，此节点的node value存储具体配置内容&lt;/li>
+&lt;/ul>
+&lt;h3 id="42-流量治理规则">4.2 流量治理规则&lt;/h3>
+&lt;p>所有流量治理规则默认都存储在 &lt;code>/dubbo/config&lt;/code> 节点下，具体节点结构图如下：&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/zk-configcenter-governance.jpg" alt="zk-configcenter-governance">&lt;/p>
 &lt;ul>
 &lt;li>namespace，用于不同配置的环境隔离。&lt;/li>
-&lt;li>config，Dubbo 约定的固定节点，不可更改，所有配置和服务治理规则都存储在此节点下。&lt;/li>
+&lt;li>config，Dubbo 约定的固定节点，不可更改，所有配置和流量治理规则都存储在此节点下。&lt;/li>
 &lt;li>dubbo，所有服务治理规则都是全局性的，dubbo 为默认节点&lt;/li>
 &lt;li>configurators/tag-router/condition-router/migration，不同的服务治理规则类型，node value 存储具体规则内容&lt;/li>
+&lt;/ul></description></item><item><title>Docs3-V2: Nacos</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config-center/nacos/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config-center/nacos/</guid><description>
+&lt;h2 id="1-前置条件">1 前置条件&lt;/h2>
+&lt;ul>
+&lt;li>了解 &lt;a href="../../../quick-start/spring-boot/">Dubbo 基本开发步骤&lt;/a>&lt;/li>
+&lt;li>安装并启动 &lt;a href="https://nacos.io/zh-cn/docs/quick-start.html">Nacos&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h4 id="apollo">Apollo&lt;/h4>
+&lt;blockquote>
+&lt;p>当Dubbo使用&lt;code>3.0.0&lt;/code>及以上版本时，需要使用Nacos &lt;code>2.0.0&lt;/code>及以上版本。&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="2-使用说明">2 使用说明&lt;/h2>
+&lt;h3 id="21-增加-maven-依赖">2.1 增加 Maven 依赖&lt;/h3>
+&lt;p>如果项目已经启用 Nacos 作为注册中心，则无需增加任何额外配置。&lt;/p>
+&lt;p>如果未启用 Nacos 注册中心，则请参考 &lt;a href="../../registry/nacos/#21-%E5%A2%9E%E5%8A%A0%E4%BE%9D%E8%B5%96">为注册中心增加 Nacos 依赖&lt;/a>。&lt;/p>
+&lt;h3 id="22-启用-zookeeper-配置中心">2.2 启用 Zookeeper 配置中心&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:config-center&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;nacos://127.0.0.1:8848&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>dubbo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> config-center
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">address&lt;/span>: nacos://127.0.0.1:8848
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.config-center.address=nacos://127.0.0.1:8848
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>ConfigCenterConfig configCenter &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ConfigCenterConfig&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>configCenter&lt;span style="color:#719e07">.&lt;/span>setAddress&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;nacos://127.0.0.1:8848&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>address&lt;/code> 格式请参考 &lt;a href="../../registry/nacos/#2.2-%E9%85%8D%E7%BD%AE%E5%B9%B6%E5%90%AF%E7%94%A8-Nacos">Nacos 注册中心 - 启用配置&lt;/a>&lt;/p>
+&lt;h2 id="3-高级配置">3 高级配置&lt;/h2>
+&lt;p>如要开启认证鉴权，请参考 &lt;a href="../../registry/nacos/#3.1-%E8%AE%A4%E8%AF%81">Nacos 注册中心 - 启用认证鉴权&lt;/a>&lt;/p>
+&lt;h3 id="31-外部化配置">3.1 外部化配置&lt;/h3>
+&lt;h4 id="311-全局外部化配置">3.1.1 全局外部化配置&lt;/h4>
+&lt;p>&lt;strong>1. 应用开启 config-center 配置&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>dubbo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> config-center
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">address&lt;/span>: nacos://127.0.0.1:2181
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">config-file&lt;/span>: dubbo.properties &lt;span style="color:#586e75"># optional&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>config-file&lt;/code> - 全局外部化配置文件 key 值，默认 &lt;code>dubbo.properties&lt;/code>。&lt;code>config-file&lt;/code> 代表将 Dubbo 配置文件存储在远端注册中心时，文件在配置中心对应的 key 值，通常不建议修改此配置项。&lt;/p>
+&lt;p>&lt;strong>2. Nacos Server 增加配置&lt;/strong>&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/nacos-configcenter-global-properties.png" alt="nacos-configcenter-global-properties.png">&lt;/p>
+&lt;p>dataId 是 &lt;code>dubbo.properties&lt;/code>，group 分组与 config-center 保持一致，如未设置则默认是 &lt;code>dubbo&lt;/code>。&lt;/p>
+&lt;h4 id="312-应用特有外部化配置">3.1.2 应用特有外部化配置&lt;/h4>
+&lt;p>&lt;strong>1. 应用开启 config-center 配置&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>dubbo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> config-center
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">address&lt;/span>: nacos://127.0.0.1:2181
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">app-config-file&lt;/span>: dubbo.properties &lt;span style="color:#586e75"># optional&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>app-config-file&lt;/code> - 当前应用特有的外部化配置文件 key 值，如 &lt;code>app-name-dubbo.properties&lt;/code>，仅在需要覆盖全局外部化配置文件 &lt;code>config-file&lt;/code> 时才配置。&lt;/p>
+&lt;p>&lt;strong>2. Nacos Server 增加配置&lt;/strong>&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/nacos-configcenter-application-properties.png" alt="nacos-configcenter-application-properties.png">&lt;/p>
+&lt;p>dataId 是 &lt;code>dubbo.properties&lt;/code>，group 分组为应用名即 &lt;code>demo-provider&lt;/code>。&lt;/p>
+&lt;h3 id="32-设置-group-与-namespace">3.2 设置 group 与 namespace&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>dubbo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> config-center
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">address&lt;/span>: zookeeper://127.0.0.1:2181
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">group&lt;/span>: dubbo-cluster1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">namespace&lt;/span>: dev1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>对配置中心而言，&lt;code>group&lt;/code> 与 &lt;code>namespace&lt;/code> 应该是全公司（集群）统一的，应该避免不同应用使用不同的值。&lt;/p>
+&lt;h2 id="4-工作原理">4 工作原理&lt;/h2>
+&lt;p>对 Nacos 而言，所有流量治理规则和外部化配置都应该是全局可见的，因此相同逻辑集群内的应用都必须使用相同的 namespace 与 group。其中，namespace 的默认值是 &lt;code>public&lt;/code>，group 默认值是 &lt;code>dubbo&lt;/code>，应用不得擅自修改 namespace 与 group，除非能保持全局一致。&lt;/p>
+&lt;h3 id="41-流量治理规则">4.1 流量治理规则&lt;/h3>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/nacos-configcenter-governance.png" alt="nacos-configcenter-governance.jpg">&lt;/p>
+&lt;p>流量治理规则有多种类型，不同类型的规则 dataId 的后缀是不同的：&lt;/p>
+&lt;ul>
+&lt;li>configurators，&lt;a href="../../examples/config-rule">覆盖规则&lt;/a>&lt;/li>
+&lt;li>tag-router，&lt;a href="../../examples/routing-rule">标签路由&lt;/a>&lt;/li>
+&lt;li>condition-router，&lt;a href="../../examples/condition-router">条件路由&lt;/a>&lt;/li>
+&lt;li>migration, &lt;a href="../../examples/todo">迁移规则&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs3-V2: Apollo</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config-center/apollo/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config-center/apollo/</guid><description>
+&lt;h2 id="1-前置条件">1 前置条件&lt;/h2>
+&lt;ul>
+&lt;li>了解 &lt;a href="../../../quick-start/spring-boot/">Dubbo 基本开发步骤&lt;/a>&lt;/li>
+&lt;li>安装并启动 &lt;a href="https://www.apolloconfig.com/#/zh/README">Apollo&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="2-使用说明">2 使用说明&lt;/h2>
+&lt;p>在此查看&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-configcenter/dubbo-samples-configcenter-apollo">完整示例代码&lt;/a>&lt;/p>
+&lt;h3 id="21-增加-maven-依赖">2.1 增加 Maven 依赖&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.dubbo&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>3.0.9&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>com.ctrip.framework.apollo&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>apollo-openapi&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>2.0.0&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>com.ctrip.framework.apollo&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>apollo-client&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>2.0.0&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="22-启用-apollo-配置中心">2.2 启用 Apollo 配置中心&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:config-center&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;apollo://localhost:8080&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>dubbo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> config-center
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">address&lt;/span>: apollo://localhost:8080
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.config-center.address=apollo://localhost:8080
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>ConfigCenterConfig configCenter &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ConfigCenterConfig&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>configCenter&lt;span style="color:#719e07">.&lt;/span>setAddress&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;apollo://localhost:8080&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="3-高级配置">3 高级配置&lt;/h2>
+&lt;h3 id="31-配置隔离">3.1 配置隔离&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:config-center&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;apollo&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;127.0.0.1:2181&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Apollo中的一个核心概念是命名空间 - namespace（和上面zookeeper的namespace概念不同），在这里全局和应用级别配置就是通过命名空间来区分的。&lt;/p>
+&lt;p>默认情况下，Dubbo会从名叫&lt;code>dubbo&lt;/code>（由于 Apollo 不支持特殊后缀 &lt;code>.properties&lt;/code> ）的命名空间中读取全局配置（&lt;code>&amp;lt;dubbo:config-center namespace=&amp;quot;your namespace&amp;quot;&amp;gt;&lt;/code>）&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/apollo-configcenter-dubbo.png" alt="apollo-configcenter-dubbo.png">&lt;/p>
+&lt;p>由于 Apollo 也默认将会在 &lt;code>dubbo&lt;/code> namespace 中存储服务治理规则（如路由规则），建议通过单独配置 &lt;code>group&lt;/code> 将服务治理和配置文件托管分离开，以 XML 配置方式为例：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo&lt;/span> namespace=&lt;span style="color:#2aa198">&amp;#34;governance&amp;#34;&lt;/span> group =&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这里，服务治理规则将存储在 governance namespace，而配置文件将存储在 dubbo namespace，如下图所示：
+&lt;img src="https://dubbo.apache.org/imgs/user/apollo-configcenter-governance-dubbo.png" alt="apollo-configcenter-governance-dubbo.png">&lt;/p>
+&lt;blockquote>
+&lt;p>关于文件配置托管，相当于是把 &lt;code>dubbo.properties&lt;/code> 配置文件的内容存储在了 Apollo 中，应用通过关联共享的 &lt;code>dubbo&lt;/code> namespace 继承公共配置,
+应用也可以按照 Apollo 的做法来覆盖个别配置项。&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="4-工作原理">4 工作原理&lt;/h2>
 &lt;p>所有的服务治理规则都是全局性的，默认从公共命名空间 &lt;code>dubbo&lt;/code> 读取和订阅：&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/apollo-configcenter-governance.jpg" alt="apollo-configcenter-governance.jpg">&lt;/p>
 &lt;p>不同的规则以不同的 key 后缀区分：&lt;/p>
@@ -45,14 +177,4 @@
 &lt;li>tag-router，&lt;a href="../../examples/routing-rule">标签路由&lt;/a>&lt;/li>
 &lt;li>condition-router，&lt;a href="../../examples/condition-router">条件路由&lt;/a>&lt;/li>
 &lt;li>migration, &lt;a href="../../examples/todo">迁移规则&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="nacos">Nacos&lt;/h4>
-&lt;p>所有的服务治理规则都是全局的，默认从 namespace: &lt;code>public&lt;/code> 下进行读取， 通过 dataId: &lt;code>interface name&lt;/code> 以及 group: &lt;code>dubbo&lt;/code> 去读取和订阅：&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/nacos-configcenter-governance.png" alt="nacos-configcenter-governance.jpg">&lt;/p>
-&lt;p>不同的规则以 dataId 的后缀区分：&lt;/p>
-&lt;ul>
-&lt;li>configurators，&lt;a href="../../examples/config-rule">覆盖规则&lt;/a>&lt;/li>
-&lt;li>tag-router，&lt;a href="../../examples/routing-rule">标签路由&lt;/a>&lt;/li>
-&lt;li>condition-router，&lt;a href="../../examples/condition-router">条件路由&lt;/a>&lt;/li>
-&lt;li>migration, &lt;a href="../../examples/todo">迁移规则&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Docs3-V2: Apollo</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config-center/apollo/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config-center/apollo/</guid><description/></item></channel></rss>
+&lt;/ul></description></item></channel></rss>

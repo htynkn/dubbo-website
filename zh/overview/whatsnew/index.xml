@@ -57,12 +57,12 @@
 &lt;li>完善的异步和流式支持。带来从底层协议到上层业务的性能提升，易于构建全链路异步以及严格保证消息顺序的流式服务。&lt;/li>
 &lt;/ol>
 &lt;p>目前 Java 和 Go 的 Dubbo SDK 已全面支持 Triple 协议。在阿里巴巴，Triple 协议广泛用于跨环境、跨语言、跨生态互通，已有数十万容器生产级使用。&lt;/p>
-&lt;p>Java SDK 支持 &lt;a href="../../../java-sdk/reference-manual/protocol/triple/idl">IDL 生成 Stub&lt;/a>
-和 &lt;a href="../../../java-sdk/reference-manual/protocol/triple/idl">Java Interface&lt;/a> 两种方式，多语言、生态互通、流式需求推荐使用 IDL 方式，现有服务平滑升级推荐使用
+&lt;p>Java SDK 支持 &lt;a href="../../../docs3-v2/java-sdk/reference-manual/protocol/triple/idl">IDL 生成 Stub&lt;/a>
+和 &lt;a href="../../../docs3-v2/java-sdk/reference-manual/protocol/triple/idl">Java Interface&lt;/a> 两种方式，多语言、生态互通、流式需求推荐使用 IDL 方式，现有服务平滑升级推荐使用
 Interface 方式。&lt;/p>
 &lt;ul>
 &lt;li>Dubbo2 老用户如何&lt;a href="TBD">从现有协议升级至 Triple&lt;/a>&lt;/li>
-&lt;li>新用户或业务参考&lt;a href="../../../docs3-v2/java-sdk/quick-start">Dubbo3 Triple Quick Start&lt;/a>&lt;/li>
+&lt;li>新用户或业务参考&lt;a href="../../../docs3-v2/java-sdk/quick-start/idl/">Dubbo3 Triple Quick Start&lt;/a>&lt;/li>
 &lt;li>深入了解 Triple 协议:&lt;a href="https://github.com/apache/dubbo-awesome/blob/master/proposals/D0-triple.md">Dubbo3 Triple 协议设计与原理&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Overview: 应用级服务发现</title><link>https://dubbo.apache.org/zh/overview/whatsnew/service-discovery/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/overview/whatsnew/service-discovery/</guid><description>
 &lt;p>在这里查看更多文档&lt;/p>
