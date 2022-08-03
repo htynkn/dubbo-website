@@ -984,7 +984,66 @@
 &lt;li>服务治理规则：org.apache.dubbo.demo.DemoService:1.0.0:group1.configurators&lt;/li>
 &lt;/ul>
 &lt;h3 id="apollo">Apollo&lt;/h3>
-&lt;p>Apollo 与 Nacos 类似，请参考动态配置中心使用文档中关于 Apollo 部分的描述。&lt;/p></description></item><item><title>Docs3-V2: 消息派发扩展</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/description/dispatcher/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/description/dispatcher/</guid><description>
+&lt;p>Apollo 与 Nacos 类似，请参考动态配置中心使用文档中关于 Apollo 部分的描述。&lt;/p></description></item><item><title>Docs3-V2: 元数据中心扩展</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/description/metadata-report/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/description/metadata-report/</guid><description>
+&lt;h2 id="设计目的">设计目的&lt;/h2>
+&lt;p>请参见 &lt;a href="../../../metadata-center/overview/">元数据中心手册&lt;/a>&lt;/p>
+&lt;h2 id="扩展接口">扩展接口&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>org.apache.dubbo.metadata.store.MetadataReportFactory&lt;/code>&lt;/li>
+&lt;li>&lt;code>org.apache.dubbo.metadata.store.MetadataReport&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h2 id="已知扩展">已知扩展&lt;/h2>
+&lt;h2 id="实现原理">实现原理&lt;/h2>
+&lt;h3 id="spi定义">SPI定义&lt;/h3>
+&lt;p>参考：org.apache.dubbo.metadata.store.MetadataReportFactory，org.apache.dubbo.metadata.store.MetadataReport&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@SPI&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;redis&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">MetadataReportFactory&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Adaptive&lt;/span>&lt;span style="color:#719e07">({&lt;/span>&lt;span style="color:#2aa198">&amp;#34;protocol&amp;#34;&lt;/span>&lt;span style="color:#719e07">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> MetadataReport &lt;span style="color:#268bd2">getMetadataReport&lt;/span>&lt;span style="color:#719e07">(&lt;/span>URL url&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="自定义元数据的存储">自定义元数据的存储&lt;/h3>
+&lt;p>下面以Redis存储为例进行说明。&lt;/p>
+&lt;p>新建一个project，需要支持以下修改：&lt;/p>
+&lt;h4 id="扩展abstractmetadatareport">扩展AbstractMetadataReport&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">RedisMetadataReport&lt;/span> &lt;span style="color:#268bd2">extends&lt;/span> AbstractMetadataReport &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">final&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> Logger logger &lt;span style="color:#719e07">=&lt;/span> LoggerFactory&lt;span style="color:#719e07">.&lt;/span>getLogger&lt;span style="color:#719e07">(&lt;/span>RedisMetadataReport&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">final&lt;/span> JedisPool pool&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">RedisMetadataReport&lt;/span>&lt;span style="color:#719e07">(&lt;/span>URL url&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">super&lt;/span>&lt;span style="color:#719e07">(&lt;/span>url&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> pool &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> JedisPool&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">new&lt;/span> JedisPoolConfig&lt;span style="color:#719e07">(),&lt;/span> url&lt;span style="color:#719e07">.&lt;/span>getHost&lt;span style="color:#719e07">(),&lt;/span> url&lt;span style="color:#719e07">.&lt;/span>getPort&lt;span style="color:#719e07">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Override&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">protected&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">doStoreProviderMetadata&lt;/span>&lt;span style="color:#719e07">(&lt;/span>ProviderMetadataIdentifier providerMetadataIdentifier&lt;span style="color:#719e07">,&lt;/span> String serviceDefinitions&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">this&lt;/span>&lt;span style="color:#719e07">.&lt;/span>storeMetadata&lt;span style="color:#719e07">(&lt;/span>providerMetadataIdentifier&lt;span style="color:#719e07">,&lt;/span> serviceDefinitions&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Override&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">protected&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">doStoreConsumerMetadata&lt;/span>&lt;span style="color:#719e07">(&lt;/span>ConsumerMetadataIdentifier consumerMetadataIdentifier&lt;span style="color:#719e07">,&lt;/span> String value&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">this&lt;/span>&lt;span style="color:#719e07">.&lt;/span>storeMetadata&lt;span style="color:#719e07">(&lt;/span>consumerMetadataIdentifier&lt;span style="color:#719e07">,&lt;/span> value&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">storeMetadata&lt;/span>&lt;span style="color:#719e07">(&lt;/span>MetadataIdentifier metadataIdentifier&lt;span style="color:#719e07">,&lt;/span> String v&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">try&lt;/span> &lt;span style="color:#719e07">(&lt;/span>Jedis jedis &lt;span style="color:#719e07">=&lt;/span> pool&lt;span style="color:#719e07">.&lt;/span>getResource&lt;span style="color:#719e07">())&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> jedis&lt;span style="color:#719e07">.&lt;/span>set&lt;span style="color:#719e07">(&lt;/span>metadataIdentifier&lt;span style="color:#719e07">.&lt;/span>getIdentifierKey&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">+&lt;/span> META_DATA_SOTRE_TAG&lt;span style="color:#719e07">,&lt;/span> v&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">catch&lt;/span> &lt;span style="color:#719e07">(&lt;/span>Throwable e&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> logger&lt;span style="color:#719e07">.&lt;/span>error&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Failed to put &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> metadataIdentifier &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34; to redis &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> v &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34;, cause: &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> e&lt;span style="color:#719e07">.&lt;/span>getMessage&lt;span style="color:#719e07">(),&lt;/span> e&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">throw&lt;/span> &lt;span style="color:#719e07">new&lt;/span> RpcException&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Failed to put &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> metadataIdentifier &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34; to redis &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> v &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34;, cause: &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> e&lt;span style="color:#719e07">.&lt;/span>getMessage&lt;span style="color:#719e07">(),&lt;/span> e&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="扩展-abstractmetadatareportfactory">扩展 AbstractMetadataReportFactory&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">RedisMetadataReportFactory&lt;/span> &lt;span style="color:#268bd2">extends&lt;/span> AbstractMetadataReportFactory &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Override&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> MetadataReport &lt;span style="color:#268bd2">createMetadataReport&lt;/span>&lt;span style="color:#719e07">(&lt;/span>URL url&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#719e07">new&lt;/span> RedisMetadataReport&lt;span style="color:#719e07">(&lt;/span>url&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="增加-metadatareportfactory">增加 MetadataReportFactory&lt;/h4>
+&lt;blockquote>
+&lt;p>META-INF/dubbo/internal/org.apache.dubbo.metadata.store.MetadataReportFactory&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>redis=org.apache.dubbo.metadata.store.redis.RedisMetadataReportFactory
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>只要将上面的修改和project打包成jar包，然后配置元数据中心的url：redis://10.20.153.10:6379。&lt;/p>
+&lt;p>至此，一个自定义的元数据存储就可以运行了。&lt;/p></description></item><item><title>Docs3-V2: 消息派发扩展</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/description/dispatcher/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/description/dispatcher/</guid><description>
 &lt;h2 id="扩展说明">扩展说明&lt;/h2>
 &lt;p>通道信息派发器，用于指定线程池模型。&lt;/p>
 &lt;h2 id="扩展接口">扩展接口&lt;/h2>

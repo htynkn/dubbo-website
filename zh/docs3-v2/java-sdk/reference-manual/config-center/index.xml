@@ -23,22 +23,15 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>address&lt;/code> 格式请参考 &lt;a href="../../registry/zookeeper/#22-%E9%85%8D%E7%BD%AE%E5%B9%B6%E5%90%AF%E7%94%A8-zookeeper">zookeeper 注册中心 - 启用配置&lt;/a>&lt;/p>
 &lt;h2 id="3-高级配置">3 高级配置&lt;/h2>
 &lt;p>如要开启认证鉴权，请参考 &lt;a href="../../registry/zookeeper/#31-%E8%AE%A4%E8%AF%81%E4%B8%8E%E9%89%B4%E6%9D%83">zookeeper 注册中心 - 启用认证鉴权&lt;/a>&lt;/p>
-&lt;h3 id="31-外部化配置">3.1 外部化配置&lt;/h3>
+&lt;h3 id="31-定制外部化配置-key">3.1 定制外部化配置 key&lt;/h3>
+&lt;p>&lt;strong>1. 启用外部化配置，并指定 key&lt;/strong>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>dubbo
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> config-center
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">address&lt;/span>: zookeeper://127.0.0.1:2181
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">config-file&lt;/span>: dubbo.properties
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>config-file&lt;/code> - 外部化配置文件 key 值，默认 &lt;code>dubbo.properties&lt;/code>。&lt;code>config-file&lt;/code> 代表将 Dubbo 配置文件存储在远端注册中心时，文件在配置中心对应的 key 值，通常不建议修改此配置项。&lt;/p>
-&lt;h3 id="31-设置-group-与-namespace">3.1 设置 group 与 namespace&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>dubbo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> config-center
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">address&lt;/span>: zookeeper://127.0.0.1:2181
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">group&lt;/span>: dubbo-cluster1
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">namespace&lt;/span>: dev1
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>对配置中心而言，&lt;code>group&lt;/code> 与 &lt;code>namespace&lt;/code> 应该是全公司（集群）统一的，应该避免不同应用使用不同的值。&lt;/p>
-&lt;h2 id="4-工作原理">4 工作原理&lt;/h2>
-&lt;h3 id="41-外部化配置">4.1 外部化配置&lt;/h3>
-&lt;p>外部化配置的存储结构如下图所示&lt;/p>
+&lt;p>&lt;strong>2. Zookeeper 配置中心增加配置&lt;/strong>
+外部化配置的存储结构如下图所示&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/zk-configcenter.jpg" alt="zk-configcenter.jpg">&lt;/p>
 &lt;ul>
 &lt;li>namespace，用于不同配置的环境隔离。&lt;/li>
@@ -46,8 +39,18 @@
 &lt;li>dubbo 与 application，分别用来隔离全局配置、应用级别配置：dubbo 是默认 group 值，application 对应应用名&lt;/li>
 &lt;li>dubbo.properties，此节点的node value存储具体配置内容&lt;/li>
 &lt;/ul>
-&lt;h3 id="42-流量治理规则">4.2 流量治理规则&lt;/h3>
-&lt;p>所有流量治理规则默认都存储在 &lt;code>/dubbo/config&lt;/code> 节点下，具体节点结构图如下：&lt;/p>
+&lt;blockquote>
+&lt;p>这里是为了说明工作原理，建议使用 dubbo-admin 进行配置管理。&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="32-设置-group-与-namespace">3.2 设置 group 与 namespace&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>dubbo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> config-center
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">address&lt;/span>: zookeeper://127.0.0.1:2181
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">group&lt;/span>: dubbo-cluster1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">namespace&lt;/span>: dev1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>对配置中心而言，&lt;code>group&lt;/code> 与 &lt;code>namespace&lt;/code> 应该是全公司（集群）统一的，应该避免不同应用使用不同的值，外部化配置和治理规则也应该存放在对应的 group 与 namespace。&lt;/p>
+&lt;h2 id="4-流量治理规则">4 流量治理规则&lt;/h2>
+&lt;p>所有流量治理规则默认都存储在 &lt;code>/dubbo/config&lt;/code> 节点下，具体节点结构图如下。流量治理规则的增删改建议通过 dubbo-admin 完成，更多内容可查看 &lt;a href="">Dubbo 支持的具体流量治理能力&lt;/a>&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/zk-configcenter-governance.jpg" alt="zk-configcenter-governance">&lt;/p>
 &lt;ul>
 &lt;li>namespace，用于不同配置的环境隔离。&lt;/li>
@@ -91,7 +94,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>config-file&lt;/code> - 全局外部化配置文件 key 值，默认 &lt;code>dubbo.properties&lt;/code>。&lt;code>config-file&lt;/code> 代表将 Dubbo 配置文件存储在远端注册中心时，文件在配置中心对应的 key 值，通常不建议修改此配置项。&lt;/p>
 &lt;p>&lt;strong>2. Nacos Server 增加配置&lt;/strong>&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/nacos-configcenter-global-properties.png" alt="nacos-configcenter-global-properties.png">&lt;/p>
-&lt;p>dataId 是 &lt;code>dubbo.properties&lt;/code>，group 分组与 config-center 保持一致，如未设置则默认是 &lt;code>dubbo&lt;/code>。&lt;/p>
+&lt;p>dataId 是 &lt;code>dubbo.properties&lt;/code>，group 分组与 config-center 保持一致，如未设置则默认填 &lt;code>dubbo&lt;/code>。&lt;/p>
 &lt;h4 id="312-应用特有外部化配置">3.1.2 应用特有外部化配置&lt;/h4>
 &lt;p>&lt;strong>1. 应用开启 config-center 配置&lt;/strong>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>dubbo
@@ -101,25 +104,33 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>app-config-file&lt;/code> - 当前应用特有的外部化配置文件 key 值，如 &lt;code>app-name-dubbo.properties&lt;/code>，仅在需要覆盖全局外部化配置文件 &lt;code>config-file&lt;/code> 时才配置。&lt;/p>
 &lt;p>&lt;strong>2. Nacos Server 增加配置&lt;/strong>&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/nacos-configcenter-application-properties.png" alt="nacos-configcenter-application-properties.png">&lt;/p>
-&lt;p>dataId 是 &lt;code>dubbo.properties&lt;/code>，group 分组为应用名即 &lt;code>demo-provider&lt;/code>。&lt;/p>
+&lt;p>dataId 是 &lt;code>dubbo.properties&lt;/code>，group 分组设置为应用名即 &lt;code>demo-provider&lt;/code>。&lt;/p>
 &lt;h3 id="32-设置-group-与-namespace">3.2 设置 group 与 namespace&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>dubbo
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> config-center
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">address&lt;/span>: zookeeper://127.0.0.1:2181
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">group&lt;/span>: dubbo-cluster1
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">namespace&lt;/span>: dev1
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>对配置中心而言，&lt;code>group&lt;/code> 与 &lt;code>namespace&lt;/code> 应该是全公司（集群）统一的，应该避免不同应用使用不同的值。&lt;/p>
-&lt;h2 id="4-工作原理">4 工作原理&lt;/h2>
-&lt;p>对 Nacos 而言，所有流量治理规则和外部化配置都应该是全局可见的，因此相同逻辑集群内的应用都必须使用相同的 namespace 与 group。其中，namespace 的默认值是 &lt;code>public&lt;/code>，group 默认值是 &lt;code>dubbo&lt;/code>，应用不得擅自修改 namespace 与 group，除非能保持全局一致。&lt;/p>
-&lt;h3 id="41-流量治理规则">4.1 流量治理规则&lt;/h3>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/nacos-configcenter-governance.png" alt="nacos-configcenter-governance.jpg">&lt;/p>
-&lt;p>流量治理规则有多种类型，不同类型的规则 dataId 的后缀是不同的：&lt;/p>
-&lt;ul>
-&lt;li>configurators，&lt;a href="../../examples/config-rule">覆盖规则&lt;/a>&lt;/li>
-&lt;li>tag-router，&lt;a href="../../examples/routing-rule">标签路由&lt;/a>&lt;/li>
-&lt;li>condition-router，&lt;a href="../../examples/condition-router">条件路由&lt;/a>&lt;/li>
-&lt;li>migration, &lt;a href="../../examples/todo">迁移规则&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>Docs3-V2: Apollo</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config-center/apollo/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config-center/apollo/</guid><description>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>``
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>对配置中心而言，`group` 与 `namespace` 应该是全公司（集群）统一的，应该避免不同应用使用不同的值。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">### 3.3 Nacos 扩展配置&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>更多 Nacos sdk/server 支持的参数配置请参见 [Nacos 注册中心 - 更多配置](../../registry/nacos/#3.5-更多配置)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## 4 流量治理规则&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>对 Nacos 而言，所有流量治理规则和外部化配置都应该是全局可见的，因此相同逻辑集群内的应用都必须使用相同的 namespace 与 group。其中，namespace 的默认值是 `public`，group 默认值是 `dubbo`，应用不得擅自修改 namespace 与 group，除非能保持全局一致。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>流量治理规则的增删改建议通过 dubbo-admin 完成，更多内容可查看 [Dubbo 支持的流量治理能力]()。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>![nacos-configcenter-governance.jpg](/imgs/user/nacos-configcenter-governance.png)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>流量治理规则有多种类型，不同类型的规则 dataId 的后缀是不同的：
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>- configurators，[覆盖规则](../../../advanced-features-and-usage/rpc/config-rule/)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>- tag-router，[标签路由](../../../advanced-features-and-usage/service/routing/routing-rule/#标签路由)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>- condition-router，[条件路由](../../../advanced-features-and-usage/service/routing/routing-rule/#条件路由)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-V2: Apollo</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config-center/apollo/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config-center/apollo/</guid><description>
 &lt;h2 id="1-前置条件">1 前置条件&lt;/h2>
 &lt;ul>
 &lt;li>了解 &lt;a href="../../../quick-start/spring-boot/">Dubbo 基本开发步骤&lt;/a>&lt;/li>
@@ -155,26 +166,42 @@
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>ConfigCenterConfig configCenter &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ConfigCenterConfig&lt;span style="color:#719e07">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>configCenter&lt;span style="color:#719e07">.&lt;/span>setAddress&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;apollo://localhost:8080&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="3-高级配置">3 高级配置&lt;/h2>
-&lt;h3 id="31-配置隔离">3.1 配置隔离&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:config-center&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;apollo&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;127.0.0.1:2181&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Apollo中的一个核心概念是命名空间 - namespace（和上面zookeeper的namespace概念不同），在这里全局和应用级别配置就是通过命名空间来区分的。&lt;/p>
-&lt;p>默认情况下，Dubbo会从名叫&lt;code>dubbo&lt;/code>（由于 Apollo 不支持特殊后缀 &lt;code>.properties&lt;/code> ）的命名空间中读取全局配置（&lt;code>&amp;lt;dubbo:config-center namespace=&amp;quot;your namespace&amp;quot;&amp;gt;&lt;/code>）&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/apollo-configcenter-dubbo.png" alt="apollo-configcenter-dubbo.png">&lt;/p>
-&lt;p>由于 Apollo 也默认将会在 &lt;code>dubbo&lt;/code> namespace 中存储服务治理规则（如路由规则），建议通过单独配置 &lt;code>group&lt;/code> 将服务治理和配置文件托管分离开，以 XML 配置方式为例：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo&lt;/span> namespace=&lt;span style="color:#2aa198">&amp;#34;governance&amp;#34;&lt;/span> group =&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这里，服务治理规则将存储在 governance namespace，而配置文件将存储在 dubbo namespace，如下图所示：
-&lt;img src="https://dubbo.apache.org/imgs/user/apollo-configcenter-governance-dubbo.png" alt="apollo-configcenter-governance-dubbo.png">&lt;/p>
-&lt;blockquote>
-&lt;p>关于文件配置托管，相当于是把 &lt;code>dubbo.properties&lt;/code> 配置文件的内容存储在了 Apollo 中，应用通过关联共享的 &lt;code>dubbo&lt;/code> namespace 继承公共配置,
-应用也可以按照 Apollo 的做法来覆盖个别配置项。&lt;/p>
-&lt;/blockquote>
-&lt;h2 id="4-工作原理">4 工作原理&lt;/h2>
-&lt;p>所有的服务治理规则都是全局性的，默认从公共命名空间 &lt;code>dubbo&lt;/code> 读取和订阅：&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/apollo-configcenter-governance.jpg" alt="apollo-configcenter-governance.jpg">&lt;/p>
-&lt;p>不同的规则以不同的 key 后缀区分：&lt;/p>
+&lt;p>Apollo中的一个核心概念是命名空间 - namespace，和上面 Zookeeper、Nacos 的 namespace 概念不同，因此使用方式上也比较特殊些，建议充分了解 Apollo 自身的用法后再阅读以下文档内容。&lt;/p>
+&lt;p>但总的来说，对 Apollo 的适配而言：&lt;/p>
 &lt;ul>
-&lt;li>configurators，&lt;a href="../../examples/config-rule">覆盖规则&lt;/a>&lt;/li>
-&lt;li>tag-router，&lt;a href="../../examples/routing-rule">标签路由&lt;/a>&lt;/li>
-&lt;li>condition-router，&lt;a href="../../examples/condition-router">条件路由&lt;/a>&lt;/li>
-&lt;li>migration, &lt;a href="../../examples/todo">迁移规则&lt;/a>&lt;/li>
-&lt;/ul></description></item></channel></rss>
+&lt;li>namespace 特用于流量治理规则隔离，参见 3.1&lt;/li>
+&lt;li>group 特用于外部化配置的隔离，参见 3.2&lt;/li>
+&lt;/ul>
+&lt;h3 id="31-外部化配置">3.1 外部化配置&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:config-center&lt;/span> group=&lt;span style="color:#2aa198">&amp;#34;demo-provider&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;apollo://localhost:8080&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>config-center 的 &lt;code>group&lt;/code> 决定了 Apollo 读取外部化配置 &lt;code>dubbo.properties&lt;/code> 文件的位置：&lt;/p>
+&lt;ol>
+&lt;li>如果 group 为空，则默认从 &lt;code>dubbo&lt;/code> namespace 读取配置，用户须将外部化配置写在 &lt;code>dubbo&lt;/code> namespace 下。&lt;/li>
+&lt;li>如果 group 不为空
+2.1 group 值为应用名，则从应用当前的 namespace 读取配置，用户须将外部化配置写在 Apollo 自动指定的应用默认 namespace 下。
+2.2 group 值为任意值，则从对应的 namespace 读取配置，用户须将外部化配置写在该 namespace 下。&lt;/li>
+&lt;/ol>
+&lt;p>如以下示例是用的默认 group=&amp;lsquo;dubbo&amp;rsquo; 的全局外部化配置，即该配置可被所有应用读取到。
+&lt;img src="https://dubbo.apache.org/imgs/user/apollo-configcenter-dubbo.png" alt="apollo-configcenter-dubbo.png">&lt;/p>
+&lt;p>如果配置 group=&amp;lsquo;应用名&amp;rsquo; 则是应用特有配置，只有该应用可以读取到。&lt;/p>
+&lt;blockquote>
+&lt;p>关于外部化文件配置托管，相当于是把 &lt;code>dubbo.properties&lt;/code> 配置文件的内容存储在了 Apollo 中。每个应用都可以通过关联共享的 &lt;code>dubbo&lt;/code> namespace 继承公共配置, 进而可以单独覆盖个别配置项。&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="32-流量治理规则">3.2 流量治理规则&lt;/h3>
+&lt;p>&lt;strong>流量治理规则一定都是全局共享的，因此每个应用内的 namespace 配置都应该保持一致。&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:config-center&lt;/span> namespace=&lt;span style="color:#2aa198">&amp;#34;governance&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;apollo://localhost:8080&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>config-center 的 &lt;code>namespace&lt;/code> 决定了 Apollo 存取 &lt;code>流量治理规则&lt;/code> 的位置：&lt;/p>
+&lt;ol>
+&lt;li>如果 namespace 为空，则默认从 &lt;code>dubbo&lt;/code> namespace 存取配置，须治理规则写在 &lt;code>dubbo&lt;/code> namespace 下。&lt;/li>
+&lt;li>如果 namespace 不为空，则从对应的 namespace 值读取规则，须治理规则写在该 namespace 下。&lt;/li>
+&lt;/ol>
+&lt;p>如以下示例是通过 &lt;code>namespace='governance'&lt;/code> 将流量治理规则放在了 &lt;code>governance&lt;/code> namespace 下。
+&lt;img src="https://dubbo.apache.org/imgs/user/apollo-configcenter-governance-dubbo.png" alt="apollo-configcenter-governance-dubbo.png">&lt;/p>
+&lt;h3 id="33-更多-apollo-特有配置">3.3 更多 Apollo 特有配置&lt;/h3>
+&lt;p>当前 Dubbo 适配了 env、apollo.meta、apollo.cluster、apollo.id 等特有配置项，可通过 config-center 的扩展参数进行配置。&lt;/p>
+&lt;p>如&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.config-center.address=apollo://localhost:8080
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.config-center.prameters.apollo.meta=xxx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.config-center.prameters.env=xxx
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

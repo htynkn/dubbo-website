@@ -337,4 +337,60 @@
 &lt;blockquote>
 &lt;p>GitHub: &lt;a href="https://github.com/apache/dubbo-spi-extensions">https://github.com/apache/dubbo-spi-extensions&lt;/a> &lt;br>
 发布说明: &lt;a href="https://github.com/apache/dubbo-spi-extensions/releases">https://github.com/apache/dubbo-spi-extensions/releases&lt;/a>&lt;/p>
-&lt;/blockquote></description></item></channel></rss>
+&lt;/blockquote>
+&lt;h2 id="dubbo-spi-extensions-101-2022-03-14">Dubbo SPI Extensions 1.0.1 (2022-03-14)&lt;/h2>
+&lt;h4 id="source-release">Source Release&lt;/h4>
+&lt;ul>
+&lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/dubbo-spi-extensions/1.0.1/apache-dubbo-extensions-1.0.1-src.zip">source&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/dubbo-spi-extensions/1.0.1/apache-dubbo-extensions-1.0.1-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/dubbo-spi-extensions/1.0.1/apache-dubbo-extensions-1.0.1-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="maven-release">Maven Release&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.dubbo.extensions&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>${component_name}&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>${component_version}&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="included-components">Included Components&lt;/h4>
+&lt;ul>
+&lt;li>dubbo-api-docs:1.0.0&lt;/li>
+&lt;li>dubbo-cluster-extensions
+&lt;ul>
+&lt;li>dubbo-cluster-broadcast-1:1.0.0&lt;/li>
+&lt;li>dubbo-cluster-loadbalance-peakewma:.1.0.0&lt;/li>
+&lt;li>dubbo-cluster-specify-address-dubbo2:1.0.0&lt;/li>
+&lt;li>dubbo-cluster-specify-address-dubbo3:1.0.0&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>dubbo-registry-extensions
+&lt;ul>
+&lt;li>dubbo-registry-dns:1.0.0&lt;/li>
+&lt;li>dubbo-registry-kubernetes:1.0.0&lt;/li>
+&lt;li>dubbo-registry-xds:1.0.0&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>dubbo-remoting-extensions
+&lt;ul>
+&lt;li>dubbo-remoting-quic:1.0.0&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>dubbo-rpc-extensions
+&lt;ul>
+&lt;li>dubbo-rpc-native-thrift:1.0.0&lt;/li>
+&lt;li>dubbo-rpc-http:1.0.0&lt;/li>
+&lt;li>dubbo-rpc-webservice:1.0.0&lt;/li>
+&lt;li>dubbo-rpc-rmi:1.0.0&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>dubbo-serialization-extensions
+&lt;ul>
+&lt;li>dubbo-serialization-protostuff:1.0.0&lt;/li>
+&lt;li>dubbo-serialization-protobuf:1.0.0&lt;/li>
+&lt;li>dubbo-serialization-kryo:1.0.0&lt;/li>
+&lt;li>dubbo-serialization-gson:1.0.0&lt;/li>
+&lt;li>dubbo-serialization-fst:1.0.0&lt;/li>
+&lt;li>dubbo-serialization-fastjson:1.0.0&lt;/li>
+&lt;li>dubbo-serialization-avro:1.0.0&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item></channel></rss>
