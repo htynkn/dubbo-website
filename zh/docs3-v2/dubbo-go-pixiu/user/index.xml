@@ -30,7 +30,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">interface&lt;/span>: com.dubbogo.pixiu.UserService
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="pixiu-配置和启动">Pixiu 配置和启动&lt;/h4>
 &lt;p>为了用例的场景，Pixiu 需要启动对应的 HTTP Listener 进行 HTTP 请求的监听，所以就会使用到 &lt;code>httpconnectionmanager&lt;/code>。
-然后因为要将 HTTP 请求转换为 Dubbo请求，所以需要使用 &lt;code>dgp.filter.http.dubboproxy&lt;/code>，这里我们将其&lt;code>auto_resolve&lt;/code> 设置为true，表示开启 HTTP to Dubbo 默认转换协议(具体定义请看&lt;a href="https://dubbo.apache.org/zh-cn/docs/user/appendix/http-to-dubbo-default-stragety.html">附录&lt;/a>)。&lt;/p>
+然后因为要将 HTTP 请求转换为 Dubbo请求，所以需要使用 &lt;code>dgp.filter.http.dubboproxy&lt;/code>，这里我们将其&lt;code>auto_resolve&lt;/code> 设置为true，表示开启 HTTP to Dubbo 默认转换协议(具体定义请看&lt;a href="../appendix/http-to-dubbo-default-stragety">附录&lt;/a>)。&lt;/p>
 &lt;p>Pixiu 的具体配置如下所示&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>static_resources:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> listeners:

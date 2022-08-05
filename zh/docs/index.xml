@@ -81,7 +81,7 @@
 &lt;li>检查服务器是否开机，是否正常工作。&lt;/li>
 &lt;li>检查防火墙等是否放行配置中心所用的端口。&lt;/li>
 &lt;/ol>
-&lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Overview: Dubbo Mesh</title><link>https://dubbo.apache.org/zh/overview/tasks/dubbo-mesh/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/overview/tasks/dubbo-mesh/</guid><description/></item><item><title>Docsv2.7: Dubbo SPI</title><link>https://dubbo.apache.org/zh/docsv2.7/dev/source/dubbo-spi/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/dev/source/dubbo-spi/</guid><description>
+&lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docsv2.7: Dubbo SPI</title><link>https://dubbo.apache.org/zh/docsv2.7/dev/source/dubbo-spi/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/dev/source/dubbo-spi/</guid><description>
 &lt;h2 id="1简介">1.简介&lt;/h2>
 &lt;p>SPI 全称为 Service Provider Interface，是一种服务发现机制。SPI 的本质是将接口实现类的全限定名配置在文件中，并由服务加载器读取配置文件，加载实现类。这样可以在运行时，动态为接口替换实现类。正因此特性，我们可以很容易的通过 SPI 机制为我们的程序提供拓展功能。SPI 机制在第三方框架中也有所应用，比如 Dubbo 就是通过 SPI 机制加载所有的组件。不过，Dubbo 并未使用 Java 原生的 SPI 机制，而是对其进行了增强，使其能够更好的满足需求。在 Dubbo 中，SPI 是一个非常重要的模块。基于 SPI，我们可以很容易的对 Dubbo 进行拓展。如果大家想要学习 Dubbo 的源码，SPI 机制务必弄懂。接下来，我们先来了解一下 Java SPI 与 Dubbo SPI 的用法，然后再来分析 Dubbo SPI 的源码。&lt;/p>
 &lt;p>需要特别说明的是，本篇文章以及本系列其他文章所分析的源码版本均为 &lt;strong>dubbo-2.6.4&lt;/strong>。因此大家在阅读文章的过程中，需注意将代码版本切换到 dubbo-2.6.4 tag 上。&lt;/p>
@@ -7102,7 +7102,7 @@ Pixiu 的整体设计遵守以下原则：&lt;/p>
 &lt;h3 id="123-补充网关场景">1.2.3 补充网关场景&lt;/h3>
 &lt;p>TBD&lt;br />&lt;br />&lt;/p>
 &lt;h3 id="134-模拟-stream-通信场景的吞吐量提升">1.3.4 模拟 Stream 通信场景的吞吐量提升&lt;/h3>
-&lt;p>TBD&lt;/p></description></item><item><title>Docs3-V2: Spring Boot</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/quick-start/spring-boot/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/quick-start/spring-boot/</guid><description>
+&lt;p>TBD&lt;/p></description></item><item><title>Overview: Istio + Sidecar + Thin SDK</title><link>https://dubbo.apache.org/zh/overview/tasks/mesh/dubbo-mesh/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/overview/tasks/mesh/dubbo-mesh/</guid><description/></item><item><title>Docs3-V2: Spring Boot</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/quick-start/spring-boot/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/quick-start/spring-boot/</guid><description>
 &lt;blockquote>
 &lt;p>Dubbo 还提供了包括&lt;a href="../../reference-manual/config/xml">XML&lt;/a>、&lt;a href="../../reference-manual/config/api">API&lt;/a>等多种启动与接入方式，更多开发方式和配置细节可参见&lt;a href="../../reference-manual/config/">配置手册&lt;/a>。&lt;/p>
 &lt;/blockquote>

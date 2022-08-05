@@ -43,14 +43,14 @@
 &lt;h4 id="http-请求的header">Http 请求的Header&lt;/h4>
 &lt;p>Header中必须包含以下条目：&lt;/p>
 &lt;ul>
-&lt;li>x-dubbo-http1.1-dubbo-version&lt;/li>
+&lt;li>x-dubbo-service-protocol&lt;/li>
 &lt;/ul>
 &lt;p>表明这个Http 请求是一个Http转dubbo的请求，目前支持Dubbo 协议和 triple 协议，可配置的选项为：&lt;/p>
 &lt;ul>
 &lt;li>
 &lt;ul>
-&lt;li>x-dubbo-http1.1-dubbo-version: triple&lt;/li>
-&lt;li>x-dubbo-http1.1-dubbo-version: dubbo&lt;/li>
+&lt;li>x-dubbo-service-protocol: triple&lt;/li>
+&lt;li>x-dubbo-service-protocol: dubbo&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;/ul>

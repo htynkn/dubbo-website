@@ -4506,7 +4506,7 @@ Configuration lines are expected to be of the following form:&lt;/p>
 &lt;/tr>
 &lt;tr>
 &lt;td>callback&lt;/td>
-&lt;td>&amp;lt;metodName&amp;gt;&amp;lt;index&amp;gt;.retries&lt;/td>
+&lt;td>&amp;lt;metodName&amp;gt;&amp;lt;index&amp;gt;.callback&lt;/td>
 &lt;td>boolean&lt;/td>
 &lt;td>可选&lt;/td>
 &lt;td>&lt;/td>
