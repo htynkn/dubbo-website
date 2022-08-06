@@ -85,7 +85,7 @@
 &lt;/div>
 &lt;/div>
 &lt;/div>
-&lt;/section></description></item><item><title>Overview: Dubbo Kubernetes 部署方案</title><link>https://dubbo.apache.org/zh/overview/tasks/kubernetes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/overview/tasks/kubernetes/</guid><description>
+&lt;/section></description></item><item><title>Overview: Kubernetes 部署方案</title><link>https://dubbo.apache.org/zh/overview/tasks/kubernetes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/overview/tasks/kubernetes/</guid><description>
 &lt;a id="td-block-0" class="td-offset-anchor">&lt;/a>
 &lt;section class="row td-box td-box--white td-box--gradient td-box--height-auto">
 &lt;div class="col">
@@ -119,7 +119,7 @@
 &lt;/div>
 &lt;/div>
 &lt;/div>
-&lt;/section></description></item><item><title>Overview: Dubbo Mesh 部署方案</title><link>https://dubbo.apache.org/zh/overview/tasks/mesh/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/overview/tasks/mesh/</guid><description>
+&lt;/section></description></item><item><title>Overview: Mesh 部署方案</title><link>https://dubbo.apache.org/zh/overview/tasks/mesh/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/overview/tasks/mesh/</guid><description>
 &lt;a id="td-block-0" class="td-offset-anchor">&lt;/a>
 &lt;section class="row td-box td-box--white td-box--gradient td-box--height-auto">
 &lt;div class="col">
@@ -200,6 +200,120 @@
 &lt;p>Stream 通信模式 (文档建设中)&lt;/p>
 &lt;/h4>
 &lt;p>Stream 通信模式&lt;/p>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;hr>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/section></description></item><item><title>Overview: 如何平滑的迁移到 Dubbo3 的新功能</title><link>https://dubbo.apache.org/zh/overview/tasks/migration/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/overview/tasks/migration/</guid><description>
+&lt;a id="td-block-0" class="td-offset-anchor">&lt;/a>
+&lt;section class="row td-box td-box--white td-box--gradient td-box--height-auto">
+&lt;div class="col">
+&lt;div class="row ">
+&lt;div class="td-content list-page">
+&lt;div class="lead">&lt;/div>&lt;header class="article-meta">
+&lt;/header>&lt;div class="row">
+&lt;div class="col-sm col-md-6 mb-4 mb-md-0">
+&lt;div class="h-100 card shadow" href="#">
+&lt;div class="card-body">
+&lt;h4 class="card-title">
+&lt;!-- &lt;a href='https://dubbo.apache.org/zh/overview/tasks/migration/'>平滑升级到 Dubbo3 &lt;/a> -->
+&lt;p>平滑升级到 Dubbo3（文档建设中）&lt;/p>
+&lt;/h4>
+&lt;p>平滑升级到 Dubbo3 版本。&lt;/p>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="col-sm col-md-6 mb-4 mb-md-0">
+&lt;div class="h-100 card shadow">
+&lt;div class="card-body">
+&lt;h4 class="card-title">
+&lt;!-- &lt;a href='https://dubbo.apache.org/zh/overview/tasks/migration/'>迁移到 Dubbo3 应用级服务发现&lt;/a> -->
+&lt;p>迁移到 Dubbo3 应用级服务发现（文档建设中）&lt;/p>
+&lt;/h4>
+&lt;p>迁移到 Dubbo3 应用级服务发现。&lt;/p>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="col-sm col-md-6 mb-4 mb-md-0">
+&lt;div class="h-100 card shadow">
+&lt;div class="card-body">
+&lt;h4 class="card-title">
+&lt;!-- &lt;a href='https://dubbo.apache.org/zh/overview/tasks/migration/'>迁移到 Triple 协议&lt;/a> -->
+&lt;p>迁移到 Dubbo3 Triple 协议（文档建设中）&lt;/p>
+&lt;/h4>
+&lt;p>迁移到 Dubbo3 Triple 协议&lt;/p>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;hr>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;/section></description></item><item><title>Overview: 利用生态项目治理微服务</title><link>https://dubbo.apache.org/zh/overview/tasks/ecosystem/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/overview/tasks/ecosystem/</guid><description>
+&lt;a id="td-block-0" class="td-offset-anchor">&lt;/a>
+&lt;section class="row td-box td-box--white td-box--gradient td-box--height-auto">
+&lt;div class="col">
+&lt;div class="row ">
+&lt;div class="td-content list-page">
+&lt;div class="lead">&lt;/div>&lt;header class="article-meta">
+&lt;/header>&lt;div class="row">
+&lt;div class="col-sm col-md-6 mb-4 mb-md-0">
+&lt;div class="h-100 card shadow" href="#">
+&lt;div class="card-body">
+&lt;h4 class="card-title">
+&lt;!-- &lt;a href='https://dubbo.apache.org/zh/overview/tasks/ecosystem/'>平滑升级到 Dubbo3 &lt;/a> -->
+&lt;p>事务管理（文档建设中）&lt;/p>
+&lt;/h4>
+&lt;p>本示例演示如何通过 Seata 实现分布式 Dubbo 服务的事务管理，保证数据一致性。&lt;/p>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="col-sm col-md-6 mb-4 mb-md-0">
+&lt;div class="h-100 card shadow">
+&lt;div class="card-body">
+&lt;h4 class="card-title">
+&lt;!-- &lt;a href='https://dubbo.apache.org/zh/overview/tasks/ecosystem/'>迁移到 Dubbo3 应用级服务发现&lt;/a> -->
+&lt;p>注册中心&amp;配置中心&amp;元数据中心（文档建设中）&lt;/p>
+&lt;/h4>
+&lt;p>本示例演示如何配置和使用 Nacos 作为 Dubbo 注册中心、配置中心和元数据中心，&lt;br/>&lt;br/> 如果您倾向更云原生、更简介的部署方式，请参考 Kubernetes 或 Mesh 部署模式&lt;/p>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="col-sm col-md-6 mb-4 mb-md-0">
+&lt;div class="h-100 card shadow">
+&lt;div class="card-body">
+&lt;h4 class="card-title">
+&lt;!-- &lt;a href='https://dubbo.apache.org/zh/overview/tasks/ecosystem/'>迁移到 Triple 协议&lt;/a> -->
+&lt;p>限流降级（文档建设中）&lt;/p>
+&lt;/h4>
+&lt;p>使用 Sentinel 保护您的应用，防止应用因个别服务的突发流量过载而出现稳定性问题。&lt;/p>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="col-sm col-md-6 mb-4 mb-md-0">
+&lt;div class="h-100 card shadow">
+&lt;div class="card-body">
+&lt;h4 class="card-title">
+&lt;!-- &lt;a href='https://dubbo.apache.org/zh/overview/tasks/ecosystem/'>迁移到 Triple 协议&lt;/a> -->
+&lt;p>http 网关接入（文档建设中）&lt;/p>
+&lt;/h4>
+&lt;p>通过网关 http 到 dubbo 协议转换，实现前端流量接入后端 dubbo 服务。&lt;/p>
+&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;div class="col-sm col-md-6 mb-4 mb-md-0">
+&lt;div class="h-100 card shadow">
+&lt;div class="card-body">
+&lt;h4 class="card-title">
+&lt;!-- &lt;a href='https://dubbo.apache.org/zh/overview/tasks/ecosystem/'>迁移到 Triple 协议&lt;/a> -->
+&lt;p>Spring Cloud 体系互通（文档建设中）&lt;/p>
+&lt;/h4>
+&lt;p>演示如何通过 Dubbo3 应用级服务发现机制，实现和 Spring Cloud 的 rest 协议互通。&lt;/p>
 &lt;/div>
 &lt;/div>
 &lt;/div>
