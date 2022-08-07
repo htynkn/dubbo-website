@@ -17,7 +17,7 @@
 &lt;h4 id="http-请求的方法">Http 请求的方法&lt;/h4>
 &lt;p>只能为 &lt;strong>POST&lt;/strong> 方法&lt;/p>
 &lt;h4 id="http-请求的-url">Http 请求的 URL&lt;/h4>
-&lt;p>格式：&lt;a href="http://host/service/method">http://host/ {service} / {method&lt;/a>} or &lt;a href="https://host/service/method">https://host/ {service} / {method&lt;/a>}&lt;/p>
+&lt;p>格式：&lt;code>[http://host/ {service} / {method](http://host/service/method)}&lt;/code> or &lt;code>[https://host/ {service} / {method](https://host/service/method)}&lt;/code>&lt;/p>
 &lt;ul>
 &lt;li>service 是调用的服务名，对应于Dubbo message body中的 service Name&lt;/li>
 &lt;li>method 是调用的方法名，对应于Dubbo message body中的 method Name&lt;/li>
@@ -355,7 +355,7 @@
 &lt;p>Triple 是基于GRPC的，定义在Http2 协议之上&lt;/p>
 &lt;h3 id="triple中rpc调用的元信息">Triple中RPC调用的元信息&lt;/h3>
 &lt;h4 id="triple-通过-url-传递调用的服务名和方法名">Triple 通过 URL 传递调用的服务名和方法名&lt;/h4>
-&lt;p>格式： &lt;a href="http://host/service/method">http://host/ {service} / {method&lt;/a>}&lt;/p>
+&lt;p>格式： &lt;code>[http://host/ {service} / {method](http://host/service/method)}&lt;/code>&lt;/p>
 &lt;p>我们的规范兼容 Triple 通过http2传递参数的形式，尽量做到dubbo 和 triple 的统一。&lt;/p>
 &lt;h4 id="header-frame">Header Frame&lt;/h4>
 &lt;p>header 中应该包含以下条目&lt;/p>

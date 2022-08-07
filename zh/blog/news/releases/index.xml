@@ -241,7 +241,7 @@
 &lt;p>（图 1 ）&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/1.5/loadbalance.png" alt="">&lt;/p>
 &lt;p>（图 2 ）&lt;/p>
-&lt;p>以前的 dubbo-go RPC 层直接复用了 getty 框架 的 RPC[&lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>(https://github.com/AlexStocks/getty/tree/master/rpc)]，未能实现协议和应用通信地址的隔离。阿里中间件展图同学重构了 dubbo-go RPC 层，实现了连接复用：可以实现 consumer 与 provider 端的同一个 TCP 连接上进行多协议通信。相关 PR 业已合并，会在 dubbo-go v1.5.1 中发布。&lt;/p>
+&lt;p>以前的 dubbo-go RPC 层直接复用了 getty 框架 的 RPC[&lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>(https://github.com/AlexStocks/getty/tree/feature/rpc)]，未能实现协议和应用通信地址的隔离。阿里中间件展图同学重构了 dubbo-go RPC 层，实现了连接复用：可以实现 consumer 与 provider 端的同一个 TCP 连接上进行多协议通信。相关 PR 业已合并，会在 dubbo-go v1.5.1 中发布。&lt;/p>
 &lt;p>目前下一个版本正在紧锣密鼓的开发中，具体规划及任务清单&lt;sup id="fnref:3">&lt;a href="#fn:3" class="footnote-ref" role="doc-noteref">3&lt;/a>&lt;/sup> ，都已经在 Github 上体现。&lt;/p>
 &lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
@@ -250,7 +250,7 @@
 &lt;p>&lt;a href="https://github.com/seata-golang/seata-golang">https://github.com/seata-golang/seata-golang&lt;/a>&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:2">
-&lt;p>&lt;a href="https://github.com/AlexStocks/getty/tree/master/rpc">https://github.com/AlexStocks/getty/tree/master/rpc&lt;/a>&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://github.com/AlexStocks/getty/tree/feature/rpc">https://github.com/AlexStocks/getty/tree/feature/rpc&lt;/a>&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:3">
 &lt;p>&lt;a href="https://github.com/apache/dubbo-go/projects/8">https://github.com/apache/dubbo-go/projects/8&lt;/a>&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
@@ -271,7 +271,7 @@
 &lt;p>保证 Provider 在注册成功之后，才暴露元数据信息。&lt;/p>
 &lt;h2 id="2-支持基于-seata-的事务">2 支持基于 Seata 的事务&lt;/h2>
 &lt;p>基于 Seata 扩展实现。通过增加过滤器，在服务端接收 xid 并结合 &lt;a href="https://github.com/seata-golang/seata-golang">seata-golang&lt;/a> 达到支持分布式事务的目的。 从而使 Dubbo-go 在分布式场景下，让用户有更多的选择，能适应更多的个性化场景。&lt;/p>
-&lt;p>我们在 dubbo-samples 中给出了 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/golang/seata">事务测试用例&lt;/a> 。&lt;/p>
+&lt;p>我们在 dubbo-samples 中给出了 &lt;a href="https://github.com/apache/dubbo-go-samples/tree/1.5/seata">事务测试用例&lt;/a> 。&lt;/p>
 &lt;h2 id="3-多注册中心集群负载均衡">3 多注册中心集群负载均衡&lt;/h2>
 &lt;p>对于多注册中心订阅的场景，选址时的多了一层注册中心集群间的负载均衡：&lt;/p>
 &lt;p>在 Cluster Invoker 这一级，我们支持的选址策略有：&lt;/p>
@@ -289,7 +289,7 @@
 &lt;p>标签路由通过将某一个或多个服务的提供者划分到同一个分组，约束流量只在指定分组中流转，从而实现流量隔离的目的，可以作为蓝绿发布、灰度发布等场景的能力基础。&lt;/p>
 &lt;p>标签主要是指对 Provider 端应用实例的分组，目前有两种方式可以完成实例分组，分别是&lt;code>动态规则打标&lt;/code>和&lt;code>静态规则打标&lt;/code>，其中动态规则相较于静态规则优先级更高，而当两种规则同时存在且出现冲突时，将以动态规则为准。&lt;/p>
 &lt;h4 id="511-动态规则打标">5.1.1 动态规则打标&lt;/h4>
-&lt;p>可随时在&lt;a href="http://dubbo.apache.org/zh-cn/docs/user/demos/routing-rule.html">服务治理控制台&lt;/a>下发标签归组规则&lt;/p>
+&lt;p>可随时在&lt;a href="https://dubbo.apache.org/zh/docsv2.7/user/examples/routing-rule/">服务治理控制台&lt;/a>下发标签归组规则&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># governance-tagrouter-provider应用增加了两个标签分组tag1和tag2&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># tag1包含一个实例 127.0.0.1:20880&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># tag2包含一个实例 127.0.0.1:20881&lt;/span>
@@ -671,7 +671,7 @@
 &lt;hr>
 &lt;ol>
 &lt;li id="fn:1">
-&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/golang/registry/kubernetes">https://github.com/apache/dubbo-samples/tree/master/golang/registry/kubernetes&lt;/a>&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://github.com/apache/dubbo-go-samples/tree/1.5/registry/kubernetes">https://github.com/apache/dubbo-go-samples/tree/1.5/registry/kubernetes&lt;/a>&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:2">
 &lt;p>&lt;a href="https://github.com/dubbogo/dubbo-samples/tree/master/golang/router/condition">https://github.com/dubbogo/dubbo-samples/tree/master/golang/router/condition&lt;/a>&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
@@ -802,8 +802,8 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sslConfig&lt;span style="color:#719e07">.&lt;/span>setClientPrivateKeyPath&lt;span style="color:#719e07">(&lt;/span>args&lt;span style="color:#719e07">[&lt;/span>2&lt;span style="color:#719e07">]);&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>为尽可能保证应用启动的灵活性，TLS Cert 的指定还能通过 -D 参数或环境变量等方式来在启动阶段根据部署环境动态指定，具体请参见 Dubbo 配置读取规则与 TLS 示例&lt;/p>
-&lt;p>Dubbo 配置读取规则：http://dubbo.apache.org/zh-cn/docs/user/configuration/configuration-load-process.html&lt;/p>
-&lt;p>TLS 示例：https://github.com/apache/dubbo-samples/tree/master/java/dubbo-samples-ssl&lt;/p>
+&lt;p>Dubbo 配置读取规则：/zh/docs/user/configuration/configuration-load-process.html&lt;/p>
+&lt;p>TLS 示例：https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-ssl&lt;/p>
 &lt;blockquote>
 &lt;p>如果要使用的是 gRPC 协议，在开启 TLS 时会使用到协议协商机制，因此必须使用支持 ALPN 机制的 Provider，推荐使用的是 netty-tcnative，具体可参见 gRPC Java 社区的总结： &lt;a href="https://github.com/grpc/grpc-java/blob/master/SECURITY.md">https://github.com/grpc/grpc-java/blob/master/SECURITY.md&lt;/a>&lt;/p>
 &lt;/blockquote>
@@ -899,7 +899,7 @@
 &lt;h2 id="验证">验证&lt;/h2>
 &lt;p>可以按照这里的&lt;a href="https://www.apache.org/info/verification">步骤&lt;/a>, 利用&lt;a href="https://downloads.apache.org/dubbo/KEYS">KEYS&lt;/a>文件来验证下载。&lt;/p>
 &lt;h2 id="apache-dubbo">Apache Dubbo&lt;/h2>
-&lt;p>请点击了解各&lt;a href="https://dubbo.apache.org/zh/docs/v2.7/user/versions/">版本详情和升级注意事项&lt;/a>&lt;/p>
+&lt;p>请点击了解各&lt;a href="https://dubbo.apache.org/zh/docsv2.7/user/versions/">版本详情和升级注意事项&lt;/a>&lt;/p>
 &lt;blockquote>
 &lt;p>GitHub: &lt;a href="https://github.com/apache/dubbo">https://github.com/apache/dubbo&lt;/a> &lt;br>
 发布说明: &lt;a href="https://github.com/apache/dubbo/releases">https://github.com/apache/dubbo/releases&lt;/a>&lt;/p>
@@ -1011,12 +1011,6 @@
 &lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/2.7.12/apache-dubbo-2.7.12-src.zip">source&lt;/a> |
 &lt;a href="https://archive.apache.org/dist/dubbo/2.7.12/apache-dubbo-2.7.12-src.zip.asc">asc&lt;/a> |
 &lt;a href="https://archive.apache.org/dist/dubbo/2.7.12/apache-dubbo-2.7.12-src.zip.sha512">sha512&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="26101-2021-05-30">2.6.10.1 (2021-05-30)&lt;/h3>
-&lt;ul>
-&lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/2.6.10.1/apache-dubbo-2.6.10.1-source-release.zip">source&lt;/a> |
-&lt;a href="https://archive.apache.org/dist/dubbo/2.6.10.1/apache-dubbo-2.6.10.1-source-release.zip.asc">asc&lt;/a> |
-&lt;a href="https://archive.apache.org/dist/dubbo/2.6.10.1/apache-dubbo-2.6.10.1-source-release.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="2711-2021-05-12">2.7.11 (2021-05-12)&lt;/h3>
 &lt;ul>

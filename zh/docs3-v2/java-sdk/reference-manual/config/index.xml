@@ -4,7 +4,6 @@
 &lt;li>&lt;a href="../../../quick-start/spring-boot/">使用 Spring Boot 快速开发 Dubbo 应用&lt;/a>&lt;/li>
 &lt;li>&lt;a href="../properties">配置项参考手册，了解有哪些配置项可用&lt;/a>&lt;/li>
 &lt;li>&lt;a href="../principle">配置加载及覆盖的工作原理&lt;/a>&lt;/li>
-&lt;li>&lt;a href="../blog">运行态地址 URL 及优先级规则&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="配置组件">配置组件&lt;/h2>
 &lt;p>为了更好地管理各种配置，Dubbo 抽象了一套结构化的配置组件，各组件总体以用途划分，分别控制不同作用域的行为。&lt;/p>
@@ -107,7 +106,7 @@
 &lt;/table>
 &lt;blockquote>
 &lt;ol>
-&lt;li>从实现原理层面，最终 Dubbo 所有的配置项都会被组装到 URL 中，以 URL 为载体在后续的启动、RPC 调用过程中传递，进而控制框架行为。如想了解更多，请参照 Dubbo 源码解析系列文档或 &lt;a href="https://dubbo.apache.org/blog/java/codeanalysis/introduction-to-dubbo-url#rpc%E8%B0%83%E7%94%A8">Blog&lt;/a>。&lt;/li>
+&lt;li>从实现原理层面，最终 Dubbo 所有的配置项都会被组装到 URL 中，以 URL 为载体在后续的启动、RPC 调用过程中传递，进而控制框架行为。如想了解更多，请参照 Dubbo 源码解析系列文档或 &lt;a href="https://dubbo.apache.org/zh/blog/2019/10/17/dubbo-%E4%B8%AD%E7%9A%84-url-%E7%BB%9F%E4%B8%80%E6%A8%A1%E5%9E%8B/#rpc%E8%B0%83%E7%94%A8">Blog&lt;/a>。&lt;/li>
 &lt;li>各组件支持的具体配置项及含义请参考 &lt;a href="../properties">配置项手册&lt;/a>&lt;/li>
 &lt;/ol>
 &lt;/blockquote>
@@ -196,12 +195,12 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>demo.service.version=1.0.0
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="属性配置">属性配置&lt;/h3>
 &lt;p>根据属性Key-value生成配置组件，类似SpringBoot的ConfigurationProperties，具体请参考&lt;a href="../properties">属性配置&lt;/a>。&lt;/p>
-&lt;p>属性配置的另外一个重要的功能特性是&lt;a href="../properties#%E5%B1%9E%E6%80%A7%E8%A6%86%E7%9B%96">属性覆盖&lt;/a>，使用外部属性的值覆盖已创建的配置组件属性。&lt;/p>
-&lt;p>如果要将属性配置放到外部的配置中心，请参考&lt;a href="../external-config">外部化配置&lt;/a>。&lt;/p>
+&lt;p>属性配置的另外一个重要的功能特性是&lt;a href="../principle/#32-%E5%B1%9E%E6%80%A7%E8%A6%86%E7%9B%96">属性覆盖&lt;/a>，使用外部属性的值覆盖已创建的配置组件属性。&lt;/p>
+&lt;p>如果要将属性配置放到外部的配置中心，请参考&lt;a href="../principle/#33-%E5%A4%96%E9%83%A8%E5%8C%96%E9%85%8D%E7%BD%AE">外部化配置&lt;/a>。&lt;/p>
 &lt;p>除了外围驱动方式上的差异，Dubbo 的配置读取总体上遵循了以下几个原则：&lt;/p>
 &lt;ol>
 &lt;li>Dubbo 支持了多层级的配置，并按预定优先级自动实现配置间的覆盖，最终所有配置汇总到数据总线URL后驱动后续的服务暴露、引用等流程。&lt;/li>
-&lt;li>配置格式以 Properties 为主，在配置内容上遵循约定的 &lt;code>path-based&lt;/code> 的&lt;a href="../properties#%E9%85%8D%E7%BD%AE%E6%A0%BC%E5%BC%8F">命名规范&lt;/a>&lt;/li>
+&lt;li>配置格式以 Properties 为主，在配置内容上遵循约定的 &lt;code>path-based&lt;/code> 的&lt;a href="../principle/#1-%E9%85%8D%E7%BD%AE%E6%A0%BC%E5%BC%8F">命名规范&lt;/a>&lt;/li>
 &lt;/ol>
 &lt;h2 id="配置加载流程">配置加载流程&lt;/h2>
 &lt;h3 id="配置规范与来源">配置规范与来源&lt;/h3>
@@ -209,7 +208,7 @@
 &lt;ul>
 &lt;li>JVM System Properties，JVM -D 参数&lt;/li>
 &lt;li>System environment，JVM进程的环境变量&lt;/li>
-&lt;li>Externalized Configuration，&lt;a href="../properties#3.3-%E5%A4%96%E9%83%A8%E5%8C%96%E9%85%8D%E7%BD%AE">外部化配置&lt;/a>，从配置中心读取&lt;/li>
+&lt;li>Externalized Configuration，&lt;a href="../principle/#33-%E5%A4%96%E9%83%A8%E5%8C%96%E9%85%8D%E7%BD%AE">外部化配置&lt;/a>，从配置中心读取&lt;/li>
 &lt;li>Application Configuration，应用的属性配置，从Spring应用的Environment中提取&amp;quot;dubbo&amp;quot;打头的属性集&lt;/li>
 &lt;li>API / XML /注解等编程接口采集的配置可以被理解成配置来源的一种，是直接面向用户编程的配置采集方式&lt;/li>
 &lt;li>从classpath读取配置文件 dubbo.properties&lt;/li>
@@ -556,7 +555,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="注意">注意：&lt;/h4>
 &lt;p>区分上面的 &lt;strong>与&lt;/strong>&lt;/p>
 &lt;h3 id="applicationyml-或-applicationproperties">application.yml 或 application.properties&lt;/h3>
-&lt;p>除 service、reference 之外的组件都可以在 application.yml 文件中设置，如果要扩展 service 或 reference 的注解配置，则需要增加 &lt;code>dubbo.properties&lt;/code> 配置文件或使用其他非注解如 Java Config 方式，具体请看下文 &lt;a href="#%E6%89%A9%E5%B1%95%E6%B3%A8%E8%A7%A3%E7%9A%84%E9%85%8D%E7%BD%AE">扩展注解的配置&lt;/a>。&lt;/p>
+&lt;p>除 service、reference 之外的组件都可以在 application.yml 文件中设置，如果要扩展 service 或 reference 的注解配置，则需要增加 &lt;code>dubbo.properties&lt;/code> 配置文件或使用其他非注解如 Java Config 方式，具体请看下文 &lt;a href="#%E6%89%A9%E5%B1%95%E6%B3%A8%E8%A7%A3%E9%85%8D%E7%BD%AE">扩展注解的配置&lt;/a>。&lt;/p>
 &lt;p>service、reference 组件也可以通过 &lt;code>id&lt;/code> 与 application 中的全局组件做关联，以下面配置为例：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">dubbo&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">application&lt;/span>:
@@ -642,7 +641,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="通过-dubboproperties-补充配置">通过 dubbo.properties 补充配置&lt;/h4>
-&lt;p>对于使用 &lt;code>DubboService&lt;/code> 或 &lt;code>DubboReference&lt;/code> 的场景，可以使用 dubbo.properties 作为配置补充，&lt;a href="../principle#1-%E9%85%8D%E7%BD%AE%E6%A0%BC%E5%BC%8F">具体格式&lt;/a>这里有更详细解释。&lt;/p>
+&lt;p>对于使用 &lt;code>DubboService&lt;/code> 或 &lt;code>DubboReference&lt;/code> 的场景，可以使用 dubbo.properties 作为配置补充，&lt;a href="../principle/#1-%E9%85%8D%E7%BD%AE%E6%A0%BC%E5%BC%8F">具体格式&lt;/a>这里有更详细解释。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.service.org.apache.dubbo.springboot.demo.DemoService.timeout=5000
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.service.org.apache.dubbo.springboot.demo.DemoService.parameters=[{myKey:myValue},{anotherKey:anotherValue}]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.reference.org.apache.dubbo.springboot.demo.DemoService.timeout=6000
@@ -966,7 +965,7 @@
 &lt;ul>
 &lt;li>JVM System Properties，JVM -D 参数&lt;/li>
 &lt;li>System environment，JVM进程的环境变量&lt;/li>
-&lt;li>Externalized Configuration，&lt;a href="#3.3-%E5%A4%96%E9%83%A8%E5%8C%96%E9%85%8D%E7%BD%AE">外部化配置&lt;/a>，从配置中心读取&lt;/li>
+&lt;li>Externalized Configuration，&lt;a href="#33-%E5%A4%96%E9%83%A8%E5%8C%96%E9%85%8D%E7%BD%AE">外部化配置&lt;/a>，从配置中心读取&lt;/li>
 &lt;li>Application Configuration，应用的属性配置，从Spring应用的Environment中提取&amp;quot;dubbo&amp;quot;打头的属性集&lt;/li>
 &lt;li>API / XML /注解等编程接口采集的配置可以被理解成配置来源的一种，是直接面向用户编程的配置采集方式&lt;/li>
 &lt;li>从classpath读取配置文件 dubbo.properties&lt;/li>
@@ -1029,7 +1028,7 @@ Configuration lines are expected to be of the following form:&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>
 &lt;p>优先级
-外部化配置默认较本地配置有更高的优先级，因此这里配置的内容会覆盖本地配置值，关于各配置形式间的&lt;a href="#%E8%A6%86%E7%9B%96%E5%85%B3%E7%B3%BB">覆盖关系&lt;/a> 有单独一章说明。&lt;/p>
+外部化配置默认较本地配置有更高的优先级，因此这里配置的内容会覆盖本地配置值，关于各配置形式间的&lt;a href="#21-%E8%A6%86%E7%9B%96%E5%85%B3%E7%B3%BB">覆盖关系&lt;/a> 有单独一章说明。&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>作用域

@@ -907,7 +907,7 @@ Configuration lines are expected to be of the following form:&lt;/p>
 &lt;/tbody>
 &lt;/table></description></item><item><title>Docs: 外部化配置</title><link>https://dubbo.apache.org/zh/docs/references/configuration/external-config/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/references/configuration/external-config/</guid><description>
 &lt;div class="pageinfo pageinfo-primary">
-&lt;p>此文档已经不再维护。您当前查看的是快照版本。如果想要查看最新版本的文档，请参阅&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config/external-config/">最新版本&lt;/a>。&lt;/p>
+&lt;p>此文档已经不再维护。您当前查看的是快照版本。如果想要查看最新版本的文档，请参阅&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config/principle/#33-%E5%A4%96%E9%83%A8%E5%8C%96%E9%85%8D%E7%BD%AE">最新版本&lt;/a>。&lt;/p>
 &lt;/div>
 &lt;h3 id="外部化配置">外部化配置&lt;/h3>
 &lt;p>外部化配置目的之一是实现配置的集中式管理，这部分业界已经有很多成熟的专业配置系统如 Apollo, Nacos 等，Dubbo 所做的主要是保证能配合这些系统正常工作。&lt;/p>
@@ -984,7 +984,7 @@ Configuration lines are expected to be of the following form:&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>configCenter&lt;span style="color:#719e07">.&lt;/span>setExternalConfig&lt;span style="color:#719e07">(&lt;/span>dubboConfigurations&lt;span style="color:#719e07">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: 自动加载环境变量</title><link>https://dubbo.apache.org/zh/docs/references/configuration/environment-variables/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/references/configuration/environment-variables/</guid><description>
 &lt;div class="pageinfo pageinfo-primary">
-&lt;p>此文档已经不再维护。您当前查看的是快照版本。如果想要查看最新版本的文档，请参阅&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config/environment-variables/">最新版本&lt;/a>。&lt;/p>
+&lt;p>此文档已经不再维护。您当前查看的是快照版本。如果想要查看最新版本的文档，请参阅&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config/principle/#33-%E5%A4%96%E9%83%A8%E5%8C%96%E9%85%8D%E7%BD%AE">最新版本&lt;/a>。&lt;/p>
 &lt;/div>
 &lt;p>从 2.7.3 版本开始，Dubbo 会自动从约定 key 中读取配置，并将配置以 Key-Value 的形式写入到URL中。&lt;/p>
 &lt;p>支持的 key 有以下两个：&lt;/p>

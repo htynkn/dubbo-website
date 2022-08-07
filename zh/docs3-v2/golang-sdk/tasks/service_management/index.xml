@@ -3,7 +3,7 @@
 &lt;h2 id="1-准备工作">1. 准备工作&lt;/h2>
 &lt;ul>
 &lt;li>dubbo-go cli 工具和依赖工具已安装&lt;/li>
-&lt;li>阅读&lt;a href="../../concept/service_management/aop_and_extension/">【组件加载与可扩展性】&lt;/a>&lt;/li>
+&lt;li>阅读&lt;a href="../../../concept/service_management/aop_and_extension/">【组件加载与可扩展性】&lt;/a>&lt;/li>
 &lt;li>创建一个新的 demo 应用&lt;/li>
 &lt;/ul>
 &lt;h2 id="2-配置指定-filter">2. 配置指定 Filter&lt;/h2>

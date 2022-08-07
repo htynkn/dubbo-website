@@ -62,4 +62,4 @@
 &lt;li>如果你需要实现自定义的注册中心，你可以使用 Dubbo 扩展能力。&lt;/li>
 &lt;li>如果你需要实现自定义的过滤器，你可以使用 Dubbo 扩展能力。&lt;/li>
 &lt;/ul>
-&lt;p>Dubbo 扩展平等的对待内部实现和第三方实现。更多使用场景，参见 &lt;a href="../../references/spis/">SPI 扩展实现&lt;/a>&lt;/p></description></item><item><title>Docs3-V2: Dubbo SPI扩展实现说明</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/description/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/description/</guid><description/></item></channel></rss>
+&lt;p>Dubbo 扩展平等的对待内部实现和第三方实现。更多使用场景，参见 &lt;a href="../description/">SPI 扩展实现&lt;/a>&lt;/p></description></item><item><title>Docs3-V2: Dubbo SPI扩展实现说明</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/description/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/description/</guid><description/></item></channel></rss>

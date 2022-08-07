@@ -255,7 +255,7 @@ To avoid complicating the online environment, do not use this feature online and
 &lt;hr>
 &lt;ol>
 &lt;li id="fn:1">
-&lt;p>custom registry, see：&lt;a href="https://dubbo.apache.org/docs/dev/impls/registry.html">registry extension&lt;/a>&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>custom registry, see：&lt;a href="https://dubbo.apache.org/en/docs/v2.7/dev/impls/registry/">registry extension&lt;/a>&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;/div></description></item><item><title>Docs: Service Group</title><link>https://dubbo.apache.org/en/docs/v2.7/user/examples/service-group/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/examples/service-group/</guid><description>
@@ -490,7 +490,7 @@ To avoid complicating the online environment, do not use this feature online and
 &lt;p>Support since &lt;code>2.1.0&lt;/code> version. If you want to know how to use it, refer to [Sample code in dubbo project] (&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-validation">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-validation&lt;/a>)&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:2">
-&lt;p>The validation method is extensible, refer to &lt;a href="https://dubbo.apache.org/docs/dev/impls/validation">Developer Extension&lt;/a> in the developer&amp;rsquo;s manual.&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>The validation method is extensible, refer to &lt;a href="https://dubbo.apache.org/en/docs/v2.7/dev/impls/validation">Developer Extension&lt;/a> in the developer&amp;rsquo;s manual.&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;/div></description></item><item><title>Docs: Cache Result</title><link>https://dubbo.apache.org/en/docs/v2.7/user/examples/result-cache/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/examples/result-cache/</guid><description>
@@ -501,7 +501,7 @@ To avoid complicating the online environment, do not use this feature online and
 &lt;li>&lt;code>threadlocal&lt;/code> The current thread cache. For example, a page have a lot of portal and each portal need to check user information, you can reduce this redundant visit with this cache.&lt;/li>
 &lt;li>&lt;code>jcache&lt;/code> integrate with &lt;a href="http://jcp.org/en/jsr/detail?id=107%27">JSR107&lt;/a> , you can bridge a variety of cache implementation.&lt;/li>
 &lt;/ul>
-&lt;p>Caching type can be extended，refer to：&lt;a href="https://dubbo.apache.org/docs/dev/impls/cache">Cache extension&lt;/a>&lt;/p>
+&lt;p>Caching type can be extended，refer to：&lt;a href="https://dubbo.apache.org/en/docs/v2.7/dev/impls/cache">Cache extension&lt;/a>&lt;/p>
 &lt;h2 id="configuration">Configuration&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> cache=&lt;span style="color:#2aa198">&amp;#34;lru&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>or：&lt;/p>
@@ -1021,7 +1021,7 @@ support on &lt;code>2.7.12&lt;/code> or above.
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">assert&lt;/span>&lt;span style="color:#719e07">(&lt;/span>status&lt;span style="color:#719e07">.&lt;/span>equals&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;OK&amp;#34;&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Context</title><link>https://dubbo.apache.org/en/docs/v2.7/user/examples/context/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/examples/context/</guid><description>
-&lt;p>All environment information of during the current call will put into the context,and all configuration information will convert the parameters of &lt;code>URL&lt;/code> instance,Ref to the column of &lt;strong>URL parameters&lt;/strong> at the &lt;a href="content/old/en/docs/v2.7/user/references/xml">schema configuration reference book&lt;/a>&lt;/p>
+&lt;p>All environment information of during the current call will put into the context,and all configuration information will convert the parameters of &lt;code>URL&lt;/code> instance,Ref to the column of &lt;strong>URL parameters&lt;/strong> at the &lt;a href="https://dubbo.apache.org/en/docs/v2.7/user/references/xml">schema configuration reference book&lt;/a>&lt;/p>
 &lt;p>&lt;code>RpcContext&lt;/code> is a temporary status recorder of &lt;code>ThreadLocal&lt;/code>,when accept &lt;code>RPC&lt;/code> request or send &lt;code>RPC&lt;/code> request,The &lt;code>RpcContext&lt;/code> will be changed.Such as: &lt;code>A&lt;/code> call &lt;code>B&lt;/code> and &lt;code>B&lt;/code> call &lt;code>C&lt;/code>. On &lt;code>B&lt;/code> machine,before &lt;code>B&lt;/code> call &lt;code>C&lt;/code>,the &lt;code>RpcContext&lt;/code> will record the information of &lt;code>A&lt;/code> call &lt;code>B&lt;/code>.After &lt;code>B&lt;/code> call &lt;code>C&lt;/code>,the &lt;code>RpcContext&lt;/code> record the information of &lt;code>B&lt;/code> call &lt;code>C&lt;/code>.&lt;/p>
 &lt;h2 id="at-service-consumer">At service consumer&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// remote invoke
@@ -1532,7 +1532,7 @@ Limit the &lt;code>sayHello&lt;/code> method of &lt;code>com.foo.BarService&lt;/
 &lt;div class="alert alert-warning" role="alert">
 &lt;h4 class="alert-heading">Warning&lt;/h4>
 &lt;p>If used default protocol(&lt;code>dubbo&lt;/code> protocol), and the value of &lt;code>connections&lt;/code> attribute is great than 0,then each service reference will has itself connection,else all service which belong to same remote server will share only one connection. In this framework,we called &lt;code>private&lt;/code> connection or &lt;code>share&lt;/code> connection.&lt;/p>
-&lt;p>If &lt;code>&amp;lt;dubbo:service&amp;gt;&lt;/code> and &lt;code>&amp;lt;dubbo:reference&amp;gt;&lt;/code> are both configured accepts/connections,&lt;code>&amp;lt;dubbo:reference&amp;gt;&lt;/code> is preferred, refer to &lt;a href="../../configuration/xml">Configuration coverage strategy&lt;/a>.&lt;/p>
+&lt;p>If &lt;code>&amp;lt;dubbo:service&amp;gt;&lt;/code> and &lt;code>&amp;lt;dubbo:reference&amp;gt;&lt;/code> are both configured accepts/connections,&lt;code>&amp;lt;dubbo:reference&amp;gt;&lt;/code> is preferred, refer to &lt;a href="../../configuration/xml/">Configuration coverage strategy&lt;/a>.&lt;/p>
 &lt;p>Because connection is connect on Server, so configure on provider side.&lt;/p>
 &lt;/div></description></item><item><title>Docs: Lazy Connect</title><link>https://dubbo.apache.org/en/docs/v2.7/user/examples/lazy-connect/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/examples/lazy-connect/</guid><description>
 &lt;p>Lazy connect can reduce the number of keep-alive connections. When a call is initiated, create a keep-alive connection.&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>&lt;/p>
@@ -1725,7 +1725,7 @@ Limit the &lt;code>sayHello&lt;/code> method of &lt;code>com.foo.BarService&lt;/
 &lt;p>Support since &lt;code>2.2.0&lt;/code>&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:2">
-&lt;p>Routing Rules Extension Point: &lt;a href="https://dubbo.apache.org/docs/dev/impls/router.html">Route Extension&lt;/a>&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>Routing Rules Extension Point: &lt;a href="https://dubbo.apache.org/en/docs/v2.7/dev/impls/router/">Route Extension&lt;/a>&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:3">
 &lt;p>Note: A service can only have one whitelist rule, otherwise the two rules will be filtered out.&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
@@ -1900,7 +1900,7 @@ supported on &lt;code>2.2.0&lt;/code> or above.
 &lt;hr>
 &lt;ol>
 &lt;li id="fn:1">
-&lt;p>Custom Extensions: &lt;a href="https://dubbo.apache.org/docs/dev/impls/logger-adapter">logger-adapter&lt;/a>&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>Custom Extensions: &lt;a href="https://dubbo.apache.org/en/docs/v2.7/dev/impls/logger-adapter">logger-adapter&lt;/a>&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;/div></description></item><item><title>Docs: Access Log</title><link>https://dubbo.apache.org/en/docs/v2.7/user/examples/accesslog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/examples/accesslog/</guid><description>
@@ -1945,7 +1945,7 @@ The size of the access log maybe too much,please check the disk capacity. Now I 
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Service Container</title><link>https://dubbo.apache.org/en/docs/v2.7/user/examples/service-container/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/examples/service-container/</guid><description>
 &lt;p>The service container is a standalone launcher because the backend service does not require the functionality of a Web container ,such as Tomcat or JBoss. If you insist on using web containers to load service providers, that increase complexity and is waste of resources.&lt;/p>
 &lt;p>The service container is just a simple Main method and loads a simple Spring container to expose the service.&lt;/p>
-&lt;p>The content of Service container can be extended, built-in spring, jetty, log4j etc.. This can be expanded with &lt;a href="https://dubbo.apache.org/docs/dev/impls/container.html">Container Extension Points&lt;/a>. Configure it with the -D parameter in the java command or &lt;code>dubbo.properties&lt;/code>.&lt;/p>
+&lt;p>The content of Service container can be extended, built-in spring, jetty, log4j etc.. This can be expanded with &lt;a href="https://dubbo.apache.org/en/docs/v2.7/dev/impls/container/">Container Extension Points&lt;/a>. Configure it with the -D parameter in the java command or &lt;code>dubbo.properties&lt;/code>.&lt;/p>
 &lt;h2 id="container-type">Container type&lt;/h2>
 &lt;h3 id="spring-container">Spring Container&lt;/h3>
 &lt;ul>
@@ -2020,7 +2020,7 @@ At this time, the service provider registers service to another registrar, but t
 &lt;p>Distributed transactions are based on the JTA / XA specification(this feature has not yet been implemented)&lt;/p>
 &lt;p>Two-phase commit:&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/jta-xa.jpg" alt="/user-guide/images/jta-xa.jpg">&lt;/p>
-&lt;p>In Dubbo, &lt;a href="https://dubbo.apache.org/blog/2019/01/17/how-to-use-seata-to-ensure-consistency-between-dubbo-microservices/">Seate&lt;/a> can be used to support distributed transactions.&lt;/p></description></item><item><title>Docs: Thread Dump</title><link>https://dubbo.apache.org/en/docs/v2.7/user/examples/dump/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/examples/dump/</guid><description>
+&lt;p>In Dubbo, &lt;a href="https://dubbo.apache.org/en/blog/2019/01/17/how-to-use-seata-to-ensure-consistency-between-dubbo-microservices/">Seate&lt;/a> can be used to support distributed transactions.&lt;/p></description></item><item><title>Docs: Thread Dump</title><link>https://dubbo.apache.org/en/docs/v2.7/user/examples/dump/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/examples/dump/</guid><description>
 &lt;p>When the business thread pool is full, we need to know what resources/conditions are waiting for the thread , to find the bottleneck point of the system or abnormal point. &lt;code>dubbo&lt;/code> automatically export thread stack through &lt;code>Jstack&lt;/code> to keep the scene for easy to troubleshoot the problem.&lt;/p>
 &lt;p>Default policy:&lt;/p>
 &lt;ul>

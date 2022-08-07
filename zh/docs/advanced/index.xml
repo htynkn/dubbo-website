@@ -523,7 +523,7 @@ key 为服务名，value 为服务提供者 url，此配置优先级最高，&lt
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>指定合并策略，缺省根据返回值类型自动匹配，如果同一类型有两个合并器时，需指定合并器的名称&lt;/p>
 &lt;div class="alert alert-primary" role="alert">
 &lt;h4 class="alert-heading">提示&lt;/h4>
-参见：&lt;a href="../../../dev/impls/merger">合并结果扩展&lt;/a>
+参见：&lt;a href="../../../docsv2.7/dev/impls/merger/">合并结果扩展&lt;/a>
 &lt;/div>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.xxx.MenuService&amp;#34;&lt;/span> group=&lt;span style="color:#2aa198">&amp;#34;*&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:method&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;getMenuItems&amp;#34;&lt;/span> merger=&lt;span style="color:#2aa198">&amp;#34;mymerge&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
@@ -1277,7 +1277,7 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;/div>
 &lt;h1 id="服务鉴权">服务鉴权&lt;/h1>
 &lt;p>类似支付之类的对安全性敏感的业务可能会有限制匿名调用的需求。在加固安全性方面，2.7.5 引入了基于AK/SK机制的认证鉴权机制，并且引入了鉴权服务中心，主要原理是消费端在请求需要鉴权的服务时，会通过SK、请求元数据、时间戳、参数等信息来生成对应的请求签名，通过Dubbo的Attahcment机制携带到对端进行验签，验签通过才进行业务逻辑处理。如下图所示：&lt;/p>
-&lt;p>&lt;img src="https://raw.githubusercontent.com/Ooo0oO0o0oO/res/master/auth.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/docsv2.7/user/examples/auth/auth.png" alt="">&lt;/p>
 &lt;p>具体的接入方式也并不复杂：&lt;/p>
 &lt;ol>
 &lt;li>
@@ -1563,7 +1563,7 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> connections=&lt;span style="color:#2aa198">&amp;#34;10&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> connections=&lt;span style="color:#2aa198">&amp;#34;10&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果 &lt;code>&amp;lt;dubbo:service&amp;gt;&lt;/code> 和 &lt;code>&amp;lt;dubbo:reference&amp;gt;&lt;/code> 都配了 connections，&lt;code>&amp;lt;dubbo:reference&amp;gt;&lt;/code> 优先，参见：&lt;a href="../../configuration/xml">配置的覆盖策略&lt;/a>&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果 &lt;code>&amp;lt;dubbo:service&amp;gt;&lt;/code> 和 &lt;code>&amp;lt;dubbo:reference&amp;gt;&lt;/code> 都配了 connections，&lt;code>&amp;lt;dubbo:reference&amp;gt;&lt;/code> 优先，参见：&lt;a href="../../references/configuration/xml/">配置的覆盖策略&lt;/a>&lt;/p>
 &lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
@@ -1623,7 +1623,7 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>为尽可能保证应用启动的灵活性，TLS Cert 的指定还能通过 -D 参数或环境变量等方式来在启动阶段根据部署环境动态指定，具体请参见 Dubbo 配置读取规则与 TLS 示例&lt;/p>
 &lt;div class="alert alert-primary" role="alert">
 &lt;h4 class="alert-heading">提示&lt;/h4>
-&lt;p>参考 Dubbo &lt;a href="../../configuration/configuration-load-process">配置读取规则&lt;/a>，TLS &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-ssl">示例&lt;/a>&lt;/p>
+&lt;p>参考 Dubbo &lt;a href="https://dubbo.apache.org/zh/docsv2.7/user/configuration/configuration-load-process/">配置读取规则&lt;/a>，TLS &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-ssl">示例&lt;/a>&lt;/p>
 &lt;p>如果要使用的是 gRPC 协议，在开启 TLS 时会使用到协议协商机制，因此必须使用支持 ALPN 机制的 Provider，推荐使用的是 netty-tcnative，具体可参见 gRPC Java 社区的&lt;a href="https://github.com/grpc/grpc-java/blob/master/SECURITY.md">总结&lt;/a>&lt;/p>
 &lt;/div>
 &lt;p>在服务调用的安全性上，Dubbo 在后续的版本中会持续投入，其中服务发现/调用的鉴权机制预计在接下来的版本中就会和大家见面。&lt;/p></description></item><item><title>Docs: 令牌验证</title><link>https://dubbo.apache.org/zh/docs/advanced/token-authorization/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/advanced/token-authorization/</guid><description>
@@ -1853,7 +1853,7 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;div class="alert alert-primary" role="alert">
 &lt;h4 class="alert-heading">提示&lt;/h4>
 &lt;p>&lt;code>2.6.x&lt;/code> 版本以及更早的版本请使用&lt;a href="../routing-rule-deprecated">老版本路由规则&lt;/a>&lt;/p>
-&lt;p>自定义路由参考&lt;a href="../../../dev/impls/router">路由扩展&lt;/a>&lt;/p>
+&lt;p>自定义路由参考&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/description/router/">路由扩展&lt;/a>&lt;/p>
 &lt;/div></description></item><item><title>Docs: 旧路由规则</title><link>https://dubbo.apache.org/zh/docs/advanced/routing-rule-deprecated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/advanced/routing-rule-deprecated/</guid><description>
 &lt;div class="pageinfo pageinfo-primary">
 &lt;p>此文档已经不再维护。您当前查看的是快照版本。如果想要查看最新版本的文档，请参阅&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/routing/routing-rule/">最新版本&lt;/a>。&lt;/p>
@@ -2031,7 +2031,7 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;/div>
 &lt;p>覆盖规则是 Dubbo 设计的在无需重启应用的情况下，动态调整 RPC 调用行为的一种能力。2.7.0 版本开始，支持从&lt;strong>服务&lt;/strong>和&lt;strong>应用&lt;/strong>两个粒度来调整动态配置。&lt;/p>
 &lt;h2 id="概览">概览&lt;/h2>
-&lt;p>请在&lt;a href="http://47.91.207.147/#/governance/config">服务治理控制台&lt;/a>查看或修改覆盖规则。&lt;/p>
+&lt;p>请在服务治理控制台查看或修改覆盖规则。&lt;/p>
 &lt;p>应用粒度&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># 将应用demo（key:demo）在20880端口上提供（side:provider）的所有服务（scope:application）的权重修改为1000（weight:1000）。&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---
@@ -2442,8 +2442,8 @@ dubbo 支持多协议，如果一个应用同时暴露多个不同协议服务�
 &lt;p>此文档已经不再维护。您当前查看的是快照版本。如果想要查看最新版本的文档，请参阅&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/performance/simplify-registry-data/">最新版本&lt;/a>。&lt;/p>
 &lt;/div>
 &lt;h2 id="背景">背景&lt;/h2>
-&lt;p>Dubbo provider 中的服务配置项有接近 &lt;a href="http://dubbo.apache.org/en-us/docs/user/references/xml/dubbo-service.html">30 个配置项&lt;/a>。 排除注册中心服务治理需要之外，很大一部分配置项是 provider 自己使用，不需要透传给消费者。这部分数据不需要进入注册中心，而只需要以 key-value 形式持久化存储。&lt;/p>
-&lt;p>Dubbo consumer 中的配置项也有 &lt;a href="http://dubbo.apache.org/en-us/docs/user/references/xml/dubbo-reference.html">20+个配置项&lt;/a>。在注册中心之中，服务消费者列表中只需要关注 application，version，group，ip，dubbo 版本等少量配置，其他配置也可以以 key-value 形式持久化存储。&lt;/p>
+&lt;p>Dubbo provider 中的服务配置项有接近 &lt;a href="https://dubbo.apache.org/zh/docsv2.7/user/references/xml/dubbo-service/">30 个配置项&lt;/a>。 排除注册中心服务治理需要之外，很大一部分配置项是 provider 自己使用，不需要透传给消费者。这部分数据不需要进入注册中心，而只需要以 key-value 形式持久化存储。&lt;/p>
+&lt;p>Dubbo consumer 中的配置项也有 &lt;a href="https://dubbo.apache.org/zh/docsv2.7/user/references/xml/dubbo-reference/">20+个配置项&lt;/a>。在注册中心之中，服务消费者列表中只需要关注 application，version，group，ip，dubbo 版本等少量配置，其他配置也可以以 key-value 形式持久化存储。&lt;/p>
 &lt;p>这些数据是以服务为维度注册进入注册中心，导致了数据量的膨胀，进而引发注册中心(如 zookeeper)的网络开销增大，性能降低。&lt;/p>
 &lt;h2 id="现有功能-sample">现有功能 sample&lt;/h2>
 &lt;p>当前现状一个简单展示。通过这个展示，分析下为什么需要做简化配置。&lt;/p>
@@ -2753,7 +2753,7 @@ dubbo 支持多协议，如果一个应用同时暴露多个不同协议服务�
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:application&lt;/span> logger=&lt;span style="color:#2aa198">&amp;#34;log4j&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;/ol>
-&lt;p>[1]: 自定义扩展可以参考 &lt;a href="../../../dev/impls/logger-adapter">日志适配扩展&lt;/a>&lt;/p></description></item><item><title>Docs: 访问日志</title><link>https://dubbo.apache.org/zh/docs/advanced/accesslog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/advanced/accesslog/</guid><description>
+&lt;p>[1]: 自定义扩展可以参考 &lt;a href="../../../docsv2.7/dev/impls/logger-adapter/">日志适配扩展&lt;/a>&lt;/p></description></item><item><title>Docs: 访问日志</title><link>https://dubbo.apache.org/zh/docs/advanced/accesslog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/advanced/accesslog/</guid><description>
 &lt;div class="pageinfo pageinfo-primary">
 &lt;p>此文档已经不再维护。您当前查看的是快照版本。如果想要查看最新版本的文档，请参阅&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/rpc/accesslog/">最新版本&lt;/a>。&lt;/p>
 &lt;/div>

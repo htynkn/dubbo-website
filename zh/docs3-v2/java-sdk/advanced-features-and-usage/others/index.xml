@@ -236,7 +236,7 @@ dubbo 支持多协议，如果一个应用同时暴露多个不同协议服务�
 &lt;li>startupProbe: &lt;code>org.apache.dubbo.qos.probe.StartupProbe&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;p>接口将自动获取当前应用所有 SPI 的实现，对应接口的 SPI 实现均成功就绪则接口返回成功。
-SPI的介绍见&lt;a href="https://dubbo.apache.org/zh/docs3-building/java-sdk/reference-manual/spi/description/">Dubbo SPI扩展&lt;/a>&lt;/p>
+SPI的介绍见&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/description/">Dubbo SPI扩展&lt;/a>&lt;/p>
 &lt;h4 id="存活检测">存活检测&lt;/h4>
 &lt;p>对于 livenessProbe 存活检测，由于 Dubbo3 框架本身无法获取到应用的存活状态，因此本接口无默认实现，且默认返回成功。开发者可以根据 SPI 定义对此 SPI 接口进行拓展，从应用层次对是否存活进行判断。&lt;/p>
 &lt;h4 id="就绪检测">就绪检测&lt;/h4>

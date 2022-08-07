@@ -295,14 +295,14 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>关闭Maven的staging仓库&lt;/p>
-&lt;p>此步骤为发布2.7.0及以上版本必须要的步骤。在此之前请先确保所有的artifact都是ok的。登录http://repository.apache.org，点击左侧的&lt;code>Staging repositories&lt;/code>，然后搜索Dubbo关键字，会出现一系列的仓库，选择你最近上传的仓库，然后点击上方的Close按钮，这个过程会进行一系列检查，检查通过以后，在下方的Summary标签页上出现一个连接，请保存好这个链接，需要放在接下来的投票邮件当中。链接应该是类似这样的: &lt;a href="https://repository.apache.org/content/repositories/orgapachedubbo-1015">https://repository.apache.org/content/repositories/orgapachedubbo-1015&lt;/a>&lt;/p>
+&lt;p>此步骤为发布2.7.0及以上版本必须要的步骤。在此之前请先确保所有的artifact都是ok的。登录http://repository.apache.org，点击左侧的&lt;code>Staging repositories&lt;/code>，然后搜索Dubbo关键字，会出现一系列的仓库，选择你最近上传的仓库，然后点击上方的Close按钮，这个过程会进行一系列检查，检查通过以后，在下方的Summary标签页上出现一个连接，请保存好这个链接，需要放在接下来的投票邮件当中。链接应该是类似这样的: &lt;code>https://repository.apache.org/content/repositories/orgapachedubbo-1015&lt;/code>&lt;/p>
 &lt;blockquote>
 &lt;p>请注意点击Close可能会出现失败，通常是网络原因，只要重试几次就可以了。可以点击Summary旁边的Activity标签来确认。&lt;/p>
 &lt;/blockquote>
 &lt;/li>
 &lt;/ol>
 &lt;h2 id="验证release-candidates">验证Release Candidates&lt;/h2>
-&lt;p>详细的检查列表请参考官方的&lt;a href="https://wiki.apache.org/incubator/IncubatorReleaseChecklist">check list&lt;/a>&lt;/p>
+&lt;p>详细的检查列表请参考官方的&lt;a href="https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist">check list&lt;/a>&lt;/p>
 &lt;p>首先，从一下地址下载要发布的Release Candidate到本地环境：&lt;/p>
 &lt;pre>
 https://dist.apache.org/repos/dist/dev/dubbo/${release_version}/
@@ -415,7 +415,7 @@ https://dist.apache.org/repos/dist/dev/dubbo/${release_version}/
 &lt;li>此步骤为发布2.7.0及以上版本必须要的步骤。在此之前请先确保所有的artifact都是ok的。登录http://repository.apache.org，点击左侧的&lt;code>Staging repositories&lt;/code>，然后搜索Dubbo关键字，会出现一系列的仓库，选择你最近上传的仓库，然后点击上方的Release按钮.&lt;/li>
 &lt;li>发布GitHub上的&lt;a href="https://github.com/apache/dubbo/releases">release notes&lt;/a>&lt;/li>
 &lt;li>修改GitHub的Readme文件，将版本号更新到最新发布的版本&lt;/li>
-&lt;li>在官网下载&lt;a href="http://dubbo.apache.org/en-us/blog/download.html">页面&lt;/a>上添加最新版本的下载链接。最新的下载链接应该类似&lt;a href="https://www.apache.org/dyn/closer.cgi?path=dubbo/$VERSION/apache-dubbo-$VERSION-source-release.zip">这样&lt;/a>. 同时更新以前版本的下载链接，改为类似&lt;a href="https://archive.apache.org/dist/dubbo/$VERSION/apache-dubbo-$VERSION-bin-release.zip">这样&lt;/a>. 具体可以参考过往的&lt;a href="https://github.com/apache/dubbo-website/blob/asf-site/blog/en-us/download.md">下载链接&lt;/a> [可以参考] (&lt;a href="https://github.com/apache/dubbo-website/pull/887">https://github.com/apache/dubbo-website/pull/887&lt;/a>)&lt;/li>
+&lt;li>在官网下载&lt;a href="https://dubbo.apache.org/en/blog/2020/05/18/past-releases/">页面&lt;/a>上添加最新版本的下载链接。最新的下载链接应该类似&lt;a href="https://www.apache.org/dyn/closer.cgi?path=dubbo/$VERSION/apache-dubbo-$VERSION-source-release.zip">这样&lt;/a>. 同时更新以前版本的下载链接，改为类似&lt;code>https://archive.apache.org/dist/dubbo/$VERSION/apache-dubbo-$VERSION-bin-release.zip&lt;/code>. 具体可以参考过往的&lt;a href="https://dubbo.apache.org/en/blog/2020/05/18/past-releases/">下载链接&lt;/a> [可以参考] (&lt;a href="https://github.com/apache/dubbo-website/pull/887">https://github.com/apache/dubbo-website/pull/887&lt;/a>)&lt;/li>
 &lt;li>合并&lt;code>${release-version}-release&lt;/code>分支到对应的主干分支， 然后删除相应的release分支，例如: &lt;code>git push origin --delete 2.7.0-release&lt;/code>&lt;/li>
 &lt;li>发邮件到 &lt;code>dev@dubbo.apache.org&lt;/code>
 宣布release邮件模板：&lt;/li>
@@ -440,7 +440,7 @@ https://dist.apache.org/repos/dist/dev/dubbo/${release_version}/
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>an issue on GitHub[4].
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[1] http://dubbo.apache.org/en-us/blog/download.html
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[1] https://dubbo.apache.org/en/blog/2020/05/18/past-releases/
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[2] https://repo1.maven.org/maven2/org/apache/dubbo/dubbo
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[3] https://github.com/apache/dubbo/releases
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[4] https://github.com/apache/dubbo/issues

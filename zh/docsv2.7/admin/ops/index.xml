@@ -68,7 +68,7 @@
 &lt;/li>
 &lt;/ol>
 &lt;/div></description></item><item><title>Docsv2.7: 服务测试</title><link>https://dubbo.apache.org/zh/docsv2.7/admin/ops/test/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/admin/ops/test/</guid><description>
-&lt;p>请参考这篇&lt;a href="../../../../../blog//2019/08/26/service-test/">博客&lt;/a>&lt;/p></description></item><item><title>Docsv2.7: 服务查询和详情展示</title><link>https://dubbo.apache.org/zh/docsv2.7/admin/ops/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/admin/ops/search/</guid><description>
+&lt;p>请参考这篇&lt;a href="https://dubbo.apache.org/zh/blog/2019/08/26/service-test/">博客&lt;/a>&lt;/p></description></item><item><title>Docsv2.7: 服务查询和详情展示</title><link>https://dubbo.apache.org/zh/docsv2.7/admin/ops/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/admin/ops/search/</guid><description>
 &lt;p>服务查询是 Dubbo OPS 最基本的功能，目前支持服务，应用和 IP 三个维度的查询，并且服务和应用支持模糊查询和自动提示:&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/admin/searchResult.png" alt="searchResult">&lt;/p>
 &lt;p>其中详情页展示了服务提供者，消费者等信息，元数据信息需要在 Dubbo 2.7 及之后的版本才会展示:&lt;/p>
@@ -224,7 +224,7 @@ Dubbo-Api-Docs 相关注解,解析注解&lt;/li>
 &lt;/li>
 &lt;/ul></description></item><item><title>Docsv2.7: 使用 Apache Skywalking 做分布式跟踪</title><link>https://dubbo.apache.org/zh/docsv2.7/admin/ops/skywalking/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/admin/ops/skywalking/</guid><description>
 &lt;h2 id="apache-skywalking-简介">Apache Skywalking 简介&lt;/h2>
-&lt;p>&lt;a href="https://github.com/apache/incubator-skywalking">Apache Skywalking&lt;/a> 专门为微服务架构和云原生架构系统而设计并且支持分布式链路追踪的APM系统。&lt;a href="https://github.com/apache/incubator-skywalking">Apache Skywalking&lt;/a> 通过加载探针的方式收集应用调用链路信息，并对采集的调用链路信息进行分析，生成应用间关系和服务间关系以及服务指标。&lt;a href="https://github.com/apache/incubator-skywalking">Apache Skywalking&lt;/a> 目前支持多种语言，其中包括 &lt;a href="https://github.com/apache/incubator-skywalking">Java&lt;/a>，&lt;a href="https://github.com/OpenSkywalking/skywalking-netcore">.Net Core&lt;/a>，&lt;a href="https://github.com/OpenSkywalking/skywalking-nodejs">Node.js&lt;/a> 和 &lt;a href="https://github.com/OpenSkywalking/skywalking-go">Go&lt;/a> 语言。&lt;/p>
+&lt;p>&lt;a href="https://github.com/apache/skywalking">Apache Skywalking&lt;/a> 专门为微服务架构和云原生架构系统而设计并且支持分布式链路追踪的APM系统。&lt;a href="https://github.com/apache/skywalking">Apache Skywalking&lt;/a> 通过加载探针的方式收集应用调用链路信息，并对采集的调用链路信息进行分析，生成应用间关系和服务间关系以及服务指标。&lt;a href="https://github.com/apache/skywalking">Apache Skywalking&lt;/a> 目前支持多种语言，其中包括 &lt;a href="https://github.com/apache/skywalking">Java&lt;/a>，&lt;a href="https://github.com/SkyAPM/SkyAPM-dotnet">.Net Core&lt;/a>，&lt;a href="https://github.com/apache/skywalking-nodejs">Node.js&lt;/a> 和 &lt;a href="https://github.com/SkyAPM/go2sky">Go&lt;/a> 语言。&lt;/p>
 &lt;p>目前 Skywalking 已经支持从 6 个可视化维度剖析分布式系统的运行情况。总览视图是应用和组件的全局视图，其中包括组件和应用数量，应用的告警波动，慢服务列表以及应用吞吐量；拓扑图从应用依赖关系出发，展现整个应用的拓扑关系；应用视图则是从单个应用的角度，展现应用的上下游关系，TopN 的服务和服务器，JVM 的相关信息以及对应的主机信息。服务视图关注单个服务入口的运行情况以及此服务的上下游依赖关系，依赖度，帮助用户针对单个服务的优化和监控；调用链展现了调用的单次请求经过的所有埋点以及每个埋点的执行时长；告警视图根据配置阈值针对应用、服务器、服务进行实时告警。&lt;/p>
 &lt;h2 id="dubbo-与-apache-skywalking">Dubbo 与 Apache Skywalking&lt;/h2>
 &lt;h3 id="编写-dubbo-示例程序">编写 Dubbo 示例程序&lt;/h3>
@@ -274,7 +274,7 @@ Dubbo-Api-Docs 相关注解,解析注解&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="部署-apache-skywalking">部署 Apache Skywalking&lt;/h3>
-&lt;p>Apache Skywalking 共提供两种部署模式：单节点模式和集群模式，以下为单节点模式部署步骤，集群模式部署详情参考&lt;a href="https://github.com/apache/incubator-skywalking/blob/master/docs/cn/Deploy-backend-in-cluster-mode-CN.md">文档&lt;/a>。&lt;/p>
+&lt;p>Apache Skywalking 共提供两种部署模式：单节点模式和集群模式，以下为单节点模式部署步骤，集群模式部署详情参考&lt;a href="https://skywalking.apache.org/docs/main/latest/en/setup/backend/backend-setup/">文档&lt;/a>。&lt;/p>
 &lt;h4 id="依赖第三方组件">依赖第三方组件&lt;/h4>
 &lt;ol>
 &lt;li>JDK8+&lt;/li>
@@ -364,7 +364,7 @@ Dubbo-Api-Docs 相关注解,解析注解&lt;/li>
 &lt;/ul>
 &lt;h2 id="pinpoint-与-dubbo-的结合">Pinpoint 与 Dubbo 的结合&lt;/h2>
 &lt;h3 id="启动-pinpoint">启动 Pinpoint&lt;/h3>
-&lt;p>参考 Pinpoint 的 &lt;a href="http://naver.github.io/pinpoint/quickstart.html">Quick start&lt;/a> 搭建环境（不需要启动 TestApp）&lt;/p>
+&lt;p>参考 Pinpoint 的 &lt;a href="https://pinpoint-apm.github.io/pinpoint/quickstart.html">Quick start&lt;/a> 搭建环境（不需要启动 TestApp）&lt;/p>
 &lt;h3 id="准备-dubbo-示例程序">准备 Dubbo 示例程序&lt;/h3>
 &lt;h4 id="创建-api-包">创建 API 包&lt;/h4>
 &lt;p>pom.xml&lt;/p>

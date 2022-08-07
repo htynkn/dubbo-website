@@ -121,9 +121,9 @@
 &lt;li>install &amp;ldquo;Google Authenticator&amp;rdquo; app on your cell phone&lt;/li>
 &lt;/ol>
 &lt;/li>
-&lt;li>2), Following the &lt;a href="https://help.github.com/articles/configuring-two-factor-authentication-via-a-totp-mobile-app/">authorized GitHub 2FA wiki&lt;/a>, you can operation step by step .&lt;/li>
+&lt;li>2), Following the &lt;a href="https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication">authorized GitHub 2FA wiki&lt;/a>, you can operation step by step .&lt;/li>
 &lt;/ul>
-&lt;p>In the &lt;a href="https://github.com/settings/two_factor_authentication/verify">two-factors authorization authentication (2. Scan this barcode with your app.)&lt;/a> page, it is not recommended to select a two-dimensional code with a cell phone, because some of the cell phones will not be able to scan.&lt;/p>
+&lt;p>In the &lt;a href="https://github.com/settings/security">two-factors authorization authentication (2. Scan this barcode with your app.)&lt;/a> page, it is not recommended to select a two-dimensional code with a cell phone, because some of the cell phones will not be able to scan.&lt;/p>
 &lt;p>Please open the cell phone &amp;ldquo;Google Authenticator&amp;rdquo; app, click &amp;ldquo;+&amp;rdquo; to select &amp;ldquo;input the secret key&amp;rdquo;: write the GitHub account in the account name input box. In your &amp;ldquo;secret key&amp;rdquo; input box, write the text of the &amp;ldquo;enter this text code&amp;rdquo; link in the open web page. After clicking &amp;ldquo;add&amp;rdquo; in app, 6 digit dynamic will be generated for this account. Write the 6 digit number to the text box in the web page, and then click &amp;ldquo;Enable&amp;rdquo;. In this way, the 2fa is set successfully.&lt;/p>
 &lt;ul>
 &lt;li>
@@ -140,7 +140,7 @@
 &lt;/li>
 &lt;/ul>
 &lt;p>When access token is generated on GitHub, the token where the instruction line needs a password is pasted.&lt;/p>
-&lt;p>Refer to website &lt;a href="https://help.github.com/articles/https-cloning-errors/#provide-access-token-if-2fa-enabled">referenced link one&lt;/a> and &lt;a href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/">referenced link two&lt;/a>&lt;/p>
+&lt;p>Refer to website &lt;a href="https://docs.github.com/en/repositories/creating-and-managing-repositories/troubleshooting-cloning-errors">referenced link one&lt;/a> and &lt;a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token">referenced link two&lt;/a>&lt;/p>
 &lt;ul>
 &lt;li>B. switch to SSH&lt;/li>
 &lt;/ul>
@@ -152,15 +152,12 @@
 &lt;p>The community is more important than the code
 If not discussed in the community (mailing list), just as it did not happen.&lt;/p>
 &lt;h3 id="add-your-name">Add your name&lt;/h3>
-&lt;p>Please update Dubbo incubator status &lt;a href="https://incubator.apache.org/projects/dubbo.html">page&lt;/a> to add your name. See this &lt;a href="http://dubbo.apache.org/en-us/docs/developers/committer-guide/apache-dubbo-page_dev.html">guide&lt;/a> for instructions.&lt;/p>
-&lt;p>Please update Dubbo official &lt;a href="http://dubbo.apache.org/en-us/docs/developers/developers_dev.html">website&lt;/a> to update your name.&lt;/p>
+&lt;p>Please update Dubbo incubator status &lt;a href="https://incubator.apache.org/projects/dubbo.html">page&lt;/a> to add your name. See this &lt;a href="https://dubbo.apache.org/en/latest/contribution-guidelines/contributor/">guide&lt;/a> for instructions.&lt;/p>
+&lt;p>Please update Dubbo official &lt;a href="https://dubbo.apache.org/en/latest/contribution-guidelines/committer">website&lt;/a> to update your name.&lt;/p>
 &lt;h3 id="a-small-benefit">A small benefit&lt;/h3>
 &lt;p>Jetbrains company gives Apache committers a small benefit, which is free to use IDEA&amp;rsquo;s full series products. The specific address is: &lt;a href="https://www.jetbrains.com/shop/eform/apache?Product=ALL">https://www.jetbrains.com/shop/eform/apache?Product=ALL&lt;/a>&lt;/p>
 &lt;h3 id="reference-wiki">Reference wiki&lt;/h3>
 &lt;p>&lt;a href="https://www.apache.org/dev/new-committers-guide.html">https://www.apache.org/dev/new-committers-guide.html&lt;/a>&lt;/p></description></item><item><title>Docs: The Devil Is In The Details</title><link>https://dubbo.apache.org/en/docs/v2.7/dev/principals/code-detail/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/dev/principals/code-detail/</guid><description>
-&lt;blockquote>
-&lt;p>&lt;a href="http://javatar.iteye.com/blog/1056664">http://javatar.iteye.com/blog/1056664&lt;/a>&lt;/p>
-&lt;/blockquote>
 &lt;p>Recently, I have been worried about the quality of the Dubbo distributed service framework. If there are more maintenance personnel or changes, there will be a decline in quality. I am thinking, is there any need for everyone to abide by it, according to a habit when writing code, I have summarized it. The code process, especially the framework code, should always keep in mind the details. Maybe the following will be said, everyone will feel very simple, very basic, but always keep in mind. Considering these factors in every line of code requires a lot of patience. It is often said that the devil is in the details.&lt;/p>
 &lt;h2 id="prevent-null-pointer-dereference-and-index-out-of-bounds">Prevent null pointer dereference and index out of bounds&lt;/h2>
 &lt;p>This is the exception I least like to see, especially in the core framework, in contrast I would like to see a parameter not legal exception with detail information. This is also a robust program developer who should be prevented in the subconscious by writing every line of code. Basically, you must be able to ensure that the code that is written once will not appear in the case of no test.&lt;/p>
@@ -2865,7 +2862,7 @@ into the project&amp;rsquo;s &lt;code>apps&lt;/code> directory.&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {dubbo_service,{git,&lt;span style="color:#2aa198">&amp;#34;${INTERFACE_LIB_URL}&amp;#34;&lt;/span>,{branch,&lt;span style="color:#2aa198">&amp;#34;master&amp;#34;&lt;/span>}}} &lt;span style="color:#586e75">%% replace ${INTERFACE_LIB_URL} with your lib git repos url
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>]}.
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="consumer-configuration">Consumer configuration&lt;/h2>
-&lt;p>Please reference &lt;a href="content/old/en/docs/v3.0/languages/erlang/reference.md">Reference Config&lt;/a>&lt;/p>
+&lt;p>Please reference &lt;a href="../reference/">Reference Config&lt;/a>&lt;/p>
 &lt;h2 id="init-dubbolib-in-your-project">Init dubbolib in your project&lt;/h2>
 &lt;p>It is need you&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-erlang" data-lang="erlang">&lt;span style="display:flex;">&lt;span>dubboerl:&lt;span style="color:#268bd2">init&lt;/span>().
@@ -2931,7 +2928,7 @@ into the project&amp;rsquo;s &lt;code>apps&lt;/code> directory.&lt;/li>
 &lt;p>&lt;strong>Then, the traffic becomes even heavier, the capacity problem of the service is exposed, how many machines are needed to support this service? When should the machine be added?&lt;/strong> To solve these problems, first, the daily service calls and the amount of response time should be counted as a reference for capacity planning. Second, dynamically adjust the weight, increase the weight of an online machine, and recorded the response time changes until it reaches the threshold, record the visits times at this time, then multiply this number of visits by the total number of machines to calculate the capacity in turn.&lt;/p>
 &lt;p>Above are the most basic requirements of Dubbo.&lt;/p></description></item><item><title>Docs: XML Configuration</title><link>https://dubbo.apache.org/en/docs/v2.7/user/configuration/xml/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/configuration/xml/</guid><description>
 &lt;blockquote>
-&lt;p>About the XML configuration items, see：&lt;a href="content/old/en/docs/v2.7/user/references/xml">XML References&lt;/a>. If you prefer use API directly instead of using Spring, see &lt;a href="../api">API Configuration&lt;/a>. Want an example of how to use configuration, see &lt;a href="../../quick-start">Quick Start&lt;/a>.&lt;/p>
+&lt;p>About the XML configuration items, see：&lt;a href="https://dubbo.apache.org/en/docs/v2.7/user/references/xml/">XML References&lt;/a>. If you prefer use API directly instead of using Spring, see &lt;a href="../api">API Configuration&lt;/a>. Want an example of how to use configuration, see &lt;a href="../../quick-start">Quick Start&lt;/a>.&lt;/p>
 &lt;/blockquote>
 &lt;h2 id="providerxml-demo">provider.xml demo&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span>
@@ -3064,7 +3061,7 @@ into the project&amp;rsquo;s &lt;code>apps&lt;/code> directory.&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>zookeeper&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>3.3.3&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Or &lt;a href="http://repo1.maven.org/maven2/org/apache/zookeeper/zookeeper">download&lt;/a> directly from apache.&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Or &lt;a href="https://repo1.maven.org/maven2/org/apache/zookeeper/zookeeper">download&lt;/a> directly from apache.&lt;/p>
 &lt;p>Dubbo supports two zookeeper clients: zkclient and curator:&lt;/p>
 &lt;h3 id="use-zkclient">Use zkclient&lt;/h3>
 &lt;p>Since &lt;code>2.2.0&lt;/code> dubbo uses zkclient by default, in order to improve the robustness. &lt;a href="https://github.com/sgroschupf/zkclient">zkclient&lt;/a> is a zookeeper client implementation open-sourced by Datameer.&lt;/p>
@@ -3075,7 +3072,7 @@ into the project&amp;rsquo;s &lt;code>apps&lt;/code> directory.&lt;/li>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>dubbo.registry.client&lt;span style="color:#719e07">=&lt;/span>zkclient
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Or:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>zookeeper://10.20.153.10:2181?client&lt;span style="color:#719e07">=&lt;/span>zkclient
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In order to use it, need to explicitly declare the following maven dependency or &lt;a href="http://repo1.maven.org/maven2/com/github/sgroschupf/zkclient">download its client&lt;/a>.&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In order to use it, need to explicitly declare the following maven dependency or &lt;a href="https://repo1.maven.org/maven2/com/github/sgroschupf/zkclient">download its client&lt;/a>.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>com.github.sgroschupf&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>zkclient&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
@@ -3089,7 +3086,7 @@ into the project&amp;rsquo;s &lt;code>apps&lt;/code> directory.&lt;/li>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>dubbo.registry.client&lt;span style="color:#719e07">=&lt;/span>curator
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Or:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>zookeeper://10.20.153.10:2181?client&lt;span style="color:#719e07">=&lt;/span>curator
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Also need to explicitly add maven dependency or directly &lt;a href="http://repo1.maven.org/maven2/com/netflix/curator/curator-framework">download&lt;/a> the jar:&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Also need to explicitly add maven dependency or directly &lt;a href="https://repo1.maven.org/maven2/com/netflix/curator/curator-framework">download&lt;/a> the jar:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>com.netflix.curator&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>curator-framework&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
@@ -3108,7 +3105,7 @@ into the project&amp;rsquo;s &lt;code>apps&lt;/code> directory.&lt;/li>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;chinaRegistry&amp;#34;&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;zookeeper&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.153.10:2181&amp;#34;&lt;/span> group=&lt;span style="color:#2aa198">&amp;#34;china&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;intlRegistry&amp;#34;&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;zookeeper&amp;#34;&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;10.20.153.10:2181&amp;#34;&lt;/span> group=&lt;span style="color:#2aa198">&amp;#34;intl&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="zookeeper-installation">Zookeeper Installation&lt;/h2>
-&lt;p>Pls. refer to &lt;a href="content/old/en/docs/v2.7/admin/install/zookeeper.md">zookeeper install manual&lt;/a> for how to install zookeeper based registry server. To set it up, specify &lt;code>dubbo.registry.address&lt;/code> to &lt;code>zookeeper://127.0.0.1:2181&lt;/code> in &lt;code>conf/dubbo.properties&lt;/code> for both provider and consumer (you can refer to &lt;a href="content/old/en/docs/v2.7/user/quick-start.md">quick start&lt;/a>) after install a zookeeper server.&lt;/p>
+&lt;p>Pls. refer to &lt;a href="https://dubbo.apache.org/en/docs/v2.7/admin/install/zookeeper/">zookeeper install manual&lt;/a> for how to install zookeeper based registry server. To set it up, specify &lt;code>dubbo.registry.address&lt;/code> to &lt;code>zookeeper://127.0.0.1:2181&lt;/code> in &lt;code>conf/dubbo.properties&lt;/code> for both provider and consumer (you can refer to &lt;a href="https://dubbo.apache.org/en/docs/v2.7/user/quick-start/">quick start&lt;/a>) after install a zookeeper server.&lt;/p>
 &lt;h2 id="declaration-of-reliability">Declaration of Reliability&lt;/h2>
 &lt;p>A home-brewed service registry server is used in Alibaba instead of zookeeper server. Zookeeper based registry center does not have long-run practice within Alibaba, therefore we cannot guarantee its reliability. Zookeeper registry server is provided for dubbo community, and its reliability relies on zookeeper itself largely.&lt;/p>
 &lt;h2 id="declaration-of-compatibility">Declaration of Compatibility&lt;/h2>
@@ -3129,7 +3126,7 @@ into the project&amp;rsquo;s &lt;code>apps&lt;/code> directory.&lt;/li>
 &lt;p>当您不熟悉ASF使用的开源的开发过程时，有时难以理解的一点，就是我们更重视社区而不是代码。一个强大而健康的社区将受到尊重，成为一个有趣和有益的地方。更重要的是，一个多元化和健康的社区可以长时间的持续支持代码，即使个别公司在这个领域来来往往，也是如此。&lt;/p>
 &lt;p>更多详细信息可以在&lt;a href="https://community.apache.org/contributors/">这里&lt;/a>找到。&lt;/p>
 &lt;h3 id="我可以贡献什么">我可以贡献什么？&lt;/h3>
-&lt;p>请参阅&lt;a href="https://dubbo.apache.org/zh/docs/contribution-guidelines/contributor/new-contributor-guide_dev">新的贡献者指南&lt;/a>。&lt;/p></description></item><item><title>Latest: Apache 提交者注册流程</title><link>https://dubbo.apache.org/en/latest/contribution-guidelines/committer/new-committer-guide_dev/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/latest/contribution-guidelines/committer/new-committer-guide_dev/</guid><description>
+&lt;p>请参阅&lt;a href="https://dubbo.apache.org/zh/blog/1/01/01/%E6%96%B0%E8%B4%A1%E7%8C%AE%E8%80%85%E5%90%91%E5%AF%BC/">新的贡献者指南&lt;/a>。&lt;/p></description></item><item><title>Latest: Apache 提交者注册流程</title><link>https://dubbo.apache.org/en/latest/contribution-guidelines/committer/new-committer-guide_dev/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/latest/contribution-guidelines/committer/new-committer-guide_dev/</guid><description>
 &lt;h2 id="一apache-提交者的产生">一、Apache 提交者的产生&lt;/h2>
 &lt;h3 id="项目孵化初始化提交者">项目孵化初始化提交者&lt;/h3>
 &lt;p>项目孵化阶段，在孵化项目提案中，会有初始化提交者列表这一选项。确认你是初始化提交者的一员。项目在 apache 孵化器社区投票通过后，提交者可以开始准备注册账户了。可以参看&lt;a href="https://wiki.apache.org/incubator/">孵化器 wiki&lt;/a>&lt;/p>
@@ -3162,13 +3159,13 @@ into the project&amp;rsquo;s &lt;code>apps&lt;/code> directory.&lt;/li>
 &lt;h3 id="github账户授权">Github账户授权&lt;/h3>
 &lt;p>按照提示授权对 github 账户的 OAuth 协议登入&lt;/p>
 &lt;h3 id="在-githubcom-设置-github-账户两因素授权2fa">在 github.com 设置 github 账户两因素授权（2FA）&lt;/h3>
-&lt;p>按照&lt;a href="https://help.github.com/articles/configuring-two-factor-authentication-via-a-totp-mobile-app/">授权 GitHub 2FA wiki&lt;/a> 操作如下：&lt;/p>
+&lt;p>按照&lt;a href="https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication">授权 GitHub 2FA wiki&lt;/a> 操作如下：&lt;/p>
 &lt;ul>
 &lt;li>
 &lt;p>在手机安装 “google 身份验证器” app&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>按照&lt;a href="https://help.github.com/articles/configuring-two-factor-authentication-via-a-totp-mobile-app/">授权 GitHub 2FA wiki&lt;/a> 一步一步操作。&lt;/p>
+&lt;p>按照&lt;a href="https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication">授权 GitHub 2FA wiki&lt;/a> 一步一步操作。&lt;/p>
 &lt;p>在&lt;a href="https://github.com/settings/security">两因素授权验证&lt;/a>界面，不建议选择用手机扫描二维码，因为有些手机会扫描不出来。
 请打开手机 “google 身份验证器” app，点“+”选择“输入提供的秘钥”： 在“账户名” input 框写入 github 账户。在“您的秘钥” input 框写入:打开的网页中 &amp;ldquo;enter this text code&amp;rdquo; 链接里面的文本。在 app 中点击&amp;quot;添加&amp;quot; 后，将为此账户生成6位数字动态。将此6位数字写入网页中的文本框，然后点 “Enable”。这样 2FA 就设置成功了。&lt;/p>
 &lt;/li>
@@ -3183,7 +3180,7 @@ into the project&amp;rsquo;s &lt;code>apps&lt;/code> directory.&lt;/li>
 &lt;ul>
 &lt;li>申请 Access Token：
 在 github 上生成 access token 后，指令行需要密码的地方就粘贴token。
-参考官网&lt;a href="https://help.github.com/articles/https-cloning-errors/#provide-access-token-if-2fa-enabled">帮助链接一&lt;/a>和&lt;a href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/">帮助链接二&lt;/a>&lt;/li>
+参考官网&lt;a href="https://docs.github.com/cn/repositories/creating-and-managing-repositories/troubleshooting-cloning-errors#provide-access-token-if-2fa-enabled">帮助链接一&lt;/a>和&lt;a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token">帮助链接二&lt;/a>&lt;/li>
 &lt;li>改用 ssh：
 在命令行执行 ssh-keygen 命令， 然后把pub文件中的内容粘贴到 github 上&lt;/li>
 &lt;/ul>
@@ -3196,9 +3193,6 @@ into the project&amp;rsquo;s &lt;code>apps&lt;/code> directory.&lt;/li>
 &lt;h3 id="the-apache-way">The Apache Way&lt;/h3>
 &lt;p>详情请参考 &lt;a href="http://apache.org/foundation/governance/">wiki&lt;/a>&lt;/p>
 &lt;p>社区重于代码，如果某问题或者方案没有在社区(邮件列表)讨论过，就当没有发生过&lt;/p>
-&lt;h3 id="添加你的名字">添加你的名字&lt;/h3>
-&lt;p>请访问孵化器&lt;a href="https://incubator.apache.org/projects/dubbo.html">主页&lt;/a>将你的名字添加到上面. 具体可以参考这个&lt;a href="http://dubbo.apache.org/docs/3.0/zh-cn/docs/developers/committer-guide/apache-dubbo-page_dev.html">文档&lt;/a>.&lt;/p>
-&lt;p>请访问 Dubbo&lt;a href="http://dubbo.apache.org/docs/3.0/zh-cn/docs/developers/developers/developers_dev.html">官方网站&lt;/a> 将你的名字添加到上面.&lt;/p>
 &lt;h3 id="小福利">小福利&lt;/h3>
 &lt;p>Jetbrains 给 apache 提交者一个小福利，就是可以免费使用 idea 的全产品系列。具体注册地址为：https://www.jetbrains.com/shop/eform/apache?product=ALL&lt;/p>
 &lt;h3 id="相关-wiki">相关 wiki&lt;/h3>
@@ -3275,7 +3269,7 @@ into the project&amp;rsquo;s &lt;code>apps&lt;/code> directory.&lt;/li>
 &lt;p>Dubbo new version removes &lt;code>dubbo.properties&lt;/code>, because the contract often conflicts configuration.&lt;/p>
 &lt;p>And to describe the configuration, because want to participate in the business logic, usually embedded into the application of life cycle management.There are more and more using spring projects, directly using the spring configuration is common, and spring permits custom schema, configuration simplified is very convenient.Also has its disadvantages, of course, is strongly dependent on the spring, can ask programming interface to do the matching scheme&lt;/p>
 &lt;p>In Dubbo configuration is described, but also environment configuration.Part with spring schame configuration is loaded, in part, from the classpath scanning properties configuration is loaded.Users feel very inconvenient, so in the new version of the merged, unified into spring schame configuration load, also increases the flexibility of configuration.&lt;/p>
-&lt;p>Extension configuration, usually to the configuration of aggregate demand is higher.Because the product need to find the third party implementation, add it to the product inside.Agreed in the Java world, usually in a specified file each jar package down load, such as: the eclipse plugin. The XML, struts 2 struts - plugin. XML, and so on, this kind of configuration can consider Java standard service discovery mechanisms, namely in the jar meta-inf/services placed under the interface class name file, content is an implementation class name of the class in a row, like encryption algorithm in the JDK extension, the script engine extension, new JDBC driver, etc., are all in this way.see：&lt;a href="http://download.oracle.com/javase/1.4.2/docs/guide/jar/jar.html#Service%20Provider">ServiceProvider Provider&lt;/a>。&lt;/p>
+&lt;p>Extension configuration, usually to the configuration of aggregate demand is higher.Because the product need to find the third party implementation, add it to the product inside.Agreed in the Java world, usually in a specified file each jar package down load, such as: the eclipse plugin. The XML, struts 2 struts - plugin. XML, and so on, this kind of configuration can consider Java standard service discovery mechanisms, namely in the jar meta-inf/services placed under the interface class name file, content is an implementation class name of the class in a row, like encryption algorithm in the JDK extension, the script engine extension, new JDBC driver, etc., are all in this way.see：&lt;a href="https://docs.oracle.com/en/cloud/saas/financials/22a/fafcf/service-provider-models.html">ServiceProvider Provider&lt;/a>。&lt;/p>
 &lt;p>Dubbo old version under each jar package through agreement, place called Dubbo - context. The spring configuration XML extensions and integration, the new version to use the JDK&amp;rsquo;s own meta-inf/services, spring from too much dependence.&lt;/p>
 &lt;h2 id="programmable-configuration">Programmable configuration&lt;/h2>
 &lt;p>Configuration of programmability is very necessary, no matter in what way you load the configuration file, should provide a programming way of configuration, allows the user to not using a configuration file, complete the configuration process with code directly.As a product, especially the component products, usually require collaboration use and other products, when a user integration of your product, may need adapter configuration mode.&lt;/p>
@@ -3303,7 +3297,7 @@ into the project&amp;rsquo;s &lt;code>apps&lt;/code> directory.&lt;/li>
 &lt;p>Configuration is also &amp;ldquo;duplicate code&amp;rdquo;, there is also a &amp;ldquo;generalization and elaboration&amp;rdquo; problem.Such as: Dubbo timeout Settings, each service, and each method, should be can set the timeout.But a lot of service don&amp;rsquo;t care about overtime, if required each method configuration, it is not realistic.So Dubbo adopted method inherit service timeout, overtime service timeout to inherit the default timeout, no configuration, opens up search.&lt;/p>
 &lt;p>Dubbo, moreover, the old version all the timeout, retries, load balancing strategies are only in the service consumer configuration.But in the process of actual use, found that the service provider knows better than consumer, but the configuration items are used in consumer.The new version, joined in the provider can match these parameters, through the registry to the consumer,As a reference, if there is no configuration, consumer to provide configuration shall prevail, the equivalent of consumption ji-cheng fang the provider&amp;rsquo;s advice configuration values.And at the time of the relay configuration registry, can also be on the way to modify configuration, so that achieve the purpose of governance, the equivalent of inheritance relationship：Service consumers &amp;ndash;&amp;gt; Registry &amp;ndash;&amp;gt; Service provider
 Dubbo, moreover, the old version all the timeout, retries, load balancing strategies are only in the service consumer configuration.But in the process of actual use, found that the service provider knows better than consumer, but the configuration items are used in consumer.The new version, joined in the provider can match these parameters, through the registry to the consumer.&lt;/p>
-&lt;p>&lt;img src="static/imgs/dev/configuration-override.png" alt="configuration-override">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/dev/configuration-override.png" alt="configuration-override">&lt;/p>
 &lt;h2 id="configuration-backward-compatibility">Configuration backward compatibility&lt;/h2>
 &lt;p>Forwards compatibility is very good, as long as you guarantee configuration only grow, basically can guarantee forwards compatibility.But backward compatibility, but also should pay attention to, to prepare for subsequent to join the new configuration items.If a special configuration in configuration, you should make an appointment a compatibility for the &amp;ldquo;special&amp;rdquo; case rules, because the special case, probably will happen later.For example, have a configuration file is save &amp;ldquo;service = address mapping&amp;rdquo;, one of the special line, is saved &amp;ldquo;registry = address&amp;rdquo;.Now application load time to define &amp;ldquo;registry&amp;rdquo; the Key is special, do special processing, the other is &amp;ldquo;service&amp;rdquo;.New version found, however, to add a &amp;ldquo;monitoring center&amp;rdquo; = address, at this point, the old version of the program will handle &amp;ldquo;monitoring center&amp;rdquo; as a &amp;ldquo;service&amp;rdquo;, because the old code can&amp;rsquo;t be change, compatibility is will be very troublesome.If previously agreed upon in the &amp;ldquo;special&amp;rdquo; logo + XXX for special treatment, follow-up will be more convenient.&lt;/p>
 &lt;p>Backward compatibility, can learn a lot from HTML5, refer to：&lt;a href="http://javatar.iteye.com/blog/949390">HTML5 design principle&lt;/a>&lt;/p></description></item><item><title>Docs: Consumer Configuration</title><link>https://dubbo.apache.org/en/docs/v2.7/user/languages/erlang/reference/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/languages/erlang/reference/</guid><description>
@@ -3572,8 +3566,7 @@ http://localhost:8081&lt;/li>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>admin.config-center=zookeeper://127.0.0.1:2181
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>admin.registry.address=zookeeper://127.0.0.1:2181
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>admin.metadata-report.address=zookeeper://127.0.0.1:2181
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>the three configure item above are configuration center, registry center and metadata center respectively, you can find explanation about the three centers &lt;a href="../user/configuration/config-center.md">here&lt;/a>
-Same as Dubbo 2.7, you can set the addresses of metadata center and registry center on configuration center, in zookeeper, the path and content are as below:&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Same as Dubbo 2.7, you can set the addresses of metadata center and registry center on configuration center, in zookeeper, the path and content are as below:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># /dubbo/config/dubbo/dubbo.properties
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address=zookeeper://127.0.0.1:2181
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.metadata-report.address=zookeeper://127.0.0.1:2181
@@ -3637,7 +3630,7 @@ Same as Dubbo 2.7, you can set the addresses of metadata center and registry cen
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="code-convention">Code convention&lt;/h3>
 &lt;p>Please check the &lt;a href="https://github.com/apache/dubbo/blob/master/CONTRIBUTING.md">CONTRIBUTING.md&lt;/a> for code convention.&lt;/p>
 &lt;h3 id="participate-in-the-release-vote">Participate in the release vote&lt;/h3>
-&lt;p>Participate in the release vote is an important way to contribute to Dubbo. The Dubbo community welcomes everyone to partipate, you can check the release vote using this &lt;a href="https://wiki.apache.org/incubator/IncubatorReleaseChecklist">check list&lt;/a>.
+&lt;p>Participate in the release vote is an important way to contribute to Dubbo. The Dubbo community welcomes everyone to partipate, you can check the release vote using this &lt;a href="https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist">check list&lt;/a>.
 If you have any question regarding the check list, please feel free to ask on &lt;a href="mailto:dev@dubbo.apache.org">dev@dubbo.apache.org&lt;/a>.&lt;/p>
 &lt;h3 id="what-can-i-contribute">What can I contribute?&lt;/h3>
 &lt;ul>
@@ -4054,7 +4047,7 @@ modifications and taggings related to ${release_version} Release Candidates are 
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ mvn release:clean
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ mvn release:prepare -Prelease -Darguments&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">&amp;#34;-Dmaven.test.skip=true&amp;#34;&lt;/span> -DautoVersionSubmodules&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">true&lt;/span> -Dusername&lt;span style="color:#719e07">=&lt;/span>YOUR GITHUB ID -DpushChanges&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">false&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>If you are promted to input password for pushing to GitHub (basically including adding new commits and tags), do not input your login password of GitHub. Use &lt;code>Personal access tokens&lt;/code> instead. You can go to &lt;a href="https://github.com/settings/profile">https://github.com/settings/profile&lt;/a>, click &lt;code>Developer settings&lt;/code> -&amp;gt; &lt;code>Personal access tokens&lt;/code>, and generate a new token if not. Please refer to this &lt;a href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/">guide&lt;/a> for more infomation.
+&lt;p>If you are promted to input password for pushing to GitHub (basically including adding new commits and tags), do not input your login password of GitHub. Use &lt;code>Personal access tokens&lt;/code> instead. You can go to &lt;a href="https://github.com/settings/profile">https://github.com/settings/profile&lt;/a>, click &lt;code>Developer settings&lt;/code> -&amp;gt; &lt;code>Personal access tokens&lt;/code>, and generate a new token if not. Please refer to this &lt;a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token">guide&lt;/a> for more infomation.
 you need to choose the release artifactId, next artifactId and the release tag, the default tag is dubbo-parent-xxxx, you need to change it to dubbo-xxxx&lt;/p>
 &lt;/blockquote>
 &lt;p>After executing the above commands, you will find that:&lt;/p>
@@ -4102,7 +4095,7 @@ The problem is that missing package occurred many times at deploying. So you sho
 &lt;li>
 &lt;p>Add public key to &lt;a href="https://dist.apache.org/repos/dist/dev/dubbo/KEYS">KEYS&lt;/a> file if you are the first time to be a release manager. KEYS is mainly used to allow people who participate in the voting to be imported locally to verify the correctness of the sign.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ &lt;span style="color:#719e07">(&lt;/span>gpg --list-sigs &amp;lt;your name&amp;gt; &lt;span style="color:#719e07">&amp;amp;&amp;amp;&lt;/span> gpg --armor --export &amp;lt;your name&amp;gt;&lt;span style="color:#719e07">)&lt;/span> &amp;gt;&amp;gt; KEYS
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For more information on how to get your key id, please refer to this &lt;a href="https://help.github.com/articles/generating-a-new-gpg-key/">guide&lt;/a>&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For more information on how to get your key id, please refer to this &lt;a href="https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key">guide&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Copy the source.zip package from the Dubbo root directory to the svn local repository dubbo/${release_version}&lt;/p>
@@ -4130,14 +4123,14 @@ The problem is that missing package occurred many times at deploying. So you sho
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>Close the maven staging repository&lt;/p>
-&lt;p>This step is required when prepare for a 2.7.0+ release, where package name has been changed to org.apache. Before that, please make sure all the maven artifacts look good. Login to &lt;a href="http://repository.apache.org">http://repository.apache.org&lt;/a>, click the &lt;code>Staging repositories&lt;/code> on the left bar, search with keyword Dubbo, and you will see a list of repositories. Find the one you just uploaded, and then click the close button in the top area. This will do some sannity check, such as gpg signature check, and checksum check. After that, a link will be shown in the summary tab in the bottom. Please copy that link, it will be used for release vote. The link should look like this: &lt;a href="https://repository.apache.org/content/repositories/orgapachedubbo-1015">https://repository.apache.org/content/repositories/orgapachedubbo-1015&lt;/a>.&lt;/p>
+&lt;p>This step is required when prepare for a 2.7.0+ release, where package name has been changed to org.apache. Before that, please make sure all the maven artifacts look good. Login to &lt;a href="http://repository.apache.org">http://repository.apache.org&lt;/a>, click the &lt;code>Staging repositories&lt;/code> on the left bar, search with keyword Dubbo, and you will see a list of repositories. Find the one you just uploaded, and then click the close button in the top area. This will do some sannity check, such as gpg signature check, and checksum check. After that, a link will be shown in the summary tab in the bottom. Please copy that link, it will be used for release vote. The link should look like this: &lt;code>https://repository.apache.org/content/repositories/orgapachedubbo-1015&lt;/code>.&lt;/p>
 &lt;blockquote>
 &lt;p>Please be aware that it may fail when you close the repository, this is normally due to network issues, please try again if it failed. You can confirm it by clicking the &lt;code>Activiey&lt;/code> tab next to &lt;code>Summary&lt;/code>.&lt;/p>
 &lt;/blockquote>
 &lt;/li>
 &lt;/ol>
 &lt;h2 id="verify-release-candidates">Verify Release Candidates&lt;/h2>
-&lt;p>&lt;strong>A full check list can be found &lt;a href="https://wiki.apache.org/incubator/IncubatorReleaseChecklist">here&lt;/a>&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>A full check list can be found &lt;a href="https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist">here&lt;/a>&lt;/strong>&lt;/p>
 &lt;p>The verification link includes but is not limited to the following contents and forms:&lt;/p>
 &lt;h3 id="check-signatures-and-hashes-are-good">Check signatures and hashes are good&lt;/h3>
 &lt;h4 id="check-the-sha512-sum">check the sha512 sum&lt;/h4>
@@ -4244,7 +4237,7 @@ The problem is that missing package occurred many times at deploying. So you sho
 &lt;li>Remove the the release file for the previous release under &lt;a href="https://dist.apache.org/repos/dist/release/dubbo/">official release directory&lt;/a>, which will be archived and can be found &lt;a href="https://archive.apache.org/dist/dubbo/">here&lt;/a>&lt;/li>
 &lt;li>Publish &lt;a href="https://github.com/apache/dubbo/releases">release notes&lt;/a> on Github.&lt;/li>
 &lt;li>Update the recommend dependency on &lt;a href="https://github.com/apache/dubbo#maven-dependency">Github&lt;/a> to the latest version, also update the version in other place if necessary.&lt;/li>
-&lt;li>Add the download link to official website &lt;a href="http://dubbo.apache.org/en-us/blog/download.html">http://dubbo.apache.org/en-us/blog/download.html&lt;/a>, using the ASF mirror system. The latest release download link should be something like &lt;a href="https://www.apache.org/dyn/closer.cgi?path=dubbo/$VERSION/apache-dubbo-$VERSION-source-release.zip">this&lt;/a>. The download link for the previous release version should be changed like &lt;a href="https://archive.apache.org/dist/dubbo/$VERSION/apache-dubbo-$VERSION-bin-release.zip">this&lt;/a>. Please refer to the &lt;a href="https://github.com/apache/dubbo-website/blob/asf-site/blog/en-us/download.md">download page&lt;/a> for more details.&lt;/li>
+&lt;li>Add the download link to official website &lt;a href="https://dubbo.apache.org/en/blog/2020/05/18/past-releases/">https://dubbo.apache.org/en/blog/2020/05/18/past-releases/&lt;/a>, using the ASF mirror system. The latest release download link should be something like &lt;a href="https://www.apache.org/dyn/closer.cgi?path=dubbo/$VERSION/apache-dubbo-$VERSION-source-release.zip">this&lt;/a>. The download link for the previous release version should be changed like &lt;code>https://archive.apache.org/dist/dubbo/$VERSION/apache-dubbo-$VERSION-bin-release.zip&lt;/code>. Please refer to the &lt;a href="https://dubbo.apache.org/en/blog/2020/05/18/past-releases/">download page&lt;/a> for more details.&lt;/li>
 &lt;li>Make sure all the commits in the release branch are merged into master branch, and then remove the remote release branch. For example: &lt;code>git push origin --delete 2.7.0-release&lt;/code>&lt;/li>
 &lt;li>Send mail to &lt;a href="mailto:dev@dubbo.apache.org">dev@dubbo.apache.org&lt;/a> , notify the community that the release is completed.
 The mail template to announce release:&lt;/li>
@@ -4270,7 +4263,7 @@ The mail template to announce release:&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[1] http://dubbo.apache.org/en-us/blog/download.html
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[1] https://dubbo.apache.org/en/blog/2020/05/18/past-releases/
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[2] https://repo1.maven.org/maven2/org/apache/dubbo/dubbo
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[3] https://github.com/apache/dubbo/releases
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[4] https://github.com/apache/dubbo/issues

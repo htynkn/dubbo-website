@@ -1,6 +1,6 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – Dubbo Configuration</title><link>https://dubbo.apache.org/en/docs/v2.7/user/configuration/</link><description>Recent content in Dubbo Configuration on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/en/docs/v2.7/user/configuration/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: XML Configuration</title><link>https://dubbo.apache.org/en/docs/v2.7/user/configuration/xml/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/configuration/xml/</guid><description>
 &lt;blockquote>
-&lt;p>About the XML configuration items, see：&lt;a href="content/old/en/docs/v2.7/user/references/xml">XML References&lt;/a>. If you prefer use API directly instead of using Spring, see &lt;a href="../api">API Configuration&lt;/a>. Want an example of how to use configuration, see &lt;a href="../../quick-start">Quick Start&lt;/a>.&lt;/p>
+&lt;p>About the XML configuration items, see：&lt;a href="https://dubbo.apache.org/en/docs/v2.7/user/references/xml/">XML References&lt;/a>. If you prefer use API directly instead of using Spring, see &lt;a href="../api">API Configuration&lt;/a>. Want an example of how to use configuration, see &lt;a href="../../quick-start">Quick Start&lt;/a>.&lt;/p>
 &lt;/blockquote>
 &lt;h2 id="providerxml-demo">provider.xml demo&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span>
@@ -236,7 +236,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">...&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ReferenceConfig&lt;span style="color:#719e07">&amp;lt;&lt;/span>XxxService&lt;span style="color:#719e07">&amp;gt;&lt;/span> reference &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ReferenceConfig&lt;span style="color:#719e07">&amp;lt;&lt;/span>XxxService&lt;span style="color:#719e07">&amp;gt;();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// If you know the address of the provider and want to bypass the registry, use `reference.setUrl()` to specify the provider directly. Refer [How to Invoke a specific provider](../demos/explicit-target.md) for details.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// If you know the address of the provider and want to bypass the registry, use `reference.setUrl()` to specify the provider directly. Refer [How to Invoke a specific provider](../demos/explicit-target/) for details.
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>reference&lt;span style="color:#719e07">.&lt;/span>setUrl&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;dubbo://10.20.130.230:20880/com.xxx.XxxService&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">...&lt;/span>
@@ -326,7 +326,7 @@
 &lt;h3 id="override-priority">Override Priority&lt;/h3>
 &lt;p>The figure below shows the priority of configuration override, decreasing from top to bottom:&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/configuration.jpg" alt="Override Priority">&lt;/p>
-&lt;p>click here to view &lt;a href="./config-center.md">Externalize configuration details&lt;/a>&lt;/p>
+&lt;p>click here to view &lt;a href="https://dubbo.apache.org/zh/docsv2.7/user/configuration/config-center/">Externalize configuration details&lt;/a>&lt;/p>
 &lt;h2 id="configuration-format">Configuration Format&lt;/h2>
 &lt;p>Currently, all configurations supported by Dubbo are in the format of &lt;code>.properties&lt;/code>, including &lt;code>-D&lt;/code>, &lt;code>Externalized Configuration&lt;/code>, etc., and all configuration items in &lt;code>.properties&lt;/code> follow a &lt;code>path-based&lt;/code> Configuration format:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># Application level

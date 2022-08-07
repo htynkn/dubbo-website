@@ -505,7 +505,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="2-基于-dubbo-协议互通-hessian2序列化">2. 基于 Dubbo 协议互通 (Hessian2序列化)&lt;/h2>
-&lt;p>参考 &lt;a href="https://github.com/apache/dubbo-go-samples/tree/rpc/dubbo">dubbo-go-samples/rpc/dubbo&lt;/a>&lt;/p>
+&lt;p>参考 &lt;a href="https://github.com/apache/dubbo-go-samples/tree/master/rpc/dubbo">dubbo-go-samples/rpc/dubbo&lt;/a>&lt;/p>
 &lt;h3 id="21-go-client---java-server">2.1 Go-Client -&amp;gt; Java-Server&lt;/h3>
 &lt;h4 id="java-server-启动-1">Java-Server 启动&lt;/h4>
 &lt;ol>
@@ -1215,4 +1215,4 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>先后启动服务端和客户端, 可在客户端看到输出：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>response result: &amp;amp;&lt;span style="color:#719e07">{&lt;/span>ID:1 Name:laurence Age:22 Time:2021-11-12 17:59:39.185 +0800 CST&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>调用成功&lt;/p>
-&lt;p>更多samples可以参阅 &lt;a href="../../samples/samples_repo/">【dubbo-go-samples】&lt;/a>&lt;/p></description></item></channel></rss>
+&lt;p>更多samples可以参阅 &lt;a href="../../../samples/samples_repo/">【dubbo-go-samples】&lt;/a>&lt;/p></description></item></channel></rss>

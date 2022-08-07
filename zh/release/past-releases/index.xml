@@ -1,7 +1,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – 过往版本</title><link>https://dubbo.apache.org/zh/release/past-releases/</link><description>Recent content in 过往版本 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/release/past-releases/index.xml" rel="self" type="application/rss+xml"/><item><title>Release: Java SDK</title><link>https://dubbo.apache.org/zh/release/past-releases/java/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/release/past-releases/java/</guid><description>
 &lt;h2 id="验证">验证&lt;/h2>
 &lt;p>可以按照这里的&lt;a href="https://www.apache.org/info/verification">步骤&lt;/a>, 利用&lt;a href="https://downloads.apache.org/dubbo/KEYS">KEYS&lt;/a>文件来验证下载。&lt;/p>
-&lt;p>请点击了解各&lt;a href="https://dubbo.apache.org/zh/docs/v2.7/user/versions/">版本详情和升级注意事项&lt;/a>&lt;/p>
+&lt;p>请点击了解各&lt;a href="https://dubbo.apache.org/zh/docsv2.7/user/versions/">版本详情和升级注意事项&lt;/a>&lt;/p>
 &lt;blockquote>
 &lt;p>GitHub: &lt;a href="https://github.com/apache/dubbo">https://github.com/apache/dubbo&lt;/a> &lt;br>
 发布说明: &lt;a href="https://github.com/apache/dubbo/releases">https://github.com/apache/dubbo/releases&lt;/a>&lt;/p>
@@ -51,12 +51,6 @@
 &lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/2.7.15/apache-dubbo-2.7.15-src.zip">source&lt;/a> |
 &lt;a href="https://archive.apache.org/dist/dubbo/2.7.15/apache-dubbo-2.7.15-src.zip.asc">asc&lt;/a> |
 &lt;a href="https://archive.apache.org/dist/dubbo/2.7.15/apache-dubbo-2.7.15-src.zip.sha512">sha512&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="2612-2021-12-29">2.6.12 (2021-12-29)&lt;/h3>
-&lt;ul>
-&lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/2.6.12/apache-dubbo-2.6.12-src.zip">source&lt;/a> |
-&lt;a href="https://archive.apache.org/dist/dubbo/2.6.12/apache-dubbo-v-src.zip.asc">asc&lt;/a> |
-&lt;a href="https://archive.apache.org/dist/dubbo/2.6.12/apache-dubbo-2.6.12-src.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="304-2021-10-24">3.0.4 (2021-10-24)&lt;/h3>
 &lt;ul>
@@ -117,12 +111,6 @@
 &lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/2.7.12/apache-dubbo-2.7.12-src.zip">source&lt;/a> |
 &lt;a href="https://archive.apache.org/dist/dubbo/2.7.12/apache-dubbo-2.7.12-src.zip.asc">asc&lt;/a> |
 &lt;a href="https://archive.apache.org/dist/dubbo/2.7.12/apache-dubbo-2.7.12-src.zip.sha512">sha512&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="26101-2021-05-30">2.6.10.1 (2021-05-30)&lt;/h3>
-&lt;ul>
-&lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/2.6.10.1/apache-dubbo-2.6.10.1-source-release.zip">source&lt;/a> |
-&lt;a href="https://archive.apache.org/dist/dubbo/2.6.10.1/apache-dubbo-2.6.10.1-source-release.zip.asc">asc&lt;/a> |
-&lt;a href="https://archive.apache.org/dist/dubbo/2.6.10.1/apache-dubbo-2.6.10.1-source-release.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="2711-2021-05-12">2.7.11 (2021-05-12)&lt;/h3>
 &lt;ul>

@@ -66,7 +66,7 @@
 &lt;/blockquote>
 &lt;h4 id="任务1临时剔除提供者">任务1：临时剔除提供者&lt;/h4>
 &lt;p>目前需要临时剔除在20880端口的提供者，可以使用覆盖规则进行动态配置。&lt;/p>
-&lt;p>1.打开&lt;a href="http://0.0.0.0/#/governance/config">服务治理控制台&lt;/a>，点击”创建“，填入应用名和配置，这个配置将禁用在20880端口上提供（side:provider）的所有服务（scope:application）。&lt;/p>
+&lt;p>1.打开服务治理控制台，点击”创建“，填入应用名和配置，这个配置将禁用在20880端口上提供（side:provider）的所有服务（scope:application）。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">configVersion&lt;/span>: v2.7
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">scope&lt;/span>: application
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">key&lt;/span>: governance-appoverride-provider
@@ -114,7 +114,7 @@
 &lt;p>dubbo-samples-servicelevel-override示例与上面的示例类似，故不赘述。运行BasicProvider类。&lt;/p>
 &lt;h4 id="任务1修改提供者服务的超时时间">任务1：修改提供者服务的超时时间&lt;/h4>
 &lt;p>目前需要修改提供者服务的超时时间&lt;/p>
-&lt;p>1.打开&lt;a href="http://0.0.0.0/#/governance/config">服务治理控制台&lt;/a>，点击”创建“，填入服务名和配置，这个配置将所有消费（side:consumer）DemoService服务（org.apache.dubbo.samples.governance.api.DemoService）的应用实例（addresses:[0.0.0.0]），超时时间修改为300ms&lt;/p>
+&lt;p>1.打开服务治理控制台，点击”创建“，填入服务名和配置，这个配置将所有消费（side:consumer）DemoService服务（org.apache.dubbo.samples.governance.api.DemoService）的应用实例（addresses:[0.0.0.0]），超时时间修改为300ms&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">configVersion&lt;/span>: v2.7
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">scope&lt;/span>: service
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">key&lt;/span>: org.apache.dubbo.samples.governance.api.DemoService
@@ -314,7 +314,7 @@
 &lt;/blockquote>
 &lt;h4 id="任务1临时剔除提供者">任务1：临时剔除提供者&lt;/h4>
 &lt;p>目前需要临时剔除在20880端口的提供者，可以使用覆盖规则进行动态配置。&lt;/p>
-&lt;p>1.打开&lt;a href="http://0.0.0.0/#/governance/config">服务治理控制台&lt;/a>，点击”创建“，填入应用名和配置，这个配置将禁用在20880端口上提供（side:provider）的所有服务（scope:application）。&lt;/p>
+&lt;p>1.打开服务治理控制台，点击”创建“，填入应用名和配置，这个配置将禁用在20880端口上提供（side:provider）的所有服务（scope:application）。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">configVersion&lt;/span>: v2.7
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">scope&lt;/span>: application
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">key&lt;/span>: governance-appoverride-provider
@@ -362,7 +362,7 @@
 &lt;p>dubbo-samples-servicelevel-override示例与上面的示例类似，故不赘述。运行BasicProvider类。&lt;/p>
 &lt;h4 id="任务1修改提供者服务的超时时间">任务1：修改提供者服务的超时时间&lt;/h4>
 &lt;p>目前需要修改提供者服务的超时时间&lt;/p>
-&lt;p>1.打开&lt;a href="http://0.0.0.0/#/governance/config">服务治理控制台&lt;/a>，点击”创建“，填入服务名和配置，这个配置将所有消费（side:consumer）DemoService服务（org.apache.dubbo.samples.governance.api.DemoService）的应用实例（addresses:[0.0.0.0]），超时时间修改为300ms&lt;/p>
+&lt;p>1.打开服务治理控制台，点击”创建“，填入服务名和配置，这个配置将所有消费（side:consumer）DemoService服务（org.apache.dubbo.samples.governance.api.DemoService）的应用实例（addresses:[0.0.0.0]），超时时间修改为300ms&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">configVersion&lt;/span>: v2.7
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">scope&lt;/span>: service
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">key&lt;/span>: org.apache.dubbo.samples.governance.api.DemoService
@@ -562,7 +562,7 @@
 &lt;/blockquote>
 &lt;h4 id="任务1临时剔除提供者">任务1：临时剔除提供者&lt;/h4>
 &lt;p>目前需要临时剔除在20880端口的提供者，可以使用覆盖规则进行动态配置。&lt;/p>
-&lt;p>1.打开&lt;a href="http://0.0.0.0/#/governance/config">服务治理控制台&lt;/a>，点击”创建“，填入应用名和配置，这个配置将禁用在20880端口上提供（side:provider）的所有服务（scope:application）。&lt;/p>
+&lt;p>1.打开服务治理控制台，点击”创建“，填入应用名和配置，这个配置将禁用在20880端口上提供（side:provider）的所有服务（scope:application）。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">configVersion&lt;/span>: v2.7
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">scope&lt;/span>: application
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">key&lt;/span>: governance-appoverride-provider
@@ -610,7 +610,7 @@
 &lt;p>dubbo-samples-servicelevel-override示例与上面的示例类似，故不赘述。运行BasicProvider类。&lt;/p>
 &lt;h4 id="任务1修改提供者服务的超时时间">任务1：修改提供者服务的超时时间&lt;/h4>
 &lt;p>目前需要修改提供者服务的超时时间&lt;/p>
-&lt;p>1.打开&lt;a href="http://0.0.0.0/#/governance/config">服务治理控制台&lt;/a>，点击”创建“，填入服务名和配置，这个配置将所有消费（side:consumer）DemoService服务（org.apache.dubbo.samples.governance.api.DemoService）的应用实例（addresses:[0.0.0.0]），超时时间修改为300ms&lt;/p>
+&lt;p>1.打开服务治理控制台，点击”创建“，填入服务名和配置，这个配置将所有消费（side:consumer）DemoService服务（org.apache.dubbo.samples.governance.api.DemoService）的应用实例（addresses:[0.0.0.0]），超时时间修改为300ms&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">configVersion&lt;/span>: v2.7
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">scope&lt;/span>: service
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">key&lt;/span>: org.apache.dubbo.samples.governance.api.DemoService
@@ -810,7 +810,7 @@
 &lt;/blockquote>
 &lt;h4 id="任务1临时剔除提供者">任务1：临时剔除提供者&lt;/h4>
 &lt;p>目前需要临时剔除在20880端口的提供者，可以使用覆盖规则进行动态配置。&lt;/p>
-&lt;p>1.打开&lt;a href="http://0.0.0.0/#/governance/config">服务治理控制台&lt;/a>，点击”创建“，填入应用名和配置，这个配置将禁用在20880端口上提供（side:provider）的所有服务（scope:application）。&lt;/p>
+&lt;p>1.打开服务治理控制台，点击”创建“，填入应用名和配置，这个配置将禁用在20880端口上提供（side:provider）的所有服务（scope:application）。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">configVersion&lt;/span>: v2.7
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">scope&lt;/span>: application
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">key&lt;/span>: governance-appoverride-provider
@@ -858,7 +858,7 @@
 &lt;p>dubbo-samples-servicelevel-override示例与上面的示例类似，故不赘述。运行BasicProvider类。&lt;/p>
 &lt;h4 id="任务1修改提供者服务的超时时间">任务1：修改提供者服务的超时时间&lt;/h4>
 &lt;p>目前需要修改提供者服务的超时时间&lt;/p>
-&lt;p>1.打开&lt;a href="http://0.0.0.0/#/governance/config">服务治理控制台&lt;/a>，点击”创建“，填入服务名和配置，这个配置将所有消费（side:consumer）DemoService服务（org.apache.dubbo.samples.governance.api.DemoService）的应用实例（addresses:[0.0.0.0]），超时时间修改为300ms&lt;/p>
+&lt;p>1.打开服务治理控制台，点击”创建“，填入服务名和配置，这个配置将所有消费（side:consumer）DemoService服务（org.apache.dubbo.samples.governance.api.DemoService）的应用实例（addresses:[0.0.0.0]），超时时间修改为300ms&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">configVersion&lt;/span>: v2.7
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">scope&lt;/span>: service
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">key&lt;/span>: org.apache.dubbo.samples.governance.api.DemoService
@@ -1058,7 +1058,7 @@
 &lt;/blockquote>
 &lt;h4 id="任务1临时剔除提供者">任务1：临时剔除提供者&lt;/h4>
 &lt;p>目前需要临时剔除在20880端口的提供者，可以使用覆盖规则进行动态配置。&lt;/p>
-&lt;p>1.打开&lt;a href="http://0.0.0.0/#/governance/config">服务治理控制台&lt;/a>，点击”创建“，填入应用名和配置，这个配置将禁用在20880端口上提供（side:provider）的所有服务（scope:application）。&lt;/p>
+&lt;p>1.打开服务治理控制台，点击”创建“，填入应用名和配置，这个配置将禁用在20880端口上提供（side:provider）的所有服务（scope:application）。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">configVersion&lt;/span>: v2.7
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">scope&lt;/span>: application
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">key&lt;/span>: governance-appoverride-provider
@@ -1106,7 +1106,7 @@
 &lt;p>dubbo-samples-servicelevel-override示例与上面的示例类似，故不赘述。运行BasicProvider类。&lt;/p>
 &lt;h4 id="任务1修改提供者服务的超时时间">任务1：修改提供者服务的超时时间&lt;/h4>
 &lt;p>目前需要修改提供者服务的超时时间&lt;/p>
-&lt;p>1.打开&lt;a href="http://0.0.0.0/#/governance/config">服务治理控制台&lt;/a>，点击”创建“，填入服务名和配置，这个配置将所有消费（side:consumer）DemoService服务（org.apache.dubbo.samples.governance.api.DemoService）的应用实例（addresses:[0.0.0.0]），超时时间修改为300ms&lt;/p>
+&lt;p>1.打开服务治理控制台，点击”创建“，填入服务名和配置，这个配置将所有消费（side:consumer）DemoService服务（org.apache.dubbo.samples.governance.api.DemoService）的应用实例（addresses:[0.0.0.0]），超时时间修改为300ms&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">configVersion&lt;/span>: v2.7
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">scope&lt;/span>: service
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">key&lt;/span>: org.apache.dubbo.samples.governance.api.DemoService
@@ -1306,7 +1306,7 @@
 &lt;/blockquote>
 &lt;h4 id="任务1临时剔除提供者">任务1：临时剔除提供者&lt;/h4>
 &lt;p>目前需要临时剔除在20880端口的提供者，可以使用覆盖规则进行动态配置。&lt;/p>
-&lt;p>1.打开&lt;a href="http://0.0.0.0/#/governance/config">服务治理控制台&lt;/a>，点击”创建“，填入应用名和配置，这个配置将禁用在20880端口上提供（side:provider）的所有服务（scope:application）。&lt;/p>
+&lt;p>1.打开服务治理控制台，点击”创建“，填入应用名和配置，这个配置将禁用在20880端口上提供（side:provider）的所有服务（scope:application）。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">configVersion&lt;/span>: v2.7
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">scope&lt;/span>: application
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">key&lt;/span>: governance-appoverride-provider
@@ -1354,7 +1354,7 @@
 &lt;p>dubbo-samples-servicelevel-override示例与上面的示例类似，故不赘述。运行BasicProvider类。&lt;/p>
 &lt;h4 id="任务1修改提供者服务的超时时间">任务1：修改提供者服务的超时时间&lt;/h4>
 &lt;p>目前需要修改提供者服务的超时时间&lt;/p>
-&lt;p>1.打开&lt;a href="http://0.0.0.0/#/governance/config">服务治理控制台&lt;/a>，点击”创建“，填入服务名和配置，这个配置将所有消费（side:consumer）DemoService服务（org.apache.dubbo.samples.governance.api.DemoService）的应用实例（addresses:[0.0.0.0]），超时时间修改为300ms&lt;/p>
+&lt;p>1.打开服务治理控制台，点击”创建“，填入服务名和配置，这个配置将所有消费（side:consumer）DemoService服务（org.apache.dubbo.samples.governance.api.DemoService）的应用实例（addresses:[0.0.0.0]），超时时间修改为300ms&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">configVersion&lt;/span>: v2.7
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">scope&lt;/span>: service
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">key&lt;/span>: org.apache.dubbo.samples.governance.api.DemoService
@@ -1554,7 +1554,7 @@
 &lt;/blockquote>
 &lt;h4 id="任务1临时剔除提供者">任务1：临时剔除提供者&lt;/h4>
 &lt;p>目前需要临时剔除在20880端口的提供者，可以使用覆盖规则进行动态配置。&lt;/p>
-&lt;p>1.打开&lt;a href="http://0.0.0.0/#/governance/config">服务治理控制台&lt;/a>，点击”创建“，填入应用名和配置，这个配置将禁用在20880端口上提供（side:provider）的所有服务（scope:application）。&lt;/p>
+&lt;p>1.打开服务治理控制台，点击”创建“，填入应用名和配置，这个配置将禁用在20880端口上提供（side:provider）的所有服务（scope:application）。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">configVersion&lt;/span>: v2.7
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">scope&lt;/span>: application
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">key&lt;/span>: governance-appoverride-provider
@@ -1602,7 +1602,7 @@
 &lt;p>dubbo-samples-servicelevel-override示例与上面的示例类似，故不赘述。运行BasicProvider类。&lt;/p>
 &lt;h4 id="任务1修改提供者服务的超时时间">任务1：修改提供者服务的超时时间&lt;/h4>
 &lt;p>目前需要修改提供者服务的超时时间&lt;/p>
-&lt;p>1.打开&lt;a href="http://0.0.0.0/#/governance/config">服务治理控制台&lt;/a>，点击”创建“，填入服务名和配置，这个配置将所有消费（side:consumer）DemoService服务（org.apache.dubbo.samples.governance.api.DemoService）的应用实例（addresses:[0.0.0.0]），超时时间修改为300ms&lt;/p>
+&lt;p>1.打开服务治理控制台，点击”创建“，填入服务名和配置，这个配置将所有消费（side:consumer）DemoService服务（org.apache.dubbo.samples.governance.api.DemoService）的应用实例（addresses:[0.0.0.0]），超时时间修改为300ms&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">configVersion&lt;/span>: v2.7
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">scope&lt;/span>: service
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">key&lt;/span>: org.apache.dubbo.samples.governance.api.DemoService

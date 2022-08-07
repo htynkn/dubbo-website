@@ -156,7 +156,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> password: &amp;#34;&amp;#34;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>首先，类似 &lt;code>envoy&lt;/code>的配置，&lt;code>static_resources&lt;/code> 表示如下都是静态配置。在静态配置中包括 Listener，NetworkFilter，Route，HttpFilter等组件，它们之间并不是完全独立的。&lt;/p>
 &lt;h4 id="listener">Listener&lt;/h4>
-&lt;p>比如说上述配置就声明了一个监听本地 8883 端口的 HTTP 类型的 Listener，更多 Listener 的配置可以查看 &lt;a href="https://dubbo.apache.org/zh-cn/docs/user/listener/http.html">Listener&lt;/a>。&lt;/p>
+&lt;p>比如说上述配置就声明了一个监听本地 8883 端口的 HTTP 类型的 Listener，更多 Listener 的配置可以查看 &lt;a href="../listener/http/">Listener&lt;/a>。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span> listeners:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - name: &amp;#34;net/http&amp;#34;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> protocol_type: &amp;#34;HTTP&amp;#34;
@@ -173,7 +173,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> config:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> route_config:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> http_filters:
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>上述配置指明了使用 &lt;code>dgp.filter.httpconnectionmanager&lt;/code> 这款 NetworkFilter，它能够接收 Http 请求的 &lt;code>Request&lt;/code> 和 &lt;code>Response&lt;/code> 进行处理，并且可以配置 Route 路由信息和使用 HttpFilter 对请求进行链式处理。更多的 NetworkFilter 可以查看 &lt;a href="https://dubbo.apache.org/zh-cn/docs/user/networkfilter/http.html">NetworkfFilter文档&lt;/a>&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>上述配置指明了使用 &lt;code>dgp.filter.httpconnectionmanager&lt;/code> 这款 NetworkFilter，它能够接收 Http 请求的 &lt;code>Request&lt;/code> 和 &lt;code>Response&lt;/code> 进行处理，并且可以配置 Route 路由信息和使用 HttpFilter 对请求进行链式处理。更多的 NetworkFilter 可以查看 &lt;a href="../networkfilter/http/">NetworkfFilter文档&lt;/a>&lt;/p>
 &lt;h4 id="route-路由-和-cluster-集群">Route 路由 和 Cluster 集群&lt;/h4>
 &lt;p>route 可以用于对请求进行路由分发，以下面配置为例。具体配置文件可以查看 &lt;code>/samples/http/simple&lt;/code> 案例的配置文件&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span> - name: dgp.filter.httpconnectionmanager
@@ -213,17 +213,17 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> username: &amp;#34;&amp;#34;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> password: &amp;#34;&amp;#34;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如上配置所示，&lt;code>httpconnectionmanager&lt;/code> 这个 NetworkFilter 下有一个 HttpFilter chain。其中包括 &lt;code>dgp.filter.http.dubboproxy&lt;/code> 这一款 HttpFilter。
-它负责将 HTTP 请求转换为 Dubbo 请求，并转发出去。它需要配置一个 Dubbo 集群注册中心的地址信息，指定其为 zookeeper 中间件。其中 &lt;code>auto_resolve&lt;/code> 则指定使用 HTTP to Dubbo 默认转换协议来进行相关数据转换，具体可以参考&lt;a href="https://dubbo.apache.org/zh-cn/docs/user/appendix/http-to-dubbo-default-stragety.html">《默认转换协议》&lt;/a>。&lt;/p>
-&lt;p>更多的 HttpFilter 可以查看 &lt;a href="https://dubbo.apache.org/zh-cn/docs/user/httpfilter/dubbo.html">HttpFilter文档&lt;/a>。&lt;/p>
+它负责将 HTTP 请求转换为 Dubbo 请求，并转发出去。它需要配置一个 Dubbo 集群注册中心的地址信息，指定其为 zookeeper 中间件。其中 &lt;code>auto_resolve&lt;/code> 则指定使用 HTTP to Dubbo 默认转换协议来进行相关数据转换，具体可以参考&lt;a href="../appendix/http-to-dubbo-default-stragety/">《默认转换协议》&lt;/a>。&lt;/p>
+&lt;p>更多的 HttpFilter 可以查看 &lt;a href="../httpfilter/dubbo/">HttpFilter文档&lt;/a>。&lt;/p>
 &lt;h4 id="adapter">Adapter&lt;/h4>
 &lt;p>Adapter 代表 Pixiu 和外界元数据中心交互的能力。目前有两款，分别是 &lt;code>dgp.adapter.dubboregistrycenter&lt;/code> 和 &lt;code>dgp.adapter.springcloud&lt;/code>，分别代表从 Dubbo 集群注册中心和 Spring Cloud 集群注册中心获取服务实例信息，构建 Pixiu 转发 Http 请求路由规则的。&lt;/p>
-&lt;p>更多的 Adapter 可以查看 &lt;a href="https://dubbo.apache.org/zh-cn/docs/user/adapter/dubbo.html">Adapter文档&lt;/a>。&lt;/p></description></item><item><title>Docs3-V2: 部署</title><link>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/deployment/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/deployment/</guid><description>
+&lt;p>更多的 Adapter 可以查看 &lt;a href="../adapter/dubbo/">Adapter文档&lt;/a>。&lt;/p></description></item><item><title>Docs3-V2: 部署</title><link>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/deployment/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/deployment/</guid><description>
 &lt;h2 id="一docker镜像部署">一、Docker镜像部署&lt;/h2>
 &lt;p>注：首先确认本机已经安装好docker并且启动&lt;/p>
 &lt;h3 id="1从docker-hub-拉取-pixiu-镜像">1、从docker hub 拉取 pixiu 镜像&lt;/h3>
 &lt;p>&lt;code>docker pull phial3/dubbo-go-pixiu:latest&lt;/code>&lt;/p>
 &lt;h3 id="2按照需求准备pixiu配置">2、按照需求准备pixiu配置&lt;/h3>
-&lt;h4 id="pixiu配置参数详解configurationsmd">&lt;a href="./configurations.md">pixiu配置参数详解&lt;/a>&lt;/h4>
+&lt;h4 id="pixiu配置参数详解configurations">&lt;a href="../configurations/">pixiu配置参数详解&lt;/a>&lt;/h4>
 &lt;p>准备 &lt;code>log.yml&lt;/code> 和 &lt;code>conf.yaml&lt;/code> 配置文件，将这两个配置文件在pixiu启动的时候挂在到本地&lt;/p>
 &lt;h3 id="3启动-pixiu">3、启动 pixiu&lt;/h3>
 &lt;p>&lt;strong>前台启动&lt;/strong>：，可方便查看服务信息运行是否正常&lt;/p>
@@ -252,7 +252,7 @@
 &lt;h3 id="1下载-pixiu-源码到本地">1、下载 pixiu 源码到本地&lt;/h3>
 &lt;p>&lt;code>git clone git@github.com:apache/dubbo-go-pixiu.git&lt;/code>&lt;/p>
 &lt;h3 id="2配置pixiu">2、配置pixiu&lt;/h3>
-&lt;h4 id="pixiu配置参数详解configurationsmd-1">&lt;a href="./configurations.md">pixiu配置参数详解&lt;/a>&lt;/h4>
+&lt;h4 id="pixiu配置参数详解configurations-1">&lt;a href="../configurations/">pixiu配置参数详解&lt;/a>&lt;/h4>
 &lt;p>进入到pixiu的源码目录&lt;code>cd dubbo-go-pixiu/&lt;/code>,在&lt;code>dubbo-go-pixiu/configs/&lt;/code>目录下
 修改配置文件&lt;code>conf.yaml&lt;/code>和&lt;code>log.yml&lt;/code>&lt;/p>
 &lt;h3 id="3编译构建">3、编译构建&lt;/h3>
@@ -262,4 +262,4 @@
 &lt;/dl>
 &lt;h3 id="4启动服务与运行示例">4、启动服务与运行示例&lt;/h3>
 &lt;p>在当前目录下&lt;code>make run&lt;/code> 可根据你当前的配置直接启动pixiu服务&lt;/p>
-&lt;p>&lt;a href="./quickstart.md">运行示例参考&lt;/a>&lt;/p></description></item><item><title>Docs3-V2: Listener 介绍</title><link>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/listener/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/listener/</guid><description/></item><item><title>Docs3-V2: Network Filter 介绍</title><link>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/networkfilter/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/networkfilter/</guid><description/></item><item><title>Docs3-V2: Adapter 介绍</title><link>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/adapter/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/adapter/</guid><description/></item><item><title>Docs3-V2: Http Filter 介绍</title><link>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/httpfilter/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/httpfilter/</guid><description/></item><item><title>Docs3-V2: 案例介绍</title><link>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/samples/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/samples/</guid><description/></item><item><title>Docs3-V2: 质量指标</title><link>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/quality/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/quality/</guid><description/></item><item><title>Docs3-V2: 附录</title><link>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/appendix/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/appendix/</guid><description/></item></channel></rss>
+&lt;p>&lt;a href="../quickstart/">运行示例参考&lt;/a>&lt;/p></description></item><item><title>Docs3-V2: Listener 介绍</title><link>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/listener/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/listener/</guid><description/></item><item><title>Docs3-V2: Network Filter 介绍</title><link>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/networkfilter/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/networkfilter/</guid><description/></item><item><title>Docs3-V2: Adapter 介绍</title><link>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/adapter/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/adapter/</guid><description/></item><item><title>Docs3-V2: Http Filter 介绍</title><link>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/httpfilter/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/httpfilter/</guid><description/></item><item><title>Docs3-V2: 案例介绍</title><link>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/samples/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/samples/</guid><description/></item><item><title>Docs3-V2: 质量指标</title><link>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/quality/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/quality/</guid><description/></item><item><title>Docs3-V2: 附录</title><link>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/appendix/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/dubbo-go-pixiu/user/appendix/</guid><description/></item></channel></rss>

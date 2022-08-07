@@ -183,8 +183,7 @@
 &lt;ul>
 &lt;li>采用 Microkernel + Plugin 模式，Microkernel 只负责组装 Plugin，Dubbo 自身的功能也是通过扩展点实现的，也就是 Dubbo 的所有功能点都可被用户自定义扩展所替换。&lt;/li>
 &lt;li>采用 URL 作为配置信息的统一格式，所有扩展点都通过传递 URL 携带配置信息。&lt;/li>
-&lt;/ul>
-&lt;p>更多设计原则参见：&lt;a href="../principals/">框架设计原则&lt;/a>&lt;/p></description></item><item><title>Docs3-V2: 服务发现</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/concepts-and-architecture/service-discovery/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/concepts-and-architecture/service-discovery/</guid><description>
+&lt;/ul></description></item><item><title>Docs3-V2: 服务发现</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/concepts-and-architecture/service-discovery/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/concepts-and-architecture/service-discovery/</guid><description>
 &lt;p>服务发现，即消费端自动发现服务地址列表的能力，是微服务框架需要具备的关键能力，借助于自动化的服务发现，微服务之间可以在无需感知对端部署位置与 IP 地址的情况下实现通信。&lt;/p>
 &lt;p>实现服务发现的方式有很多种，Dubbo 提供的是一种 Client-Based 的服务发现机制，通常还需要部署额外的第三方注册中心组件来协调服务发现过程，如常用的 Nacos、Consul、Zookeeper 等，Dubbo 自身也提供了对多种注册中心组件的对接，用户可以灵活选择。&lt;/p>
 &lt;p>Dubbo 基于消费端的自动服务发现能力，其基本工作原理如下图：&lt;/p>

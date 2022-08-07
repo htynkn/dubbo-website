@@ -372,7 +372,7 @@ Dubbo 定义了一些中心化组件，这包括：&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;p>拿注册中心举例，下面是一个多活场景的部署架构示意图：&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/concepts/multiple-registry-deployment-architecture" alt="//imgs/v3/concepts/multiple-registry-deployment-architecture">&lt;/p></description></item><item><title>Docs: 如何扩展 Dubbo</title><link>https://dubbo.apache.org/zh/docs/concepts/extensibility/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/concepts/extensibility/</guid><description>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/concepts/multiple-registry-deployment-architecture.png" alt="//imgs/v3/concepts/multiple-registry-deployment-architecture">&lt;/p></description></item><item><title>Docs: 如何扩展 Dubbo</title><link>https://dubbo.apache.org/zh/docs/concepts/extensibility/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/concepts/extensibility/</guid><description>
 &lt;div class="pageinfo pageinfo-primary">
 &lt;p>此文档已经不再维护。您当前查看的是快照版本。如果想要查看最新版本的文档，请参阅&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/">最新版本&lt;/a>。&lt;/p>
 &lt;/div>

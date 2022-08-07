@@ -220,7 +220,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Received reply:message: &amp;#34;Hello,Demo!&amp;#34;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-V2: POJO 方式使用 Triple</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/protocol/triple/pojo/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/protocol/triple/pojo/</guid><description>
 &lt;p>这篇教程会通过从零构建一个简单的工程来演示如何基于 POJO 方式使用 Dubbo Triple, 在应用不改变已有接口定义的同时升级到 Triple 协议。
-POJO on Triple 原理请参考&lt;a href="TBD">POJO on Triple&lt;/a>&lt;/p>
+POJO on Triple 原理请参考POJO on Triple(TBD)&lt;/p>
 &lt;h3 id="前置条件">前置条件&lt;/h3>
 &lt;ul>
 &lt;li>&lt;a href="https://jdk.java.net/">JDK&lt;/a> 版本 &amp;gt;= 8&lt;/li>

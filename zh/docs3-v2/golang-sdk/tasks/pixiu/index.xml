@@ -6,7 +6,7 @@
 &lt;/ul>
 &lt;h2 id="2-使用-http-协议通过网关调用-triple-应用">2. 使用 HTTP 协议通过网关调用 Triple 应用&lt;/h2>
 &lt;p>Dubbo-go-pixiu 网关支持调用 GO/Java 的 Dubbo 集群。在 Dubbo-go 3.0 的场景下，我们可以通过 Pixiu 网关，在集群外以 HTTP 协议请求 pixiu 网关，在网关层进行协议转换，进一步调用集群内的Dubbo-go 服务。&lt;/p>
-&lt;p>&lt;img src="https://raw.githubusercontent.com/dubbogo/dubbogo.github.io/master/img/triple-pixiu.png" alt="image.png">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/docs3-v2/golang-sdk/tasks/pixiu/http_triple/triple-pixiu.png" alt="image.png">&lt;/p>
 &lt;p>用户调用 Dubbo-go 服务的 path 为http://$(app_name)/$(service_name)/$(method)。&lt;/p>
 &lt;p>例如一个proto文件内有如下定义：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-protobuf" data-lang="protobuf">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">package&lt;/span> org&lt;span style="color:#719e07">.&lt;/span>apache.dubbo.quickstart.samples;

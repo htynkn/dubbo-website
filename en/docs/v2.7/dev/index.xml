@@ -280,7 +280,7 @@
 &lt;p>Based on &lt;code>META-INF/spring.handlers&lt;/code> config in dubbo.jar, Spring calls &lt;code>DubboNamespaceHandler&lt;/code> when meeting dubbo namespace.&lt;/p>
 &lt;p>All Dubbo tags are parsed by &lt;code>DubboBeanDefinitionParser&lt;/code>, based on one to one attribute mapping, the XML label is parsed as a Bean object.&lt;/p>
 &lt;p>Transfer Bean object to URL, and transfer all attributes of Bean to URL parameters when &lt;code>ServiceConfig.export()&lt;/code> or &lt;code>ReferenceConfig.get()&lt;/code> initialization.&lt;/p>
-&lt;p>Then pase URL to &lt;a href="../impls/protocol">Protocol extension point&lt;/a>, based on &lt;a href="../SPI">Extension point adaptive mechanism&lt;/a> of extension point, processing service exposure or reference for different protocols according to URL protocol header.&lt;/p>
+&lt;p>Then pase URL to &lt;a href="../impls/protocol">Protocol extension point&lt;/a>, based on &lt;a href="../spi/">Extension point adaptive mechanism&lt;/a> of extension point, processing service exposure or reference for different protocols according to URL protocol header.&lt;/p>
 &lt;h3 id="service-exposure">Service Exposure&lt;/h3>
 &lt;h4 id="1-only-expose-service-port">1. Only expose service port:&lt;/h4>
 &lt;p>Direct exposing to provider when have not Registry, &lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>, the URL format which parsing by &lt;code>ServiceConfig&lt;/code>:

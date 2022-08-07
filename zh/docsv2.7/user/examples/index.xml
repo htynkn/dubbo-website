@@ -1767,7 +1767,7 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>为尽可能保证应用启动的灵活性，TLS Cert 的指定还能通过 -D 参数或环境变量等方式来在启动阶段根据部署环境动态指定，具体请参见 Dubbo 配置读取规则与 TLS 示例&lt;/p>
 &lt;div class="alert alert-primary" role="alert">
 &lt;h4 class="alert-heading">提示&lt;/h4>
-&lt;p>参考 Dubbo &lt;a href="../../configuration/configuration-load-process">配置读取规则&lt;/a>，TLS &lt;a href="https://github.com/apache/dubbo-samples/tree/master/java/dubbo-samples-ssl">示例&lt;/a>&lt;/p>
+&lt;p>参考 Dubbo &lt;a href="../../configuration/configuration-load-process/">配置读取规则&lt;/a>，TLS &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-ssl">示例&lt;/a>&lt;/p>
 &lt;p>如果要使用的是 gRPC 协议，在开启 TLS 时会使用到协议协商机制，因此必须使用支持 ALPN 机制的 Provider，推荐使用的是 netty-tcnative，具体可参见 gRPC Java 社区的&lt;a href="https://github.com/grpc/grpc-java/blob/master/SECURITY.md">总结&lt;/a>&lt;/p>
 &lt;/div>
 &lt;p>在服务调用的安全性上，Dubbo 在后续的版本中会持续投入，其中服务发现/调用的鉴权机制预计在接下来的版本中就会和大家见面。&lt;/p></description></item><item><title>Docsv2.7: 令牌验证</title><link>https://dubbo.apache.org/zh/docsv2.7/user/examples/token-authorization/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/user/examples/token-authorization/</guid><description>
@@ -1991,7 +1991,7 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;div class="alert alert-primary" role="alert">
 &lt;h4 class="alert-heading">提示&lt;/h4>
 &lt;p>&lt;code>2.6.x&lt;/code> 版本以及更早的版本请使用&lt;a href="../routing-rule-deprecated">老版本路由规则&lt;/a>&lt;/p>
-&lt;p>自定义路由参考&lt;a href="../../../dev/impls/router">路由扩展&lt;/a>&lt;/p>
+&lt;p>自定义路由参考&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/description/router/">路由扩展&lt;/a>&lt;/p>
 &lt;/div></description></item><item><title>Docsv2.7: 旧路由规则</title><link>https://dubbo.apache.org/zh/docsv2.7/user/examples/routing-rule-deprecated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/user/examples/routing-rule-deprecated/</guid><description>
 &lt;p>路由规则 &lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup> 决定一次 dubbo 服务调用的目标服务器，分为条件路由规则和脚本路由规则，并且支持可扩展 &lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>。&lt;/p>
 &lt;h2 id="写入路由规则">写入路由规则&lt;/h2>
@@ -2144,7 +2144,7 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;p>&lt;code>2.2.0&lt;/code> 以上版本支持&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:2">
-&lt;p>路由规则扩展点：&lt;a href="../../../dev/impls/router">路由扩展&lt;/a>&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>路由规则扩展点：&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/description/router/">路由扩展&lt;/a>&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:3">
 &lt;p>注意：一个服务只能有一条白名单规则，否则两条规则交叉，就都被筛选掉了&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
@@ -2163,7 +2163,7 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;/div>
 &lt;p>覆盖规则是 Dubbo 设计的在无需重启应用的情况下，动态调整 RPC 调用行为的一种能力。2.7.0 版本开始，支持从&lt;strong>服务&lt;/strong>和&lt;strong>应用&lt;/strong>两个粒度来调整动态配置。&lt;/p>
 &lt;h2 id="概览">概览&lt;/h2>
-&lt;p>请在&lt;a href="http://47.91.207.147/#/governance/config">服务治理控制台&lt;/a>查看或修改覆盖规则。&lt;/p>
+&lt;p>请在服务治理控制台查看或修改覆盖规则。&lt;/p>
 &lt;p>应用粒度&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># 将应用demo（key:demo）在20880端口上提供（side:provider）的所有服务（scope:application）的权重修改为1000（weight:1000）。&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---

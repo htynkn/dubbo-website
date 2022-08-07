@@ -16,23 +16,21 @@
 &lt;ul>
 &lt;li>&lt;strong>新的地址发现模型（应用级服务发现）。&lt;/strong>
 &lt;ul>
-&lt;li>查看&lt;a href="../migration-service-discovery">应用级服务发现的迁移步骤&lt;/a>&lt;/li>
-&lt;li>查看&lt;a href="">应用级服务发现的使用方式&lt;/a>&lt;/li>
-&lt;li>查看&lt;a href="">应用级服务发现设计与实现&lt;/a>。&lt;/li>
+&lt;li>查看&lt;a href="../service-discovery/service-discovery-samples/">应用级服务发现迁移示例&lt;/a>。&lt;/li>
+&lt;li>查看&lt;a href="../service-discovery/migration-service-discovery/">应用级服务发现的迁移步骤&lt;/a>&lt;/li>
+&lt;li>查看&lt;a href="../service-discovery/service-discovery-rule/">应用级服务发现地址迁移规则说明&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>&lt;strong>下一代基于 HTTP/2 的 Triple 协议。&lt;/strong>
 &lt;ul>
-&lt;li>查看&lt;a href="../migration-triple">Triple 协议迁移步骤&lt;/a>&lt;/li>
-&lt;li>查看 &lt;a href="../../references/protocols/tri">Triple 协议使用方式&lt;/a>&lt;/li>
-&lt;li>查看 Triple 协议设计与实现。&lt;/li>
+&lt;li>查看&lt;a href="../migration-triple/">Triple 协议迁移步骤&lt;/a>&lt;/li>
+&lt;li>查看 &lt;a href="../../reference-manual/protocol/triple/guide/">Triple 协议使用方式&lt;/a>&lt;/li>
+&lt;li>查看 &lt;a href="../../reference-manual/protocol/triple/overview/">Triple 协议设计与实现&lt;/a>。&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>&lt;strong>统一的路由规则。&lt;/strong>
 &lt;ul>
-&lt;li>查看&lt;a href="../migration-routingrule">统一路由规则的迁移步骤&lt;/a>&lt;/li>
-&lt;li>查看&lt;a href="../../references/routerule">统一路由规则使用方式&lt;/a>&lt;/li>
-&lt;li>查看统一路由规则设计与实现&lt;/li>
+&lt;li>查看&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/routing/mesh-style/">统一路由规则设计与实现&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;/ul></description></item><item><title>Docs3-V2: Dubbo协议迁移至Triple协议指南</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/migration-triple/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/migration-triple/</guid><description>
@@ -86,7 +84,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="仅使用-dubbo-协议">仅使用 dubbo 协议&lt;/h3>
 &lt;p>为保证兼容性，我们先将部分 provider 升级到 &lt;code>dubbo3&lt;/code> 版本并使用 &lt;code>dubbo&lt;/code> 协议。&lt;/p>
-&lt;p>使用 &lt;code>dubbo&lt;/code> 协议启动一个 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/com/apache/dubbo/sample/basic/migration/ApiMigrationDubboProvider">&lt;code>Provider&lt;/code>&lt;/a> 和 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/com/apache/dubbo/sample/basic/migration/ApiMigrationDubboConsumer">&lt;code>Consumer&lt;/code>&lt;/a> ,完成调用，输出如下:
+&lt;p>使用 &lt;code>dubbo&lt;/code> 协议启动一个 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/org/apache/dubbo/sample/tri/migration/ApiMigrationDubboProvider.java">&lt;code>Provider&lt;/code>&lt;/a> 和 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/org/apache/dubbo/sample/tri/migration/ApiMigrationDubboConsumer.java">&lt;code>Consumer&lt;/code>&lt;/a> ,完成调用，输出如下:
 &lt;img src="https://dubbo.apache.org/imgs/v3/migration/tri/dubbo3-tri-migration-dubbo-dubbo-result.png" alt="result">&lt;/p>
 &lt;h3 id="同时使用-dubbo-和-triple-协议">同时使用 dubbo 和 triple 协议&lt;/h3>
 &lt;p>对于线上服务的升级，不可能一蹴而就同时完成 provider 和 consumer 升级, 需要按步操作，保证业务稳定。
@@ -96,14 +94,14 @@
 &lt;blockquote>
 &lt;p>按照推荐升级步骤，provider 已经支持了tri协议，所以 dubbo3的 consumer 可以直接使用 tri 协议&lt;/p>
 &lt;/blockquote>
-&lt;p>使用&lt;code>dubbo&lt;/code>协议和&lt;code>triple&lt;/code>协议启动&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/com/apache/dubbo/sample/basic/migration/ApiMigrationBothProvider">&lt;code>Provider&lt;/code>&lt;/a>和&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/com/apache/dubbo/sample/basic/migration/ApiMigrationBothConsumer">&lt;code>Consumer&lt;/code>&lt;/a>,完成调用，输出如下:&lt;/p>
+&lt;p>使用&lt;code>dubbo&lt;/code>协议和&lt;code>triple&lt;/code>协议启动&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/org/apache/dubbo/sample/tri/migration/ApiMigrationBothProvider.java">&lt;code>Provider&lt;/code>&lt;/a>和&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/org/apache/dubbo/sample/tri/migration/ApiMigrationBothConsumer.java">&lt;code>Consumer&lt;/code>&lt;/a>,完成调用，输出如下:&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/migration/tri/dubbo3-tri-migration-both-dubbo-tri-result.png" alt="result">&lt;/p>
 &lt;h3 id="仅使用-triple-协议">仅使用 triple 协议&lt;/h3>
 &lt;p>当所有的 consuemr 都升级至支持 &lt;code>Triple&lt;/code> 协议的版本后，provider 可切换至仅使用 &lt;code>Triple&lt;/code> 协议启动&lt;/p>
 &lt;p>结构如图所示:
 &lt;img src="https://dubbo.apache.org/imgs/v3/migration/tri/migrate-only-tri-strust.png" alt="strust">&lt;/p>
-&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/com/apache/dubbo/sample/basic/migration/ApiMigrationTriProvider">Provider&lt;/a>
-和 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/com/apache/dubbo/sample/basic/migration/ApiMigrationTriConsumer">Consumer&lt;/a> 完成调用，输出如下:&lt;/p>
+&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/org/apache/dubbo/sample/tri/migration/ApiMigrationTriProvider.java">Provider&lt;/a>
+和 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/org/apache/dubbo/sample/tri/migration/ApiMigrationTriConsumer.java">Consumer&lt;/a> 完成调用，输出如下:&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/migration/tri/dubbo3-tri-migration-tri-tri-result.png" alt="result">&lt;/p>
 &lt;h3 id="实现原理">实现原理&lt;/h3>
 &lt;p>通过上面介绍的升级过程，我们可以很简单的通过修改协议类型来完成升级。框架是怎么帮我们做到这些的呢？&lt;/p>
@@ -414,7 +412,7 @@ Grpc 使用 &lt;code>compiler&lt;/code> 将编写的 &lt;code>proto&lt;/code> �
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>生成的java代码&lt;/li>
 &lt;/ul>
-&lt;p>&lt;img src="https://user-images.githubusercontent.com/22830937/124234531-b96c2c80-db46-11eb-8155-a77dbe059f07.png" alt="image">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/docs/advanced/protobufinterface/124234531-b96c2c80-db46-11eb-8155-a77dbe059f07.png" alt="image">&lt;/p>
 &lt;blockquote>
 &lt;p>枚举是常量，因此采用大写&lt;/p>
 &lt;/blockquote>
@@ -428,7 +426,7 @@ Grpc 使用 &lt;code>compiler&lt;/code> 将编写的 &lt;code>proto&lt;/code> �
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>生成的java代码&lt;/li>
 &lt;/ul>
-&lt;p>&lt;img src="https://user-images.githubusercontent.com/22830937/124234564-c4bf5800-db46-11eb-94fc-a056af6089cb.png" alt="image">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/docs/advanced/protobufinterface/124234564-c4bf5800-db46-11eb-94fc-a056af6089cb.png" alt="image">&lt;/p>
 &lt;blockquote>
 &lt;p>底层实际上是1个ArrayList&lt;/p>
 &lt;/blockquote>
@@ -444,7 +442,7 @@ Grpc 使用 &lt;code>compiler&lt;/code> 将编写的 &lt;code>proto&lt;/code> �
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>生成的java代码&lt;/li>
 &lt;/ul>
-&lt;p>&lt;img src="https://user-images.githubusercontent.com/22830937/124234654-e4568080-db46-11eb-9700-b30022ebee21.png" alt="image">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/docs/advanced/protobufinterface/124234654-e4568080-db46-11eb-9700-b30022ebee21.png" alt="image">&lt;/p>
 &lt;h3 id="225-嵌套">2.2.5. 嵌套&lt;/h3>
 &lt;ul>
 &lt;li>原始pb代码&lt;/li>
@@ -466,7 +464,7 @@ Grpc 使用 &lt;code>compiler&lt;/code> 将编写的 &lt;code>proto&lt;/code> �
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>生成的java代码&lt;/li>
 &lt;/ul>
-&lt;p>&lt;img src="https://user-images.githubusercontent.com/22830937/124234723-f89a7d80-db46-11eb-82d0-a8aee5322098.png" alt="image">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/docs/advanced/protobufinterface/124234723-f89a7d80-db46-11eb-82d0-a8aee5322098.png" alt="image">&lt;/p>
 &lt;h2 id="3-字段默认值">3. 字段默认值&lt;/h2>
 &lt;ul>
 &lt;li>对于字符串，默认值为空字符串。&lt;/li>

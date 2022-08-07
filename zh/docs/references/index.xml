@@ -65,9 +65,9 @@
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/apollo-configcenter-governance.jpg" alt="apollo-configcenter-governance.jpg">&lt;/p>
 &lt;p>不同的规则以不同的 key 后缀区分：&lt;/p>
 &lt;ul>
-&lt;li>configurators，&lt;a href="../../examples/config-rule">覆盖规则&lt;/a>&lt;/li>
-&lt;li>tag-router，&lt;a href="../../examples/routing-rule">标签路由&lt;/a>&lt;/li>
-&lt;li>condition-router，&lt;a href="../../examples/condition-router">条件路由&lt;/a>&lt;/li>
+&lt;li>configurators，&lt;a href="https://dubbo.apache.org/zh/docsv2.7/user/examples/config-rule/">覆盖规则&lt;/a>&lt;/li>
+&lt;li>tag-router，&lt;a href="https://dubbo.apache.org/zh/docsv2.7/user/examples/routing-rule/">标签路由&lt;/a>&lt;/li>
+&lt;li>condition-router，&lt;a href="https://dubbo.apache.org/zh/docsv2.7/user/examples/routing-rule/#%E6%9D%A1%E4%BB%B6%E8%B7%AF%E7%94%B1">条件路由&lt;/a>&lt;/li>
 &lt;li>migration，&lt;a href="../../migration/migration-service-discovery">迁移规则&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h4 id="nacos">Nacos&lt;/h4>
@@ -75,9 +75,9 @@
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/nacos-configcenter-governance.png" alt="nacos-configcenter-governance.jpg">&lt;/p>
 &lt;p>不同的规则以 dataId 的后缀区分：&lt;/p>
 &lt;ul>
-&lt;li>configurators，&lt;a href="../../examples/config-rule">覆盖规则&lt;/a>&lt;/li>
-&lt;li>tag-router，&lt;a href="../../examples/routing-rule">标签路由&lt;/a>&lt;/li>
-&lt;li>condition-router，&lt;a href="../../examples/condition-router">条件路由&lt;/a>&lt;/li>
+&lt;li>configurators，&lt;a href="https://dubbo.apache.org/zh/docsv2.7/user/examples/config-rule/">覆盖规则&lt;/a>&lt;/li>
+&lt;li>tag-router，&lt;a href="https://dubbo.apache.org/zh/docsv2.7/user/examples/routing-rule/">标签路由&lt;/a>&lt;/li>
+&lt;li>condition-router，&lt;a href="https://dubbo.apache.org/zh/docsv2.7/user/examples/routing-rule/#%E6%9D%A1%E4%BB%B6%E8%B7%AF%E7%94%B1">条件路由&lt;/a>&lt;/li>
 &lt;li>migration，&lt;a href="../../migration/migration-service-discovery">迁移规则&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Docs: 注册中心参考手册</title><link>https://dubbo.apache.org/zh/docs/references/registry/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/references/registry/</guid><description>
 &lt;div class="pageinfo pageinfo-primary">
@@ -95,8 +95,8 @@
 &lt;p>此文档已经不再维护。您当前查看的是快照版本。如果想要查看最新版本的文档，请参阅&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/metadata-center/">最新版本&lt;/a>。&lt;/p>
 &lt;/div>
 &lt;h2 id="背景">背景&lt;/h2>
-&lt;p>dubbo provider中的服务配置项有接近&lt;a href="https://dubbo.apache.org/zh/docs/v2.7/user/references/xml/dubbo-provider/">30个配置项&lt;/a>。 排除注册中心服务治理需要之外，很大一部分配置项是provider自己使用，不需要透传给消费者。这部分数据不需要进入注册中心，而只需要以key-value形式持久化存储。
-dubbo consumer中的配置项也有&lt;a href="https://dubbo.apache.org/zh/docs/v2.7/user/references/xml/dubbo-consumer/">20+个配置项&lt;/a>。在注册中心之中，服务消费者列表中只需要关注application，version，group，ip，dubbo版本等少量配置，其他配置也可以以key-value形式持久化存储。
+&lt;p>dubbo provider中的服务配置项有接近&lt;a href="https://dubbo.apache.org/zh/docsv2.7/user/references/xml/dubbo-provider/">30个配置项&lt;/a>。 排除注册中心服务治理需要之外，很大一部分配置项是provider自己使用，不需要透传给消费者。这部分数据不需要进入注册中心，而只需要以key-value形式持久化存储。
+dubbo consumer中的配置项也有&lt;a href="https://dubbo.apache.org/zh/docsv2.7/user/references/xml/dubbo-consumer/">20+个配置项&lt;/a>。在注册中心之中，服务消费者列表中只需要关注application，version，group，ip，dubbo版本等少量配置，其他配置也可以以key-value形式持久化存储。
 这些数据是以服务为维度注册进入注册中心，导致了数据量的膨胀，进而引发注册中心(如zookeeper)的网络开销增大，性能降低。&lt;br>
 除了上述配置项的存储之外，dubbo服务元数据信息也需要被存储下来。元数据信息包括服务接口，及接口的方法信息。这些信息将被用于服务mock，服务测试。&lt;/p>
 &lt;p>以上的元数据都是基于接口级别。在3.0版本中，引入了应用元数据的概念，应用元数据描述的是整个应用的信息概览。并且引入了服务自省映射，用于应用级别的服务发现。&lt;/p>

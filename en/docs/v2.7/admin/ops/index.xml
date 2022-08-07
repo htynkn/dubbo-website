@@ -50,8 +50,7 @@ http://localhost:8081&lt;/li>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>admin.config-center=zookeeper://127.0.0.1:2181
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>admin.registry.address=zookeeper://127.0.0.1:2181
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>admin.metadata-report.address=zookeeper://127.0.0.1:2181
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>the three configure item above are configuration center, registry center and metadata center respectively, you can find explanation about the three centers &lt;a href="../user/configuration/config-center.md">here&lt;/a>
-Same as Dubbo 2.7, you can set the addresses of metadata center and registry center on configuration center, in zookeeper, the path and content are as below:&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Same as Dubbo 2.7, you can set the addresses of metadata center and registry center on configuration center, in zookeeper, the path and content are as below:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># /dubbo/config/dubbo/dubbo.properties
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address=zookeeper://127.0.0.1:2181
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.metadata-report.address=zookeeper://127.0.0.1:2181
@@ -70,7 +69,7 @@ Same as Dubbo 2.7, you can set the addresses of metadata center and registry cen
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/admin/searchResult.png" alt="searchResult">&lt;/p>
 &lt;p>the service detail page display providers, consumers, medata information is supported in Dubbo 2.7 or higher version:&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/admin/detail.jpg" alt="detail">&lt;/p></description></item><item><title>Docs: Service Test</title><link>https://dubbo.apache.org/en/docs/v2.7/admin/ops/test/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/admin/ops/test/</guid><description>
-&lt;p>please refer to this &lt;a href="../../../../../blog//2019/08/26/service-test/">blog&lt;/a>&lt;/p></description></item><item><title>Docs: API Docs&amp;Test</title><link>https://dubbo.apache.org/en/docs/v2.7/admin/ops/apidocs/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/admin/ops/apidocs/</guid><description>
+&lt;p>please refer to this &lt;a href="https://dubbo.apache.org/en/blog/2019/08/26/service-test/">blog&lt;/a>&lt;/p></description></item><item><title>Docs: API Docs&amp;Test</title><link>https://dubbo.apache.org/en/docs/v2.7/admin/ops/apidocs/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/admin/ops/apidocs/</guid><description>
 &lt;h2 id="dubbo-api-docs">dubbo api docs&lt;/h2>
 &lt;p>Dubbo api documents, test tools, generate documents according to annotations, and provide test functions&lt;/p>
 &lt;p>Adding some annotations can generate a swagger like document without turning a non web Dubbo project into a web project&lt;/p>
@@ -195,19 +194,19 @@ the generated key is not in the standard JSON format, and an exception will occu
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/admin/route.jpg" alt="tag">&lt;/p>
 &lt;p>the client can use &lt;code>setAttachment&lt;/code> to specify different tag, is the above case, &lt;code>setAttachment(tag1)&lt;/code>, the client will choose from the three servers in the picture above. In this way, you can implement features such as traffic isolation and gray release.&lt;/p>
 &lt;h3 id="condition-route">condition route&lt;/h3>
-&lt;p>condition route is a traditional function in Dubbo, now you can create it in either service scope or application scope. Condition route is in &lt;code>yaml&lt;/code> format, you can read &lt;a href="../user/demo/routing-rule.md">here&lt;/a> to find more.&lt;/p>
+&lt;p>condition route is a traditional function in Dubbo, now you can create it in either service scope or application scope. Condition route is in &lt;code>yaml&lt;/code> format, you can read &lt;a href="../../../user/examples/routing-rule/">here&lt;/a> to find more.&lt;/p>
 &lt;h3 id="black-white-list">black white list&lt;/h3>
 &lt;p>black white list is a part of condition route and store with condition route together, you can set black list or white list, in either service scope or application scope:&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/admin/blackList.jpg" alt="blackList">&lt;/p>
 &lt;h3 id="dynamic-configuration">dynamic configuration&lt;/h3>
 &lt;p>dynamic configuration has the same level with routing rule, it can change the RPC behaviour dynamically without restart service. It supports application scope since Dubbo 2,7, in Dubbo format, the screen shot shows in below:&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/admin/config.jpg" alt="config">&lt;/p>
-&lt;p>to read more, please refer &lt;a href="../user/demos/config-rule.md">here&lt;/a>&lt;/p>
+&lt;p>to read more, please refer &lt;a href="../../../user/examples/config-rule/">here&lt;/a>&lt;/p>
 &lt;h3 id="weight-adjust">weight adjust&lt;/h3>
 &lt;p>weigth adjuest is part of dynamic configuration, change the weight of server side to do traffic control dynamically:&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/admin/weight.jpg" alt="weight">&lt;/p>
 &lt;h3 id="load-balancing">load balancing&lt;/h3>
-&lt;p>load balancing is also poart of dynamic configuration, to specify the route strategy in client side. now we have three strategies: random, least active and round robin, to read more, please refer &lt;a href="../../../user/demos/loadbalance">here&lt;/a>&lt;/p>
+&lt;p>load balancing is also poart of dynamic configuration, to specify the route strategy in client side. now we have three strategies: random, least active and round robin, to read more, please refer &lt;a href="../../../user/examples/loadbalance">here&lt;/a>&lt;/p>
 &lt;h2 id="configuration-management">configuration management&lt;/h2>
 &lt;p>configuration management is also a new feaature for Dubbo 2.7. In Dubbo 2.7, we can specify configurations in global scope and application scope(including services in application), you can view, modify and create new configurations in Dubbo Admin.&lt;/p>
 &lt;ul>
@@ -259,7 +258,7 @@ have minimal impact on the performance (approximately 3% increase in resource us
 &lt;/ul>
 &lt;h2 id="pinpoint-and-dubbo">Pinpoint and Dubbo&lt;/h2>
 &lt;h3 id="quickstart-pinpoint">Quickstart Pinpoint&lt;/h3>
-&lt;p>&lt;a href="http://naver.github.io/pinpoint/quickstart.html">Quick start&lt;/a>（No neet to start TestApp）&lt;/p>
+&lt;p>&lt;a href="https://pinpoint-apm.github.io/pinpoint/quickstart.html">Quick start&lt;/a>（No neet to start TestApp）&lt;/p>
 &lt;h3 id="dubbo-demo">Dubbo demo&lt;/h3>
 &lt;h4 id="create-api-module">Create API module&lt;/h4>
 &lt;p>pom.xml&lt;/p>
@@ -581,7 +580,7 @@ have minimal impact on the performance (approximately 3% increase in resource us
 &lt;h3 id="other">Other&lt;/h3>
 &lt;p>The example simply simulates the provision and call of Dubbo, and does not carry out the application of other middleware such as database. For detailed use, please refer to the Pinpoint document.&lt;/p></description></item><item><title>Docs: Tracing Dubbo service with Apache Skywalking</title><link>https://dubbo.apache.org/en/docs/v2.7/admin/ops/skywalking/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/admin/ops/skywalking/</guid><description>
 &lt;h2 id="introduction-to-apache-skywalking">Introduction to Apache Skywalking&lt;/h2>
-&lt;p>&lt;a href="https://github.com/apache/incubator-skywalking">Apache Skywalking(Incubator)&lt;/a> is the APM system that it designed for micro-services architectures and cloud native architecture systems and supports distribute tracking. &lt;a href="https://github.com/apache/incubator-skywalking">Apache skywalking (incubator)&lt;/a> collects and analyzes the trace data and generates the relationship between the application and the service metric, Apache skywalking supports multiple languages agent, for example &lt;a href="https://github.com/apache/incubator-skywalking">Java&lt;/a>,&lt;a href="https://github.com/OpenSkywalking/skywalking-netcore">.net core&lt;/a>,&lt;a href="https://github.com/OpenSkywalking/skywalking-nodejs">Node.js&lt;/a> and &lt;a href="https://github.com/OpenSkywalking/skywalking-go">Go&lt;/a>.&lt;/p>
+&lt;p>&lt;a href="https://github.com/apache/skywalking">Apache Skywalking(Incubator)&lt;/a> is the APM system that it designed for micro-services architectures and cloud native architecture systems and supports distribute tracking. &lt;a href="https://github.com/apache/skywalking">Apache skywalking (incubator)&lt;/a> collects and analyzes the trace data and generates the relationship between the application and the service metric, Apache skywalking supports multiple languages agent, for example &lt;a href="https://github.com/apache/skywalking">Java&lt;/a>,&lt;a href="https://github.com/OpenSkywalking/skywalking-netcore">.net core&lt;/a>,&lt;a href="https://github.com/OpenSkywalking/skywalking-nodejs">Node.js&lt;/a> and &lt;a href="https://github.com/SkyAPM/go2sky">Go&lt;/a>.&lt;/p>
 &lt;p>Currently, Skywalking has supported analysis the operation of distributed systems from 6 visual dimensions. The overview view is a global view of your applications and components, including the number of components and applications, application alarm fluctuations, slow service lists, and application throughput; The topology shows the topological relationship of the whole application; The application view represents the upstream and downstream relationship of the application from single application, TOP N services and servers, JVM, host and process info. The service view focuses on the operation of a single service portal and the upstream and downstream dependencies of this service and it helps the user to optimize and monitor a single service; the trace graph shows all the buried points of the invocation and the execution time of each burial point, and the alarm view is based on the configuration threshold for the application, server, service for real-time alarms&lt;/p>
 &lt;h2 id="dubbo-and-apache-skywalking">Dubbo and Apache Skywalking&lt;/h2>
 &lt;h3 id="build-the-dubbo-demo--project">Build the Dubbo demo project&lt;/h3>
@@ -631,7 +630,7 @@ have minimal impact on the performance (approximately 3% increase in resource us
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="deploy-apache-skywalking">Deploy Apache Skywalking&lt;/h3>
-&lt;p>&lt;a href="https://github.com/apache/incubator-skywalking">Apache skywalking (Incubator)&lt;/a> offers two deployment modes: single-node mode and cluster mode,Here is the single-node mode deployment step, and more about how to deploy skywalking with cluster mode, please reference &lt;a href="https://github.com/apache/incubator-skywalking/blob/master/docs/en/Deploy-backend-in-cluster-mode.md">document&lt;/a>.&lt;/p>
+&lt;p>&lt;a href="https://github.com/apache/skywalking">Apache skywalking (Incubator)&lt;/a> offers two deployment modes: single-node mode and cluster mode,Here is the single-node mode deployment step, and more about how to deploy skywalking with cluster mode, please reference &lt;a href="https://skywalking.apache.org/docs/main/latest/en/setup/backend/backend-setup/">document&lt;/a>.&lt;/p>
 &lt;h4 id="third-party-components">Third-party components&lt;/h4>
 &lt;ol>
 &lt;li>JDK 8+&lt;/li>

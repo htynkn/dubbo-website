@@ -191,9 +191,9 @@
 &lt;h3 id="限流算法">限流算法&lt;/h3>
 &lt;p>限流算法首先需要考虑限流的对象，dubbogo 需要考虑 interface 和 method。其次是限流方法，首先需要考虑的是单机限流还是集群限流，单机限流算法很多，譬如常用的固定窗口算法和滑动窗口算法，以及更进一步的自适应限流。限流时一个重要问题就是限流参数是很难配的，譬如线上服务到底需要使用多少机器资源合理，限流窗口的时间窗口时长应该多长合适，其 qps 值设置多少合适呢？这都是 dubbogo 需要解决的问题。先进如谷歌的 BBR 算法，可以在当前的网络环境恶化前不断尝试改进相关参数，直到尝试出一段时间内的最佳参数。还有一些业务形态下的限流，如针对会员和非会员分别设计不同的限流链路。&lt;/p>
 &lt;p>Dubbo 的限流接口源码如下：&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p15.jpeg" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p15.png" alt="">&lt;/p>
 &lt;p>这个接口抽象是非常漂亮的，第一个是限流 url，第二个服务调用。下面是 Dubbo 的固定窗口限流源码：&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p16.jpeg" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p16.png" alt="">&lt;/p>
 &lt;p>上面的代码很明显，&amp;ldquo;private final&amp;rdquo; 决定了 Dubbo 使用者只能使用期给定的固定窗口限流限算法，无法扩展。&lt;/p>
 &lt;p>以下是 dubbogo 的限流接口：&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p17.jpeg" alt="">&lt;/p>
@@ -221,7 +221,7 @@
 &lt;/ol>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p23.jpeg" alt="">&lt;/p>
 &lt;p>所以每一步基本上都要给程序一定的时间进行等待，所以等的时间窗口是多少呢？dubbogo 默认每个步骤大概花2秒，总体一个时间窗口是10秒。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p24.jpeg" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p24.png" alt="">&lt;/p>
 &lt;p>基本上在别的 RPC 框架里面，可能不太常见到这种处理。&lt;/p>
 &lt;h2 id="五-dubbogo-上云">五 Dubbogo 上云&lt;/h2>
 &lt;p>dubbogo 作为微服务框架如何适配 k8s，如何部署？dubbogo 本身是一个 RPC 框架，但是其又有了服务治理能力，这部分能力与 k8s 的部分能力有些重合，不可能为了适配 k8s 就彻底抛弃。目前 Dubbo 官方也没有很好的解决方案供我们参考，所以这里我们 dubbogo 先给出一个简单的常识性的实践方案。下面先分析下 dubbogo 的 interface/service 和 k8s service 两者直接的差别。&lt;/p>
@@ -234,7 +234,6 @@
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p26.jpeg" alt="">&lt;/p>
 &lt;h2 id="七-展望未来">七 展望未来&lt;/h2>
 &lt;p>最后就是展望未来，也就是明年的规划。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p27.jpeg" alt="">&lt;/p>
 &lt;p>明年我们将会很快实现 dubbo router。社区在 8月份已经实现了 router 功能需要的底层的算法模块，但是当时配置中心下发相关的参数的能力还不是很强，所以没有最终完成。最近服务治理配置刚刚支持了 zookeeper 和 apollo，预计很快就可以将 router 的参数通过配置中心下发的形式支持掉。另外，还有 tracing，我们将会引入社区主流的 tracing 方案，以 opentracing 为标准，去集成 opentracing 开源生态的相关能力。第三个是 kubernetes operator，这个就是刚才说的 K8s 的服务调用，我们会基于 operator 的方案做一版新的基于 k8s 的注册中心实现。最后就是云原生生态的融入，即与 istio 的集成，dubbogo 将会成为 dubbo 在 service mesh 生态中的重要角色。&lt;/p>
 &lt;p>目前 dubbogo 项目，今年是能 run 起来，质量方面还有很多工作要做，功能基本上到明年可与 dubbo 2.7 补齐，目前已经基本够用。目前落地实践的是 3 个比较典型的公司，一个是携程，还有一个是涂鸦智能。&lt;/p>
 &lt;p>dubbogo 本身是一个 go 语言项目，也期待与其他 go 社区的指正或者需求，一起成长。&lt;/p></description></item><item><title>Blog: 从 2019 到 2020，Apache Dubbo 年度回顾与总结</title><link>https://dubbo.apache.org/zh/blog/2020/05/11/%E4%BB%8E-2019-%E5%88%B0-2020apache-dubbo-%E5%B9%B4%E5%BA%A6%E5%9B%9E%E9%A1%BE%E4%B8%8E%E6%80%BB%E7%BB%93/</link><pubDate>Mon, 11 May 2020 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2020/05/11/%E4%BB%8E-2019-%E5%88%B0-2020apache-dubbo-%E5%B9%B4%E5%BA%A6%E5%9B%9E%E9%A1%BE%E4%B8%8E%E6%80%BB%E7%BB%93/</guid><description>
@@ -332,11 +331,11 @@ Dubbo Java 版本的典型服务定义如下：&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>CompletableFuture&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">&amp;gt;&lt;/span> future &lt;span style="color:#719e07">=&lt;/span> helloService&lt;span style="color:#719e07">.&lt;/span>sayHello&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;world&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>以上示例都是基于 Java Interface 来描述 Dubbo 服务的，如果要和多语言异构的微服务实现互调，则服务又需要用相应语言的方式重新定义一遍，无法实现跨语言的服务复用；另外跨语言的序列化也是需要注意的一个问题。&lt;/p>
 &lt;p>为此 2.7.5 版本引入了对 IDL + Protobuf 的支持，以解决跨语言的服务定义问题，具体可参见示例：&lt;/p>
-&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/java/dubbo-samples-protobuf">dubbo-samples-protobuf&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-protobuf">dubbo-samples-protobuf&lt;/a>&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/service-idl.png" alt="service idl">&lt;/p>
 &lt;p>对 Reactive-style API 的支持则和上面 CompletableFuture 有些类似，允许用户定义 RxJava、Reactor API 的服务接口&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/idl-dubbo-compiler.png" alt="idl dubbo compiler">&lt;/p>
-&lt;p>但是需要注意的一定是，由于外围的 Reactive API 需要有底层传输协议的支持才有意义，因此，目前 Reactive API 只能在使用 gRPC 协议时才有意义，具体请参见示例以及下面关于 ”&lt;a href="https://github.com/apache/dubbo-samples/tree/master/java/dubbo-samples-grpc/dubbo-samples-rxjava">Dubbo 对 gRPC 的支持&lt;/a>” 一节的讲解。&lt;/p>
+&lt;p>但是需要注意的一定是，由于外围的 Reactive API 需要有底层传输协议的支持才有意义，因此，目前 Reactive API 只能在使用 gRPC 协议时才有意义，具体请参见示例以及下面关于 ”&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-grpc/dubbo-samples-rxjava">Dubbo 对 gRPC 的支持&lt;/a>” 一节的讲解。&lt;/p>
 &lt;h3 id="性能优化">性能优化&lt;/h3>
 &lt;p>2.7 版本在性能优化方面也做了很多的工作，对 Dubbo 业务系统的吞吐量、调用链路响应速度、服务治理链路性能等都有明显提升。&lt;/p>
 &lt;ol>
@@ -347,7 +346,7 @@ Dubbo Java 版本的典型服务定义如下：&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/filter.png" alt="filter">&lt;/p>
-&lt;p>关于消费端线程模型的优化，对于网关类应用，需要消费大量服务的应用，都会在系统稳定性和性能表现上有很大提升，其优化后的总体工作原理图所下所示，具体解析可以参见之前发布的文章：&lt;a href="http://dubbo.apache.org/zh-cn/docs/user/demos/consumer-threadpool.html">《消费端线程池模型》&lt;/a>&lt;/p>
+&lt;p>关于消费端线程模型的优化，对于网关类应用，需要消费大量服务的应用，都会在系统稳定性和性能表现上有很大提升，其优化后的总体工作原理图所下所示，具体解析可以参见之前发布的文章：&lt;a href="https://dubbo.apache.org/zh/docsv2.7/user/examples/consumer-threadpool/">《消费端线程池模型》&lt;/a>&lt;/p>
 &lt;p>老线程模型工作原理：&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/consumer-threadpool0.png" alt="consumer threadpool">&lt;/p>
 &lt;p>新线程模型工作原理：&lt;/p>
@@ -648,7 +647,7 @@ Reactive Stream 引入 RPC，带来更丰富的通信语义和 API 编程模型�
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ mvn release:clean
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ mvn release:prepare -Prelease -Darguments&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">&amp;#34;-DskipTests&amp;#34;&lt;/span> -DautoVersionSubmodules&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">true&lt;/span> -Dusername&lt;span style="color:#719e07">=&lt;/span>YOUR GITHUB ID -DpushChanges&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">false&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>执行release插件时，如果指定了&lt;code>-DpushChanges=true&lt;/code>, 插件会自动提交到远端的GitHub仓库中，此时就需要输入GitHub的密码，注意不是输入web页面的登录密码，而是一个&lt;code>Personal access tokens&lt;/code>，获取方式详见&lt;a href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line">这里&lt;/a>&lt;/p>
+&lt;p>执行release插件时，如果指定了&lt;code>-DpushChanges=true&lt;/code>, 插件会自动提交到远端的GitHub仓库中，此时就需要输入GitHub的密码，注意不是输入web页面的登录密码，而是一个&lt;code>Personal access tokens&lt;/code>，获取方式详见&lt;a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token">这里&lt;/a>&lt;/p>
 &lt;/blockquote>
 &lt;blockquote>
 &lt;p>这里有一点要注意的是tag， 在执行过程中，需要选择发布的artifactId, 下一个版本artifactId以及发布版本的tag, tag默认的是dubbo-parent-xxxx，需要改成dubbo-xxxx&lt;/p>
@@ -677,7 +676,7 @@ Reactive Stream 引入 RPC，带来更丰富的通信语义和 API 编程模型�
 &lt;/li>
 &lt;li>
 &lt;p>将dubbo checkout到本地目录&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ svn checkout https://dist.apache.org/repos/dist/dev/incubator/dubbo
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ svn checkout https://dist.apache.org/repos/dist/dev/dubbo
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># 假定本地目录为 ~/apache/incubator/dubbo&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
@@ -686,7 +685,7 @@ Reactive Stream 引入 RPC，带来更丰富的通信语义和 API 编程模型�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ mkdir &lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">release_version&lt;/span>&lt;span style="color:#2aa198">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
-&lt;p>添加public key到&lt;a href="https://dist.apache.org/repos/dist/dev/incubator/dubbo/KEYS">KEYS&lt;/a>文件并提交到SVN仓库（第一次做发布的人需要做这个操作，具体操作参考KEYS文件里的说明）。KEYS主要是让参与投票的人在本地导入，用来校验sign的正确性&lt;/p>
+&lt;p>添加public key到&lt;a href="https://dist.apache.org/repos/dist/dev/dubbo/KEYS">KEYS&lt;/a>文件并提交到SVN仓库（第一次做发布的人需要做这个操作，具体操作参考KEYS文件里的说明）。KEYS主要是让参与投票的人在本地导入，用来校验sign的正确性&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>$ gpg -a --export your_key_id &amp;gt;&amp;gt; KEYS
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
@@ -710,10 +709,10 @@ Reactive Stream 引入 RPC，带来更丰富的通信语义和 API 编程模型�
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;/ol>
 &lt;h2 id="验证release-candidates">验证Release Candidates&lt;/h2>
-&lt;p>详细的检查列表请参考官方的&lt;a href="https://wiki.apache.org/incubator/IncubatorReleaseChecklist">check list&lt;/a>&lt;/p>
+&lt;p>详细的检查列表请参考官方的&lt;a href="https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist">check list&lt;/a>&lt;/p>
 &lt;p>首先，从一下地址下载要发布的Release Candidate到本地环境：&lt;/p>
 &lt;pre>
-https://dist.apache.org/repos/dist/dev/incubator/dubbo/${release_version}/
+https://dist.apache.org/repos/dist/dev/dubbo/${release_version}/
 &lt;/pre>
 &lt;p>然后，开始验证环节，验证包含但不限于以下内容和形式&lt;/p>
 &lt;h3 id="检查签名和hash等信息">检查签名和hash等信息&lt;/h3>
@@ -722,7 +721,7 @@ https://dist.apache.org/repos/dist/dev/incubator/dubbo/${release_version}/
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ shasum -c apache-dubbo-&lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">release_version&lt;/span>&lt;span style="color:#2aa198">}&lt;/span>-bin-release.zip.sha512
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="检查gpg签名">检查gpg签名&lt;/h4>
 &lt;p>如果是第一次检查，需要首先导入公钥。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span> $ curl https://dist.apache.org/repos/dist/dev/incubator/dubbo/KEYS &amp;gt;&amp;gt; KEYS &lt;span style="color:#586e75"># download public keys to local directory&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span> $ curl https://dist.apache.org/repos/dist/dev/dubbo/KEYS &amp;gt;&amp;gt; KEYS &lt;span style="color:#586e75"># download public keys to local directory&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> $ gpg --import KEYS &lt;span style="color:#586e75"># import keys&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> $ gpg —edit-key liujun
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;gt; trust &lt;span style="color:#586e75"># type trust command&lt;/span>
@@ -773,7 +772,7 @@ https://dist.apache.org/repos/dist/dev/incubator/dubbo/${release_version}/
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>This is a call for vote to release Apache Dubbo (Incubating) version 2.6.2.
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>The release candidates:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>https://dist.apache.org/repos/dist/dev/incubator/dubbo/2.6.2/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>https://dist.apache.org/repos/dist/dev/dubbo/2.6.2/
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Git tag for the release:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>https://github.com/apache/dubbo/tree/dubbo-2.6.2
@@ -785,7 +784,7 @@ https://dist.apache.org/repos/dist/dev/incubator/dubbo/${release_version}/
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>https://github.com/apache/dubbo/releases/tag/untagged-4775c0a22c60fca55118
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>The artifacts have been signed with Key : 28681CB1, which can be found in the keys file:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>https://dist.apache.org/repos/dist/dev/incubator/dubbo/KEYS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>https://dist.apache.org/repos/dist/dev/dubbo/KEYS
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>The vote will be open for at least 72 hours or until necessary number of votes are reached.
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -818,7 +817,7 @@ https://dist.apache.org/repos/dist/dev/incubator/dubbo/${release_version}/
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>A minor issue also can be found in the above thread.
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>The release candidates (RC1):
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>https://dist.apache.org/repos/dist/dev/incubator/dubbo/2.6.4
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>https://dist.apache.org/repos/dist/dev/dubbo/2.6.4
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Git tag for the release (RC1):
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>https://github.com/apache/dubbo/tree/dubbo-2.6.4
@@ -832,7 +831,7 @@ https://dist.apache.org/repos/dist/dev/incubator/dubbo/${release_version}/
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>The artifacts have been signed with Key : 7955FB6D1DD21CF7, which can be
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>found in the keys file:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>https://dist.apache.org/repos/dist/dev/incubator/dubbo/KEYS
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>https://dist.apache.org/repos/dist/dev/dubbo/KEYS
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Look at here for how to verify this release candidate:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>https://github.com/apache/dubbo-website/blob/asf-site/blog/en-us/prepare-an-apache-release.md#prepare-apache-release
@@ -862,12 +861,12 @@ https://dist.apache.org/repos/dist/dev/incubator/dubbo/${release_version}/
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>The Apache Dubbo (Incubating) Team
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="正式发布">正式发布&lt;/h2>
 &lt;ol>
-&lt;li>将&lt;a href="https://dist.apache.org/repos/dist/dev/incubator/dubbo">dev&lt;/a>目录下的发布包添加到&lt;a href="https://dist.apache.org/repos/dist/release/incubator/dubbo">release&lt;/a>目录下，KEYS有更新的，也需要同步更新。&lt;/li>
-&lt;li>删除&lt;a href="https://dist.apache.org/repos/dist/dev/incubator/dubbo">dev&lt;/a>目录下的发布包&lt;/li>
-&lt;li>删除&lt;a href="https://dist.apache.org/repos/dist/release/incubator/dubbo">release&lt;/a>目录下上一个版本的发布包，这些包会被自动保存在&lt;a href="https://archive.apache.org/dist/incubator/dubbo">这里&lt;/a>&lt;/li>
+&lt;li>将&lt;a href="https://dist.apache.org/repos/dist/dev/dubbo">dev&lt;/a>目录下的发布包添加到&lt;a href="https://dist.apache.org/repos/dist/release/dubbo">release&lt;/a>目录下，KEYS有更新的，也需要同步更新。&lt;/li>
+&lt;li>删除&lt;a href="https://dist.apache.org/repos/dist/dev/dubbo">dev&lt;/a>目录下的发布包&lt;/li>
+&lt;li>删除&lt;a href="https://dist.apache.org/repos/dist/release/dubbo">release&lt;/a>目录下上一个版本的发布包，这些包会被自动保存在&lt;a href="https://archive.apache.org/dist/incubator/dubbo">这里&lt;/a>&lt;/li>
 &lt;li>发布GitHub上的&lt;a href="https://github.com/apache/dubbo/releases">release notes&lt;/a>&lt;/li>
 &lt;li>修改GitHub的Readme文件，将版本号更新到最新发布的版本&lt;/li>
-&lt;li>在官网下载&lt;a href="http://dubbo.apache.org/en-us/blog/download.html">页面&lt;/a>上添加最新版本的下载链接。最新的下载链接应该类似&lt;a href="https://www.apache.org/dyn/closer.cgi?path=incubator/dubbo/$VERSION/apache-dubbo-$VERSION-source-release.zip">这样&lt;/a>. 同时更新以前版本的下载链接，改为类似&lt;a href="https://archive.apache.org/dist/incubator/dubbo/$VERSION/apache-dubbo-$VERSION-bin-release.zip">这样&lt;/a>. 具体可以参考过往的&lt;a href="https://github.com/apache/dubbo-website/blob/asf-site/blog/en-us/download.md">下载链接&lt;/a>&lt;/li>
+&lt;li>在官网下载&lt;a href="https://dubbo.apache.org/en/blog/2020/05/18/past-releases/">页面&lt;/a>上添加最新版本的下载链接。最新的下载链接应该类似&lt;code>https://www.apache.org/dyn/closer.cgi?path=incubator/dubbo/$VERSION/apache-dubbo-$VERSION-source-release.zip&lt;/code>. 同时更新以前版本的下载链接，改为类似&lt;code>https://archive.apache.org/dist/dubbo/$VERSION/apache-dubbo-$VERSION-bin-release.zip&lt;/code>. 具体可以参考过往的&lt;a href="https://dubbo.apache.org/en/blog/2020/05/18/past-releases/">下载链接&lt;/a>&lt;/li>
 &lt;li>合并&lt;code>${release-version}-release&lt;/code>分支到对应的主干分支， 然后删除相应的release分支，例如: &lt;code>git push origin --delete 2.7.0-release&lt;/code>&lt;/li>
 &lt;li>发邮件到 &lt;code>dev@dubbo.apache.org&lt;/code> 和 &lt;code>general@incubator.apache.org&lt;/code>
 宣布release邮件模板：&lt;/li>
@@ -899,7 +898,7 @@ https://dist.apache.org/repos/dist/dev/incubator/dubbo/${release_version}/
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Apache Dubbo is an effort undergoing incubation at The Apache Software Foundation (ASF), sponsored by the Incubator. Incubation is required of all newly accepted projects until a further review indicates that the infrastructure, communications, and decision making process have stabilized in a manner consistent with other successful ASF projects. While incubation status is not necessarily a reflection of the completeness or stability of the code, it does indicate that the project has yet to be fully endorsed by the ASF.
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[1] http://dubbo.apache.org/en-us/blog/download.html
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[1] https://dubbo.apache.org/en/blog/2020/05/18/past-releases/
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[2] http://central.maven.org/maven2/com/alibaba/dubbo
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[3] https://github.com/apache/dubbo/releases
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[4] https://github.com/apache/dubbo/issues

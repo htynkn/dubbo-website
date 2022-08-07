@@ -20,8 +20,8 @@
 &lt;li>&lt;strong>新的地址发现模型（应用级服务发现）。&lt;/strong>
 &lt;ul>
 &lt;li>查看&lt;a href="../migration-service-discovery">应用级服务发现的迁移步骤&lt;/a>&lt;/li>
-&lt;li>查看&lt;a href="">应用级服务发现的使用方式&lt;/a>&lt;/li>
-&lt;li>查看&lt;a href="">应用级服务发现设计与实现&lt;/a>。&lt;/li>
+&lt;li>查看应用级服务发现的使用方式&lt;/li>
+&lt;li>查看应用级服务发现设计与实现。&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;li>&lt;strong>下一代基于 HTTP/2 的 Triple 协议。&lt;/strong>
@@ -33,8 +33,8 @@
 &lt;/li>
 &lt;li>&lt;strong>统一的路由规则。&lt;/strong>
 &lt;ul>
-&lt;li>查看&lt;a href="../migration-routingrule">统一路由规则的迁移步骤&lt;/a>&lt;/li>
-&lt;li>查看&lt;a href="../../references/routerule">统一路由规则使用方式&lt;/a>&lt;/li>
+&lt;li>查看&lt;a href="../migration-routingrule/">统一路由规则的迁移步骤&lt;/a>&lt;/li>
+&lt;li>查看&lt;a href="../../references/routers/">统一路由规则使用方式&lt;/a>&lt;/li>
 &lt;li>查看统一路由规则设计与实现&lt;/li>
 &lt;/ul>
 &lt;/li>
@@ -142,7 +142,7 @@
 &lt;p>而 Grpc 的默认仅支持 Protobuf 序列化，对于 Java 语言中的多参数以及方法重载也无法支持。&lt;/p>
 &lt;p>Dubbo3的之初就有一条目标是完美兼容 Dubbo2，所以为了 Dubbo2 能够平滑升级， Dubbo 框架侧做了很多工作来保证升级的无感，目前默认的序列化和 Dubbo2 保持一致为&lt;code>hessian2&lt;/code>。&lt;/p>
 &lt;p>所以，如果决定要升级到 Dubbo3 的 &lt;code>Triple&lt;/code> 协议，只需要修改配置中的协议名称为 &lt;code>tri&lt;/code> (注意: 不是triple)即可。&lt;/p>
-&lt;p>接下来我们我们以一个使用 Dubbo2 协议的&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/org/apache/dubbo/sample/tri/migration">工程&lt;/a> 来举例，如何一步一步安全的升级。&lt;/p>
+&lt;p>接下来我们我们以一个使用 Dubbo2 协议的&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/org/apache/dubbo/sample/tri">工程&lt;/a> 来举例，如何一步一步安全的升级。&lt;/p>
 &lt;ol>
 &lt;li>仅使用 &lt;code>dubbo&lt;/code> 协议启动 &lt;code>provider&lt;/code> 和 &lt;code>consumer&lt;/code>，并完成调用。&lt;/li>
 &lt;li>使用 &lt;code>dubbo&lt;/code> 和 &lt;code>tri&lt;/code> 协议 启动&lt;code>provider&lt;/code>，以 &lt;code>dubbo&lt;/code> 协议启动 &lt;code>consumer&lt;/code>，并完成调用。&lt;/li>
@@ -174,7 +174,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="仅使用-dubbo-协议">仅使用 dubbo 协议&lt;/h3>
 &lt;p>为保证兼容性，我们先将部分 provider 升级到 &lt;code>dubbo3&lt;/code> 版本并使用 &lt;code>dubbo&lt;/code> 协议。&lt;/p>
-&lt;p>使用 &lt;code>dubbo&lt;/code> 协议启动一个 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/com/apache/dubbo/sample/basic/migration/ApiMigrationDubboProvider">&lt;code>Provider&lt;/code>&lt;/a> 和 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/com/apache/dubbo/sample/basic/migration/ApiMigrationDubboConsumer">&lt;code>Consumer&lt;/code>&lt;/a> ,完成调用，输出如下:
+&lt;p>使用 &lt;code>dubbo&lt;/code> 协议启动一个 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/org/apache/dubbo/sample/tri/migration/ApiMigrationDubboProvider.java">&lt;code>Provider&lt;/code>&lt;/a> 和 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/org/apache/dubbo/sample/tri/migration/ApiMigrationDubboConsumer.java">&lt;code>Consumer&lt;/code>&lt;/a> ,完成调用，输出如下:
 &lt;img src="https://dubbo.apache.org/imgs/v3/migration/tri/dubbo3-tri-migration-dubbo-dubbo-result.png" alt="result">&lt;/p>
 &lt;h3 id="同时使用-dubbo-和-triple-协议">同时使用 dubbo 和 triple 协议&lt;/h3>
 &lt;p>对于线上服务的升级，不可能一蹴而就同时完成 provider 和 consumer 升级, 需要按步操作，保证业务稳定。
@@ -184,14 +184,14 @@
 &lt;blockquote>
 &lt;p>按照推荐升级步骤，provider 已经支持了tri协议，所以 dubbo3的 consumer 可以直接使用 tri 协议&lt;/p>
 &lt;/blockquote>
-&lt;p>使用&lt;code>dubbo&lt;/code>协议和&lt;code>triple&lt;/code>协议启动&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/com/apache/dubbo/sample/basic/migration/ApiMigrationBothProvider">&lt;code>Provider&lt;/code>&lt;/a>和&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/com/apache/dubbo/sample/basic/migration/ApiMigrationBothConsumer">&lt;code>Consumer&lt;/code>&lt;/a>,完成调用，输出如下:&lt;/p>
+&lt;p>使用&lt;code>dubbo&lt;/code>协议和&lt;code>triple&lt;/code>协议启动&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/org/apache/dubbo/sample/tri/migration/ApiMigrationBothProvider.java">&lt;code>Provider&lt;/code>&lt;/a>和&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/org/apache/dubbo/sample/tri/migration/ApiMigrationBothConsumer.java">&lt;code>Consumer&lt;/code>&lt;/a>,完成调用，输出如下:&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/migration/tri/dubbo3-tri-migration-both-dubbo-tri-result.png" alt="result">&lt;/p>
 &lt;h3 id="仅使用-triple-协议">仅使用 triple 协议&lt;/h3>
 &lt;p>当所有的 consuemr 都升级至支持 &lt;code>Triple&lt;/code> 协议的版本后，provider 可切换至仅使用 &lt;code>Triple&lt;/code> 协议启动&lt;/p>
 &lt;p>结构如图所示:
 &lt;img src="https://dubbo.apache.org/imgs/v3/migration/tri/migrate-only-tri-strust.png" alt="strust">&lt;/p>
-&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/com/apache/dubbo/sample/basic/migration/ApiMigrationTriProvider">Provider&lt;/a>
-和 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/com/apache/dubbo/sample/basic/migration/ApiMigrationTriConsumer">Consumer&lt;/a> 完成调用，输出如下:&lt;/p>
+&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/org/apache/dubbo/sample/tri/migration/ApiMigrationTriProvider.java">Provider&lt;/a>
+和 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple/src/main/java/org/apache/dubbo/sample/tri/migration/ApiMigrationTriConsumer.java">Consumer&lt;/a> 完成调用，输出如下:&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/migration/tri/dubbo3-tri-migration-tri-tri-result.png" alt="result">&lt;/p>
 &lt;h3 id="实现原理">实现原理&lt;/h3>
 &lt;p>通过上面介绍的升级过程，我们可以很简单的通过修改协议类型来完成升级。框架是怎么帮我们做到这些的呢？&lt;/p>

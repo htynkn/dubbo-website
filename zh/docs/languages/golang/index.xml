@@ -2,7 +2,7 @@
 &lt;div class="pageinfo pageinfo-primary">
 &lt;p>此文档已经不再维护。您当前查看的是快照版本。如果想要查看最新版本的文档，请参阅&lt;a href="https://dubbo.apache.org/zh/docs3-v2/golang-sdk/quickstart/">最新版本&lt;/a>。&lt;/p>
 &lt;/div>
-&lt;p>推荐&lt;a href="../../../examples/quick-start">使用 IDL&lt;/a> 定义跨语言的服务与编码格式，以下展示的是 Golang 语言版本的服务定义与开发方式，如果你有遗留系统或无多语言开发需求，可参考以下使用方式。&lt;/p>
+&lt;p>推荐&lt;a href="../dubbo-go-3.0/quickstart/quickstart_triple">使用 IDL&lt;/a> 定义跨语言的服务与编码格式，以下展示的是 Golang 语言版本的服务定义与开发方式，如果你有遗留系统或无多语言开发需求，可参考以下使用方式。&lt;/p>
 &lt;h1 id="快速开始">快速开始&lt;/h1>
 &lt;p>通过一个 &lt;code>hellowworld&lt;/code> 例子带领大家快速上手Dubbo-go框架。&lt;/p>
 &lt;p>协议：Dubbo &lt;br>

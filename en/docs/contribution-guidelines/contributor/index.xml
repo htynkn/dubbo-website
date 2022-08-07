@@ -59,7 +59,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="code-convention">Code convention&lt;/h3>
 &lt;p>Please check the &lt;a href="https://github.com/apache/dubbo/blob/master/CONTRIBUTING.md">CONTRIBUTING.md&lt;/a> for code convention.&lt;/p>
 &lt;h3 id="participate-in-the-release-vote">Participate in the release vote&lt;/h3>
-&lt;p>Participate in the release vote is an important way to contribute to Dubbo. The Dubbo community welcomes everyone to partipate, you can check the release vote using this &lt;a href="https://wiki.apache.org/incubator/IncubatorReleaseChecklist">check list&lt;/a>.
+&lt;p>Participate in the release vote is an important way to contribute to Dubbo. The Dubbo community welcomes everyone to partipate, you can check the release vote using this &lt;a href="https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist">check list&lt;/a>.
 If you have any question regarding the check list, please feel free to ask on &lt;a href="mailto:dev@dubbo.apache.org">dev@dubbo.apache.org&lt;/a>.&lt;/p>
 &lt;h3 id="what-can-i-contribute">What can I contribute?&lt;/h3>
 &lt;ul>
@@ -280,7 +280,7 @@ For example:&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>${dubbo.version}&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="src-guide">Src Guide&lt;/h2>
-&lt;p>Usually, implement special extension, just need reference the &lt;a href="http://dubbo.apache.org/#/docs/dev/build.md?lang=en-us">Developer Guide&lt;/a> docs. Implement necessary interface and adapt extension to dubbo. Besides, some others should be considered:&lt;/p>
+&lt;p>Usually, implement special extension, just need reference the &lt;a href="https://dubbo.apache.org/en/latest/contribution-guidelines/">Developer Guide&lt;/a> docs. Implement necessary interface and adapt extension to dubbo. Besides, some others should be considered:&lt;/p>
 &lt;ol>
 &lt;li>Well tested. You should write unit test and mock test to eliminate potential bugs.&lt;/li>
 &lt;li>No warning, if some warning cannot to avoid, use @SuppressWarnings to suppress it, but do not abuse it.&lt;/li>
@@ -313,7 +313,7 @@ For example:&lt;/p>
 &lt;li>Attention to boundary condition test&lt;/li>
 &lt;li>Test code should also be designed without writing useless code.&lt;/li>
 &lt;li>When you find a &lt;code>method&lt;/code> that is hard to write unit test, if you can be sure the &lt;code>method&lt;/code> is &amp;ldquo;smelly code&amp;rdquo;, then refactor it with the committer.&lt;/li>
-&lt;li>The mock framework in dubbo is: &lt;a href="http://site.mockito.org/">mockito&lt;/a>. Some tutorials:&lt;a href="http://www.baeldung.com/bdd-mockito">mockito tutorial&lt;/a>,&lt;a href="https://dzone.com/refcardz/mockito">mockito refcard&lt;/a>&lt;/li>
+&lt;li>The mock framework in dubbo is: &lt;a href="http://site.mockito.org/">mockito&lt;/a>. Some tutorials:&lt;a href="https://www.baeldung.com/bdd-mockito">mockito tutorial&lt;/a>,&lt;a href="https://dzone.com/refcardz/mockito">mockito refcard&lt;/a>&lt;/li>
 &lt;li>TDD（optional）：When you start a new issue, you can try to write test case at first&lt;/li>
 &lt;/ul>
 &lt;h3 id="the-specified-value-of-the-test-coverage">The specified value of the test coverage&lt;/h3>

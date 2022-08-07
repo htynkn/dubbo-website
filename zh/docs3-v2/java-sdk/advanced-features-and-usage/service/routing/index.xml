@@ -203,8 +203,7 @@
 &lt;/ol>
 &lt;div class="alert alert-primary" role="alert">
 &lt;h4 class="alert-heading">提示&lt;/h4>
-&lt;p>&lt;code>2.6.x&lt;/code> 版本以及更早的版本请使用&lt;a href="../routing-rule-deprecated">老版本路由规则&lt;/a>&lt;/p>
-&lt;p>自定义路由参考&lt;a href="../../../dev/impls/router">路由扩展&lt;/a>&lt;/p>
+自定义路由参考&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/description/router/">路由扩展&lt;/a>
 &lt;/div></description></item><item><title>Docs3-V2: Mesh 路由规则</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/routing/mesh-style/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/routing/mesh-style/</guid><description>
 &lt;h3 id="基本思想">基本思想&lt;/h3>
 &lt;p>基于路由链，采用Pipeline的处理方式，如下图所示：&lt;/p>

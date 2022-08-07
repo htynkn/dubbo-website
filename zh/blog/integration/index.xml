@@ -12,7 +12,7 @@
 &lt;/ul>
 &lt;p>&lt;code>Apache Dubbo&lt;/code> 是一款微服务开发框架，它提供了 &lt;code>RPC&lt;/code> 通信 与 微服务治理 两大关键能力。这意味着，使用 &lt;code>Dubbo&lt;/code> 开发的微服务，将具备相互之间的远程发现与通信能力， 同时利用 Dubbo 提供的丰富服务治理能力，可以实现诸如服务发现、负载均衡、流量调度等服务治理诉求。同时 &lt;code>Dubbo&lt;/code> 是高度可扩展的，用户几乎可以在任意功能点去定制自己的实现，以改变框架的默认行为来满足自己的业务需求。&lt;/p>
 &lt;h2 id="2-dubbo快速开始">2. Dubbo快速开始&lt;/h2>
-&lt;p>本小节介绍如何将&lt;code>Dubbo&lt;/code>服务接入到&lt;code>ShenYu&lt;/code>网关，您可以直接在工程下找到本小节的&lt;a href="https://github.com/apache/incubator-shenyu/tree/master/shenyu-examples/shenyu-examples-dubbo/shenyu-examples-apache-dubbo-service">示例代码&lt;/a> 。&lt;/p>
+&lt;p>本小节介绍如何将&lt;code>Dubbo&lt;/code>服务接入到&lt;code>ShenYu&lt;/code>网关，您可以直接在工程下找到本小节的&lt;a href="https://github.com/apache/shenyu/tree/master/shenyu-examples/shenyu-examples-dubbo">示例代码&lt;/a> 。&lt;/p>
 &lt;h3 id="21-启动shenyu-admin">2.1 启动shenyu-admin&lt;/h3>
 &lt;p>&lt;code>shenyu-admin&lt;/code>是&lt;code>Apache ShenYu&lt;/code>后台管理系统， 启动的方式有多种，本文通过 &lt;a href="https://shenyu.apache.org/zh/docs/deployment/deployment-local">本地部署&lt;/a> 的方式启动。启动成功后，需要在基础配置&lt;code>-&amp;gt;&lt;/code>插件管理中，把&lt;code>dubbo&lt;/code> 插件设置为开启，并设置你的注册地址，请确保注册中心已经开启。&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/shenyu-dubbo/dubbo-enable-zh.png" alt="">&lt;/p>
@@ -55,7 +55,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;!--&lt;/span> Dubbo zookeeper registry dependency end &lt;span style="color:#719e07">--&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;!--&lt;/span> apache dubbo plugin end&lt;span style="color:#719e07">--&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="23-启动shenyu-examples-dubbo">2.3 启动shenyu-examples-dubbo&lt;/h3>
-&lt;p>以官网提供的例子为例 &lt;a href="https://github.com/apache/incubator-shenyu/tree/master/shenyu-examples/shenyu-examples-dubbo/shenyu-examples-apache-dubbo-service">shenyu-examples-dubbo&lt;/a> 。 假如&lt;code>dubbo&lt;/code>服务定义如下：&lt;/p>
+&lt;p>以官网提供的例子为例 &lt;a href="https://github.com/apache/shenyu/tree/master/shenyu-examples/shenyu-examples-dubbo">shenyu-examples-dubbo&lt;/a> 。 假如&lt;code>dubbo&lt;/code>服务定义如下：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> /* ...... * &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:application&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;test-dubbo-service&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
@@ -119,7 +119,7 @@
 &lt;blockquote>
 &lt;p>选择器和规则是 &lt;code>Apache ShenYu&lt;/code> 网关中最灵魂的东西。掌握好它，你可以对任何流量进行管理。对应为选择器与规则里面的匹配条件(conditions)，根据不同的流量筛选规则，我们可以处理各种复杂的场景。流量筛选可以从&lt;code>Header&lt;/code>, &lt;code>URI&lt;/code>, &lt;code>Query&lt;/code>, &lt;code>Cookie&lt;/code> 等等Http请求获取数据。&lt;/p>
 &lt;p>然后可以采用 &lt;code>Match&lt;/code>，&lt;code>=&lt;/code>，&lt;code>Regex&lt;/code>，&lt;code>Groovy&lt;/code>，&lt;code>Exclude&lt;/code>等匹配方式，匹配出你所预想的数据。多组匹配添加可以使用&lt;code>And/Or&lt;/code>的匹配策略。&lt;/p>
-&lt;p>具体的介绍与使用请看: &lt;a href="https://shenyu.apache.org/zh/docs/design/user-guide/admin-usage/selector-and-rule">选择器与规则管理&lt;/a> 。&lt;/p>
+&lt;p>具体的介绍与使用请看: &lt;a href="https://shenyu.apache.org/zh/docs/user-guide/admin-usage/selector-and-rule">选择器与规则管理&lt;/a> 。&lt;/p>
 &lt;/blockquote>
 &lt;p>发起&lt;code>GET&lt;/code>请求，通过&lt;code>ShenYu&lt;/code>网关调用&lt;code>dubbo&lt;/code>服务：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:9195/dubbo/findById?id=100
@@ -471,7 +471,7 @@
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-graalvm-support/graalvm_env.png" alt="">&lt;/p>
 &lt;p>​ 这里我们使用的基于jdk1.8版本的GraalVM。&lt;/p>
 &lt;h2 id="快速上手">快速上手&lt;/h2>
-&lt;p>​ 为了便于用户快速上手，我们在本分支，即&lt;a href="https://github.com/apache/dubbo/tree/2.7-native_image">apache:2.7-native_image&lt;/a>分支中，提供了如下demo。&lt;/p>
+&lt;p>​ 为了便于用户快速上手，我们在 Dubbo 仓库中，提供了如下demo。&lt;/p>
 &lt;p>​ 模块名dubbo-demo-native，该模块中提供了简易版本的dubbo的provider以及consumer:&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-graalvm-support/demo_path.png" alt="">&lt;/p>
 &lt;p>​ 我们在其中使用了native-image的maven插件，并定制了一些native-image的启动参数，用户只需要对应在provider以及consumer模块下执行maven的编译打包命令：&lt;/p>
@@ -715,11 +715,9 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> //......
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>​ 这里由于该service拥有多个接口获取proxy时需要是有序的，原先使用的set不满足需求，这里用ArrayList替代。&lt;/p>
-&lt;p>​ 以上就是为了支持graalvm对dubbo源码的主要改动点。&lt;/p>
-&lt;p>分支地址如下：&lt;/p>
-&lt;p>&lt;a href="https://github.com/apache/dubbo/tree/2.7-native_image">https://github.com/apache/dubbo/tree/2.7-native_image&lt;/a>&lt;/p></description></item><item><title>Blog: 使用Apache Skywalking (Incubator) 做分布式跟踪</title><link>https://dubbo.apache.org/zh/blog/2019/08/11/%E4%BD%BF%E7%94%A8apache-skywalking-incubator-%E5%81%9A%E5%88%86%E5%B8%83%E5%BC%8F%E8%B7%9F%E8%B8%AA/</link><pubDate>Sun, 11 Aug 2019 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2019/08/11/%E4%BD%BF%E7%94%A8apache-skywalking-incubator-%E5%81%9A%E5%88%86%E5%B8%83%E5%BC%8F%E8%B7%9F%E8%B8%AA/</guid><description>
+&lt;p>​ 以上就是为了支持graalvm对dubbo源码的主要改动点。&lt;/p></description></item><item><title>Blog: 使用Apache Skywalking (Incubator) 做分布式跟踪</title><link>https://dubbo.apache.org/zh/blog/2019/08/11/%E4%BD%BF%E7%94%A8apache-skywalking-incubator-%E5%81%9A%E5%88%86%E5%B8%83%E5%BC%8F%E8%B7%9F%E8%B8%AA/</link><pubDate>Sun, 11 Aug 2019 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2019/08/11/%E4%BD%BF%E7%94%A8apache-skywalking-incubator-%E5%81%9A%E5%88%86%E5%B8%83%E5%BC%8F%E8%B7%9F%E8%B8%AA/</guid><description>
 &lt;h2 id="apache-skywalkingincubator简介">Apache Skywalking(Incubator)简介&lt;/h2>
-&lt;p>&lt;a href="https://github.com/apache/incubator-skywalking">Apache Skywalking(Incubator)&lt;/a> 专门为微服务架构和云原生架构系统而设计并且支持分布式链路追踪的APM系统。&lt;a href="https://github.com/apache/incubator-skywalking">Apache Skywalking(Incubator)&lt;/a>通过加载探针的方式收集应用调用链路信息，并对采集的调用链路信息进行分析，生成应用间关系和服务间关系以及服务指标。&lt;a href="https://github.com/apache/incubator-skywalking">Apache Skywalking (Incubating)&lt;/a>目前支持多种语言，其中包括&lt;a href="https://github.com/apache/incubator-skywalking">Java&lt;/a>，&lt;a href="https://github.com/OpenSkywalking/skywalking-netcore">.Net Core&lt;/a>，&lt;a href="https://github.com/OpenSkywalking/skywalking-nodejs">Node.js&lt;/a>和&lt;a href="https://github.com/OpenSkywalking/skywalking-go">Go&lt;/a>语言。&lt;/p>
+&lt;p>&lt;a href="https://github.com/apache/skywalking">Apache Skywalking(Incubator)&lt;/a> 专门为微服务架构和云原生架构系统而设计并且支持分布式链路追踪的APM系统。&lt;a href="https://github.com/apache/skywalking">Apache Skywalking(Incubator)&lt;/a>通过加载探针的方式收集应用调用链路信息，并对采集的调用链路信息进行分析，生成应用间关系和服务间关系以及服务指标。&lt;a href="https://github.com/apache/skywalking">Apache Skywalking (Incubating)&lt;/a>目前支持多种语言，其中包括&lt;a href="https://github.com/apache/skywalking">Java&lt;/a>，&lt;a href="https://github.com/OpenSkywalking/skywalking-netcore">.Net Core&lt;/a>，&lt;a href="https://github.com/OpenSkywalking/skywalking-nodejs">Node.js&lt;/a>和&lt;a href="https://github.com/SkyAPM/go2sky">Go&lt;/a>语言。&lt;/p>
 &lt;p>目前Skywalking已经支持从6个可视化维度剖析分布式系统的运行情况。总览视图是应用和组件的全局视图，其中包括组件和应用数量，应用的告警波动，慢服务列表以及应用吞吐量；拓扑图从应用依赖关系出发，展现整个应用的拓扑关系；应用视图则是从单个应用的角度，展现应用的上下游关系，TopN的服务和服务器，JVM的相关信息以及对应的主机信息。服务视图关注单个服务入口的运行情况以及此服务的上下游依赖关系，依赖度，帮助用户针对单个服务的优化和监控；调用链展现了调用的单次请求经过的所有埋点以及每个埋点的执行时长；告警视图根据配置阈值针对应用、服务器、服务进行实时告警。&lt;/p>
 &lt;h2 id="dubbo与apache-skywalkingincubator">Dubbo与Apache Skywalking(Incubator)&lt;/h2>
 &lt;h3 id="编写dubbo示例程序">编写Dubbo示例程序&lt;/h3>
@@ -769,7 +767,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="部署apache-skywalkingincubator">部署Apache Skywalking(Incubator)&lt;/h3>
-&lt;p>Apache Skywalking(Incubator）共提供两种部署模式：单节点模式和集群模式，以下为单节点模式部署步骤，集群模式部署详情参考&lt;a href="https://github.com/apache/incubator-skywalking/blob/master/docs/cn/Deploy-backend-in-cluster-mode-CN.md">文档&lt;/a>。&lt;/p>
+&lt;p>Apache Skywalking(Incubator）共提供两种部署模式：单节点模式和集群模式，以下为单节点模式部署步骤，集群模式部署详情参考&lt;a href="https://skywalking.apache.org/docs/main/latest/en/setup/backend/backend-setup/">文档&lt;/a>。&lt;/p>
 &lt;h4 id="依赖第三方组件">依赖第三方组件&lt;/h4>
 &lt;ol>
 &lt;li>JDK8+&lt;/li>
@@ -824,7 +822,7 @@
 &lt;p>Arthas是Alibaba开源的应用诊断利器，9月份开源以来，Github Star数三个月超过6000。&lt;/p>
 &lt;ul>
 &lt;li>Github: &lt;a href="https://github.com/alibaba/arthas">https://github.com/alibaba/arthas&lt;/a>&lt;/li>
-&lt;li>文档：https://alibaba.github.io/arthas/&lt;/li>
+&lt;li>文档：https://arthas.aliyun.com/doc/&lt;/li>
 &lt;li>Arthas开源交流QQ群: 916328269&lt;/li>
 &lt;li>Arthas开源交流钉钉群: 21965291&lt;/li>
 &lt;/ul>
@@ -865,9 +863,9 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="arthas快速开始">Arthas快速开始&lt;/h3>
 &lt;ul>
-&lt;li>&lt;a href="https://alibaba.github.io/arthas/install-detail.html">https://alibaba.github.io/arthas/install-detail.html&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://arthas.aliyun.com/doc/install-detail.html">https://arthas.aliyun.com/doc/install-detail.html&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ wget https://alibaba.github.io/arthas/arthas-boot.jar
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ wget https://arthas.aliyun.com/arthas-boot.jar
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ java -jar arthas-boot.jar
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>启动后，会列出所有的java进程，选择1，然后回车，就会连接上&lt;code>ServerDemoApplication&lt;/code>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ java -jar arthas-boot.jar
@@ -885,7 +883,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>| | | &lt;span style="color:#719e07">||&lt;/span> |&lt;span style="color:#cb4b16">\ &lt;/span> &lt;span style="color:#cb4b16">\ &lt;/span> | | | | | &lt;span style="color:#719e07">||&lt;/span> | | |.-&lt;span style="color:#2aa198">&amp;#39; |
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#2aa198">`--&amp;#39;&lt;/span> &lt;span style="color:#586e75">`&lt;/span>--&lt;span style="color:#2aa198">&amp;#39;`--&amp;#39;&lt;/span> &lt;span style="color:#2aa198">&amp;#39;--&amp;#39;&lt;/span> &lt;span style="color:#586e75">`&lt;/span>--&lt;span style="color:#2aa198">&amp;#39; `--&amp;#39;&lt;/span> &lt;span style="color:#586e75">`&lt;/span>--&lt;span style="color:#2aa198">&amp;#39;`--&amp;#39;&lt;/span> &lt;span style="color:#586e75">`&lt;/span>--&lt;span style="color:#2aa198">&amp;#39;`-----&amp;#39;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wiki: https://alibaba.github.io/arthas
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>wiki: https://arthas.aliyun.com/doc
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>version: 3.0.5
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>pid: &lt;span style="color:#2aa198">43523&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>time: 2018-12-05 16:23:52
@@ -893,7 +891,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="dubbo线上服务抛出异常怎么获取调用参数">Dubbo线上服务抛出异常，怎么获取调用参数？&lt;/h3>
 &lt;ul>
-&lt;li>&lt;a href="https://alibaba.github.io/arthas/watch.html">https://alibaba.github.io/arthas/watch.html&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://arthas.aliyun.com/doc/watch.html">https://arthas.aliyun.com/doc/watch.html&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>当线上服务抛出异常时，最着急的是什么参数导致了抛异常？&lt;/p>
 &lt;p>在demo里，访问 http://localhost:8080/user/0 ，&lt;code>UserServiceImpl&lt;/code>就会抛出一个异常，因为user id不合法。&lt;/p>
@@ -915,7 +913,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> at com.alibaba.dubbo.rpc.filter.ExceptionFilter.invoke(ExceptionFilter.java:61)
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="怎样线上调试dubbo服务代码">怎样线上调试Dubbo服务代码?&lt;/h3>
 &lt;ul>
-&lt;li>&lt;a href="https://alibaba.github.io/arthas/redefine.html">https://alibaba.github.io/arthas/redefine.html&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://arthas.aliyun.com/doc/redefine.html">https://arthas.aliyun.com/doc/redefine.html&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>在本地开发时，可能会用到热部署工具，直接改代码，不需要重启应用。但是在线上环境，有没有办法直接动态调试代码？比如增加日志。&lt;/p>
 &lt;p>在Arthas里，可以通过&lt;code>redefine&lt;/code>命令来达到线上不重启，动态更新代码的效果。&lt;/p>
@@ -938,8 +936,8 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这样子更新成功之后，访问 http://localhost:8080/user/1 ，在&lt;code>ServerDemoApplication&lt;/code>的控制台里就可以看到打印出了user信息。&lt;/p>
 &lt;h3 id="怎样动态修改dubbo的logger级别">怎样动态修改Dubbo的logger级别?&lt;/h3>
 &lt;ul>
-&lt;li>&lt;a href="https://alibaba.github.io/arthas/ognl.html">https://alibaba.github.io/arthas/ognl.html&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://alibaba.github.io/arthas/sc.html">https://alibaba.github.io/arthas/sc.html&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://arthas.aliyun.com/doc/ognl.html">https://arthas.aliyun.com/doc/ognl.html&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://arthas.aliyun.com/doc/sc.html">https://arthas.aliyun.com/doc/sc.html&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://commons.apache.org/proper/commons-ognl/language-guide.html">https://commons.apache.org/proper/commons-ognl/language-guide.html&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>在排查问题时，需要查看到更多的信息，如果可以把logger级别修改为&lt;code>DEBUG&lt;/code>，就非常有帮助。&lt;/p>
@@ -984,7 +982,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>可以看到修改之后，&lt;code>root&lt;/code> logger的level变为&lt;code>DEBUG&lt;/code>。&lt;/p>
 &lt;h3 id="怎样减少测试小姐姐重复发请求的麻烦">怎样减少测试小姐姐重复发请求的麻烦?&lt;/h3>
 &lt;ul>
-&lt;li>&lt;a href="https://alibaba.github.io/arthas/tt.html">https://alibaba.github.io/arthas/tt.html&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://arthas.aliyun.com/doc/tt.html">https://arthas.aliyun.com/doc/tt.html&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>在平时开发时，可能需要测试小姐姐发请求过来联调，但是我们在debug时，可能不小心直接跳过去了。这样子就尴尬了，需要测试小姐姐再发请求过来。&lt;/p>
 &lt;p>Arthas里提供了&lt;code>tt&lt;/code>命令，可以减少这种麻烦，可以直接重放请求。&lt;/p>
@@ -1014,7 +1012,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Affect&lt;span style="color:#719e07">(&lt;/span>row-cnt:1&lt;span style="color:#719e07">)&lt;/span> cost in &lt;span style="color:#2aa198">4&lt;/span> ms.
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="dubbo运行时有哪些filter-耗时是多少">Dubbo运行时有哪些Filter? 耗时是多少?&lt;/h3>
 &lt;ul>
-&lt;li>&lt;a href="https://alibaba.github.io/arthas/trace.html">https://alibaba.github.io/arthas/trace.html&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://arthas.aliyun.com/doc/trace.html">https://arthas.aliyun.com/doc/trace.html&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>Dubbo运行时会加载很多的Filter，那么一个请求会经过哪些Filter处理，Filter里的耗时又是多少呢？&lt;/p>
 &lt;p>通过Arthas的&lt;code>trace&lt;/code>命令，可以很方便地知道Filter的信息，可以看到详细的调用栈和耗时。&lt;/p>
@@ -1037,7 +1035,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> +---&lt;span style="color:#719e07">[&lt;/span>0.01481ms&lt;span style="color:#719e07">]&lt;/span> com.alibaba.dubbo.rpc.Invocation:getMethodName&lt;span style="color:#719e07">()&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="dubbo动态代理是怎样实现的">Dubbo动态代理是怎样实现的?&lt;/h3>
 &lt;ul>
-&lt;li>&lt;a href="https://alibaba.github.io/arthas/jad.html">https://alibaba.github.io/arthas/jad.html&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://arthas.aliyun.com/doc/jad.html">https://arthas.aliyun.com/doc/jad.html&lt;/a>&lt;/li>
 &lt;li>com.alibaba.dubbo.common.bytecode.Wrapper&lt;/li>
 &lt;/ul>
 &lt;p>通过Arthas的&lt;code>jad&lt;/code>命令，可以看到Dubbo通过javaassist动态生成的Wrappr类的代码：&lt;/p>
@@ -1265,7 +1263,7 @@ dubbo-storage-service.xml&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="step-5-运行例子">Step 5: 运行例子&lt;/h3>
 &lt;ul>
 &lt;li>启动账户服务 (&lt;a href="https://github.com/seata/seata-samples/blob/master/dubbo/src/main/java/io/seata/samples/dubbo/starter/DubboAccountServiceStarter.java">DubboAccountServiceStarter&lt;/a>)。&lt;/li>
-&lt;li>启动库存服务 (&lt;a href="https://github.com/seata/seata-samples/blob/master/dubbo/src/main/java/io/seata/samples/dubbo/starter/DubboStorageServiceStarter.java">DubboStorageServiceStarter&lt;/a>)。&lt;/li>
+&lt;li>启动库存服务 (&lt;a href="https://github.com/seata/seata-samples/blob/master/dubbo/src/main/java/io/seata/samples/dubbo/starter/DubboStockServiceStarter.java">DubboStockServiceStarter&lt;/a>)。&lt;/li>
 &lt;li>启动订单服务 (&lt;a href="https://github.com/seata/seata-samples/blob/master/dubbo/src/main/java/io/seata/samples/dubbo/starter/DubboOrderServiceStarter.java">DubboOrderServiceStarter&lt;/a>)。&lt;/li>
 &lt;li>运行BusinessService入口 (&lt;a href="https://github.com/seata/seata-samples/blob/master/dubbo/src/main/java/io/seata/samples/dubbo/starter/DubboBusinessTester.java">DubboBusinessTester&lt;/a>)。&lt;/li>
 &lt;/ul>
@@ -1274,8 +1272,7 @@ dubbo-storage-service.xml&lt;/p>
 &lt;li>Seata: &lt;a href="https://github.com/seata/seata">https://github.com/seata/seata&lt;/a>&lt;/li>
 &lt;li>Seata Samples : &lt;a href="https://github.com/seata/seata-samples">https://github.com/seata/seata-samples&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>Blog: 新版 Dubbo Admin 介绍</title><link>https://dubbo.apache.org/zh/blog/2019/01/07/%E6%96%B0%E7%89%88-dubbo-admin-%E4%BB%8B%E7%BB%8D/</link><pubDate>Mon, 07 Jan 2019 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2019/01/07/%E6%96%B0%E7%89%88-dubbo-admin-%E4%BB%8B%E7%BB%8D/</guid><description>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>Demo地址：http://47.91.207.147/#/service
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>github: https://github.com/apache/dubbo-ops
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>github: https://github.com/apache/dubbo-ops
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Dubbo Admin之前的版本过于老旧，也长期疏于维护，因此在去年年中的时候，对该项目进行了一次重构，项目结构上的变化如下：&lt;/p>
 &lt;ul>
 &lt;li>将后端框架从webx替换成spring boot&lt;/li>
@@ -2316,7 +2313,7 @@ dubbo2.7.3默认开启qos功能，导致一些混部在物理机的dubbo服务�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>world
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="在-dubbo-中使用-zookeeper">在 Dubbo 中使用 Zookeeper&lt;/h2>
 &lt;p>Dubbo 使用 Zookeeper 用于服务的注册发现和配置管理，在 Zookeeper 中数据的组织由下图所示：&lt;/p>
-&lt;p>&lt;img src="../../img/blog/dubbo-in-zk.jpg" alt="dubbo-in-zk">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-in-zk.jpg" alt="dubbo-in-zk">&lt;/p>
 &lt;p>首先，所有 Dubbo 相关的数据都组织在 &lt;code>/dubbo&lt;/code> 的根节点下。&lt;/p>
 &lt;p>二级目录是服务名，如 &lt;code>com.foo.BarService&lt;/code>。&lt;/p>
 &lt;p>三级目录有两个子节点，分别是 &lt;code>providers&lt;/code> 和 &lt;code>consumers&lt;/code>，表示该服务的提供者和消费者。&lt;/p>
@@ -2494,7 +2491,7 @@ dubbo2.7.3默认开启qos功能，导致一些混部在物理机的dubbo服务�
 &lt;ul>
 &lt;li>&lt;strong>单台设备监控&lt;/strong>：当在机器列表中看到您的机器，就代表着已经成功接入控制台，可以查看单台设备的设备名称、IP地址、端口号、健康状态和心跳时间等信息。&lt;/li>
 &lt;/ul>
-&lt;p>&lt;img src="https://github.com/alibaba/Sentinel/wiki/image/machinediscover.png" alt="Discovery">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/2018/07/27/sentinel/machinediscover.png" alt="Discovery">&lt;/p>
 &lt;ul>
 &lt;li>&lt;strong>链路监控&lt;/strong>：簇点链路实时的去拉取指定客户端资源的运行情况，它提供了两种展示模式，一种用书状结构展示资源的调用链路；另外一种则不区分调用链路展示资源的运行情况。通过链路监控，可以查看到每个资源的流控和降级的历史状态。&lt;/li>
 &lt;/ul>
@@ -2507,8 +2504,8 @@ dubbo2.7.3默认开启qos功能，导致一些混部在物理机的dubbo服务�
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
-&lt;td style="text-align:center">&lt;img src="https://github.com/alibaba/Sentinel/wiki/image/resourceTree.png" alt="resourceTree">&lt;/td>
-&lt;td style="text-align:left">&lt;img src="https://github.com/alibaba/Sentinel/wiki/image/sentine_dashboard.gif" alt="cluster">&lt;/td>
+&lt;td style="text-align:center">&lt;img src="https://dubbo.apache.org/imgs/blog/2018/07/27/sentinel/resourceTree.png" alt="resourceTree">&lt;/td>
+&lt;td style="text-align:left">&lt;img src="https://dubbo.apache.org/imgs/blog/2018/07/27/sentinel/sentine_dashboard.gif" alt="cluster">&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
@@ -2550,7 +2547,7 @@ dubbo2.7.3默认开启qos功能，导致一些混部在物理机的dubbo服务�
 &lt;h4 id="服务降级">服务降级&lt;/h4>
 &lt;p>当服务依赖于多个下游服务，而某个下游服务调用非常慢时，会严重影响当前服务的调用。这里我们可以利用 Sentinel 熔断降级的功能，为调用端配置基于平均 RT 的&lt;a href="https://github.com/alibaba/Sentinel/wiki/%E7%86%94%E6%96%AD%E9%99%8D%E7%BA%A7">降级规则&lt;/a>。这样当调用链路中某个服务调用的平均 RT 升高，在一定的次数内超过配置的 RT 阈值，Sentinel 就会对此调用资源进行降级操作，接下来的调用都会立刻拒绝，直到过了一段设定的时间后才恢复，从而保护服务不被调用端短板所影响。同时可以配合 fallback 功能使用，在被降级的时候提供相应的处理逻辑。&lt;/p>
 &lt;h3 id="fallback">Fallback&lt;/h3>
-&lt;p>从 0.1.1 版本开始，Sentinel Dubbo Adapter 还支持配置全局的 fallback 函数，可以在 Dubbo 服务被限流/降级/负载保护的时候进行相应的 fallback 处理。用户只需要实现自定义的 &lt;a href="https://github.com/alibaba/Sentinel/blob/master/sentinel-adapter/sentinel-dubbo-adapter/src/main/java/com/alibaba/csp/sentinel/adapter/dubbo/fallback/DubboFallback.java">&lt;code>DubboFallback&lt;/code>&lt;/a> 接口，并通过 &lt;code>DubboFallbackRegistry&lt;/code> 注册即可。默认情况会直接将 &lt;code>BlockException&lt;/code> 包装后抛出。同时，我们还可以配合 &lt;a href="http://dubbo.apache.org/#!/docs/user/demos/local-mock.md?lang=zh-cn">Dubbo 的 fallback 机制&lt;/a> 来为降级的服务提供替代的实现。&lt;/p>
+&lt;p>从 0.1.1 版本开始，Sentinel Dubbo Adapter 还支持配置全局的 fallback 函数，可以在 Dubbo 服务被限流/降级/负载保护的时候进行相应的 fallback 处理。用户只需要实现自定义的 &lt;a href="https://github.com/alibaba/Sentinel/blob/master/sentinel-adapter/sentinel-dubbo-adapter/src/main/java/com/alibaba/csp/sentinel/adapter/dubbo/fallback/DubboFallback.java">&lt;code>DubboFallback&lt;/code>&lt;/a> 接口，并通过 &lt;code>DubboFallbackRegistry&lt;/code> 注册即可。默认情况会直接将 &lt;code>BlockException&lt;/code> 包装后抛出。同时，我们还可以配合 &lt;a href="https://dubbo.apache.org/zh/docsv2.7/user/examples/local-mock/">Dubbo 的 fallback 机制&lt;/a> 来为降级的服务提供替代的实现。&lt;/p>
 &lt;h2 id="sentinel-与-hystrix-的比较">Sentinel 与 Hystrix 的比较&lt;/h2>
 &lt;p>目前业界常用的熔断降级/隔离的库是 Netflix 的 &lt;a href="https://github.com/Netflix/Hystrix">Hystrix&lt;/a>，那么 Sentinel 与 Hystrix 有什么异同呢？Hystrix 的关注点在于以 &lt;em>隔离&lt;/em> 和 &lt;em>熔断&lt;/em> 为主的容错机制，而 Sentinel 的侧重点在于多样化的流量控制、熔断降级、系统负载保护、实时监控和控制台，可以看到解决的问题还是有比较大的不同的。&lt;/p>
 &lt;p>Hystrix 采用命令模式封装资源调用逻辑，并且资源的定义与隔离规则是强依赖的，即在创建 HystrixCommand 的时候就要指定隔离规则（因其执行模型依赖于隔离模式）。Sentinel 的设计更为简单，不关注资源是如何执行的，资源的定义与规则的配置相分离。用户可以先定义好资源，然后在需要的时候配置规则即可。Sentinel 的原则非常简单：根据对应资源配置的规则来为资源执行相应的限流/降级/负载保护策略，若规则未配置则仅进行统计。从 0.1.1 版本开始，Sentinel 还引入了&lt;a href="https://github.com/alibaba/Sentinel/wiki/%E6%B3%A8%E8%A7%A3%E6%94%AF%E6%8C%81">注解支持&lt;/a>，可以更方便地定义资源。&lt;/p>
@@ -2602,7 +2599,7 @@ dubbo2.7.3默认开启qos功能，导致一些混部在物理机的dubbo服务�
 &lt;/ul>
 &lt;h2 id="pinpoint与dubbo的结合">Pinpoint与Dubbo的结合&lt;/h2>
 &lt;h3 id="启动pinpoint">启动Pinpoint&lt;/h3>
-&lt;p>参考Pinpoint的&lt;a href="http://naver.github.io/pinpoint/quickstart.html">Quick start&lt;/a>搭建环境（不需要启动TestApp）&lt;/p>
+&lt;p>参考Pinpoint的&lt;a href="https://pinpoint-apm.github.io/pinpoint/quickstart.html">Quick start&lt;/a>搭建环境（不需要启动TestApp）&lt;/p>
 &lt;h3 id="准备dubbo示例程序">准备Dubbo示例程序&lt;/h3>
 &lt;h4 id="创建api包">创建API包&lt;/h4>
 &lt;p>pom.xml&lt;/p>
@@ -2933,7 +2930,7 @@ dubbo2.7.3默认开启qos功能，导致一些混部在物理机的dubbo服务�
 &lt;p>Zipkin 是基于 &lt;a href="https://ai.google/research/pubs/pub36356">Dapper&lt;/a> 论文实现，由 Twitter 开源的分布式追踪系统，通过收集分布式服务执行时间的信息来达到追踪服务调用链路、以及分析服务执行延迟等目的。&lt;/p>
 &lt;h3 id="zipkin-架构">Zipkin 架构&lt;/h3>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/zipkin-architecture.png" alt="Zipkin architecture">&lt;/p>
-&lt;p>Collector 收集器、Storage 存储、API、UI 用户界面等几部分构成了 Zipkin Server 部分，对应于 GitHub 上 &lt;a href="https://github.com/openzipkin/zipkin">openzipkin/zipkin&lt;/a> 这个项目。而收集应用中调用的耗时信息并将其上报的组件与应用共生，并拥有各个语言的实现版本，其中 Java 的实现是 GitHub 上 &lt;a href="https://github.com/openzipkin/brave">openzipkin/brave&lt;/a>。除了 Java 客户端实现之外，openzipkin 还提供了许多其他语言的实现，其中包括了 go、php、JavaScript、.net、ruby 等，具体列表可以参阅 Zipkin 的 &lt;a href="https://zipkin.io/pages/existing_instrumentations">Exiting instrumentations&lt;/a>。&lt;/p>
+&lt;p>Collector 收集器、Storage 存储、API、UI 用户界面等几部分构成了 Zipkin Server 部分，对应于 GitHub 上 &lt;a href="https://github.com/openzipkin/zipkin">openzipkin/zipkin&lt;/a> 这个项目。而收集应用中调用的耗时信息并将其上报的组件与应用共生，并拥有各个语言的实现版本，其中 Java 的实现是 GitHub 上 &lt;a href="https://github.com/openzipkin/brave">openzipkin/brave&lt;/a>。除了 Java 客户端实现之外，openzipkin 还提供了许多其他语言的实现，其中包括了 go、php、JavaScript、.net、ruby 等，具体列表可以参阅 Zipkin 的 &lt;a href="https://zipkin.io/pages/tracers_instrumentation.html">Exiting instrumentations&lt;/a>。&lt;/p>
 &lt;h3 id="zipkin-的工作过程">Zipkin 的工作过程&lt;/h3>
 &lt;p>当用户发起一次调用时，Zipkin 的客户端会在入口处为整条调用链路生成一个全局唯一的 trace id，并为这条链路中的每一次分布式调用生成一个 span id。span 与 span 之间可以有父子嵌套关系，代表分布式调用中的上下游关系。span 和 span 之间可以是兄弟关系，代表当前调用下的两次子调用。一个 trace 由一组 span 组成，可以看成是由 trace 为根节点，span 为若干个子节点的一棵树。&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/trace-sample.png" alt="Related image">&lt;/p>

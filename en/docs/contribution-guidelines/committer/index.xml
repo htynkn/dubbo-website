@@ -48,9 +48,9 @@
 &lt;li>install &amp;ldquo;Google Authenticator&amp;rdquo; app on your cell phone&lt;/li>
 &lt;/ol>
 &lt;/li>
-&lt;li>2), Following the &lt;a href="https://help.github.com/articles/configuring-two-factor-authentication-via-a-totp-mobile-app/">authorized GitHub 2FA wiki&lt;/a>, you can operation step by step .&lt;/li>
+&lt;li>2), Following the &lt;a href="https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication">authorized GitHub 2FA wiki&lt;/a>, you can operation step by step .&lt;/li>
 &lt;/ul>
-&lt;p>In the &lt;a href="https://github.com/settings/two_factor_authentication/verify">two-factors authorization authentication (2. Scan this barcode with your app.)&lt;/a> page, it is not recommended to select a two-dimensional code with a cell phone, because some of the cell phones will not be able to scan.&lt;/p>
+&lt;p>In the &lt;a href="https://github.com/settings/security">two-factors authorization authentication (2. Scan this barcode with your app.)&lt;/a> page, it is not recommended to select a two-dimensional code with a cell phone, because some of the cell phones will not be able to scan.&lt;/p>
 &lt;p>Please open the cell phone &amp;ldquo;Google Authenticator&amp;rdquo; app, click &amp;ldquo;+&amp;rdquo; to select &amp;ldquo;input the secret key&amp;rdquo;: write the GitHub account in the account name input box. In your &amp;ldquo;secret key&amp;rdquo; input box, write the text of the &amp;ldquo;enter this text code&amp;rdquo; link in the open web page. After clicking &amp;ldquo;add&amp;rdquo; in app, 6 digit dynamic will be generated for this account. Write the 6 digit number to the text box in the web page, and then click &amp;ldquo;Enable&amp;rdquo;. In this way, the 2fa is set successfully.&lt;/p>
 &lt;ul>
 &lt;li>
@@ -67,7 +67,7 @@
 &lt;/li>
 &lt;/ul>
 &lt;p>When access token is generated on GitHub, the token where the instruction line needs a password is pasted.&lt;/p>
-&lt;p>Refer to website &lt;a href="https://help.github.com/articles/https-cloning-errors/#provide-access-token-if-2fa-enabled">referenced link one&lt;/a> and &lt;a href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/">referenced link two&lt;/a>&lt;/p>
+&lt;p>Refer to website &lt;a href="https://docs.github.com/en/repositories/creating-and-managing-repositories/troubleshooting-cloning-errors">referenced link one&lt;/a> and &lt;a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token">referenced link two&lt;/a>&lt;/p>
 &lt;ul>
 &lt;li>B. switch to SSH&lt;/li>
 &lt;/ul>
@@ -79,8 +79,8 @@
 &lt;p>The community is more important than the code
 If not discussed in the community (mailing list), just as it did not happen.&lt;/p>
 &lt;h3 id="add-your-name">Add your name&lt;/h3>
-&lt;p>Please update Dubbo incubator status &lt;a href="https://incubator.apache.org/projects/dubbo.html">page&lt;/a> to add your name. See this &lt;a href="http://dubbo.apache.org/en-us/docs/developers/committer-guide/apache-dubbo-page_dev.html">guide&lt;/a> for instructions.&lt;/p>
-&lt;p>Please update Dubbo official &lt;a href="http://dubbo.apache.org/en-us/docs/developers/developers_dev.html">website&lt;/a> to update your name.&lt;/p>
+&lt;p>Please update Dubbo incubator status &lt;a href="https://incubator.apache.org/projects/dubbo.html">page&lt;/a> to add your name. See this &lt;a href="https://dubbo.apache.org/en/latest/contribution-guidelines/contributor/">guide&lt;/a> for instructions.&lt;/p>
+&lt;p>Please update Dubbo official &lt;a href="https://dubbo.apache.org/en/latest/contribution-guidelines/committer">website&lt;/a> to update your name.&lt;/p>
 &lt;h3 id="a-small-benefit">A small benefit&lt;/h3>
 &lt;p>Jetbrains company gives Apache committers a small benefit, which is free to use IDEA&amp;rsquo;s full series products. The specific address is: &lt;a href="https://www.jetbrains.com/shop/eform/apache?Product=ALL">https://www.jetbrains.com/shop/eform/apache?Product=ALL&lt;/a>&lt;/p>
 &lt;h3 id="reference-wiki">Reference wiki&lt;/h3>
@@ -258,7 +258,7 @@ modifications and taggings related to ${release_version} Release Candidates are 
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ mvn release:clean
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ mvn release:prepare -Prelease -Darguments&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">&amp;#34;-Dmaven.test.skip=true&amp;#34;&lt;/span> -DautoVersionSubmodules&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">true&lt;/span> -Dusername&lt;span style="color:#719e07">=&lt;/span>YOUR GITHUB ID -DpushChanges&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">false&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>If you are promted to input password for pushing to GitHub (basically including adding new commits and tags), do not input your login password of GitHub. Use &lt;code>Personal access tokens&lt;/code> instead. You can go to &lt;a href="https://github.com/settings/profile">https://github.com/settings/profile&lt;/a>, click &lt;code>Developer settings&lt;/code> -&amp;gt; &lt;code>Personal access tokens&lt;/code>, and generate a new token if not. Please refer to this &lt;a href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/">guide&lt;/a> for more infomation.
+&lt;p>If you are promted to input password for pushing to GitHub (basically including adding new commits and tags), do not input your login password of GitHub. Use &lt;code>Personal access tokens&lt;/code> instead. You can go to &lt;a href="https://github.com/settings/profile">https://github.com/settings/profile&lt;/a>, click &lt;code>Developer settings&lt;/code> -&amp;gt; &lt;code>Personal access tokens&lt;/code>, and generate a new token if not. Please refer to this &lt;a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token">guide&lt;/a> for more infomation.
 you need to choose the release artifactId, next artifactId and the release tag, the default tag is dubbo-parent-xxxx, you need to change it to dubbo-xxxx&lt;/p>
 &lt;/blockquote>
 &lt;p>After executing the above commands, you will find that:&lt;/p>
@@ -306,7 +306,7 @@ The problem is that missing package occurred many times at deploying. So you sho
 &lt;li>
 &lt;p>Add public key to &lt;a href="https://dist.apache.org/repos/dist/dev/dubbo/KEYS">KEYS&lt;/a> file if you are the first time to be a release manager. KEYS is mainly used to allow people who participate in the voting to be imported locally to verify the correctness of the sign.&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>$ &lt;span style="color:#719e07">(&lt;/span>gpg --list-sigs &amp;lt;your name&amp;gt; &lt;span style="color:#719e07">&amp;amp;&amp;amp;&lt;/span> gpg --armor --export &amp;lt;your name&amp;gt;&lt;span style="color:#719e07">)&lt;/span> &amp;gt;&amp;gt; KEYS
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For more information on how to get your key id, please refer to this &lt;a href="https://help.github.com/articles/generating-a-new-gpg-key/">guide&lt;/a>&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For more information on how to get your key id, please refer to this &lt;a href="https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key">guide&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Copy the source.zip package from the Dubbo root directory to the svn local repository dubbo/${release_version}&lt;/p>
@@ -334,14 +334,14 @@ The problem is that missing package occurred many times at deploying. So you sho
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>Close the maven staging repository&lt;/p>
-&lt;p>This step is required when prepare for a 2.7.0+ release, where package name has been changed to org.apache. Before that, please make sure all the maven artifacts look good. Login to &lt;a href="http://repository.apache.org">http://repository.apache.org&lt;/a>, click the &lt;code>Staging repositories&lt;/code> on the left bar, search with keyword Dubbo, and you will see a list of repositories. Find the one you just uploaded, and then click the close button in the top area. This will do some sannity check, such as gpg signature check, and checksum check. After that, a link will be shown in the summary tab in the bottom. Please copy that link, it will be used for release vote. The link should look like this: &lt;a href="https://repository.apache.org/content/repositories/orgapachedubbo-1015">https://repository.apache.org/content/repositories/orgapachedubbo-1015&lt;/a>.&lt;/p>
+&lt;p>This step is required when prepare for a 2.7.0+ release, where package name has been changed to org.apache. Before that, please make sure all the maven artifacts look good. Login to &lt;a href="http://repository.apache.org">http://repository.apache.org&lt;/a>, click the &lt;code>Staging repositories&lt;/code> on the left bar, search with keyword Dubbo, and you will see a list of repositories. Find the one you just uploaded, and then click the close button in the top area. This will do some sannity check, such as gpg signature check, and checksum check. After that, a link will be shown in the summary tab in the bottom. Please copy that link, it will be used for release vote. The link should look like this: &lt;code>https://repository.apache.org/content/repositories/orgapachedubbo-1015&lt;/code>.&lt;/p>
 &lt;blockquote>
 &lt;p>Please be aware that it may fail when you close the repository, this is normally due to network issues, please try again if it failed. You can confirm it by clicking the &lt;code>Activiey&lt;/code> tab next to &lt;code>Summary&lt;/code>.&lt;/p>
 &lt;/blockquote>
 &lt;/li>
 &lt;/ol>
 &lt;h2 id="verify-release-candidates">Verify Release Candidates&lt;/h2>
-&lt;p>&lt;strong>A full check list can be found &lt;a href="https://wiki.apache.org/incubator/IncubatorReleaseChecklist">here&lt;/a>&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>A full check list can be found &lt;a href="https://cwiki.apache.org/confluence/display/INCUBATOR/Incubator+Release+Checklist">here&lt;/a>&lt;/strong>&lt;/p>
 &lt;p>The verification link includes but is not limited to the following contents and forms:&lt;/p>
 &lt;h3 id="check-signatures-and-hashes-are-good">Check signatures and hashes are good&lt;/h3>
 &lt;h4 id="check-the-sha512-sum">check the sha512 sum&lt;/h4>
@@ -448,7 +448,7 @@ The problem is that missing package occurred many times at deploying. So you sho
 &lt;li>Remove the the release file for the previous release under &lt;a href="https://dist.apache.org/repos/dist/release/dubbo/">official release directory&lt;/a>, which will be archived and can be found &lt;a href="https://archive.apache.org/dist/dubbo/">here&lt;/a>&lt;/li>
 &lt;li>Publish &lt;a href="https://github.com/apache/dubbo/releases">release notes&lt;/a> on Github.&lt;/li>
 &lt;li>Update the recommend dependency on &lt;a href="https://github.com/apache/dubbo#maven-dependency">Github&lt;/a> to the latest version, also update the version in other place if necessary.&lt;/li>
-&lt;li>Add the download link to official website &lt;a href="http://dubbo.apache.org/en-us/blog/download.html">http://dubbo.apache.org/en-us/blog/download.html&lt;/a>, using the ASF mirror system. The latest release download link should be something like &lt;a href="https://www.apache.org/dyn/closer.cgi?path=dubbo/$VERSION/apache-dubbo-$VERSION-source-release.zip">this&lt;/a>. The download link for the previous release version should be changed like &lt;a href="https://archive.apache.org/dist/dubbo/$VERSION/apache-dubbo-$VERSION-bin-release.zip">this&lt;/a>. Please refer to the &lt;a href="https://github.com/apache/dubbo-website/blob/asf-site/blog/en-us/download.md">download page&lt;/a> for more details.&lt;/li>
+&lt;li>Add the download link to official website &lt;a href="https://dubbo.apache.org/en/blog/2020/05/18/past-releases/">https://dubbo.apache.org/en/blog/2020/05/18/past-releases/&lt;/a>, using the ASF mirror system. The latest release download link should be something like &lt;a href="https://www.apache.org/dyn/closer.cgi?path=dubbo/$VERSION/apache-dubbo-$VERSION-source-release.zip">this&lt;/a>. The download link for the previous release version should be changed like &lt;code>https://archive.apache.org/dist/dubbo/$VERSION/apache-dubbo-$VERSION-bin-release.zip&lt;/code>. Please refer to the &lt;a href="https://dubbo.apache.org/en/blog/2020/05/18/past-releases/">download page&lt;/a> for more details.&lt;/li>
 &lt;li>Make sure all the commits in the release branch are merged into master branch, and then remove the remote release branch. For example: &lt;code>git push origin --delete 2.7.0-release&lt;/code>&lt;/li>
 &lt;li>Send mail to &lt;a href="mailto:dev@dubbo.apache.org">dev@dubbo.apache.org&lt;/a> , notify the community that the release is completed.
 The mail template to announce release:&lt;/li>
@@ -474,7 +474,7 @@ The mail template to announce release:&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[1] http://dubbo.apache.org/en-us/blog/download.html
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[1] https://dubbo.apache.org/en/blog/2020/05/18/past-releases/
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[2] https://repo1.maven.org/maven2/org/apache/dubbo/dubbo
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[3] https://github.com/apache/dubbo/releases
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[4] https://github.com/apache/dubbo/issues

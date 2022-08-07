@@ -45,8 +45,8 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>修改其中的dubbo:registry，替换成Provider提供的注册中心地址, 如：
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;dubbo:registry &lt;span style="color:#268bd2">address&lt;/span>&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">&amp;#34;zookeeper://127.0.0.1:2181&amp;#34;&lt;/span>/&amp;gt;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docsv2.7: Redis 注册中心安装</title><link>https://dubbo.apache.org/zh/docsv2.7/admin/install/redis/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docsv2.7/admin/install/redis/</guid><description>
-&lt;p>Redis &lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup> 使用方式参见: &lt;a href="http://dubbo.apache.org/books/dubbo-user-book/references/registry/redis.html">Redis 注册中心参考手册&lt;/a>。&lt;/p>
-&lt;p>只需搭一个原生的 Redis 服务器，并将&lt;a href="http://dubbo.apache.org/books/dubbo-user-book/quick-start.html">快速启动&lt;/a>中 Provider 和 Consumer 里的 &lt;code>conf/dubbo.properties&lt;/code> 中的 &lt;code>dubbo.registry.address&lt;/code> 的值改为 &lt;code>redis://127.0.0.1:6379&lt;/code> 即可使用。&lt;/p>
+&lt;p>Redis &lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup> 使用方式参见: &lt;a href="https://dubbo.apache.org/zh/docsv2.7/user/references/registry/redis/">Redis 注册中心参考手册&lt;/a>。&lt;/p>
+&lt;p>只需搭一个原生的 Redis 服务器，并将&lt;a href="https://dubbo.apache.org/zh/docsv2.7/user/quick-start/">快速启动&lt;/a>中 Provider 和 Consumer 里的 &lt;code>conf/dubbo.properties&lt;/code> 中的 &lt;code>dubbo.registry.address&lt;/code> 的值改为 &lt;code>redis://127.0.0.1:6379&lt;/code> 即可使用。&lt;/p>
 &lt;p>Redis 注册中心集群 &lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup> 采用在客户端同时写入多个服务器，读取单个服务器的策略实现。&lt;/p>
 &lt;p>安装:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>wget http://redis.googlecode.com/files/redis-2.4.8.tar.gz

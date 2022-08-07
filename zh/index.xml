@@ -100,7 +100,7 @@
 &lt;h2 id="url-简介">URL 简介&lt;/h2>
 &lt;p>在阐述地址推送性能的具体优化之前，我们有必要先了解一下与之息息相关的内容 &amp;mdash; URL。&lt;/p>
 &lt;h3 id="定义">定义&lt;/h3>
-&lt;p>在不谈及 dubbo 时，我们大多数人对 URL 这个概念并不会感到陌生。统一资源定位器 (&lt;a href="https://link.zhihu.com/?target=https%3A//www.ietf.org/rfc/rfc1738.txt">RFC1738&lt;/a>――Uniform Resource Locators (URL))应该是最广为人知的一个 RFC 规范，它的定义也非常简单。&lt;/p>
+&lt;p>在不谈及 dubbo 时，我们大多数人对 URL 这个概念并不会感到陌生。统一资源定位器 (&lt;a href="https://www.ietf.org/rfc/rfc1738.txt">RFC1738&lt;/a>――Uniform Resource Locators (URL))应该是最广为人知的一个 RFC 规范，它的定义也非常简单。&lt;/p>
 &lt;blockquote>
 &lt;p>因特网上的可用资源可以用简单字符串来表示，该文档就是描述了这种字符串的语法和语 义。而这些字符串则被称为：“统一资源定位器”（URL）&lt;/p>
 &lt;/blockquote>
@@ -251,7 +251,7 @@
 &lt;/ul>
 &lt;p>&lt;code>Apache Dubbo&lt;/code> 是一款微服务开发框架，它提供了 &lt;code>RPC&lt;/code> 通信 与 微服务治理 两大关键能力。这意味着，使用 &lt;code>Dubbo&lt;/code> 开发的微服务，将具备相互之间的远程发现与通信能力， 同时利用 Dubbo 提供的丰富服务治理能力，可以实现诸如服务发现、负载均衡、流量调度等服务治理诉求。同时 &lt;code>Dubbo&lt;/code> 是高度可扩展的，用户几乎可以在任意功能点去定制自己的实现，以改变框架的默认行为来满足自己的业务需求。&lt;/p>
 &lt;h2 id="2-dubbo快速开始">2. Dubbo快速开始&lt;/h2>
-&lt;p>本小节介绍如何将&lt;code>Dubbo&lt;/code>服务接入到&lt;code>ShenYu&lt;/code>网关，您可以直接在工程下找到本小节的&lt;a href="https://github.com/apache/incubator-shenyu/tree/master/shenyu-examples/shenyu-examples-dubbo/shenyu-examples-apache-dubbo-service">示例代码&lt;/a> 。&lt;/p>
+&lt;p>本小节介绍如何将&lt;code>Dubbo&lt;/code>服务接入到&lt;code>ShenYu&lt;/code>网关，您可以直接在工程下找到本小节的&lt;a href="https://github.com/apache/shenyu/tree/master/shenyu-examples/shenyu-examples-dubbo">示例代码&lt;/a> 。&lt;/p>
 &lt;h3 id="21-启动shenyu-admin">2.1 启动shenyu-admin&lt;/h3>
 &lt;p>&lt;code>shenyu-admin&lt;/code>是&lt;code>Apache ShenYu&lt;/code>后台管理系统， 启动的方式有多种，本文通过 &lt;a href="https://shenyu.apache.org/zh/docs/deployment/deployment-local">本地部署&lt;/a> 的方式启动。启动成功后，需要在基础配置&lt;code>-&amp;gt;&lt;/code>插件管理中，把&lt;code>dubbo&lt;/code> 插件设置为开启，并设置你的注册地址，请确保注册中心已经开启。&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/shenyu-dubbo/dubbo-enable-zh.png" alt="">&lt;/p>
@@ -294,7 +294,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;!--&lt;/span> Dubbo zookeeper registry dependency end &lt;span style="color:#719e07">--&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;!--&lt;/span> apache dubbo plugin end&lt;span style="color:#719e07">--&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="23-启动shenyu-examples-dubbo">2.3 启动shenyu-examples-dubbo&lt;/h3>
-&lt;p>以官网提供的例子为例 &lt;a href="https://github.com/apache/incubator-shenyu/tree/master/shenyu-examples/shenyu-examples-dubbo/shenyu-examples-apache-dubbo-service">shenyu-examples-dubbo&lt;/a> 。 假如&lt;code>dubbo&lt;/code>服务定义如下：&lt;/p>
+&lt;p>以官网提供的例子为例 &lt;a href="https://github.com/apache/shenyu/tree/master/shenyu-examples/shenyu-examples-dubbo">shenyu-examples-dubbo&lt;/a> 。 假如&lt;code>dubbo&lt;/code>服务定义如下：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> /* ...... * &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:application&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;test-dubbo-service&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
@@ -358,7 +358,7 @@
 &lt;blockquote>
 &lt;p>选择器和规则是 &lt;code>Apache ShenYu&lt;/code> 网关中最灵魂的东西。掌握好它，你可以对任何流量进行管理。对应为选择器与规则里面的匹配条件(conditions)，根据不同的流量筛选规则，我们可以处理各种复杂的场景。流量筛选可以从&lt;code>Header&lt;/code>, &lt;code>URI&lt;/code>, &lt;code>Query&lt;/code>, &lt;code>Cookie&lt;/code> 等等Http请求获取数据。&lt;/p>
 &lt;p>然后可以采用 &lt;code>Match&lt;/code>，&lt;code>=&lt;/code>，&lt;code>Regex&lt;/code>，&lt;code>Groovy&lt;/code>，&lt;code>Exclude&lt;/code>等匹配方式，匹配出你所预想的数据。多组匹配添加可以使用&lt;code>And/Or&lt;/code>的匹配策略。&lt;/p>
-&lt;p>具体的介绍与使用请看: &lt;a href="https://shenyu.apache.org/zh/docs/design/user-guide/admin-usage/selector-and-rule">选择器与规则管理&lt;/a> 。&lt;/p>
+&lt;p>具体的介绍与使用请看: &lt;a href="https://shenyu.apache.org/zh/docs/user-guide/admin-usage/selector-and-rule">选择器与规则管理&lt;/a> 。&lt;/p>
 &lt;/blockquote>
 &lt;p>发起&lt;code>GET&lt;/code>请求，通过&lt;code>ShenYu&lt;/code>网关调用&lt;code>dubbo&lt;/code>服务：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:9195/dubbo/findById?id=100
@@ -1133,7 +1133,7 @@
 &lt;p>Dubbo 要支持 Kubernetes native service，相比之前自建注册中心的服务发现体系来说，在工作机制上主要有两点变化：&lt;/p>
 &lt;ul>
 &lt;li>服务注册由平台接管，provider 不再需要关心服务注册&lt;/li>
-&lt;li>consumer 端服务发现将是 Dubbo 关注的重点，通过对接平台层的 API-Server、DNS 等，Dubbo client 可以通过一个 &lt;a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service Name&lt;/a>（通常对应到 Application Name）查询到一组 &lt;a href="">Endpoints&lt;/a>（一组运行 provider 的 pod），通过将 Endpoints 映射到 Dubbo 内部地址列表，以驱动 Dubbo 内置的负载均衡机制工作。&lt;/li>
+&lt;li>consumer 端服务发现将是 Dubbo 关注的重点，通过对接平台层的 API-Server、DNS 等，Dubbo client 可以通过一个 &lt;a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service Name&lt;/a>（通常对应到 Application Name）查询到一组 Endpoints（一组运行 provider 的 pod），通过将 Endpoints 映射到 Dubbo 内部地址列表，以驱动 Dubbo 内置的负载均衡机制工作。&lt;/li>
 &lt;/ul>
 &lt;blockquote>
 &lt;p>Kubernetes Service 作为一个抽象概念，怎么映射到 Dubbo 是一个值得讨论的点&lt;/p>
@@ -1345,7 +1345,7 @@ MetadataService 通过标准的 Dubbo 协议暴露，根据查询条件，会将
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">......&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="212-启动-dubbo-服务提供者">2.1.2 启动 dubbo 服务提供者&lt;/h4>
-&lt;p>用的 &lt;a href="http://dubbo.apache.org/zh/docs/v2.7/user/configuration/api/">dubbo 官方示例代码&lt;/a>:&lt;/p>
+&lt;p>用的 &lt;a href="https://dubbo.apache.org/zh/docsv2.7/user/configuration/api/">dubbo 官方示例代码&lt;/a>:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">main&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String&lt;span style="color:#719e07">[]&lt;/span> args&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> IOException &lt;span style="color:#719e07">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// 服务实现
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> DemoService demoService &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> DemoServiceImpl&lt;span style="color:#719e07">();&lt;/span>
@@ -1842,7 +1842,7 @@ MetadataService 通过标准的 Dubbo 协议暴露，根据查询条件，会将
 &lt;/ul>
 &lt;h2 id="四参考">四、参考&lt;/h2>
 &lt;ul>
-&lt;li>&lt;a href="https://dubbo.apache.org/zh/docs/v2.7/user/configuration/api/">https://dubbo.apache.org/zh/docs/v2.7/user/configuration/api/&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://dubbo.apache.org/zh/docsv2.7/user/configuration/api/">https://dubbo.apache.org/zh/docsv2.7/user/configuration/api/&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://github.com/apache/dubbo-go/issues/257">https://github.com/apache/dubbo-go/issues/257&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;hr>
@@ -2961,7 +2961,7 @@ PRI * HTTP/2.0\r\n\r\nSM\r\n\r\n；&lt;/li>
 &lt;p>（图 1 ）&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/1.5/loadbalance.png" alt="">&lt;/p>
 &lt;p>（图 2 ）&lt;/p>
-&lt;p>以前的 dubbo-go RPC 层直接复用了 getty 框架 的 RPC[&lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>(https://github.com/AlexStocks/getty/tree/master/rpc)]，未能实现协议和应用通信地址的隔离。阿里中间件展图同学重构了 dubbo-go RPC 层，实现了连接复用：可以实现 consumer 与 provider 端的同一个 TCP 连接上进行多协议通信。相关 PR 业已合并，会在 dubbo-go v1.5.1 中发布。&lt;/p>
+&lt;p>以前的 dubbo-go RPC 层直接复用了 getty 框架 的 RPC[&lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>(https://github.com/AlexStocks/getty/tree/feature/rpc)]，未能实现协议和应用通信地址的隔离。阿里中间件展图同学重构了 dubbo-go RPC 层，实现了连接复用：可以实现 consumer 与 provider 端的同一个 TCP 连接上进行多协议通信。相关 PR 业已合并，会在 dubbo-go v1.5.1 中发布。&lt;/p>
 &lt;p>目前下一个版本正在紧锣密鼓的开发中，具体规划及任务清单&lt;sup id="fnref:3">&lt;a href="#fn:3" class="footnote-ref" role="doc-noteref">3&lt;/a>&lt;/sup> ，都已经在 Github 上体现。&lt;/p>
 &lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
@@ -2970,7 +2970,7 @@ PRI * HTTP/2.0\r\n\r\nSM\r\n\r\n；&lt;/li>
 &lt;p>&lt;a href="https://github.com/seata-golang/seata-golang">https://github.com/seata-golang/seata-golang&lt;/a>&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:2">
-&lt;p>&lt;a href="https://github.com/AlexStocks/getty/tree/master/rpc">https://github.com/AlexStocks/getty/tree/master/rpc&lt;/a>&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://github.com/AlexStocks/getty/tree/feature/rpc">https://github.com/AlexStocks/getty/tree/feature/rpc&lt;/a>&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:3">
 &lt;p>&lt;a href="https://github.com/apache/dubbo-go/projects/8">https://github.com/apache/dubbo-go/projects/8&lt;/a>&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
@@ -2991,7 +2991,7 @@ PRI * HTTP/2.0\r\n\r\nSM\r\n\r\n；&lt;/li>
 &lt;p>保证 Provider 在注册成功之后，才暴露元数据信息。&lt;/p>
 &lt;h2 id="2-支持基于-seata-的事务">2 支持基于 Seata 的事务&lt;/h2>
 &lt;p>基于 Seata 扩展实现。通过增加过滤器，在服务端接收 xid 并结合 &lt;a href="https://github.com/seata-golang/seata-golang">seata-golang&lt;/a> 达到支持分布式事务的目的。 从而使 Dubbo-go 在分布式场景下，让用户有更多的选择，能适应更多的个性化场景。&lt;/p>
-&lt;p>我们在 dubbo-samples 中给出了 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/golang/seata">事务测试用例&lt;/a> 。&lt;/p>
+&lt;p>我们在 dubbo-samples 中给出了 &lt;a href="https://github.com/apache/dubbo-go-samples/tree/1.5/seata">事务测试用例&lt;/a> 。&lt;/p>
 &lt;h2 id="3-多注册中心集群负载均衡">3 多注册中心集群负载均衡&lt;/h2>
 &lt;p>对于多注册中心订阅的场景，选址时的多了一层注册中心集群间的负载均衡：&lt;/p>
 &lt;p>在 Cluster Invoker 这一级，我们支持的选址策略有：&lt;/p>
@@ -3009,7 +3009,7 @@ PRI * HTTP/2.0\r\n\r\nSM\r\n\r\n；&lt;/li>
 &lt;p>标签路由通过将某一个或多个服务的提供者划分到同一个分组，约束流量只在指定分组中流转，从而实现流量隔离的目的，可以作为蓝绿发布、灰度发布等场景的能力基础。&lt;/p>
 &lt;p>标签主要是指对 Provider 端应用实例的分组，目前有两种方式可以完成实例分组，分别是&lt;code>动态规则打标&lt;/code>和&lt;code>静态规则打标&lt;/code>，其中动态规则相较于静态规则优先级更高，而当两种规则同时存在且出现冲突时，将以动态规则为准。&lt;/p>
 &lt;h4 id="511-动态规则打标">5.1.1 动态规则打标&lt;/h4>
-&lt;p>可随时在&lt;a href="http://dubbo.apache.org/zh-cn/docs/user/demos/routing-rule.html">服务治理控制台&lt;/a>下发标签归组规则&lt;/p>
+&lt;p>可随时在&lt;a href="https://dubbo.apache.org/zh/docsv2.7/user/examples/routing-rule/">服务治理控制台&lt;/a>下发标签归组规则&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># governance-tagrouter-provider应用增加了两个标签分组tag1和tag2&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># tag1包含一个实例 127.0.0.1:20880&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># tag2包含一个实例 127.0.0.1:20881&lt;/span>
@@ -3174,7 +3174,7 @@ PRI * HTTP/2.0\r\n\r\nSM\r\n\r\n；&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>使用者可通过 SPI 机制定制签名和认证方式，以及适配公司内部基础设施的密钥服务下发 AK/SK。&lt;/p>
 &lt;h2 id="示例">示例&lt;/h2>
-&lt;p>以 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/golang/helloworld/dubbo">Helloworld 示例&lt;/a> 中的代码接入当前社区版本中的默认鉴权认证功能实现为例：&lt;/p>
+&lt;p>以 &lt;a href="https://github.com/apache/dubbo-go-samples/tree/master/helloworld/">Helloworld 示例&lt;/a> 中的代码接入当前社区版本中的默认鉴权认证功能实现为例：&lt;/p>
 &lt;p>在无需改变代码的情况下，只需要在配置上增加额外的相关鉴权配置即可，dubbo-go 服务端配置示例如下：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">services&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#2aa198">&amp;#34;UserProvider&amp;#34;&lt;/span>:
@@ -4286,7 +4286,7 @@ HTTP 协议与 dubbo 协议之间的映射关系。&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-graalvm-support/graalvm_env.png" alt="">&lt;/p>
 &lt;p>​ 这里我们使用的基于jdk1.8版本的GraalVM。&lt;/p>
 &lt;h2 id="快速上手">快速上手&lt;/h2>
-&lt;p>​ 为了便于用户快速上手，我们在本分支，即&lt;a href="https://github.com/apache/dubbo/tree/2.7-native_image">apache:2.7-native_image&lt;/a>分支中，提供了如下demo。&lt;/p>
+&lt;p>​ 为了便于用户快速上手，我们在 Dubbo 仓库中，提供了如下demo。&lt;/p>
 &lt;p>​ 模块名dubbo-demo-native，该模块中提供了简易版本的dubbo的provider以及consumer:&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-graalvm-support/demo_path.png" alt="">&lt;/p>
 &lt;p>​ 我们在其中使用了native-image的maven插件，并定制了一些native-image的启动参数，用户只需要对应在provider以及consumer模块下执行maven的编译打包命令：&lt;/p>
@@ -4530,9 +4530,7 @@ HTTP 协议与 dubbo 协议之间的映射关系。&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> //......
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>​ 这里由于该service拥有多个接口获取proxy时需要是有序的，原先使用的set不满足需求，这里用ArrayList替代。&lt;/p>
-&lt;p>​ 以上就是为了支持graalvm对dubbo源码的主要改动点。&lt;/p>
-&lt;p>分支地址如下：&lt;/p>
-&lt;p>&lt;a href="https://github.com/apache/dubbo/tree/2.7-native_image">https://github.com/apache/dubbo/tree/2.7-native_image&lt;/a>&lt;/p></description></item><item><title>Blog: 都已经十岁的 Apache Dubbo，还能再乘风破浪吗？</title><link>https://dubbo.apache.org/zh/blog/2021/01/14/%E9%83%BD%E5%B7%B2%E7%BB%8F%E5%8D%81%E5%B2%81%E7%9A%84-apache-dubbo%E8%BF%98%E8%83%BD%E5%86%8D%E4%B9%98%E9%A3%8E%E7%A0%B4%E6%B5%AA%E5%90%97/</link><pubDate>Thu, 14 Jan 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/01/14/%E9%83%BD%E5%B7%B2%E7%BB%8F%E5%8D%81%E5%B2%81%E7%9A%84-apache-dubbo%E8%BF%98%E8%83%BD%E5%86%8D%E4%B9%98%E9%A3%8E%E7%A0%B4%E6%B5%AA%E5%90%97/</guid><description>
+&lt;p>​ 以上就是为了支持graalvm对dubbo源码的主要改动点。&lt;/p></description></item><item><title>Blog: 都已经十岁的 Apache Dubbo，还能再乘风破浪吗？</title><link>https://dubbo.apache.org/zh/blog/2021/01/14/%E9%83%BD%E5%B7%B2%E7%BB%8F%E5%8D%81%E5%B2%81%E7%9A%84-apache-dubbo%E8%BF%98%E8%83%BD%E5%86%8D%E4%B9%98%E9%A3%8E%E7%A0%B4%E6%B5%AA%E5%90%97/</link><pubDate>Thu, 14 Jan 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/01/14/%E9%83%BD%E5%B7%B2%E7%BB%8F%E5%8D%81%E5%B2%81%E7%9A%84-apache-dubbo%E8%BF%98%E8%83%BD%E5%86%8D%E4%B9%98%E9%A3%8E%E7%A0%B4%E6%B5%AA%E5%90%97/</guid><description>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/10years/dubbo-home.png" alt="">&lt;/p>
 &lt;p>纵观中国开源历史，你真的没法找到第二个像 Dubbo 一样自带争议和讨论热度的开源项目。&lt;/p>
 &lt;p>一方面，2011 年，它的开源填补了当时生产环境使用的 RPC 框架的空白，一发布就被广泛采用；另一方面，它经历了停止维护、重启维护后捐献给 Apache 基金会、接着又以顶级项目的身份毕业。&lt;/p>
@@ -5068,7 +5066,7 @@ HTTP 协议与 dubbo 协议之间的映射关系。&lt;/p>
 &lt;p>此外Nacos-SDK-go还支持推空保护，当Nacos推送的实例列表为空时，不更新本地缓存，也不通知Dubbo-go变更，避免Consumer无可用实例调用，造成故障。同时，SDK还支持服务实例信息本地持久化存储，可以保证在Nacos服务故障过程中，Consumer重启也能获取到可用实例，具备容灾效果。&lt;/p>
 &lt;h1 id="范例实践">范例实践&lt;/h1>
 &lt;h2 id="环境准备">环境准备&lt;/h2>
-&lt;p>dubbo-go samples代码下载：https://github.com/apache/dubbo-samples/tree/master/golang，基于Nacos注册中心的应用级服务发现的hello world代码目录在 registry/servicediscovery/nacos。&lt;/p>
+&lt;p>dubbo-go samples代码下载：https://github.com/apache/dubbo-go-samples/tree/master，基于Nacos注册中心的应用级服务发现的hello world代码目录在 registry/servicediscovery/nacos。&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/nacos/p7.png" alt="">&lt;/p>
 &lt;p>Nacos服务端搭建，参考官方文档：https://nacos.io/zh-cn/docs/quick-start.html，或者使用官方提供的公共Nacos服务：http://console.nacos.io/nacos(账号密码:nacos，仅供测试)，或者购买阿里云服务：https://help.aliyun.com/document_detail/139460.html?spm=a2c4g.11186623.6.559.d7e264b7bLpZIs&lt;/p>
 &lt;h2 id="server端搭建">Server端搭建&lt;/h2>
@@ -5106,7 +5104,7 @@ HTTP 协议与 dubbo 协议之间的映射关系。&lt;/p>
 &lt;p>PS：以下的学习方式适用于很多新技术&lt;/p>
 &lt;h2 id="基本概念">基本概念&lt;/h2>
 &lt;p>&lt;strong>首先学习一个技术首先要看看它的整体架构和基本概念&lt;/strong>，每个技术都有着自己的名词解释和实现方式，如果文档齐全就简单很多。&lt;/p>
-&lt;p>&lt;a href="https://links.jianshu.com/go?to=http%3A%2F%2Fdubbo.apache.org%2Fzh-cn%2Fdocs%2Fuser%2Fpreface%2Fbackground.html">http://dubbo.apache.org/zh-cn/docs/user/preface/background.html&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://links.jianshu.com/go?to=http%3A%2F%2Fdubbo.apache.org%2Fzh-cn%2Fdocs%2Fuser%2Fpreface%2Fbackground.html">/zh/docs/user/preface/background.html&lt;/a>&lt;/p>
 &lt;p>大致浏览了背景、需求、架构之后基本上有一个大致概念&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-architecture.png" alt="">&lt;/p>
 &lt;p>其实整体架构和很多微服务的架构都是类似的，就是有一个注册中心管理所有的服务列表，服务提供方先向注册中心注册，而消费方向注册中心请求服务列表，通过服务列表调用最终的服务。总的来说 dubbo 将整个过程封装在了里面，而作为使用者的我们来说更加关心业务实现，它帮我们做好了治理的工作。&lt;/p>
@@ -5280,7 +5278,7 @@ HTTP 协议与 dubbo 协议之间的映射关系。&lt;/p>
 &lt;p>针对如上痛点，随即着手准备设计新的 gateway 架构。首先就是语言选型，golang 的协程调用模型使得 golang 非常适合构建 IO 密集型的应用，且应用部署上也较 java 简单。经过调研后我们敲定使用 golang 作为 proxy 的编码语言，并使用 dubbo-go 用于连接 dubbo provider 集群。provider 端的业务应用通过使用 java 的插件，以注解形式配置 API 配置信息，该插件会将配置信息和 dubbo 接口元数据更新到元数据注册中心（下图中的 redis ）。这样一来，配置从管理后台页面转移到了程序代码中。开发人员在编码时，非常方便地看到 dubbo 接口对外的 API 描述，无需从另外一个管理后台配置 API 的使用方式。&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/tuya/p2.png" alt="">&lt;/p>
 &lt;h3 id="实践">实践&lt;/h3>
-&lt;p>从上图可以看到，网关能动态加载 dubbo 接口信息，调用 dubbo 接口是基于 dubbo 泛化调用。泛化调用使 client 不需要构建 provider 的 interface 代码，在 dubbo-go 中表现为无需调用 config.SetConsumerService 和 hessian.RegisterPOJO 方法，而是将请求模型纯参数完成，这使得 client 动态新增、修改接口成为可能。在 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/golang/generic/go-client">apache/dubbo-sample/golang/generic/go-client&lt;/a> 中的有泛化调用的演示代码。&lt;/p>
+&lt;p>从上图可以看到，网关能动态加载 dubbo 接口信息，调用 dubbo 接口是基于 dubbo 泛化调用。泛化调用使 client 不需要构建 provider 的 interface 代码，在 dubbo-go 中表现为无需调用 config.SetConsumerService 和 hessian.RegisterPOJO 方法，而是将请求模型纯参数完成，这使得 client 动态新增、修改接口成为可能。在 &lt;a href="https://github.com/apache/dubbo-go-samples/tree/master/generic/default/go-client">apache/dubbo-sample/golang/generic/default/go-client&lt;/a> 中的有泛化调用的演示代码。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">func&lt;/span> &lt;span style="color:#268bd2">test&lt;/span>() {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">var&lt;/span> appName = &lt;span style="color:#2aa198">&amp;#34;UserProviderGer&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">var&lt;/span> referenceConfig = config.ReferenceConfig{
@@ -5300,7 +5298,7 @@ HTTP 协议与 dubbo 协议之间的映射关系。&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">panic&lt;/span>(err)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>泛化调用的实现其实相当简单。其功能作用在 dubbo 的 Filter 层中。&lt;a href="https://github.com/apache/dubbo-go/blob/master/filter/filter_impl/generic_filter.go">Generic Filter&lt;/a> 已经作为默认开启的 Filter 加入到 dubbo Filter 链中。其核心逻辑如下：&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>泛化调用的实现其实相当简单。其功能作用在 dubbo 的 Filter 层中。&lt;a href="https://github.com/apache/dubbo-go/blob/master/filter/generic/filter.go">Generic Filter&lt;/a> 已经作为默认开启的 Filter 加入到 dubbo Filter 链中。其核心逻辑如下：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">func&lt;/span> (ef &lt;span style="color:#719e07">*&lt;/span>GenericFilter) &lt;span style="color:#268bd2">Invoke&lt;/span>(ctx context.Context, invoker protocol.Invoker, invocation protocol.Invocation) protocol.Result {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> invocation.&lt;span style="color:#268bd2">MethodName&lt;/span>() &lt;span style="color:#719e07">==&lt;/span> constant.GENERIC &lt;span style="color:#719e07">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#b58900">len&lt;/span>(invocation.&lt;span style="color:#268bd2">Arguments&lt;/span>()) &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#2aa198">3&lt;/span> {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> oldArguments &lt;span style="color:#719e07">:=&lt;/span> invocation.&lt;span style="color:#268bd2">Arguments&lt;/span>()
@@ -5556,7 +5554,7 @@ HTTP 协议与 dubbo 协议之间的映射关系。&lt;/p>
 &lt;hr>
 &lt;ol>
 &lt;li id="fn:1">
-&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/golang/registry/kubernetes">https://github.com/apache/dubbo-samples/tree/master/golang/registry/kubernetes&lt;/a>&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://github.com/apache/dubbo-go-samples/tree/1.5/registry/kubernetes">https://github.com/apache/dubbo-go-samples/tree/1.5/registry/kubernetes&lt;/a>&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:2">
 &lt;p>&lt;a href="https://github.com/dubbogo/dubbo-samples/tree/master/golang/router/condition">https://github.com/dubbogo/dubbo-samples/tree/master/golang/router/condition&lt;/a>&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
@@ -5740,7 +5738,7 @@ HTTP 协议与 dubbo 协议之间的映射关系。&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>priority: &lt;span style="color:#2aa198">1&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>force: &lt;span style="color:#cb4b16">true&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>conditions : [&lt;span style="color:#2aa198">&amp;#34;host = 1.1.1.1 =&amp;gt; host = 192.168.199.214&amp;#34;&lt;/span>]
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>更多配置方式：&lt;a href="http://dubbo.apache.org/zh-cn/docs/user/demos/routing-rule.html">条件路由配置&lt;/a>&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>更多配置方式：&lt;a href="https://dubbo.apache.org/zh/docsv2.7/user/examples/routing-rule/">条件路由配置&lt;/a>&lt;/p>
 &lt;h3 id="配置中心配置">配置中心配置&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-golang" data-lang="golang">&lt;span style="display:flex;">&lt;span>_ &lt;span style="color:#2aa198">&amp;#34;github.com/apache/dubbo-go/config_center/zookeeper&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>目前仅支持 zookeeper 配置中心，与 dubbo-admin 结合即可使用。配置方式如下：&lt;/p>
@@ -5918,7 +5916,7 @@ HTTP 协议与 dubbo 协议之间的映射关系。&lt;/p>
 &lt;p>张慧仁，github id: micln，任职 得到APP 后端开发。&lt;/p></description></item><item><title>Blog: Dubbo Go 踩坑记</title><link>https://dubbo.apache.org/zh/blog/2021/01/11/dubbo-go-%E8%B8%A9%E5%9D%91%E8%AE%B0/</link><pubDate>Mon, 11 Jan 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/01/11/dubbo-go-%E8%B8%A9%E5%9D%91%E8%AE%B0/</guid><description>
 &lt;h2 id="扯淡">扯淡&lt;/h2>
 &lt;h3 id="前尘">前尘&lt;/h3>
-&lt;p>由于我的一个项目需要做公司用户鉴权，而组内其他小伙伴刚好有一个 &lt;em>dubbo&lt;/em> 的鉴权 &lt;em>rpc&lt;/em> ，一开始我是打算直接的读 &lt;em>redis&lt;/em> 数据然后自己做解密。工作进行到一半，由于考虑到如果以后这个服务有任何变动，我这边要有联动行为，所以改用 &lt;em>go&lt;/em> 来调用 &lt;em>dubbo&lt;/em> 的 &lt;em>rpc&lt;/em> ，于是我在 &lt;em>github&lt;/em> 上找到了 &lt;a href="https://github.com/AlexStocks">雨神&lt;/a> 的 &lt;a href="https://github.com/AlexStocks/dubbogo">dubbogo&lt;/a> (PS: 这个是 &lt;em>dubbo-go&lt;/em> 前身)。不得不说，雨神是热心的人儿啊，当时还帮着我调试代码。最后也是接入了一个阉割版的吧，主要是当时 &lt;em>hessian2&lt;/em> 对泛型支持的不怎么好。&lt;/p>
+&lt;p>由于我的一个项目需要做公司用户鉴权，而组内其他小伙伴刚好有一个 &lt;em>dubbo&lt;/em> 的鉴权 &lt;em>rpc&lt;/em> ，一开始我是打算直接的读 &lt;em>redis&lt;/em> 数据然后自己做解密。工作进行到一半，由于考虑到如果以后这个服务有任何变动，我这边要有联动行为，所以改用 &lt;em>go&lt;/em> 来调用 &lt;em>dubbo&lt;/em> 的 &lt;em>rpc&lt;/em> ，于是我在 &lt;em>github&lt;/em> 上找到了 &lt;a href="https://github.com/AlexStocks">雨神&lt;/a> 的 &lt;code>https://github.com/apache/dubbo-go-samples/tree/master&lt;/code> (PS: 这个是 &lt;em>dubbo-go&lt;/em> 前身)。不得不说，雨神是热心的人儿啊，当时还帮着我调试代码。最后也是接入了一个阉割版的吧，主要是当时 &lt;em>hessian2&lt;/em> 对泛型支持的不怎么好。&lt;/p>
 &lt;h3 id="现在">现在&lt;/h3>
 &lt;p>目前 &lt;a href="https://github.com/apache/dubbo-go">dubbo-go&lt;/a>隶属于 &lt;em>apache&lt;/em> 社区，相比以前做了部分重构，并且维护也很活跃了。&lt;/p>
 &lt;h2 id="接入">接入&lt;/h2>
@@ -5966,7 +5964,7 @@ HTTP 协议与 dubbo 协议之间的映射关系。&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">methods&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">name&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;validate&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">retries&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;3&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>我这里是把 &lt;em>dubbo-go&lt;/em> 作为第三方库来用，所以我没使用官方 &lt;a href="https://github.com/dubbogo/dubbo-samples/golang">dubbo-samples&lt;/a> 那样在 &lt;em>init&lt;/em> 函数中读入配置。&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>我这里是把 &lt;em>dubbo-go&lt;/em> 作为第三方库来用，所以我没使用官方 &lt;a href="https://github.com/apache/dubbo-go-samples/">dubbo-samples&lt;/a> 那样在 &lt;em>init&lt;/em> 函数中读入配置。&lt;/p>
 &lt;p>配置代码如下：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-golang" data-lang="golang">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">import&lt;/span> (
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#2aa198">&amp;#34;github.com/apache/dubbo-go/config&amp;#34;&lt;/span>
@@ -6279,9 +6277,9 @@ HTTP 协议与 dubbo 协议之间的映射关系。&lt;/p>
 &lt;h3 id="限流算法">限流算法&lt;/h3>
 &lt;p>限流算法首先需要考虑限流的对象，dubbogo 需要考虑 interface 和 method。其次是限流方法，首先需要考虑的是单机限流还是集群限流，单机限流算法很多，譬如常用的固定窗口算法和滑动窗口算法，以及更进一步的自适应限流。限流时一个重要问题就是限流参数是很难配的，譬如线上服务到底需要使用多少机器资源合理，限流窗口的时间窗口时长应该多长合适，其 qps 值设置多少合适呢？这都是 dubbogo 需要解决的问题。先进如谷歌的 BBR 算法，可以在当前的网络环境恶化前不断尝试改进相关参数，直到尝试出一段时间内的最佳参数。还有一些业务形态下的限流，如针对会员和非会员分别设计不同的限流链路。&lt;/p>
 &lt;p>Dubbo 的限流接口源码如下：&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p15.jpeg" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p15.png" alt="">&lt;/p>
 &lt;p>这个接口抽象是非常漂亮的，第一个是限流 url，第二个服务调用。下面是 Dubbo 的固定窗口限流源码：&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p16.jpeg" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p16.png" alt="">&lt;/p>
 &lt;p>上面的代码很明显，&amp;ldquo;private final&amp;rdquo; 决定了 Dubbo 使用者只能使用期给定的固定窗口限流限算法，无法扩展。&lt;/p>
 &lt;p>以下是 dubbogo 的限流接口：&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p17.jpeg" alt="">&lt;/p>
@@ -6309,7 +6307,7 @@ HTTP 协议与 dubbo 协议之间的映射关系。&lt;/p>
 &lt;/ol>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p23.jpeg" alt="">&lt;/p>
 &lt;p>所以每一步基本上都要给程序一定的时间进行等待，所以等的时间窗口是多少呢？dubbogo 默认每个步骤大概花2秒，总体一个时间窗口是10秒。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p24.jpeg" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p24.png" alt="">&lt;/p>
 &lt;p>基本上在别的 RPC 框架里面，可能不太常见到这种处理。&lt;/p>
 &lt;h2 id="五-dubbogo-上云">五 Dubbogo 上云&lt;/h2>
 &lt;p>dubbogo 作为微服务框架如何适配 k8s，如何部署？dubbogo 本身是一个 RPC 框架，但是其又有了服务治理能力，这部分能力与 k8s 的部分能力有些重合，不可能为了适配 k8s 就彻底抛弃。目前 Dubbo 官方也没有很好的解决方案供我们参考，所以这里我们 dubbogo 先给出一个简单的常识性的实践方案。下面先分析下 dubbogo 的 interface/service 和 k8s service 两者直接的差别。&lt;/p>
@@ -6322,7 +6320,6 @@ HTTP 协议与 dubbo 协议之间的映射关系。&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p26.jpeg" alt="">&lt;/p>
 &lt;h2 id="七-展望未来">七 展望未来&lt;/h2>
 &lt;p>最后就是展望未来，也就是明年的规划。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p27.jpeg" alt="">&lt;/p>
 &lt;p>明年我们将会很快实现 dubbo router。社区在 8月份已经实现了 router 功能需要的底层的算法模块，但是当时配置中心下发相关的参数的能力还不是很强，所以没有最终完成。最近服务治理配置刚刚支持了 zookeeper 和 apollo，预计很快就可以将 router 的参数通过配置中心下发的形式支持掉。另外，还有 tracing，我们将会引入社区主流的 tracing 方案，以 opentracing 为标准，去集成 opentracing 开源生态的相关能力。第三个是 kubernetes operator，这个就是刚才说的 K8s 的服务调用，我们会基于 operator 的方案做一版新的基于 k8s 的注册中心实现。最后就是云原生生态的融入，即与 istio 的集成，dubbogo 将会成为 dubbo 在 service mesh 生态中的重要角色。&lt;/p>
 &lt;p>目前 dubbogo 项目，今年是能 run 起来，质量方面还有很多工作要做，功能基本上到明年可与 dubbo 2.7 补齐，目前已经基本够用。目前落地实践的是 3 个比较典型的公司，一个是携程，还有一个是涂鸦智能。&lt;/p>
 &lt;p>dubbogo 本身是一个 go 语言项目，也期待与其他 go 社区的指正或者需求，一起成长。&lt;/p></description></item><item><title>Blog: Dubbo Go 快速开始</title><link>https://dubbo.apache.org/zh/blog/2021/01/11/dubbo-go-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B/</link><pubDate>Mon, 11 Jan 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/01/11/dubbo-go-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B/</guid><description>
@@ -6885,7 +6882,7 @@ group 。又或者我采集到的机器自身的数据，可以将其归类到 s
 &lt;li>AddListener&lt;/li>
 &lt;/ul>
 &lt;p>而 Parser &amp;amp; SetParser 使用默认实现即可，默认为 Properties 转换器。&lt;/p>
-&lt;p>更多信息，参考：dubbo-go-apollo ，详情参考： &lt;a href="https://github.com/apache/dubbo-go/tree/master/config_center/apollo">https://github.com/apache/dubbo-go/tree/master/config_center/apollo&lt;/a>&lt;/p>
+&lt;p>更多信息，参考：dubbo-go-apollo ，详情参考： &lt;a href="https://github.com/apache/dubbo-go/tree/1.5/config_center/apollo">https://github.com/apache/dubbo-go/tree/1.5/config_center/apollo&lt;/a>&lt;/p>
 &lt;h3 id="使用方法">使用方法&lt;/h3>
 &lt;p>从上面的设计里面，也能大概猜到怎么使用了：&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/config-center/zookeeper-usercase.png" alt="">&lt;/p>
@@ -6918,7 +6915,7 @@ group 。又或者我采集到的机器自身的数据，可以将其归类到 s
 &lt;/ul>
 &lt;p>&lt;strong>本文作者：&lt;/strong> 邹毅贤，Github ID @zouyx，开源爱好者，就职于 SheIn 供应链部门，负责供应链开放平台&lt;/p></description></item><item><title>Blog: Dubbo Go Getty 开发日志</title><link>https://dubbo.apache.org/zh/blog/2021/01/11/dubbo-go-getty-%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/</link><pubDate>Mon, 11 Jan 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/01/11/dubbo-go-getty-%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/</guid><description>
 &lt;h3 id="0-说明">0 说明&lt;/h3>
-&lt;p>&lt;a href="https://github.com/alexstocks/getty">getty&lt;/a>是一个go语言实现的网络层引擎，可以处理TCP/UDP/websocket三种网络协议。&lt;/p>
+&lt;p>[getty][3]是一个go语言实现的网络层引擎，可以处理TCP/UDP/websocket三种网络协议。&lt;/p>
 &lt;p>2016年6月我在上海做一个即时通讯项目时，接口层的底层网络驱动是当时的同事&lt;a href="https://github.com/sanbit">sanbit&lt;/a>写的，原始网络层实现了TCP
 Server，其命名规范学习了著名的netty。当时这个引擎比较简洁，随着我对这个项目的改进这个网络层引擎也就随之进化了（添加了TCP Client、抽象出了 TCP connection 和 TCP
 session），至2016年8月份（又添加了websocket）其与原始实现已经大异其趣了，征得原作者和相关领导同意后就放到了github上。&lt;/p>
@@ -6957,13 +6954,13 @@ unreachable” 错误。&lt;/p>
 &lt;li>Output second datagram&lt;/li>
 &lt;/ul>
 &lt;p>这个 case 下，内核只在第一次设定下虚拟链接的 peer address，后面进行连续发送即可。所以 connected UDP 的发送过程减少了 1/3 的等待时间。&lt;/p>
-&lt;p>2017年5月7日 我曾用 &lt;a href="https://github.com/alexStocks/python-practice/blob/master/tcp_udp_http_ws/udp/client.py">python 程序&lt;/a>
+&lt;p>2017年5月7日 我曾用 python 程序(&lt;code>https://github.com/alexStocks/python-practice/blob/master/tcp_udp_http_ws/udp/client.py&lt;/code>)
 对二者之间的性能做过测试，如果 client 和 server 都部署在本机，测试结果显示发送 100 000 量的 UDP datagram packet 时，connected UDP 比 unconnected UDP 少用了 2
 / 13 的时间。&lt;/p>
 &lt;p>这个测试的另一个结论是：不管是 connected UDP 还是 unconnected UDP，如果启用了 SetTimeout，则会增大发送延迟。&lt;/p>
 &lt;h4 id="13-go-udp">1.3 Go UDP&lt;/h4>
 &lt;p>Go 语言 UDP 编程也对 connected UDP 和 unconnected UDP 进行了明确区分，参考文档2 详细地列明了如何使用相关
-API，根据这篇文档个人也写一个 &lt;a href="https://github.com/alexstocks/go-practice/blob/master/udp-tcp-http/udp/connected-udp.go">程序&lt;/a> 测试这些
+API，根据这篇文档个人也写一个 程序(&lt;code>https://github.com/alexstocks/go-practice/blob/master/udp-tcp-http/udp/connected-udp.go&lt;/code>) 测试这些
 API，测试结论如下：&lt;/p>
 &lt;ul>
 &lt;li>connected UDP 读写方法是 Read 和 Write；&lt;/li>
@@ -6977,14 +6974,14 @@ API，测试结论如下：&lt;/p>
 &lt;/ul>
 &lt;p>综上结论，读统一使用 ReadFromUDP，写则统一使用 WriteMsgUDP。&lt;/p>
 &lt;h4 id="14-getty-udp">1.4 Getty UDP&lt;/h4>
-&lt;p>版本 v0.8.1 Getty 中添加 connected UDP 支持时，其连接函数 &lt;a href="https://github.com/alexstocks/getty/blob/master/client.go#L141">dialUDP&lt;/a>
+&lt;p>版本 v0.8.1 Getty 中添加 connected UDP 支持时，其连接函数 dialUDP(&lt;code>https://github.com/alexstocks/getty/blob/master/client.go#L141&lt;/code>)
 这是简单调用了 net.DialUDP 函数，导致昨日（20180318 22:19 pm）测试的时候遇到一个怪现象：把 peer UDP endpoint 关闭，local udp endpoint 进行 connect 时
 net.DialUDP 函数返回成功，然后 lsof 命令查验结果时看到确实存在这个单链接：&lt;/p>
 &lt;pre>&lt;code>COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAME
 echo_clie 31729 alex 9u IPv4 0xa5d288135c97569d 0t0 UDP localhost:63410-&amp;gt;localhost:10000
 &lt;/code>&lt;/pre>
 &lt;p>然后当 net.UDPConn 进行 read 动作的时候，会得到错误 “read: connection refused”。&lt;/p>
-&lt;p>于是模仿C语言中对 TCP client connect 成功与否判断方法，对 &lt;a href="https://github.com/alexstocks/getty/blob/master/client.go#L141">dialUDP&lt;/a> 改进如下：&lt;/p>
+&lt;p>于是模仿C语言中对 TCP client connect 成功与否判断方法，对 dialUDP(&lt;code>https://github.com/alexstocks/getty/blob/master/client.go#L141&lt;/code>) 改进如下：&lt;/p>
 &lt;ul>
 &lt;li>net.DialUDP 成功之后，判断其是否是自连接，是则退出；&lt;/li>
 &lt;li>connected UDP 向对端发送一个无用的 datagram packet【”ping”字符串，对端会因其非正确 datagram 而丢弃】，失败则退出；&lt;/li>
@@ -7012,16 +7009,16 @@ frame，并对&lt;a href="https://github.com/gorilla/websocket/blob/master/conn.
 &lt;/ul>
 &lt;p>但是为何发生读超时错误则毫无头绪。&lt;/p>
 &lt;p>2018/03/07 日测试 TCP compression 的时候发现启动 compression 后，程序 CPU 也会很快跑到
-100%，进一步追查后发现函数 &lt;a href="https://github.com/alexstocks/getty/blob/master/conn.go#L228">getty/conn.go:gettyTCPConn::read&lt;/a> 里面的 log
+100%，进一步追查后发现函数 getty/conn.go:gettyTCPConn::read(&lt;code>https://github.com/alexstocks/getty/blob/master/conn.go#L228&lt;/code>) 里面的 log
 有很多 “io timeout” error。当时查到这个错误很疑惑，因为我已经在 TCP read 之前进行了超时设置【SetReadDeadline】，难道启动 compression
 会导致超时设置失效使得socket成了非阻塞的socket？&lt;/p>
-&lt;p>于是在 &lt;a href="https://github.com/alexstocks/getty/blob/master/conn.go#L228">getty/conn.go:gettyTCPConn::read&lt;/a> 中添加了一个逻辑：启用 TCP
+&lt;p>于是在 getty/conn.go:gettyTCPConn::read(&lt;code>https://github.com/alexstocks/getty/blob/master/conn.go#L228&lt;/code>) 中添加了一个逻辑：启用 TCP
 compression 的时不再设置超时时间【默认情况下tcp connection是永久阻塞的】，CPU 100% 的问题很快就得到了解决。&lt;/p>
 &lt;p>至于为何 &lt;code>启用 TCP compression 会导致 SetDeadline 失效使得socket成了非阻塞的socket&lt;/code>，囿于个人能力和精力，待将来追查出结果后再在此补充之。&lt;/p>
 &lt;h4 id="22-websocket-compression">2.2 Websocket compression&lt;/h4>
 &lt;p>TCP compression 的问题解决后，个人猜想 Websocket compression
 程序遇到的问题或许也跟 &lt;code>启用 TCP compression 会导致 SetDeadline 失效使得socket成了非阻塞的socket&lt;/code> 有关。&lt;/p>
-&lt;p>于是借鉴 TCP 的解决方法，在 &lt;a href="https://github.com/alexstocks/getty/blob/master/conn.go#L527">getty/conn.go:gettyWSConn::read&lt;/a>
+&lt;p>于是借鉴 TCP 的解决方法，在 getty/conn.go:gettyWSConn::read(&lt;code>https://github.com/alexstocks/getty/blob/master/conn.go#L527&lt;/code>)
 直接把超时设置关闭，然后 CPU 100% 被解决，且程序运转正常。&lt;/p>
 &lt;h3 id="a-name33-unix-socketa">&lt;a name="3">3 unix socket&lt;/a>&lt;/h3>
 &lt;p>本节与 getty 无关，仅仅是在使用 unix socket 过程中遇到一些 keypoint 的记录。&lt;/p>
@@ -7042,36 +7039,50 @@ compression 的时不再设置超时时间【默认情况下tcp connection是永
 &lt;p>It looks like AF_UNIX sockets don&amp;rsquo;t support scatter/gather on current Linux. it is a fixed size 130688 B. &amp;mdash; &lt;a href="https://stackoverflow.com/questions/13953912/difference-between-unix-domain-stream-and-datagram-sockets">Difference between UNIX domain STREAM and DATAGRAM sockets?&lt;/a>&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="a-name44-goroutine-poola">&lt;a name="4">4 Goroutine Pool&lt;/a>&lt;/h3>
-&lt;p>随着 &lt;a href="https://github.com/dubbogo/getty">dubbogo/getty&lt;/a> 被 &lt;a href="https://github.com/apache/dubbo-go/">apache/dubbo-go&lt;/a> 用作底层 tcp 的 transport 引擎，处于提高系统吞吐的需要，&lt;a href="https://github.com/dubbogo/getty">dubbogo/getty&lt;/a> 面临着下一步的进化要求：&lt;a href="https://www.oschina.net/question/3820517_2306822">&lt;strong>针对
-dubbo-go 和 Getty 的网络 I/O 与线程派发这一部分进行进一步优化&lt;/strong>&lt;/a>。其中的关键就是添加 Goroutine Pool【下文简称 gr pool】，以分离网络 I/O 和 逻辑处理。&lt;/p>
+&lt;p>随着 [dubbogo/getty][1] 被 [apache/dubbo-go][2] 用作底层 tcp 的 transport 引擎，处于提高系统吞吐的需要，[dubbogo/getty][1] 面临着下一步的进化要求：[&lt;strong>针对
+dubbo-go 和 Getty 的网络 I/O 与线程派发这一部分进行进一步优化&lt;/strong>][4]。其中的关键就是添加 Goroutine Pool【下文简称 gr pool】，以分离网络 I/O 和 逻辑处理。&lt;/p>
 &lt;p>Gr Pool 成员有任务队列【其数目为 M】和 Gr 数组【其数目为 N】以及任务【或者称之为消息】，根据 N 的数目变化其类型分为可伸缩与固定大小，可伸缩 Gr Pool 好处是可以随着任务数目变化增减 N 以节约 CPU
-和内存资源，但一般不甚常用，比人以前撸过一个后就躺在我的 &lt;a href="https://github.com/alexstocks/goext/blob/master/sync/pool/worker_pool.go">github repo&lt;/a> 里面了。&lt;/p>
-&lt;p>&lt;a href="https://github.com/dubbogo/getty">dubbogo/getty&lt;/a> 只关注 N 值固定大小的 gr pool，且不考虑收到包后的处理顺序。譬如，&lt;a href="https://github.com/dubbogo/getty">dubbogo/getty&lt;/a> 服务端收到了客户端发来的 A 和 B 两个网络包，不考虑处理顺序的 gr pool
+和内存资源，但一般不甚常用，比人以前撸过一个后就躺在我的 [github repo][5] 里面了。&lt;/p>
+&lt;p>[dubbogo/getty][1] 只关注 N 值固定大小的 gr pool，且不考虑收到包后的处理顺序。譬如，[dubbogo/getty][1] 服务端收到了客户端发来的 A 和 B 两个网络包，不考虑处理顺序的 gr pool
 模型可能造成客户端先收到 B 包的 response，后才收到 A 包的 response。&lt;/p>
-&lt;p>如果客户端的每次请求都是独立的，没有前后顺序关系，则带有 gr pool 特性的 &lt;a href="https://github.com/dubbogo/getty">dubbogo/getty&lt;/a> 不考虑顺序关系是没有问题的。如果上层用户关注 A 和 B 请求处理的前后顺序，则可以把 A 和 B
+&lt;p>如果客户端的每次请求都是独立的，没有前后顺序关系，则带有 gr pool 特性的 [dubbogo/getty][1] 不考虑顺序关系是没有问题的。如果上层用户关注 A 和 B 请求处理的前后顺序，则可以把 A 和 B
 两个请求合并为一个请求，或者把 gr pool 特性关闭。&lt;/p>
 &lt;h3 id="a-name4141-固定大小-gr-poola">&lt;a name="4.1">4.1 固定大小 Gr Pool&lt;/a>&lt;/h3>
 &lt;p>按照 M 与 N 的比例，固定大小 Gr Pool 又区分为 1:1、1:N、M:N 三类。&lt;/p>
-&lt;p>1:N 类型的 Gr Pool 最易实现，个人 2017 年在项目 &lt;a href="https://github.com/AlexStocks/kafka-connect-elasticsearch">kafka-connect-elasticsearch&lt;/a> 中实现过此类型的 &lt;a href="https://github.com/AlexStocks/kafka-connect-elasticsearch/blob/master/app/worker.go">Gr Pool&lt;/a>：作为消费者从 kafka 读取数据然后放入消息队列，然后各个
+&lt;p>1:N 类型的 Gr Pool 最易实现，个人 2017 年在项目 [kafka-connect-elasticsearch][6] 中实现过此类型的 [Gr Pool][7]：作为消费者从 kafka 读取数据然后放入消息队列，然后各个
 worker gr 从此队列中取出任务进行消费处理。&lt;/p>
-&lt;p>向 &lt;a href="https://github.com/dubbogo/getty">dubbogo/getty&lt;/a> 中添加 gr pool 时也曾实现过这个版本的 &lt;a href="https://github.com/dubbogo/getty/pull/6/commits/4b32c61e65858b3eea9d88d8f1c154ab730c32f1">gr pool&lt;/a>。这种模型的 gr pool 整个 pool 只创建一个 chan， 所有 gr 去读取这一个
+&lt;p>向 [dubbogo/getty][1] 中添加 gr pool 时也曾实现过这个版本的 [gr pool][8]。这种模型的 gr pool 整个 pool 只创建一个 chan， 所有 gr 去读取这一个
 chan，其缺点是：队列读写模型是 一写多读，因为 go channel 的低效率【整体使用一个 mutex lock】造成竞争激烈，当然其网络包处理顺序更无从保证。&lt;/p>
-&lt;p>&lt;a href="https://github.com/dubbogo/getty">dubbogo/getty&lt;/a> 初始版本的 &lt;a href="https://github.com/dubbogo/getty/pull/6/files/c4d06e2a329758a6c65c46abe464a90a3002e428#diff-9922b38d89e2ff9f820f2ce62f254162">gr pool&lt;/a> 模型为 1:1，每个 gr 多有自己的 chan，其读写模型是一写一读，其优点是可保证网络包处理顺序性， 如读取 kafka 消息时候，按照 kafka
-message 的 key 的 hash 值以取余方式【hash(message key) % N】将其投递到某个 task queue，则同一 key 的消息都可以保证处理有序。但 &lt;a href="10">望哥&lt;/a>
+&lt;p>[dubbogo/getty][1] 初始版本的 [gr pool][9] 模型为 1:1，每个 gr 多有自己的 chan，其读写模型是一写一读，其优点是可保证网络包处理顺序性， 如读取 kafka 消息时候，按照 kafka
+message 的 key 的 hash 值以取余方式【hash(message key) % N】将其投递到某个 task queue，则同一 key 的消息都可以保证处理有序。但望哥
 指出了这种模型的缺陷：每个task处理要有时间，此方案会造成某个 gr 的 chan 里面有 task 堵塞，就算其他 gr 闲着，也没办法处理之【任务处理“饥饿”】。&lt;/p>
-&lt;p>&lt;a href="https://github.com/wenweihu86">wenwei86&lt;/a> 给出了更进一步的 1:1 模型的改进方案：每个 gr 一个 chan，如果 gr 发现自己的 chan 没有请求，就去找别的 chan，发送方也尽量发往消费快的协程。这个方案类似于 go runtime 内部的
+&lt;p>[wenwei86][12] 给出了更进一步的 1:1 模型的改进方案：每个 gr 一个 chan，如果 gr 发现自己的 chan 没有请求，就去找别的 chan，发送方也尽量发往消费快的协程。这个方案类似于 go runtime 内部的
 MPG 调度算法，但是对我个人来说算法和实现均太复杂，故而没有采用。&lt;/p>
-&lt;p>&lt;a href="https://github.com/dubbogo/getty">dubbogo/getty&lt;/a> 目前采用了 M:N 模型版本的 &lt;a href="https://github.com/dubbogo/getty/pull/6/commits/1991056b300ba9804de0554dbb49b5eb04560c4b">gr pool&lt;/a>，每个 task queue 被 N/M 个 gr 消费，这种模型的优点是兼顾处理效率和锁压力平衡，可以做到总体层面的任务处理均衡。此版本下
+&lt;p>[dubbogo/getty][1] 目前采用了 M:N 模型版本的 [gr pool][11]，每个 task queue 被 N/M 个 gr 消费，这种模型的优点是兼顾处理效率和锁压力平衡，可以做到总体层面的任务处理均衡。此版本下
 Task 派发采用 RoundRobin 方式。&lt;/p>
 &lt;h2 id="总结">总结&lt;/h2>
-&lt;p>本文总结了 &lt;a href="https://github.com/alexstocks/getty">getty&lt;/a> 近期开发过程中遇到的一些问题，囿于个人水平只能给出目前自认为最好的解决方法【如何你有更好的实现，请留言】。&lt;/p>
-&lt;p>随着 &lt;a href="https://github.com/alexstocks/getty">getty&lt;/a> 若有新的 improvement 或者新 feature，我会及时补加此文。&lt;/p>
+&lt;p>本文总结了 [getty][3] 近期开发过程中遇到的一些问题，囿于个人水平只能给出目前自认为最好的解决方法【如何你有更好的实现，请留言】。&lt;/p>
+&lt;p>随着 [getty][3] 若有新的 improvement 或者新 feature，我会及时补加此文。&lt;/p>
 &lt;p>此记。&lt;/p>
 &lt;h2 id="参考文档">参考文档&lt;/h2>
 &lt;ol>
 &lt;li>&lt;a href="http://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch08lev1sec11.html">connect Function with UDP&lt;/a>&lt;/li>
 &lt;li>&lt;a href="http://colobu.com/2016/10/19/Go-UDP-Programming/">深入Go UDP编程&lt;/a>&lt;/li>
-&lt;/ol></description></item><item><title>Blog: 无缝衔接 gRPC 与 dubbo-go</title><link>https://dubbo.apache.org/zh/blog/2021/01/11/%E6%97%A0%E7%BC%9D%E8%A1%94%E6%8E%A5-grpc-%E4%B8%8E-dubbo-go/</link><pubDate>Mon, 11 Jan 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/01/11/%E6%97%A0%E7%BC%9D%E8%A1%94%E6%8E%A5-grpc-%E4%B8%8E-dubbo-go/</guid><description>
+&lt;/ol>
+&lt;blockquote>
+&lt;p>1: &lt;a href="https://github.com/dubbogo/getty">https://github.com/dubbogo/getty&lt;/a>&lt;/p>
+&lt;p>2: &lt;a href="https://github.com/apache/dubbo-go/">https://github.com/apache/dubbo-go/&lt;/a>&lt;/p>
+&lt;p>3: &lt;a href="https://github.com/alexstocks/getty">https://github.com/alexstocks/getty&lt;/a>&lt;/p>
+&lt;p>4: &lt;a href="https://www.oschina.net/question/3820517_2306822">https://www.oschina.net/question/3820517_2306822&lt;/a>&lt;/p>
+&lt;p>5: &lt;a href="https://github.com/alexstocks/goext/blob/master/sync/pool/worker_pool.go">https://github.com/alexstocks/goext/blob/master/sync/pool/worker_pool.go&lt;/a>&lt;/p>
+&lt;p>6: &lt;a href="https://github.com/AlexStocks/kafka-connect-elasticsearch">https://github.com/AlexStocks/kafka-connect-elasticsearch&lt;/a>&lt;/p>
+&lt;p>7: &lt;a href="https://github.com/AlexStocks/kafka-connect-elasticsearch/blob/master/app/worker.go">https://github.com/AlexStocks/kafka-connect-elasticsearch/blob/master/app/worker.go&lt;/a>&lt;/p>
+&lt;p>8: &lt;a href="https://github.com/dubbogo/getty/pull/6/commits/4b32c61e65858b3eea9d88d8f1c154ab730c32f1">https://github.com/dubbogo/getty/pull/6/commits/4b32c61e65858b3eea9d88d8f1c154ab730c32f1&lt;/a>&lt;/p>
+&lt;p>9: &lt;a href="https://github.com/dubbogo/getty/pull/6/files/c4d06e2a329758a6c65c46abe464a90a3002e428#diff-9922b38d89e2ff9f820f2ce62f254162">https://github.com/dubbogo/getty/pull/6/files/c4d06e2a329758a6c65c46abe464a90a3002e428#diff-9922b38d89e2ff9f820f2ce62f254162&lt;/a>&lt;/p>
+&lt;p>10: &lt;a href="https://github.com/wongoo">https://github.com/wongoo&lt;/a>&lt;/p>
+&lt;p>11: &lt;a href="https://github.com/dubbogo/getty/pull/6/commits/1991056b300ba9804de0554dbb49b5eb04560c4b">https://github.com/dubbogo/getty/pull/6/commits/1991056b300ba9804de0554dbb49b5eb04560c4b&lt;/a>&lt;/p>
+&lt;p>12: &lt;a href="https://github.com/wenweihu86">https://github.com/wenweihu86&lt;/a>&lt;/p>
+&lt;/blockquote></description></item><item><title>Blog: 无缝衔接 gRPC 与 dubbo-go</title><link>https://dubbo.apache.org/zh/blog/2021/01/11/%E6%97%A0%E7%BC%9D%E8%A1%94%E6%8E%A5-grpc-%E4%B8%8E-dubbo-go/</link><pubDate>Mon, 11 Jan 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/01/11/%E6%97%A0%E7%BC%9D%E8%A1%94%E6%8E%A5-grpc-%E4%B8%8E-dubbo-go/</guid><description>
 &lt;p>最近我们 dubbo-go 社区里面，呼声很大的一个 feature 就是对 gRPC 的支持。在某位大佬的不懈努力之下，终于弄出来了。&lt;/p>
 &lt;p>今天我就给大家分析一下大佬是怎么连接 dubbo-go 和 gRPC 。&lt;/p>
 &lt;h2 id="grpc">gRPC&lt;/h2>
@@ -7629,8 +7640,8 @@ Dubbo这边有没有集合文档展示和测试功能,能不用写文档就能�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sslConfig&lt;span style="color:#719e07">.&lt;/span>setClientPrivateKeyPath&lt;span style="color:#719e07">(&lt;/span>args&lt;span style="color:#719e07">[&lt;/span>2&lt;span style="color:#719e07">]);&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>为尽可能保证应用启动的灵活性，TLS Cert 的指定还能通过 -D 参数或环境变量等方式来在启动阶段根据部署环境动态指定，具体请参见 Dubbo 配置读取规则与 TLS 示例&lt;/p>
-&lt;p>Dubbo 配置读取规则：http://dubbo.apache.org/zh-cn/docs/user/configuration/configuration-load-process.html&lt;/p>
-&lt;p>TLS 示例：https://github.com/apache/dubbo-samples/tree/master/java/dubbo-samples-ssl&lt;/p>
+&lt;p>Dubbo 配置读取规则：/zh/docs/user/configuration/configuration-load-process.html&lt;/p>
+&lt;p>TLS 示例：https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-ssl&lt;/p>
 &lt;blockquote>
 &lt;p>如果要使用的是 gRPC 协议，在开启 TLS 时会使用到协议协商机制，因此必须使用支持 ALPN 机制的 Provider，推荐使用的是 netty-tcnative，具体可参见 gRPC Java 社区的总结： &lt;a href="https://github.com/grpc/grpc-java/blob/master/SECURITY.md">https://github.com/grpc/grpc-java/blob/master/SECURITY.md&lt;/a>&lt;/p>
 &lt;/blockquote>
@@ -7726,7 +7737,7 @@ Dubbo这边有没有集合文档展示和测试功能,能不用写文档就能�
 &lt;h2 id="验证">验证&lt;/h2>
 &lt;p>可以按照这里的&lt;a href="https://www.apache.org/info/verification">步骤&lt;/a>, 利用&lt;a href="https://downloads.apache.org/dubbo/KEYS">KEYS&lt;/a>文件来验证下载。&lt;/p>
 &lt;h2 id="apache-dubbo">Apache Dubbo&lt;/h2>
-&lt;p>请点击了解各&lt;a href="https://dubbo.apache.org/zh/docs/v2.7/user/versions/">版本详情和升级注意事项&lt;/a>&lt;/p>
+&lt;p>请点击了解各&lt;a href="https://dubbo.apache.org/zh/docsv2.7/user/versions/">版本详情和升级注意事项&lt;/a>&lt;/p>
 &lt;blockquote>
 &lt;p>GitHub: &lt;a href="https://github.com/apache/dubbo">https://github.com/apache/dubbo&lt;/a> &lt;br>
 发布说明: &lt;a href="https://github.com/apache/dubbo/releases">https://github.com/apache/dubbo/releases&lt;/a>&lt;/p>
@@ -7838,12 +7849,6 @@ Dubbo这边有没有集合文档展示和测试功能,能不用写文档就能�
 &lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/2.7.12/apache-dubbo-2.7.12-src.zip">source&lt;/a> |
 &lt;a href="https://archive.apache.org/dist/dubbo/2.7.12/apache-dubbo-2.7.12-src.zip.asc">asc&lt;/a> |
 &lt;a href="https://archive.apache.org/dist/dubbo/2.7.12/apache-dubbo-2.7.12-src.zip.sha512">sha512&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="26101-2021-05-30">2.6.10.1 (2021-05-30)&lt;/h3>
-&lt;ul>
-&lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/2.6.10.1/apache-dubbo-2.6.10.1-source-release.zip">source&lt;/a> |
-&lt;a href="https://archive.apache.org/dist/dubbo/2.6.10.1/apache-dubbo-2.6.10.1-source-release.zip.asc">asc&lt;/a> |
-&lt;a href="https://archive.apache.org/dist/dubbo/2.6.10.1/apache-dubbo-2.6.10.1-source-release.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h3 id="2711-2021-05-12">2.7.11 (2021-05-12)&lt;/h3>
 &lt;ul>
@@ -8123,11 +8128,11 @@ Dubbo Java 版本的典型服务定义如下：&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>CompletableFuture&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">&amp;gt;&lt;/span> future &lt;span style="color:#719e07">=&lt;/span> helloService&lt;span style="color:#719e07">.&lt;/span>sayHello&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;world&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>以上示例都是基于 Java Interface 来描述 Dubbo 服务的，如果要和多语言异构的微服务实现互调，则服务又需要用相应语言的方式重新定义一遍，无法实现跨语言的服务复用；另外跨语言的序列化也是需要注意的一个问题。&lt;/p>
 &lt;p>为此 2.7.5 版本引入了对 IDL + Protobuf 的支持，以解决跨语言的服务定义问题，具体可参见示例：&lt;/p>
-&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/java/dubbo-samples-protobuf">dubbo-samples-protobuf&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-protobuf">dubbo-samples-protobuf&lt;/a>&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/service-idl.png" alt="service idl">&lt;/p>
 &lt;p>对 Reactive-style API 的支持则和上面 CompletableFuture 有些类似，允许用户定义 RxJava、Reactor API 的服务接口&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/idl-dubbo-compiler.png" alt="idl dubbo compiler">&lt;/p>
-&lt;p>但是需要注意的一定是，由于外围的 Reactive API 需要有底层传输协议的支持才有意义，因此，目前 Reactive API 只能在使用 gRPC 协议时才有意义，具体请参见示例以及下面关于 ”&lt;a href="https://github.com/apache/dubbo-samples/tree/master/java/dubbo-samples-grpc/dubbo-samples-rxjava">Dubbo 对 gRPC 的支持&lt;/a>” 一节的讲解。&lt;/p>
+&lt;p>但是需要注意的一定是，由于外围的 Reactive API 需要有底层传输协议的支持才有意义，因此，目前 Reactive API 只能在使用 gRPC 协议时才有意义，具体请参见示例以及下面关于 ”&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-grpc/dubbo-samples-rxjava">Dubbo 对 gRPC 的支持&lt;/a>” 一节的讲解。&lt;/p>
 &lt;h3 id="性能优化">性能优化&lt;/h3>
 &lt;p>2.7 版本在性能优化方面也做了很多的工作，对 Dubbo 业务系统的吞吐量、调用链路响应速度、服务治理链路性能等都有明显提升。&lt;/p>
 &lt;ol>
@@ -8138,7 +8143,7 @@ Dubbo Java 版本的典型服务定义如下：&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/filter.png" alt="filter">&lt;/p>
-&lt;p>关于消费端线程模型的优化，对于网关类应用，需要消费大量服务的应用，都会在系统稳定性和性能表现上有很大提升，其优化后的总体工作原理图所下所示，具体解析可以参见之前发布的文章：&lt;a href="http://dubbo.apache.org/zh-cn/docs/user/demos/consumer-threadpool.html">《消费端线程池模型》&lt;/a>&lt;/p>
+&lt;p>关于消费端线程模型的优化，对于网关类应用，需要消费大量服务的应用，都会在系统稳定性和性能表现上有很大提升，其优化后的总体工作原理图所下所示，具体解析可以参见之前发布的文章：&lt;a href="https://dubbo.apache.org/zh/docsv2.7/user/examples/consumer-threadpool/">《消费端线程池模型》&lt;/a>&lt;/p>
 &lt;p>老线程模型工作原理：&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/consumer-threadpool0.png" alt="consumer threadpool">&lt;/p>
 &lt;p>新线程模型工作原理：&lt;/p>
