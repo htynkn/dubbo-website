@@ -1,19 +1,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – 文档</title><link>https://dubbo.apache.org/zh/docs/</link><description>Recent content in 文档 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs3-V2: 0-1 - 线程池资源枯竭</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/0/1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/0/1/</guid><description>
+&lt;p>服务端的线程资源耗尽了。
+默认情况下，Dubbo 服务端的业务线程数是 200 个。如果多个并发请求量超过了 200，就会拒绝新的请求，抛出此错误。&lt;/p>
 &lt;h2 id="可能的原因">可能的原因&lt;/h2>
-&lt;p>服务端的线程资源耗尽了。&lt;/p>
-&lt;p>默认情况下，Dubbo 服务端的业务线程数是 200 个。如果多个并发请求量超过了 200，就会拒绝新的请求，抛出此错误。&lt;/p>
+&lt;ol>
+&lt;li>Consumer 的并发请求量太大，导致 Provider 端创建的线程数量超限。&lt;/li>
+&lt;li>可能 Provider 端在执行业务的时候，由于业务调用外部应用接口，导致线程出现阻塞，从而导致线程池回收不了线程。&lt;/li>
+&lt;/ol>
 &lt;h2 id="排查和解决步骤">排查和解决步骤&lt;/h2>
 &lt;ul>
-&lt;li>调整 Provider 端的 &lt;code>dubbo.provider.threads&lt;/code> 参数的大小，调大一些即可。&lt;/li>
-&lt;li>调整 Consumer 端的 &lt;code>dubbo.consumer.actives&lt;/code> 参数的大小，调小一些即可。&lt;/li>
-&lt;li>增加 Provider 端服务器的数量，让各个服务器分担压力。&lt;/li>
+&lt;li>开启 Dubbo 的访问日志功能，排查是否有短时间内大量调用 RPC 服务的情况。&lt;/li>
+&lt;li>通过 &lt;code>jps&lt;/code> 和 &lt;code>jstack&lt;/code> 指令检查线程池中各个线程的状态，看下是否有业务调用外部应用接口造成阻塞。&lt;/li>
+&lt;li>如果是 Consumer 的并发请求量太大，那么调整 Provider 端的 &lt;code>dubbo.provider.threads&lt;/code> 参数，将 Dubbo 的线程池的数目调大。&lt;/li>
+&lt;li>如果 Provider 业务的 QPS 实在太大，目前的服务器数目处理不完，那么增加 Provider 端服务器的数量，让更多的服务器分担压力。&lt;/li>
 &lt;/ul>
 &lt;h2 id="致谢">致谢&lt;/h2>
 &lt;p>这个错误码的 FAQ 页面参考了空冥同学的 &lt;a href="https://github.com/StabilityMan/StabilityGuide/blob/master/docs/diagnosis/plugin/rpc/%E7%B3%BB%E7%BB%9F%E7%A8%B3%E5%AE%9A%E6%80%A7%E2%80%94%E2%80%94Dubbo%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95.md">《Dubbo 常见错误及解决方法》&lt;/a> 。&lt;/p>
 &lt;p>所引文章通过 &lt;a href="http://creativecommons.org/licenses/by/4.0/">CC-BY-4.0&lt;/a> 协议赋予了汇编的权利。在此向原作者表示感谢。&lt;/p>
 &lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 1-1 - 地址非法</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/1/</guid><description>
 &lt;h2 id="地址找不到异常">地址找不到异常&lt;/h2></description></item><item><title>Docs3-V2: 2-1 - 路由选址执行失败</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/1/</guid><description>
-&lt;h2 id="路由选址执行失败">路由选址执行失败&lt;/h2></description></item><item><title>Docs3-V2: 2.x升级至3.x操作指南</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/2.x-to-3.x-compatibility-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/2.x-to-3.x-compatibility-guide/</guid><description>
+&lt;h2 id="路由选址执行失败">路由选址执行失败&lt;/h2></description></item><item><title>Docs3-V2: 2.x 升级至 3.x 操作指南</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/2.x-to-3.x-compatibility-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/2.x-to-3.x-compatibility-guide/</guid><description>
 &lt;p>&lt;strong>无需改动任何代码，直接升级到 Dubbo 3.0。&lt;/strong>&lt;/p>
 &lt;p>在 3.0 版本的设计与开发之初，我们就定下了兼容老版本 Dubbo 用户（2.5、2.6、2.7）的目标。因此，往 3.0 版本的升级过程将会是完全透明的，用户无需做任何业务改造，升级 3.x 后的框架行为将保持与 2.x 版本完全一致。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
@@ -427,7 +432,7 @@
 &lt;p>Dubbo IOC 目前仅支持 setter 方式注入，总的来说，逻辑比较简单易懂。&lt;/p>
 &lt;h2 id="4总结">4.总结&lt;/h2>
 &lt;p>本篇文章简单分别介绍了 Java SPI 与 Dubbo SPI 用法，并对 Dubbo SPI 的加载拓展类的过程进行了分析。另外，在 Dubbo SPI 中还有一块重要的逻辑这里没有进行分析，即 Dubbo SPI 的扩展点自适应机制。该机制的逻辑较为复杂，我们将会在下一篇文章中进行详细的分析。&lt;/p>
-&lt;p>好了，本篇文章就先到这里了。如果文章中有错误不妥之处，欢迎大家提 issue 进行反馈，或者提 pull request 进行修正。让我们携手共建 Dubbo 社区。&lt;/p></description></item><item><title>Docs3-V2: Dubbo SPI概述</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/overview/</guid><description>
+&lt;p>好了，本篇文章就先到这里了。如果文章中有错误不妥之处，欢迎大家提 issue 进行反馈，或者提 pull request 进行修正。让我们携手共建 Dubbo 社区。&lt;/p></description></item><item><title>Docs3-V2: Dubbo SPI 概述</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/overview/</guid><description>
 &lt;h2 id="扩展设计理念">扩展设计理念&lt;/h2>
 &lt;p>可扩展性是任何一个系统所追求的，对于 Dubbo 来说是同样适用。&lt;/p>
 &lt;h3 id="什么是可扩展性">什么是可扩展性&lt;/h3>
