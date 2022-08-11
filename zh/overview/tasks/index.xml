@@ -107,10 +107,9 @@
 &lt;div class="h-100 card shadow" href="#">
 &lt;div class="card-body">
 &lt;h4 class="card-title">
-&lt;!-- &lt;a href='https://dubbo.apache.org/zh/overview/tasks/kubernetes/deploy-on-k8s/'>Dubbo Mesh&lt;/a> -->
-&lt;p>Dubbo Mesh (建设中)&lt;/p>
+&lt;a href='https://dubbo.apache.org/zh/overview/tasks/mesh/'>Dubbo Mesh&lt;/a>
 &lt;/h4>
-&lt;p>依赖 Dubbo Control Plane 屏蔽服务治理细节&lt;/p>
+&lt;p>通过 Dubbo Control Plane 屏蔽服务治理细节，保留适配 kubernetes 原生能力的同时从架构上实现数据面与 kubernetes 的解耦，避免数据面与 kubernetes 直接通信带来的各种问题。&lt;br/>&lt;br/>具体请参见 Mesh解决方案 小节&lt;/p>
 &lt;/div>
 &lt;/div>
 &lt;/div>
@@ -174,7 +173,7 @@
 &lt;/div>
 &lt;/div>
 &lt;/div>
-&lt;/section></description></item><item><title>Overview: Triple</title><link>https://dubbo.apache.org/zh/overview/tasks/triple/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/overview/tasks/triple/</guid><description>
+&lt;/section></description></item><item><title>Overview: Triple 使用示例</title><link>https://dubbo.apache.org/zh/overview/tasks/triple/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/overview/tasks/triple/</guid><description>
 &lt;a id="td-block-0" class="td-offset-anchor">&lt;/a>
 &lt;section class="row td-box td-box--white td-box--gradient td-box--height-auto">
 &lt;div class="col">
@@ -254,7 +253,7 @@
 &lt;/div>
 &lt;/div>
 &lt;/div>
-&lt;/section></description></item><item><title>Overview: 利用生态项目治理微服务</title><link>https://dubbo.apache.org/zh/overview/tasks/ecosystem/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/overview/tasks/ecosystem/</guid><description>
+&lt;/section></description></item><item><title>Overview: 微服务治理</title><link>https://dubbo.apache.org/zh/overview/tasks/ecosystem/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/overview/tasks/ecosystem/</guid><description>
 &lt;a id="td-block-0" class="td-offset-anchor">&lt;/a>
 &lt;section class="row td-box td-box--white td-box--gradient td-box--height-auto">
 &lt;div class="col">

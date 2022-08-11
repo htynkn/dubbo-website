@@ -1,5 +1,5 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – Kubernetes 部署方案</title><link>https://dubbo.apache.org/zh/overview/tasks/kubernetes/</link><description>Recent content in Kubernetes 部署方案 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/overview/tasks/kubernetes/index.xml" rel="self" type="application/rss+xml"/><item><title>Overview: 部署到 Kubernetes</title><link>https://dubbo.apache.org/zh/overview/tasks/kubernetes/deploy-on-k8s/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/overview/tasks/kubernetes/deploy-on-k8s/</guid><description>
-&lt;p>可以按照下文步骤，将 Demo 部署到本地集群。&lt;/p>
+&lt;p>可以按照下文步骤，将 Dubbo 服务轻松部署到 Kubernetes 集群，此查看文章用到的 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-kubernetes/">完整代码示例地址&lt;/a>&lt;/p>
 &lt;h2 id="1-总体目标">1 总体目标&lt;/h2>
 &lt;ul>
 &lt;li>部署 Dubbo 应用到 Kubernetes&lt;/li>
@@ -36,36 +36,8 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># 切换命名空间&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubens dubbo-demo
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="33-项目与镜像打包可跳过">3.3 项目与镜像打包（可跳过）&lt;/h3>
-&lt;p>示例项目及相关镜像均已就绪，以下仅为指引说明，可直接跳过此步骤直接查看 3.4 小节。
-&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-kubernetes/">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-kubernetes/&lt;/a>&lt;/p>
-&lt;p>注意，由于 kubernetes 为独立扩展项目，开启 Kubernetes 支持前请添加如下依赖到 pom.xml&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.dubbo.extensions&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo-registry-kubernetes&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>1.0.2-SNAPSHOT&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>设置 Dubbo 项目使用 Kubernetes 作为注册中心，这里通过 DEFAULT_MASTER_HOST指定使用默认 API-SERVER 集群地址 kubernetes.default.srv，同时还指定了
-namespace、trustCerts 两个参数&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.application.name=dubbo-samples-apiserver-provider
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.metadataServicePort=20885
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address=kubernetes://DEFAULT_MASTER_HOST?registry-type=service&amp;amp;duplicate=false&amp;amp;namespace=dubbo-demo&amp;amp;trustCerts=true
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.name=dubbo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port=20880
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.qosEnable=true
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.qosAcceptForeignIp=true
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.provider.token=true
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果要在本地打包镜像，可通过 spring-boot-maven-plugin 插件打包镜像（也可以直接使用示例提供好的镜像包）&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># 打包镜像&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn spring-boot:build-image
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># 重命名镜像&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>docker tag docker.io/dubboteam/dubbo-samples-apiserver-provider:latest your-image-space/dubbo-samples-apiserver-provider
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># 推到镜像仓库&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>docker push your-image-space/dubbo-samples-apiserver-provider
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="34-部署到-kubernetes">3.4 部署到 Kubernetes&lt;/h3>
-&lt;h4 id="341-部署-provider">3.4.1 部署 Provider&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="33-部署到-kubernetes">3.3 部署到 Kubernetes&lt;/h3>
+&lt;h4 id="331-部署-provider">3.3.1 部署 Provider&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># 部署 Service&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl apply -f https://raw.githubusercontent.com/apache/dubbo-samples/master/dubbo-samples-kubernetes/dubbo-samples-apiserver-provider/src/main/resources/k8s/Service.yml
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -79,7 +51,7 @@ namespace、trustCerts 两个参数&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># 查看 pod 部署日志&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl logs your-pod-id
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="342-部署-consumer">3.4.2 部署 Consumer&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="332-部署-consumer">3.3.2 部署 Consumer&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># 部署 Service&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl apply -f https://raw.githubusercontent.com/apache/dubbo-samples/master/dubbo-samples-kubernetes/dubbo-samples-apiserver-consumer/src/main/resources/k8s/Service.yml
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -95,26 +67,33 @@ namespace、trustCerts 两个参数&lt;/p>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>可以看到日志输出如下:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">[&lt;/span>22&lt;span style="color:#719e07">/&lt;/span>04&lt;span style="color:#719e07">/&lt;/span>22 01&lt;span style="color:#719e07">:&lt;/span>10&lt;span style="color:#719e07">:&lt;/span>24&lt;span style="color:#719e07">:&lt;/span>024UTC&lt;span style="color:#719e07">]&lt;/span>main INFO deploy&lt;span style="color:#719e07">.&lt;/span>DefaultApplicationDeployer&lt;span style="color:#719e07">:[&lt;/span>DUBBO&lt;span style="color:#719e07">]&lt;/span>Dubbo Application&lt;span style="color:#719e07">[&lt;/span>1&lt;span style="color:#719e07">.&lt;/span>1&lt;span style="color:#719e07">](&lt;/span>dubbo&lt;span style="color:#719e07">-&lt;/span>samples&lt;span style="color:#719e07">-&lt;/span>apiserver&lt;span style="color:#719e07">-&lt;/span>consumer&lt;span style="color:#719e07">)&lt;/span>is ready&lt;span style="color:#719e07">.,&lt;/span>dubbo version&lt;span style="color:#719e07">:&lt;/span>3&lt;span style="color:#719e07">.&lt;/span>0&lt;span style="color:#719e07">.&lt;/span>7&lt;span style="color:#719e07">,&lt;/span>current host&lt;span style="color:#719e07">:&lt;/span>172&lt;span style="color:#719e07">.&lt;/span>17&lt;span style="color:#719e07">.&lt;/span>0&lt;span style="color:#719e07">.&lt;/span>6
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> result&lt;span style="color:#719e07">:&lt;/span>hello&lt;span style="color:#719e07">,&lt;/span>Kubernetes Api Server
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="35-检查-consumer-正常消费服务">3.5 检查 Consumer 正常消费服务&lt;/h3>
-&lt;p>TBD&lt;/p>
-&lt;blockquote>
-&lt;ul>
-&lt;li>改造 consumer 支持 spring-web&lt;/li>
-&lt;li>Consumer service 暴露对外地址与端口&lt;/li>
-&lt;li>访问 http 地址验证行为&lt;/li>
-&lt;/ul>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="34-修改项目并打包可跳过">3.4 修改项目并打包（可跳过）&lt;/h3>
+&lt;p>示例项目及相关镜像均已就绪，此小节仅面向需要修改示例并查看部署效果的用户。在此查看&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-kubernetes/">完整代码示例地址&lt;/a>&lt;/p>
+&lt;p>设置 Dubbo 项目使用 Kubernetes 作为注册中心，这里通过 DEFAULT_MASTER_HOST指定使用默认 API-SERVER 集群地址 kubernetes.default.srv，同时还指定了
+namespace、trustCerts 两个参数&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.application.name=dubbo-samples-apiserver-provider
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.metadataServicePort=20885
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address=kubernetes://DEFAULT_MASTER_HOST?registry-type=service&amp;amp;duplicate=false&amp;amp;namespace=dubbo-demo&amp;amp;trustCerts=true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.name=dubbo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port=20880
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.qosEnable=true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.qosAcceptForeignIp=true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.provider.token=true
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果要在本地打包镜像，可通过 jib-maven-plugin 插件打包镜像&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-shell" data-lang="shell">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># 打包并推送镜像&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mvn compile jib:build
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>Jib 插件会自动打包并发布镜像。注意，本地开发需将 jib 插件配置中的 docker registry 组织 dubboteam 改为自己有权限的组织（包括其他 kubernetes manifests 中的 dubboteam 也要修改，以确保 kubernetes 部署的是自己定制后的镜像），如遇到 jib 插件认证问题，请参考&lt;a href="https://github.com/GoogleContainerTools/jib/blob/master/docs/faq.md#what-should-i-do-when-the-registry-responds-with-unauthorized">相应链接&lt;/a>配置 docker registry 认证信息。
+可以通过直接在命令行指定 &lt;code>mvn compile jib:build -Djib.to.auth.username=x -Djib.to.auth.password=x -Djib.from.auth.username=x -Djib.from.auth.username=x&lt;/code>，或者使用 docker-credential-helper.&lt;/p>
 &lt;/blockquote>
 &lt;h2 id="4-最佳实践">4 最佳实践&lt;/h2>
 &lt;p>TBD&lt;/p>
 &lt;ul>
 &lt;li>rediness probe&lt;/li>
 &lt;li>liveness probe&lt;/li>
+&lt;li>ci/cd 接入 Skalfold&lt;/li>
 &lt;/ul>
-&lt;h2 id="5-cicd">5 CI/CD&lt;/h2>
-&lt;ul>
-&lt;li>接入 Skalfold&lt;/li>
-&lt;/ul>
-&lt;h2 id="6-附录-k8s-manifests">6 附录 k8s manifests&lt;/h2>
+&lt;h2 id="5-附录-k8s-manifests">5 附录 k8s manifests&lt;/h2>
 &lt;p>ServiceAccount.yml&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">apiVersion&lt;/span>: v1
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">kind&lt;/span>: Namespace

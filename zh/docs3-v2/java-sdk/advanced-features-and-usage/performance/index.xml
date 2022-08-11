@@ -177,7 +177,7 @@
 &lt;h3 id="查看路由缓存状态">查看路由缓存状态&lt;/h3>
 &lt;p>Dubbo 在收到地址变更的时候，会将地址信息推送给所有的 &lt;code>Router&lt;/code>，这些 &lt;code>Router&lt;/code> 可以在此阶段提前计算路由的分组，缓存起来，以避免在调用时需要遍历所有的提供者计算分组参数。
 在 Dubbo 3 中引入的 &lt;code>StateRouter&lt;/code> 提供了通过 qos 命令工具实时获取每个路由的状态的能力。&lt;/p>
-&lt;p>运维人员可以通过 &lt;code>getRouterSnapshot&lt;/code> 命令获取路由的状态。具体命令使用方式可以参考 &lt;a href="../../..//reference-manual/qos/router-snapshot/#getroutersnapshot-%E5%91%BD%E4%BB%A4">getRouterSnapshot 命令&lt;/a> 文档。&lt;/p>
+&lt;p>运维人员可以通过 &lt;code>getRouterSnapshot&lt;/code> 命令获取路由的状态。具体命令使用方式可以参考 &lt;a href="../../../reference-manual/qos/router-snapshot/#getroutersnapshot-%E5%91%BD%E4%BB%A4">getRouterSnapshot 命令&lt;/a> 文档。&lt;/p>
 &lt;p>&lt;strong>注：此功能仅支持 &lt;code>StateRoute&lt;/code>，且 &lt;code>StateRouter&lt;/code> 需要基于 &lt;code>AbstractStateRouter&lt;/code> 实现 &lt;code>doBuildSnapshot&lt;/code> 接口。&lt;/strong>&lt;/p>
 &lt;h3 id="查看实际请求的路由计算结果">查看实际请求的路由计算结果&lt;/h3>
 &lt;p>Dubbo 3 中默认在路由筛选后为空的时候打印路由计算的节点状态。运维人员可以通过日志判断每个路由的计算结果是否符合预期。&lt;/p>
@@ -198,7 +198,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [ StandardMeshRuleRouter (Input: 2) (Current Node Output: 2) (Chain Node Output: 0) Router message: MeshRuleCache has not been built. Skip route. ] Current Node Output: 30.227.64.173:20881,30.227.64.173:20880
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> [ TagStateRouter (Input: 2) (Current Node Output: 0) (Chain Node Output: 0) Router message: FAILOVER: return all Providers without any tags ] Current Node Output: Empty, dubbo version: 3.0.7, current host: 30.227.64.173
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="开启路由全采样">开启路由全采样&lt;/h4>
-&lt;p>在一些特殊情况下，请求可能调用到错误的服务端，但是因为选址非空，所以无法看到路由的过程信息，此时可以 &lt;a href="../../..//reference-manual/qos/router-snapshot/">通过 qos 开启路由全采样&lt;/a>。通过 qos 的 &lt;code>getRecentRouterSnapshot&lt;/code> 命令可以远程获取最近的路由快照。&lt;/p>
+&lt;p>在一些特殊情况下，请求可能调用到错误的服务端，但是因为选址非空，所以无法看到路由的过程信息，此时可以 &lt;a href="../../../reference-manual/qos/router-snapshot/">通过 qos 开启路由全采样&lt;/a>。通过 qos 的 &lt;code>getRecentRouterSnapshot&lt;/code> 命令可以远程获取最近的路由快照。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo&amp;gt;getRecentRouterSnapshot
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>1658224330156 - Router snapshot service com.dubbo.dubbointegration.BackendService from registry 172.18.111.184 on the consumer 172.18.111.184 using the dubbo version 3.0.9 is below:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[ Parent (Input: 2) (Current Node Output: 2) (Chain Node Output: 2) ] Input: 172.18.111.187:20880,172.18.111.183:20880 -&amp;gt; Chain Node Output: 172.18.111.187:20880,172.18.111.183:20880
