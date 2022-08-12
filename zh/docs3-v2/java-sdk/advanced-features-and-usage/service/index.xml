@@ -373,10 +373,12 @@
 &lt;p>如果不需要区分版本，可以按照以下的方式配置&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;barService&amp;#34;&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> version=&lt;span style="color:#2aa198">&amp;#34;*&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-V2: 启动时检查</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/preflight-check/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/preflight-check/</guid><description>
+&lt;h2 id="特性说明">特性说明&lt;/h2>
 &lt;p>Dubbo 缺省会在启动时检查依赖的服务是否可用，不可用时会抛出异常，阻止 Spring 初始化完成，以便上线时，能及早发现问题，默认 &lt;code>check=&amp;quot;true&amp;quot;&lt;/code>。&lt;/p>
 &lt;p>可以通过 &lt;code>check=&amp;quot;false&amp;quot;&lt;/code> 关闭检查，比如，测试时，有些服务不关心，或者出现了循环依赖，必须有一方先启动。&lt;/p>
 &lt;p>另外，如果你的 Spring 容器是懒加载的，或者通过 API 编程延迟引用服务，请关闭 check，否则服务临时不可用时，会抛出异常，拿到 null 引用，如果 &lt;code>check=&amp;quot;false&amp;quot;&lt;/code>，总是会返回引用，当服务恢复时，能自动连上。&lt;/p>
-&lt;h2 id="示例">示例&lt;/h2>
+&lt;h2 id="使用场景">使用场景&lt;/h2>
+&lt;h2 id="使用方式">使用方式&lt;/h2>
 &lt;h3 id="通过-spring-配置文件">通过 spring 配置文件&lt;/h3>
 &lt;p>关闭某个服务的启动时检查 (没有提供者时报错)：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> check=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
@@ -765,7 +767,7 @@ broadcast.fail.percent 只是控制的当失败后是否继续调用其他节点
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> cluster=&lt;span style="color:#2aa198">&amp;#34;failsafe&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-V2: 服务降级</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/service-downgrade/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/service-downgrade/</guid><description>
-&lt;p>推荐使用相关限流降级组件（如 &lt;a href="https://sentinelguard.io/zh-cn/docs/open-source-framework-integrations.html">Sentinel&lt;/a>）以达到最佳体验。&lt;/p>
+&lt;p>推荐使用相关限流降级组件（如 &lt;a href="https://sentinelguard.io/zh-cn/docs/open-source-framework-integrations.html">Sentinel&lt;/a>）以达到最佳体验。参考示例实践：&lt;a href="https://dubbo.apache.org/zh/overview/tasks/ecosystem/rate-limit/">微服务治理/限流降级&lt;/a>;&lt;/p>
 &lt;h2 id="特性说明">特性说明&lt;/h2>
 &lt;p>服务降级是指服务在非正常情况下进行降级应急处理。&lt;/p>
 &lt;h2 id="使用场景">使用场景&lt;/h2>
@@ -1280,7 +1282,7 @@ broadcast.fail.percent 只是控制的当失败后是否继续调用其他节点
 &lt;p>可以通过 &lt;code>RpcContext&lt;/code> 上的 &lt;code>setAttachment&lt;/code> 和 &lt;code>getAttachment&lt;/code> 在服务消费方和提供方之间进行参数的隐式传递。&lt;/p>
 &lt;h4 id="背景">背景&lt;/h4>
 &lt;p>上下文信息是 RPC 框架很重要的一个功能，使用 RpcContext 可以为单次调用指定不同配置。如分布式链路追踪场景，其实现原理就是在全链路的上下文中维护一个 traceId，Consumer 和 Provider 通过传递 traceId 来连接一次RPC调用，分别上报日志后可以在追踪系统中串联并展示完整的调用流程。这样可以更方便地发现异常，定位问题。
-Dubbo 中的 RpcContext 是一个 ThreadLocal 的临时状态记录器，当接收到 RPC 请求，或发起 RPC 请求时，RpcContext 的状态都会变化。比如：A 调 B，B 再调 C，则 B 机器上，在 B 调 C 之前，RpcContext 记录的是 A 调 B 的信息，在 B 调 C 之后，RpcContext 记录的是 B 调 C 的信息。&lt;/p>
+Dubbo 中的 RpcContext 是一个 ThreadLocal 的临时状态记录器，当接收到 RPC 请求，或发起 RPC 请求时，RpcContext 的状态都会变化。比如：&lt;strong>A 调 B，B 调 C，则 B 机器上，在 B 调 C 之前，RpcContext 记录的是 A 和 B 的信息，在 B 调 C 之后，RpcContext 记录的是 B 和 C 的信息。&lt;/strong>&lt;/p>
 &lt;p>在 Dubbo 3 中，RpcContext 被拆分为四大模块（ServerContext、ClientAttachment、ServerAttachment 和 ServiceContext）。&lt;/p>
 &lt;p>它们分别承担了不同的指责：&lt;/p>
 &lt;ul>
