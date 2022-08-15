@@ -2,6 +2,28 @@
 &lt;h2 id="地址找不到异常">地址找不到异常&lt;/h2></description></item><item><title>Docs3-V2: 1-4 - 空地址</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/4/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/4/</guid><description>
 &lt;h2 id="可能的原因">可能的原因&lt;/h2>
 &lt;h2 id="排查和解决步骤">排查和解决步骤&lt;/h2>
+&lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 1-9 - 读写注册中心服务缓存失败</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/9/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/9/</guid><description>
+&lt;h2 id="可能的原因">可能的原因&lt;/h2>
+&lt;ol>
+&lt;li>多个 Dubbo 进程（或其他 Java 进程）使用了同一个缓存文件。&lt;/li>
+&lt;li>由于缓存文件所在目录的文件系统权限问题，导致读写失败。&lt;/li>
+&lt;li>&lt;code>dubbo.registry.file&lt;/code> 的值输入错误。&lt;/li>
+&lt;li>不小心指定了两个注册中心使用同一文件存储。&lt;/li>
+&lt;/ol>
+&lt;div class="pageinfo pageinfo-primary">
+&lt;p>&lt;strong>提示：&lt;/strong>&lt;/p>
+&lt;p>如未指定 &lt;code>dubbo.registry.file&lt;/code>，则注册中心服务缓存路径默认为 &lt;code>~/.dubbo&lt;/code> 目录&lt;/p>
+&lt;p>（其中 &lt;code>~&lt;/code> 为用户的 HOME 目录）&lt;/p>
+&lt;/div>
+&lt;h2 id="排查和解决步骤">排查和解决步骤&lt;/h2>
+&lt;ol>
+&lt;li>检查 &lt;code>dubbo.registry.file&lt;/code> 的值有无拼写错误。&lt;/li>
+&lt;li>检查是否有其它进程使用了同一份缓存文件。&lt;/li>
+&lt;li>如果指定了 &lt;code>dubbo.registry.file&lt;/code>，那么检查下它在文件系统的权限。&lt;/li>
+&lt;li>排查是否出现了“两个注册中心使用了同一文件存储” 这一情况，如果出现则调整。&lt;/li>
+&lt;/ol>
+&lt;h2 id="另请参阅">另请参阅&lt;/h2>
+&lt;p>&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config/properties/#registry">注册中心的配置项参考手册&lt;/a>&lt;/p>
 &lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 1-13 - 执行重试任务失败</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/13/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/13/</guid><description>
 &lt;h2 id="可能的原因">可能的原因&lt;/h2>
 &lt;ol>

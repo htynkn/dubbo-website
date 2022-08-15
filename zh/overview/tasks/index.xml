@@ -40,10 +40,9 @@
 &lt;div class="h-100 card shadow">
 &lt;div class="card-body">
 &lt;h4 class="card-title">
-&lt;!-- &lt;a href='https://dubbo.apache.org/zh/overview/tasks/traffic-management/traffic-gray/'>流量灰度 (TBD)&lt;/a> -->
-&lt;p>流量灰度 (文档建设中)&lt;/p>
+&lt;a href='https://dubbo.apache.org/zh/overview/tasks/traffic-management/traffic-gray/'>流量灰度&lt;/a>
 &lt;/h4>
-&lt;p>根据请求上下文中的标签，实现对&lt;/p>
+&lt;p>根据请求上下文中的标签，实现对流量进行约束，实现灰度发布&lt;/p>
 &lt;/div>
 &lt;/div>
 &lt;/div>
@@ -51,8 +50,7 @@
 &lt;div class="h-100 card shadow">
 &lt;div class="card-body">
 &lt;h4 class="card-title">
-&lt;!-- &lt;a href='https://dubbo.apache.org/zh/overview/tasks/traffic-management/traffic-routing/'>请求路由 (TBD)&lt;/a> -->
-&lt;p>根据请求条件路由 (文档建设中)&lt;/p>
+&lt;a href='https://dubbo.apache.org/zh/overview/tasks/traffic-management/traffic-routing/'>根据请求条件路由&lt;/a>
 &lt;/h4>
 &lt;p>根据请求发起方、请求的方法条件路由&lt;/p>
 &lt;/div>
@@ -62,10 +60,9 @@
 &lt;div class="h-100 card shadow">
 &lt;div class="card-body">
 &lt;h4 class="card-title">
-&lt;!-- &lt;a href='https://dubbo.apache.org/zh/overview/tasks/traffic-management/traffic-condition/'>流量隔离 (TBD)&lt;/a> -->
-&lt;p>流量隔离 (文档建设中)&lt;/p>
+&lt;a href='https://dubbo.apache.org/zh/overview/tasks/traffic-management/traffic-condition/'>流量隔离&lt;/a>
 &lt;/h4>
-&lt;p>流量隔离&lt;/p>
+&lt;p>将不同环境的服务流量进行隔离，保证服务相互不受影响&lt;/p>
 &lt;/div>
 &lt;/div>
 &lt;/div>
@@ -73,10 +70,9 @@
 &lt;div class="h-100 card shadow">
 &lt;div class="card-body">
 &lt;h4 class="card-title">
-&lt;!-- &lt;a href='https://dubbo.apache.org/zh/overview/tasks/traffic-management/zone/'>同机房/区域优先 (TBD)&lt;/a> -->
-&lt;p>同机房/区域优先 (文档建设中)&lt;/p>
+&lt;a href='https://dubbo.apache.org/zh/overview/tasks/traffic-management/zone/'>同机房/区域优先&lt;/a>
 &lt;/h4>
-&lt;p>同机房/区域优先&lt;/p>
+&lt;p>应用调用服务时，优先调用同机房/区域的服务提供者。&lt;/p>
 &lt;/div>
 &lt;/div>
 &lt;/div>

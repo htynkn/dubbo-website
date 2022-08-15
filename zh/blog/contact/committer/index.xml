@@ -68,7 +68,33 @@
 &lt;h3 id="小福利">小福利&lt;/h3>
 &lt;p>Jetbrains 给 apache 提交者一个小福利，就是可以免费使用 idea 的全产品系列。具体注册地址为：https://www.jetbrains.com/shop/eform/apache?product=ALL&lt;/p>
 &lt;h3 id="相关-wiki">相关 wiki&lt;/h3>
-&lt;p>&lt;a href="https://www.apache.org/dev/new-committers-guide.html">https://www.apache.org/dev/new-committers-guide.html&lt;/a>&lt;/p></description></item><item><title>Blog: 如何准备 Apache Release</title><link>https://dubbo.apache.org/zh/blog/contact/committer/release-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/contact/committer/release-guide/</guid><description/></item><item><title>Blog: 网站向导</title><link>https://dubbo.apache.org/zh/blog/1/01/01/%E7%BD%91%E7%AB%99%E5%90%91%E5%AF%BC/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/1/01/01/%E7%BD%91%E7%AB%99%E5%90%91%E5%AF%BC/</guid><description>
+&lt;p>&lt;a href="https://www.apache.org/dev/new-committers-guide.html">https://www.apache.org/dev/new-committers-guide.html&lt;/a>&lt;/p></description></item><item><title>Blog: CLA 签署向导</title><link>https://dubbo.apache.org/zh/blog/1/01/01/cla-%E7%AD%BE%E7%BD%B2%E5%90%91%E5%AF%BC/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/1/01/01/cla-%E7%AD%BE%E7%BD%B2%E5%90%91%E5%AF%BC/</guid><description>
+&lt;p>以下情况，需要您签署 Apache ICLA：&lt;/p>
+&lt;ul>
+&lt;li>在 Dubbo 被捐赠给 Apache 之前，您已经为 Dubbo 作出了很多贡献，并且您以前没有签署过 Alibaba-CLA。&lt;/li>
+&lt;li>您已经为 Dubbo 作出了很多贡献，并且您被邀请成为 Dubbo 提交者，且之前没有签署过 Alibaba-CLA 或者 Apache ICLA。&lt;/li>
+&lt;/ul>
+&lt;h3 id="步骤">步骤&lt;/h3>
+&lt;ul>
+&lt;li>下载这篇 &lt;a href="https://www.apache.org/licenses/icla.pdf">pdf 文档&lt;/a>&lt;/li>
+&lt;li>编辑该文档，在必要的空格处填上适当的内容&lt;/li>
+&lt;li>打印&lt;/li>
+&lt;li>在打印好的文件上签字&lt;/li>
+&lt;li>扫描&lt;/li>
+&lt;li>发送一封邮件到secretary@apache.org，并抄送给private@dubbo.apache.org：
+&lt;ul>
+&lt;li>邮件标题为 “ICLA submission”&lt;/li>
+&lt;li>请在邮件正文附上您的github账号链接&lt;/li>
+&lt;li>请记得将您的 ICLA 文档放入邮件的附件里&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="空格填写必要说明">空格填写必要说明&lt;/h3>
+&lt;ul>
+&lt;li>Mailing address：首选英文格式的公司地址&lt;/li>
+&lt;li>Preferred apache id(s)：如果您被邀请成为一名提交者，那么需要您填写一个apache账号，否则，可以不填&lt;/li>
+&lt;li>Notify project：Dubbo（意思就是Dubbo就是通知您签署ICLA的项目）&lt;/li>
+&lt;/ul></description></item><item><title>Blog: 如何准备 Apache Release</title><link>https://dubbo.apache.org/zh/blog/contact/committer/release-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/contact/committer/release-guide/</guid><description/></item><item><title>Blog: 网站向导</title><link>https://dubbo.apache.org/zh/blog/1/01/01/%E7%BD%91%E7%AB%99%E5%90%91%E5%AF%BC/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/1/01/01/%E7%BD%91%E7%AB%99%E5%90%91%E5%AF%BC/</guid><description>
 &lt;ol>
 &lt;li>Apache Dubbo 的网站仓库是 &lt;a href="https://github.com/apache/dubbo-website">https://github.com/apache/dubbo-website&lt;/a>&lt;/li>
 &lt;li>网站构建完毕后，它会被自动发布到 dubbo.apache.org，您也可以通过 &lt;a href="https://selfserve.apache.org">https://selfserve.apache.org&lt;/a> 手动触发（需要使用 Apache 账号登陆）&lt;/li>
