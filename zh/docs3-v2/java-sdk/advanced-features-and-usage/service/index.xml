@@ -377,6 +377,14 @@
 &lt;p>可以通过 &lt;code>check=&amp;quot;false&amp;quot;&lt;/code> 关闭检查，比如，测试时，有些服务不关心，或者出现了循环依赖，必须有一方先启动。&lt;/p>
 &lt;p>另外，如果你的 Spring 容器是懒加载的，或者通过 API 编程延迟引用服务，请关闭 check，否则服务临时不可用时，会抛出异常，拿到 null 引用，如果 &lt;code>check=&amp;quot;false&amp;quot;&lt;/code>，总是会返回引用，当服务恢复时，能自动连上。&lt;/p>
 &lt;h2 id="使用场景">使用场景&lt;/h2>
+&lt;ul>
+&lt;li>单向依赖：有依赖关系（建议默认设置）和无依赖关系（可以设置 check=false）&lt;/li>
+&lt;li>相互依赖：即循环依赖，(不建议设置 check=false)&lt;/li>
+&lt;li>延迟加载处理&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>check只用来启动时检查，运行时没有相应的依赖仍然会报错。&lt;/p>
+&lt;/blockquote>
 &lt;h2 id="使用方式">使用方式&lt;/h2>
 &lt;h3 id="通过-spring-配置文件">通过 spring 配置文件&lt;/h3>
 &lt;p>关闭某个服务的启动时检查 (没有提供者时报错)：&lt;/p>
