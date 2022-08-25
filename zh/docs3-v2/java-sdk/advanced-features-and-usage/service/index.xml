@@ -1427,15 +1427,10 @@ key 为服务名，value 为服务提供者 url，此配置优先级最高，&lt
 &lt;h2 id="特性说明">特性说明&lt;/h2>
 &lt;p>上下文中存放的是当前调用过程中所需的环境信息。所有配置信息都将转换为 URL 的参数，参见 &lt;a href="../../../reference-manual/config/properties/">schema 配置参考手册&lt;/a> 中的&lt;strong>对应URL参数&lt;/strong>一列。&lt;/p>
 &lt;p>RpcContext 是一个 ThreadLocal 的临时状态记录器，当接收到 RPC 请求，或发起 RPC 请求时，RpcContext 的状态都会变化。比如：A 调 B，B 再调 C，则 B 机器上，在 B 调 C 之前，RpcContext 记录的是 A 调 B 的信息，在 B 调 C 之后，RpcContext 记录的是 B 调 C 的信息。&lt;/p>
-&lt;h4 id="类型">类型：&lt;/h4>
-&lt;ul>
-&lt;li>服务消费方&lt;/li>
-&lt;li>服务提供方&lt;/li>
-&lt;/ul>
 &lt;h2 id="使用场景">使用场景&lt;/h2>
 &lt;p>全局链路追踪和隐藏参数。&lt;/p>
 &lt;h2 id="使用方式">使用方式&lt;/h2>
-&lt;h4 id="服务消费方">服务消费方&lt;/h4>
+&lt;h3 id="服务消费方">服务消费方&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// 远程调用
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>xxxService&lt;span style="color:#719e07">.&lt;/span>xxx&lt;span style="color:#719e07">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// 本端是否为消费端，这里会返回true
@@ -1446,7 +1441,7 @@ key 为服务名，value 为服务提供者 url，此配置优先级最高，&lt
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>String application &lt;span style="color:#719e07">=&lt;/span> RpcContext&lt;span style="color:#719e07">.&lt;/span>getServiceContext&lt;span style="color:#719e07">().&lt;/span>getUrl&lt;span style="color:#719e07">().&lt;/span>getParameter&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;application&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// 注意：每发起RPC调用，上下文状态会变化
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>yyyService&lt;span style="color:#719e07">.&lt;/span>yyy&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="服务提供方">服务提供方&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="服务提供方">服务提供方&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">XxxServiceImpl&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> XxxService &lt;span style="color:#719e07">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">xxx&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
@@ -1469,23 +1464,23 @@ key 为服务名，value 为服务提供者 url，此配置优先级最高，&lt
 &lt;p>在有多台服务端的时候根据请求参数的进行一致性哈希散列选择服务端。&lt;/p>
 &lt;h2 id="使用方式">使用方式&lt;/h2>
 &lt;p>配置一致性哈希的方式有很多，最常见的是：&lt;/p>
-&lt;p>注解：&lt;/p>
+&lt;h3 id="注解配置">注解配置&lt;/h3>
 &lt;blockquote>
 &lt;p>@DubboReference(loadbalance = “consistenthash”)&lt;/p>
 &lt;/blockquote>
-&lt;p>API 配置：&lt;/p>
+&lt;h3 id="api-配置">API 配置&lt;/h3>
 &lt;blockquote>
 &lt;p>referenceConfig.setLoadBalance(&amp;ldquo;consistenthash&amp;rdquo;);&lt;/p>
 &lt;/blockquote>
-&lt;p>Properties配置：&lt;/p>
+&lt;h3 id="properties-配置">Properties 配置&lt;/h3>
 &lt;blockquote>
 &lt;p>dubbo.reference.loadbalance=consistenthash&lt;/p>
 &lt;/blockquote>
-&lt;p>XML配置：&lt;/p>
+&lt;h3 id="xml-配置">XML 配置&lt;/h3>
 &lt;blockquote>
 &lt;p>&amp;lt;dubbo:reference loadbalance=“consistenthash” /&amp;gt;&lt;/p>
 &lt;/blockquote>
-&lt;p>默认采用第一个参数作为哈希 key，如果需要切换参数，可以指定 &lt;code>hash.arguments&lt;/code> 属性，例如：&lt;/p>
+&lt;p>默认采用第一个参数作为哈希 key，如果需要切换参数，可以指定 &lt;code>hash.arguments&lt;/code> 属性&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>ReferenceConfig&lt;span style="color:#719e07">&amp;lt;&lt;/span>DemoService&lt;span style="color:#719e07">&amp;gt;&lt;/span> referenceConfig &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ReferenceConfig&lt;span style="color:#719e07">&amp;lt;&lt;/span>DemoService&lt;span style="color:#719e07">&amp;gt;();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// ... init
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>Map&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">,&lt;/span> String&lt;span style="color:#719e07">&amp;gt;&lt;/span> parameters &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> HashMap&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">,&lt;/span> String&lt;span style="color:#719e07">&amp;gt;();&lt;/span>
