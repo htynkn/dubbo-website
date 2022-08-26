@@ -16,8 +16,20 @@
 &lt;h2 id="致谢">致谢&lt;/h2>
 &lt;p>这个错误码的 FAQ 页面参考了空冥同学的 &lt;a href="https://github.com/StabilityMan/StabilityGuide/blob/master/docs/diagnosis/plugin/rpc/%E7%B3%BB%E7%BB%9F%E7%A8%B3%E5%AE%9A%E6%80%A7%E2%80%94%E2%80%94Dubbo%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95.md">《Dubbo 常见错误及解决方法》&lt;/a> 。&lt;/p>
 &lt;p>所引文章通过 &lt;a href="http://creativecommons.org/licenses/by/4.0/">CC-BY-4.0&lt;/a> 协议赋予了汇编的权利。在此向原作者表示感谢。&lt;/p>
-&lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 1-1 - 地址非法</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/1/</guid><description>
-&lt;h2 id="地址找不到异常">地址找不到异常&lt;/h2></description></item><item><title>Docs3-V2: 2-1 - 路由选址执行失败</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/1/</guid><description>
+&lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 1-1 - 地址非法（服务版本或分组不匹配）</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/1/</guid><description>
+&lt;h2 id="可能的原因">可能的原因&lt;/h2>
+&lt;ol>
+&lt;li>Provider 端配置的 &lt;code>service.group&lt;/code> 和 Consumer 端配置的 &lt;code>reference.group&lt;/code> （即服务分组的配置）不匹配。&lt;/li>
+&lt;li>Provider 端配置的 &lt;code>service.version&lt;/code> 和 Consumer 端配置的 &lt;code>reference.version&lt;/code> （即服务版本的配置）不匹配。&lt;/li>
+&lt;/ol>
+&lt;h2 id="排查和解决步骤">排查和解决步骤&lt;/h2>
+&lt;ol>
+&lt;li>确保 Provider 和 Consumer 端的服务分组配置相对应。&lt;/li>
+&lt;li>确保 Provider 和 Consumer 端的服务版本配置相对应。&lt;/li>
+&lt;/ol>
+&lt;h2 id="另请参阅">另请参阅&lt;/h2>
+&lt;p>&lt;a href="../../../reference-manual/config/properties">配置项参考手册&lt;/a>&lt;/p>
+&lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 2-1 - 路由选址执行失败</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/1/</guid><description>
 &lt;h2 id="路由选址执行失败">路由选址执行失败&lt;/h2></description></item><item><title>Docs3-V2: 2.x 升级至 3.x 操作指南</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/2.x-to-3.x-compatibility-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/2.x-to-3.x-compatibility-guide/</guid><description>
 &lt;p>&lt;strong>无需改动任何代码，直接升级到 Dubbo 3.0。&lt;/strong>&lt;/p>
 &lt;p>在 3.0 版本的设计与开发之初，我们就定下了兼容老版本 Dubbo 用户（2.5、2.6、2.7）的目标。因此，往 3.0 版本的升级过程将会是完全透明的，用户无需做任何业务改造，升级 3.x 后的框架行为将保持与 2.x 版本完全一致。&lt;/p>
@@ -70,7 +82,15 @@
 &lt;/ol>
 &lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 4-1 - 不支持的协议</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/4/1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/4/1/</guid><description>
 &lt;h2 id="可能的原因">可能的原因&lt;/h2>
+&lt;p>这种情况可能出现在自定义 Protocol 的场景下。Dubbo 的 SPI 机制找不到 URL 中所指定的 Protocol。&lt;/p>
 &lt;h2 id="排查和解决步骤">排查和解决步骤&lt;/h2>
+&lt;ol>
+&lt;li>确定 Consumer 中有服务端所用到的 Protocol 的依赖。&lt;/li>
+&lt;li>确定 Protocol 的依赖包的 SPI 配置文件的名字没有写错。&lt;/li>
+&lt;/ol>
+&lt;h2 id="另请参阅">另请参阅&lt;/h2>
+&lt;p>&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/overview/">Dubbo SPI 概述&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/description/protocol/">协议扩展说明&lt;/a>&lt;/p>
 &lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 5-1 - 配置中心连接失败</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/5/1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/5/1/</guid><description>
 &lt;h2 id="可能的原因">可能的原因&lt;/h2>
 &lt;ol>

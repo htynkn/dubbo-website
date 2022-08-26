@@ -70,7 +70,7 @@
 &lt;h3 id="21-增加-maven-依赖">2.1 增加 Maven 依赖&lt;/h3>
 &lt;p>如果项目已经启用 Nacos 作为注册中心，则无需增加任何额外配置。&lt;/p>
 &lt;p>如果未启用 Nacos 注册中心，则请参考 &lt;a href="../../registry/nacos/#21-%E5%A2%9E%E5%8A%A0%E4%BE%9D%E8%B5%96">为注册中心增加 Nacos 依赖&lt;/a>。&lt;/p>
-&lt;h3 id="22-启用-zookeeper-配置中心">2.2 启用 Zookeeper 配置中心&lt;/h3>
+&lt;h3 id="22-启用-nacos-配置中心">2.2 启用 Nacos 配置中心&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:config-center&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;nacos://127.0.0.1:8848&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>dubbo
