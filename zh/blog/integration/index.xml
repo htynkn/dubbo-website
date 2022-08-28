@@ -14,7 +14,7 @@
 &lt;h2 id="2-dubbo快速开始">2. Dubbo快速开始&lt;/h2>
 &lt;p>本小节介绍如何将&lt;code>Dubbo&lt;/code>服务接入到&lt;code>ShenYu&lt;/code>网关，您可以直接在工程下找到本小节的&lt;a href="https://github.com/apache/shenyu/tree/master/shenyu-examples/shenyu-examples-dubbo">示例代码&lt;/a> 。&lt;/p>
 &lt;h3 id="21-启动shenyu-admin">2.1 启动shenyu-admin&lt;/h3>
-&lt;p>&lt;code>shenyu-admin&lt;/code>是&lt;code>Apache ShenYu&lt;/code>后台管理系统， 启动的方式有多种，本文通过 &lt;a href="https://shenyu.apache.org/zh/docs/deployment/deployment-local">本地部署&lt;/a> 的方式启动。启动成功后，需要在基础配置&lt;code>-&amp;gt;&lt;/code>插件管理中，把&lt;code>dubbo&lt;/code> 插件设置为开启，并设置你的注册地址，请确保注册中心已经开启。&lt;/p>
+&lt;p>&lt;code>shenyu-admin&lt;/code>是&lt;code>Apache ShenYu&lt;/code>后台管理系统， 启动的方式有多种，本文通过 &lt;code>[本地部署](https://shenyu.apache.org/zh/docs/deployment/deployment-local)&lt;/code> 的方式启动。启动成功后，需要在基础配置&lt;code>-&amp;gt;&lt;/code>插件管理中，把&lt;code>dubbo&lt;/code> 插件设置为开启，并设置你的注册地址，请确保注册中心已经开启。&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/shenyu-dubbo/dubbo-enable-zh.png" alt="">&lt;/p>
 &lt;h3 id="22-启动shenyu网关">2.2 启动shenyu网关&lt;/h3>
 &lt;p>在这里通过 &lt;a href="https://github.com/apache/incubator-shenyu/tree/master/shenyu-bootstrap">源码&lt;/a> 的方式启动，直接运行&lt;code>shenyu-bootstrap&lt;/code>中的&lt;code>ShenyuBootstrapApplication&lt;/code>。&lt;/p>
@@ -107,7 +107,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">contextPath&lt;/span>: /dubbo
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">appName&lt;/span>: dubbo
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在配置文件中，声明&lt;code>dubbo&lt;/code>使用的注册中心地址，&lt;code>dubbo&lt;/code>服务向&lt;code>shenyu-admin&lt;/code>注册，使用的方式是&lt;code>http&lt;/code>，注册地址是&lt;code>http://localhost:9095&lt;/code>。&lt;/p>
-&lt;p>关于注册方式的使用，请参考 &lt;a href="https://shenyu.apache.org/docs/design/register-center-design/">应用客户端接入&lt;/a> 。&lt;/p>
+&lt;p>关于注册方式的使用，请参考 &lt;code>[应用客户端接入](https://shenyu.apache.org/docs/design/register-center-design/)&lt;/code> 。&lt;/p>
 &lt;h3 id="24-调用dubbo服务">2.4 调用dubbo服务&lt;/h3>
 &lt;p>&lt;code>shenyu-examples-dubbo&lt;/code>项目成功启动之后会自动把加 &lt;code>@ShenyuDubboClient&lt;/code> 注解的接口方法注册到网关。&lt;/p>
 &lt;p>打开 &lt;code>插件列表 -&amp;gt; Proxy -&amp;gt; dubbo&lt;/code> 可以看到插件规则配置列表：&lt;/p>
@@ -119,7 +119,7 @@
 &lt;blockquote>
 &lt;p>选择器和规则是 &lt;code>Apache ShenYu&lt;/code> 网关中最灵魂的东西。掌握好它，你可以对任何流量进行管理。对应为选择器与规则里面的匹配条件(conditions)，根据不同的流量筛选规则，我们可以处理各种复杂的场景。流量筛选可以从&lt;code>Header&lt;/code>, &lt;code>URI&lt;/code>, &lt;code>Query&lt;/code>, &lt;code>Cookie&lt;/code> 等等Http请求获取数据。&lt;/p>
 &lt;p>然后可以采用 &lt;code>Match&lt;/code>，&lt;code>=&lt;/code>，&lt;code>Regex&lt;/code>，&lt;code>Groovy&lt;/code>，&lt;code>Exclude&lt;/code>等匹配方式，匹配出你所预想的数据。多组匹配添加可以使用&lt;code>And/Or&lt;/code>的匹配策略。&lt;/p>
-&lt;p>具体的介绍与使用请看: &lt;a href="https://shenyu.apache.org/zh/docs/user-guide/admin-usage/selector-and-rule">选择器与规则管理&lt;/a> 。&lt;/p>
+&lt;p>具体的介绍与使用请看: &lt;code>[选择器与规则管理](https://shenyu.apache.org/zh/docs/user-guide/admin-usage/selector-and-rule)&lt;/code> 。&lt;/p>
 &lt;/blockquote>
 &lt;p>发起&lt;code>GET&lt;/code>请求，通过&lt;code>ShenYu&lt;/code>网关调用&lt;code>dubbo&lt;/code>服务：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>GET http://localhost:9195/dubbo/findById?id=100
@@ -141,7 +141,7 @@
 &lt;h3 id="31-应用客户端接入">3.1 应用客户端接入&lt;/h3>
 &lt;p>应用客户端接入是指将微服务接入到&lt;code>Apache ShenYu&lt;/code>网关，当前支持&lt;code>Http&lt;/code>、 &lt;code>Dubbo&lt;/code>、 &lt;code>Spring Cloud&lt;/code>、 &lt;code>gRPC&lt;/code>、 &lt;code>Motan&lt;/code>、 &lt;code>Sofa&lt;/code>、 &lt;code>Tars&lt;/code>等协议的接入。&lt;/p>
 &lt;p>将应用客户端接入到&lt;code>Apache ShenYu&lt;/code>网关是通过注册中心来实现的，涉及到客户端注册和服务端同步数据。注册中心支持&lt;code>Http&lt;/code>、&lt;code>Zookeeper&lt;/code>、&lt;code>Etcd&lt;/code>、&lt;code>Consul&lt;/code>和&lt;code>Nacos&lt;/code>。默认是通过&lt;code>Http&lt;/code>方式注册。&lt;/p>
-&lt;p>客户端接入的相关配置请参考 &lt;a href="https://shenyu.apache.org/zh/docs/user-guide/register-center-access">客户端接入配置&lt;/a> 。&lt;/p>
+&lt;p>客户端接入的相关配置请参考 &lt;code>[客户端接入配置](https://shenyu.apache.org/zh/docs/user-guide/register-center-access)&lt;/code> 。&lt;/p>
 &lt;h4 id="311-客户端注册">3.1.1 客户端注册&lt;/h4>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/shenyu-dubbo/register-client.png" alt="">&lt;/p>
 &lt;p>在你的微服务配置中声明注册中心客户端类型，如&lt;code>Http&lt;/code>或&lt;code>Zookeeper&lt;/code>。
@@ -153,7 +153,7 @@
 &lt;p>&lt;code>Disruptor&lt;/code>在其中起到数据与操作解耦，利于扩展。如果注册请求过多，导致注册异常，也有数据缓冲作用。&lt;/p>
 &lt;h3 id="32-数据同步原理">3.2 数据同步原理&lt;/h3>
 &lt;p>数据同步是指在 &lt;code>shenyu-admin&lt;/code> 后台操作数据以后，使用何种策略将数据同步到 &lt;code>Apache ShenYu&lt;/code> 网关。&lt;code>Apache ShenYu&lt;/code> 网关当前支持&lt;code>ZooKeeper&lt;/code>、&lt;code>WebSocket&lt;/code>、&lt;code>Http长轮询&lt;/code>、&lt;code>Nacos&lt;/code> 、&lt;code>Etcd&lt;/code> 和 &lt;code>Consul&lt;/code> 进行数据同步。默认是通过&lt;code>WebSocket&lt;/code>进行数据同步。&lt;/p>
-&lt;p>数据同步的相关配置请参考 &lt;a href="https://shenyu.apache.org/zh/docs/user-guide/use-data-sync">数据同步配置&lt;/a> 。&lt;/p>
+&lt;p>数据同步的相关配置请参考 &lt;code>[数据同步配置](https://shenyu.apache.org/zh/docs/user-guide/use-data-sync)&lt;/code> 。&lt;/p>
 &lt;h4 id="321-数据同步的意义">3.2.1 数据同步的意义&lt;/h4>
 &lt;p>网关是流量请求的入口，在微服务架构中承担了非常重要的角色，网关高可用的重要性不言而喻。在使用网关的过程中，为了满足业务诉求，经常需要变更配置，比如流控规则、路由规则等等。因此，网关动态配置是保障网关高可用的重要因素。&lt;/p>
 &lt;p>当前数据同步特性如下：&lt;/p>
@@ -182,7 +182,7 @@
 &lt;/ul>
 &lt;p>使用注解&lt;code>@ShenyuDubboClient&lt;/code>标记需要注册到网关的&lt;code>dubbo&lt;/code>服务。&lt;/p>
 &lt;p>注解扫描通过&lt;code>ApacheDubboServiceBeanListener&lt;/code>完成，它实现了&lt;code>ApplicationListener&amp;lt;ContextRefreshedEvent&amp;gt;&lt;/code>接口，在&lt;code>Spring&lt;/code>容器启动过程中，发生上下文刷新事件时，开始执行事件处理方法&lt;code>onApplicationEvent()&lt;/code>。在重写的方法逻辑中，读取&lt;code>Dubbo&lt;/code>服务&lt;code>ServiceBean&lt;/code>，构建元数据对象和&lt;code>URI&lt;/code>对象，并向&lt;code>shenyu-admin&lt;/code>注册。&lt;/p>
-&lt;p>具体的注册逻辑由注册中心实现，请参考 &lt;a href="https://shenyu.apache.org/zh/docs/design/register-center-design/">客户端接入原理&lt;/a> 。&lt;/p>
+&lt;p>具体的注册逻辑由注册中心实现，请参考 &lt;code>[客户端接入原理](https://shenyu.apache.org/zh/docs/design/register-center-design/)&lt;/code> 。&lt;/p>
 &lt;ul>
 &lt;li>处理注册信息&lt;/li>
 &lt;/ul>

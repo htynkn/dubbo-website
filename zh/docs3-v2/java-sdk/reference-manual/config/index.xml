@@ -2032,6 +2032,26 @@ Configuration lines are expected to be of the following form:&lt;/p>
 &lt;td>2.7.0以上版本&lt;/td>
 &lt;/tr>
 &lt;tr>
+&lt;td>providerPort&lt;/td>
+&lt;td>provider-port&lt;/td>
+&lt;td>int&lt;/td>
+&lt;td>可选&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>Service Mesh&lt;/td>
+&lt;td>当dubbo.consumer.meshEnable=true，Dubbo默认会将请求转换成K8S标准格式，结合VirtualService和DestinationRule进行流量治理，此时consumer端可以感知到provider。如果不想使用VirtualService和DestinationRule，请设置providerPort，使consumer端感知provider暴露的服务端口&lt;/td>
+&lt;td>3.1.0以上版本&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>unloadClusterRelated&lt;/td>
+&lt;td>unloadClusterRelated&lt;/td>
+&lt;td>boolean&lt;/td>
+&lt;td>可选&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>Service Mesh&lt;/td>
+&lt;td>当dubbo.consumer.meshEnable=true，在Service Mesh模式下，设置为true，可在当前调用中卸载与Cluster相关的Directory、Router和Load Balance，将重试、负载平衡、超时和其他流量管理功能下放至Sidecar，使用VirtualService和DestinationRule进行流量治理&lt;/td>
+&lt;td>3.1.0以上版本&lt;/td>
+&lt;/tr>
+&lt;tr>
 &lt;td>parameters&lt;/td>
 &lt;td>无&lt;/td>
 &lt;td>Map&amp;lt;string, string&amp;gt;&lt;/td>
@@ -3764,6 +3784,16 @@ Configuration lines are expected to be of the following form:&lt;/p>
 &lt;td>性能优化&lt;/td>
 &lt;td>异步调用线程池大小&lt;/td>
 &lt;td>3.0.0以上版本&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>meshEnable&lt;/td>
+&lt;td>mesh-enable&lt;/td>
+&lt;td>boolean&lt;/td>
+&lt;td>可选&lt;/td>
+&lt;td>false&lt;/td>
+&lt;td>Service Mesh&lt;/td>
+&lt;td>Dubbo Mesh模式的开关。开启后，可适配SideCar模式，将Dubbo服务调用转换为K8S标准调用。仅支持Triple协议，兼容GRPC。设置为true后，原生对接K8S，无需第三方注册中心，设置dubbo.registry.address=N/A即可&lt;/td>
+&lt;td>3.1.0以上版本&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>parameters&lt;/td>

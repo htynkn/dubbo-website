@@ -21,6 +21,9 @@
 &lt;h5 class="mt-3">&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/performance/profiler/">请求耗时采样&lt;/a>&lt;/h5>
 &lt;/div>
 &lt;div>
+&lt;h5 class="mt-3">&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/reactive/">响应式编程&lt;/a>&lt;/h5>
+&lt;/div>
+&lt;div>
 &lt;h5 class="mt-3">&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/others/service-container/">自定义服务容器&lt;/a>&lt;/h5>
 &lt;/div>
 &lt;div>
