@@ -106,6 +106,9 @@ center&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/dependency&amp;gt;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
 &lt;li>&lt;/li>
+&lt;/ol>
+&lt;p>Download &lt;a href="https://github.com/apache/dubbo-admin">dubbo-admin&lt;/a> &lt;a href="https://github.com/apache/dubbo-admin/releases">Download&lt;/a>&lt;/p>
+&lt;ol start="3">
 &lt;li>
 &lt;p>Start dubbo-admin&lt;/p>
 &lt;/li>

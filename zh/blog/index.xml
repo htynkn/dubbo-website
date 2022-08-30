@@ -3191,6 +3191,7 @@ DubboProtocol的createServer方法&lt;/p>
 &lt;li>为了让&lt;strong>注册中心更加聚焦与地址的发现和推送能力&lt;/strong>，&lt;strong>减轻注册中心的负担&lt;/strong>，元数据中心承载了所有的服务元数据、大量接口/方法级别配置信息等，无论是接口粒度还是应用粒度的服务发现和注册，元数据中心都起到了重要的作用。&lt;/li>
 &lt;li>&lt;/li>
 &lt;/ul>
+&lt;p>如果有以上两种需求，都可以选择部署元数据中心，并通过Dubbo的配置来集成该元数据中心。&lt;/p>
 &lt;p>&lt;strong>元数据中心并不依赖于注册中心和配置中心&lt;/strong>，用户可以自由选择是否集成和部署元数据中心，如下图所示：&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/concepts/centers-metadata.png" alt="/imgs/v3/concepts/centers-metadata.png">&lt;/p>
 &lt;p>该图中不配备配置中心，意味着可以不需要全局管理配置的能力。该图中不配备注册中心，意味着可能采用了Dubbo mesh的方案，也可能不需要进行服务注册，仅仅接收直连模式的服务调用。
