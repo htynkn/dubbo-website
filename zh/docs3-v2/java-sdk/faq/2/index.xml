@@ -26,4 +26,13 @@
 &lt;ol>
 &lt;li>参照社区SPI扩展使用手册，检查用户自定义路由，&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/">《SPI 扩展使用手册》&lt;/a>。&lt;/li>
 &lt;/ol>
+&lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 2-4 - Merger接口加载失败</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/4/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/4/</guid><description>
+&lt;h2 id="可能的原因">可能的原因&lt;/h2>
+&lt;ul>
+&lt;li>dubbo提供了聚合下游所有提供方响应的SPI扩展Merger接口，dubbo在加载用户在自定义扩展Merger接口时，加载配置失败。&lt;/li>
+&lt;/ul>
+&lt;h2 id="排查和解决步骤">排查和解决步骤&lt;/h2>
+&lt;ol>
+&lt;li>参照社区SPI扩展使用手册，检查用户自定义扩展Merger接口实现，&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/">《SPI 扩展使用手册》&lt;/a>。&lt;/li>
+&lt;/ol>
 &lt;p style="margin-top: 3rem;"> &lt;/p></description></item></channel></rss>
