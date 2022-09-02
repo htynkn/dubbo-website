@@ -2125,22 +2125,23 @@ key 为服务名，value 为服务提供者 url，此配置优先级最高，&lt
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-V2: 调用信息记录</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/accesslog/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/accesslog/</guid><description>
 &lt;h2 id="特性说明">特性说明&lt;/h2>
 &lt;p>在 dubbo3 日志分为日志适配和访问日志，如果想记录每一次请求信息，可开启访问日志，类似于 apache 的访问日志。&lt;/p>
-&lt;h4 id="访问日志输出类型">访问日志输出类型：&lt;/h4>
-&lt;ul>
-&lt;li>log4j 日志&lt;/li>
-&lt;li>指定文件&lt;/li>
-&lt;/ul>
 &lt;h2 id="使用场景">使用场景&lt;/h2>
 &lt;p>基于审计需要等类似 nginx accesslog 输出等。&lt;/p>
 &lt;h2 id="使用方式">使用方式&lt;/h2>
-&lt;p>将访问日志输出到当前应用的 log4j 日志：&lt;/p>
+&lt;h3 id="log4j-日志">log4j 日志&lt;/h3>
+&lt;p>将访问日志输出到当前应用的 log4j 日志&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> accesslog=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>将访问日志输出到指定文件：&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="指定文件">指定文件&lt;/h3>
+&lt;p>将访问日志输出到指定文件&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> accesslog=&lt;span style="color:#2aa198">&amp;#34;http://10.20.160.198/wiki/display/dubbo/foo/bar.log&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="注意">注意：&lt;/h4>
-&lt;p>此日志量比较大，请注意磁盘容量。&lt;/p></description></item><item><title>Docs3-V2: 实现泛化实现（服务端泛化）</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/generic-service/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/generic-service/</guid><description>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>此日志量比较大，请注意磁盘容量。&lt;/p>
+&lt;/blockquote></description></item><item><title>Docs3-V2: 实现泛化实现（服务端泛化）</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/generic-service/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/generic-service/</guid><description>
+&lt;h2 id="特性说明">特性说明&lt;/h2>
 &lt;p>泛接口实现方式主要用于服务器端没有 API 接口及模型类元的情况，参数及返回值中的所有 POJO 均用 Map 表示，通常用于框架集成，比如：实现一个通用的远程服务 Mock 框架，可通过实现 GenericService 接口处理所有服务请求。&lt;/p>
-&lt;p>在 Java 代码中实现 &lt;code>GenericService&lt;/code> 接口：&lt;/p>
+&lt;h2 id="使用场景">使用场景&lt;/h2>
+&lt;h2 id="使用方式">使用方式&lt;/h2>
+&lt;p>在 Java 代码中实现 &lt;code>GenericService&lt;/code> 接口&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">package&lt;/span> com.foo&lt;span style="color:#719e07">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">MyGenericService&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> GenericService &lt;span style="color:#719e07">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -2150,11 +2151,11 @@ key 为服务名，value 为服务提供者 url，此配置优先级最高，&lt
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="通过-spring-暴露泛化实现">通过 Spring 暴露泛化实现&lt;/h2>
-&lt;p>在 Spring 配置申明服务的实现：&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="通过-spring-暴露泛化实现">通过 Spring 暴露泛化实现&lt;/h3>
+&lt;p>在 Spring 配置申明服务的实现&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;bean&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;genericService&amp;#34;&lt;/span> class=&lt;span style="color:#2aa198">&amp;#34;com.foo.MyGenericService&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> ref=&lt;span style="color:#2aa198">&amp;#34;genericService&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="通过-api-方式暴露泛化实现">通过 API 方式暴露泛化实现&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="通过-api-方式暴露泛化实现">通过 API 方式暴露泛化实现&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">...&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// 用org.apache.dubbo.rpc.service.GenericService可以替代所有接口实现
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>GenericService xxxService &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> XxxGenericService&lt;span style="color:#719e07">();&lt;/span>
