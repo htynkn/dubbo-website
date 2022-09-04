@@ -17,6 +17,6 @@
 &lt;p>为确保兼容性，Dubbo 3.1 基于原本的 Logger 抽象，构建了一个新的接口 &lt;code>ErrorTypeAwareLogger&lt;/code>。其对 warn 等级的方法进行了扩展如下：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>void warn(String code, String cause, String extendedInformation, String msg);
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>void warn(String code, String cause, String extendedInformation, String msg, Throwable e);
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中 code 指错误码，cause 指可能的原因（即 caused by&amp;hellip;），extendedInformation 作为补充信息。&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中 code 指错误码，cause 指可能的原因（即 caused by&amp;hellip; 后面所接的文字），extendedInformation 作为补充信息，直接附加在 caused by 这句话的后面。&lt;/p>
 &lt;p>对于 error 级别也做了相同的扩展。&lt;/p>
 &lt;p style="margin-top: 3rem;"> &lt;/p></description></item></channel></rss>
