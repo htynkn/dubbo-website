@@ -374,9 +374,9 @@
 &lt;/ul>
 &lt;/li>
 &lt;/ul></description></item><item><title>Docs3-V2: Ab测试</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/traffic/mesh-style/ab-testing-deployment/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/traffic/mesh-style/ab-testing-deployment/</guid><description>
-&lt;h4 id="场景描述">场景描述&lt;/h4>
+&lt;h3 id="场景描述">场景描述&lt;/h3>
 &lt;p>描述当前IDC、服务部署、服务信息、希望实现的效果等相关情况&lt;/p>
-&lt;h4 id="操作工艺">操作工艺&lt;/h4>
+&lt;h3 id="操作工艺">操作工艺&lt;/h3>
 &lt;ul>
 &lt;li>
 &lt;p>步骤1&lt;/p>
@@ -1323,7 +1323,7 @@
 &lt;/tr>
 &lt;/tbody>
 &lt;/table></description></item><item><title>Docs3-V2: DestinationRule</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/traffic/mesh-style/destination-rule/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/traffic/mesh-style/destination-rule/</guid><description>
-&lt;h4 id="destinationrule">DestinationRule&lt;/h4>
+&lt;h3 id="destinationrule">DestinationRule&lt;/h3>
 &lt;p>&lt;code>DestinationRule&lt;/code>用来处理目标地址的规则，与&lt;code>DestinationRule&lt;/code>相关的&lt;code>ServiceEntry&lt;/code>, &lt;code>WorkloadEntry&lt;/code>等定义与开源保持一致&lt;/p>
 &lt;ul>
 &lt;li>使用示例&lt;/li>
@@ -1375,7 +1375,7 @@
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;h4 id="subset">Subset&lt;/h4>
+&lt;h3 id="subset">Subset&lt;/h3>
 &lt;p>&lt;code>Subset&lt;/code>应用服务的命名，可以是单个也可以是多个版本&lt;/p>
 &lt;ul>
 &lt;li>使用示例&lt;/li>
@@ -1415,7 +1415,7 @@
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;h4 id="trafficpolicy">TrafficPolicy&lt;/h4>
+&lt;h3 id="trafficpolicy">TrafficPolicy&lt;/h3>
 &lt;p>&lt;code>TrafficPolicy&lt;/code>表示负载均衡策略&lt;/p>
 &lt;ul>
 &lt;li>使用示例&lt;/li>
@@ -1448,7 +1448,7 @@
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;h4 id="loadbalancersettings">LoadBalancerSettings&lt;/h4>
+&lt;h3 id="loadbalancersettings">LoadBalancerSettings&lt;/h3>
 &lt;p>&lt;code>LoadBalancerSettings&lt;/code>用来表示负载均衡相关的配置&lt;/p>
 &lt;ul>
 &lt;li>使用示例&lt;/li>
