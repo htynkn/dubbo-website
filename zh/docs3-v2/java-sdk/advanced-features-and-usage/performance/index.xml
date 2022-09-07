@@ -152,6 +152,7 @@
 &lt;h2 id="使用场景">使用场景&lt;/h2>
 &lt;p>网关等存在动态创建订阅的场景，由于 ReferenceConfig 本身很重，会创建特别多的中间对象，而 proxy 本身是可以复用的，所以通过 ReferenceConfigCache 可以缓存这部分的属性。&lt;/p>
 &lt;h2 id="使用方式">使用方式&lt;/h2>
+&lt;h3 id="消除并销毁">消除并销毁&lt;/h3>
 &lt;p>消除 Cache 中的 &lt;code>ReferenceConfig&lt;/code>，将销毁 &lt;code>ReferenceConfig&lt;/code> 并释放对应的资源。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>ReferenceConfig&lt;span style="color:#719e07">&amp;lt;&lt;/span>XxxService&lt;span style="color:#719e07">&amp;gt;&lt;/span> reference &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ReferenceConfig&lt;span style="color:#719e07">&amp;lt;&lt;/span>XxxService&lt;span style="color:#719e07">&amp;gt;();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reference&lt;span style="color:#719e07">.&lt;/span>setInterface&lt;span style="color:#719e07">(&lt;/span>XxxService&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">);&lt;/span>
@@ -166,6 +167,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>ReferenceConfigCache cache &lt;span style="color:#719e07">=&lt;/span> ReferenceConfigCache&lt;span style="color:#719e07">.&lt;/span>getCache&lt;span style="color:#719e07">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cache&lt;span style="color:#719e07">.&lt;/span>destroy&lt;span style="color:#719e07">(&lt;/span>reference&lt;span style="color:#719e07">);&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>缺省 &lt;code>ReferenceConfigCache&lt;/code> 把相同服务 Group、接口、版本的 &lt;code>ReferenceConfig&lt;/code> 认为是相同，缓存一份。即以服务 Group、接口、版本为缓存的 Key。&lt;/p>
+&lt;h3 id="修改策略">修改策略&lt;/h3>
 &lt;p>可以修改这个策略，在 &lt;code>ReferenceConfigCache.getCache&lt;/code> 时，传一个 &lt;code>KeyGenerator&lt;/code>。详见 &lt;code>ReferenceConfigCache&lt;/code> 类的方法。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>KeyGenerator keyGenerator &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> &lt;span style="color:#719e07">...&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ReferenceConfigCache cache &lt;span style="color:#719e07">=&lt;/span> ReferenceConfigCache&lt;span style="color:#719e07">.&lt;/span>getCache&lt;span style="color:#719e07">(&lt;/span>keyGenerator&lt;span style="color:#719e07">);&lt;/span>

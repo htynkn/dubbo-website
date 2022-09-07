@@ -1,18 +1,5 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – 2 - 路由层</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/</link><description>Recent content in 2 - 路由层 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs3-V2: 2-1 - 路由选址执行失败</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/1/</guid><description>
-&lt;h2 id="路由选址执行失败">路由选址执行失败&lt;/h2></description></item><item><title>Docs3-V2: 2-10 - 调用服务提供方失败</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/10/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/10/</guid><description>
-&lt;h2 id="可能的原因">可能的原因&lt;/h2>
-&lt;ul>
-&lt;li>Dubbo 调用服务提供方失败，并开始重试。&lt;/li>
-&lt;li>Dubbo 重试调用服务提供方持续失败。&lt;/li>
-&lt;li>Dubbo 重试调用服务提供方达到上限。&lt;/li>
-&lt;/ul>
-&lt;h2 id="排查和解决步骤">排查和解决步骤&lt;/h2>
-&lt;ol>
-&lt;li>检查消费方提供方之间网络连接耗时等网络资源。&lt;/li>
-&lt;li>通过 telnet 等手段检查提供方对应端口是否能正常响应。&lt;/li>
-&lt;li>检查提供方程序是否运行正常。&lt;/li>
-&lt;/ol>
-&lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 2-11 - 标签路由规则不合法</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/11/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/11/</guid><description>
+&lt;h2 id="路由选址执行失败">路由选址执行失败&lt;/h2></description></item><item><title>Docs3-V2: 2-11 - 标签路由规则不合法</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/11/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/11/</guid><description>
 &lt;h2 id="可能的原因">可能的原因&lt;/h2>
 &lt;ul>
 &lt;li>用户配置的标签路由规则不合法。&lt;/li>
@@ -39,6 +26,25 @@
 &lt;h2 id="排查和解决步骤">排查和解决步骤&lt;/h2>
 &lt;ol>
 &lt;li>检查mesh路由规则配置。&lt;a href="https://dubbo.apache.org/zh/overview/tasks/mesh/">《Mesh示例》&lt;/a>。&lt;/li>
+&lt;/ol>
+&lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 2-15 - 脚本路由执行失败</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/14/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/14/</guid><description>
+&lt;h2 id="可能的原因">可能的原因&lt;/h2>
+&lt;ul>
+&lt;li>脚本路由规则不合法，导致规则解析失败。&lt;/li>
+&lt;li>Dubbo 框架执行脚本失败。&lt;/li>
+&lt;/ul>
+&lt;h2 id="排查和解决步骤">排查和解决步骤&lt;/h2>
+&lt;ol>
+&lt;li>检查脚本是否按照规范编写。&lt;/li>
+&lt;/ol>
+&lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 2-15 - 路由规则解析失败</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/15/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/15/</guid><description>
+&lt;h2 id="可能的原因">可能的原因&lt;/h2>
+&lt;ul>
+&lt;li>用户配置的路由规则不合法。&lt;/li>
+&lt;/ul>
+&lt;h2 id="排查和解决步骤">排查和解决步骤&lt;/h2>
+&lt;ol>
+&lt;li>排查配置的路由规则。&lt;/li>
 &lt;/ol>
 &lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 2-2 - 没有可用的 Provider（地址找不到）</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/2/</guid><description>
 &lt;h2 id="可能的原因">可能的原因&lt;/h2>
@@ -70,7 +76,7 @@
 &lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 2-4 - Merger接口加载失败</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/4/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/4/</guid><description>
 &lt;h2 id="可能的原因">可能的原因&lt;/h2>
 &lt;ul>
-&lt;li>dubbo提供了聚合下游所有提供方响应的SPI扩展Merger接口，dubbo在加载用户在自定义扩展Merger接口时，加载配置失败。&lt;/li>
+&lt;li>Dubbo 提供了聚合下游所有提供方响应的SPI扩展Merger接口，Dubbo 在加载用户在自定义扩展Merger接口时，加载配置失败。&lt;/li>
 &lt;/ul>
 &lt;h2 id="排查和解决步骤">排查和解决步骤&lt;/h2>
 &lt;ol>
@@ -79,13 +85,13 @@
 &lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 2-5 - 筛选提供方失败</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/5/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/5/</guid><description>
 &lt;h2 id="可能的原因">可能的原因&lt;/h2>
 &lt;ul>
-&lt;li>dubbo在负载均衡时会从提供方列表中最终选择一个提供方发起调用，在选择过程中提供方列表变动，发生读写冲突，导致筛选异常。&lt;/li>
-&lt;li>dubbo重试机制在调用提供方失败时，会重新筛选另一个提供方发起调用，重新筛选过程发生异常。&lt;/li>
+&lt;li>Dubbo 在负载均衡时会从提供方列表中最终选择一个提供方发起调用，在选择过程中提供方列表变动，发生读写冲突，导致筛选异常。&lt;/li>
+&lt;li>Dubbo 重试机制在调用提供方失败时，会重新筛选另一个提供方发起调用，重新筛选过程发生异常。&lt;/li>
 &lt;/ul>
 &lt;h2 id="排查和解决步骤">排查和解决步骤&lt;/h2>
 &lt;ol>
 &lt;li>检查注册中心提供方列表，与对应提供方可用性。&lt;/li>
-&lt;li>在社区提issue，提供环境现场信息及复现步骤。&lt;/li>
+&lt;li>在社区提 Issue，提供环境现场信息及复现步骤。&lt;/li>
 &lt;/ol>
 &lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 2-6 - 条件路由筛选提供方列表为空</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/6/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/6/</guid><description>
 &lt;h2 id="可能的原因">可能的原因&lt;/h2>
@@ -123,5 +129,18 @@
 &lt;h2 id="排查和解决步骤">排查和解决步骤&lt;/h2>
 &lt;ol>
 &lt;li>该异常为 Dubbo 框架自身异常，请在社区提 issue ，提供环境现场信息及复现步骤。&lt;/li>
+&lt;/ol>
+&lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 2-10 - 调用服务提供方失败</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/10/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/2/10/</guid><description>
+&lt;h2 id="可能的原因">可能的原因&lt;/h2>
+&lt;ul>
+&lt;li>Dubbo 调用服务提供方失败，并开始重试。&lt;/li>
+&lt;li>Dubbo 重试调用服务提供方持续失败。&lt;/li>
+&lt;li>Dubbo 重试调用服务提供方达到上限。&lt;/li>
+&lt;/ul>
+&lt;h2 id="排查和解决步骤">排查和解决步骤&lt;/h2>
+&lt;ol>
+&lt;li>检查消费方提供方之间网络连接耗时等网络资源。&lt;/li>
+&lt;li>通过 telnet 等手段检查提供方对应端口是否能正常响应。&lt;/li>
+&lt;li>检查提供方程序是否运行正常。&lt;/li>
 &lt;/ol>
 &lt;p style="margin-top: 3rem;"> &lt;/p></description></item></channel></rss>

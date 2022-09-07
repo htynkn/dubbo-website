@@ -1,4 +1,358 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – 功能演示</title><link>https://dubbo.apache.org/zh/blog/java/demos/</link><description>Recent content in 功能演示 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/blog/java/demos/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: Dubbo-Api-Docs -- Apache Dubbo文档展示&amp;测试工具</title><link>https://dubbo.apache.org/zh/blog/2020/12/22/dubbo-api-docs--apache-dubbo%E6%96%87%E6%A1%A3%E5%B1%95%E7%A4%BA%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/</link><pubDate>Tue, 22 Dec 2020 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2020/12/22/dubbo-api-docs--apache-dubbo%E6%96%87%E6%A1%A3%E5%B1%95%E7%A4%BA%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – 功能演示</title><link>https://dubbo.apache.org/zh/blog/java/demos/</link><description>Recent content in 功能演示 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/blog/java/demos/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: Proxyless Mesh在Dubbo中的实践</title><link>https://dubbo.apache.org/zh/blog/2022/09/05/proxyless-mesh%E5%9C%A8dubbo%E4%B8%AD%E7%9A%84%E5%AE%9E%E8%B7%B5/</link><pubDate>Mon, 05 Sep 2022 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2022/09/05/proxyless-mesh%E5%9C%A8dubbo%E4%B8%AD%E7%9A%84%E5%AE%9E%E8%B7%B5/</guid><description>
+&lt;h2 id="背景">背景&lt;/h2>
+&lt;p>随着 Dubbo 3.1 的 release，Dubbo 在云原生的路上又迈出了重要的一步。在这个版本中添加了 Proxyless Mesh 的新特性，Dubbo Proxyless Mesh 直接实现 xDS 协议解析，
+实现 Dubbo 与 Control Plane 的直接通信，进而实现控制面对流量管控、服务治理、可观测性、安全等的统一管控，规避 Sidecar 模式带来的性能损耗与部署架构复杂性。&lt;/p>
+&lt;h2 id="什么是service-mesh">什么是Service Mesh&lt;/h2>
+&lt;p>Service Mesh 又译作 “服务网格”，作为服务间通信的基础设施层。Buoyant 公司的 CEO Willian Morgan 在他的这篇文章 &lt;a href="https://linkerd.io/2017/04/25/whats-a-service-mesh-and-why-do-i-need-one/">WHAT’S A Service Mesh? AND WHY DO I NEED ONE? &lt;/a>
+中解释了什么是 Service Mesh，为什么云原生应用需要 Service Mesh。&lt;/p>
+&lt;p>&lt;strong>下面是 Willian Morgan 对 Service Mesh 的解释。&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>A Service Mesh is a dedicated infrastructure layer for handling service-to-service communication.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>It’s responsible for the reliable delivery of requests through the complex topology of services
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>that comprise a modern, cloud native application. In practice, the Service Mesh is typically implemented
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>as an array of lightweight network proxies that are deployed alongside application code, without the
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>application needing to be aware.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>翻译成中文&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>服务网格（Service Mesh）是处理服务间通信的基础设施层。它负责构成现代云原生应用程序的复杂服务拓扑来可靠地交付请求。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>在实践中，Service Mesh 通常以轻量级网络代理阵列的形式实现，这些代理与应用程序代码部署在一起，对应用程序来说无需感知代理的存在。
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>说到 Service Mesh 一定离不开 Sidecar 经典架构模式。它通过在业务 Pod 中注入 Sidecar 容器，接管业务容器的通信流量，同时 Sidecar 容器与网格平台的控制平面对接，
+基于控制平面下发的策略，对代理流量实施治理和管控，将原有服务框架的治理能力下层到 Sidecar 容器中，从而实现了基础框架能力的下沉，与业务系统解耦。&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/20220905/1.png" alt="Service Mesh">&lt;/p>
+&lt;p>经典的 Sidecar Mesh 部署架构有很多优势，如平滑升级、多语言、业务侵入小等，但也带来了一些额外的问题，比如:&lt;/p>
+&lt;ul>
+&lt;li>Proxy 带来的性能损耗，在复杂拓扑的网络调用中将变得尤其明显&lt;/li>
+&lt;li>流量拦截带来的架构复杂性&lt;/li>
+&lt;li>Sidecar 生命周期管理&lt;/li>
+&lt;li>部署环境受限，并不是所有环境都满足 Sidecar 流量拦截条件&lt;/li>
+&lt;/ul>
+&lt;p>针对 Sidecar Mesh 模型的问题，Dubbo 社区自很早之前就做了 Dubbo 直接对接到控制面的设想与思考，并在国内开源社区率先提出了 Proxyless Mesh 的概念，当然就 Proxyless 概念的说法而言，最开始是谷歌提出来的。&lt;/p>
+&lt;h2 id="dubbo-proxyless-mesh">Dubbo Proxyless Mesh&lt;/h2>
+&lt;p>Dubbo Proxyless 模式是指 Dubbo 直接与 Istiod通信，通过 xDS协议实现服务发现和服务治理等能力。&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/20220905/2.png" alt="Proxyless">&lt;/p>
+&lt;p>Proxyless 模式使得微服务又回到了 2.x 时代的部署架构，同 Dubbo 经典服务治理模式非常相似，所以说这个模式并不新鲜， Dubbo 从最开始就是这样的设计模式。
+这样做可以极大的提升应用性能，降低网络延迟。有人说这种做法又回答了原始的基于 SDK 的微服务模式，其实非也，它依然使用了 Envoy 的 xDS API，
+但是因为不再需要向应用程序中注入 Sidecar 代理，因此可以减少应用程序性能的损耗。&lt;/p>
+&lt;p>但相比于 Mesh 架构，Dubbo 经典服务治理模式并没有强调控制面的统一管控，而这点恰好是 Service Mesh 所强调的，强调对流量、可观测性、证书等的标准化管控与治理，也是 Mesh 理念先进的地方。&lt;/p>
+&lt;p>在 Dubbo Proxyless 架构模式下，Dubbo 进程将直接与控制面通信，Dubbo 进程之间也继续保持直连通信模式，我们可以看出 Proxyless 架构的优势：&lt;/p>
+&lt;ul>
+&lt;li>没有额外的 Proxy 中转损耗，因此更适用于性能敏感应用&lt;/li>
+&lt;li>更有利于遗留系统的平滑迁移&lt;/li>
+&lt;li>架构简单，容易运维部署&lt;/li>
+&lt;li>适用于几乎所有的部署环境&lt;/li>
+&lt;/ul>
+&lt;h2 id="服务发现">服务发现&lt;/h2>
+&lt;p>xDS 接入以注册中心的模式对接，节点发现同其他注册中心的服务自省模型一样，对于 xDS 的负载均衡和路由配置通过 ServiceInstance 的动态运行时配置传出，
+在构建 Invoker 的时候将配置参数传入配置地址。&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/20220905/3.png" alt="服务发现">&lt;/p>
+&lt;h2 id="证书管理">证书管理&lt;/h2>
+&lt;p>零信任架构下，需要严格区分工作负载的识别和信任，而签发 X.509 证书是推荐的一种认证方式。在 Kubernetes 集群中，服务间是通过 DNS 名称互相访问的，而网络流量可能被 DNS 欺骗、BGP/路由劫持、ARP 欺骗等手段劫持，为了将服务名称（DNS 名称）与服务身份强关联起来，Istio 使用置于 X.509 证书中的安全命名机制。SPIFFE是 Istio 所采用的安全命名的规范，它也是云原生定义的一种标准化的、可移植的工作负载身份规范。&lt;/p>
+&lt;p>Secure Production Identity Framework For Everyone (SPIFFE) 是一套服务之间相互进行身份识别的标准，主要包含以下内容：&lt;/p>
+&lt;ul>
+&lt;li>SPIFFE ID 标准，SPIFFE ID 是服务的唯一标识，具体实现使用 URI 资源标识符&lt;/li>
+&lt;li>SPIFFE Verifiable Identity Document (SVID) 标准，将 SPIFFE ID 编码到一个加密的可验证的数据格式中&lt;/li>
+&lt;li>颁发与撤销 SVID 的 API 标准（SVID 是 SPIFFE ID 的识别凭证）&lt;/li>
+&lt;/ul>
+&lt;p>SPIFFE ID 规定了形如 &lt;code>spiffe://&amp;lt;trust domain&amp;gt;/&amp;lt;workload identifier&amp;gt;&lt;/code> 的 URI 格式，作为工作负载（Workload）的唯一标识。
+而 Istio 在自身的生态中只使用到了 SPIFFE ID 作为安全命名，其数据格式由自己实现，通信格式采用 CNCF 支持的 xDS 协议规范（证书认证通信更具体来说是 xDS 的 SDS）。&lt;/p>
+&lt;p>Istio 使用形如 &lt;code>spiffe://&amp;lt;trust_domain&amp;gt;/ns/&amp;lt;namespace&amp;gt;/sa/&amp;lt;service_account&amp;gt;&lt;/code> 格式的 SPIFFE ID 作为安全命名，注入到 X.509 证书的 subjectAltName 扩展中。
+其中&amp;quot;trust_domain&amp;quot;参数通过 Istiod 环境变量TRUST_DOMAIN 注入，用于在多集群环境中交互。&lt;/p>
+&lt;p>以下是 Dubbo Proxyless Mesh 证书颁发的过程&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/20220905/4.png" alt="证书颁发">&lt;/p>
+&lt;ul>
+&lt;li>创建 RSA 私钥（Istio 还不支持 ECDSA 私钥）&lt;/li>
+&lt;li>构建 CSR（Certificate signing request）模板&lt;/li>
+&lt;li>自签名 CSR 生成证书&lt;/li>
+&lt;li>创建 Kubernetes Secret 资源储存 CA 证书和私钥（CA Service处理）&lt;/li>
+&lt;/ul>
+&lt;h2 id="案例实践">案例实践&lt;/h2>
+&lt;p>接下来我将带领大家通过一个例子使已有的项目快速跑在 Proxyless Mesh 模式下。&lt;/p>
+&lt;h2 id="环境准备">环境准备&lt;/h2>
+&lt;h3 id="安装docker">安装docker&lt;/h3>
+&lt;p>&lt;a href="https://www.docker.com/">https://www.docker.com/&lt;/a>&lt;/p>
+&lt;h3 id="安装minikube">安装minikube&lt;/h3>
+&lt;p>墙裂推荐：&lt;a href="https://kubernetes.io/zh-cn/docs/tutorials/hello-minikube/">https://kubernetes.io/zh-cn/docs/tutorials/hello-minikube/&lt;/a>&lt;/p>
+&lt;h3 id="安装istio">安装istio&lt;/h3>
+&lt;p>&lt;a href="https://istio.io/latest/docs/setup/getting-started/">https://istio.io/latest/docs/setup/getting-started/&lt;/a>&lt;/p>
+&lt;p>❗❗❗ 安装 Istio 的时候需要开启 first-party-jwt 支持（使用 istioctl 工具安装的时候加上 &amp;ndash;set values.global.jwtPolicy=first-party-jwt 参数），否则将导致客户端认证失败的问题。
+参考命令如下：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl -L https://istio.io/downloadIstio | sh -
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#b58900">cd&lt;/span> istio-1.xx.x
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#b58900">export&lt;/span> &lt;span style="color:#268bd2">PATH&lt;/span>&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#268bd2">$PWD&lt;/span>/bin:&lt;span style="color:#268bd2">$PATH&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>istioctl install --set &lt;span style="color:#268bd2">profile&lt;/span>&lt;span style="color:#719e07">=&lt;/span>demo --set values.global.jwtPolicy&lt;span style="color:#719e07">=&lt;/span>first-party-jwt -y
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="代码准备">代码准备&lt;/h2>
+&lt;h3 id="xds-provider">xds-provider&lt;/h3>
+&lt;h4 id="定义一个接口">定义一个接口&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">GreetingService&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> String &lt;span style="color:#268bd2">sayHello&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String name&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="实现对应的接口">实现对应的接口&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@DubboService&lt;/span>&lt;span style="color:#719e07">(&lt;/span>version &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;1.0.0&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">AnnotatedGreetingService&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> GreetingService &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Override&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> String &lt;span style="color:#268bd2">sayHello&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String name&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;greeting service received: &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> name&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#2aa198">&amp;#34;hello, &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> name &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34;! from host: &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> NetUtils&lt;span style="color:#719e07">.&lt;/span>getLocalHost&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="编写启动类">编写启动类&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">ProviderBootstrap&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">main&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String&lt;span style="color:#719e07">[]&lt;/span> args&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> Exception &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> AnnotationConfigApplicationContext context &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> AnnotationConfigApplicationContext&lt;span style="color:#719e07">(&lt;/span>ProviderConfiguration&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> context&lt;span style="color:#719e07">.&lt;/span>start&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;dubbo service started&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">new&lt;/span> CountDownLatch&lt;span style="color:#719e07">(&lt;/span>1&lt;span style="color:#719e07">).&lt;/span>await&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Configuration&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@EnableDubbo&lt;/span>&lt;span style="color:#719e07">(&lt;/span>scanBasePackages &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.impl&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@PropertySource&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;classpath:/spring/dubbo-provider.properties&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">ProviderConfiguration&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="编写配置信息">编写配置信息&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.application.name=dubbo-samples-xds-provider
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 由于 Dubbo 3 应用级服务发现的元数据无法从 istio 中获取，需要走服务自省模式。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 这要求了 Dubbo MetadataService 的端口在全集群的是统一的。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.metadataServicePort=20885
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 走xds协议
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address=xds://istiod.istio-system.svc:15012
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.name=tri
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port=50051
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 对齐k8s pod生命周期，由于 Kubernetes probe 探活机制的工作原理限制，
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 探活请求的发起方不是 localhost，所以需要配置 qosAcceptForeignIp 参数开启允许全局访问
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.qosEnable=true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.qosAcceptForeignIp=true
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="编写deploymentyml和serviceyml">编写Deployment.yml和Service.yml&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>apiVersion: apps/v1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kind: Deployment
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>metadata:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name: dubbo-samples-xds-provider
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> namespace: dubbo-demo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>spec:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> replicas: 3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> selector:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> matchLabels:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> app: dubbo-samples-xds-provider
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> template:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> metadata:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> labels:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> app: dubbo-samples-xds-provider
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> spec:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> containers:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - name: server
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> image: apache/dubbo-demo:dubbo-samples-xds-provider_0.0.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> livenessProbe:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> httpGet:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> path: /live
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> port: 22222
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> initialDelaySeconds: 5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> periodSeconds: 5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> readinessProbe:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> httpGet:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> path: /ready
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> port: 22222
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> initialDelaySeconds: 5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> periodSeconds: 5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> startupProbe:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> httpGet:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> path: /startup
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> port: 22222
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> failureThreshold: 30
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> periodSeconds: 10
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>apiVersion: v1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kind: Service
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>metadata:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name: dubbo-samples-xds-provider
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> namespace: dubbo-demo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>spec:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> clusterIP: None
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> selector:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> app: dubbo-samples-xds-provider
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ports:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - name: grpc
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> protocol: TCP
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> port: 50051
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> targetPort: 50051
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="编写dockerfile">编写Dockerfile&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>FROM openjdk:8-jdk
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ADD ./target/dubbo-samples-xds-provider-1.0-SNAPSHOT.jar dubbo-samples-xds-provider-1.0-SNAPSHOT.jar
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>CMD java -jar -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=31000 /dubbo-samples-xds-provider-1.0-SNAPSHOT.jar
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="xds-consumer">xds-consumer&lt;/h3>
+&lt;h4 id="定义一个接口-1">定义一个接口&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>public interface GreetingService {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> String sayHello(String name);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="实现对应的接口-1">实现对应的接口&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>@Component(&amp;#34;annotatedConsumer&amp;#34;)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>public class GreetingServiceConsumer {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> // 这里特别注意的是、由于当前 Dubbo 版本受限于 istio 的通信模型无法获取接口所对应的应用名，
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> // 因此需要配置 providedBy 参数来标记此服务来自哪个应用。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> @DubboReference(version = &amp;#34;1.0.0&amp;#34;, providedBy = &amp;#34;dubbo-samples-xds-provider&amp;#34;)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> private GreetingService greetingService;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> public String doSayHello(String name) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> return greetingService.sayHello(name);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="编写启动类-1">编写启动类&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>public class ConsumerBootstrap {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> public static void main(String[] args) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ConsumerConfiguration.class);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> context.start();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> GreetingServiceConsumer greetingServiceConsumer = context.getBean(GreetingServiceConsumer.class);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> while (true) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> try {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> String hello = greetingServiceConsumer.doSayHello(&amp;#34;xDS Consumer&amp;#34;);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System.out.println(&amp;#34;result: &amp;#34; + hello);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Thread.sleep(100);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } catch (Throwable t) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> t.printStackTrace();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> @Configuration
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> @EnableDubbo(scanBasePackages = &amp;#34;org.apache.dubbo.samples.action&amp;#34;)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> @PropertySource(&amp;#34;classpath:/spring/dubbo-consumer.properties&amp;#34;)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> @ComponentScan(value = {&amp;#34;org.apache.dubbo.samples.action&amp;#34;})
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> static class ConsumerConfiguration {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="编写配置信息-1">编写配置信息&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.application.name=dubbo-samples-xds-consumer
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.metadataServicePort=20885
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address=xds://istiod.istio-system.svc:15012
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.consumer.timeout=3000
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.consumer.check=false
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.qosEnable=true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.qosAcceptForeignIp=true
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="编写deploymentyml和serviceyml-1">编写Deployment.yml和Service.yml&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>apiVersion: apps/v1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kind: Deployment
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>metadata:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name: dubbo-samples-xds-consumer
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> namespace: dubbo-demo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>spec:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> replicas: 2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> selector:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> matchLabels:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> app: dubbo-samples-xds-consumer
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> template:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> metadata:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> labels:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> app: dubbo-samples-xds-consumer
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> spec:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> containers:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - name: server
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> image: apache/dubbo-demo:dubbo-samples-xds-consumer_0.0.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> livenessProbe:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> httpGet:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> path: /live
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> port: 22222
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> initialDelaySeconds: 5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> periodSeconds: 5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> readinessProbe:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> httpGet:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> path: /ready
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> port: 22222
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> initialDelaySeconds: 5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> periodSeconds: 5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> startupProbe:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> httpGet:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> path: /startup
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> port: 22222
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> failureThreshold: 30
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> periodSeconds: 10
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>apiVersion: v1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kind: Service
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>metadata:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name: dubbo-samples-xds-consumer
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> namespace: dubbo-demo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>spec:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> clusterIP: None
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> selector:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> app: dubbo-samples-xds-consumer
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ports:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - name: grpc
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> protocol: TCP
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> port: 50051
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> targetPort: 50051
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="编写dockerfile-1">编写Dockerfile&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>FROM openjdk:8-jdk
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ADD ./target/dubbo-samples-xds-consumer-1.0-SNAPSHOT.jar dubbo-samples-xds-consumer-1.0-SNAPSHOT.jar
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>CMD java -jar -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=31000 /dubbo-samples-xds-consumer-1.0-SNAPSHOT.jar
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>✅ 到目前为止我们的环境和代码就全都准备完毕了！&lt;/p>
+&lt;h2 id="构建镜像">构建镜像&lt;/h2>
+&lt;h3 id="1启动docker">1、启动docker&lt;/h3>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/20220905/5.png" alt="启动docker">&lt;/p>
+&lt;h3 id="2启动minikube">2、启动minikube&lt;/h3>
+&lt;p>因为minikube是一个本地的k8s，他启动需要一个虚拟引擎，这里我们用docker来管理。我们通过如下命令启动&lt;/p>
+&lt;p>&lt;code>minikube start&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/20220905/6.png" alt="启动minikube">&lt;/p>
+&lt;p>我们可以在docker里看到minikube&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/20220905/7.png" alt="minikube">&lt;/p>
+&lt;h3 id="3检查istio的状态">3、检查istio的状态&lt;/h3>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/20220905/8.png" alt="istio的状态">&lt;/p>
+&lt;h3 id="4构建镜像">4、构建镜像&lt;/h3>
+&lt;p>在本地找到代码所在位置、依次执行以下命令&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># 找到provider所在路径
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cd ./dubbo-samples-xds-provider/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 构建provider的镜像
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>docker build -t apache/dubbo-demo:dubbo-samples-xds-provider_0.0.1 .
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/20220905/9.png" alt="构建provider">&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># 找到consumer所在路径
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cd ../dubbo-samples-xds-consumer/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 构建consumer的镜像
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>docker build -t apache/dubbo-demo:dubbo-samples-xds-consumer_0.0.1 .
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/20220905/10.png" alt="构建consumer">&lt;/p>
+&lt;h3 id="5检查本地镜像">5、检查本地镜像&lt;/h3>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/20220905/11.png" alt="检查本地镜像">&lt;/p>
+&lt;h3 id="6创建namespace">6、创建namespace&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># 初始化命名空间
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl apply -f https://raw.githubusercontent.com/apache/dubbo-samples/master/dubbo-samples-xds/deploy/Namespace.yml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 切换命名空间
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubens dubbo-demo
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果不创建namespace，那么会看到如下错误&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/20220905/12.png" alt="错误">&lt;/p>
+&lt;h2 id="部署容器">部署容器&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># 找到provider所在路径
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cd ./dubbo-samples-xds-provider/src/main/resources/k8s
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># dubbo-samples-xds/dubbo-samples-xds-provider/src/main/resources/k8s/Deployment.yml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># dubbo-samples-xds/dubbo-samples-xds-provider/src/main/resources/k8s/Service.yml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 部署provider的Deployment和Service
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl apply -f Deployment.yml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl apply -f Service.yml
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/20220905/13.png" alt="部署provider">&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># 找到consumer所在路径
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cd ../../../../../dubbo-samples-xds-consumer/src/main/resources/k8s
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># dubbo-samples-xds/dubbo-samples-xds-consumer/src/main/resources/k8s/Deployment.yml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 部署consumer的Deployment
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl apply -f Deployment.yml
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/20220905/14.png" alt="部署provider">&lt;/p>
+&lt;p>在minikube dashboard看到我们已经部署的pod&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/20220905/15.png" alt="部署provider">&lt;/p>
+&lt;h2 id="观察consumer效果">观察consumer效果&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>kubectl logs xxx
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>result: hello, xDS Consumer! from host: 172.17.0.5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>result: hello, xDS Consumer! from host: 172.17.0.5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>result: hello, xDS Consumer! from host: 172.17.0.6
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>result: hello, xDS Consumer! from host: 172.17.0.6
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="总结展望">总结&amp;amp;展望&lt;/h2>
+&lt;p>本文主要剖析了 Dubbo Proxyless Mesh 的架构、服务发现以及证书管理等核心流程，最后通过示例给大家演示了如何使用 Dubbo Proxyless。&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/20220905/16.png" alt="部署provider">&lt;/p>
+&lt;p>随着 Dubbo 3.1 的 release，Dubbo 在云原生的路上又迈出了重要的一步。在今年年底，Dubbo Mesh 将发布具有服务发现能力的版本，
+届时将面向所有 Dubbo 用户提供从低版本平滑迁移到 Mesh 架构的能力；在明年年初春季的时候将发布带有治理能力的版本；在明年年底前发布带热插件更新能力的版本，
+希望有兴趣见证 Dubbo 云原生之路的同学可以积极参与社区贡献！&lt;/p>
+&lt;p>更多关于 Dubbo Mesh 的动态可以关注 Apache Dubbo 社区官方公众号（ApacheDubbo），及时获取最新消息。&lt;/p></description></item><item><title>Blog: Dubbo-Api-Docs -- Apache Dubbo文档展示&amp;测试工具</title><link>https://dubbo.apache.org/zh/blog/2020/12/22/dubbo-api-docs--apache-dubbo%E6%96%87%E6%A1%A3%E5%B1%95%E7%A4%BA%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/</link><pubDate>Tue, 22 Dec 2020 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2020/12/22/dubbo-api-docs--apache-dubbo%E6%96%87%E6%A1%A3%E5%B1%95%E7%A4%BA%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7/</guid><description>
 &lt;h1 id="dubbo-api-docs">Dubbo-Api-Docs&lt;/h1>
 &lt;h2 id="背景">背景&lt;/h2>
 &lt;p>Swagger 是一个规范和完整的前端框架,用于生成,描述,调用和可视化 RESTful 风格的 Web 服务.
@@ -8387,7 +8741,7 @@ Spring 配置：&lt;/p>
 &lt;h2 id="4-开源最佳实践">4 开源最佳实践&lt;/h2>
 &lt;h3 id="41-有效沟通">4.1 有效沟通&lt;/h3>
 &lt;p>无论你处于什么样的目的：仅仅是一次性的贡献，亦或是永久性的加入社区，都的和他人进行沟通和交往，这是你要在开源圈发展必须修炼的技能。&lt;/p>
-&lt;p>在你开启一个isse或PR之前，或者是在聊天室问问题之前，请牢记下面所列出的几点建议，会让你的工作更加的高效。&lt;/p>
+&lt;p>在你开启一个issue或PR之前，或者是在聊天室问问题之前，请牢记下面所列出的几点建议，会让你的工作更加的高效。&lt;/p>
 &lt;p>&lt;strong>给出上下文&lt;/strong> 以便于让其他人能够快速的理解。比方说你运行程序时遇到一个错误，要解释你是如何做的，并描述如何才能再现错误现象。又比方说你是提交一个新的想法，要解释你为什么这么想，对于项目有用处吗（不仅仅是只有你！）&lt;/p>
 &lt;blockquote>
 &lt;p>😇 &lt;em>“当我做 Y 的时候 X 不能工作”&lt;/em>&lt;/p>
