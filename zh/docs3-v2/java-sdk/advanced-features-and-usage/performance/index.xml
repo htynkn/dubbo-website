@@ -736,15 +736,19 @@
 &lt;/li>
 &lt;/ol>
 &lt;/div></description></item><item><title>Docs3-V2: 延迟连接</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/performance/lazy-connect/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/performance/lazy-connect/</guid><description>
+&lt;h2 id="特性说明">特性说明&lt;/h2>
+&lt;h2 id="使用场景">使用场景&lt;/h2>
 &lt;p>延迟连接用于减少长连接数。当有调用发起时，再创建长连接。&lt;/p>
+&lt;h2 id="使用方式">使用方式&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> lazy=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
-&lt;div class="alert alert-primary" role="alert">
-&lt;h4 class="alert-heading">提示&lt;/h4>
-该配置只对使用长连接的 dubbo 协议生效。
-&lt;/div></description></item><item><title>Docs3-V2: 粘滞连接</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/performance/stickiness/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/performance/stickiness/</guid><description>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>该配置只对使用长连接的 dubbo 协议生效。&lt;/p>
+&lt;/blockquote></description></item><item><title>Docs3-V2: 粘滞连接</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/performance/stickiness/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/performance/stickiness/</guid><description>
+&lt;h2 id="特性说明">特性说明&lt;/h2>
+&lt;h2 id="使用场景">使用场景&lt;/h2>
 &lt;p>粘滞连接用于有状态服务，尽可能让客户端总是向同一提供者发起调用，除非该提供者挂了，再连另一台。&lt;/p>
-&lt;p>粘滞连接将自动开启&lt;a href="../lazy-connect">延迟连接&lt;/a>，以减少长连接数。&lt;/p>
+&lt;p>粘滞连接将自动开启 &lt;a href="../lazy-connect">延迟连接&lt;/a>，以减少长连接数。&lt;/p>
+&lt;h2 id="使用方式">使用方式&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;xxxService&amp;#34;&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.xxx.XxxService&amp;#34;&lt;/span> sticky=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Dubbo 支持方法级别的粘滞连接，如果你想进行更细粒度的控制，还可以这样配置。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;xxxService&amp;#34;&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.xxx.XxxService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
