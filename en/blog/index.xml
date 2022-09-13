@@ -1169,7 +1169,7 @@ return helloService.sayHello(name);
 &lt;/code>&lt;/pre>
 &lt;p>}&lt;/p>
 &lt;h3 id="deploy-apache-skywalking">Deploy Apache Skywalking&lt;/h3>
-&lt;p>&lt;a href="https://github.com/apache/skywalking">Apache skywalking&lt;/a> offers two deployment modes: single-node mode and cluster mode,Here is the single-node mode deployment step, and more about how to deploy skywalking with cluster mode, please reference &lt;a href="https://skywalking.apache.org/docs/main/latest/en/setup/backend/backend-setup/">document&lt;/a>.&lt;/p>
+&lt;p>&lt;a href="https://github.com/apache/skywalking">Apache skywalking&lt;/a> offers two deployment modes: single-node mode and cluster mode,Here is the single-node mode deployment step, and more about how to deploy skywalking with cluster mode, please reference &lt;a href="https://skywalking.apache.org/docs/main/next/en/setup/backend/backend-setup/">document&lt;/a>.&lt;/p>
 &lt;h4 id="third-party-components">Third-party components&lt;/h4>
 &lt;ol>
 &lt;li>JDK 8+&lt;/li>

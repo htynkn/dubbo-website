@@ -767,7 +767,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="部署apache-skywalkingincubator">部署Apache Skywalking(Incubator)&lt;/h3>
-&lt;p>Apache Skywalking(Incubator）共提供两种部署模式：单节点模式和集群模式，以下为单节点模式部署步骤，集群模式部署详情参考&lt;a href="https://skywalking.apache.org/docs/main/latest/en/setup/backend/backend-setup/">文档&lt;/a>。&lt;/p>
+&lt;p>Apache Skywalking(Incubator）共提供两种部署模式：单节点模式和集群模式，以下为单节点模式部署步骤，集群模式部署详情参考&lt;a href="https://skywalking.apache.org/docs/main/next/en/setup/backend/backend-setup/">文档&lt;/a>。&lt;/p>
 &lt;h4 id="依赖第三方组件">依赖第三方组件&lt;/h4>
 &lt;ol>
 &lt;li>JDK8+&lt;/li>
