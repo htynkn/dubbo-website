@@ -225,36 +225,31 @@ dubbo 支持多协议，如果一个应用同时暴露多个不同协议服务�
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-V2: Kubernetes 生命周期探针</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/others/dubbo-kubernetes-probe/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/others/dubbo-kubernetes-probe/</guid><description>
 &lt;h2 id="特性说明">特性说明&lt;/h2>
 &lt;p>&lt;a href="https://kubernetes.io/zh/docs/concepts/workloads/pods/pod-lifecycle/">Pod 的生命周期&lt;/a> 与服务调度息息相关，通过对 Kubernetes 官方探针的实现，能够使 Dubbo3 乃至整个应用的生命周期与 Pod 的生命周期，在 Pod 的整个生命周期中，影响到 Pod 的就只有健康检查这一部分, 我们可以通过配置 liveness probe（存活探针）和 readiness probe（可读性探针）来影响容器的生命周期。&lt;/p>
-&lt;p>通过 Dubbo3 的 SPI 机制，在内部实现多种“探针”，基于 Dubbo3 QOS 运维模块的 HTTP 服务，使容器探针能够获取到应用内对应探针的状态。另外，SPI 的实现机制也利于用户自行拓展内部“探针”，使整个应用的生命周期更有效的进行管控&lt;/p>
-&lt;h4 id="dobbo3-spi-接口探针">Dobbo3 SPI 接口探针&lt;/h4>
-&lt;p>三种探针对应的 SPI 接口如下：&lt;/p>
+&lt;p>通过 Dubbo3 的 SPI 机制，在内部实现多种“探针”，基于 Dubbo3 QOS 运维模块的 HTTP 服务，使容器探针能够获取到应用内对应探针的状态。另外，SPI 的实现机制也利于用户自行拓展内部“探针”，使整个应用的生命周期更有效的进行管控。&lt;/p>
+&lt;p>&lt;strong>三种探针对应的 SPI 接口&lt;/strong>&lt;/p>
 &lt;ul>
 &lt;li>livenessProbe: &lt;code>org.apache.dubbo.qos.probe.LivenessProbe&lt;/code>&lt;/li>
 &lt;li>readinessProbe: &lt;code>org.apache.dubbo.qos.probe.ReadinessProbe&lt;/code>&lt;/li>
 &lt;li>startupProbe: &lt;code>org.apache.dubbo.qos.probe.StartupProbe&lt;/code>&lt;/li>
 &lt;/ul>
-&lt;p>接口将自动获取当前应用所有 SPI 的实现，对应接口的 SPI 实现均成功就绪则接口返回成功。
-SPI的介绍见&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/description/">Dubbo SPI扩展&lt;/a>&lt;/p>
-&lt;h4 id="存活检测">存活检测&lt;/h4>
-&lt;p>对于 livenessProbe 存活检测，由于 Dubbo3 框架本身无法获取到应用的存活状态，因此本接口无默认实现，且默认返回成功。开发者可以根据 SPI 定义对此 SPI 接口进行拓展，从应用层次对是否存活进行判断。&lt;/p>
-&lt;h4 id="就绪检测">就绪检测&lt;/h4>
-&lt;p>对于 readinessProbe 就绪检测，目前 Dubbo3 默认提供了两个检测维度，一是对 Dubbo3 服务自身是否启停做判断，另外是对所有服务是否存在已注册接口，如果所有服务均已从注册中心下线（可以通过 QOS 运维进行操作）将返回未就绪的状态。&lt;/p>
-&lt;h4 id="启动检测">启动检测&lt;/h4>
-&lt;p>对于 startupProbe 启动检测，目前 Dubbo3 默认提供了一个检测维度，即是在所有启动流程（接口暴露、注册中心写入等）均结束后返回已就绪状态。&lt;/p>
-&lt;p>关于 &lt;a href="../../../reference-manual/spi/description/liveness/">liveness 存活探针&lt;/a> 扩展示例&lt;/p>
-&lt;p>关于 &lt;a href="../../../reference-manual/spi/description/readiness/">readiness 就绪探针&lt;/a> 扩展示例&lt;/p>
-&lt;p>关于 &lt;a href="../../../reference-manual/spi/description/startup/">startup 启动探针&lt;/a> 扩展示例&lt;/p>
+&lt;p>接口将自动获取当前应用所有 SPI 的实现，对应接口的 SPI 实现均成功就绪则接口返回成功。&lt;/p>
+&lt;p>Dubbo3 SPI 更多扩展的介绍见 &lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/spi/description/">Dubbo SPI扩展&lt;/a>&lt;/p>
 &lt;h2 id="使用场景">使用场景&lt;/h2>
 &lt;ul>
 &lt;li>kubelet 使用 &lt;code>liveness probe&lt;/code> 来确定你的应用程序是否正在运行，查看是否存活。一般来说，如果你的程序一旦崩溃了， Kubernetes 就会立刻知道这个程序已经终止了，然后就会重启这个程序。而我们的 liveness probe 的目的就是来捕获到当前应用程序还没有终止，还没有崩溃，如果出现了这些情况，那么就重启处于该状态下的容器，使应用程序在存在 bug 的情况下依然能够继续运行下去。&lt;/li>
 &lt;li>kubelet 使用 &lt;code>readiness probe&lt;/code> 来确定容器是否已经就绪可以接收流量过来。是否准备就绪，现在是否可以开始工作。只有当 Pod 中的容器都处于就绪状态的时候 kubelet 才会认定该 Pod 处于就绪状态，因为一个 Pod 下面可能会有多个容器。 Pod 如果处于非就绪状态，那么我们就会将他从 Service 的 Endpoints 列表中移除出来，这样我们的流量就不会被路由到这个 Pod 里面。&lt;/li>
 &lt;/ul>
-&lt;h2 id="使用方式">使用方式：&lt;/h2>
-&lt;p>步骤一：需要先配置 &lt;code>参考示例&lt;/code>，保证 Kubernetes 集群的 Pod 健康检查。&lt;/p>
-&lt;p>步骤二：为了使 Kubernetes 集群能够正常访问到探针，需要开启 QOS 允许远程访问，此操作有可能带来安全风险，请仔细评估后再打开。&lt;/p>
-&lt;h4 id="说明">说明：&lt;/h4>
-&lt;p>QOS 当计算节点检测到内存压力时，kuberentes 会 BestEffort -&amp;gt; Burstable -&amp;gt; Guaranteed 依次驱逐 Pod&lt;/p>
-&lt;h4 id="参考示例">参考示例&lt;/h4>
+&lt;h2 id="使用方式">使用方式&lt;/h2>
+&lt;h3 id="存活检测">存活检测&lt;/h3>
+&lt;p>对于 livenessProbe 存活检测，由于 Dubbo3 框架本身无法获取到应用的存活状态，因此本接口无默认实现，且默认返回成功。开发者可以根据 SPI 定义对此 SPI 接口进行拓展，从应用层次对是否存活进行判断。&lt;/p>
+&lt;p>关于 &lt;a href="../../../reference-manual/spi/description/liveness/">liveness 存活探针&lt;/a> 扩展示例&lt;/p>
+&lt;h3 id="就绪检测">就绪检测&lt;/h3>
+&lt;p>对于 readinessProbe 就绪检测，目前 Dubbo3 默认提供了两个检测维度，一是对 Dubbo3 服务自身是否启停做判断，另外是对所有服务是否存在已注册接口，如果所有服务均已从注册中心下线（可以通过 QOS 运维进行操作）将返回未就绪的状态。&lt;/p>
+&lt;p>关于 &lt;a href="../../../reference-manual/spi/description/readiness/">readiness 就绪探针&lt;/a> 扩展示例&lt;/p>
+&lt;h3 id="启动检测">启动检测&lt;/h3>
+&lt;p>对于 startupProbe 启动检测，目前 Dubbo3 默认提供了一个检测维度，即是在所有启动流程（接口暴露、注册中心写入等）均结束后返回已就绪状态。&lt;/p>
+&lt;p>关于 &lt;a href="../../../reference-manual/spi/description/startup/">startup 启动探针&lt;/a> 扩展示例&lt;/p>
+&lt;h3 id="参考示例">参考示例&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">livenessProbe&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">httpGet&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">path&lt;/span>: /live
@@ -273,4 +268,7 @@ SPI的介绍见&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/referen
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">port&lt;/span>: &lt;span style="color:#2aa198">22222&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">failureThreshold&lt;/span>: &lt;span style="color:#2aa198">30&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">periodSeconds&lt;/span>: &lt;span style="color:#2aa198">10&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>目前三种探针均有对应的接口，路径为 QOS 中的命令，端口信息请根据 QOS 配置进行对应修改（默认端口为 22222）。其他参数请参考&lt;a href="https://kubernetes.io/zh/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/">Kubernetes官方文档说明&lt;/a>。&lt;/p></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>QOS 当计算节点检测到内存压力时，kuberentes 会 BestEffort -&amp;gt; Burstable -&amp;gt; Guaranteed 依次驱逐 Pod。&lt;/p>
+&lt;/blockquote>
+&lt;p>目前三种探针均有对应的接口，路径为 QOS 中的命令，端口信息请根据 QOS 配置进行对应修改（默认端口为 22222）。其他参数请参考 &lt;a href="https://kubernetes.io/zh/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/">Kubernetes官方文档说明&lt;/a>。&lt;/p></description></item></channel></rss>
