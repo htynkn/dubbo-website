@@ -44,12 +44,12 @@ Consumer gets parameter information from the URL that it wrote to the registry a
 &lt;h4 id="refresh-regularly">Refresh regularly&lt;/h4>
 &lt;p>It&amp;rsquo;s opening by default and can be turned off by setting cycleReport=false.&lt;/p>
 &lt;h4 id="complete-configurations">Complete configurations:&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.metadata-report.address=zookeeper://127.0.0.1:2181
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.metadata-report.username=xxx ##Not necessary
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.metadata-report.password=xxx ##Not necessary
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.metadata-report.retry-times=30 ##Not necessary,default 100
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.metadata-report.retry-period=5000 ##Not necessary,default 3000
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.metadata-report.cycle-report=false ##Not necessary,default true
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>dubbo.metadata-report.address&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">zookeeper://127.0.0.1:2181&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.metadata-report.username&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">xxx ##Not necessary&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.metadata-report.password&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">xxx ##Not necessary&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.metadata-report.retry-times&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">30 ##Not necessary,default 100&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.metadata-report.retry-period&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">5000 ##Not necessary,default 3000&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.metadata-report.cycle-report&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">false ##Not necessary,default true&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
 &lt;p>If the metadata address (dubbo.metadata-report.address) is not configured, the writing of the entire metadata will not take effect, but it will not affect the running of the program.&lt;/p>
 &lt;/blockquote>
@@ -70,14 +70,14 @@ Consumer gets parameter information from the URL that it wrote to the registry a
 &lt;p>Refer to the sample: dubbo-samples-metadata-report/dubbo-samples-metadata-report-configcenter.&lt;/p>
 &lt;h5 id="configcenter-configuration">Configcenter Configuration&lt;/h5>
 &lt;p>Configurations of Configcenter，can refer to the document of Configcenter. As follows:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.registry.address=zookeeper://127.0.0.1:2181
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>### Notice the hump style
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.metadata-report.address=zookeeper://127.0.0.1:2181 ###Address of metadata storage
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>dubbo.registry.address&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">zookeeper://127.0.0.1:2181&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">### Notice the hump style&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.metadata-report.address&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">zookeeper://127.0.0.1:2181 ###Address of metadata storage&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In the sample, Zookeeper is used as the Configcenter. Run directly: org.Apache.Dubbo.Samples.Metadatareport.Configcenter.ZKTools after starting a local zookeeper service, then writing finished.
 You can also use Nacos, Apollo as the Configcenter. These products themselves support ops configuration.&lt;/p>
 &lt;h5 id="application-configuration">Application Configuration&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>###dubbo.properties
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.config-center.address=zookeeper://127.0.0.1:2181
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">###dubbo.properties&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.config-center.address&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">zookeeper://127.0.0.1:2181&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>After completing the above two steps, the registry address and metadata address are retrieved from the Configcenter. You can now run the Provider and the Consumer in turn and get the corresponding output in console or view it directly through the client of zookeeper.&lt;/p>
 &lt;h5 id="provider-configuration">Provider Configuration&lt;/h5>
@@ -142,7 +142,7 @@ The next two examples focus on configuring in a project: the XML mode and the an
 &lt;h3 id="method-2-config-project-in-properties-way">Method 2: Config project in properties way&lt;/h3>
 &lt;p>Refer to the sample: dubbo-samples-metadata-report/dubbo-samples-metadata-report-local-xml.&lt;/p>
 &lt;h5 id="dubboproperties">dubbo.properties&lt;/h5>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.metadata-report.address=zookeeper://127.0.0.1:2181
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>dubbo.metadata-report.address&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">zookeeper://127.0.0.1:2181&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>After setting this configuration, have not to focus on others. You can also view the service information of the corresponding provider and consumer directly.&lt;/p>
 &lt;h5 id="provider-stores">Provider stores:&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
@@ -295,7 +295,7 @@ The next two examples focus on configuring in a project: the XML mode and the an
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="new-meta-infdubbointernalorgapachedubbometadatastoremetadatareportfactory">New META-INF/dubbo/internal/org.apache.dubbo.metadata.store.MetadataReportFactory&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>redis=org.apache.dubbo.metadata.store.redis.RedisMetadataReportFactory
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>redis&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">org.apache.dubbo.metadata.store.redis.RedisMetadataReportFactory&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>As long as the above modifications along with the project are packaged into a jar, then config metadata center url: redis://10.20.153.10:6379.&lt;/p>
 &lt;p>Up to now, a custom metadata store is ready to run.&lt;/p></description></item><item><title>Docs: API Reference</title><link>https://dubbo.apache.org/en/docs/v2.7/user/references/api/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/references/api/</guid><description>
 &lt;p>Generally speaking, dubbo keeps its functionality no intrusive as much as possible, but for some particular features, there&amp;rsquo;s no other way not only API can achieve.

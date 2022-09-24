@@ -42,9 +42,9 @@ Dubbo协议支持，以及Qos协议支持。这些协议的识别都是由一个
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">port&lt;/span>: -&lt;span style="color:#2aa198">1&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">ext-protocol&lt;/span>: dubbo,
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="properties-配置">properties 配置&lt;/h4>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.protocol.name=tri
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.ext-protocol=dubbo,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port=20880
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>dubbo.protocol.name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">tri&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.ext-protocol&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">dubbo,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">20880&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="qos接入">Qos接入&lt;/h3>
 &lt;h4 id="qos模块导入">Qos模块导入&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
@@ -246,24 +246,24 @@ Dubbo协议支持，以及Qos协议支持。这些协议的识别都是由一个
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="第五步">&lt;strong>第五步&lt;/strong>&lt;/h3>
 &lt;p>运行你下载的 nacos,并参考 &lt;a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fseata%2Fseata%2Ftree%2Fdevelop%2Fscript%2Fconfig-center">https://github.com/seata/seata/tree/develop/script/config-center&lt;/a> 的 config.txt 并修改&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>#仅client使用
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#事务分组叫my_test_tx_group对应的seata-server集群为default
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>service.vgroupMapping.my_test_tx_group=default
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#以下仅server使用
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store.mode=db
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store.db.datasource=druid
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store.db.dbType=mysql
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store.db.driverClassName=com.mysql.jdbc.Driver
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store.db.url=jdbc:mysql://127.0.0.1:3306/seata?useUnicode=true
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store.db.user=username
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store.db.password=password
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store.db.minConn=5
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store.db.maxConn=30
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store.db.globalTable=global_table
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store.db.branchTable=branch_table
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store.db.queryLimit=100
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store.db.lockTable=lock_table
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store.db.maxWait=5000
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">#仅client使用&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">#事务分组叫my_test_tx_group对应的seata-server集群为default&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>service.vgroupMapping.my_test_tx_group&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">default&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">#以下仅server使用&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store.mode&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">db&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store.db.datasource&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">druid&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store.db.dbType&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">mysql&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store.db.driverClassName&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">com.mysql.jdbc.Driver&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store.db.url&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">jdbc:mysql://127.0.0.1:3306/seata?useUnicode=true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store.db.user&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">username&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store.db.password&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">password&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store.db.minConn&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">5&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store.db.maxConn&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">30&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store.db.globalTable&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">global_table&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store.db.branchTable&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">branch_table&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store.db.queryLimit&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">100&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store.db.lockTable&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">lock_table&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>store.db.maxWait&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">5000&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>打开 nacos 控制台,在对应的 namespace 下创建 dataId 为 seata.properties 的配置,并填写 group 为 SEATA_GROUP,并将以上内容填入选择类型为 properties 保存
 &lt;img src="https://dubbo.apache.org/imgs/blog/Dingtalk_20220724021635.jpg" alt="Dingtalk_20220724021635.jpg.png" style="zoom:50%;" />&lt;/p>
 &lt;h3 id="第六步">&lt;strong>第六步&lt;/strong>&lt;/h3>
@@ -485,9 +485,9 @@ Dubbo协议支持，以及Qos协议支持。这些协议的识别都是由一个
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>关闭注册中心启动时检查 (注册订阅失败时报错)：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> check=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="通过-dubboproperties">通过 dubbo.properties&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.reference.com.foo.BarService.check=false
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.consumer.check=false
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.check=false
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>dubbo.reference.com.foo.BarService.check&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.consumer.check&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.check&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">false&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="通过--d-参数">通过 -D 参数&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>java -Ddubbo.reference.com.foo.BarService.check&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">false&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>java -Ddubbo.consumer.check&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#b58900">false&lt;/span>
@@ -1702,7 +1702,7 @@ key 为服务名，value 为服务提供者 url，此配置优先级最高，&lt
 &lt;p>如果服务比较多，也可以用文件映射，用 &lt;code>-Ddubbo.resolve.file&lt;/code> 指定映射文件路径，此配置优先级高于 &lt;code>&amp;lt;dubbo:reference&amp;gt;&lt;/code> 中的配置 [^3]，如：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>java -Ddubbo.resolve.file&lt;span style="color:#719e07">=&lt;/span>xxx.properties
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后在映射文件 &lt;code>xxx.properties&lt;/code> 中加入配置，其中 key 为服务名，value 为服务提供者 URL：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>com.alibaba.xxx.XxxService=dubbo://localhost:20890
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>com.alibaba.xxx.XxxService&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">dubbo://localhost:20890&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
 &lt;div class="alert alert-primary" role="alert">
 &lt;h4 class="alert-heading">提示&lt;/h4>

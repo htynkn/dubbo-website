@@ -56,19 +56,19 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>configuration:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>vi conf/zoo.cfg
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>If cluster is not needed, the content of &lt;code>zoo.cfg&lt;/code> is as below &lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>tickTime=2000
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>initLimit=10
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>syncLimit=5
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dataDir=/home/dubbo/zookeeper-3.3.3/data
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>clientPort=2181
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>tickTime&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">2000&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>initLimit&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">10&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>syncLimit&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">5&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dataDir&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">/home/dubbo/zookeeper-3.3.3/data&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>clientPort&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">2181&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>If cluster is needed, the content of &lt;code>zoo.cfg&lt;/code> is as below &lt;sup id="fnref:3">&lt;a href="#fn:3" class="footnote-ref" role="doc-noteref">3&lt;/a>&lt;/sup>:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>tickTime=2000
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>initLimit=10
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>syncLimit=5
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dataDir=/home/dubbo/zookeeper-3.3.3/data
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>clientPort=2181
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server.1=10.20.153.10:2555:3555
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server.2=10.20.153.11:2555:3555
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>tickTime&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">2000&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>initLimit&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">10&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>syncLimit&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">5&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dataDir&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">/home/dubbo/zookeeper-3.3.3/data&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>clientPort&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">2181&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server.1&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">10.20.153.10:2555:3555&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server.2&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">10.20.153.11:2555:3555&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Put myid file in data directory &lt;sup id="fnref:4">&lt;a href="#fn:4" class="footnote-ref" role="doc-noteref">4&lt;/a>&lt;/sup>:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>mkdir data
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vi myid

@@ -2653,10 +2653,10 @@ If not discussed in the community (mailing list), just as it did not happen.&lt;
 &lt;h3 id="dubbo-spring-externalization-configurationhttpsmercyblitzgithubio20180118dubbo-e5a496e983a8e58c96e9858de7bdae">&lt;a href="https://mercyblitz.github.io/2018/01/18/Dubbo-%E5%A4%96%E9%83%A8%E5%8C%96%E9%85%8D%E7%BD%AE/">Dubbo Spring Externalization Configuration&lt;/a>&lt;/h3>
 &lt;p>The Dubbo Spring externalization configuration is a new feature introduced by Dubbo &lt;code>2.5.8&lt;/code> that automatically generates and binds Dubbo configuration beans through the Spring &lt;code>Environment&lt;/code> property, simplifying configuration and lowering the microservice development threshold.&lt;/p>
 &lt;p>Assuming your Nacos Server is also running on server &lt;code>10.20.153.10&lt;/code> and using the default Nacos service port &lt;code>8848&lt;/code>, you only need to adjust the &lt;code>dubbo.registry.address&lt;/code> property as follows:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>## Other properties remain unchanged
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## Other properties remain unchanged&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## Nacos registry address
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address = nacos://10.20.153.10:8848
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## Nacos registry address&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">nacos://10.20.153.10:8848&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then, restart your Dubbo app, Dubbo&amp;rsquo;s service provider and consumer information can be displayed on the Nacos console:&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-registry-nacos-1.png" alt="dubbo-registry-nacos-1.png">&lt;/p>
@@ -2702,10 +2702,10 @@ otherwise the service will throw an exception when the service is temporarily un
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Disable the registration center startup check (registration subscription failed error):&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> check=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="use-dubboproperties">Use dubbo.properties&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.reference.com.foo.BarService.check = false
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.reference.check = false
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.consumer.check = false
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.check = false
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>dubbo.reference.com.foo.BarService.check &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.reference.check &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.consumer.check &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.check &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">false&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="use-the--d-parameter">Use the -D parameter&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>java -Ddubbo.reference.com.foo.BarService.check &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#b58900">false&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>java -Ddubbo.reference.check &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#b58900">false&lt;/span>
@@ -2839,7 +2839,7 @@ otherwise the service will throw an exception when the service is temporarily un
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>META-INF/dubbo/org.apache.dubbo.rpc.Protocol：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>xxx=com.xxx.XxxProtocol
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>xxx&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">com.xxx.XxxProtocol&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Quick start</title><link>https://dubbo.apache.org/en/docs/v3.0/languages/erlang/quick-start/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v3.0/languages/erlang/quick-start/</guid><description>
 &lt;p>It is recommended to use java to define the interface jar first, and use the &lt;a href="https://github.com/apache/dubbo-erlang/tree/master/tools/erlanalysis">erlanalysis&lt;/a> tool to parse the java interface to Erlang lib&lt;/p>
 &lt;h2 id="import-dependent-libraries">Import dependent libraries&lt;/h2>
@@ -3524,7 +3524,7 @@ Effective in dubbo2.7.10 and above.&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>META-INF/dubbo/org.apache.dubbo.rpc.Filter：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>xxx=com.xxx.XxxFilter
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>xxx&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">com.xxx.XxxFilter&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Dubbo Admin Introductions</title><link>https://dubbo.apache.org/en/docs/v2.7/admin/ops/introduction/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/admin/ops/introduction/</guid><description>
 &lt;p>Now version 0.1 has been released, frontend uses Vue and Vuetify as javascript framework and UI framework, backend uses spring framework, you can deploy the whole project with maven or deploy frontend and backend separately.&lt;/p>
 &lt;h3 id="deploy-the-whole-project-through-maven">Deploy the whole project through maven&lt;/h3>
@@ -3563,13 +3563,13 @@ http://localhost:8081&lt;/li>
 &lt;p>configuration file location&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>dubbo-admin-server/src/main/resources/application.properties
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>configuration:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>admin.config-center=zookeeper://127.0.0.1:2181
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>admin.registry.address=zookeeper://127.0.0.1:2181
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>admin.metadata-report.address=zookeeper://127.0.0.1:2181
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>admin.config-center&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">zookeeper://127.0.0.1:2181&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>admin.registry.address&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">zookeeper://127.0.0.1:2181&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>admin.metadata-report.address&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">zookeeper://127.0.0.1:2181&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Same as Dubbo 2.7, you can set the addresses of metadata center and registry center on configuration center, in zookeeper, the path and content are as below:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># /dubbo/config/dubbo/dubbo.properties
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address=zookeeper://127.0.0.1:2181
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.metadata-report.address=zookeeper://127.0.0.1:2181
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># /dubbo/config/dubbo/dubbo.properties&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">zookeeper://127.0.0.1:2181&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.metadata-report.address&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">zookeeper://127.0.0.1:2181&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>the addresses in configuration center have higher priority than those in &lt;code>application.properties&lt;/code>&lt;/p>
 &lt;p>visit documents on github:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>https://github.com/apache/dubbo-admin
@@ -3665,9 +3665,9 @@ If you have any question regarding the check list, please feel free to ask on &l
 &lt;li>&lt;code>dubbo.registry.china.address=10.20.153.10:9090&lt;/code> equals to &lt;code>&amp;lt;dubbo:registry id=&amp;quot;china&amp;quot; address=&amp;quot;10.20.153.10:9090&amp;quot; /&amp;gt;&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;p>Here is a typical dubbo.properties demo configuration：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.application.name=foo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.owner=bar
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address=10.20.153.10:9090
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>dubbo.application.name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">foo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.owner&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">bar&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">10.20.153.10:9090&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="overrides-and-priorities">Overrides and Priorities&lt;/h2>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/dubbo-properties-override.jpg" alt="properties-override">&lt;/p>
 &lt;p>Priorities from high to low:&lt;/p>
@@ -3751,13 +3751,13 @@ If you prefer a registry like zookeeper, please check out examples &lt;a href="h
 &lt;p>Dubbo use log4j as logging system by default, it also support slf4j, Apache Commons Logging, and JUL logging.&lt;/p>
 &lt;p>Following is a sample configuration:&lt;/p>
 &lt;p>log4j.properties&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>###set log levels###
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>log4j.rootLogger=info, stdout
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>###output to the console###
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>log4j.appender.stdout=org.apache.log4j.ConsoleAppender
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>log4j.appender.stdout.Target=System.out
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>log4j.appender.stdout.layout.ConversionPattern=[%d{dd/MM/yy hh:mm:ss:sss z}] %t %5p %c{2}: %m%n
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">###set log levels###&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>log4j.rootLogger&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">info, stdout&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">###output to the console###&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>log4j.appender.stdout&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">org.apache.log4j.ConsoleAppender&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>log4j.appender.stdout.Target&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">System.out&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>log4j.appender.stdout.layout&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">org.apache.log4j.PatternLayout&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>log4j.appender.stdout.layout.ConversionPattern&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">[%d{dd/MM/yy hh:mm:ss:sss z}] %t %5p %c{2}: %m%n&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="bootstrap-the-service-provider">Bootstrap the service provider&lt;/h3>
 &lt;p>Provider.java&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">package&lt;/span> org.apache.dubbo.demo.provider&lt;span style="color:#719e07">;&lt;/span>

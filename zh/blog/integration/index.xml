@@ -1283,13 +1283,13 @@ dubbo-storage-service.xml&lt;/p>
 &lt;p>当前版本的Dubbo Admin包含了之前版本中的绝大部分功能，包括服务治理，服务查询等，同时支持了Dubbo2.7中服务治理的新特性。&lt;/p>
 &lt;h2 id="配置规范">配置规范&lt;/h2>
 &lt;p>由于在Dubbo2.7中，配置中心和注册中心做了分离，并且增加了元数据中心，因此Dubbo Admin的配置方式也做了更新，&lt;code>application.properties&lt;/code>中的配置如下:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>admin.registry.address=zookeeper://127.0.0.1:2181
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>admin.config-center=zookeeper://127.0.0.1:2181
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>admin.metadata-report.address=zookeeper://127.0.0.1:2181
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>admin.registry.address&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">zookeeper://127.0.0.1:2181&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>admin.config-center&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">zookeeper://127.0.0.1:2181&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>admin.metadata-report.address&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">zookeeper://127.0.0.1:2181&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>也可以和Dubbo2.7一样，在配置中心指定元数据和注册中心的地址，以zookeeper为例，配置的路径和内容如下:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># /dubbo/config/dubbo/dubbo.properties
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address=zookeeper://127.0.0.1:2181
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.metadata-report.address=zookeeper://127.0.0.1:2181
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># /dubbo/config/dubbo/dubbo.properties&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">zookeeper://127.0.0.1:2181&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.metadata-report.address&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">zookeeper://127.0.0.1:2181&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>配置中心里的地址会覆盖掉本地&lt;code>application.properties&lt;/code>的配置&lt;/p>
 &lt;h2 id="功能介绍">功能介绍&lt;/h2>
 &lt;p>功能上，主要延续了之前版本的功能，包括服务查询和服务治理，2.7版本在服务治理的功能上有了很大的改进，这些改进也大部分都会以Dubbo Admin作为入口来体现。&lt;/p>
@@ -1542,17 +1542,17 @@ dubbo2.7.3默认开启qos功能，导致一些混部在物理机的dubbo服务�
 &lt;h3 id="dubbo-spring-外部化配置httpsmercyblitzgithubio20180118dubbo-e5a496e983a8e58c96e9858de7bdae">&lt;a href="https://mercyblitz.github.io/2018/01/18/Dubbo-%E5%A4%96%E9%83%A8%E5%8C%96%E9%85%8D%E7%BD%AE/">Dubbo Spring 外部化配置&lt;/a>&lt;/h3>
 &lt;p>Dubbo Spring 外部化配置是由 Dubbo &lt;code>2.5.8&lt;/code> 引入的新特性，可通过 Spring &lt;code>Environment&lt;/code> 属性自动地生成并绑定 Dubbo 配置 Bean，实现配置简化，并且降低微服务开发门槛。&lt;/p>
 &lt;p>假设您 Dubbo 应用的使用 Zookeeper 作为注册中心，并且其服务器 IP 地址为：&lt;code>10.20.153.10&lt;/code>，同时，该注册地址作为 Dubbo 外部化配置属性存储在 &lt;code>dubbo-config.properties&lt;/code> 文件，如下所示：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>## application
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.name = your-dubbo-application
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## application&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">your-dubbo-application&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## Zookeeper registry address
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address = zookeeper://10.20.153.10:2181
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## Zookeeper registry address&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">zookeeper://10.20.153.10:2181&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>假设您的 Nacos Server 同样运行在服务器 &lt;code>10.20.153.10&lt;/code> 上，并使用默认 Nacos 服务端口 &lt;code>8848&lt;/code>，您只需将 &lt;code>dubbo.registry.address&lt;/code> 属性调整如下：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>## 其他属性保持不变
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## 其他属性保持不变&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## Nacos registry address
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address = nacos://10.20.153.10:8848
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## Nacos registry address&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">nacos://10.20.153.10:8848&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>随后，重启您的 Dubbo 应用，Dubbo 的服务提供和消费信息在 Nacos 控制台中可以显示：&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-registry-nacos-1.png" alt="image-20181213103845976">&lt;/p>
@@ -1643,19 +1643,19 @@ dubbo2.7.3默认开启qos功能，导致一些混部在物理机的dubbo服务�
 &lt;ul>
 &lt;li>定义 Dubbo 提供方外部化配置属性源 - &lt;code>provider-config.properties&lt;/code>&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>## application
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.name = dubbo-provider-demo
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## application&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo-provider-demo&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## Nacos registry address
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address = nacos://127.0.0.1:8848
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## Nacos registry address&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">nacos://127.0.0.1:8848&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## Dubbo Protocol
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.name = dubbo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port = -1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## Dubbo Protocol&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">-1&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Provider @Service version
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>demo.service.version=1.0.0
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>demo.service.name = demoService
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># Provider @Service version&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>demo.service.version&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">1.0.0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>demo.service.name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">demoService&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>实现服务提供方引导类 - &lt;code>DemoServiceProviderBootstrap&lt;/code>&lt;/li>
 &lt;/ul>
@@ -1690,14 +1690,14 @@ dubbo2.7.3默认开启qos功能，导致一些混部在物理机的dubbo服务�
 &lt;ul>
 &lt;li>定义 Dubbo 消费方外部化配置属性源 - &lt;code>consumer-config.properties&lt;/code>&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>## Dubbo Application info
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.name = dubbo-consumer-demo
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## Dubbo Application info&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo-consumer-demo&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## Nacos registry address
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address = nacos://127.0.0.1:8848
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## Nacos registry address&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">nacos://127.0.0.1:8848&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># @Reference version
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>demo.service.version= 1.0.0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># @Reference version&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>demo.service.version&lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">1.0.0&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>同样地，&lt;code>dubbo.registry.address&lt;/code> 属性指向 Nacos 注册中心，其他 Dubbo 服务相关的元信息通过 Nacos 注册中心获取。&lt;/p>
 &lt;ul>
 &lt;li>实现服务消费方引导类 - &lt;code>DemoServiceConsumerBootstrap&lt;/code>&lt;/li>
@@ -2004,8 +2004,8 @@ dubbo2.7.3默认开启qos功能，导致一些混部在物理机的dubbo服务�
 &lt;li>
 &lt;p>&lt;code>EnableCircuitBreakerImportSelector&lt;/code>继承了&lt;code>SpringFactoryImportSelector&amp;lt;EnableCircuitBreaker&amp;gt;&lt;/code>，使spring加载&lt;code>META-INF/spring.factories&lt;/code>里的&lt;code>EnableCircuitBreaker&lt;/code>声明的配置&lt;/p>
 &lt;p>在&lt;code>META-INF/spring.factories&lt;/code>里可以找到下面的配置，也就是引入了&lt;code>HystrixCircuitBreakerConfiguration&lt;/code>。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker=\
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>org.springframework.cloud.netflix.hystrix.HystrixCircuitBreakerConfiguration
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#2aa198">org.springframework.cloud.netflix.hystrix.HystrixCircuitBreakerConfiguration&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>在&lt;code>HystrixCircuitBreakerConfiguration&lt;/code>里可以发现创建了&lt;code>HystrixCommandAspect&lt;/code>&lt;/p>
@@ -2340,10 +2340,10 @@ dubbo2.7.3默认开启qos功能，导致一些混部在物理机的dubbo服务�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@PropertySource&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;classpath:/spring/dubbo-provider.properties&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">ProviderConfiguration&lt;/span> &lt;span style="color:#719e07">{}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>dubbo-provider.properties 是在 Spring 应用中外置配置的方式，内容如下：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.application.name=demo-provider
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address=zookeeper://$DOCKER_HOST:2181
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.name=dubbo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port=20880
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>dubbo.application.name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">demo-provider&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">zookeeper://$DOCKER_HOST:2181&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">dubbo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">20880&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>由于 Zookeeper 运行在 Docker 容器中，需要注意的是：&lt;/p>
 &lt;ul>
 &lt;li>本文假定 Dubbo 应用运行在宿主机上，也就是 Docker 容器外，需要将 Zookeeper 的地址替换成环境变量 &lt;em>${DOCKER_HOST}&lt;/em> 所指定的 IP 地址，相关信息请查阅 Docker 官方文档&lt;/li>
@@ -2391,9 +2391,9 @@ dubbo2.7.3默认开启qos功能，导致一些混部在物理机的dubbo服务�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@ComponentScan&lt;/span>&lt;span style="color:#719e07">(&lt;/span>value &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">{&lt;/span>&lt;span style="color:#2aa198">&amp;#34;com.alibaba.dubbo.samples.action&amp;#34;&lt;/span>&lt;span style="color:#719e07">})&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">ConsumerConfiguration&lt;/span> &lt;span style="color:#719e07">{}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>dubbo-consumer.properties 是在 Spring 应用中外置配置的方式，内容如下：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.application.name=demo-consumer
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address=zookeeper://$DOCKER_HOST:2181
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.consumer.timeout=3000
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>dubbo.application.name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">demo-consumer&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">zookeeper://$DOCKER_HOST:2181&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.consumer.timeout&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">3000&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>与 &lt;strong>3. 服务端：组装&lt;/strong> 相同，需要根据自己的运行环境来修改 &lt;em>dubbo.registry.address&lt;/em> 中定义的 &lt;em>$DOCKER_HOST&lt;/em>。请参阅步骤 3 的说明部分。&lt;/p>
 &lt;h4 id="7-客户端发起远程调用">7. 客户端：发起远程调用&lt;/h4>
 &lt;p>运行 &lt;code>main&lt;/code> 向已经启动的服务提供方发起一次远程调用。Dubbo 会先向 Zookeeper 订阅服务地址，然后从返回的地址列表中选取一个，向对端发起调用：&lt;/p>
@@ -2733,30 +2733,30 @@ dubbo2.7.3默认开启qos功能，导致一些混部在物理机的dubbo服务�
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>配置 &lt;code>application.properties&lt;/code>：&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># Spring boot application
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>spring.application.name = dubbo-provider-demo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server.port = 9090
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>management.port = 9091
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># Spring boot application&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>spring.application.name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo-provider-demo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server.port &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">9090&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>management.port &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">9091&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Service version
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>demo.service.version = 1.0.0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># Service version&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>demo.service.version &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">1.0.0&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Base packages to scan Dubbo Components (e.g @Service , @Reference)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.scan.basePackages = com.example.demoprovider
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># Base packages to scan Dubbo Components (e.g @Service , @Reference)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.scan.basePackages &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">com.example.demoprovider&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Dubbo Config properties
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## ApplicationConfig Bean
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.id = dubbo-provider-demo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.name = dubbo-provider-demo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># Dubbo Config properties&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## ApplicationConfig Bean&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.id &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo-provider-demo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo-provider-demo&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## ProtocolConfig Bean
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.id = dubbo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.name = dubbo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port = 12345
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## ProtocolConfig Bean&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.id &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">12345&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## RegistryConfig Bean
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.id = my-registry
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address = N/A
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## RegistryConfig Bean&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.id &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">my-registry&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">N/A&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="实现-dubbo-服务消费方">实现 Dubbo 服务消费方&lt;/h4>
 &lt;p>pom.xml&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span>
@@ -2877,23 +2877,23 @@ dubbo2.7.3默认开启qos功能，导致一些混部在物理机的dubbo服务�
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>配置 &lt;code>application.properties&lt;/code>：&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># Spring boot application
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>spring.application.name=dubbo-consumer-demo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server.port=8080
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>management.port=8081
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># Spring boot application&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>spring.application.name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">dubbo-consumer-demo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server.port&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">8080&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>management.port&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">8081&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Service Version
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>demo.service.version=1.0.0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># Service Version&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>demo.service.version&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">1.0.0&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Dubbo Config properties
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## ApplicationConfig Bean
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.id=dubbo-consumer-demo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.name=dubbo-consumer-demo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># Dubbo Config properties&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## ApplicationConfig Bean&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.id&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">dubbo-consumer-demo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">dubbo-consumer-demo&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## ProtocolConfig Bean
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.id=dubbo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.name=dubbo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port=12345
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## ProtocolConfig Bean&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.id&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">dubbo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">dubbo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">12345&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="使用pinpoint-agent启动服务提供方和服务消费方">使用Pinpoint-agent启动服务提供方和服务消费方&lt;/h3>
 &lt;h4 id="启动服务提供方">启动服务提供方&lt;/h4>
 &lt;ol>

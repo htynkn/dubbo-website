@@ -12,10 +12,10 @@ otherwise the service will throw an exception when the service is temporarily un
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Disable the registration center startup check (registration subscription failed error):&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> check=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="use-dubboproperties">Use dubbo.properties&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.reference.com.foo.BarService.check = false
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.reference.check = false
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.consumer.check = false
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.check = false
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>dubbo.reference.com.foo.BarService.check &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.reference.check &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.consumer.check &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.check &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">false&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="use-the--d-parameter">Use the -D parameter&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>java -Ddubbo.reference.com.foo.BarService.check &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#b58900">false&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>java -Ddubbo.reference.check &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#b58900">false&lt;/span>
@@ -145,7 +145,7 @@ Effective in dubbo2.7.10 and above.&lt;/p>
 &lt;p>If you have more services, you can also use file mapping to specify the mapping file path with &lt;code>-Ddubbo.resolve.file&lt;/code>. This configuration takes precedence over the configuration in&lt;code>&amp;lt;dubbo: reference&amp;gt;&lt;/code>, for example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>java -Ddubbo.resolve.file&lt;span style="color:#719e07">=&lt;/span>xxx.properties
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then add the configuration in the mapping file &lt;code>xxx.properties&lt;/code>, where key is the service name and value is the service provider URL:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>com.alibaba.xxx.XxxService=dubbo://localhost:20890
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>com.alibaba.xxx.XxxService&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">dubbo://localhost:20890&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
 &lt;div class="alert alert-primary" role="alert">
 &lt;h4 class="alert-heading">Notice&lt;/h4>
@@ -1803,8 +1803,8 @@ supported on &lt;code>2.2.0&lt;/code> or above.
 &lt;/ul>
 &lt;h2 id="configuration-shutdown-wait-time">Configuration shutdown wait time&lt;/h2>
 &lt;p>Set graceful shutdown timeout, the default timeout is 10 seconds, if the overtime is forced to close.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># dubbo.properties
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.service.shutdown.wait=15000
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># dubbo.properties&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.service.shutdown.wait&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">15000&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>If ShutdownHook does not take effect, you can call it yourself, &lt;strong>in tomcat, it is recommended by extending the ContextListener and call the following code for graceful shutdown&lt;/strong>：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>DubboShutdownHook&lt;span style="color:#719e07">.&lt;/span>destroyAll&lt;span style="color:#719e07">();&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Hostname Binding</title><link>https://dubbo.apache.org/en/docs/v2.7/user/examples/hostname-binding/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/examples/hostname-binding/</guid><description>
@@ -1827,7 +1827,7 @@ supported on &lt;code>2.2.0&lt;/code> or above.
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>or config that in &lt;code>dubbo.properties&lt;/code>:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.protocol.host=205.182.23.201
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>dubbo.protocol.host&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">205.182.23.201&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;/ol>
 &lt;h2 id="port-configuration">Port configuration&lt;/h2>
@@ -1878,7 +1878,7 @@ supported on &lt;code>2.2.0&lt;/code> or above.
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>or config that in &lt;code>dubbo.properties&lt;/code>:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.protocol.dubbo.port=20880
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>dubbo.protocol.dubbo.port&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">20880&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;/ol></description></item><item><title>Docs: Logger Strategy</title><link>https://dubbo.apache.org/en/docs/v2.7/user/examples/logger-strategy/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/examples/logger-strategy/</guid><description>
 &lt;p>&lt;code>2.2.1&lt;/code> or later, dubbo support log4j、slf4j、jcl、jdk adapters &lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>, you can also explicitly configure the log output policy in the following ways:&lt;/p>
@@ -1889,7 +1889,7 @@ supported on &lt;code>2.2.0&lt;/code> or above.
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>Configure in &lt;code>dubbo.properties&lt;/code>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.application.logger=log4j
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>dubbo.application.logger&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">log4j&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>Configure in &lt;code>dubbo.xml&lt;/code>&lt;/p>
@@ -1951,7 +1951,7 @@ The size of the access log maybe too much,please check the disk capacity. Now I 
 &lt;ul>
 &lt;li>
 &lt;p>Automatically load all spring configurations in the &lt;code>META-INF/spring&lt;/code>.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.spring.config=classpath*:META-INF/spring/*.xml
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>dubbo.spring.config&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">classpath*:META-INF/spring/*.xml&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;/ul>
 &lt;h3 id="jetty-container">Jetty Container&lt;/h3>
@@ -2028,8 +2028,8 @@ At this time, the service provider registers service to another registrar, but t
 &lt;li>Export interval，The shortest interval allows you to export every 10 minutes&lt;/li>
 &lt;/ul>
 &lt;p>Specified export file path:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># dubbo.properties
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.dump.directory=/tmp
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># dubbo.properties&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.dump.directory&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">/tmp&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:application&lt;/span> ...&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:parameter&lt;/span> key=&lt;span style="color:#2aa198">&amp;#34;dump.directory&amp;#34;&lt;/span> value=&lt;span style="color:#2aa198">&amp;#34;/tmp&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dubbo:application&amp;gt;&lt;/span>

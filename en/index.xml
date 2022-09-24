@@ -2086,17 +2086,17 @@ dubbo-storage-service.xml&lt;/p>
 &lt;h2 id="dubbo-spring-externalization-configuration">Dubbo Spring Externalization Configuration&lt;/h2>
 &lt;p>Dubbo Spring externalization configuration is a new feature introduced by Dubbo 2.5.8, which automatically generates and binds Dubbo configuration Bean through the Spring Environment property, simplifying configuration and lowering the threshold for microservice development.&lt;/p>
 &lt;p>Assume your Dubbo application uses Zookeeper as the registry and its server IP address is 10.20.153.10, the registered address is also stored in the dubbo-config.properties file as a Dubbo externalization configuration attribute, as shown below:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>## application
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.name = your-dubbo-application
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## application&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">your-dubbo-application&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## Zookeeper registry address
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address = zookeeper://10.20.153.10:2181
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## Zookeeper registry address&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">zookeeper://10.20.153.10:2181&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Assuming your Nacos Server is also running on server 10.20.153.10 and using the default Nacos service port 8848, you can simply adjust the dubbo.registry.address property as follows:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>## 其他属性保持不变
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## 其他属性保持不变&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## Nacos registry address
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address = nacos://10.20.153.10:8848
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## Nacos registry address&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">nacos://10.20.153.10:8848&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Subsequently, restart your Dubbo application, and Dubbo&amp;rsquo;s service delivery and consumption information can be displayed in the Nacos console:&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-registry-nacos-1.png" alt="image-20181213103845976">&lt;/p>
@@ -2187,19 +2187,19 @@ dubbo-storage-service.xml&lt;/p>
 &lt;ul>
 &lt;li>Define property source of Dubbo provider externalization configuration - provider-config.properties&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>## application
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.name = dubbo-provider-demo
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## application&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo-provider-demo&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## Nacos registry address
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address = nacos://127.0.0.1:8848
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## Nacos registry address&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">nacos://127.0.0.1:8848&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## Dubbo Protocol
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.name = dubbo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port = -1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## Dubbo Protocol&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">-1&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Provider @Service version
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>demo.service.version=1.0.0
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>demo.service.name = demoService
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># Provider @Service version&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>demo.service.version&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">1.0.0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>demo.service.name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">demoService&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>Implement service provider bootstrap - DemoServiceProviderBootstrap&lt;/li>
 &lt;/ul>
@@ -2234,14 +2234,14 @@ dubbo-storage-service.xml&lt;/p>
 &lt;ul>
 &lt;li>Define property source of Dubbo consumer externalization configuration - consumer-config.properties&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>## Dubbo Application info
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.name = dubbo-consumer-demo
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## Dubbo Application info&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo-consumer-demo&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## Nacos registry address
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address = nacos://127.0.0.1:8848
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## Nacos registry address&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">nacos://127.0.0.1:8848&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># @Reference version
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>demo.service.version= 1.0.0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># @Reference version&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>demo.service.version&lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">1.0.0&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Similarly, the dubbo.registry.address property points to the Nacos registry, through which metadata about other Dubbo services is obtained.&lt;/p>
 &lt;ul>
 &lt;li>Implement service consumer bootstrap class - DemoServiceConsumerBootstrap&lt;/li>
@@ -5814,10 +5814,10 @@ For example, the service provider of &lt;code>com.foo.BarService&lt;/code> will 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@PropertySource&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;classpath:/spring/dubbo-provider.properties&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">ProviderConfiguration&lt;/span> &lt;span style="color:#719e07">{}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Dubbo-provider.properties is an external configuration in a spring application, as follows:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.application.name=demo-provider
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address=zookeeper://$DOCKER_HOST:2181
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.name=dubbo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port=20880
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>dubbo.application.name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">demo-provider&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">zookeeper://$DOCKER_HOST:2181&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">dubbo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">20880&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Since zookeeper runs in a docker container, please be noted that:&lt;/p>
 &lt;ul>
 &lt;li>We assumes that Dubbo applications is running on the host machine (outside the docker container) in this document, and needs to replace the PATH of Zookeeper with the IP address of the Environment Variable &lt;em>${DOCKER_HOST}&lt;/em>. Please find more detail in the official Docker documentation.&lt;/li>
@@ -5866,9 +5866,9 @@ For example, the service provider of &lt;code>com.foo.BarService&lt;/code> will 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@ComponentScan&lt;/span>&lt;span style="color:#719e07">(&lt;/span>value &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">{&lt;/span>&lt;span style="color:#2aa198">&amp;#34;com.alibaba.dubbo.samples.action&amp;#34;&lt;/span>&lt;span style="color:#719e07">})&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">ConsumerConfiguration&lt;/span> &lt;span style="color:#719e07">{}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&amp;ldquo;dubbo-consumer.properties&amp;rdquo; is a method of external configuration in a Spring application, as follows:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.application.name=demo-consumer
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address=zookeeper://$DOCKER_HOST:2181
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.consumer.timeout=3000
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>dubbo.application.name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">demo-consumer&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">zookeeper://$DOCKER_HOST:2181&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.consumer.timeout&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">3000&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Same as &lt;strong>3. Server: Assembling&lt;/strong>, You need to modify &lt;em>$DOCKER_HOST&lt;/em> defined in &lt;em>dubbo.registry.address&lt;/em> according to your own environment. You could find more instructions in step 3.&lt;/p>
 &lt;h4 id="7-client-initiating-a-remote-call">7. Client: Initiating A Remote Call&lt;/h4>
 &lt;p>Run &lt;code>main&lt;/code> to initiate a remote call from a existed service provider. Dubbo first subscribes to the zookeeper service address and then selects one from the list of returned addresses to invoke the client:&lt;/p>
@@ -6466,30 +6466,30 @@ have minimal impact on the performance (approximately 3% increase in resource us
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>&lt;code>application.properties&lt;/code>：&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># Spring boot application
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>spring.application.name = dubbo-provider-demo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server.port = 9090
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>management.port = 9091
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># Spring boot application&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>spring.application.name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo-provider-demo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server.port &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">9090&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>management.port &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">9091&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Service version
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>demo.service.version = 1.0.0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># Service version&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>demo.service.version &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">1.0.0&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Base packages to scan Dubbo Components (e.g @Service , @Reference)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.scan.basePackages = com.example.demoprovider
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># Base packages to scan Dubbo Components (e.g @Service , @Reference)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.scan.basePackages &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">com.example.demoprovider&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Dubbo Config properties
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## ApplicationConfig Bean
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.id = dubbo-provider-demo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.name = dubbo-provider-demo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># Dubbo Config properties&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## ApplicationConfig Bean&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.id &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo-provider-demo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo-provider-demo&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## ProtocolConfig Bean
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.id = dubbo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.name = dubbo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port = 12345
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## ProtocolConfig Bean&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.id &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">12345&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## RegistryConfig Bean
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.id = my-registry
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address = N/A
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## RegistryConfig Bean&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.id &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">my-registry&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">N/A&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="dubbo-consumer">Dubbo consumer&lt;/h4>
 &lt;p>pom.xml&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span>
@@ -6607,23 +6607,23 @@ have minimal impact on the performance (approximately 3% increase in resource us
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>&lt;code>application.properties&lt;/code>:&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># Spring boot application
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>spring.application.name=dubbo-consumer-demo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server.port=8080
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>management.port=8081
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># Spring boot application&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>spring.application.name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">dubbo-consumer-demo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>server.port&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">8080&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>management.port&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">8081&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Service Version
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>demo.service.version=1.0.0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># Service Version&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>demo.service.version&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">1.0.0&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Dubbo Config properties
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## ApplicationConfig Bean
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.id=dubbo-consumer-demo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.name=dubbo-consumer-demo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># Dubbo Config properties&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## ApplicationConfig Bean&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.id&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">dubbo-consumer-demo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">dubbo-consumer-demo&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## ProtocolConfig Bean
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.id=dubbo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.name=dubbo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port=12345
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## ProtocolConfig Bean&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.id&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">dubbo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">dubbo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">12345&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="using-pinpoint-agent-to-start-dubbo-provider-and-dubbo-consumer">Using Pinpoint-agent to start &lt;code>Dubbo provider&lt;/code> and &lt;code>Dubbo consumer&lt;/code>&lt;/h3>
 &lt;ol>
 &lt;li>Maven clean package&lt;/li>

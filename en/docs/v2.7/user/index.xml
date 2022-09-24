@@ -66,13 +66,13 @@ If you prefer a registry like zookeeper, please check out examples &lt;a href="h
 &lt;p>Dubbo use log4j as logging system by default, it also support slf4j, Apache Commons Logging, and JUL logging.&lt;/p>
 &lt;p>Following is a sample configuration:&lt;/p>
 &lt;p>log4j.properties&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>###set log levels###
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>log4j.rootLogger=info, stdout
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>###output to the console###
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>log4j.appender.stdout=org.apache.log4j.ConsoleAppender
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>log4j.appender.stdout.Target=System.out
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>log4j.appender.stdout.layout.ConversionPattern=[%d{dd/MM/yy hh:mm:ss:sss z}] %t %5p %c{2}: %m%n
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">###set log levels###&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>log4j.rootLogger&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">info, stdout&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">###output to the console###&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>log4j.appender.stdout&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">org.apache.log4j.ConsoleAppender&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>log4j.appender.stdout.Target&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">System.out&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>log4j.appender.stdout.layout&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">org.apache.log4j.PatternLayout&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>log4j.appender.stdout.layout.ConversionPattern&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">[%d{dd/MM/yy hh:mm:ss:sss z}] %t %5p %c{2}: %m%n&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="bootstrap-the-service-provider">Bootstrap the service provider&lt;/h3>
 &lt;p>Provider.java&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">package&lt;/span> org.apache.dubbo.demo.provider&lt;span style="color:#719e07">;&lt;/span>

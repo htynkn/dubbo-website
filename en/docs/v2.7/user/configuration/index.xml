@@ -122,9 +122,9 @@
 &lt;li>&lt;code>dubbo.registry.china.address=10.20.153.10:9090&lt;/code> equals to &lt;code>&amp;lt;dubbo:registry id=&amp;quot;china&amp;quot; address=&amp;quot;10.20.153.10:9090&amp;quot; /&amp;gt;&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;p>Here is a typical dubbo.properties demo configuration：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.application.name=foo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.owner=bar
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address=10.20.153.10:9090
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>dubbo.application.name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">foo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.owner&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">bar&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">10.20.153.10:9090&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="overrides-and-priorities">Overrides and Priorities&lt;/h2>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/dubbo-properties-override.jpg" alt="properties-override">&lt;/p>
 &lt;p>Priorities from high to low:&lt;/p>
@@ -262,11 +262,11 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="add-application-sharing-configuration">Add application sharing configuration&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># dubbo-provider.properties
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.name=annotation-provider
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address=zookeeper://127.0.0.1:2181
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.name=dubbo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port=20880
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># dubbo-provider.properties&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">annotation-provider&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">zookeeper://127.0.0.1:2181&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">dubbo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">20880&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="spring-scan-path">Spring scan path&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@Configuration&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@EnableDubbo&lt;/span>&lt;span style="color:#719e07">(&lt;/span>scanBasePackages &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.samples.simple.annotation.impl&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
@@ -329,42 +329,42 @@
 &lt;p>click here to view &lt;a href="https://dubbo.apache.org/zh/docsv2.7/user/configuration/config-center/">Externalize configuration details&lt;/a>&lt;/p>
 &lt;h2 id="configuration-format">Configuration Format&lt;/h2>
 &lt;p>Currently, all configurations supported by Dubbo are in the format of &lt;code>.properties&lt;/code>, including &lt;code>-D&lt;/code>, &lt;code>Externalized Configuration&lt;/code>, etc., and all configuration items in &lt;code>.properties&lt;/code> follow a &lt;code>path-based&lt;/code> Configuration format:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># Application level
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.{config-type}[.{config-id}].{config-item}={config-item-value}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Service level
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.service.{interface-name}[.{method-name}].{config-item}={config-item-value}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.reference.{interface-name}[.{method-name}].{config-item}={config-item-value}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># Multiple configuration items
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.{config-type}s.{config-id}.{config-item}={config-item-value}
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># Application level&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.{config-type}[.{config-id}].{config-item}&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">{config-item-value}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># Service level&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.service.{interface-name}[.{method-name}].{config-item}&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">{config-item-value}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.reference.{interface-name}[.{method-name}].{config-item}&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">{config-item-value}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># Multiple configuration items&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.{config-type}s.{config-id}.{config-item}&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">{config-item-value}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>Application level&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.application.name=demo-provider
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address=zookeeper://127.0.0.1:2181
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port=-1
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>dubbo.application.name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">demo-provider&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">zookeeper://127.0.0.1:2181&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">-1&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>Service level&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.service.org.apache.dubbo.samples.api.DemoService.timeout=5000
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.reference.org.apache.dubbo.samples.api.DemoService.timeout=6000
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.reference.org.apache.dubbo.samples.api.DemoService.sayHello.timeout=7000
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>dubbo.service.org.apache.dubbo.samples.api.DemoService.timeout&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">5000&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.reference.org.apache.dubbo.samples.api.DemoService.timeout&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">6000&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.reference.org.apache.dubbo.samples.api.DemoService.sayHello.timeout&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">7000&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>Multiple configuration items&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.registries.unit1.address=zookeeper://127.0.0.1:2181
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registries.unit2.address=zookeeper://127.0.0.1:2182
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>dubbo.registries.unit1.address&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">zookeeper://127.0.0.1:2181&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registries.unit2.address&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">zookeeper://127.0.0.1:2182&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocols.dubbo.name=dubbo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocols.dubbo.port=20880
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocols.hessian.name=hessian
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocols.hessian.port=8089
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocols.dubbo.name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">dubbo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocols.dubbo.port&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">20880&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocols.hessian.name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">hessian&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocols.hessian.port&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">8089&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>Extended configuration&lt;/li>
 &lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.application.parameters.item1=value1
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.parameters.item2=value2
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.parameters.item3=value3
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.reference.org.apache.dubbo.samples.api.DemoService.parameters.item4=value4
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>dubbo.application.parameters.item1&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">value1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.parameters.item2&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">value2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.parameters.item3&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">value3&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.reference.org.apache.dubbo.samples.api.DemoService.parameters.item4&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">value4&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="several-programming-approaches-of-configuration">Several programming approaches of configuration&lt;/h2>
 &lt;p>Next, let&amp;rsquo;s look at the changes corresponding to &lt;code>ServiceConfig, ReferenceConfig and other programming interface collected configuration&lt;/code> when selecting different development methods.&lt;/p>
 &lt;h3 id="spring">Spring&lt;/h3>
@@ -397,37 +397,37 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#2aa198">&amp;#34;annotation: hello, &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> name&lt;span style="color:#719e07">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span> ## dubbo.properties
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">## dubbo.properties&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dubbo.application.name=annotation-provider
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dubbo.registry.address=zookeeper://127.0.0.1:2181
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dubbo.protocol.name=dubbo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dubbo.protocol.port=20880
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dubbo.application.name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">annotation-provider&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dubbo.registry.address&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">zookeeper://127.0.0.1:2181&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dubbo.protocol.name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">dubbo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dubbo.protocol.port&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">20880&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>Spring Boot&lt;/li>
 &lt;/ul>
 &lt;p>Refer to &lt;a href="https://github.com/apache/dubbo-spring-boot-project/tree/master/dubbo-spring-boot-samples">the sample&lt;/a>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span> ## application.properties
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">## application.properties&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> # Spring boot application
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> spring.application.name=dubbo-externalized-configuration-provider-sample
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75"># Spring boot application&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> spring.application.name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">dubbo-externalized-configuration-provider-sample&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> # Base packages to scan Dubbo Component: @com.alibaba.dubbo.config.annotation.Service
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dubbo.scan.base-packages=com.alibaba.boot.dubbo.demo.provider.service
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75"># Base packages to scan Dubbo Component: @com.alibaba.dubbo.config.annotation.Service&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dubbo.scan.base-packages&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">com.alibaba.boot.dubbo.demo.provider.service&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> # Dubbo Application
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ## The default value of dubbo.application.name is ${spring.application.name}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ## dubbo.application.name=${spring.application.name}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75"># Dubbo Application&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">## The default value of dubbo.application.name is ${spring.application.name}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">## dubbo.application.name=${spring.application.name}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> # Dubbo Protocol
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dubbo.protocol.name=dubbo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dubbo.protocol.port=12345
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75"># Dubbo Protocol&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dubbo.protocol.name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">dubbo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dubbo.protocol.port&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">12345&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ## Dubbo Registry
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dubbo.registry.address=N/A
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">## Dubbo Registry&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dubbo.registry.address&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">N/A&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ## DemoService version
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> demo.service.version=1.0.0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">## DemoService version&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> demo.service.version&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">1.0.0&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="api">API&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">main&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String&lt;span style="color:#719e07">[]&lt;/span> args&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> IOException &lt;span style="color:#719e07">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ServiceConfig&lt;span style="color:#719e07">&amp;lt;&lt;/span>GreetingsService&lt;span style="color:#719e07">&amp;gt;&lt;/span> service &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ServiceConfig&lt;span style="color:#719e07">&amp;lt;&amp;gt;();&lt;/span>

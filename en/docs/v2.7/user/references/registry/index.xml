@@ -47,10 +47,10 @@
 &lt;h3 id="dubbo-spring-externalization-configurationhttpsmercyblitzgithubio20180118dubbo-e5a496e983a8e58c96e9858de7bdae">&lt;a href="https://mercyblitz.github.io/2018/01/18/Dubbo-%E5%A4%96%E9%83%A8%E5%8C%96%E9%85%8D%E7%BD%AE/">Dubbo Spring Externalization Configuration&lt;/a>&lt;/h3>
 &lt;p>The Dubbo Spring externalization configuration is a new feature introduced by Dubbo &lt;code>2.5.8&lt;/code> that automatically generates and binds Dubbo configuration beans through the Spring &lt;code>Environment&lt;/code> property, simplifying configuration and lowering the microservice development threshold.&lt;/p>
 &lt;p>Assuming your Nacos Server is also running on server &lt;code>10.20.153.10&lt;/code> and using the default Nacos service port &lt;code>8848&lt;/code>, you only need to adjust the &lt;code>dubbo.registry.address&lt;/code> property as follows:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>## Other properties remain unchanged
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## Other properties remain unchanged&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## Nacos registry address
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address = nacos://10.20.153.10:8848
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## Nacos registry address&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">nacos://10.20.153.10:8848&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then, restart your Dubbo app, Dubbo&amp;rsquo;s service provider and consumer information can be displayed on the Nacos console:&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-registry-nacos-1.png" alt="dubbo-registry-nacos-1.png">&lt;/p>

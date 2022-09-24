@@ -193,10 +193,10 @@
 &lt;p>服务发现的一个核心组件是注册中心，Provider 注册地址到注册中心，Consumer 从注册中心读取和订阅 Provider 地址列表。
 因此，要启用服务发现，需要为 Dubbo 增加注册中心配置：&lt;/p>
 &lt;p>以 dubbo-spring-boot-starter 使用方式为例，增加 registry 配置&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># application.properties
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># application.properties&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> registry
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> address: zookeeper://127.0.0.1:2181
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> address&lt;span style="color:#719e07">:&lt;/span> &lt;span style="color:#2aa198">zookeeper://127.0.0.1:2181&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="应用级服务发现简介">应用级服务发现简介&lt;/h3>
 &lt;p>概括来说，Dubbo3 引入的应用级服务发现主要有以下优势&lt;/p>
 &lt;ul>

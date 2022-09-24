@@ -1279,7 +1279,7 @@ Dubbo这边有没有集合文档展示和测试功能,能不用写文档就能�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>配置为 Dubbo SPI，`resources/META-INF/services 增加配置文件&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>default=org.apache.dubbo.samples.basic.comtomize.MyGrpcConfigurator
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>default&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">org.apache.dubbo.samples.basic.comtomize.MyGrpcConfigurator&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol>
 &lt;li>
 &lt;p>指定 Provider 端线程池&lt;/p>
@@ -8247,8 +8247,7 @@ DubboComponentScanRegistrar-85]-[main]-[INFO] 0 annotated @Service Components { 
 &lt;li>
 &lt;p>在META-INF/dubbo下，增加META-INF/dubbo/com.alibaba.dubbo.rpc.Filter，内容为：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>myFilter=com.test.MyFilter
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>``&lt;/p>
-&lt;/li>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;/ol>
 &lt;p>看似简单的两点，对Dubbo框架来说，需要：&lt;/p>
 &lt;ol>
@@ -8976,9 +8975,9 @@ Spring 配置：&lt;/p>
 &lt;/table>
 &lt;p>当标注 &lt;code>@EnableDubboConfig&lt;/code> 的类被扫描注册后，同时 Spring（Spring Boot）应用配置（&lt;code>PropertySources&lt;/code>）中存在&lt;code>dubbo.application.*&lt;/code> 时，&lt;code>ApplicationConfig&lt;/code> Bean 将被注册到在 Spring 上下文。否则，不会被注册。如果出现&lt;code>dubbo.registry.*&lt;/code>的配置，那么，&lt;code>RegistryConfig&lt;/code> Bean 将会创建，以此类推。即按需装配 Dubbo 配置 Bean。&lt;/p>
 &lt;p>如果需要指定配置 Bean的 id，可通过&lt;code>**.id&lt;/code> 属性设置，以&lt;code>dubbo.application&lt;/code> 为例：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>## application
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.id = applicationBean
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.name = dubbo-demo-application
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## application&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.id &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">applicationBean&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo-demo-application&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>以上配置等同于以下 Java Config Bean：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Bean&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;applicationBean&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> ApplicationConfig &lt;span style="color:#268bd2">applicationBean&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
@@ -9006,44 +9005,44 @@ Spring 配置：&lt;/p>
 &lt;li>&lt;code>dubbo.consumers&lt;/code>&lt;/li>
 &lt;/ul>
 &lt;p>以&lt;code>dubbo.applications&lt;/code> 为例，基本的模式如下：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.applications.${bean-name}.property-name = ${property-value}
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>dubbo.applications.${bean-name}.property-name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">${property-value}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>请读者注意，在单 Dubbo 配置 Bean 绑定时，可以通过指定&lt;code>id&lt;/code> 属性的方式，定义&lt;code>ApplicationConfig&lt;/code> Bean 的ID，即&lt;code>dubbo.application.id&lt;/code>。&lt;/p>
 &lt;p>而在多 Dubbo 配置 Bean 绑定时，Bean ID 则由&lt;code>dubbo.applications.&lt;/code>与属性字段名称（&lt;code>.property-name&lt;/code>)之间的字符来表达。&lt;/p>
 &lt;p>如下配置：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># multiple Bean definition
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.applications.applicationBean.name = dubbo-demo-application
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.applications.applicationBean2.name = dubbo-demo-application2
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.applications.applicationBean3.name = dubbo-demo-application3
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># multiple Bean definition&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.applications.applicationBean.name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo-demo-application&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.applications.applicationBean2.name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo-demo-application2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.applications.applicationBean3.name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo-demo-application3&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>该配置内容中，绑定了三个&lt;code>ApplicationConfig&lt;/code> Bean，分别是&lt;code>applicationBean&lt;/code>、&lt;code>applicationBean2&lt;/code>以及&lt;code>applicationBean3&lt;/code>&lt;/p>
 &lt;h4 id="示例说明">示例说明&lt;/h4>
 &lt;p>&lt;code>@EnableDubboConfig&lt;/code> 的使用方法很简答， 再次强调一点，当规约的外部配置存在时，相应的 Dubbo 配置类 才会提升为 Spring Bean。简言之，按需装配。&lt;/p>
 &lt;h5 id="单-dubbo-配置-bean-绑定-1">单 Dubbo 配置 Bean 绑定&lt;/h5>
 &lt;h6 id="外部化配置文件">外部化配置文件&lt;/h6>
 &lt;p>将以下内容的外部化配置文件物理路径为：&lt;code>classpath:/META-INF/config.properties&lt;/code>:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># 单 Dubbo 配置 Bean 绑定
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## application
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.id = applicationBean
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.name = dubbo-demo-application
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># 单 Dubbo 配置 Bean 绑定&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## application&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.id &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">applicationBean&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo-demo-application&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## module
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.module.id = moduleBean
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.module.name = dubbo-demo-module
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## module&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.module.id &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">moduleBean&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.module.name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo-demo-module&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## registry
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address = zookeeper://192.168.99.100:32770
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## registry&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">zookeeper://192.168.99.100:32770&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## protocol
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.name = dubbo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port = 20880
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## protocol&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">20880&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## monitor
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.monitor.address = zookeeper://127.0.0.1:32770
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## monitor&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.monitor.address &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">zookeeper://127.0.0.1:32770&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## provider
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.provider.host = 127.0.0.1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## provider&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.provider.host &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">127.0.0.1&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## consumer
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.consumer.client = netty
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## consumer&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.consumer.client &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">netty&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="enabledubboconfig-配置-bean">&lt;code>@EnableDubboConfig&lt;/code> 配置 Bean&lt;/h6>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">/**
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * Dubbo 配置 Bean
@@ -9113,11 +9112,11 @@ Spring 配置：&lt;/p>
 &lt;h5 id="多-dubbo-配置-bean-绑定-1">多 Dubbo 配置 Bean 绑定&lt;/h5>
 &lt;h6 id="外部化配置文件-1">外部化配置文件&lt;/h6>
 &lt;p>将以下内容的外部化配置文件物理路径为：&lt;code>classpath:/META-INF/multiple-config.properties&lt;/code>:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># 多 Dubbo 配置 Bean 绑定
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## dubbo.applications
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.applications.applicationBean.name = dubbo-demo-application
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.applications.applicationBean2.name = dubbo-demo-application2
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.applications.applicationBean3.name = dubbo-demo-application3
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># 多 Dubbo 配置 Bean 绑定&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## dubbo.applications&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.applications.applicationBean.name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo-demo-application&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.applications.applicationBean2.name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo-demo-application2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.applications.applicationBean3.name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo-demo-application3&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h6 id="enabledubboconfig--配置-bean多">&lt;code>@EnableDubboConfig&lt;/code> 配置 Bean（多）&lt;/h6>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@EnableDubboConfig&lt;/span>&lt;span style="color:#719e07">(&lt;/span>multiple &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#cb4b16">true&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@PropertySource&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;META-INF/multiple-config.properties&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
@@ -9195,8 +9194,8 @@ Spring 配置：&lt;/p>
 &lt;li>&lt;code>multiple()&lt;/code> : 表明是否需要将&lt;code>prefix()&lt;/code> 作为多个 &lt;code>type()&lt;/code> 类型的 Spring Bean 外部化配置属性。默认值为&lt;code>false&lt;/code>，即默认支持单个类型的 Spring 配置 Bean&lt;/li>
 &lt;/ul>
 &lt;p>假设标注 &lt;code>@EnableDubboConfigBinding&lt;/code> 的实现类被 Spring 应用上下文扫描并且注册后，其中&lt;code>prefix()&lt;/code> = &lt;code>dubbo.app&lt;/code> 、 &lt;code>type()&lt;/code> = &lt;code>ApplicationConfig.class&lt;/code> ，且外部配置内容为：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.app.id = applicationBean
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.app.name = dubbo-demo-application
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>dubbo.app.id &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">applicationBean&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.app.name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo-demo-application&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Spring 应用上下文启动后，一个 ID 为 &amp;ldquo;applicationBean&amp;rdquo; 的 &lt;code>ApplicationConfig&lt;/code> Bean 被初始化，其 &lt;code>name&lt;/code> 字段被设置为 &amp;ldquo;dubbo-demo-application&amp;rdquo;。&lt;/p>
 &lt;h5 id="enabledubboconfigbindings-定义">&lt;code>EnableDubboConfigBindings&lt;/code> 定义&lt;/h5>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">@interface&lt;/span> EnableDubboConfigBindings &lt;span style="color:#719e07">{&lt;/span>
@@ -9215,21 +9214,21 @@ Spring 配置：&lt;/p>
 &lt;h4 id="示例说明-1">示例说明&lt;/h4>
 &lt;h5 id="外部化配置文件-2">外部化配置文件&lt;/h5>
 &lt;p>将以下内容的外部化配置文件物理路径为：&lt;code>classpath:/META-INF/bindings.properties&lt;/code>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># classpath:/META-INF/bindings.properties
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## 占位符值 : ApplicationConfig 外部配置属性前缀
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>applications.prefix = dubbo.apps.
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># classpath:/META-INF/bindings.properties&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## 占位符值 : ApplicationConfig 外部配置属性前缀&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>applications.prefix &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo.apps.&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## 多 ApplicationConfig Bean 绑定
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.apps.applicationBean.name = dubbo-demo-application
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.apps.applicationBean2.name = dubbo-demo-application2
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.apps.applicationBean3.name = dubbo-demo-application3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## 多 ApplicationConfig Bean 绑定&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.apps.applicationBean.name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo-demo-application&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.apps.applicationBean2.name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo-demo-application2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.apps.applicationBean3.name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo-demo-application3&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## 单 ModuleConfig Bean 绑定
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.module.id = moduleBean
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.module.name = dubbo-demo-module
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## 单 ModuleConfig Bean 绑定&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.module.id &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">moduleBean&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.module.name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">dubbo-demo-module&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>## 单 RegistryConfig Bean 绑定
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address = zookeeper://192.168.99.100:32770
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">## 单 RegistryConfig Bean 绑定&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.registry.address &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">zookeeper://192.168.99.100:32770&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="enabledubboconfigbindings-配置-bean">&lt;code>EnableDubboConfigBindings&lt;/code> 配置 Bean&lt;/h5>
 &lt;p>&lt;code>DubboConfiguration&lt;/code> 作为 Dubbo 配置 Bean，除通过 &lt;code>@EnableDubboConfigBinding&lt;/code> 绑定之外，还需要 &lt;code>@PropertySource&lt;/code> 指定外部化配置文件（&lt;code>classpath:/META-INF/bindings.properties&lt;/code>）:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">/**

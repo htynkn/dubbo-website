@@ -394,13 +394,13 @@ Dubbo Java 版本的典型服务定义如下：&lt;/p>
 &lt;p>新增的配置中心主要有两个用途：存储/推送配置规则、应用配置托管，接下来着重讲解应用配置托管相关功能，看其对 Dubbo 的开发与运维配置的影响。Dubbo 当前支持 JVM 动态参数、配置中心、API、本地配置文件等几种配置源，他们之间按照优先级从高到低的顺序实现配置覆盖，如下图所示：&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/config.png" alt="config">&lt;/p>
 &lt;p>配置中心相当于是共享版本的 &lt;code>dubbo.properties&lt;/code> 的远程托管，其中，key 值有特定的命名规范：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span># 应⽤用级别
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.{config-type}[.{config-id}].{config-item} {config-item-value}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 服务级别
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.service.{interface-name}[.{method-name}].{config-item} {config-item-value}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.reference.{interface-name}[.{method-name}].{config-item} {config-item-value}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span># 多配置项
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.{config-type}s.{config-id}.{config-item} {config-item-value}
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># 应⽤用级别&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.{config-type}[.{config-id}].{config-item} &lt;span style="color:#2aa198">{config-item-value}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># 服务级别&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.service.{interface-name}[.{method-name}].{config-item} &lt;span style="color:#2aa198">{config-item-value}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.reference.{interface-name}[.{method-name}].{config-item} &lt;span style="color:#2aa198">{config-item-value}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># 多配置项&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.{config-type}s.{config-id}.{config-item} &lt;span style="color:#2aa198">{config-item-value}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="传输协议">传输协议&lt;/h3>
 &lt;p>2.7 版本在 RPC 协议层和序列化层进行了扩展，RPC 协议层增加了对 gRPC 协议的支持，序列化层增加了对 Protobuf 协议的支持。&lt;/p>
 &lt;p>支持 gRPC 其中一个重要原因是其基于 HTTP/2 协议构建，HTTP/2 协议作为 HTTP 标准协议，在各个层次的网络设备及网关代理上都得到了很好的支持，因此具有更好的穿透性和通用性。通过支持 gRPC 协议，对于期望使用 HTTP/2 的 Dubbo 用户提供了一种传输协议选择。&lt;/p>
