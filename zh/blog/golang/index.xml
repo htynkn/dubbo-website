@@ -2999,7 +2999,7 @@ HTTP 协议与 dubbo 协议之间的映射关系。&lt;/p>
 &lt;p>PS：以下的学习方式适用于很多新技术&lt;/p>
 &lt;h2 id="基本概念">基本概念&lt;/h2>
 &lt;p>&lt;strong>首先学习一个技术首先要看看它的整体架构和基本概念&lt;/strong>，每个技术都有着自己的名词解释和实现方式，如果文档齐全就简单很多。&lt;/p>
-&lt;p>&lt;a href="https://links.jianshu.com/go?to=http%3A%2F%2Fdubbo.apache.org%2Fzh-cn%2Fdocs%2Fuser%2Fpreface%2Fbackground.html">/zh/docs/user/preface/background.html&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://dubbo.apache.org/zh/docs/languages/golang/dubbo-go-3.0/preface/architecture/">基本概念&lt;/a>&lt;/p>
 &lt;p>大致浏览了背景、需求、架构之后基本上有一个大致概念&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-architecture.png" alt="">&lt;/p>
 &lt;p>其实整体架构和很多微服务的架构都是类似的，就是有一个注册中心管理所有的服务列表，服务提供方先向注册中心注册，而消费方向注册中心请求服务列表，通过服务列表调用最终的服务。总的来说 dubbo 将整个过程封装在了里面，而作为使用者的我们来说更加关心业务实现，它帮我们做好了治理的工作。&lt;/p>
