@@ -2879,7 +2879,423 @@ into the project&amp;rsquo;s &lt;code>apps&lt;/code> directory.&lt;/li>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">%% you can receive the message after.
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#268bd2">handle_cast&lt;/span>({msg_back,&lt;span style="color:#268bd2">RequestRef&lt;/span>,&lt;span style="color:#268bd2">Response&lt;/span>,&lt;span style="color:#268bd2">RpcContent&lt;/span>},&lt;span style="color:#268bd2">State&lt;/span>).
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="example">Example&lt;/h2>
-&lt;p>Refer to &lt;a href="https://github.com/apache/dubbo-erlang/tree/master/samples">dubboerl_demo&lt;/a>&lt;/p></description></item><item><title>Docs: Quick Start</title><link>https://dubbo.apache.org/en/docs/v2.7/user/languages/erlang/quick-start/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/languages/erlang/quick-start/</guid><description>
+&lt;p>Refer to &lt;a href="https://github.com/apache/dubbo-erlang/tree/master/samples">dubboerl_demo&lt;/a>&lt;/p></description></item><item><title>Docs3-V2: Quick start</title><link>https://dubbo.apache.org/en/docs3-v2/rust-sdk/quick-start/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs3-v2/rust-sdk/quick-start/</guid><description>
+&lt;p>See the full example &lt;a href="https://github.com/apache/dubbo-rust/tree/main/examples/greeter">here&lt;/a>.&lt;/p>
+&lt;h2 id="1-prerequisite">1 Prerequisite&lt;/h2>
+&lt;ul>
+&lt;li>Install &lt;a href="https://rustup.rs/">Rust development environment&lt;/a>.&lt;/li>
+&lt;li>Install &lt;a href="https://grpc.io/docs/protoc-installation/">protoc&lt;/a>.&lt;/li>
+&lt;/ul>
+&lt;h2 id="2-use-idl-to-define-dubbo-service">2 Use IDL to define Dubbo service&lt;/h2>
+&lt;p>The Greeter service is defined as follows, contains a Unary, Client stream, Server stream, Bidirectional stream model Dubbo service:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-protobuf" data-lang="protobuf">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// ./proto/greeter.proto
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>syntax &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;proto3&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">option&lt;/span> java_multiple_files &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#cb4b16">true&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">package&lt;/span> org&lt;span style="color:#719e07">.&lt;/span>apache.dubbo.sample.tri;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// The request message containing the user&amp;#39;s name.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#268bd2">message&lt;/span> &lt;span style="color:#268bd2">GreeterRequest&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#dc322f">string&lt;/span> name &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">1&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// The response message containing the greetings
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#268bd2">message&lt;/span> &lt;span style="color:#268bd2">GreeterReply&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#dc322f">string&lt;/span> &lt;span style="color:#268bd2">message&lt;/span> &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">1&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">service&lt;/span> Greeter{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// unary
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">rpc&lt;/span> greet(GreeterRequest) &lt;span style="color:#719e07">returns&lt;/span> (GreeterReply);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// clientStream
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">rpc&lt;/span> greetClientStream(stream GreeterRequest) &lt;span style="color:#719e07">returns&lt;/span> (GreeterReply);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// serverStream
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">rpc&lt;/span> greetServerStream(GreeterRequest) &lt;span style="color:#719e07">returns&lt;/span> (stream GreeterReply);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// bi streaming
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">rpc&lt;/span> greetStream(stream GreeterRequest) &lt;span style="color:#719e07">returns&lt;/span> (stream GreeterReply);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="3-add-dubbo-rust-and-other-dependencies">3 Add Dubbo-rust and other dependencies&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-toml" data-lang="toml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># ./Cargo.toml&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[package]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>name = &lt;span style="color:#2aa198">&amp;#34;example-greeter&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>version = &lt;span style="color:#2aa198">&amp;#34;0.1.0&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>edition = &lt;span style="color:#2aa198">&amp;#34;2021&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[[bin]]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>name = &lt;span style="color:#2aa198">&amp;#34;greeter-server&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>path = &lt;span style="color:#2aa198">&amp;#34;src/greeter/server.rs&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[[bin]]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>name = &lt;span style="color:#2aa198">&amp;#34;greeter-client&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>path = &lt;span style="color:#2aa198">&amp;#34;src/greeter/client.rs&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[dependencies]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>http = &lt;span style="color:#2aa198">&amp;#34;0.2&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>http-body = &lt;span style="color:#2aa198">&amp;#34;0.4.4&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>futures-util = {version = &lt;span style="color:#2aa198">&amp;#34;0.3&amp;#34;&lt;/span>, default-features = &lt;span style="color:#cb4b16">false&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tokio = { version = &lt;span style="color:#2aa198">&amp;#34;1.0&amp;#34;&lt;/span>, features = [ &lt;span style="color:#2aa198">&amp;#34;rt-multi-thread&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;time&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;fs&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;macros&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;net&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;signal&amp;#34;&lt;/span>] }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>prost-derive = {version = &lt;span style="color:#2aa198">&amp;#34;0.10&amp;#34;&lt;/span>, optional = &lt;span style="color:#cb4b16">true&lt;/span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>prost = &lt;span style="color:#2aa198">&amp;#34;0.10.4&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>async-trait = &lt;span style="color:#2aa198">&amp;#34;0.1.56&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tokio-stream = &lt;span style="color:#2aa198">&amp;#34;0.1&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo = &lt;span style="color:#2aa198">&amp;#34;0.1.0&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo-config = &lt;span style="color:#2aa198">&amp;#34;0.1.0&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[build-dependencies]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo-build = &lt;span style="color:#2aa198">&amp;#34;0.1.0&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="4-configure-dubbo-build-to-compile-idl">4 Configure dubbo-build to compile IDL&lt;/h2>
+&lt;p>Create &lt;code>build.rs&lt;/code> at project root directory:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rust" data-lang="rust">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// ./build.rs
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">fn&lt;/span> &lt;span style="color:#268bd2">main&lt;/span>() -&amp;gt; &lt;span style="color:#b58900">Result&lt;/span>&lt;span style="color:#719e07">&amp;lt;&lt;/span>(), &lt;span style="color:#b58900">Box&lt;/span>&lt;span style="color:#719e07">&amp;lt;&lt;/span>&lt;span style="color:#719e07">dyn&lt;/span> std::error::Error&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> tonic_build::compile_protos(&lt;span style="color:#2aa198">&amp;#34;proto/helloworld.proto&amp;#34;&lt;/span>)&lt;span style="color:#719e07">?&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">Ok&lt;/span>(())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>After this configuration, the project compiling will generate Dubbo stub code, where the path is usually located &lt;code>./target/debug/build/example-greeter-&amp;lt;id&amp;gt;/out/org.apache.dubbo.sample.tri.rs&lt;/code>.&lt;/p>
+&lt;h2 id="5-implement-server-and-client">5 Implement server and client&lt;/h2>
+&lt;h3 id="51-write-dubbo-rust-server">5.1 Write Dubbo-rust Server&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rust" data-lang="rust">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// ./src/greeter/server.rs
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">pub&lt;/span> &lt;span style="color:#719e07">mod&lt;/span> protos {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> include!(concat!(env!(&lt;span style="color:#2aa198">&amp;#34;OUT_DIR&amp;#34;&lt;/span>), &lt;span style="color:#2aa198">&amp;#34;/org.apache.dubbo.sample.tri.rs&amp;#34;&lt;/span>));
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">use&lt;/span> futures_util::StreamExt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">use&lt;/span> protos::{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> greeter_server::{register_server, Greeter},
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> GreeterReply, GreeterRequest,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>};
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">use&lt;/span> std::{io::ErrorKind, pin::Pin};
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">use&lt;/span> async_trait::async_trait;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">use&lt;/span> futures_util::Stream;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">use&lt;/span> tokio::sync::mpsc;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">use&lt;/span> tokio_stream::wrappers::ReceiverStream;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">use&lt;/span> dubbo_config::RootConfig;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">use&lt;/span> dubbo::{codegen::&lt;span style="color:#719e07">*&lt;/span>, Dubbo};
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">type&lt;/span> &lt;span style="color:#268bd2">ResponseStream&lt;/span> &lt;span style="color:#719e07">=&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Pin&lt;span style="color:#719e07">&amp;lt;&lt;/span>&lt;span style="color:#b58900">Box&lt;/span>&lt;span style="color:#719e07">&amp;lt;&lt;/span>&lt;span style="color:#719e07">dyn&lt;/span> Stream&lt;span style="color:#719e07">&amp;lt;&lt;/span>Item &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#b58900">Result&lt;/span>&lt;span style="color:#719e07">&amp;lt;&lt;/span>GreeterReply, dubbo::status::Status&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#b58900">Send&lt;/span>&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">#[tokio::main]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">async&lt;/span> &lt;span style="color:#719e07">fn&lt;/span> &lt;span style="color:#268bd2">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> register_server(GreeterServerImpl {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name: &lt;span style="color:#2aa198">&amp;#34;greeter&amp;#34;&lt;/span>.to_string(),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> });
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// Dubbo::new().start().await;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> Dubbo::new()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .with_config({
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">let&lt;/span> r &lt;span style="color:#719e07">=&lt;/span> RootConfig::new();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">match&lt;/span> r.load() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">Ok&lt;/span>(config) &lt;span style="color:#719e07">=&amp;gt;&lt;/span> config,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">Err&lt;/span>(_err) &lt;span style="color:#719e07">=&amp;gt;&lt;/span> panic!(&lt;span style="color:#2aa198">&amp;#34;err: {:?}&amp;#34;&lt;/span>, _err), &lt;span style="color:#586e75">// response was droped
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> })
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .start()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .&lt;span style="color:#719e07">await&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">#[allow(dead_code)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">#[derive(Default, Clone)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">struct&lt;/span> &lt;span style="color:#268bd2">GreeterServerImpl&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name: &lt;span style="color:#b58900">String&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// #[async_trait]
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">#[async_trait]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">impl&lt;/span> Greeter &lt;span style="color:#719e07">for&lt;/span> GreeterServerImpl {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">async&lt;/span> &lt;span style="color:#719e07">fn&lt;/span> &lt;span style="color:#268bd2">greet&lt;/span>(
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;amp;&lt;/span>&lt;span style="color:#268bd2">self&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> request: &lt;span style="color:#268bd2">Request&lt;/span>&lt;span style="color:#719e07">&amp;lt;&lt;/span>GreeterRequest&lt;span style="color:#719e07">&amp;gt;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ) -&amp;gt; &lt;span style="color:#b58900">Result&lt;/span>&lt;span style="color:#719e07">&amp;lt;&lt;/span>Response&lt;span style="color:#719e07">&amp;lt;&lt;/span>GreeterReply&lt;span style="color:#719e07">&amp;gt;&lt;/span>, dubbo::status::Status&lt;span style="color:#719e07">&amp;gt;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println!(&lt;span style="color:#2aa198">&amp;#34;GreeterServer::greet {:?}&amp;#34;&lt;/span>, request.metadata);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">Ok&lt;/span>(Response::new(GreeterReply {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> message: &lt;span style="color:#2aa198">&amp;#34;hello, dubbo-rust&amp;#34;&lt;/span>.to_string(),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">async&lt;/span> &lt;span style="color:#719e07">fn&lt;/span> &lt;span style="color:#268bd2">greet_client_stream&lt;/span>(
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;amp;&lt;/span>&lt;span style="color:#268bd2">self&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> request: &lt;span style="color:#268bd2">Request&lt;/span>&lt;span style="color:#719e07">&amp;lt;&lt;/span>Decoding&lt;span style="color:#719e07">&amp;lt;&lt;/span>GreeterRequest&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ) -&amp;gt; &lt;span style="color:#b58900">Result&lt;/span>&lt;span style="color:#719e07">&amp;lt;&lt;/span>Response&lt;span style="color:#719e07">&amp;lt;&lt;/span>GreeterReply&lt;span style="color:#719e07">&amp;gt;&lt;/span>, dubbo::status::Status&lt;span style="color:#719e07">&amp;gt;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">let&lt;/span> &lt;span style="color:#719e07">mut&lt;/span> s &lt;span style="color:#719e07">=&lt;/span> request.into_inner();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">loop&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">let&lt;/span> result &lt;span style="color:#719e07">=&lt;/span> s.next().&lt;span style="color:#719e07">await&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">match&lt;/span> result {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">Some&lt;/span>(&lt;span style="color:#b58900">Ok&lt;/span>(val)) &lt;span style="color:#719e07">=&amp;gt;&lt;/span> println!(&lt;span style="color:#2aa198">&amp;#34;result: {:?}&amp;#34;&lt;/span>, val),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">Some&lt;/span>(&lt;span style="color:#b58900">Err&lt;/span>(val)) &lt;span style="color:#719e07">=&amp;gt;&lt;/span> println!(&lt;span style="color:#2aa198">&amp;#34;err: {:?}&amp;#34;&lt;/span>, val),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">None&lt;/span> &lt;span style="color:#719e07">=&amp;gt;&lt;/span> &lt;span style="color:#719e07">break&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">Ok&lt;/span>(Response::new(GreeterReply {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> message: &lt;span style="color:#2aa198">&amp;#34;hello client streaming&amp;#34;&lt;/span>.to_string(),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">type&lt;/span> &lt;span style="color:#268bd2">greetServerStreamStream&lt;/span> &lt;span style="color:#719e07">=&lt;/span> ResponseStream;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">async&lt;/span> &lt;span style="color:#719e07">fn&lt;/span> &lt;span style="color:#268bd2">greet_server_stream&lt;/span>(
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;amp;&lt;/span>&lt;span style="color:#268bd2">self&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> request: &lt;span style="color:#268bd2">Request&lt;/span>&lt;span style="color:#719e07">&amp;lt;&lt;/span>GreeterRequest&lt;span style="color:#719e07">&amp;gt;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ) -&amp;gt; &lt;span style="color:#b58900">Result&lt;/span>&lt;span style="color:#719e07">&amp;lt;&lt;/span>Response&lt;span style="color:#719e07">&amp;lt;&lt;/span>&lt;span style="color:#268bd2">Self&lt;/span>::greetServerStreamStream&lt;span style="color:#719e07">&amp;gt;&lt;/span>, dubbo::status::Status&lt;span style="color:#719e07">&amp;gt;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println!(&lt;span style="color:#2aa198">&amp;#34;greet_server_stream: {:?}&amp;#34;&lt;/span>, request.into_inner());
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">let&lt;/span> data &lt;span style="color:#719e07">=&lt;/span> vec![
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">Result&lt;/span>::&lt;span style="color:#719e07">&amp;lt;&lt;/span>_, dubbo::status::Status&lt;span style="color:#719e07">&amp;gt;&lt;/span>::&lt;span style="color:#b58900">Ok&lt;/span>(GreeterReply {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> message: &lt;span style="color:#2aa198">&amp;#34;msg1 from server&amp;#34;&lt;/span>.to_string(),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">Result&lt;/span>::&lt;span style="color:#719e07">&amp;lt;&lt;/span>_, dubbo::status::Status&lt;span style="color:#719e07">&amp;gt;&lt;/span>::&lt;span style="color:#b58900">Ok&lt;/span>(GreeterReply {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> message: &lt;span style="color:#2aa198">&amp;#34;msg2 from server&amp;#34;&lt;/span>.to_string(),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">Result&lt;/span>::&lt;span style="color:#719e07">&amp;lt;&lt;/span>_, dubbo::status::Status&lt;span style="color:#719e07">&amp;gt;&lt;/span>::&lt;span style="color:#b58900">Ok&lt;/span>(GreeterReply {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> message: &lt;span style="color:#2aa198">&amp;#34;msg3 from server&amp;#34;&lt;/span>.to_string(),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ];
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">let&lt;/span> resp &lt;span style="color:#719e07">=&lt;/span> futures_util::stream::iter(data);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">Ok&lt;/span>(Response::new(&lt;span style="color:#b58900">Box&lt;/span>::pin(resp)))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">type&lt;/span> &lt;span style="color:#268bd2">greetStreamStream&lt;/span> &lt;span style="color:#719e07">=&lt;/span> ResponseStream;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">async&lt;/span> &lt;span style="color:#719e07">fn&lt;/span> &lt;span style="color:#268bd2">greet_stream&lt;/span>(
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;amp;&lt;/span>&lt;span style="color:#268bd2">self&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> request: &lt;span style="color:#268bd2">Request&lt;/span>&lt;span style="color:#719e07">&amp;lt;&lt;/span>Decoding&lt;span style="color:#719e07">&amp;lt;&lt;/span>GreeterRequest&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ) -&amp;gt; &lt;span style="color:#b58900">Result&lt;/span>&lt;span style="color:#719e07">&amp;lt;&lt;/span>Response&lt;span style="color:#719e07">&amp;lt;&lt;/span>&lt;span style="color:#268bd2">Self&lt;/span>::greetStreamStream&lt;span style="color:#719e07">&amp;gt;&lt;/span>, dubbo::status::Status&lt;span style="color:#719e07">&amp;gt;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println!(
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#2aa198">&amp;#34;GreeterServer::greet_stream, grpc header: {:?}&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> request.metadata
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> );
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">let&lt;/span> &lt;span style="color:#719e07">mut&lt;/span> in_stream &lt;span style="color:#719e07">=&lt;/span> request.into_inner();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">let&lt;/span> (tx, rx) &lt;span style="color:#719e07">=&lt;/span> mpsc::channel(&lt;span style="color:#2aa198">128&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// this spawn here is required if you want to handle connection error.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#586e75">// If we just map `in_stream` and write it back as `out_stream` the `out_stream`
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#586e75">// will be drooped when connection error occurs and error will never be propagated
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#586e75">// to mapped version of `in_stream`.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> tokio::spawn(&lt;span style="color:#719e07">async&lt;/span> &lt;span style="color:#719e07">move&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">while&lt;/span> &lt;span style="color:#268bd2">let&lt;/span> &lt;span style="color:#b58900">Some&lt;/span>(result) &lt;span style="color:#719e07">=&lt;/span> in_stream.next().&lt;span style="color:#719e07">await&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">match&lt;/span> result {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">Ok&lt;/span>(v) &lt;span style="color:#719e07">=&amp;gt;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// if v.name.starts_with(&amp;#34;msg2&amp;#34;) {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#586e75">// tx.send(Err(dubbo::status::Status::internal(format!(&amp;#34;err: args is invalid, {:?}&amp;#34;, v.name))
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#586e75">// )).await.expect(&amp;#34;working rx&amp;#34;);
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#586e75">// continue;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#586e75">// }
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> tx.send(&lt;span style="color:#b58900">Ok&lt;/span>(GreeterReply {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> message: &lt;span style="color:#268bd2">format&lt;/span>&lt;span style="color:#719e07">!&lt;/span>(&lt;span style="color:#2aa198">&amp;#34;server reply: {:?}&amp;#34;&lt;/span>, v.name),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .&lt;span style="color:#719e07">await&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .expect(&lt;span style="color:#2aa198">&amp;#34;working rx&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">Err&lt;/span>(err) &lt;span style="color:#719e07">=&amp;gt;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#268bd2">let&lt;/span> &lt;span style="color:#b58900">Some&lt;/span>(io_err) &lt;span style="color:#719e07">=&lt;/span> match_for_io_error(&lt;span style="color:#719e07">&amp;amp;&lt;/span>err) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> io_err.kind() &lt;span style="color:#719e07">==&lt;/span> ErrorKind::BrokenPipe {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// here you can handle special case when client
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#586e75">// disconnected in unexpected way
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> eprintln!(&lt;span style="color:#2aa198">&amp;#34;\tclient disconnected: broken pipe&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">break&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">match&lt;/span> tx.send(&lt;span style="color:#b58900">Err&lt;/span>(err)).&lt;span style="color:#719e07">await&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">Ok&lt;/span>(_) &lt;span style="color:#719e07">=&amp;gt;&lt;/span> (),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">Err&lt;/span>(_err) &lt;span style="color:#719e07">=&amp;gt;&lt;/span> &lt;span style="color:#719e07">break&lt;/span>, &lt;span style="color:#586e75">// response was droped
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println!(&lt;span style="color:#2aa198">&amp;#34;\tstream ended&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> });
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// echo just write the same data that was received
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#268bd2">let&lt;/span> out_stream &lt;span style="color:#719e07">=&lt;/span> ReceiverStream::new(rx);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">Ok&lt;/span>(Response::new(
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">Box&lt;/span>::pin(out_stream) &lt;span style="color:#719e07">as&lt;/span> &lt;span style="color:#268bd2">Self&lt;/span>::greetStreamStream
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">fn&lt;/span> &lt;span style="color:#268bd2">match_for_io_error&lt;/span>(err_status: &lt;span style="color:#719e07">&amp;amp;&lt;/span>&lt;span style="color:#268bd2">dubbo&lt;/span>::status::Status) -&amp;gt; &lt;span style="color:#b58900">Option&lt;/span>&lt;span style="color:#719e07">&amp;lt;&amp;amp;&lt;/span>std::io::Error&lt;span style="color:#719e07">&amp;gt;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">let&lt;/span> &lt;span style="color:#719e07">mut&lt;/span> err: &lt;span style="color:#719e07">&amp;amp;&lt;/span>(&lt;span style="color:#719e07">dyn&lt;/span> std::error::Error &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#719e07">&amp;#39;&lt;/span>&lt;span style="color:#b58900">static&lt;/span>) &lt;span style="color:#719e07">=&lt;/span> err_status;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">loop&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#268bd2">let&lt;/span> &lt;span style="color:#b58900">Some&lt;/span>(io_err) &lt;span style="color:#719e07">=&lt;/span> err.downcast_ref::&lt;span style="color:#719e07">&amp;lt;&lt;/span>std::io::Error&lt;span style="color:#719e07">&amp;gt;&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#b58900">Some&lt;/span>(io_err);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> err &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">match&lt;/span> err.source() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">Some&lt;/span>(err) &lt;span style="color:#719e07">=&amp;gt;&lt;/span> err,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">None&lt;/span> &lt;span style="color:#719e07">=&amp;gt;&lt;/span> &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#b58900">None&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> };
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="52-configure-dubboyaml">5.2 Configure dubbo.yaml&lt;/h3>
+&lt;p>&lt;code>dubbo.yaml&lt;/code> indicates the configuration of the server, including the exposed service list, protocol configuration, listening configuration, and so on.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># ./dubbo.yaml&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">name&lt;/span>: dubbo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">service&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">org.apache.dubbo.sample.tri.Greeter&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">version&lt;/span>: &lt;span style="color:#2aa198">1.0.0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">group&lt;/span>: test
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">protocol&lt;/span>: triple
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">registry&lt;/span>: &lt;span style="color:#2aa198">&amp;#39;&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">serializer&lt;/span>: json
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">protocol_configs&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">triple&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">ip&lt;/span>: &lt;span style="color:#2aa198">0.0.0.0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">port&lt;/span>: &lt;span style="color:#2aa198">&amp;#39;8888&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">name&lt;/span>: triple
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">protocols&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">triple&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">ip&lt;/span>: &lt;span style="color:#2aa198">0.0.0.0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">port&lt;/span>: &lt;span style="color:#2aa198">&amp;#39;8888&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">name&lt;/span>: triple
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="53-write-dubbo-rust-client">5.3 Write Dubbo-rust Client&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rust" data-lang="rust">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// ./src/greeter/client.rs
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">pub&lt;/span> &lt;span style="color:#719e07">mod&lt;/span> protos {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> include!(concat!(env!(&lt;span style="color:#2aa198">&amp;#34;OUT_DIR&amp;#34;&lt;/span>), &lt;span style="color:#2aa198">&amp;#34;/org.apache.dubbo.sample.tri.rs&amp;#34;&lt;/span>));
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">use&lt;/span> dubbo::codegen::&lt;span style="color:#719e07">*&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">use&lt;/span> futures_util::StreamExt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">use&lt;/span> protos::{greeter_client::GreeterClient, GreeterRequest};
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">#[tokio::main]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">async&lt;/span> &lt;span style="color:#719e07">fn&lt;/span> &lt;span style="color:#268bd2">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">let&lt;/span> &lt;span style="color:#719e07">mut&lt;/span> cli &lt;span style="color:#719e07">=&lt;/span> GreeterClient::new().with_uri(&lt;span style="color:#2aa198">&amp;#34;http://127.0.0.1:8888&amp;#34;&lt;/span>.to_string());
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println!(&lt;span style="color:#2aa198">&amp;#34;# unary call&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">let&lt;/span> resp &lt;span style="color:#719e07">=&lt;/span> cli
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .greet(Request::new(GreeterRequest {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name: &lt;span style="color:#2aa198">&amp;#34;message from client&amp;#34;&lt;/span>.to_string(),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .&lt;span style="color:#719e07">await&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">let&lt;/span> resp &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">match&lt;/span> resp {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">Ok&lt;/span>(resp) &lt;span style="color:#719e07">=&amp;gt;&lt;/span> resp,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">Err&lt;/span>(err) &lt;span style="color:#719e07">=&amp;gt;&lt;/span> &lt;span style="color:#719e07">return&lt;/span> println!(&lt;span style="color:#2aa198">&amp;#34;{:?}&amp;#34;&lt;/span>, err),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> };
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">let&lt;/span> (_parts, body) &lt;span style="color:#719e07">=&lt;/span> resp.into_parts();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println!(&lt;span style="color:#2aa198">&amp;#34;Response: {:?}&amp;#34;&lt;/span>, body);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println!(&lt;span style="color:#2aa198">&amp;#34;# client stream&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">let&lt;/span> data &lt;span style="color:#719e07">=&lt;/span> vec![
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> GreeterRequest {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name: &lt;span style="color:#2aa198">&amp;#34;msg1 from client streaming&amp;#34;&lt;/span>.to_string(),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> GreeterRequest {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name: &lt;span style="color:#2aa198">&amp;#34;msg2 from client streaming&amp;#34;&lt;/span>.to_string(),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> GreeterRequest {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name: &lt;span style="color:#2aa198">&amp;#34;msg3 from client streaming&amp;#34;&lt;/span>.to_string(),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ];
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">let&lt;/span> req &lt;span style="color:#719e07">=&lt;/span> futures_util::stream::iter(data);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">let&lt;/span> resp &lt;span style="color:#719e07">=&lt;/span> cli.greet_client_stream(req).&lt;span style="color:#719e07">await&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">let&lt;/span> client_streaming_resp &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">match&lt;/span> resp {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">Ok&lt;/span>(resp) &lt;span style="color:#719e07">=&amp;gt;&lt;/span> resp,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">Err&lt;/span>(err) &lt;span style="color:#719e07">=&amp;gt;&lt;/span> &lt;span style="color:#719e07">return&lt;/span> println!(&lt;span style="color:#2aa198">&amp;#34;{:?}&amp;#34;&lt;/span>, err),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> };
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">let&lt;/span> (_parts, resp_body) &lt;span style="color:#719e07">=&lt;/span> client_streaming_resp.into_parts();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println!(&lt;span style="color:#2aa198">&amp;#34;client streaming, Response: {:?}&amp;#34;&lt;/span>, resp_body);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println!(&lt;span style="color:#2aa198">&amp;#34;# bi stream&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">let&lt;/span> data &lt;span style="color:#719e07">=&lt;/span> vec![
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> GreeterRequest {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name: &lt;span style="color:#2aa198">&amp;#34;msg1 from client&amp;#34;&lt;/span>.to_string(),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> GreeterRequest {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name: &lt;span style="color:#2aa198">&amp;#34;msg2 from client&amp;#34;&lt;/span>.to_string(),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> GreeterRequest {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name: &lt;span style="color:#2aa198">&amp;#34;msg3 from client&amp;#34;&lt;/span>.to_string(),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ];
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">let&lt;/span> req &lt;span style="color:#719e07">=&lt;/span> futures_util::stream::iter(data);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">let&lt;/span> bidi_resp &lt;span style="color:#719e07">=&lt;/span> cli.greet_stream(req).&lt;span style="color:#719e07">await&lt;/span>.unwrap();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">let&lt;/span> (parts, &lt;span style="color:#719e07">mut&lt;/span> body) &lt;span style="color:#719e07">=&lt;/span> bidi_resp.into_parts();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println!(&lt;span style="color:#2aa198">&amp;#34;parts: {:?}&amp;#34;&lt;/span>, parts);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">while&lt;/span> &lt;span style="color:#268bd2">let&lt;/span> &lt;span style="color:#b58900">Some&lt;/span>(item) &lt;span style="color:#719e07">=&lt;/span> body.next().&lt;span style="color:#719e07">await&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">match&lt;/span> item {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">Ok&lt;/span>(v) &lt;span style="color:#719e07">=&amp;gt;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println!(&lt;span style="color:#2aa198">&amp;#34;reply: {:?}&amp;#34;&lt;/span>, v);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">Err&lt;/span>(err) &lt;span style="color:#719e07">=&amp;gt;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println!(&lt;span style="color:#2aa198">&amp;#34;err: {:?}&amp;#34;&lt;/span>, err);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">let&lt;/span> trailer &lt;span style="color:#719e07">=&lt;/span> body.trailer().&lt;span style="color:#719e07">await&lt;/span>.unwrap();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println!(&lt;span style="color:#2aa198">&amp;#34;trailer: {:?}&amp;#34;&lt;/span>, trailer);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println!(&lt;span style="color:#2aa198">&amp;#34;# server stream&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">let&lt;/span> resp &lt;span style="color:#719e07">=&lt;/span> cli
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .greet_server_stream(Request::new(GreeterRequest {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name: &lt;span style="color:#2aa198">&amp;#34;server streaming req&amp;#34;&lt;/span>.to_string(),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .&lt;span style="color:#719e07">await&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .unwrap();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">let&lt;/span> (parts, &lt;span style="color:#719e07">mut&lt;/span> body) &lt;span style="color:#719e07">=&lt;/span> resp.into_parts();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println!(&lt;span style="color:#2aa198">&amp;#34;parts: {:?}&amp;#34;&lt;/span>, parts);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">while&lt;/span> &lt;span style="color:#268bd2">let&lt;/span> &lt;span style="color:#b58900">Some&lt;/span>(item) &lt;span style="color:#719e07">=&lt;/span> body.next().&lt;span style="color:#719e07">await&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">match&lt;/span> item {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">Ok&lt;/span>(v) &lt;span style="color:#719e07">=&amp;gt;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println!(&lt;span style="color:#2aa198">&amp;#34;reply: {:?}&amp;#34;&lt;/span>, v);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">Err&lt;/span>(err) &lt;span style="color:#719e07">=&amp;gt;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println!(&lt;span style="color:#2aa198">&amp;#34;err: {:?}&amp;#34;&lt;/span>, err);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">let&lt;/span> trailer &lt;span style="color:#719e07">=&lt;/span> body.trailer().&lt;span style="color:#719e07">await&lt;/span>.unwrap();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println!(&lt;span style="color:#2aa198">&amp;#34;trailer: {:?}&amp;#34;&lt;/span>, trailer);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="6-run">6 Run&lt;/h2>
+&lt;ol>
+&lt;li>Compile&lt;/li>
+&lt;/ol>
+&lt;p>Run &lt;code>cargo build&lt;/code> to compile server and client.&lt;/p>
+&lt;ol start="2">
+&lt;li>Run server&lt;/li>
+&lt;/ol>
+&lt;p>Run &lt;code>./target/debug/greeter-server&lt;/code> to start server. as configured above by dubbo.yaml, the server listens on port 8888 and provides RPC services over triple protocol:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>$ ./target/debug/greeter-server
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2022-09-28T23:33:28.104577Z INFO dubbo::framework: url: Some&lt;span style="color:#719e07">(&lt;/span>Url &lt;span style="color:#719e07">{&lt;/span> uri: &lt;span style="color:#2aa198">&amp;#34;triple://0.0.0.0:8888/org.apache.dubbo.sample.tri.Greeter&amp;#34;&lt;/span>, protocol: &lt;span style="color:#2aa198">&amp;#34;triple&amp;#34;&lt;/span>, location: &lt;span style="color:#2aa198">&amp;#34;0.0.0.0:8888&amp;#34;&lt;/span>, ip: &lt;span style="color:#2aa198">&amp;#34;0.0.0.0&amp;#34;&lt;/span>, port: &lt;span style="color:#2aa198">&amp;#34;8888&amp;#34;&lt;/span>, service_key: &lt;span style="color:#719e07">[&lt;/span>&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.sample.tri.Greeter&amp;#34;&lt;/span>&lt;span style="color:#719e07">]&lt;/span>, params: &lt;span style="color:#719e07">{}&lt;/span> &lt;span style="color:#719e07">})&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>Run client, verify that the call was successful&lt;/li>
+&lt;/ol>
+&lt;p>Run &lt;code>./target/debug/greeter-client&lt;/code> to start client, which will call methods under &lt;code>triple://127.0.0.1:8888/org.apache.dubbo.sample.tri.Greeter&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>$ ./target/debug/greeter-client
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># unary call&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Response: GreeterReply &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;hello, dubbo-rust&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># client stream&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>client streaming, Response: GreeterReply &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;hello client streaming&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># bi stream&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>parts: Metadata &lt;span style="color:#719e07">{&lt;/span> inner: &lt;span style="color:#719e07">{&lt;/span>&lt;span style="color:#2aa198">&amp;#34;content-type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;application/grpc&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;date&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;Wed, 28 Sep 2022 23:34:20 GMT&amp;#34;&lt;/span>&lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reply: GreeterReply &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;server reply: \&amp;#34;msg1 from client\&amp;#34;&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reply: GreeterReply &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;server reply: \&amp;#34;msg2 from client\&amp;#34;&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reply: GreeterReply &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;server reply: \&amp;#34;msg3 from client\&amp;#34;&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>trailer: Some&lt;span style="color:#719e07">(&lt;/span>Metadata &lt;span style="color:#719e07">{&lt;/span> inner: &lt;span style="color:#719e07">{&lt;/span>&lt;span style="color:#2aa198">&amp;#34;content-type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;application/grpc&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;grpc-status&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;0&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;grpc-message&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;poll trailer successfully.&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;grpc-accept-encoding&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;gzip,identity&amp;#34;&lt;/span>&lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># server stream&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>parts: Metadata &lt;span style="color:#719e07">{&lt;/span> inner: &lt;span style="color:#719e07">{&lt;/span>&lt;span style="color:#2aa198">&amp;#34;content-type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;application/grpc&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;date&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;Wed, 28 Sep 2022 23:34:20 GMT&amp;#34;&lt;/span>&lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reply: GreeterReply &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;msg1 from server&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reply: GreeterReply &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;msg2 from server&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reply: GreeterReply &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;msg3 from server&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>trailer: Some&lt;span style="color:#719e07">(&lt;/span>Metadata &lt;span style="color:#719e07">{&lt;/span> inner: &lt;span style="color:#719e07">{&lt;/span>&lt;span style="color:#2aa198">&amp;#34;content-type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;application/grpc&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;grpc-status&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;0&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;grpc-message&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;poll trailer successfully.&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;grpc-accept-encoding&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;gzip,identity&amp;#34;&lt;/span>&lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">})&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Quick Start</title><link>https://dubbo.apache.org/en/docs/v2.7/user/languages/erlang/quick-start/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/languages/erlang/quick-start/</guid><description>
 &lt;p>We recommend using java to define the Dubbo interface. And use &lt;a href="https://github.com/apache/dubbo-erlang/tree/master/tools/erlanalysis">erlanalysis&lt;/a>
 tool parse java interface transfer to erlang lib.&lt;/p>
 &lt;h2 id="import-dependency-lib">Import Dependency Lib&lt;/h2>
@@ -4274,442 +4690,4 @@ The mail template to announce release:&lt;/li>
 &lt;h4 id="gpg-signing-failed-inappropriate-ioctl-for-device">gpg: signing failed: Inappropriate ioctl for device&lt;/h4>
 &lt;p>If you&amp;rsquo;ve encountered this error, try the following commands:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>export GPG_TTY=$(tty)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: rest protocol</title><link>https://dubbo.apache.org/en/docs/v2.7/user/references/protocol/rest/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/en/docs/v2.7/user/references/protocol/rest/</guid><description>
-&lt;p>基于标准的Java REST API——JAX-RS 2.0（Java API for RESTful Web Services的简写）实现的REST调用支持&lt;/p>
-&lt;h2 id="快速入门">快速入门&lt;/h2>
-&lt;p>在dubbo中开发一个REST风格的服务会比较简单，下面以一个注册用户的简单服务为例说明。&lt;/p>
-&lt;p>这个服务要实现的功能是提供如下URL（注：这个URL不是完全符合REST的风格，但是更简单实用）：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>http://localhost:8080/users/register
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>而任何客户端都可以将包含用户信息的JSON字符串POST到以上URL来完成用户注册。&lt;/p>
-&lt;p>首先，开发服务的接口：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">UserService&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">registerUser&lt;/span>&lt;span style="color:#719e07">(&lt;/span>User user&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后，开发服务的实现：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@Path&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;users&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">UserServiceImpl&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> UserService &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@POST&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Path&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;register&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Consumes&lt;/span>&lt;span style="color:#719e07">({&lt;/span>MediaType&lt;span style="color:#719e07">.&lt;/span>APPLICATION_JSON&lt;span style="color:#719e07">})&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">registerUser&lt;/span>&lt;span style="color:#719e07">(&lt;/span>User user&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// save the user...
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>上面的实现非常简单，但是由于该 REST 服务是要发布到指定 URL 上，供任意语言的客户端甚至浏览器来访问，所以这里额外添加了几个 JAX-RS 的标准 annotation 来做相关的配置。&lt;/p>
-&lt;p>@Path(&amp;ldquo;users&amp;rdquo;)：指定访问UserService的URL相对路径是/users，即http://localhost:8080/users&lt;/p>
-&lt;p>@Path(&amp;ldquo;register&amp;rdquo;)：指定访问registerUser()方法的URL相对路径是/register，再结合上一个@Path为UserService指定的路径，则调用UserService.register()的完整路径为http://localhost:8080/users/register&lt;/p>
-&lt;p>@POST：指定访问registerUser()用HTTP POST方法&lt;/p>
-&lt;p>@Consumes({MediaType.APPLICATION_JSON})：指定registerUser()接收JSON格式的数据。REST框架会自动将JSON数据反序列化为User对象&lt;/p>
-&lt;p>最后，在spring配置文件中添加此服务，即完成所有服务开发工作：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&amp;lt;!-- 用rest协议在8080端口暴露服务 --&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;rest&amp;#34;&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;8080&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&amp;lt;!-- 声明需要暴露的服务接口 --&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;xxx.UserService&amp;#34;&lt;/span> ref=&lt;span style="color:#2aa198">&amp;#34;userService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&amp;lt;!-- 和本地bean一样实现服务 --&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;bean&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;userService&amp;#34;&lt;/span> class=&lt;span style="color:#2aa198">&amp;#34;xxx.UserServiceImpl&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="rest服务提供端详解">REST服务提供端详解&lt;/h2>
-&lt;p>下面我们扩充“快速入门”中的UserService，进一步展示在dubbo中REST服务提供端的开发要点。&lt;/p>
-&lt;h3 id="http-postget的实现">HTTP POST/GET的实现&lt;/h3>
-&lt;p>REST服务中虽然建议使用HTTP协议中四种标准方法POST、DELETE、PUT、GET来分别实现常见的“增删改查”，但实际中，我们一般情况直接用POST来实现“增改”，GET来实现“删查”即可（DELETE和PUT甚至会被一些防火墙阻挡）。&lt;/p>
-&lt;p>前面已经简单演示了POST的实现，在此，我们为UserService添加一个获取注册用户资料的功能，来演示GET的实现。&lt;/p>
-&lt;p>这个功能就是要实现客户端通过访问如下不同URL来获取不同ID的用户资料：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>http://localhost:8080/users/1001
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>http://localhost:8080/users/1002
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>http://localhost:8080/users/1003
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>当然，也可以通过其他形式的URL来访问不同ID的用户资料，例如：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>http://localhost:8080/users/load?id=1001
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>JAX-RS本身可以支持所有这些形式。但是上面那种在URL路径中包含查询参数的形式（http://localhost:8080/users/1001） 更符合REST的一般习惯，所以更推荐大家来使用。下面我们就为UserService添加一个getUser()方法来实现这种形式的URL访问：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@GET&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@Path&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;{id : \\d+}&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@Produces&lt;/span>&lt;span style="color:#719e07">({&lt;/span>MediaType&lt;span style="color:#719e07">.&lt;/span>APPLICATION_JSON&lt;span style="color:#719e07">})&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> User &lt;span style="color:#268bd2">getUser&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#268bd2">@PathParam&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span> Long id&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// ...
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>@GET：指定用HTTP GET方法访问&lt;/p>
-&lt;p>@Path(&amp;quot;{id : \d+}&amp;quot;)：根据上面的功能需求，访问getUser()的URL应当是“http://localhost:8080/users/ + 任意数字&amp;quot;，并且这个数字要被做为参数传入getUser()方法。 这里的annotation配置中，@Path中间的{id: xxx}指定URL相对路径中包含了名为id参数，而它的值也将被自动传递给下面用@PathParam(&amp;ldquo;id&amp;rdquo;)修饰的方法参数id。{id:后面紧跟的\d+是一个正则表达式，指定了id参数必须是数字。&lt;/p>
-&lt;p>@Produces({MediaType.APPLICATION_JSON})：指定getUser()输出JSON格式的数据。框架会自动将User对象序列化为JSON数据。&lt;/p>
-&lt;h3 id="annotation放在接口类还是实现类">Annotation放在接口类还是实现类&lt;/h3>
-&lt;p>在Dubbo中开发REST服务主要都是通过JAX-RS的annotation来完成配置的，在上面的示例中，我们都是将annotation放在服务的实现类中。但其实，我们完全也可以将annotation放到服务的接口上，这两种方式是完全等价的，例如：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@Path&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;users&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">UserService&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@GET&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Path&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;{id : \\d+}&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Produces&lt;/span>&lt;span style="color:#719e07">({&lt;/span>MediaType&lt;span style="color:#719e07">.&lt;/span>APPLICATION_JSON&lt;span style="color:#719e07">})&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> User &lt;span style="color:#268bd2">getUser&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#268bd2">@PathParam&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span> Long id&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在一般应用中，我们建议将annotation放到服务实现类，这样annotation和java实现代码位置更接近，更便于开发和维护。另外更重要的是，我们一般倾向于避免对接口的污染，保持接口的纯净性和广泛适用性。&lt;/p>
-&lt;p>但是，如后文所述，如果我们要用dubbo直接开发的消费端来访问此服务，则annotation必须放到接口上。&lt;/p>
-&lt;p>如果接口和实现类都同时添加了annotation，则实现类的annotation配置会生效，接口上的annotation被直接忽略。&lt;/p>
-&lt;h3 id="jsonxml等多数据格式的支持">JSON、XML等多数据格式的支持&lt;/h3>
-&lt;p>在dubbo中开发的REST服务可以同时支持传输多种格式的数据，以给客户端提供最大的灵活性。其中我们目前对最常用的JSON和XML格式特别添加了额外的功能。&lt;/p>
-&lt;p>比如，我们要让上例中的getUser()方法支持分别返回JSON和XML格式的数据，只需要在annotation中同时包含两种格式即可：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@Produces&lt;/span>&lt;span style="color:#719e07">({&lt;/span>MediaType&lt;span style="color:#719e07">.&lt;/span>APPLICATION_JSON&lt;span style="color:#719e07">,&lt;/span> MediaType&lt;span style="color:#719e07">.&lt;/span>TEXT_XML&lt;span style="color:#719e07">})&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>User &lt;span style="color:#268bd2">getUser&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#268bd2">@PathParam&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span> Long id&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者也可以直接用字符串（还支持通配符）表示MediaType：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@Produces&lt;/span>&lt;span style="color:#719e07">({&lt;/span>&lt;span style="color:#2aa198">&amp;#34;application/json&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#2aa198">&amp;#34;text/xml&amp;#34;&lt;/span>&lt;span style="color:#719e07">})&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>User &lt;span style="color:#268bd2">getUser&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#268bd2">@PathParam&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span> Long id&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果所有方法都支持同样类型的输入输出数据格式，则我们无需在每个方法上做配置，只需要在服务类上添加annotation即可：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@Path&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;users&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@Consumes&lt;/span>&lt;span style="color:#719e07">({&lt;/span>MediaType&lt;span style="color:#719e07">.&lt;/span>APPLICATION_JSON&lt;span style="color:#719e07">,&lt;/span> MediaType&lt;span style="color:#719e07">.&lt;/span>TEXT_XML&lt;span style="color:#719e07">})&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@Produces&lt;/span>&lt;span style="color:#719e07">({&lt;/span>MediaType&lt;span style="color:#719e07">.&lt;/span>APPLICATION_JSON&lt;span style="color:#719e07">,&lt;/span> MediaType&lt;span style="color:#719e07">.&lt;/span>TEXT_XML&lt;span style="color:#719e07">})&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">UserServiceImpl&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> UserService &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// ...
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在一个REST服务同时对多种数据格式支持的情况下，根据JAX-RS标准，一般是通过HTTP中的MIME header（content-type和accept）来指定当前想用的是哪种格式的数据。&lt;/p>
-&lt;p>但是在dubbo中，我们还自动支持目前业界普遍使用的方式，即用一个URL后缀（.json和.xml）来指定想用的数据格式。例如，在添加上述annotation后，直接访问http://localhost:8888/users/1001.json则表示用json格式，直接访问http://localhost:8888/users/1002.xml则表示用xml格式，比用HTTP Header更简单直观。Twitter、微博等的REST API都是采用这种方式。&lt;/p>
-&lt;p>如果你既不加HTTP header，也不加后缀，则dubbo的REST会优先启用在以上annotation定义中排位最靠前的那种数据格式。&lt;/p>
-&lt;blockquote>
-&lt;p>注意：这里要支持XML格式数据，在annotation中既可以用MediaType.TEXT_XML，也可以用MediaType.APPLICATION_XML，但是TEXT_XML是更常用的，并且如果要利用上述的URL后缀方式来指定数据格式，只能配置为TEXT_XML才能生效。&lt;/p>
-&lt;/blockquote>
-&lt;h3 id="中文字符支持">中文字符支持&lt;/h3>
-&lt;p>为了在dubbo REST中正常输出中文字符，和通常的Java web应用一样，我们需要将HTTP响应的contentType设置为UTF-8编码。&lt;/p>
-&lt;p>基于JAX-RS的标准用法，我们只需要做如下annotation配置即可：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@Produces&lt;/span>&lt;span style="color:#719e07">({&lt;/span>&lt;span style="color:#2aa198">&amp;#34;application/json; charset=UTF-8&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#2aa198">&amp;#34;text/xml; charset=UTF-8&amp;#34;&lt;/span>&lt;span style="color:#719e07">})&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>User &lt;span style="color:#268bd2">getUser&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#268bd2">@PathParam&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span> Long id&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>为了方便用户，我们在dubbo REST中直接添加了一个支持类，来定义以上的常量，可以直接使用，减少出错的可能性。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@Produces&lt;/span>&lt;span style="color:#719e07">({&lt;/span>ContentType&lt;span style="color:#719e07">.&lt;/span>APPLICATION_JSON_UTF_8&lt;span style="color:#719e07">,&lt;/span> ContentType&lt;span style="color:#719e07">.&lt;/span>TEXT_XML_UTF_8&lt;span style="color:#719e07">})&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>User &lt;span style="color:#268bd2">getUser&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#268bd2">@PathParam&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span> Long id&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="xml数据格式的额外要求">XML数据格式的额外要求&lt;/h3>
-&lt;p>由于JAX-RS的实现一般都用标准的JAXB（Java API for XML Binding）来序列化和反序列化XML格式数据，所以我们需要为每一个要用XML传输的对象添加一个类级别的JAXB annotation，否则序列化将报错。例如为getUser()中返回的User添加如下：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@XmlRootElement&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">User&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> Serializable &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// ...
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>此外，如果service方法中的返回值是Java的 primitive类型（如int，long，float，double等），最好为它们添加一层wrapper对象，因为JAXB不能直接序列化primitive类型。&lt;/p>
-&lt;p>例如，我们想让前述的registerUser()方法返回服务器端为用户生成的ID号：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#dc322f">long&lt;/span> &lt;span style="color:#268bd2">registerUser&lt;/span>&lt;span style="color:#719e07">(&lt;/span>User user&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>由于primitive类型不被JAXB序列化支持，所以添加一个wrapper对象：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@XmlRootElement&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">RegistrationResult&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> Serializable &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> Long id&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">RegistrationResult&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">RegistrationResult&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Long id&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">this&lt;/span>&lt;span style="color:#719e07">.&lt;/span>id &lt;span style="color:#719e07">=&lt;/span> id&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> Long &lt;span style="color:#268bd2">getId&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> id&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">setId&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Long id&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">this&lt;/span>&lt;span style="color:#719e07">.&lt;/span>id &lt;span style="color:#719e07">=&lt;/span> id&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>并修改service方法：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>RegistrationResult &lt;span style="color:#268bd2">registerUser&lt;/span>&lt;span style="color:#719e07">(&lt;/span>User user&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这样不但能够解决XML序列化的问题，而且使得返回的数据都符合XML和JSON的规范。例如，在JSON中，返回的将是如下形式：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-javascript" data-lang="javascript">&lt;span style="display:flex;">&lt;span>{&lt;span style="color:#2aa198">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#719e07">:&lt;/span> &lt;span style="color:#2aa198">1001&lt;/span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果不加wrapper，JSON返回值将直接是&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>1001
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>而在XML中，加wrapper后返回值将是：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;registrationResult&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;id&amp;gt;&lt;/span>1002&lt;span style="color:#268bd2">&amp;lt;/id&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/registrationResult&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这种wrapper对象其实利用所谓Data Transfer Object（DTO）模式，采用DTO还能对传输数据做更多有用的定制。&lt;/p>
-&lt;h3 id="定制序列化">定制序列化&lt;/h3>
-&lt;p>如上所述，REST的底层实现会在service的对象和JSON/XML数据格式之间自动做序列化/反序列化。但有些场景下，如果觉得这种自动转换不满足要求，可以对其做定制。&lt;/p>
-&lt;p>Dubbo中的REST实现是用JAXB做XML序列化，用Jackson做JSON序列化，所以在对象上添加JAXB或Jackson的annotation即可以定制映射。&lt;/p>
-&lt;p>例如，定制对象属性映射到XML元素的名字：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@XmlRootElement&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@XmlAccessorType&lt;/span>&lt;span style="color:#719e07">(&lt;/span>XmlAccessType&lt;span style="color:#719e07">.&lt;/span>FIELD&lt;span style="color:#719e07">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">User&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> Serializable &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@XmlElement&lt;/span>&lt;span style="color:#719e07">(&lt;/span>name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">&amp;#34;username&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> String name&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>定制对象属性映射到JSON字段的名字：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">User&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> Serializable &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@JsonProperty&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;username&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> String name&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>更多资料请参考JAXB和Jackson的官方文档，或自行google。&lt;/p>
-&lt;h3 id="配置rest-server的实现">配置REST Server的实现&lt;/h3>
-&lt;p>目前在dubbo中，我们支持5种嵌入式rest server的实现，并同时支持采用外部应用服务器来做rest server的实现。rest server可以通过如下配置实现：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;rest&amp;#34;&lt;/span> server=&lt;span style="color:#2aa198">&amp;#34;jetty&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>以上配置选用了嵌入式的jetty来做rest server，同时，如果不配置server属性，rest协议默认也是选用jetty。jetty是非常成熟的java servlet容器，并和dubbo已经有较好的集成（目前5种嵌入式server中只有jetty和后面所述的tomcat、tjws，与dubbo监控系统等完成了无缝的集成），所以，如果你的dubbo系统是单独启动的进程，你可以直接默认采用jetty即可。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;rest&amp;#34;&lt;/span> server=&lt;span style="color:#2aa198">&amp;#34;tomcat&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>以上配置选用了嵌入式的tomcat来做rest server。在嵌入式tomcat上，REST的性能比jetty上要好得多（参见后面的基准测试），建议在需要高性能的场景下采用tomcat。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;rest&amp;#34;&lt;/span> server=&lt;span style="color:#2aa198">&amp;#34;netty&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>以上配置选用嵌入式的netty来做rest server。（TODO more contents to add）&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;rest&amp;#34;&lt;/span> server=&lt;span style="color:#2aa198">&amp;#34;tjws&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span> (tjws is now deprecated)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;rest&amp;#34;&lt;/span> server=&lt;span style="color:#2aa198">&amp;#34;sunhttp&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>以上配置选用嵌入式的tjws或Sun HTTP server来做rest server。这两个server实现非常轻量级，非常方便在集成测试中快速启动使用，当然也可以在负荷不高的生产环境中使用。 注：tjws目前已经被deprecated掉了，因为它不能很好的和servlet 3.1 API工作。&lt;/p>
-&lt;p>如果你的dubbo系统不是单独启动的进程，而是部署到了Java应用服务器中，则建议你采用以下配置：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;rest&amp;#34;&lt;/span> server=&lt;span style="color:#2aa198">&amp;#34;servlet&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>通过将server设置为servlet，dubbo将采用外部应用服务器的servlet容器来做rest server。同时，还要在dubbo系统的web.xml中添加如下配置：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;web-app&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;context-param&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;param-name&amp;gt;&lt;/span>contextConfigLocation&lt;span style="color:#268bd2">&amp;lt;/param-name&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;param-value&amp;gt;&lt;/span>/WEB-INF/classes/META-INF/spring/dubbo-demo-provider.xml&lt;span style="color:#268bd2">&amp;lt;/param-value&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;/context-param&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;listener&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;listener-class&amp;gt;&lt;/span>org.apache.dubbo.remoting.http.servlet.BootstrapListener&lt;span style="color:#268bd2">&amp;lt;/listener-class&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;/listener&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;listener&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;listener-class&amp;gt;&lt;/span>org.springframework.web.context.ContextLoaderListener&lt;span style="color:#268bd2">&amp;lt;/listener-class&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;/listener&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;servlet&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;servlet-name&amp;gt;&lt;/span>dispatcher&lt;span style="color:#268bd2">&amp;lt;/servlet-name&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;servlet-class&amp;gt;&lt;/span>org.apache.dubbo.remoting.http.servlet.DispatcherServlet&lt;span style="color:#268bd2">&amp;lt;/servlet-class&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;load-on-startup&amp;gt;&lt;/span>1&lt;span style="color:#268bd2">&amp;lt;/load-on-startup&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;/servlet&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;servlet-mapping&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;servlet-name&amp;gt;&lt;/span>dispatcher&lt;span style="color:#268bd2">&amp;lt;/servlet-name&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;url-pattern&amp;gt;&lt;/span>/*&lt;span style="color:#268bd2">&amp;lt;/url-pattern&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;/servlet-mapping&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/web-app&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>即必须将dubbo的BootstrapListener和DispatherServlet添加到web.xml，以完成dubbo的REST功能与外部servlet容器的集成。&lt;/p>
-&lt;blockquote>
-&lt;p>注意：如果你是用spring的ContextLoaderListener来加载spring，则必须保证BootstrapListener配置在ContextLoaderListener之前，否则dubbo初始化会出错。&lt;/p>
-&lt;/blockquote>
-&lt;p>其实，这种场景下你依然可以坚持用嵌入式server，但外部应用服务器的servlet容器往往比嵌入式server更加强大（特别是如果你是部署到更健壮更可伸缩的WebLogic，WebSphere等），另外有时也便于在应用服务器做统一管理、监控等等。&lt;/p>
-&lt;h3 id="获取上下文context信息">获取上下文（Context）信息&lt;/h3>
-&lt;p>在远程调用中，值得获取的上下文信息可能有很多种，这里特别以获取客户端IP为例。&lt;/p>
-&lt;p>在dubbo的REST中，我们有两种方式获取客户端IP。&lt;/p>
-&lt;p>第一种方式，用JAX-RS标准的@Context annotation：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> User &lt;span style="color:#268bd2">getUser&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#268bd2">@PathParam&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span> Long id&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#268bd2">@Context&lt;/span> HttpServletRequest request&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Client address is &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> request&lt;span style="color:#719e07">.&lt;/span>getRemoteAddr&lt;span style="color:#719e07">());&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>用Context修饰getUser()的一个方法参数后，就可以将当前的HttpServletRequest注入进来，然后直接调用servlet api获取IP。&lt;/p>
-&lt;blockquote>
-&lt;p>注意：这种方式只能在将server设置为 tjws、tomcat、jetty 或者 servlet 的时候才能工作，因为只有这几种 server 的实现才提供了 servlet 容器。另外，标准的JAX-RS还支持用@Context修饰service类的一个实例字段来获取HttpServletRequest，但在dubbo中我们没有对此作出支持。&lt;/p>
-&lt;/blockquote>
-&lt;p>第二种方式，用dubbo中常用的RpcContext：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> User &lt;span style="color:#268bd2">getUser&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#268bd2">@PathParam&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;id&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span> Long id&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Client address is &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> RpcContext&lt;span style="color:#719e07">.&lt;/span>getContext&lt;span style="color:#719e07">().&lt;/span>getRemoteAddressString&lt;span style="color:#719e07">());&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>注意：这种方式只能在设置server=&amp;ldquo;jetty&amp;quot;或者server=&amp;ldquo;tomcat&amp;quot;或者server=&amp;ldquo;servlet&amp;quot;或者server=&amp;ldquo;tjws&amp;quot;的时候才能工作。另外，目前dubbo的RpcContext是一种比较有侵入性的用法，未来我们很可能会做出重构。&lt;/p>
-&lt;/blockquote>
-&lt;p>如果你想保持你的项目对JAX-RS的兼容性，未来脱离dubbo也可以运行，请选择第一种方式。如果你想要更优雅的服务接口定义，请选用第二种方式。&lt;/p>
-&lt;p>此外，在最新的dubbo rest中，还支持通过RpcContext来获取HttpServletRequest和HttpServletResponse，以提供更大的灵活性来方便用户实现某些复杂功能，比如在dubbo标准的filter中访问HTTP Header。用法示例如下：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>RpcContext&lt;span style="color:#719e07">.&lt;/span>getContext&lt;span style="color:#719e07">().&lt;/span>getRequest&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span> &lt;span style="color:#719e07">&amp;amp;&amp;amp;&lt;/span> RpcContext&lt;span style="color:#719e07">.&lt;/span>getContext&lt;span style="color:#719e07">().&lt;/span>getRequest&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">instanceof&lt;/span> HttpServletRequest&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Client address is &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#719e07">((&lt;/span>HttpServletRequest&lt;span style="color:#719e07">)&lt;/span> RpcContext&lt;span style="color:#719e07">.&lt;/span>getContext&lt;span style="color:#719e07">().&lt;/span>getRequest&lt;span style="color:#719e07">()).&lt;/span>getRemoteAddr&lt;span style="color:#719e07">());&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>RpcContext&lt;span style="color:#719e07">.&lt;/span>getContext&lt;span style="color:#719e07">().&lt;/span>getResponse&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span> &lt;span style="color:#719e07">&amp;amp;&amp;amp;&lt;/span> RpcContext&lt;span style="color:#719e07">.&lt;/span>getContext&lt;span style="color:#719e07">().&lt;/span>getResponse&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">instanceof&lt;/span> HttpServletResponse&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Response object from RpcContext: &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> RpcContext&lt;span style="color:#719e07">.&lt;/span>getContext&lt;span style="color:#719e07">().&lt;/span>getResponse&lt;span style="color:#719e07">());&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>注意：为了保持协议的中立性，RpcContext.getRequest()和RpcContext.getResponse()返回的仅仅是一个Object类，而且可能为null。所以，你必须自己做null和类型的检查。&lt;/p>
-&lt;/blockquote>
-&lt;blockquote>
-&lt;p>注意：只有在设置server=&amp;ldquo;jetty&amp;quot;或者server=&amp;ldquo;tomcat&amp;quot;或者server=&amp;ldquo;servlet&amp;quot;的时候，你才能通过以上方法正确的得到HttpServletRequest和HttpServletResponse，因为只有这几种server实现了servlet容器。&lt;/p>
-&lt;/blockquote>
-&lt;p>为了简化编程，在此你也可以用泛型的方式来直接获取特定类型的request/response：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>RpcContext&lt;span style="color:#719e07">.&lt;/span>getContext&lt;span style="color:#719e07">().&lt;/span>getRequest&lt;span style="color:#719e07">(&lt;/span>HttpServletRequest&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span>&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Client address is &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> RpcContext&lt;span style="color:#719e07">.&lt;/span>getContext&lt;span style="color:#719e07">().&lt;/span>getRequest&lt;span style="color:#719e07">(&lt;/span>HttpServletRequest&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">).&lt;/span>getRemoteAddr&lt;span style="color:#719e07">());&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>RpcContext&lt;span style="color:#719e07">.&lt;/span>getContext&lt;span style="color:#719e07">().&lt;/span>getResponse&lt;span style="color:#719e07">(&lt;/span>HttpServletResponse&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span>&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Response object from RpcContext: &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> RpcContext&lt;span style="color:#719e07">.&lt;/span>getContext&lt;span style="color:#719e07">().&lt;/span>getResponse&lt;span style="color:#719e07">(&lt;/span>HttpServletResponse&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">));&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果request/response不符合指定的类型，这里也会返回null。&lt;/p>
-&lt;h3 id="配置端口号和context-path">配置端口号和Context Path&lt;/h3>
-&lt;p>dubbo中的rest协议默认将采用80端口，如果想修改端口，直接配置：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;rest&amp;#34;&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;8888&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>另外，如前所述，我们可以用@Path来配置单个rest服务的URL相对路径。但其实，我们还可以设置一个所有rest服务都适用的基础相对路径，即java web应用中常说的context path。&lt;/p>
-&lt;p>只需要添加如下contextpath属性即可：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;rest&amp;#34;&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;8888&amp;#34;&lt;/span> contextpath=&lt;span style="color:#2aa198">&amp;#34;services&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>以前面代码为例：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@Path&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;users&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">UserServiceImpl&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> UserService &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@POST&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Path&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;register&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Consumes&lt;/span>&lt;span style="color:#719e07">({&lt;/span>MediaType&lt;span style="color:#719e07">.&lt;/span>APPLICATION_JSON&lt;span style="color:#719e07">})&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">registerUser&lt;/span>&lt;span style="color:#719e07">(&lt;/span>User user&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// save the user...
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>现在registerUser()的完整访问路径为：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>http://localhost:8888/services/users/register
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>注意：如果你是选用外部应用服务器做rest server，即配置:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;rest&amp;#34;&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;8888&amp;#34;&lt;/span> contextpath=&lt;span style="color:#2aa198">&amp;#34;services&amp;#34;&lt;/span> server=&lt;span style="color:#2aa198">&amp;#34;servlet&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>则必须保证这里设置的port、contextpath，与外部应用服务器的端口、DispatcherServlet的上下文路径（即webapp path加上servlet url pattern）保持一致。例如，对于部署为tomcat ROOT路径的应用，这里的contextpath必须与web.xml中DispacherServlet的&lt;code>&amp;lt;url-pattern/&amp;gt;&lt;/code>完全一致：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;servlet-mapping&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;servlet-name&amp;gt;&lt;/span>dispatcher&lt;span style="color:#268bd2">&amp;lt;/servlet-name&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;url-pattern&amp;gt;&lt;/span>/services/*&lt;span style="color:#268bd2">&amp;lt;/url-pattern&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/servlet-mapping&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="配置线程数和io线程数">配置线程数和IO线程数&lt;/h3>
-&lt;p>可以为rest服务配置线程池大小：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;rest&amp;#34;&lt;/span> threads=&lt;span style="color:#2aa198">&amp;#34;500&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>注意：目前线程池的设置只有当server=&amp;ldquo;netty&amp;quot;或者server=&amp;ldquo;jetty&amp;quot;或者server=&amp;ldquo;tomcat&amp;quot;的时候才能生效。另外，如果server=&amp;ldquo;servlet&amp;rdquo;，由于这时候启用的是外部应用服务器做rest server，不受dubbo控制，所以这里的线程池设置也无效。&lt;/p>
-&lt;/blockquote>
-&lt;p>如果是选用netty server，还可以配置Netty的IO worker线程数：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;rest&amp;#34;&lt;/span> iothreads=&lt;span style="color:#2aa198">&amp;#34;5&amp;#34;&lt;/span> threads=&lt;span style="color:#2aa198">&amp;#34;100&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="配置长连接">配置长连接&lt;/h3>
-&lt;p>Dubbo中的rest服务默认都是采用http长连接来访问，如果想切换为短连接，直接配置：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;rest&amp;#34;&lt;/span> keepalive=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>注意：这个配置目前只对server=&amp;ldquo;netty&amp;quot;和server=&amp;ldquo;tomcat&amp;quot;才能生效。&lt;/p>
-&lt;/blockquote>
-&lt;h3 id="配置最大的http连接数">配置最大的HTTP连接数&lt;/h3>
-&lt;p>可以配置服务器提供端所能同时接收的最大HTTP连接数，防止REST server被过多连接撑爆，以作为一种最基本的自我保护机制：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;rest&amp;#34;&lt;/span> accepts=&lt;span style="color:#2aa198">&amp;#34;500&amp;#34;&lt;/span> server=&lt;span style="color:#2aa198">&amp;#34;tomcat/&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>注意：这个配置目前只对server=&amp;ldquo;tomcat&amp;quot;才能生效。&lt;/p>
-&lt;/blockquote>
-&lt;h3 id="配置每个消费端的超时时间和http连接数">配置每个消费端的超时时间和HTTP连接数&lt;/h3>
-&lt;p>如果rest服务的消费端也是dubbo系统，可以像其他dubbo RPC机制一样，配置消费端调用此rest服务的最大超时时间以及每个消费端所能启动的最大HTTP连接数。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;xxx&amp;#34;&lt;/span> ref=&lt;span style="color:#2aa198">&amp;#34;xxx&amp;#34;&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;rest&amp;#34;&lt;/span> timeout=&lt;span style="color:#2aa198">&amp;#34;2000&amp;#34;&lt;/span> connections=&lt;span style="color:#2aa198">&amp;#34;10&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>当然，由于这个配置针对消费端生效的，所以也可以在消费端配置：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;xxx&amp;#34;&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;xxx&amp;#34;&lt;/span> timeout=&lt;span style="color:#2aa198">&amp;#34;2000&amp;#34;&lt;/span> connections=&lt;span style="color:#2aa198">&amp;#34;10&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>但是，通常我们建议配置在服务提供端提供此类配置。按照dubbo官方文档的说法：“Provider上尽量多配置Consumer端的属性，让Provider实现者一开始就思考Provider服务特点、服务质量的问题。”&lt;/p>
-&lt;blockquote>
-&lt;p>注意：如果dubbo的REST服务是发布给非dubbo的客户端使用，则这里&lt;code>&amp;lt;dubbo:service/&amp;gt;&lt;/code>上的配置完全无效，因为这种客户端不受dubbo控制。&lt;/p>
-&lt;/blockquote>
-&lt;h3 id="用annotation取代部分spring-xml配置">用Annotation取代部分Spring XML配置&lt;/h3>
-&lt;p>以上所有的讨论都是基于dubbo在spring中的xml配置。但是，dubbo/spring本身也支持用annotation来作配置，所以我们也可以按dubbo官方文档中的步骤，把相关annotation加到REST服务的实现中，取代一些xml配置，例如：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@Service&lt;/span>&lt;span style="color:#719e07">(&lt;/span>protocol &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;rest&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@Path&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;users&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">UserServiceImpl&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> UserService &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Autowired&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> UserRepository userRepository&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@POST&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Path&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;register&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Consumes&lt;/span>&lt;span style="color:#719e07">({&lt;/span>MediaType&lt;span style="color:#719e07">.&lt;/span>APPLICATION_JSON&lt;span style="color:#719e07">})&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">registerUser&lt;/span>&lt;span style="color:#719e07">(&lt;/span>User user&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// save the user
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> userRepository&lt;span style="color:#719e07">.&lt;/span>save&lt;span style="color:#719e07">(&lt;/span>user&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>annotation的配置更简单更精确，通常也更便于维护（当然现代IDE都可以在xml中支持比如类名重构，所以就这里的特定用例而言，xml的维护性也很好）。而xml对代码的侵入性更小一些，尤其有利于动态修改配置，特别是比如你要针对单个服务配置连接超时时间、每客户端最大连接数、集群策略、权重等等。另外，特别对复杂应用或者模块来说，xml提供了一个中心点来涵盖的所有组件和配置，更一目了然，一般更便于项目长时期的维护。&lt;/p>
-&lt;p>当然，选择哪种配置方式没有绝对的优劣，和个人的偏好也不无关系。&lt;/p>
-&lt;h3 id="添加自定义的filterinterceptor等">添加自定义的Filter、Interceptor等&lt;/h3>
-&lt;p>Dubbo的REST也支持JAX-RS标准的Filter和Interceptor，以方便对REST的请求与响应过程做定制化的拦截处理。&lt;/p>
-&lt;p>其中，Filter主要用于访问和设置HTTP请求和响应的参数、URI等等。例如，设置HTTP响应的cache header：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">CacheControlFilter&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> ContainerResponseFilter &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">filter&lt;/span>&lt;span style="color:#719e07">(&lt;/span>ContainerRequestContext req&lt;span style="color:#719e07">,&lt;/span> ContainerResponseContext res&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>req&lt;span style="color:#719e07">.&lt;/span>getMethod&lt;span style="color:#719e07">().&lt;/span>equals&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;GET&amp;#34;&lt;/span>&lt;span style="color:#719e07">))&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> res&lt;span style="color:#719e07">.&lt;/span>getHeaders&lt;span style="color:#719e07">().&lt;/span>add&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Cache-Control&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#2aa198">&amp;#34;someValue&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Interceptor主要用于访问和修改输入与输出字节流，例如，手动添加GZIP压缩：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">GZIPWriterInterceptor&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> WriterInterceptor &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Override&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">aroundWriteTo&lt;/span>&lt;span style="color:#719e07">(&lt;/span>WriterInterceptorContext context&lt;span style="color:#719e07">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">throws&lt;/span> IOException&lt;span style="color:#719e07">,&lt;/span> WebApplicationException &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> OutputStream outputStream &lt;span style="color:#719e07">=&lt;/span> context&lt;span style="color:#719e07">.&lt;/span>getOutputStream&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> context&lt;span style="color:#719e07">.&lt;/span>setOutputStream&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">new&lt;/span> GZIPOutputStream&lt;span style="color:#719e07">(&lt;/span>outputStream&lt;span style="color:#719e07">));&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> context&lt;span style="color:#719e07">.&lt;/span>proceed&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在标准JAX-RS应用中，我们一般是为Filter和Interceptor添加@Provider annotation，然后JAX-RS runtime会自动发现并启用它们。而在dubbo中，我们是通过添加XML配置的方式来注册Filter和Interceptor：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;rest&amp;#34;&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;8888&amp;#34;&lt;/span> extension=&lt;span style="color:#2aa198">&amp;#34;xxx.TraceInterceptor, xxx.TraceFilter&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在此，我们可以将Filter、Interceptor和DynamicFeature这三种类型的对象都添加到&lt;code>extension&lt;/code>属性上，多个之间用逗号分隔。（DynamicFeature是另一个接口，可以方便我们更动态的启用Filter和Interceptor，感兴趣请自行google。）&lt;/p>
-&lt;p>当然，dubbo自身也支持Filter的概念，但我们这里讨论的Filter和Interceptor更加接近协议实现的底层，相比dubbo的filter，可以做更底层的定制化。&lt;/p>
-&lt;blockquote>
-&lt;p>注：这里的XML属性叫extension，而不是叫interceptor或者filter，是因为除了Interceptor和Filter，未来我们还会添加更多的扩展类型。&lt;/p>
-&lt;/blockquote>
-&lt;p>如果REST的消费端也是dubbo系统（参见下文的讨论），则也可以用类似方式为消费端配置Interceptor和Filter。但注意，JAX-RS中消费端的Filter和提供端的Filter是两种不同的接口。例如前面例子中服务端是ContainerResponseFilter接口，而消费端对应的是ClientResponseFilter:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">LoggingFilter&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> ClientResponseFilter &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">filter&lt;/span>&lt;span style="color:#719e07">(&lt;/span>ClientRequestContext reqCtx&lt;span style="color:#719e07">,&lt;/span> ClientResponseContext resCtx&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#268bd2">throws&lt;/span> IOException &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;status: &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> resCtx&lt;span style="color:#719e07">.&lt;/span>getStatus&lt;span style="color:#719e07">());&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;date: &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> resCtx&lt;span style="color:#719e07">.&lt;/span>getDate&lt;span style="color:#719e07">());&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;last-modified: &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> resCtx&lt;span style="color:#719e07">.&lt;/span>getLastModified&lt;span style="color:#719e07">());&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;location: &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> resCtx&lt;span style="color:#719e07">.&lt;/span>getLocation&lt;span style="color:#719e07">());&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;headers:&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">for&lt;/span> &lt;span style="color:#719e07">(&lt;/span>Entry&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">,&lt;/span> List&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span> header &lt;span style="color:#719e07">:&lt;/span> resCtx&lt;span style="color:#719e07">.&lt;/span>getHeaders&lt;span style="color:#719e07">().&lt;/span>entrySet&lt;span style="color:#719e07">())&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>print&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;\t&amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> header&lt;span style="color:#719e07">.&lt;/span>getKey&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34; :&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">for&lt;/span> &lt;span style="color:#719e07">(&lt;/span>String value &lt;span style="color:#719e07">:&lt;/span> header&lt;span style="color:#719e07">.&lt;/span>getValue&lt;span style="color:#719e07">())&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>print&lt;span style="color:#719e07">(&lt;/span>value &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34;, &amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>print&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;\n&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> System&lt;span style="color:#719e07">.&lt;/span>out&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;media-type: &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> resCtx&lt;span style="color:#719e07">.&lt;/span>getMediaType&lt;span style="color:#719e07">().&lt;/span>getType&lt;span style="color:#719e07">());&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="添加自定义的exception处理">添加自定义的Exception处理&lt;/h3>
-&lt;p>Dubbo的REST也支持JAX-RS标准的ExceptionMapper，可以用来定制特定exception发生后应该返回的HTTP响应。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">CustomExceptionMapper&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> ExceptionMapper&lt;span style="color:#719e07">&amp;lt;&lt;/span>NotFoundException&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> Response &lt;span style="color:#268bd2">toResponse&lt;/span>&lt;span style="color:#719e07">(&lt;/span>NotFoundException e&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> Response&lt;span style="color:#719e07">.&lt;/span>status&lt;span style="color:#719e07">(&lt;/span>Response&lt;span style="color:#719e07">.&lt;/span>Status&lt;span style="color:#719e07">.&lt;/span>NOT_FOUND&lt;span style="color:#719e07">).&lt;/span>entity&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;Oops! the requested resource is not found!&amp;#34;&lt;/span>&lt;span style="color:#719e07">).&lt;/span>type&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;text/plain&amp;#34;&lt;/span>&lt;span style="color:#719e07">).&lt;/span>build&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>和Interceptor、Filter类似，将其添加到XML配置文件中即可启用：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;rest&amp;#34;&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;8888&amp;#34;&lt;/span> extension=&lt;span style="color:#2aa198">&amp;#34;xxx.CustomExceptionMapper&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="配置http日志输出">配置HTTP日志输出&lt;/h3>
-&lt;p>Dubbo rest支持输出所有HTTP请求/响应中的header字段和body消息体。&lt;/p>
-&lt;p>在XML配置中添加如下自带的REST filter：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;rest&amp;#34;&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;8888&amp;#34;&lt;/span> extension=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.rpc.protocol.rest.support.LoggingFilter&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后配置在logging配置中至少为org.apache.dubbo.rpc.protocol.rest.support打开INFO级别日志输出，例如，在log4j.xml中配置：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;logger&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.rpc.protocol.rest.support&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;level&lt;/span> value=&lt;span style="color:#2aa198">&amp;#34;INFO&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;appender-ref&lt;/span> ref=&lt;span style="color:#2aa198">&amp;#34;CONSOLE&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/logger&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>当然，你也可以直接在ROOT logger打开INFO级别日志输出：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;root&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;level&lt;/span> value=&lt;span style="color:#2aa198">&amp;#34;INFO&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;appender-ref&lt;/span> ref=&lt;span style="color:#2aa198">&amp;#34;CONSOLE&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/root&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后在日志中会有类似如下的内容输出：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>The HTTP headers are:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>accept: application/json;charset=UTF-8
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>accept-encoding: gzip, deflate
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>connection: Keep-Alive
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>content-length: 22
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>content-type: application/json
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>host: 192.168.1.100:8888
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>user-agent: Apache-HttpClient/4.2.1 (java 1.5)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>The contents of request body is:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{&amp;#34;id&amp;#34;:1,&amp;#34;name&amp;#34;:&amp;#34;dang&amp;#34;}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>打开HTTP日志输出后，除了正常日志输出的性能开销外，也会在比如HTTP请求解析时产生额外的开销，因为需要建立额外的内存缓冲区来为日志的输出做数据准备。&lt;/p>
-&lt;h3 id="输入参数的校验">输入参数的校验&lt;/h3>
-&lt;p>dubbo的rest支持采用Java标准的bean validation annotation（JSR 303)来做输入校验http://beanvalidation.org/&lt;/p>
-&lt;p>为了和其他dubbo远程调用协议保持一致，在rest中作校验的annotation必须放在服务的接口上，例如：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">UserService&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> User &lt;span style="color:#268bd2">getUser&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#268bd2">@Min&lt;/span>&lt;span style="color:#719e07">(&lt;/span>value&lt;span style="color:#719e07">=&lt;/span>1L&lt;span style="color:#719e07">,&lt;/span> message&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">&amp;#34;User ID must be greater than 1&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span> Long id&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>当然，在很多其他的bean validation的应用场景都是将annotation放到实现类而不是接口上。把annotation放在接口上至少有一个好处是，dubbo的客户端可以共享这个接口的信息，dubbo甚至不需要做远程调用，在本地就可以完成输入校验。&lt;/p>
-&lt;p>然后按照dubbo的标准方式在XML配置中打开验证：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">xxx.UserService&amp;#34;&lt;/span> ref=&lt;span style="color:#2aa198">&amp;#34;userService&amp;#34;&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;rest&amp;#34;&lt;/span> validation=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在dubbo的其他很多远程调用协议中，如果输入验证出错，是直接将&lt;code>RpcException&lt;/code>抛向客户端，而在rest中由于客户端经常是非dubbo，甚至非java的系统，所以不便直接抛出Java异常。因此，目前我们将校验错误以XML的格式返回：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;violationReport&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;constraintViolations&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;path&amp;gt;&lt;/span>getUserArgument0&lt;span style="color:#268bd2">&amp;lt;/path&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;message&amp;gt;&lt;/span>User ID must be greater than 1&lt;span style="color:#268bd2">&amp;lt;/message&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;value&amp;gt;&lt;/span>0&lt;span style="color:#268bd2">&amp;lt;/value&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;/constraintViolations&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/violationReport&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>稍后也会支持其他数据格式的返回值。至于如何对验证错误消息作国际化处理，直接参考bean validation的相关文档即可。&lt;/p>
-&lt;p>如果你认为默认的校验错误返回格式不符合你的要求，可以如上面章节所述，添加自定义的ExceptionMapper来自由的定制错误返回格式。需要注意的是，这个ExceptionMapper必须用泛型声明来捕获dubbo的RpcException，才能成功覆盖dubbo rest默认的异常处理策略。为了简化操作，其实这里最简单的方式是直接继承dubbo rest的RpcExceptionMapper，并覆盖其中处理校验异常的方法即可：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">MyValidationExceptionMapper&lt;/span> &lt;span style="color:#268bd2">extends&lt;/span> RpcExceptionMapper &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">protected&lt;/span> Response &lt;span style="color:#268bd2">handleConstraintViolationException&lt;/span>&lt;span style="color:#719e07">(&lt;/span>ConstraintViolationException cve&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ViolationReport report &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ViolationReport&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">for&lt;/span> &lt;span style="color:#719e07">(&lt;/span>ConstraintViolation cv &lt;span style="color:#719e07">:&lt;/span> cve&lt;span style="color:#719e07">.&lt;/span>getConstraintViolations&lt;span style="color:#719e07">())&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> report&lt;span style="color:#719e07">.&lt;/span>addConstraintViolation&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">new&lt;/span> RestConstraintViolation&lt;span style="color:#719e07">(&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cv&lt;span style="color:#719e07">.&lt;/span>getPropertyPath&lt;span style="color:#719e07">().&lt;/span>toString&lt;span style="color:#719e07">(),&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cv&lt;span style="color:#719e07">.&lt;/span>getMessage&lt;span style="color:#719e07">(),&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cv&lt;span style="color:#719e07">.&lt;/span>getInvalidValue&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span> &lt;span style="color:#719e07">?&lt;/span> &lt;span style="color:#2aa198">&amp;#34;null&amp;#34;&lt;/span> &lt;span style="color:#719e07">:&lt;/span> cv&lt;span style="color:#719e07">.&lt;/span>getInvalidValue&lt;span style="color:#719e07">().&lt;/span>toString&lt;span style="color:#719e07">()));&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// 采用json输出代替xml输出
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">return&lt;/span> Response&lt;span style="color:#719e07">.&lt;/span>status&lt;span style="color:#719e07">(&lt;/span>Response&lt;span style="color:#719e07">.&lt;/span>Status&lt;span style="color:#719e07">.&lt;/span>INTERNAL_SERVER_ERROR&lt;span style="color:#719e07">).&lt;/span>entity&lt;span style="color:#719e07">(&lt;/span>report&lt;span style="color:#719e07">).&lt;/span>type&lt;span style="color:#719e07">(&lt;/span>ContentType&lt;span style="color:#719e07">.&lt;/span>APPLICATION_JSON_UTF_8&lt;span style="color:#719e07">).&lt;/span>build&lt;span style="color:#719e07">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后将这个ExceptionMapper添加到XML配置中即可：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;rest&amp;#34;&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;8888&amp;#34;&lt;/span> extension=&lt;span style="color:#2aa198">&amp;#34;xxx.MyValidationExceptionMapper&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
