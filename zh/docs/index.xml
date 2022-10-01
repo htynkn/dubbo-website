@@ -7465,7 +7465,7 @@ Pixiu 的整体设计遵守以下原则：&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl label namespace &lt;span style="color:#2aa198">${&lt;/span>&lt;span style="color:#268bd2">your&lt;/span> namespace&lt;span style="color:#2aa198">}&lt;/span> istio-injection&lt;span style="color:#719e07">=&lt;/span>disabled --overwrite
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="6-注意事项">6 注意事项&lt;/h2>
 &lt;ol>
-&lt;li>示例中，生产者消费者都属于同一个namespace；如果需要调用不同的namespace的提供者，需要按如下配置(&lt;strong>dubbo版本&amp;gt;=3.1.1&lt;/strong>)：&lt;/li>
+&lt;li>示例中，生产者消费者都属于同一个namespace；如果需要调用不同的namespace的提供者，需要按如下配置(&lt;strong>dubbo版本&amp;gt;=3.1.2&lt;/strong>)：&lt;/li>
 &lt;/ol>
 &lt;p>注解方式：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@DubboReference&lt;/span>&lt;span style="color:#719e07">(&lt;/span>providedBy &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;istio-demo-dubbo-producer&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span>providerPort &lt;span style="color:#719e07">=&lt;/span> 20885&lt;span style="color:#719e07">,&lt;/span> providerNamespace &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;istio-demo&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
