@@ -7274,7 +7274,7 @@ Pixiu 的整体设计遵守以下原则：&lt;/p>
 &lt;/ul>
 &lt;h3 id="123-补充网关场景">1.2.3 补充网关场景&lt;/h3>
 &lt;p>TBD&lt;br />&lt;br />&lt;/p>
-&lt;h3 id="134-模拟-stream-通信场景的吞吐量提升">1.3.4 模拟 Stream 通信场景的吞吐量提升&lt;/h3>
+&lt;h3 id="124-模拟-stream-通信场景的吞吐量提升">1.2.4 模拟 Stream 通信场景的吞吐量提升&lt;/h3>
 &lt;p>TBD&lt;/p></description></item><item><title>Overview: Dubbo proxy mesh using Envoy &amp; Istio</title><link>https://dubbo.apache.org/zh/overview/tasks/mesh/dubbo-mesh/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/overview/tasks/mesh/dubbo-mesh/</guid><description>
 &lt;p>遵循以下步骤，可以轻松掌握如何开发符合 Service Mesh 架构的 Dubbo 服务，并将其部署到 Kubernetes 并接入 Istio 的流量治理体系。在此查看 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-mesh-k8s">完整示例源码&lt;/a>&lt;/p>
 &lt;h2 id="1-总体目标">1 总体目标&lt;/h2>
