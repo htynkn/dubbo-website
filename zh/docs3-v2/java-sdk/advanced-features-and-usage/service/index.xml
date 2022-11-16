@@ -1529,9 +1529,12 @@ broadcast.fail.percent 只是控制的当失败后是否继续调用其他节点
 &lt;li>对于其他序列化格式，需要特殊配置&lt;/li>
 &lt;/ol></description></item><item><title>Docs3-V2: 流式通信</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/streaming/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/streaming/</guid><description>
 &lt;p>TBD&lt;/p></description></item><item><title>Docs3-V2: 线程池隔离</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/isolation-executor/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/isolation-executor/</guid><description>
-&lt;h1 id="线程池隔离">线程池隔离&lt;/h1>
+&lt;h2 id="特性说明">特性说明&lt;/h2>
 &lt;p>一种新的线程池管理方式，使得提供者应用内各个服务的线程池隔离开来，互相独立，某个服务的线程池资源耗尽不会影响其他正常服务。支持线程池可配置化，由用户手动指定。&lt;/p>
-&lt;h1 id="新增配置参数">新增配置参数&lt;/h1>
+&lt;h2 id="使用场景">使用场景&lt;/h2>
+&lt;h2 id="使用方式">使用方式&lt;/h2>
+&lt;p>目前可以以 API、XML、Annotation 的方式进行配置&lt;/p>
+&lt;p>&lt;strong>配置参数&lt;/strong>&lt;/p>
 &lt;ul>
 &lt;li>&lt;code>ApplicationConfig&lt;/code> 新增 &lt;code>String executor-management-mode&lt;/code> 参数，配置值为 &lt;code>default&lt;/code> 和 &lt;code>isolation&lt;/code> ，默认为 &lt;code>default&lt;/code>。
 &lt;ul>
@@ -1541,10 +1544,10 @@ broadcast.fail.percent 只是控制的当失败后是否继续调用其他节点
 &lt;/li>
 &lt;li>&lt;code>ServiceConfig&lt;/code> 新增 &lt;code>Executor executor&lt;/code> 参数，&lt;strong>用以服务间隔离的线程池&lt;/strong>，可以由用户配置化、提供自己想要的线程池，若没有指定，则会根据协议配置(&lt;code>ProtocolConfig&lt;/code>)信息构建默认的线程池用以服务隔离。&lt;/li>
 &lt;/ul>
-&lt;p>&lt;strong>注意&lt;/strong>&lt;code>ServiceConfig&lt;/code> 新增 &lt;code>Executor executor&lt;/code> 配置参数只有指定&lt;code>executor-management-mode = isolation&lt;/code> 才生效。&lt;/p>
-&lt;h1 id="配置方式">配置方式&lt;/h1>
-&lt;p>目前可以以 API、XML、Annotation 的方式进行配置&lt;/p>
-&lt;h2 id="api">API&lt;/h2>
+&lt;blockquote>
+&lt;p>&lt;code>ServiceConfig&lt;/code> 新增 &lt;code>Executor executor&lt;/code> 配置参数只有指定&lt;code>executor-management-mode = isolation&lt;/code> 才生效。&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="api">API&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">test&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// provider app
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> DubboBootstrap providerBootstrap &lt;span style="color:#719e07">=&lt;/span> DubboBootstrap&lt;span style="color:#719e07">.&lt;/span>newInstance&lt;span style="color:#719e07">();&lt;/span>
@@ -1591,7 +1594,7 @@ broadcast.fail.percent 只是控制的当失败后是否继续调用其他节点
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> providerBootstrap&lt;span style="color:#719e07">.&lt;/span>start&lt;span style="color:#719e07">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="xml">XML&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="xml">XML&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;beans&lt;/span> xmlns:xsi=&lt;span style="color:#2aa198">&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> xmlns:dubbo=&lt;span style="color:#2aa198">&amp;#34;http://dubbo.apache.org/schema/dubbo&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> xmlns=&lt;span style="color:#2aa198">&amp;#34;http://www.springframework.org/schema/beans&amp;#34;&lt;/span>
@@ -1635,7 +1638,7 @@ broadcast.fail.percent 只是控制的当失败后是否继续调用其他节点
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> timeout=&lt;span style="color:#2aa198">&amp;#34;5000&amp;#34;&lt;/span> ref=&lt;span style="color:#2aa198">&amp;#34;helloServiceV3&amp;#34;&lt;/span> registry=&lt;span style="color:#2aa198">&amp;#34;registry1&amp;#34;&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;dubbo,tri&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/beans&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="annotation">Annotation&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="annotation">Annotation&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@Configuration&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@EnableDubbo&lt;/span>&lt;span style="color:#719e07">(&lt;/span>scanBasePackages &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.config.spring.isolation.spring.annotation.provider&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">ProviderConfiguration&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
