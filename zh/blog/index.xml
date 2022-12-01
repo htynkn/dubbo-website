@@ -1,4 +1,55 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – Apache Dubbo 博客</title><link>https://dubbo.apache.org/zh/blog/</link><description>Recent content in Apache Dubbo 博客 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: Apache Dubbo 多语言体系再添新员：首个 Rust 语言版本正式发布</title><link>https://dubbo.apache.org/zh/blog/2022/10/23/apache-dubbo-%E5%A4%9A%E8%AF%AD%E8%A8%80%E4%BD%93%E7%B3%BB%E5%86%8D%E6%B7%BB%E6%96%B0%E5%91%98%E9%A6%96%E4%B8%AA-rust-%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC%E6%AD%A3%E5%BC%8F%E5%8F%91%E5%B8%83/</link><pubDate>Sun, 23 Oct 2022 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2022/10/23/apache-dubbo-%E5%A4%9A%E8%AF%AD%E8%A8%80%E4%BD%93%E7%B3%BB%E5%86%8D%E6%B7%BB%E6%96%B0%E5%91%98%E9%A6%96%E4%B8%AA-rust-%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC%E6%AD%A3%E5%BC%8F%E5%8F%91%E5%B8%83/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – Apache Dubbo 博客</title><link>https://dubbo.apache.org/zh/blog/</link><description>Recent content in Apache Dubbo 博客 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://dubbo.apache.org/zh/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: Dubbo 3.1.3、3.2.0-beta.2 正式发布</title><link>https://dubbo.apache.org/zh/blog/2022/11/29/dubbo-3.1.33.2.0-beta.2-%E6%AD%A3%E5%BC%8F%E5%8F%91%E5%B8%83/</link><pubDate>Tue, 29 Nov 2022 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2022/11/29/dubbo-3.1.33.2.0-beta.2-%E6%AD%A3%E5%BC%8F%E5%8F%91%E5%B8%83/</guid><description>
+&lt;h2 id="dubbo-313">Dubbo 3.1.3&lt;/h2>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/release/3-1-3.png" alt="image.png">&lt;/p>
+&lt;h3 id="修改内容">修改内容&lt;/h3>
+&lt;ul>
+&lt;li>修复本地调用的过程中 Filter 顺序异常的问题&lt;/li>
+&lt;li>支持导入协议配置项到 MetadataService&lt;/li>
+&lt;li>支持在发布 MetadataService 时自动选择可用端口&lt;/li>
+&lt;li>完善错误码内容&lt;/li>
+&lt;li>泛化调用下支持一致性哈希负载均衡&lt;/li>
+&lt;li>修复泛化调用时反序列化异常的问题&lt;/li>
+&lt;li>修复由于 JVM Methods 顺序不一致导致的应用级元数据无法复用的问题&lt;/li>
+&lt;li>默认关闭端口复用能力，修复 remoting 组建找不到 SPI 的问题&lt;/li>
+&lt;li>修复由于引用计数异常导致的 safe gard 问题&lt;/li>
+&lt;li>删除 Nacos 注册中心组建中使用的 guava 依赖&lt;/li>
+&lt;li>修复接口级使用 Nacos 注册中心时由于地址聚合导致的无法下线的问题&lt;/li>
+&lt;li>多个代码质量优化提交&lt;/li>
+&lt;/ul>
+&lt;h3 id="新贡献者">新贡献者&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/zhangzq7">@zhangzq7&lt;/a> 在 &lt;a href="https://github.com/apache/dubbo/pull/10847">#10847&lt;/a> 中提交了第一个贡献&lt;/li>
+&lt;li>&lt;a href="https://github.com/nobodyw-cell">@nobodyw-cell&lt;/a> 在 &lt;a href="https://github.com/apache/dubbo/pull/10799">#10799&lt;/a> 中提交了第一个贡献&lt;/li>
+&lt;li>&lt;a href="https://github.com/wxbty">@wxbty&lt;/a> 在 &lt;a href="https://github.com/apache/dubbo/pull/10921">#10921&lt;/a> 中提交了第一个贡献&lt;/li>
+&lt;li>&lt;a href="https://github.com/haoxz11">@haoxz11&lt;/a> 在 &lt;a href="https://github.com/apache/dubbo/pull/10937">#10937&lt;/a> 中提交了第一个贡献&lt;/li>
+&lt;/ul>
+&lt;h2 id="dubbo-320-beta2">Dubbo 3.2.0-beta.2&lt;/h2>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/release/3-2-0-beta-2.png" alt="image.png">&lt;/p>
+&lt;h3 id="修改内容-1">修改内容&lt;/h3>
+&lt;ul>
+&lt;li>切换到在用户线程序列化，提升协议性能&lt;/li>
+&lt;li>支持 Netty3 的端口复用&lt;/li>
+&lt;li>修复存在多个用户配置的 providedBy 时不生效的问题&lt;/li>
+&lt;li>支持 istio 的 first-party-jwt 能力&lt;/li>
+&lt;li>删除 fastjson 和 gson 的传递依赖&lt;/li>
+&lt;li>支持可选 appResponse 不透传的能力&lt;/li>
+&lt;li>切换到 Fastjson2 为默认序列化依赖&lt;/li>
+&lt;li>完善注册中心推送的日志&lt;/li>
+&lt;li>修复路由刷新时机早于服务目录刷新时机的问题&lt;/li>
+&lt;li>关闭地址推空保护&lt;/li>
+&lt;li>更新支持 GraalVM Native 的 SPI 生成代码&lt;/li>
+&lt;li>支持使用 plain text 模式传输 xds 通道&lt;/li>
+&lt;li>支持 Nacos 批量注册，修复多注册覆盖的问题&lt;/li>
+&lt;li>支持 Spring Framework 6 and Spring Boot 3&lt;/li>
+&lt;li>多个代码质量优化提交&lt;/li>
+&lt;li>前述 Dubbo 3.1.3 的所有修改内容&lt;/li>
+&lt;/ul>
+&lt;h3 id="新贡献者-1">新贡献者&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/weixsun">@weixsun&lt;/a> 在 &lt;a href="https://github.com/apache/dubbo/pull/10941">#10941&lt;/a> 中提交了第一个贡献&lt;/li>
+&lt;/ul>
+&lt;h2 id="未来的版本规划">未来的版本规划&lt;/h2>
+&lt;p>3.0、3.1、3.2 有什么区别？未来会怎么发展？发版周期是怎么样的？更多的版本迭代规划也将在近期推出，欢迎关注 Apache Dubbo 官方公众号获取最新的信息。&lt;/p></description></item><item><title>Blog: Apache Dubbo 多语言体系再添新员：首个 Rust 语言版本正式发布</title><link>https://dubbo.apache.org/zh/blog/2022/10/23/apache-dubbo-%E5%A4%9A%E8%AF%AD%E8%A8%80%E4%BD%93%E7%B3%BB%E5%86%8D%E6%B7%BB%E6%96%B0%E5%91%98%E9%A6%96%E4%B8%AA-rust-%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC%E6%AD%A3%E5%BC%8F%E5%8F%91%E5%B8%83/</link><pubDate>Sun, 23 Oct 2022 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2022/10/23/apache-dubbo-%E5%A4%9A%E8%AF%AD%E8%A8%80%E4%BD%93%E7%B3%BB%E5%86%8D%E6%B7%BB%E6%96%B0%E5%91%98%E9%A6%96%E4%B8%AA-rust-%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC%E6%AD%A3%E5%BC%8F%E5%8F%91%E5%B8%83/</guid><description>
 &lt;p>Dubbo Rust 定位为 Dubbo 多语言体系的重要实现，提供高性能、易用、可扩展的 RPC 框架，同时通过接入 Dubbo Mesh 体系提供丰富的服务治理能力。本文主要为大家介绍 Dubbo Rust 项目基本情况，通过一个示例快速体验 Rust 首个正式版本特性，并给出了 Dubbo Rust 社区的近期规划，适合于关注或正在采用 Rust 语言的开发者与企业用户阅读。&lt;/p>
 &lt;h2 id="1-dubbo-rust-简介">1 Dubbo Rust 简介&lt;/h2>
 &lt;p>Dubbo 作为 Apache 基金会最活跃的明星项目之一，同时也是国内最受欢迎的开源微服务框架，在易用性、高性能通信、服务治理等方面有着非常大的优势，通过 Dubbo3、Dubbo Mesh 等提供了云原生友好的开发与部署模式。与此同时，Dubbo 的多语言体系也得到了快速发展，长期以来提供的有 Java、Golang 两种语言实现，Rust、Node、Python、C++ 等语言实现的支持也已在社区正式启动。&lt;/p>
@@ -14622,373 +14673,4 @@ HTTP 协议与 dubbo 协议之间的映射关系。&lt;/p>
 &lt;/ul>
 &lt;p>新一代的 RPC 协议和应用级服务发现模型将会是这一部分的前置基础。&lt;/p>
 &lt;h1 id="总结与展望">总结与展望&lt;/h1>
-&lt;p>作为系列文章开篇，我们在这里对 Dubbo 过去一年的成绩做了简要的总结与回顾，包括 Dubbo 社区、产品迭代的发展。接下来我们会看到更多来自深度 Dubbo 用户的落地经验分享，Dubbo-go 子社区的发展故事等。更重要的，我们也对下一代云原生 Dubbo - Dubbo 3.0 做了展望，后续关于 Dubbo 3.0 Roadmap、方案设计与进展解析等也将在此系列中发布。&lt;/p></description></item><item><title>Blog: 记一次在 mosn 对 dubbo、dubbo-go-hessian2 的性能优化</title><link>https://dubbo.apache.org/zh/blog/2021/01/14/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%9C%A8-mosn-%E5%AF%B9-dubbodubbo-go-hessian2-%E7%9A%84%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</link><pubDate>Thu, 14 Jan 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2021/01/14/%E8%AE%B0%E4%B8%80%E6%AC%A1%E5%9C%A8-mosn-%E5%AF%B9-dubbodubbo-go-hessian2-%E7%9A%84%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</guid><description>
-&lt;h3 id="背景">背景&lt;/h3>
-&lt;p>蚂蚁内部对 Service Mesh 的稳定性和性能要求是比较高的，内部 mosn 广泛用于生产环境。在云上和开源社区，RPC 领域 dubbo 和 spring cloud 同样广泛用于生产环境，我们在 mosn 基础上，支持了 dubbo 和 spring cloud 流量代理。我们发现在支持 dubbo 协议过程中，经过 Mesh 流量代理后，性能有非常大的性能损耗，在大商户落地 Mesh 中也对性能有较高要求，因此本文会重点描述在基于 Go 语言库 &lt;a href="https://github.com/apache/dubbo-go-hessian2">dubbo-go-hessian2&lt;/a> 、dubbo 协议中对 &lt;a href="https://github.com/mosn/mosn">mosn&lt;/a> 所做的性能优化。&lt;/p>
-&lt;h3 id="性能优化概述">性能优化概述&lt;/h3>
-&lt;p>根据实际业务部署场景，并没有选用高性能机器，使用普通 linux 机器，配置和压测参数如下：&lt;/p>
-&lt;ul>
-&lt;li>Intel(R) Xeon(R) Platinum 8163 CPU @ 2.50GHz 4 核 16G 。&lt;/li>
-&lt;li>pod 配置 &lt;code>2c、1g&lt;/code>，JVM 参数 &lt;code>-server -Xms1024m -Xmx1024m&lt;/code>。&lt;/li>
-&lt;li>网络延迟 0.23 ms, 2 台 linux 机器，分别部署 server + mosn, 压测程序 &lt;a href="https://github.com/zonghaishang/rpc-performance">rpc-perfomance&lt;/a>。&lt;/li>
-&lt;/ul>
-&lt;p>经过 3 轮性能优化后，使用优化版本 mosn 将会获得以下性能收益（框架随机 512 和 1k 字节压测）：&lt;/p>
-&lt;ul>
-&lt;li>512 字节数据：mosn + dubbo 服务调用 TPS 整体提升 55-82.8%，RT 降低 45% 左右，内存占用 40M，&lt;/li>
-&lt;li>1k 数据：mosn + dubbo 服务调用 TPS 整体提升 51.1-69.3%，RT 降低 41% 左右, 内存占用 41M。&lt;/li>
-&lt;/ul>
-&lt;h3 id="性能优化工具-pprof">性能优化工具 pprof&lt;/h3>
-&lt;p>磨刀不误砍柴工，在性能优化前首先要找到性能卡点，找到性能卡点后，另一个难点就是如何用高效代码优化替代 slow code。因为蚂蚁 Service Mesh 是基于 go 语言实现的，我们首选 go 自带的 pprof 性能工具，我们简要介绍这个工具如何使用。如果我们 go 库自带 http.Server 时并且在 main 头部导入&lt;code>import _ &amp;quot;net/http/pprof&amp;quot;&lt;/code>，go 会帮我们挂载对应的 handler , 详细可以参考 &lt;a href="https://pkg.go.dev/net/http/pprof?tab=doc">godoc&lt;/a> 。&lt;/p>
-&lt;p>因为 mosn 默认会在&lt;code>34902&lt;/code>端口暴露 http 服务，通过以下命令轻松获取 mosn 的性能诊断文件：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>go tool pprof -seconds &lt;span style="color:#2aa198">60&lt;/span> http://benchmark-server-ip:34902/debug/pprof/profile
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># 会生成类似以下文件，该命令采样cpu 60秒&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># pprof.mosn.samples.cpu.001.pb.gz&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后继续用 pprof 打开诊断文件，方便在浏览器查看，在图 1-1 给出压测后 profiler 火焰图：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># http=:8000代表pprof打开8000端口然后用于web浏览器分析&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># mosnd代表mosn的二进制可执行文件，用于分析代码符号&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># pprof.mosn.samples.cpu.001.pb.gz是cpu诊断文件&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>go tool pprof -http&lt;span style="color:#719e07">=&lt;/span>:8000 mosnd pprof.mosn.samples.cpu.001.pb.gz
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/moson-optimize/p1.png" alt="">&lt;/p>
-&lt;p>图 1-1 mosn 性能压测火焰图&lt;/p>
-&lt;p>在获得诊断数据后，可以切到浏览器 Flame Graph（火焰图，go 1.11 以上版本自带），火焰图的 x 轴坐标代表 CPU 消耗情况， y 轴代码方法调用堆栈。在优化开始之前，我们借助 go 工具 pprof 可以诊断出大致的性能卡点在以下几个方面（直接压 server 端 mosn）：&lt;/p>
-&lt;ul>
-&lt;li>mosn 在接收 dubbo 请求，CPU 卡点在 streamConnection.Dispatch&lt;/li>
-&lt;li>mosn 在转发 dubbo 请求，CPU 卡点在 downStream.Receive&lt;/li>
-&lt;/ul>
-&lt;p>可以点击火焰图任意横条，进去查看长方块耗时和堆栈明细（请参考图 1-2 和 1-3 所示）：&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/moson-optimize/p2.png" alt="">&lt;/p>
-&lt;p>图 1-2 Dispatch 火焰图明细&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/moson-optimize/p3.png" alt="">&lt;/p>
-&lt;p>图 1-3 Receive 火焰图明细&lt;/p>
-&lt;h3 id="性能优化思路">性能优化思路&lt;/h3>
-&lt;p>本文重点记录优化了哪些 case 才能提升 50% 以上的吞吐量和降低 RT，因此后面直接分析当前优化了哪些 case。在此之前，我们以 Dispatch 为例，看下它为甚么那么吃性能 。在 terminal 中通过以下命令可以查看代码行耗费 CPU 数据（代码有删减）：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">go&lt;/span> tool pprof mosnd pprof.mosn.samples.cpu&lt;span style="color:#2aa198">.001&lt;/span>.pb.&lt;span style="color:#268bd2">gz&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>(pprof) list Dispatch
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Total: &lt;span style="color:#2aa198">1.75&lt;/span>mins
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#2aa198">370&lt;/span>ms &lt;span style="color:#2aa198">37.15&lt;/span>&lt;span style="color:#268bd2">s&lt;/span> (flat, cum) &lt;span style="color:#2aa198">35.46&lt;/span>&lt;span style="color:#719e07">%&lt;/span> of Total
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#2aa198">10&lt;/span>ms &lt;span style="color:#2aa198">10&lt;/span>ms &lt;span style="color:#2aa198">123&lt;/span>:&lt;span style="color:#268bd2">func&lt;/span> (conn &lt;span style="color:#719e07">*&lt;/span>streamConnection) &lt;span style="color:#268bd2">Dispatch&lt;/span>(buffer types.IoBuffer) {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#2aa198">40&lt;/span>ms &lt;span style="color:#2aa198">630&lt;/span>ms &lt;span style="color:#2aa198">125&lt;/span>: log.DefaultLogger.&lt;span style="color:#268bd2">Tracef&lt;/span>(&lt;span style="color:#2aa198">&amp;#34;stream connection dispatch data string = %v&amp;#34;&lt;/span>, buffer.&lt;span style="color:#268bd2">String&lt;/span>())
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . . &lt;span style="color:#2aa198">126&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . . &lt;span style="color:#2aa198">127&lt;/span>: &lt;span style="color:#586e75">// get sub protocol codec
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> . &lt;span style="color:#2aa198">250&lt;/span>ms &lt;span style="color:#2aa198">128&lt;/span>: requestList &lt;span style="color:#719e07">:=&lt;/span> conn.codec.&lt;span style="color:#268bd2">SplitFrame&lt;/span>(buffer.&lt;span style="color:#268bd2">Bytes&lt;/span>())
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#2aa198">20&lt;/span>ms &lt;span style="color:#2aa198">20&lt;/span>ms &lt;span style="color:#2aa198">129&lt;/span>: &lt;span style="color:#719e07">for&lt;/span> _, request &lt;span style="color:#719e07">:=&lt;/span> &lt;span style="color:#719e07">range&lt;/span> requestList {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#2aa198">10&lt;/span>ms &lt;span style="color:#2aa198">160&lt;/span>ms &lt;span style="color:#2aa198">134&lt;/span>: headers &lt;span style="color:#719e07">:=&lt;/span> &lt;span style="color:#b58900">make&lt;/span>(&lt;span style="color:#268bd2">map&lt;/span>[&lt;span style="color:#dc322f">string&lt;/span>]&lt;span style="color:#dc322f">string&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . . &lt;span style="color:#2aa198">135&lt;/span>: &lt;span style="color:#586e75">// support dynamic route
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#2aa198">50&lt;/span>ms &lt;span style="color:#2aa198">920&lt;/span>ms &lt;span style="color:#2aa198">136&lt;/span>: headers[strings.&lt;span style="color:#268bd2">ToLower&lt;/span>(protocol.MosnHeaderHostKey)] = conn.connection.&lt;span style="color:#268bd2">RemoteAddr&lt;/span>().&lt;span style="color:#268bd2">String&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . . &lt;span style="color:#2aa198">149&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . . &lt;span style="color:#2aa198">150&lt;/span>: &lt;span style="color:#586e75">// get stream id
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#2aa198">10&lt;/span>ms &lt;span style="color:#2aa198">440&lt;/span>ms &lt;span style="color:#2aa198">151&lt;/span>: streamID &lt;span style="color:#719e07">:=&lt;/span> conn.codec.&lt;span style="color:#268bd2">GetStreamID&lt;/span>(request)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . . &lt;span style="color:#2aa198">156&lt;/span>: &lt;span style="color:#586e75">// request route
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> . &lt;span style="color:#2aa198">50&lt;/span>ms &lt;span style="color:#2aa198">157&lt;/span>: requestRouteCodec, ok &lt;span style="color:#719e07">:=&lt;/span> conn.codec.(xprotocol.RequestRouting)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . . &lt;span style="color:#2aa198">158&lt;/span>: &lt;span style="color:#719e07">if&lt;/span> ok {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . &lt;span style="color:#2aa198">20.11&lt;/span>s &lt;span style="color:#2aa198">159&lt;/span>: routeHeaders &lt;span style="color:#719e07">:=&lt;/span> requestRouteCodec.&lt;span style="color:#268bd2">GetMetas&lt;/span>(request)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . . &lt;span style="color:#2aa198">165&lt;/span>: }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . . &lt;span style="color:#2aa198">166&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . . &lt;span style="color:#2aa198">167&lt;/span>: &lt;span style="color:#586e75">// tracing
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#2aa198">10&lt;/span>ms &lt;span style="color:#2aa198">80&lt;/span>ms &lt;span style="color:#2aa198">168&lt;/span>: tracingCodec, ok &lt;span style="color:#719e07">:=&lt;/span> conn.codec.(xprotocol.Tracing)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . . &lt;span style="color:#2aa198">169&lt;/span>: &lt;span style="color:#268bd2">var&lt;/span> span types.Span
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . . &lt;span style="color:#2aa198">170&lt;/span>: &lt;span style="color:#719e07">if&lt;/span> ok {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#2aa198">10&lt;/span>ms &lt;span style="color:#2aa198">1.91&lt;/span>s &lt;span style="color:#2aa198">171&lt;/span>: serviceName &lt;span style="color:#719e07">:=&lt;/span> tracingCodec.&lt;span style="color:#268bd2">GetServiceName&lt;/span>(request)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . &lt;span style="color:#2aa198">2.17&lt;/span>s &lt;span style="color:#2aa198">172&lt;/span>: methodName &lt;span style="color:#719e07">:=&lt;/span> tracingCodec.&lt;span style="color:#268bd2">GetMethodName&lt;/span>(request)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . . &lt;span style="color:#2aa198">176&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . . &lt;span style="color:#2aa198">177&lt;/span>: &lt;span style="color:#719e07">if&lt;/span> trace.&lt;span style="color:#268bd2">IsEnabled&lt;/span>() {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . &lt;span style="color:#2aa198">50&lt;/span>ms &lt;span style="color:#2aa198">179&lt;/span>: tracer &lt;span style="color:#719e07">:=&lt;/span> trace.&lt;span style="color:#268bd2">Tracer&lt;/span>(protocol.Xprotocol)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . . &lt;span style="color:#2aa198">180&lt;/span>: &lt;span style="color:#719e07">if&lt;/span> tracer &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#cb4b16">nil&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#2aa198">20&lt;/span>ms &lt;span style="color:#2aa198">1.66&lt;/span>s &lt;span style="color:#2aa198">181&lt;/span>: span = tracer.&lt;span style="color:#268bd2">Start&lt;/span>(conn.context, headers, time.&lt;span style="color:#268bd2">Now&lt;/span>())
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . . &lt;span style="color:#2aa198">182&lt;/span>: }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . . &lt;span style="color:#2aa198">183&lt;/span>: }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . . &lt;span style="color:#2aa198">184&lt;/span>: }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . . &lt;span style="color:#2aa198">185&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . &lt;span style="color:#2aa198">110&lt;/span>ms &lt;span style="color:#2aa198">186&lt;/span>: reqBuf &lt;span style="color:#719e07">:=&lt;/span> networkbuffer.&lt;span style="color:#268bd2">NewIoBufferBytes&lt;/span>(request)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . . &lt;span style="color:#2aa198">188&lt;/span>: &lt;span style="color:#586e75">// append sub protocol header
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#2aa198">10&lt;/span>ms &lt;span style="color:#2aa198">950&lt;/span>ms &lt;span style="color:#2aa198">189&lt;/span>: headers[types.HeaderXprotocolSubProtocol] = &lt;span style="color:#b58900">string&lt;/span>(conn.subProtocol)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#2aa198">10&lt;/span>ms &lt;span style="color:#2aa198">4.96&lt;/span>s &lt;span style="color:#2aa198">190&lt;/span>: conn.&lt;span style="color:#268bd2">OnReceive&lt;/span>(ctx, streamID, protocol.&lt;span style="color:#268bd2">CommonHeader&lt;/span>(headers), reqBuf, span, isHearbeat)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#2aa198">30&lt;/span>ms &lt;span style="color:#2aa198">60&lt;/span>ms &lt;span style="color:#2aa198">191&lt;/span>: buffer.&lt;span style="color:#268bd2">Drain&lt;/span>(requestLen)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . . &lt;span style="color:#2aa198">192&lt;/span>: }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . . &lt;span style="color:#2aa198">193&lt;/span>:}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>通过上面 &lt;code>list Dispatch&lt;/code> 命令，性能卡点主要分布在 &lt;code>159&lt;/code> 、 &lt;code>171&lt;/code> 、&lt;code>172&lt;/code> 、 &lt;code>181&lt;/code> 、和 &lt;code>190&lt;/code> 等行，主要卡点在解码 dubbo 参数、重复解参数、tracer、发序列化和 log 等。&lt;/p>
-&lt;h4 id="1-优化-dubbo-解码-getmetas">1. 优化 dubbo 解码 GetMetas&lt;/h4>
-&lt;p>我们通过解码 dubbo 的 body 可以获得以下信息，调用的目标接口（ interface ）和调用方法的服务分组（ group ）等信息，但是需要跳过所有业务方法参数，目前使用开源的 &lt;a href="https://github.com/apache/dubbo-go-hessian2">dubbo-go-hessian2&lt;/a> 库，解析 string 和 map 性能较差, 提升 hessian 库解码性能，会在本文后面讲解。&lt;/p>
-&lt;p>&lt;strong>优化思路：&lt;/strong>&lt;/p>
-&lt;p>在 mosn 的 ingress 端（ mosn 直接转发请求给本地 java server 进程）, 我们根据请求的 path 和 version 窥探用户使用的 interface 和 group , 构建正确的 dataID 可以进行无脑转发，无需解码 body，榨取性能提升。&lt;/p>
-&lt;p>我们可以在服务注册时，构建服务发布的 path 、version 和 group 到 interface 、group 映射。在 mosn 转发 dubbo 请求时可以通过读锁查 cache + 跳过解码 body，加速 mosn 性能。&lt;/p>
-&lt;p>因此我们构建以下 cache 实现（数组 + 链表数据结构）, 可参见 &lt;a href="https://github.com/mosn/mosn/pull/1174/commits/9020ee9995cd15a7a4321a375a9506cf94dc70a8#diff-f5ff30debd68b8318c8236a0b5ccde07R6">优化代码 diff&lt;/a> ：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// metadata.go
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// DubboPubMetadata dubbo pub cache metadata
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#268bd2">var&lt;/span> DubboPubMetadata = &lt;span style="color:#719e07">&amp;amp;&lt;/span>Metadata{}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// DubboSubMetadata dubbo sub cache metadata
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#268bd2">var&lt;/span> DubboSubMetadata = &lt;span style="color:#719e07">&amp;amp;&lt;/span>Metadata{}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// Metadata cache service pub or sub metadata.
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// speed up for decode or encode dubbo peformance.
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// please do not use outside of the dubbo framwork.
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#268bd2">type&lt;/span> Metadata &lt;span style="color:#268bd2">struct&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> data &lt;span style="color:#268bd2">map&lt;/span>[&lt;span style="color:#dc322f">string&lt;/span>]&lt;span style="color:#719e07">*&lt;/span>Node
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mu sync.RWMutex &lt;span style="color:#586e75">// protect data internal
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// Find cached pub or sub metatada.
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// caller should be check match is true
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#268bd2">func&lt;/span> (m &lt;span style="color:#719e07">*&lt;/span>Metadata) &lt;span style="color:#268bd2">Find&lt;/span>(path, version &lt;span style="color:#dc322f">string&lt;/span>) (node &lt;span style="color:#719e07">*&lt;/span>Node, matched &lt;span style="color:#dc322f">bool&lt;/span>) {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// we found nothing
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">if&lt;/span> m.data &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#cb4b16">nil&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#cb4b16">nil&lt;/span>, &lt;span style="color:#cb4b16">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> m.mu.&lt;span style="color:#268bd2">RLocker&lt;/span>().&lt;span style="color:#268bd2">Lock&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// for performance
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#586e75">// m.mu.RLocker().Unlock() should be called.
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// we check head node first
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> head &lt;span style="color:#719e07">:=&lt;/span> m.data[path]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> head &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#cb4b16">nil&lt;/span> &lt;span style="color:#719e07">||&lt;/span> head.count &lt;span style="color:#719e07">&amp;lt;=&lt;/span> &lt;span style="color:#2aa198">0&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> m.mu.&lt;span style="color:#268bd2">RLocker&lt;/span>().&lt;span style="color:#268bd2">Unlock&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#cb4b16">nil&lt;/span>, &lt;span style="color:#cb4b16">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> node = head.Next
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// just only once, just return
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#586e75">// for dubbo framwork, that&amp;#39;s what we&amp;#39;re expected.
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">if&lt;/span> head.count &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#2aa198">1&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> m.mu.&lt;span style="color:#268bd2">RLocker&lt;/span>().&lt;span style="color:#268bd2">Unlock&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> node, &lt;span style="color:#cb4b16">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">var&lt;/span> count &lt;span style="color:#dc322f">int&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">var&lt;/span> found &lt;span style="color:#719e07">*&lt;/span>Node
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">for&lt;/span> ; node &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#cb4b16">nil&lt;/span>; node = node.Next {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> node.Version &lt;span style="color:#719e07">==&lt;/span> version {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> found &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#cb4b16">nil&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> found = node
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> count&lt;span style="color:#719e07">++&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> m.mu.&lt;span style="color:#268bd2">RLocker&lt;/span>().&lt;span style="color:#268bd2">Unlock&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> found, count &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#2aa198">1&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// Register pub or sub metadata
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#268bd2">func&lt;/span> (m &lt;span style="color:#719e07">*&lt;/span>Metadata) &lt;span style="color:#268bd2">Register&lt;/span>(path &lt;span style="color:#dc322f">string&lt;/span>, node &lt;span style="color:#719e07">*&lt;/span>Node) {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> m.mu.&lt;span style="color:#268bd2">Lock&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// for performance
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#586e75">// m.mu.Unlock() should be called.
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> m.data &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#cb4b16">nil&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> m.data = &lt;span style="color:#b58900">make&lt;/span>(&lt;span style="color:#268bd2">map&lt;/span>[&lt;span style="color:#dc322f">string&lt;/span>]&lt;span style="color:#719e07">*&lt;/span>Node, &lt;span style="color:#2aa198">4&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// we check head node first
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> head &lt;span style="color:#719e07">:=&lt;/span> m.data[path]
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> head &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#cb4b16">nil&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> head = &lt;span style="color:#719e07">&amp;amp;&lt;/span>Node{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> count: &lt;span style="color:#2aa198">1&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// update head
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> m.data[path] = head
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> insert &lt;span style="color:#719e07">:=&lt;/span> &lt;span style="color:#719e07">&amp;amp;&lt;/span>Node{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Service: node.Service,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Version: node.Version,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Group: node.Group,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> next &lt;span style="color:#719e07">:=&lt;/span> head.Next
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> next &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#cb4b16">nil&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// fist insert, just insert to head
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> head.Next = insert
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// record last element
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> head.last = insert
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> m.mu.&lt;span style="color:#268bd2">Unlock&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// we check already exist first
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">for&lt;/span> ; next &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#cb4b16">nil&lt;/span>; next = next.Next {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// we found it
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">if&lt;/span> next.Version &lt;span style="color:#719e07">==&lt;/span> node.Version &lt;span style="color:#719e07">&amp;amp;&amp;amp;&lt;/span> next.Group &lt;span style="color:#719e07">==&lt;/span> node.Group {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// release lock and no nothing
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> m.mu.&lt;span style="color:#268bd2">Unlock&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> head.count&lt;span style="color:#719e07">++&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// append node to the end of the list
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> head.last.Next = insert
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// update last element
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> head.last = insert
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> m.mu.&lt;span style="color:#268bd2">Unlock&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>通过服务注册时构建好的 cache，可以在 mosn 的 stream 做解码时命中 cache , 无需解码参数获取接口和 group 信息，可参见&lt;a href="https://github.com/mosn/mosn/pull/1174/commits/9020ee9995cd15a7a4321a375a9506cf94dc70a8#diff-73d1153005841c788c91116915f460a5R188">优化代码 diff&lt;/a> :&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// decoder.go
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// for better performance.
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// If the ingress scenario is not using group,
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// we can skip parsing attachment to improve performance
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">if&lt;/span> listener &lt;span style="color:#719e07">==&lt;/span> IngressDubbo {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> node, matched = DubboPubMetadata.&lt;span style="color:#268bd2">Find&lt;/span>(path, version); matched {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> meta[ServiceNameHeader] = node.Service
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> meta[GroupNameHeader] = node.Group
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>} &lt;span style="color:#719e07">else&lt;/span> &lt;span style="color:#719e07">if&lt;/span> listener &lt;span style="color:#719e07">==&lt;/span> EgressDubbo {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// for better performance.
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#586e75">// If the egress scenario is not using group,
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#586e75">// we can skip parsing attachment to improve performance
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">if&lt;/span> node, matched = DubboSubMetadata.&lt;span style="color:#268bd2">Find&lt;/span>(path, version); matched {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> meta[ServiceNameHeader] = node.Service
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> meta[GroupNameHeader] = node.Group
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在 mosn 的 egress 端（ mosn 直接转发请求给本地 java client 进程）, 我们采用类似的思路, 我们根据请求的 path 和 version 去窥探用户使用的 interface 和 group , 构建正确的 dataID 可以进行无脑转发，无需解码 body，榨取性能提升。&lt;/p>
-&lt;h4 id="2-优化-dubbo-解码参数">2. 优化 dubbo 解码参数&lt;/h4>
-&lt;p>在 dubbo 解码参数值的时候 ，mosn 采用的是 hessian 的正则表达式查找，非常耗费性能。我们先看下优化前后 benchmark 对比, 性能提升 50 倍。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>go &lt;span style="color:#b58900">test&lt;/span> -bench&lt;span style="color:#719e07">=&lt;/span>BenchmarkCountArgCount -run&lt;span style="color:#719e07">=&lt;/span>^$ -benchmem
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BenchmarkCountArgCountByRegex-12 &lt;span style="color:#2aa198">200000&lt;/span> &lt;span style="color:#2aa198">6236&lt;/span> ns/op &lt;span style="color:#2aa198">1472&lt;/span> B/op &lt;span style="color:#2aa198">24&lt;/span> allocs/op
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BenchmarkCountArgCountOptimized-12 &lt;span style="color:#2aa198">10000000&lt;/span> &lt;span style="color:#2aa198">124&lt;/span> ns/op &lt;span style="color:#2aa198">0&lt;/span> B/op &lt;span style="color:#2aa198">0&lt;/span> allocs/op
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>优化思路：&lt;/strong>&lt;/p>
-&lt;p>可以消除正则表达式，采用简单字符串解析识别参数类型个数， &lt;a href="https://github.com/zonghaishang/dubbo/blob/e0fd702825a274379fb609229bdb06ca0586122e/dubbo-common/src/main/java/org/apache/dubbo/common/utils/ReflectUtils.java#L370">dubbo 编码参数个数字符串实现&lt;/a> 并不复杂, 主要给对象加 L 前缀、数组加 [、primitive 类型有单字符代替。采用 go 可以实现同等解析, 可以参考&lt;a href="https://github.com/mosn/mosn/pull/1174/commits/9020ee9995cd15a7a4321a375a9506cf94dc70a8#diff-73d1153005841c788c91116915f460a5R245">优化代码 diff&lt;/a> ：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">func&lt;/span> &lt;span style="color:#268bd2">getArgumentCount&lt;/span>(desc &lt;span style="color:#dc322f">string&lt;/span>) &lt;span style="color:#dc322f">int&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> len &lt;span style="color:#719e07">:=&lt;/span> &lt;span style="color:#b58900">len&lt;/span>(desc)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> len &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#2aa198">0&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#2aa198">0&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">var&lt;/span> args, next = &lt;span style="color:#2aa198">0&lt;/span>, &lt;span style="color:#cb4b16">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">for&lt;/span> _, ch &lt;span style="color:#719e07">:=&lt;/span> &lt;span style="color:#719e07">range&lt;/span> desc {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// is array ?
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">if&lt;/span> ch &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#2aa198">&amp;#39;[&amp;#39;&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">continue&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// is object ?
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">if&lt;/span> next &lt;span style="color:#719e07">&amp;amp;&amp;amp;&lt;/span> ch &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#2aa198">&amp;#39;;&amp;#39;&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">continue&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">switch&lt;/span> ch {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">case&lt;/span> &lt;span style="color:#2aa198">&amp;#39;V&amp;#39;&lt;/span>, &lt;span style="color:#586e75">// void
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#2aa198">&amp;#39;Z&amp;#39;&lt;/span>, &lt;span style="color:#586e75">// boolean
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#2aa198">&amp;#39;B&amp;#39;&lt;/span>, &lt;span style="color:#586e75">// byte
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#2aa198">&amp;#39;C&amp;#39;&lt;/span>, &lt;span style="color:#586e75">// char
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#2aa198">&amp;#39;D&amp;#39;&lt;/span>, &lt;span style="color:#586e75">// double
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#2aa198">&amp;#39;F&amp;#39;&lt;/span>, &lt;span style="color:#586e75">// float
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#2aa198">&amp;#39;I&amp;#39;&lt;/span>, &lt;span style="color:#586e75">// int
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#2aa198">&amp;#39;J&amp;#39;&lt;/span>, &lt;span style="color:#586e75">// long
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#2aa198">&amp;#39;S&amp;#39;&lt;/span>: &lt;span style="color:#586e75">// short
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> args&lt;span style="color:#719e07">++&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">default&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// we found object
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">if&lt;/span> ch &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#2aa198">&amp;#39;L&amp;#39;&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> args&lt;span style="color:#719e07">++&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> next = &lt;span style="color:#cb4b16">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// end of object ?
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> } &lt;span style="color:#719e07">else&lt;/span> &lt;span style="color:#719e07">if&lt;/span> ch &lt;span style="color:#719e07">==&lt;/span> &lt;span style="color:#2aa198">&amp;#39;;&amp;#39;&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> next = &lt;span style="color:#cb4b16">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> args
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="3-优化-dubbo-hessian-go-解码-string-性能">3. 优化 dubbo hessian go 解码 string 性能&lt;/h4>
-&lt;p>在图 1-2 中可以看到 dubbo hessian go 在解码 string 占比 CPU 采样较高，我们在解码 dubbo 请求时，会解析 dubbo 框架版本、调用 path 、接口版本和方法名，这些都是 string 类型，dubbo hessian go 解析 string 会影响 RPC 性能。&lt;/p>
-&lt;p>我们首先跑一下 benchmar k 前后解码 string 性能对比，性能提升 56.11%， 对应到 RPC 中有 5% 左右提升。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>BenchmarkDecodeStringOriginal-12 &lt;span style="color:#2aa198">1967202&lt;/span> &lt;span style="color:#2aa198">613&lt;/span> ns/op &lt;span style="color:#2aa198">272&lt;/span> B/op &lt;span style="color:#2aa198">6&lt;/span> allocs/op
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BenchmarkDecodeStringOptimized-12 &lt;span style="color:#2aa198">4477216&lt;/span> &lt;span style="color:#2aa198">269&lt;/span> ns/op &lt;span style="color:#2aa198">224&lt;/span> B/op &lt;span style="color:#2aa198">5&lt;/span> allocs/op
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>优化思路：&lt;/strong>&lt;/p>
-&lt;p>直接使用 UTF-8 byte 解码，性能最高，之前先解码 byte 成 rune , 对 rune 解码成 string ，及其耗费性能。增加批量 string chunk copy ，降低 read 调用，并且使用 unsafe 转换 string（避免一些校验），因为代码优化 diff 较多，这里给出&lt;a href="https://github.com/apache/dubbo-go-hessian2/pull/188">优化代码 PR&lt;/a> 。&lt;/p>
-&lt;p>go SDK 代码&lt;code>runtime/string.go#slicerunetostring&lt;/code>（ rune 转换成 string ）， 同样是把 rune 转成 byte 数组，这里给了我优化思路启发。&lt;/p>
-&lt;h4 id="4-优化-hessian-库编解码对象">4. 优化 hessian 库编解码对象&lt;/h4>
-&lt;p>虽然消除了 dubbo 的 body 解码部分，但是 mosn 在处理 dubbo 请求时，必须要借助 hessian 去 decode 请求头部的框架版本、请求 path 和接口版本值。但是每次在解码的时候都会创建序列化对象，开销非常高，因为 hessian 每次在创建 reader 的时候会 allocate 4k 数据并 reset。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#2aa198">10&lt;/span>ms &lt;span style="color:#2aa198">10&lt;/span>ms &lt;span style="color:#2aa198">75&lt;/span>:&lt;span style="color:#268bd2">func&lt;/span> &lt;span style="color:#268bd2">unSerialize&lt;/span>(serializeId &lt;span style="color:#dc322f">int&lt;/span>, data []&lt;span style="color:#dc322f">byte&lt;/span>, parseCtl unserializeCtl) &lt;span style="color:#719e07">*&lt;/span>dubboAttr {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#2aa198">10&lt;/span>ms &lt;span style="color:#2aa198">140&lt;/span>ms &lt;span style="color:#2aa198">82&lt;/span>: attr &lt;span style="color:#719e07">:=&lt;/span> &lt;span style="color:#719e07">&amp;amp;&lt;/span>dubboAttr{}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#2aa198">80&lt;/span>ms &lt;span style="color:#2aa198">2.56&lt;/span>s &lt;span style="color:#2aa198">83&lt;/span>: decoder &lt;span style="color:#719e07">:=&lt;/span> hessian.&lt;span style="color:#268bd2">NewDecoderWithSkip&lt;/span>(data[:])
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ROUTINE &lt;span style="color:#719e07">========================&lt;/span> bufio.NewReaderSize in &lt;span style="color:#719e07">/&lt;/span>usr&lt;span style="color:#719e07">/&lt;/span>local&lt;span style="color:#719e07">/&lt;/span>&lt;span style="color:#719e07">go&lt;/span>&lt;span style="color:#719e07">/&lt;/span>src&lt;span style="color:#719e07">/&lt;/span>bufio&lt;span style="color:#719e07">/&lt;/span>bufio.&lt;span style="color:#719e07">go&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#2aa198">50&lt;/span>ms &lt;span style="color:#2aa198">2.44&lt;/span>&lt;span style="color:#268bd2">s&lt;/span> (flat, cum) &lt;span style="color:#2aa198">2.33&lt;/span>&lt;span style="color:#719e07">%&lt;/span> of Total
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . &lt;span style="color:#2aa198">220&lt;/span>ms &lt;span style="color:#2aa198">55&lt;/span>: r &lt;span style="color:#719e07">:=&lt;/span> &lt;span style="color:#b58900">new&lt;/span>(Reader)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#2aa198">50&lt;/span>ms &lt;span style="color:#2aa198">2.22&lt;/span>s &lt;span style="color:#2aa198">56&lt;/span>: r.&lt;span style="color:#268bd2">reset&lt;/span>(&lt;span style="color:#b58900">make&lt;/span>([]&lt;span style="color:#dc322f">byte&lt;/span>, size), rd)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . . &lt;span style="color:#2aa198">57&lt;/span>: &lt;span style="color:#719e07">return&lt;/span> r
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . . &lt;span style="color:#2aa198">58&lt;/span>:}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>我们可以写个池化内存前后性能对比, 性能提升 85.4% , &lt;a href="https://github.com/apache/dubbo-go-hessian2/blob/9b418c4e2700964f244e6b982855b4e89b45990d/string_test.go#L161">benchmark 用例&lt;/a> ：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>BenchmarkNewDecoder-12 &lt;span style="color:#2aa198">1487685&lt;/span> &lt;span style="color:#2aa198">803&lt;/span> ns/op &lt;span style="color:#2aa198">4528&lt;/span> B/op &lt;span style="color:#2aa198">9&lt;/span> allocs/op
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>BenchmarkNewDecoderOptimized-12 &lt;span style="color:#2aa198">10564024&lt;/span> &lt;span style="color:#2aa198">117&lt;/span> ns/op &lt;span style="color:#2aa198">128&lt;/span> B/op &lt;span style="color:#2aa198">3&lt;/span> allocs/op
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>优化思路：&lt;/strong>&lt;/p>
-&lt;p>在每次编解码时，池化 hessian 的 decoder 对象，新增 NewCheapDecoderWithSkip 并支持 reset 复用 decoder 。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">var&lt;/span> decodePool = &lt;span style="color:#719e07">&amp;amp;&lt;/span>sync.Pool{
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> New: &lt;span style="color:#268bd2">func&lt;/span>() &lt;span style="color:#268bd2">interface&lt;/span>{} {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> hessian.&lt;span style="color:#268bd2">NewCheapDecoderWithSkip&lt;/span>([]&lt;span style="color:#dc322f">byte&lt;/span>{})
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// 在解码时按照如下方法调用
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>decoder &lt;span style="color:#719e07">:=&lt;/span> decodePool.&lt;span style="color:#268bd2">Get&lt;/span>().(&lt;span style="color:#719e07">*&lt;/span>hessian.Decoder)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// fill decode data
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>decoder.&lt;span style="color:#268bd2">Reset&lt;/span>(data[:])
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hessianPool.&lt;span style="color:#268bd2">Put&lt;/span>(decoder)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="5-优化重复解码-service-和-methodname-值">5. 优化重复解码 service 和 methodName 值&lt;/h4>
-&lt;p>xprotocol 在实现 xprotocol.Tracing 获取服务名称和方法时，会触发调用并解析 2 次，调用开销比较大。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>10ms 1.91s 171: serviceName :&lt;span style="color:#719e07">=&lt;/span> tracingCodec.GetServiceName&lt;span style="color:#719e07">(&lt;/span>request&lt;span style="color:#719e07">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> . 2.17s 172: methodName :&lt;span style="color:#719e07">=&lt;/span> tracingCodec.GetMethodName&lt;span style="color:#719e07">(&lt;/span>request&lt;span style="color:#719e07">)&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>优化思路：&lt;/strong>&lt;/p>
-&lt;p>因为在 GetMetas 里面已经解析过一次了，可以把解析过的 headers 传进去，如果 headers 有了就不用再去解析了，并且重构接口名称为一个，返回值为二元组，消除一次调用。&lt;/p>
-&lt;h4 id="6-优化-streamid-类型转换">6. 优化 streamID 类型转换&lt;/h4>
-&lt;p>在 go 中将 byte 数组和 streamID 进行互转的时候，比较费性能。&lt;/p>
-&lt;p>&lt;strong>优化思路：&lt;/strong>&lt;/p>
-&lt;p>生产代码中, 尽量不要使用 fmt.Sprintf 和 fmt.Printf 去做类型转换和打印信息。可以使用 strconv 去转换。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span> . &lt;span style="color:#2aa198">430&lt;/span>ms &lt;span style="color:#2aa198">147&lt;/span>: reqIDStr &lt;span style="color:#719e07">:=&lt;/span> fmt.&lt;span style="color:#268bd2">Sprintf&lt;/span>(&lt;span style="color:#2aa198">&amp;#34;%d&amp;#34;&lt;/span>, reqID)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#2aa198">60&lt;/span>ms &lt;span style="color:#2aa198">4.10&lt;/span>s &lt;span style="color:#2aa198">168&lt;/span>: fmt.&lt;span style="color:#268bd2">Printf&lt;/span>(&lt;span style="color:#2aa198">&amp;#34;src=%s, len=%d, reqid:%v\n&amp;#34;&lt;/span>, streamID, reqIDStrLen, reqIDStr)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="7-优化昂贵的系统调用">7. 优化昂贵的系统调用&lt;/h4>
-&lt;p>mosn 在解码 dubbo 的请求时，会在 header 中塞一份远程 host 的地址，并且在 for 循环中获取 remote IP，系统调用开销比较高。&lt;/p>
-&lt;p>&lt;strong>优化思路：&lt;/strong>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#2aa198">50&lt;/span>ms &lt;span style="color:#2aa198">920&lt;/span>ms &lt;span style="color:#2aa198">136&lt;/span>: headers[strings.&lt;span style="color:#268bd2">ToLower&lt;/span>(protocol.MosnHeaderHostKey)] = conn.connection.&lt;span style="color:#268bd2">RemoteAddr&lt;/span>().&lt;span style="color:#268bd2">String&lt;/span>()
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在获取远程地址时，尽可能在 streamConnection 中 cache 远程 IP 值，不要每次都去调用 RemoteAddr。&lt;/p>
-&lt;h4 id="8-优化-slice-和-map-触发扩容和-rehash">8. 优化 slice 和 map 触发扩容和 rehash&lt;/h4>
-&lt;p>在 mosn 处理 dubbo 请求时，会根据接口、版本和分组去构建 dataID ，然后匹配 cluster , 会创建默认 slice 和 map 对象，经过性能诊断，导致不断 allocate slice 和 grow map 容量比较费性能。&lt;/p>
-&lt;p>&lt;strong>优化思路：&lt;/strong>&lt;/p>
-&lt;p>使用 slice 和 map 时，尽可能预估容量大小，使用 make(type, capacity) 去指定初始大小。&lt;/p>
-&lt;h4 id="9-优化-trace-日志级别输出">9. 优化 trace 日志级别输出&lt;/h4>
-&lt;p>mosn 中不少代码在处理逻辑时，会打很多 trace 级别的日志，并且会传递不少参数值。&lt;/p>
-&lt;p>&lt;strong>优化思路：&lt;/strong>&lt;/p>
-&lt;p>调用 trace 输出前，尽量判断一下日志级别，如果有多个 trace 调用，尽可能把所有字符串写到 buf 中，然后把 buf 内容写到日志中，并且尽可能少的调用 trace 日志方法。&lt;/p>
-&lt;h4 id="10-优化-tracerlog-和-metrics">10. 优化 tracer、log 和 metrics&lt;/h4>
-&lt;p>在大促期间，对机器的性能要求较高，经过性能诊断，tracer、mosn log 和 cloud metrics 写日志（ IO 操作）非常耗费性能。&lt;/p>
-&lt;p>&lt;strong>优化思路：&lt;/strong>&lt;/p>
-&lt;p>通过配置中心下发配置或者增加大促开关，允许 API 调用这些 feature 的开关。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>/api/v1/downgrade/on
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/api/v1/downgrade/off
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="11-优化-route-header-解析">11. 优化 route header 解析&lt;/h4>
-&lt;p>mosn 中在做路由前，需要做大量的 header 的 map 访问，比如 IDC、antvip 等逻辑判断，商业版或者开源 mosn 不需要这些逻辑，这些也会占用一些开销。&lt;/p>
-&lt;p>&lt;strong>优化思路：&lt;/strong>&lt;/p>
-&lt;p>如果是云上逻辑，主站的逻辑都不走。&lt;/p>
-&lt;h4 id="12-优化-featuregate-调用">12. 优化 featuregate 调用&lt;/h4>
-&lt;p>在 mosn 中处理请求时，为了区分主站和商业版路由逻辑，会通过 featuregate 判断逻辑走哪部分。通过 featuregate 调用开销较大，需要频繁的做类型转换和多层 map 去获取。&lt;/p>
-&lt;p>&lt;strong>优化思路：&lt;/strong>&lt;/p>
-&lt;p>通过一个 bool 变量记录 featuregate 对应开关，如果没有初始化过，就主动调用一下 featuregate。&lt;/p>
-&lt;h3 id="未来性能优化思考">未来性能优化思考&lt;/h3>
-&lt;p>经过几轮性能优化 ，目前看火焰图，卡点都在 connection 的 read 和 write ，可以优化的空间比较小了。但是可能从以下场景中获得收益：&lt;/p>
-&lt;ul>
-&lt;li>减少 connection 的 read 和 write 次数 (syscall) 。&lt;/li>
-&lt;li>优化 IO 线程模型，减少携程和上下文切换等。&lt;/li>
-&lt;/ul>
-&lt;p>作为结束，给出了最终优化后的火焰图 ，大部分卡点都在系统调用和网络读写, 请参考图 1-4。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/moson-optimize/p4.png" alt="">&lt;/p>
-&lt;p>图 1-4 优化版本 mosn + dubbo 火线图&lt;/p>
-&lt;h3 id="其他">其他&lt;/h3>
-&lt;p>pprof 工具异常强大，可以诊断 CPU、memory、go 协程、tracer 和死锁等，该工具可以参考 &lt;a href="https://blog.golang.org/pprof">godoc&lt;/a>，性能优化参考：&lt;/p>
-&lt;ul>
-&lt;li>&lt;a href="https://blog.golang.org/pprof">https://blog.golang.org/pprof&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.cnblogs.com/Dr-wei/p/11742414.html">https://www.cnblogs.com/Dr-wei/p/11742414.html&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-&lt;iframe src="https://www.youtube.com/embed/N3PWzBeLX2M" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="Profiling and Optimizing Go">&lt;/iframe>
-&lt;/div>
-&lt;h2 id="欢迎加入-dubbo-go-社区">欢迎加入 dubbo-go 社区&lt;/h2>
-&lt;p>Dubbo-go 的社区钉钉群： 23331795，欢迎感兴趣的小伙伴们加入！&lt;/p>
-&lt;blockquote>
-&lt;p>关于作者 诣极，github ID zonghaishang，Apache Dubbo PMC，目前就职于蚂蚁金服中间件团队，主攻 RPC 和 Service Mesh 方向。《深入理解 Apache Dubbo 与实战》一书作者。&lt;/p>
-&lt;/blockquote></description></item></channel></rss>
+&lt;p>作为系列文章开篇，我们在这里对 Dubbo 过去一年的成绩做了简要的总结与回顾，包括 Dubbo 社区、产品迭代的发展。接下来我们会看到更多来自深度 Dubbo 用户的落地经验分享，Dubbo-go 子社区的发展故事等。更重要的，我们也对下一代云原生 Dubbo - Dubbo 3.0 做了展望，后续关于 Dubbo 3.0 Roadmap、方案设计与进展解析等也将在此系列中发布。&lt;/p></description></item></channel></rss>
