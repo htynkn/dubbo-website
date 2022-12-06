@@ -822,7 +822,7 @@ Dubbo 默认支持 hibernate-validator 版本 &amp;lt;=6.x，若使用 hibernate
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: GoogleProtobuf 对象泛化调用</title><link>https://dubbo.apache.org/zh/docs/advanced/pb-generic-reference/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/advanced/pb-generic-reference/</guid><description>
 &lt;div class="pageinfo pageinfo-primary">
-&lt;p>此文档已经不再维护。您当前查看的是快照版本。如果想要查看最新版本的文档，请参阅&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/generic-reference/#protobuf%E5%AF%B9%E8%B1%A1%E6%B3%9B%E5%8C%96%E8%B0%83%E7%94%A8">最新版本&lt;/a>。&lt;/p>
+&lt;p>此文档已经不再维护。您当前查看的是快照版本。如果想要查看最新版本的文档，请参阅&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/generic-reference/#protobuf-%E5%AF%B9%E8%B1%A1%E6%B3%9B%E5%8C%96%E8%B0%83%E7%94%A8">最新版本&lt;/a>。&lt;/p>
 &lt;/div>
 &lt;p>泛化接口调用方式主要用于客户端没有 API 接口及模型类元的情况，参考 &lt;a href="../generic-reference">泛化调用&lt;/a>。
 一般泛化调用只能用于生成的服务参数为POJO的情况，而 GoogleProtobuf 的对象是基于 Builder 生成的非正常POJO，可以通过 protobuf-json 泛化调用。&lt;/p>

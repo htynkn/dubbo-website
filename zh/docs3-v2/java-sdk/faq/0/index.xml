@@ -96,4 +96,70 @@ background: #cccccc;
 &lt;li>尝试重新配置上述 &lt;strong>Java System Property（用 -D 配置的 Java 系统属性）&lt;/strong>。&lt;/li>
 &lt;li>删除缓存文件夹重启 &lt;strong>Provider&lt;/strong> 和 &lt;strong>Consumer&lt;/strong> （缓存文件夹的位置一般在 &lt;code>~/.dubbo&lt;/code>。如果配置了 &lt;code>dubbo.meta.cache.filePath&lt;/code> 和 &lt;code>dubbo.mapping.cache.filePath&lt;/code> 则为该路径）。&lt;/li>
 &lt;li>如果确实没有配置这些 &lt;strong>System Property&lt;/strong>，请到 &lt;a href="https://github.com/apache/dubbo/issues">GitHub Issue Tracker&lt;/a> 下发 Issue。&lt;/li>
-&lt;/ol></description></item></channel></rss>
+&lt;/ol></description></item><item><title>Docs3-V2: 0-6 - 线程中断异常</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/0/6/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/0/6/</guid><description>
+&lt;h3 id="可能的原因">可能的原因&lt;/h3>
+&lt;p>运行中的线程在处于 &lt;code>wait、sleep、join&lt;/code> 时，被显示调用 &lt;code>interrupt()&lt;/code>&lt;/p>
+&lt;h3 id="排查和解决步骤">排查和解决步骤&lt;/h3>
+&lt;p>正常运行的线程在调用了&lt;code>interrupt()&lt;/code>方法后，将对当前线程中断状态设置为true，但线程的执行并不会受到影响。
+可根据实际情况进行操作或检查业务代码有无被错误使用。&lt;/p>
+&lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 0-7 - 未找到反射类</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/0/7/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/0/7/</guid><description>
+&lt;h3 id="可能的原因">可能的原因&lt;/h3>
+&lt;ol>
+&lt;li>一般是&lt;code>Class.forName(className)&lt;/code>执行此方法时，找不到&lt;code>className&lt;/code> 当前类。&lt;/li>
+&lt;li>业务代码上显示排除了当前&lt;code>className&lt;/code>类，导致加载时未找到。&lt;/li>
+&lt;/ol>
+&lt;h3 id="排查和解决步骤">排查和解决步骤&lt;/h3>
+&lt;ol>
+&lt;li>检查&lt;code>Class.forName(className)&lt;/code>中，&lt;code>className&lt;/code>是否存在。&lt;/li>
+&lt;li>排查业务代码，有没有使用配置或扫描注解&lt;code>exclude&lt;/code>排除了一些类或包。&lt;/li>
+&lt;/ol>
+&lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 0-8 - 反射失败</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/0/8/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/0/8/</guid><description>
+&lt;h3 id="可能的原因">可能的原因&lt;/h3>
+&lt;p>在反射调用某方法时，未对当前方法设置正确的参数类型值，也就是参数类型不匹配。&lt;/p>
+&lt;h3 id="排查和解决步骤">排查和解决步骤&lt;/h3>
+&lt;p>检查是否存在未正确设置相匹配的类型值。&lt;/p>
+&lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 0-9 - 通知事件失败</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/0/9/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/0/9/</guid><description>
+&lt;h3 id="可能的原因">可能的原因&lt;/h3>
+&lt;p>自定义的监听器，在处理上产生了运行时异常。&lt;/p>
+&lt;h3 id="排查和解决步骤">排查和解决步骤&lt;/h3>
+&lt;p>检查实现&lt;code>org.apache.dubbo.rpc.ExporterListener&lt;/code>接口的业务类，实现方法可能存在代码逻辑错误。&lt;/p>
+&lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 0-10 - 当前调用不在支持</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/0/10/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/0/10/</guid><description>
+&lt;h3 id="可能的原因">可能的原因&lt;/h3>
+&lt;p>当前调用的方法可能已经被弃用或声明了&lt;code>@Deprecated&lt;/code>，不影响执行结果。&lt;/p>
+&lt;h3 id="排查和解决步骤">排查和解决步骤&lt;/h3>
+&lt;p>请使用其它可替代的API方法。&lt;/p>
+&lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 0-11 - 服务停止失败</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/0/11/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/0/11/</guid><description>
+&lt;h3 id="可能的原因">可能的原因&lt;/h3>
+&lt;p>连接没有及时关闭或内存不足，导致服务在停止时会出现一些异常。&lt;/p>
+&lt;h3 id="排查和解决步骤">排查和解决步骤&lt;/h3>
+&lt;p>在响应内容完成后进行关闭连接。&lt;/p>
+&lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 0-12 - 未知异常</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/0/12/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/0/12/</guid><description>
+&lt;p>未知异常，一般为API使用或配置异常&lt;/p>
+&lt;h3 id="可能的原因">可能的原因&lt;/h3>
+&lt;p>如：转码异常、不支持的加解密方法等等&lt;/p>
+&lt;h3 id="排查和解决步骤">排查和解决步骤&lt;/h3>
+&lt;p>可根据堆栈信息，进行业务代码行定位。&lt;/p>
+&lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 0-13 - 指标收集器发生异常</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/0/13/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/0/13/</guid><description>
+&lt;h3 id="可能的原因">可能的原因&lt;/h3>
+&lt;p>指标数据在推送过程中发生错误，推送的服务器连接不上或一些配置错误，目前支持Prometheus。&lt;/p>
+&lt;h3 id="排查和解决步骤">排查和解决步骤&lt;/h3>
+&lt;p>请参考配置项参考手册&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config/properties/#metrics">配置项参考手册&lt;/a>。&lt;/p>
+&lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 0-14 - 监控异常</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/0/14/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/0/14/</guid><description>
+&lt;p>用来统计RPC 调用次数和调用耗时时间，扩展接口为MonitorFactory，对应的实现类为DubboMonitorFactroy。&lt;/p>
+&lt;h3 id="可能的原因">可能的原因&lt;/h3>
+&lt;p>用户可以实现该层的MonitorFactory扩展接口，实现自定义监控统计策略。
+在自定义监控统计策略的实现类，发生了业务运行时异常。&lt;/p>
+&lt;h3 id="排查和解决步骤">排查和解决步骤&lt;/h3>
+&lt;p>检查 &lt;code>org.apache.dubbo.monitor.MonitorFactory&lt;/code>接口的业务类，实现方法可能存在代码逻辑错误。&lt;/p>
+&lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 0-15 - 加载扩展类时发生异常</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/0/15/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/faq/0/15/</guid><description>
+&lt;h3 id="可能的原因">可能的原因&lt;/h3>
+&lt;ol>
+&lt;li>&lt;code>clazz&lt;/code> 类并没有实现当前扩展点的接口类。&lt;/li>
+&lt;li>扩展名可能是个接口或者不存在。&lt;/li>
+&lt;/ol>
+&lt;h3 id="排查和解决步骤">排查和解决步骤&lt;/h3>
+&lt;ol>
+&lt;li>检查扩展类声明，并没有与之相匹配的扩展实现类。&lt;/li>
+&lt;li>扩展实现类需实现扩展点接口类以及方法。&lt;/li>
+&lt;/ol>
+&lt;p style="margin-top: 3rem;"> &lt;/p></description></item></channel></rss>

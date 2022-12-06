@@ -5,7 +5,7 @@
 &lt;h2 id="使用场景">使用场景&lt;/h2>
 &lt;p>对全链路有加密需求的用户可以使用 TLS。&lt;/p>
 &lt;h2 id="参考用例">参考用例&lt;/h2>
-&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-ssl">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-ssl&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/4-governance/dubbo-samples-ssl">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-ssl&lt;/a>&lt;/p>
 &lt;h2 id="使用方式">使用方式&lt;/h2>
 &lt;h3 id="provider-端">Provider 端&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>SslConfig sslConfig &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> SslConfig&lt;span style="color:#719e07">();&lt;/span>

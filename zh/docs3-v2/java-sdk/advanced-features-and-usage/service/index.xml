@@ -18,7 +18,7 @@ Dubbo协议支持，以及Qos协议支持。这些协议的识别都是由一个
 &lt;/li>
 &lt;/ul>
 &lt;h2 id="参考用例">参考用例&lt;/h2>
-&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-port-unification">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-port-unification&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/3-extensions/protocol/dubbo-samples-port-unification">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-port-unification&lt;/a>&lt;/p>
 &lt;h2 id="配置方式">配置方式&lt;/h2>
 &lt;p>关于Dubbo支持的配置方式，可以参考&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config/">配置说明&lt;/a>&lt;/p>
 &lt;h3 id="服务多协议导出">服务多协议导出&lt;/h3>
@@ -74,7 +74,7 @@ Dubbo协议支持，以及Qos协议支持。这些协议的识别都是由一个
 &lt;/li>
 &lt;/ol>
 &lt;h3 id="服务引用">服务引用&lt;/h3>
-&lt;p>以&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-port-unification">dubbo-samples-port-unification&lt;/a>中的例子作为基础, 引用不同协议的服务和非端口复用情况下的配置是一致的，下面通过Consumer端的InvokerListener输出调用过程中的URL信息。&lt;/p>
+&lt;p>以&lt;a href="https://github.com/apache/dubbo-samples/tree/master/3-extensions/protocol/dubbo-samples-port-unification">dubbo-samples-port-unification&lt;/a>中的例子作为基础, 引用不同协议的服务和非端口复用情况下的配置是一致的，下面通过Consumer端的InvokerListener输出调用过程中的URL信息。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>ReferenceConfig&lt;span style="color:#719e07">&amp;lt;&lt;/span>GreetingService&lt;span style="color:#719e07">&amp;gt;&lt;/span> reference &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ReferenceConfig&lt;span style="color:#719e07">&amp;lt;&amp;gt;();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reference&lt;span style="color:#719e07">.&lt;/span>setInterface&lt;span style="color:#719e07">(&lt;/span>GreetingService&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reference&lt;span style="color:#719e07">.&lt;/span>setListener&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;consumer&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
@@ -394,7 +394,7 @@ Dubbo协议支持，以及Qos协议支持。这些协议的识别都是由一个
 &lt;p>详情请访问:https://seata.io/&lt;/p></description></item><item><title>Docs3-V2: 分组聚合</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/group-merger/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/group-merger/</guid><description>
 &lt;h2 id="特性说明">特性说明&lt;/h2>
 &lt;p>通过分组对结果进行聚合并返回聚合后的结果，比如菜单服务，用 group 区分同一接口的多种实现，现在消费方需从每种 group 中调用一次并返回结果，对结果进行合并之后返回，这样就可以实现聚合菜单项。&lt;/p>
-&lt;p>相关代码可以参考 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-merge">dubbo 项目中的示例&lt;/a>&lt;/p>
+&lt;p>相关代码可以参考 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/2-advanced/dubbo-samples-merge">dubbo 项目中的示例&lt;/a>&lt;/p>
 &lt;h2 id="使用场景">使用场景&lt;/h2>
 &lt;p>服务分组和多版本&lt;/p>
 &lt;h2 id="使用方式">使用方式&lt;/h2>
@@ -439,7 +439,7 @@ Dubbo协议支持，以及Qos协议支持。这些协议的识别都是由一个
 &lt;h2 id="使用场景">使用场景&lt;/h2>
 &lt;p>当一个接口实现，出现不兼容升级时，可以用版本号过渡，版本号不同的服务相互间不引用。&lt;/p>
 &lt;h2 id="参考用例">参考用例&lt;/h2>
-&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-version">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-version&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/2-advanced/dubbo-samples-version">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-version&lt;/a>&lt;/p>
 &lt;h2 id="使用方式">使用方式&lt;/h2>
 &lt;h3 id="服务提供者">服务提供者&lt;/h3>
 &lt;p>老版本服务提供者配置&lt;/p>
@@ -495,7 +495,7 @@ Dubbo协议支持，以及Qos协议支持。这些协议的识别都是由一个
 &lt;p>Reactive Stream 提供了一套标准的异步流处理 API， 在能够让应用写出事件驱动的程序的同时，也通过 BackPressure 的方式保证了节点的稳定。Triple 协议在通信协议层面为 Dubbo 框架增加了流式场景的支持，在此基础上能够实现上层包括大文件传输和推送机制的业务需求。&lt;/p>
 &lt;p>Dubbo + Reactive Stream Stub 的组合模式可以给用户带来最方便的流式使用方式以及全链路异步性能提升。&lt;/p>
 &lt;h2 id="参考用例">参考用例&lt;/h2>
-&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple-reactor">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple-reactor&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/3-extensions/protocol/dubbo-samples-triple-reactor">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple-reactor&lt;/a>&lt;/p>
 &lt;h2 id="使用场景">使用场景&lt;/h2>
 &lt;h2 id="使用方式">使用方式&lt;/h2>
 &lt;p>Triple 使用及配置可参考 &lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/protocol/triple/idl/">IDL 方式使用 Triple&lt;/a>，并确保 Dubbo 版本 &amp;gt;= 3.1.0。&lt;/p>
@@ -701,7 +701,7 @@ Dubbo协议支持，以及Qos协议支持。这些协议的识别都是由一个
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="使用场景">使用场景&lt;/h2>
 &lt;p>服务端在向外提供接口服务时，解决各种接口参数校验问题。&lt;/p>
 &lt;h2 id="参考用例">参考用例&lt;/h2>
-&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-validation">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-validation&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/2-advanced/dubbo-samples-validation">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-validation&lt;/a>&lt;/p>
 &lt;h2 id="使用方式">使用方式&lt;/h2>
 &lt;h3 id="参数标注示例">参数标注示例&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> java.io.Serializable&lt;span style="color:#719e07">;&lt;/span>
@@ -844,7 +844,7 @@ Dubbo协议支持，以及Qos协议支持。这些协议的识别都是由一个
 &lt;h2 id="使用场景">使用场景&lt;/h2>
 &lt;p>当一个接口有多种实现时，可以用 group 区分。&lt;/p>
 &lt;h2 id="参考用例">参考用例&lt;/h2>
-&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-group">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-group&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/2-advanced/dubbo-samples-group">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-group&lt;/a>&lt;/p>
 &lt;h2 id="使用方式">使用方式&lt;/h2>
 &lt;h3 id="注解配置">注解配置&lt;/h3>
 &lt;h4 id="服务提供端注解配置">服务提供端(注解配置)&lt;/h4>
@@ -1093,7 +1093,7 @@ broadcast.fail.percent 只是控制的当失败后是否继续调用其他节点
 &lt;p>基于 NIO 的非阻塞实现并行调用，客户端不需要启动多线程即可完成并行调用多个远程服务，相对多线程开销较小。&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/user/future.jpg" alt="/user-guide/images/future.jpg">&lt;/p>
 &lt;h2 id="参考用例">参考用例&lt;/h2>
-&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-async">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-async&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/2-advanced/dubbo-samples-async">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-async&lt;/a>&lt;/p>
 &lt;h2 id="使用场景">使用场景&lt;/h2>
 &lt;h2 id="使用方式">使用方式&lt;/h2>
 &lt;h3 id="使用-completablefuture-签名的接口">使用 CompletableFuture 签名的接口&lt;/h3>
@@ -1208,20 +1208,20 @@ broadcast.fail.percent 只是控制的当失败后是否继续调用其他节点
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:method&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;findFoo&amp;#34;&lt;/span> async=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> return=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-V2: 泛化调用（客户端泛化）</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/generic-reference/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/generic-reference/</guid><description>
 &lt;h2 id="特性说明">特性说明&lt;/h2>
-&lt;p>泛化调用是指在调用方没有服务方提供的API（SDK）的情况下，对服务方进行调用，并且可以正常拿到调用结果。&lt;/p>
+&lt;p>泛化调用是指在调用方没有服务方提供的 API（SDK）的情况下，对服务方进行调用，并且可以正常拿到调用结果。&lt;/p>
 &lt;h2 id="使用场景">使用场景&lt;/h2>
 &lt;p>泛化调用主要用于实现一个通用的远程服务 Mock 框架，可通过实现 GenericService 接口处理所有服务请求。比如如下场景：&lt;/p>
 &lt;ol>
 &lt;li>
-&lt;p>网关服务：如果要搭建一个网关服务，那么服务网关要作为所有RPC服务的调用端。但是网关本身不应该依赖于服务提供方的接口API（这样会导致每有一个新的服务发布，就需要修改网关的代码以及重新部署），所以需要泛化调用的支持。&lt;/p>
+&lt;p>网关服务：如果要搭建一个网关服务，那么服务网关要作为所有 RPC 服务的调用端。但是网关本身不应该依赖于服务提供方的接口 API（这样会导致每有一个新的服务发布，就需要修改网关的代码以及重新部署），所以需要泛化调用的支持。&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>测试平台：如果要搭建一个可以测试RPC调用的平台，用户输入分组名、接口、方法名等信息，就可以测试对应的RPC服务。那么由于同样的原因（即会导致每有一个新的服务发布，就需要修改网关的代码以及重新部署），所以平台本身不应该依赖于服务提供方的接口API。所以需要泛化调用的支持。&lt;/p>
+&lt;p>测试平台：如果要搭建一个可以测试 RPC 调用的平台，用户输入分组名、接口、方法名等信息，就可以测试对应的 RPC 服务。那么由于同样的原因（即会导致每有一个新的服务发布，就需要修改网关的代码以及重新部署），所以平台本身不应该依赖于服务提供方的接口 API。所以需要泛化调用的支持。&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;h2 id="使用方式">使用方式&lt;/h2>
-&lt;p>demo可见&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-generic">dubbo 项目中的示例代码&lt;/a>&lt;/p>
-&lt;p>API部分以此demo为例讲解使用方式。&lt;/p>
+&lt;p>demo 可见 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/2-advanced/dubbo-samples-generic">dubbo 项目中的示例代码&lt;/a>&lt;/p>
+&lt;p>API 部分以此 demo 为例讲解使用方式。&lt;/p>
 &lt;h3 id="服务定义">服务定义&lt;/h3>
 &lt;h4 id="服务接口">服务接口&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">HelloService&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
@@ -1297,10 +1297,10 @@ broadcast.fail.percent 只是控制的当失败后是否继续调用其他节点
 &lt;p>在设置 &lt;code>ServiceConfig&lt;/code> 时，使用&lt;code>setGeneric(&amp;quot;true&amp;quot;)&lt;/code>来开启泛化调用&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>在设置 &lt;code>ServiceConfig&lt;/code> 时，使用setRef指定实现类时，要设置一个 &lt;code>GenericService&lt;/code> 的对象。而不是真正的服务实现类对象&lt;/p>
+&lt;p>在设置 &lt;code>ServiceConfig&lt;/code> 时，使用 setRef 指定实现类时，要设置一个 &lt;code>GenericService&lt;/code> 的对象。而不是真正的服务实现类对象&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>其他设置与正常Api服务启动一致即可&lt;/p>
+&lt;p>其他设置与正常 Api 服务启动一致即可&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#268bd2">static&lt;/span> String zookeeperAddress &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;zookeeper://&amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> System&lt;span style="color:#719e07">.&lt;/span>getProperty&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;zookeeper.address&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#2aa198">&amp;#34;127.0.0.1&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34;:2181&amp;#34;&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
@@ -1395,8 +1395,8 @@ broadcast.fail.percent 只是控制的当失败后是否继续调用其他节点
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> System&lt;span style="color:#719e07">.&lt;/span>err&lt;span style="color:#719e07">.&lt;/span>println&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;invokeSayHello(return): &amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> result&lt;span style="color:#719e07">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> latch&lt;span style="color:#719e07">.&lt;/span>await&lt;span style="color:#719e07">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="通过spring使用泛化调用">通过Spring使用泛化调用&lt;/h3>
-&lt;p>Spring中服务暴露与服务发现有多种使用方式，如xml，注解。这里以xml为例。
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="通过-spring-使用泛化调用">通过 Spring 使用泛化调用&lt;/h3>
+&lt;p>Spring 中服务暴露与服务发现有多种使用方式，如 xml，注解。这里以 xml 为例。
 步骤：&lt;/p>
 &lt;ol>
 &lt;li>
@@ -1426,10 +1426,10 @@ broadcast.fail.percent 只是控制的当失败后是否继续调用其他节点
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">//获得结果
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> Object result &lt;span style="color:#719e07">=&lt;/span> genericService&lt;span style="color:#719e07">.&lt;/span>$invoke&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;sayHello&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#719e07">new&lt;/span> String&lt;span style="color:#719e07">[]{&lt;/span>&lt;span style="color:#2aa198">&amp;#34;java.lang.String&amp;#34;&lt;/span>&lt;span style="color:#719e07">},&lt;/span> &lt;span style="color:#719e07">new&lt;/span> Object&lt;span style="color:#719e07">[]{&lt;/span>&lt;span style="color:#2aa198">&amp;#34;world&amp;#34;&lt;/span>&lt;span style="color:#719e07">});&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="protobuf对象泛化调用">Protobuf对象泛化调用&lt;/h3>
-&lt;p>一般泛化调用只能用于生成的服务参数为POJO的情况，而 GoogleProtobuf 的对象是基于 Builder 生成的非正常POJO，可以通过 protobuf-json 泛化调用。&lt;/p>
-&lt;p>GoogleProtobuf 序列化相关的Demo可以参考 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-protobuf">protobuf-demo&lt;/a>&lt;/p>
-&lt;h4 id="通过spring对google-protobuf对象泛化调用">通过Spring对Google Protobuf对象泛化调用&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="protobuf-对象泛化调用">Protobuf 对象泛化调用&lt;/h3>
+&lt;p>一般泛化调用只能用于生成的服务参数为 POJO 的情况，而 GoogleProtobuf 的对象是基于 Builder 生成的非正常 POJO，可以通过 protobuf-json 泛化调用。&lt;/p>
+&lt;p>GoogleProtobuf 序列化相关的 Demo 可以参考 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/3-extensions/serialization/dubbo-samples-protobuf">protobuf-demo&lt;/a>&lt;/p>
+&lt;h4 id="通过-spring-对-google-protobuf-对象泛化调用">通过 Spring 对 Google Protobuf 对象泛化调用&lt;/h4>
 &lt;p>在 Spring 中配置声明 generic = &amp;ldquo;protobuf-json&amp;rdquo;&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;barService&amp;#34;&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> generic=&lt;span style="color:#2aa198">&amp;#34;protobuf-json&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在 Java 代码获取 barService 并开始泛化调用：&lt;/p>
@@ -1455,7 +1455,7 @@ broadcast.fail.percent 只是控制的当失败后是否继续调用其他节点
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#2aa198">&amp;#34;com.xxx.XxxService.GooglePbBasic$CDubboGooglePBRequestType&amp;#34;&lt;/span>&lt;span style="color:#719e07">},&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">new&lt;/span> Object&lt;span style="color:#719e07">[]&lt;/span> &lt;span style="color:#719e07">{&lt;/span>requestString&lt;span style="color:#719e07">});&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="googleprotobuf-对象的处理">GoogleProtobuf 对象的处理&lt;/h4>
-&lt;p>GoogleProtobuf 对象是由 Protocol 契约生成,相关知识请参考 &lt;a href="https://developers.google.com/protocol-buffers/?hl=zh-CN">ProtocolBuffers 文档&lt;/a>。假如有如下Protobuf 契约&lt;/p>
+&lt;p>GoogleProtobuf 对象是由 Protocol 契约生成,相关知识请参考 &lt;a href="https://developers.google.com/protocol-buffers/?hl=zh-CN">ProtocolBuffers 文档&lt;/a>。假如有如下 Protobuf 契约&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-proto" data-lang="proto">&lt;span style="display:flex;">&lt;span>syntax &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;proto3&amp;#34;&lt;/span>;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">package&lt;/span> com&lt;span style="color:#719e07">.&lt;/span>xxx.XxxService.GooglePbBasic.basic;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">message&lt;/span> &lt;span style="color:#268bd2">CDubboGooglePBRequestType&lt;/span> {
@@ -1494,10 +1494,10 @@ broadcast.fail.percent 只是控制的当失败后是否继续调用其他节点
 &lt;h2 id="注意事项">注意事项&lt;/h2>
 &lt;ol>
 &lt;li>
-&lt;p>如果参数为基本类型或者Date,List,Map等，则不需要转换，直接调用。&lt;/p>
+&lt;p>如果参数为基本类型或者 Date,List,Map 等，则不需要转换，直接调用。&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>如果参数为其他POJO，则使用Map代替。&lt;/p>
+&lt;p>如果参数为其他 POJO，则使用 Map 代替。&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;p>如：&lt;/p>
@@ -1987,7 +1987,7 @@ key 为服务名，value 为服务提供者 url，此配置优先级最高，&lt
 &lt;h2 id="特性说明">特性说明&lt;/h2>
 &lt;p>在调用之前、调用之后、出现异常时，会触发 &lt;code>oninvoke&lt;/code>、&lt;code>onreturn&lt;/code>、&lt;code>onthrow&lt;/code> 三个事件，可以配置当事件发生时，通知哪个类的哪个方法。&lt;/p>
 &lt;h2 id="参考用例">参考用例&lt;/h2>
-&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-notify">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-notify&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/2-advanced/dubbo-samples-notify">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-notify&lt;/a>&lt;/p>
 &lt;h2 id="使用场景">使用场景&lt;/h2>
 &lt;p>调用服务方法前我们可以记录开始时间，调用结束后统计整个调用耗费，发生异常时我们可以告警或打印错误日志或者调用服务前后记录请求日志、响应日志等。&lt;/p>
 &lt;h2 id="使用方式">使用方式&lt;/h2>
@@ -2092,7 +2092,7 @@ key 为服务名，value 为服务提供者 url，此配置优先级最高，&lt
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/beans&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-V2: 服务端对客户端进行回调</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/callback-parameter/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/callback-parameter/</guid><description>
 &lt;h2 id="特性说明">特性说明&lt;/h2>
-&lt;p>参数回调方式与调用本地 callback 或 listener 相同，只需要在 Spring 的配置文件中声明哪个参数是 callback 类型即可。Dubbo 将基于长连接生成反向代理，这样就可以从服务器端调用客户端逻辑。可以参考 &lt;a href="https://github.com/dubbo/dubbo-samples/tree/master/dubbo-samples-callback">dubbo 项目中的示例代码&lt;/a>。&lt;/p>
+&lt;p>参数回调方式与调用本地 callback 或 listener 相同，只需要在 Spring 的配置文件中声明哪个参数是 callback 类型即可。Dubbo 将基于长连接生成反向代理，这样就可以从服务器端调用客户端逻辑。可以参考 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/2-advanced/dubbo-samples-callback">dubbo 项目中的示例代码&lt;/a>。&lt;/p>
 &lt;h2 id="使用场景">使用场景&lt;/h2>
 &lt;p>回调函数通知客户端执行结果，或发送通知，在方法执行时间比较长时，类似异步调用，审批工作流中回调客户端审批结果。&lt;/p>
 &lt;h2 id="使用方式">使用方式&lt;/h2>
@@ -2392,7 +2392,7 @@ key 为服务名，value 为服务提供者 url，此配置优先级最高，&lt
 &lt;h2 id="特性说明">特性说明&lt;/h2>
 &lt;p>回声测试用于检测服务是否可用，回声测试按照正常请求流程执行，能够测试整个调用是否通畅，可用于监控。&lt;/p>
 &lt;h2 id="参考用例">参考用例&lt;/h2>
-&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-echo">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-echo&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/2-advanced/dubbo-samples-echo">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-echo&lt;/a>&lt;/p>
 &lt;h2 id="使用场景">使用场景&lt;/h2>
 &lt;h2 id="使用方式">使用方式&lt;/h2>
 &lt;p>所有服务自动实现 &lt;code>EchoService&lt;/code> 接口，只需将任意服务引用强制转型为 &lt;code>EchoService&lt;/code>，即可使用。&lt;/p>

@@ -671,7 +671,7 @@
 &lt;li>&lt;code>jcache&lt;/code> 与 &lt;a href="http://jcp.org/en/jsr/detail?id=107%27">JSR107&lt;/a> 集成，可以桥接各种缓存实现。&lt;/li>
 &lt;/ul>
 &lt;p>缓存类型可扩展 &lt;a href="../../../reference-manual/spi/description/cache">缓存扩展&lt;/a>&lt;/p>
-&lt;p>关于 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-cache">示例代码&lt;/a>&lt;/p>
+&lt;p>关于 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/2-advanced/dubbo-samples-cache">示例代码&lt;/a>&lt;/p>
 &lt;h2 id="使用场景">使用场景&lt;/h2>
 &lt;p>结果缓存，用于加速热门数据的访问速度，Dubbo 提供声明式缓存，以减少用户加缓存的工作量。&lt;/p>
 &lt;h2 id="使用方式">使用方式&lt;/h2>
