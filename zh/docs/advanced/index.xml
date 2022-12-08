@@ -692,7 +692,7 @@ Dubbo 默认支持 hibernate-validator 版本 &amp;lt;=6.x，若使用 hibernate
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
 &lt;div class="alert alert-primary" role="alert">
 &lt;h4 class="alert-heading">提示&lt;/h4>
-&lt;p>自 &lt;code>2.1.0&lt;/code> 版本开始支持, 如何使用可以参考 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-validation">dubbo 项目中的示例代码&lt;/a>&lt;/p>
+&lt;p>自 &lt;code>2.1.0&lt;/code> 版本开始支持, 如何使用可以参考 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/2-advanced/dubbo-samples-validation">dubbo 项目中的示例代码&lt;/a>&lt;/p>
 &lt;p>验证方式可扩展，扩展方式参见开发者手册中的&lt;a href="../../references/spis/validation">验证扩展&lt;/a>&lt;/p>
 &lt;/div></description></item><item><title>Docs: 结果缓存</title><link>https://dubbo.apache.org/zh/docs/advanced/result-cache/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/advanced/result-cache/</guid><description>
 &lt;div class="pageinfo pageinfo-primary">
@@ -796,7 +796,7 @@ Dubbo 默认支持 hibernate-validator 版本 &amp;lt;=6.x，若使用 hibernate
 &lt;/div>
 &lt;p>当前 Dubbo 的服务定义和具体的编程语言绑定，没有提供一种语言中立的服务描述格式，比如 Java 就是定义 Interface 接口，到了其他语言又得重新以另外的格式定义一遍。
 2.7.5 版本通过支持 Protobuf IDL 实现了语言中立的服务定义。&lt;/p>
-&lt;p>日后，不论我们使用什么语言版本来开发 Dubbo 服务，都可以直接使用 IDL 定义如下服务，具体请&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-protobuf">参见示例&lt;/a>&lt;/p>
+&lt;p>日后，不论我们使用什么语言版本来开发 Dubbo 服务，都可以直接使用 IDL 定义如下服务，具体请&lt;a href="https://github.com/apache/dubbo-samples/tree/master/3-extensions/serialization/dubbo-samples-protobuf">参见示例&lt;/a>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>syntax = &lt;span style="color:#2aa198">&amp;#34;proto3&amp;#34;&lt;/span>;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>option java_multiple_files = &lt;span style="color:#cb4b16">true&lt;/span>;
@@ -826,7 +826,7 @@ Dubbo 默认支持 hibernate-validator 版本 &amp;lt;=6.x，若使用 hibernate
 &lt;/div>
 &lt;p>泛化接口调用方式主要用于客户端没有 API 接口及模型类元的情况，参考 &lt;a href="../generic-reference">泛化调用&lt;/a>。
 一般泛化调用只能用于生成的服务参数为POJO的情况，而 GoogleProtobuf 的对象是基于 Builder 生成的非正常POJO，可以通过 protobuf-json 泛化调用。&lt;/p>
-&lt;p>GoogleProtobuf 序列化相关的Demo可以参考 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-protobuf">protobuf-demo&lt;/a>&lt;/p>
+&lt;p>GoogleProtobuf 序列化相关的Demo可以参考 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/3-extensions/serialization/dubbo-samples-protobuf">protobuf-demo&lt;/a>&lt;/p>
 &lt;h2 id="通过spring对google-protobuf对象泛化调用">通过Spring对Google Protobuf对象泛化调用&lt;/h2>
 &lt;p>在 Spring 中配置声明 generic = &amp;ldquo;protobuf-json&amp;rdquo;&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;barService&amp;#34;&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> generic=&lt;span style="color:#2aa198">&amp;#34;protobuf-json&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
@@ -1623,7 +1623,7 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>为尽可能保证应用启动的灵活性，TLS Cert 的指定还能通过 -D 参数或环境变量等方式来在启动阶段根据部署环境动态指定，具体请参见 Dubbo 配置读取规则与 TLS 示例&lt;/p>
 &lt;div class="alert alert-primary" role="alert">
 &lt;h4 class="alert-heading">提示&lt;/h4>
-&lt;p>参考 Dubbo &lt;a href="https://dubbo.apache.org/zh/docsv2.7/user/configuration/configuration-load-process/">配置读取规则&lt;/a>，TLS &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-ssl">示例&lt;/a>&lt;/p>
+&lt;p>参考 Dubbo &lt;a href="https://dubbo.apache.org/zh/docsv2.7/user/configuration/configuration-load-process/">配置读取规则&lt;/a>，TLS &lt;a href="https://github.com/apache/dubbo-samples/tree/master/4-governance/dubbo-samples-ssl">示例&lt;/a>&lt;/p>
 &lt;p>如果要使用的是 gRPC 协议，在开启 TLS 时会使用到协议协商机制，因此必须使用支持 ALPN 机制的 Provider，推荐使用的是 netty-tcnative，具体可参见 gRPC Java 社区的&lt;a href="https://github.com/grpc/grpc-java/blob/master/SECURITY.md">总结&lt;/a>&lt;/p>
 &lt;/div>
 &lt;p>在服务调用的安全性上，Dubbo 在后续的版本中会持续投入，其中服务发现/调用的鉴权机制预计在接下来的版本中就会和大家见面。&lt;/p></description></item><item><title>Docs: 令牌验证</title><link>https://dubbo.apache.org/zh/docs/advanced/token-authorization/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/advanced/token-authorization/</guid><description>

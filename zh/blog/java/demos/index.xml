@@ -3544,7 +3544,7 @@ ProtocolFilterWrapper代码如下：&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> entry&lt;span style="color:#719e07">.&lt;/span>getValue&lt;span style="color:#719e07">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>argumentIndex是在初始化Selector的时候一起赋值的，代表着需要用哪几个请求参数作Hash映射获取Invoker。比如：有方法methodA(Integer a, Integer b, Integer c)，如果argumentIndex的值为{0,2}，那么即用a和c拼接的字符串来计算Hash值。&lt;/p>
-&lt;p>我们已经知道virtualInvokers是一个TreeMap，TreeMap的底层实现是红黑树。对于TreeMap的方法ceilingEntry(hash)，它的作用是用来&lt;strong>获取比传入值大的第一个元素&lt;/strong>。可以看到，这一点与一般的一致性Hash算法的处理逻辑完全是相同的。&lt;/p>
+&lt;p>我们已经知道virtualInvokers是一个TreeMap，TreeMap的底层实现是红黑树。对于TreeMap的方法ceilingEntry(hash)，它的作用是用来&lt;strong>获取大于等于传入值的首个元素&lt;/strong>。可以看到，这一点与一般的一致性Hash算法的处理逻辑完全是相同的。&lt;/p>
 &lt;p>但这里的回环逻辑有点不同。对于取模运算来讲，大于最大值后，会自动回环从0开始，而这里的逻辑是：当没有比传入ceilingEntry()方法中的值大的元素的时候，virtualInvokers.ceilingEntry(hash)必然会得到null，于是，就用virtualInvokers.firstEntry()来获取整个TreeMap的第一个元素。&lt;/p>
 &lt;p>从selectForKey中获取到Invoker后，负载均衡策略也就算是执行完毕了。后续获取远程调用客户端等调用流程不再赘述。&lt;/p></description></item><item><title>Blog: Dubbo可扩展机制实战</title><link>https://dubbo.apache.org/zh/blog/2019/04/25/dubbo%E5%8F%AF%E6%89%A9%E5%B1%95%E6%9C%BA%E5%88%B6%E5%AE%9E%E6%88%98/</link><pubDate>Thu, 25 Apr 2019 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/blog/2019/04/25/dubbo%E5%8F%AF%E6%89%A9%E5%B1%95%E6%9C%BA%E5%88%B6%E5%AE%9E%E6%88%98/</guid><description>
 &lt;h2 id="1-dubbo的扩展机制">1. Dubbo的扩展机制&lt;/h2>
