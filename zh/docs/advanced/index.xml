@@ -506,7 +506,7 @@ key 为服务名，value 为服务提供者 url，此配置优先级最高，&lt
 &lt;p>此文档已经不再维护。您当前查看的是快照版本。如果想要查看最新版本的文档，请参阅&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/group-merger/">最新版本&lt;/a>。&lt;/p>
 &lt;/div>
 &lt;p>通过分组对结果进行聚合并返回聚合后的结果，比如菜单服务，用group区分同一接口的多种实现，现在消费方需从每种group中调用一次并返回结果，对结果进行合并之后返回，这样就可以实现聚合菜单项。&lt;/p>
-&lt;p>相关代码可以参考 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-merge">dubbo 项目中的示例&lt;/a>&lt;/p>
+&lt;p>相关代码可以参考 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/2-advanced/dubbo-samples-merge">dubbo 项目中的示例&lt;/a>&lt;/p>
 &lt;h2 id="配置">配置&lt;/h2>
 &lt;p>搜索所有分组&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.xxx.MenuService&amp;#34;&lt;/span> group=&lt;span style="color:#2aa198">&amp;#34;*&amp;#34;&lt;/span> merger=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
@@ -1184,7 +1184,7 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;div class="pageinfo pageinfo-primary">
 &lt;p>此文档已经不再维护。您当前查看的是快照版本。如果想要查看最新版本的文档，请参阅&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/callback-parameter/">最新版本&lt;/a>。&lt;/p>
 &lt;/div>
-&lt;p>参数回调方式与调用本地 callback 或 listener 相同，只需要在 Spring 的配置文件中声明哪个参数是 callback 类型即可。Dubbo 将基于长连接生成反向代理，这样就可以从服务器端调用客户端逻辑。可以参考 &lt;a href="https://github.com/dubbo/dubbo-samples/tree/master/dubbo-samples-callback">dubbo 项目中的示例代码&lt;/a>。&lt;/p>
+&lt;p>参数回调方式与调用本地 callback 或 listener 相同，只需要在 Spring 的配置文件中声明哪个参数是 callback 类型即可。Dubbo 将基于长连接生成反向代理，这样就可以从服务器端调用客户端逻辑。可以参考 &lt;a href="https://github.com/dubbo/dubbo-samples/tree/master/2-advanced/dubbo-samples-callback">dubbo 项目中的示例代码&lt;/a>。&lt;/p>
 &lt;h4 id="服务接口示例">服务接口示例&lt;/h4>
 &lt;h6 id="callbackservicejava">CallbackService.java&lt;/h6>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">package&lt;/span> com.callback&lt;span style="color:#719e07">;&lt;/span>
@@ -2409,7 +2409,7 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;20890&amp;#34;&lt;/span> host=&lt;span style="color:#2aa198">&amp;#34;www.example.com&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ...
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="在使用-docker-时有时需要设置端口映射此时启动-server-时绑定的-socket-和向注册中心注册的-socket-使用不同的端口号此时又该如何设置">在使用 docker 时，有时需要设置端口映射，此时，启动 server 时绑定的 socket 和向注册中心注册的 socket 使用不同的端口号，此时又该如何设置？&lt;/h4>
-&lt;p>见 &lt;a href="https://github.com/dubbo/dubbo-samples/tree/master/dubbo-samples-docker">dubbo 通过环境变量设置 host&lt;/a>&lt;/p>
+&lt;p>见 &lt;a href="https://github.com/dubbo/dubbo-samples/tree/master/2-advanced/dubbo-samples-docker">dubbo 通过环境变量设置 host&lt;/a>&lt;/p>
 &lt;p>有些部署场景需要动态指定服务注册的地址，如 docker bridge 网络模式下要指定注册宿主机 ip 以实现外网通信。dubbo 提供了两对启动阶段的系统属性，用于设置对外通信的ip、port地址。&lt;/p>
 &lt;ul>
 &lt;li>DUBBO_IP_TO_REGISTRY &amp;mdash; 注册到注册中心的ip地址&lt;/li>
@@ -2436,7 +2436,7 @@ dubbo 支持多协议，如果一个应用同时暴露多个不同协议服务�
 &lt;h2 id="参考">参考&lt;/h2>
 &lt;ol>
 &lt;li>&lt;a href="https://github.com/apache/dubbo/issues/2043">Proposal: support hostname or domain in service discovery.&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://github.com/dubbo/dubbo-samples/tree/master/dubbo-samples-docker">dubbo通过环境变量设置host&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/dubbo/dubbo-samples/tree/master/2-advanced/dubbo-samples-docker">dubbo通过环境变量设置host&lt;/a>&lt;/li>
 &lt;/ol></description></item><item><title>Docs: 注册信息简化</title><link>https://dubbo.apache.org/zh/docs/advanced/simplify-registry-data/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/advanced/simplify-registry-data/</guid><description>
 &lt;div class="pageinfo pageinfo-primary">
 &lt;p>此文档已经不再维护。您当前查看的是快照版本。如果想要查看最新版本的文档，请参阅&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/performance/simplify-registry-data/">最新版本&lt;/a>。&lt;/p>

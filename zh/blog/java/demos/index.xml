@@ -814,7 +814,7 @@ Dubbo这边有没有集合文档展示和测试功能,能不用写文档就能�
 &lt;p>在CPU资源的管理上，OS和JVM的最小调度单位都是线程，业务应用通过扩展实现的协程包是可以具备独立的运行单位，事实上也是基于线程来做的，核心应该是遇到IO阻塞，或者锁等待时，保存上下文，然后切换到另一个协程。至于说的协程开销低，能更高效的使用CPU，这些考虑到协程库的用户态实现和上下文设计是支持的，但也建议大家结合实际业务场景做性能测试。&lt;/p>
 &lt;p>&lt;strong>在默认的Dubbo线程策略中，是有worker线程池来执行业务逻辑，但也常常会发生ThreadPool Full的问题，为了尽快释放worker线程，在业务服务的实现中会另起线程。代价是再次增加线程上下文切换，同时需要考虑链路级别的数据传送(比如tracing信息)和流控的出口控制等等。当然，如果Dubbo能够切换到Same-thread策略，再配合协程库的支持，服务端异步是一种值得推荐的使用方式。&lt;/strong>&lt;/p>
 &lt;h2 id="示例">示例&lt;/h2>
-&lt;p>通过示例来体验下Dubbo服务端异步接口。Demo代码请访问github之&lt;a href="https://github.com/dubbo/dubbo-samples/tree/master/dubbo-samples-notify">https://github.com/dubbo/dubbo-samples/tree/master/dubbo-samples-notify&lt;/a>。&lt;/p>
+&lt;p>通过示例来体验下Dubbo服务端异步接口。Demo代码请访问github之&lt;a href="https://github.com/dubbo/dubbo-samples/tree/master/2-advanced/dubbo-samples-notify">https://github.com/dubbo/dubbo-samples/tree/master/2-advanced/dubbo-samples-notify&lt;/a>。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">AsyncServiceImpl&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> AsyncService &lt;span style="color:#719e07">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Override&lt;/span>
@@ -1053,7 +1053,7 @@ Dubbo这边有没有集合文档展示和测试功能,能不用写文档就能�
 &lt;h2 id="示例">示例&lt;/h2>
 &lt;h3 id="示例-1使用-dubbo-开发-grpc-服务">示例 1，使用 Dubbo 开发 gRPC 服务&lt;/h3>
 &lt;p>&lt;a href="https://grpc.io/">gRPC&lt;/a> 是 Google 开源的构建在 HTTP/2 之上的一个 PRC 通信协议。Dubbo 依赖其灵活的协议扩展机制，增加了对 gRPC (HTTP/2) 协议的支持。&lt;/p>
-&lt;p>目前的支持限定在 Dubbo Java 语言版本，后续 Go 语言或其他语言版本将会以类似方式提供支持。下面，通过一个&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-grpc">简单的示例&lt;/a>来演示如何在 Dubbo 中使用 gRPC 协议通信。&lt;/p>
+&lt;p>目前的支持限定在 Dubbo Java 语言版本，后续 Go 语言或其他语言版本将会以类似方式提供支持。下面，通过一个&lt;a href="https://github.com/apache/dubbo-samples/tree/master/3-extensions/protocol/dubbo-samples-grpc">简单的示例&lt;/a>来演示如何在 Dubbo 中使用 gRPC 协议通信。&lt;/p>
 &lt;h4 id="1-定义服务-idl">1. 定义服务 IDL&lt;/h4>
 &lt;p>首先，通过标准的 Protobuf 协议定义服务如下：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>syntax = &lt;span style="color:#2aa198">&amp;#34;proto3&amp;#34;&lt;/span>;
@@ -1317,7 +1317,7 @@ Dubbo这边有没有集合文档展示和测试功能,能不用写文档就能�
 &lt;p>&lt;strong>三、TLS 配置&lt;/strong>&lt;/p>
 &lt;p>配置方式和 Dubbo 提供的通用的 &lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/security/tls/">TLS 支持&lt;/a>一致，具体请参见文档&lt;/p>
 &lt;h3 id="示例-2-使用-protobuf-开发-dubbo-服务">示例 2， 使用 Protobuf 开发 Dubbo 服务&lt;/h3>
-&lt;p>下面，我们以一个&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-protobuf">具体的示例&lt;/a>来看一下基于 Protobuf 的 Dubbo 服务开发流程。&lt;/p>
+&lt;p>下面，我们以一个&lt;a href="https://github.com/apache/dubbo-samples/tree/master/3-extensions/serialization/dubbo-samples-protobuf">具体的示例&lt;/a>来看一下基于 Protobuf 的 Dubbo 服务开发流程。&lt;/p>
 &lt;h4 id="1-定义服务">1. 定义服务&lt;/h4>
 &lt;p>通过标准 Protobuf 定义服务&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>syntax = &lt;span style="color:#2aa198">&amp;#34;proto3&amp;#34;&lt;/span>;
@@ -1370,7 +1370,7 @@ Dubbo这边有没有集合文档展示和测试功能,能不用写文档就能�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;/execution&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;/executions&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/plugin&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>注意，这里与 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-grpc">Dubbo 对 gRPC&lt;/a> 支持部分的区别在于：
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>注意，这里与 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/3-extensions/protocol/dubbo-samples-grpc">Dubbo 对 gRPC&lt;/a> 支持部分的区别在于：
 &lt;code> &amp;lt;pluginParameter&amp;gt;dubbo&amp;lt;/pluginParameter&amp;gt;&lt;/code>&lt;/p>
 &lt;ol start="2">
 &lt;li>
