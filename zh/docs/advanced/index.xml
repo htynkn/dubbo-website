@@ -716,7 +716,7 @@ Dubbo 默认支持 hibernate-validator 版本 &amp;lt;=6.x，若使用 hibernate
 &lt;div class="alert alert-primary" role="alert">
 &lt;h4 class="alert-heading">提示&lt;/h4>
 &lt;p>&lt;code>2.1.0&lt;/code> 以上版本支持。&lt;/p>
-&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-cache">示例代码&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/2-advanced/dubbo-samples-cache">示例代码&lt;/a>&lt;/p>
 &lt;/div></description></item><item><title>Docs: 使用泛化调用</title><link>https://dubbo.apache.org/zh/docs/advanced/generic-reference/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs/advanced/generic-reference/</guid><description>
 &lt;div class="pageinfo pageinfo-primary">
 &lt;p>此文档已经不再维护。您当前查看的是快照版本。如果想要查看最新版本的文档，请参阅&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/generic-reference/">最新版本&lt;/a>。&lt;/p>

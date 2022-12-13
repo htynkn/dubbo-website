@@ -19,7 +19,7 @@
 &lt;h3 id="新贡献者">新贡献者&lt;/h3>
 &lt;ul>
 &lt;li>&lt;a href="https://github.com/zhangzq7">@zhangzq7&lt;/a> 在 &lt;a href="https://github.com/apache/dubbo/pull/10847">#10847&lt;/a> 中提交了第一个贡献&lt;/li>
-&lt;li>&lt;a href="https://github.com/nobodyw-cell">@nobodyw-cell&lt;/a> 在 &lt;a href="https://github.com/apache/dubbo/pull/10799">#10799&lt;/a> 中提交了第一个贡献&lt;/li>
+&lt;li>&lt;a href="https://github.com/akaakking">@akaakking&lt;/a> 在 &lt;a href="https://github.com/apache/dubbo/pull/10799">#10799&lt;/a> 中提交了第一个贡献&lt;/li>
 &lt;li>&lt;a href="https://github.com/wxbty">@wxbty&lt;/a> 在 &lt;a href="https://github.com/apache/dubbo/pull/10921">#10921&lt;/a> 中提交了第一个贡献&lt;/li>
 &lt;li>&lt;a href="https://github.com/haoxz11">@haoxz11&lt;/a> 在 &lt;a href="https://github.com/apache/dubbo/pull/10937">#10937&lt;/a> 中提交了第一个贡献&lt;/li>
 &lt;/ul>
@@ -10746,7 +10746,7 @@ FrameworkModel 重置默认的应用模型对象 resetDefaultAppModel()方法
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>上述代码中，&lt;code>DemoServiceImpl&lt;/code> 会打印接收到的 &lt;code>httpRequestContext&lt;/code>，并通过返回包含有指定 Key 的 Map 对象去描述该 Dubbo 请求的 HTTP 响应。&lt;/p>
 &lt;h4 id="操作步骤">操作步骤&lt;/h4>
 &lt;ol>
-&lt;li>启动 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-tengine#install-dubbo">&lt;code>dubbo-samples&lt;/code>&lt;/a>。&lt;/li>
+&lt;li>启动 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/2-advanced/dubbo-samples-tengine#install-dubbo">&lt;code>dubbo-samples&lt;/code>&lt;/a>。&lt;/li>
 &lt;li>在 &lt;code>config.yaml&lt;/code> 文件中进行 &lt;code>dubbo-proxy&lt;/code> 插件启用。&lt;/li>
 &lt;/ol>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># Add this in config.yaml&lt;/span>
