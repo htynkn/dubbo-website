@@ -422,7 +422,7 @@
 &lt;li>Install Java development environment.&lt;/li>
 &lt;/ul>
 &lt;h2 id="2-run-example-of-java-dubbo-provider">2 Run example of Java Dubbo provider&lt;/h2>
-&lt;p>Java version of Dubbo provider example &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple&lt;/a>.&lt;/p>
+&lt;p>Java version of Dubbo provider example &lt;a href="https://github.com/apache/dubbo-samples/tree/master/3-extensions/protocol/dubbo-samples-triple">https://github.com/apache/dubbo-samples/tree/master/3-extensions/protocol/dubbo-samples-triple&lt;/a>.&lt;/p>
 &lt;p>Clone the source code, compile, and run provider:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>$ &lt;span style="color:#586e75"># clone the source code&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ git clone https://github.com/apache/dubbo-samples.git
@@ -435,9 +435,9 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ java -Dprovider.port&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">8888&lt;/span> -jar ./target/dubbo-samples-triple-1.0-SNAPSHOT.jar
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># … some logs&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Dubbo triple stub server started, &lt;span style="color:#268bd2">port&lt;/span>&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">8888&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/blob/master/dubbo-samples-triple/src/main/proto/greeter.proto">The interface defination on Java side&lt;/a>&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/blob/master/3-extensions/protocol/dubbo-samples-triple/src/main/proto/greeter.proto">The interface defination on Java side&lt;/a>&lt;/p>
 &lt;h2 id="3-run-rust-version-of--dubbo-consumer">3 Run Rust version of Dubbo consumer&lt;/h2>
-&lt;p>Rust version of Dubbo consumer &lt;a href="https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple&lt;/a>.&lt;/p>
+&lt;p>Rust version of Dubbo consumer &lt;a href="https://github.com/apache/dubbo-samples/tree/master/3-extensions/protocol/dubbo-samples-triple">https://github.com/apache/dubbo-samples/tree/master/3-extensions/protocol/dubbo-samples-triple&lt;/a>.&lt;/p>
 &lt;p>Clone the source code, compile and run consumer:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>$ &lt;span style="color:#586e75"># clone the source code&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ git clone https://github.com/apache/dubbo-rust.git

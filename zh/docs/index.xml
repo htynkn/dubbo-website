@@ -6208,30 +6208,14 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>3.1.3&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="311-2022-09-29">3.1.1 (2022-09-29)&lt;/h3>
-&lt;h4 id="source-release-2">Source Release&lt;/h4>
-&lt;ul>
-&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.1.1/apache-dubbo-3.1.1-src.zip">source&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.1.1/apache-dubbo-3.1.1-src.zip.asc">asc&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.1.1/apache-dubbo-3.1.1-src.zip.sha512">sha512&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h4 id="maven-release-2">Maven Release&lt;/h4>
-&lt;ul>
-&lt;li>&lt;a href="https://search.maven.org/artifact/org.apache.dubbo/dubbo/3.1.1/jar">org.apache.dubbo:dubbo:3.1.1&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.dubbo&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>3.1.1&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3012-2022-09-29">3.0.12 (2022-09-29)&lt;/h3>
-&lt;h4 id="source-release-3">Source Release&lt;/h4>
+&lt;h4 id="source-release-2">Source Release&lt;/h4>
 &lt;ul>
 &lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.12/apache-dubbo-3.0.12-src.zip">source&lt;/a> |
 &lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.12/apache-dubbo-3.0.12-src.zip.asc">asc&lt;/a> |
 &lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/3.0.12/apache-dubbo-3.0.12-src.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h4 id="maven-release-3">Maven Release&lt;/h4>
+&lt;h4 id="maven-release-2">Maven Release&lt;/h4>
 &lt;ul>
 &lt;li>&lt;a href="https://search.maven.org/artifact/org.apache.dubbo/dubbo/3.0.12/jar">org.apache.dubbo:dubbo:3.0.12&lt;/a>&lt;/li>
 &lt;/ul>
@@ -6240,21 +6224,21 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>3.0.12&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2718-2022-09-29">2.7.18 (2022-09-29)&lt;/h3>
-&lt;h4 id="source-release-4">Source Release&lt;/h4>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2719-2022-12-13">2.7.19 (2022-12-13)&lt;/h3>
+&lt;h4 id="source-release-3">Source Release&lt;/h4>
 &lt;ul>
-&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.18/apache-dubbo-2.7.18-src.zip">source&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.18/apache-dubbo-2.7.18-src.zip.asc">asc&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.18/apache-dubbo-2.7.18-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.19/apache-dubbo-2.7.19-src.zip">source&lt;/a> |
+&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.19/apache-dubbo-2.7.19-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://www.apache.org/dyn/closer.lua/dubbo/2.7.19/apache-dubbo-2.7.19-src.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h4 id="maven-release-4">Maven Release&lt;/h4>
+&lt;h4 id="maven-release-3">Maven Release&lt;/h4>
 &lt;ul>
-&lt;li>&lt;a href="https://search.maven.org/artifact/org.apache.dubbo/dubbo/2.7.18/jar">org.apache.dubbo:dubbo:2.7.18&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://search.maven.org/artifact/org.apache.dubbo/dubbo/2.7.19/jar">org.apache.dubbo:dubbo:2.7.19&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.dubbo&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>2.7.18&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>2.7.19&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Release: Java SDK</title><link>https://dubbo.apache.org/zh/release/past-releases/java/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/release/past-releases/java/</guid><description>
 &lt;h2 id="验证">验证&lt;/h2>
@@ -6296,14 +6280,30 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>3.1.3&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="320-beta1-2022-11-08">3.2.0-beta.1 (2022-11-08)&lt;/h3>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2718-2022-09-29">2.7.18 (2022-09-29)&lt;/h3>
 &lt;h4 id="source-release-2">Source Release&lt;/h4>
+&lt;ul>
+&lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/2.7.18/apache-dubbo-2.7.18-src.zip">source&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/2.7.18/apache-dubbo-2.7.18-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/2.7.18/apache-dubbo-2.7.18-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="maven-release-2">Maven Release&lt;/h4>
+&lt;ul>
+&lt;li>&lt;a href="https://search.maven.org/artifact/org.apache.dubbo/dubbo/2.7.18/jar">org.apache.dubbo:dubbo:2.7.18&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.dubbo&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>2.7.18&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="320-beta1-2022-11-08">3.2.0-beta.1 (2022-11-08)&lt;/h3>
+&lt;h4 id="source-release-3">Source Release&lt;/h4>
 &lt;ul>
 &lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/3.2.0-beta.1/apache-dubbo-3.2.0-beta.1-src.zip">source&lt;/a> |
 &lt;a href="https://archive.apache.org/dist/dubbo/3.2.0-beta.1/apache-dubbo-3.2.0-beta.1-src.zip.asc">asc&lt;/a> |
 &lt;a href="https://archive.apache.org/dist/dubbo/3.2.0-beta.1/apache-dubbo-3.2.0-beta.1-src.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h4 id="maven-release-2">Maven Release&lt;/h4>
+&lt;h4 id="maven-release-3">Maven Release&lt;/h4>
 &lt;ul>
 &lt;li>&lt;a href="https://search.maven.org/artifact/org.apache.dubbo/dubbo/3.2.0-beta.1/jar">org.apache.dubbo:dubbo:3.2.0-beta.1&lt;/a>&lt;/li>
 &lt;/ul>
@@ -6313,13 +6313,13 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>3.2.0-beta.1&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="312-2022-11-08">3.1.2 (2022-11-08)&lt;/h3>
-&lt;h4 id="source-release-3">Source Release&lt;/h4>
+&lt;h4 id="source-release-4">Source Release&lt;/h4>
 &lt;ul>
 &lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/3.1.2/apache-dubbo-3.1.2-src.zip">source&lt;/a> |
 &lt;a href="https://archive.apache.org/dist/dubbo/3.1.2/apache-dubbo-3.1.2-src.zip.asc">asc&lt;/a> |
 &lt;a href="https://archive.apache.org/dist/dubbo/3.1.2/apache-dubbo-3.1.2-src.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h4 id="maven-release-3">Maven Release&lt;/h4>
+&lt;h4 id="maven-release-4">Maven Release&lt;/h4>
 &lt;ul>
 &lt;li>&lt;a href="https://search.maven.org/artifact/org.apache.dubbo/dubbo/3.1.2/jar">org.apache.dubbo:dubbo:3.1.2&lt;/a>&lt;/li>
 &lt;/ul>
@@ -6328,14 +6328,30 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>3.1.2&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="311-2022-09-29">3.1.1 (2022-09-29)&lt;/h3>
+&lt;h4 id="source-release-5">Source Release&lt;/h4>
+&lt;ul>
+&lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/3.1.1/apache-dubbo-3.1.1-src.zip">source&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/3.1.1/apache-dubbo-3.1.1-src.zip.asc">asc&lt;/a> |
+&lt;a href="https://archive.apache.org/dist/dubbo/3.1.1/apache-dubbo-3.1.1-src.zip.sha512">sha512&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h4 id="maven-release-5">Maven Release&lt;/h4>
+&lt;ul>
+&lt;li>&lt;a href="https://search.maven.org/artifact/org.apache.dubbo/dubbo/3.1.1/jar">org.apache.dubbo:dubbo:3.1.1&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.dubbo&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>3.1.1&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="310-2022-08-22">3.1.0 (2022-08-22)&lt;/h3>
-&lt;h4 id="source-release-4">Source Release&lt;/h4>
+&lt;h4 id="source-release-6">Source Release&lt;/h4>
 &lt;ul>
 &lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/3.1.0/apache-dubbo-3.1.0-src.zip">source&lt;/a> |
 &lt;a href="https://archive.apache.org/dist/dubbo/3.1.0/apache-dubbo-3.1.0-src.zip.asc">asc&lt;/a> |
 &lt;a href="https://archive.apache.org/dist/dubbo/3.1.0/apache-dubbo-3.1.0-src.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h4 id="maven-release-4">Maven Release&lt;/h4>
+&lt;h4 id="maven-release-6">Maven Release&lt;/h4>
 &lt;ul>
 &lt;li>&lt;a href="https://search.maven.org/artifact/org.apache.dubbo/dubbo/3.1.0/jar">org.apache.dubbo:dubbo:3.1.0&lt;/a>&lt;/li>
 &lt;/ul>
@@ -6345,13 +6361,13 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>3.1.0&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3011-2022-08-23">3.0.11 (2022-08-23)&lt;/h3>
-&lt;h4 id="source-release-5">Source Release&lt;/h4>
+&lt;h4 id="source-release-7">Source Release&lt;/h4>
 &lt;ul>
 &lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/3.0.11/apache-dubbo-3.0.11-src.zip">source&lt;/a> |
 &lt;a href="https://archive.apache.org/dist/dubbo/3.0.11/apache-dubbo-3.0.11-src.zip.asc">asc&lt;/a> |
 &lt;a href="https://archive.apache.org/dist/dubbo/3.0.11/apache-dubbo-3.0.11-src.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h4 id="maven-release-5">Maven Release&lt;/h4>
+&lt;h4 id="maven-release-7">Maven Release&lt;/h4>
 &lt;ul>
 &lt;li>&lt;a href="https://search.maven.org/artifact/org.apache.dubbo/dubbo/3.0.11/jar">org.apache.dubbo:dubbo:3.0.11&lt;/a>&lt;/li>
 &lt;/ul>
@@ -6361,13 +6377,13 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>3.0.11&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2717-2022-08-23">2.7.17 (2022-08-23)&lt;/h3>
-&lt;h4 id="source-release-6">Source Release&lt;/h4>
+&lt;h4 id="source-release-8">Source Release&lt;/h4>
 &lt;ul>
 &lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/2.7.17/apache-dubbo-2.7.17-src.zip">source&lt;/a> |
 &lt;a href="https://archive.apache.org/dist/dubbo/2.7.17/apache-dubbo-2.7.17-src.zip.asc">asc&lt;/a> |
 &lt;a href="https://archive.apache.org/dist/dubbo/2.7.17/apache-dubbo-2.7.17-src.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h4 id="maven-release-6">Maven Release&lt;/h4>
+&lt;h4 id="maven-release-8">Maven Release&lt;/h4>
 &lt;ul>
 &lt;li>&lt;a href="https://search.maven.org/artifact/org.apache.dubbo/dubbo/2.7.17/jar">org.apache.dubbo:dubbo:2.7.17&lt;/a>&lt;/li>
 &lt;/ul>
@@ -6377,13 +6393,13 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>2.7.17&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2716-2022-07-06">2.7.16 (2022-07-06)&lt;/h3>
-&lt;h4 id="source-release-7">Source Release&lt;/h4>
+&lt;h4 id="source-release-9">Source Release&lt;/h4>
 &lt;ul>
 &lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/2.7.16/apache-dubbo-2.7.16-src.zip">source&lt;/a> |
 &lt;a href="https://archive.apache.org/dist/dubbo/2.7.16/apache-dubbo-2.7.16-src.zip.asc">asc&lt;/a> |
 &lt;a href="https://archive.apache.org/dist/dubbo/2.7.16/apache-dubbo-2.7.16-src.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h4 id="maven-release-7">Maven Release&lt;/h4>
+&lt;h4 id="maven-release-9">Maven Release&lt;/h4>
 &lt;ul>
 &lt;li>&lt;a href="https://search.maven.org/artifact/org.apache.dubbo/dubbo/2.7.16/jar">org.apache.dubbo:dubbo:2.7.16&lt;/a>&lt;/li>
 &lt;/ul>
@@ -6393,13 +6409,13 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>2.7.16&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3010-2022-07-21">3.0.10 (2022-07-21)&lt;/h3>
-&lt;h4 id="source-release-8">Source Release&lt;/h4>
+&lt;h4 id="source-release-10">Source Release&lt;/h4>
 &lt;ul>
 &lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/3.0.10/apache-dubbo-3.0.10-src.zip">source&lt;/a> |
 &lt;a href="https://archive.apache.org/dist/dubbo/3.0.10/apache-dubbo-3.0.10-src.zip.asc">asc&lt;/a> |
 &lt;a href="https://archive.apache.org/dist/dubbo/3.0.10/apache-dubbo-3.0.10-src.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h4 id="maven-release-8">Maven Release&lt;/h4>
+&lt;h4 id="maven-release-10">Maven Release&lt;/h4>
 &lt;ul>
 &lt;li>&lt;a href="https://search.maven.org/artifact/org.apache.dubbo/dubbo/3.0.10/jar">org.apache.dubbo:dubbo:3.0.10&lt;/a>&lt;/li>
 &lt;/ul>
@@ -6409,13 +6425,13 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>3.0.10&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="309-2022-06-23">3.0.9 (2022-06-23)&lt;/h3>
-&lt;h4 id="source-release-9">Source Release&lt;/h4>
+&lt;h4 id="source-release-11">Source Release&lt;/h4>
 &lt;ul>
 &lt;li>&lt;a href="https://archive.apache.org/dist/dubbo/3.0.9/apache-dubbo-3.0.9-src.zip">source&lt;/a> |
 &lt;a href="https://archive.apache.org/dist/dubbo/3.0.9/apache-dubbo-3.0.9-src.zip.asc">asc&lt;/a> |
 &lt;a href="https://archive.apache.org/dist/dubbo/3.0.9/apache-dubbo-3.0.9-src.zip.sha512">sha512&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;h4 id="maven-release-9">Maven Release&lt;/h4>
+&lt;h4 id="maven-release-11">Maven Release&lt;/h4>
 &lt;ul>
 &lt;li>&lt;a href="https://search.maven.org/artifact/org.apache.dubbo/dubbo/3.0.9/jar">org.apache.dubbo:dubbo:3.0.9&lt;/a>&lt;/li>
 &lt;/ul>
@@ -7200,6 +7216,11 @@ Pixiu 的整体设计遵守以下原则：&lt;/p>
 &lt;td>支持的远端主机ip地址（段）&lt;/td>
 &lt;td>(无)&lt;/td>
 &lt;/tr>
+&lt;tr>
+&lt;td>qos-anonymous-access-permission-level&lt;/td>
+&lt;td>支持的匿名访问的权限级别&lt;/td>
+&lt;td>PUBLIC(1)&lt;/td>
+&lt;/tr>
 &lt;/tbody>
 &lt;/table>
 &lt;blockquote>
@@ -7237,7 +7258,59 @@ Pixiu 的整体设计遵守以下原则：&lt;/p>
 &lt;p>设置 JVM 参数:&lt;/p>
 &lt;/blockquote>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>-Ddubbo.application.qos-accept-foreign-ip-whitelist=123.12.10.13,132.12.10.13/24
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="协议">协议&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="权限">权限&lt;/h2>
+&lt;p>为了对生命周期探针的默认支持，QoS 提供了匿名访问的能力以及对权限级别的设置，目前支持的权限级别有：&lt;/p>
+&lt;ul>
+&lt;li>PUBLIC(1)&lt;br>
+默认支持匿名访问的命令权限级别，目前只支持生命周期探针相关的命令&lt;/li>
+&lt;li>PROTECTED(2)&lt;br>
+命令默认的权限级别&lt;/li>
+&lt;li>PRIVATE(3)&lt;br>
+保留的最高权限级别，目前未支持&lt;/li>
+&lt;li>NONE&lt;br>
+最低权限级别，即不支持匿名访问&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>权限级别 &lt;code>PRIVATE&lt;/code>&amp;gt; &lt;code>PROTECTED&lt;/code>&amp;gt; &lt;code>PUBLIC&lt;/code>&amp;gt; &lt;code>NONE&lt;/code>, 高级别权限可访问同级别和低级别权限命令。
+当前以下命令权限为&lt;code>PUBLIC&lt;/code>, 其它命令默认权限别为&lt;code>PROTECTED&lt;/code>。&lt;/p>
+&lt;/blockquote>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>命令&lt;/th>
+&lt;th>权限等级&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Live&lt;/td>
+&lt;td>PUBLIC (1)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Startup&lt;/td>
+&lt;td>PUBLIC (1)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Ready&lt;/td>
+&lt;td>PUBLIC (1)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Quit&lt;/td>
+&lt;td>PUBLIC (1)&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>默认情况下，dubbo 允许匿名主机发起匿名访问，只有&lt;code>PUBLIC&lt;/code>权限级别的命令可以执行，其他更高权限的命令会被拒绝。&lt;/p>
+&lt;p>&lt;strong>关闭匿名访问&lt;/strong>&lt;br>
+可以通过设置&lt;code>qos-anonymous-access-permission-level=NONE&lt;/code>来关闭匿名访问。&lt;/p>
+&lt;p>&lt;strong>设置权限级别&lt;/strong>&lt;br>
+可以通过配置文件&lt;code>dubbo.properties&lt;/code> 修改:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.application.qos-anonymous-access-permission-level=PROTECTED
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者&lt;br>
+可以通过设置 JVM 参数:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>-Ddubbo.application.qos-anonymous-access-permission-level=PROTECTED
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>来允许匿名访问更高级别的权限的命令。&lt;/p>
+&lt;h2 id="协议">协议&lt;/h2>
 &lt;h3 id="telnet-与-http-协议">telnet 与 http 协议&lt;/h3>
 &lt;p>telnet 模块现在同时支持 http 协议和 telnet 协议，方便各种情况的使用
 示例：&lt;/p>
@@ -7287,12 +7360,14 @@ Pixiu 的整体设计遵守以下原则：&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-Ddubbo.application.qos-port=33333
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-Ddubbo.application.qos-accept-foreign-ip=false
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-Ddubbo.application.qos-accept-foreign-ip-whitelist=123.12.10.13,132.12.10.13/24
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-Ddubbo.application.qos-anonymous-access-permission-level=PUBLIC
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="使用-dubboproperties-文件配置">使用 dubbo.properties 文件配置&lt;/h3>
 &lt;p>在项目的&lt;code>src/main/resources&lt;/code>目录下添加 dubbo.properties文件，内容如下:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>dubbo.application.qos-enable=true
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.qos-port=33333
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.qos-accept-foreign-ip=false
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.qos-accept-foreign-ip-whitelist=123.12.10.13, 132.12.10.13/24
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.qos-anonymous-access-permission-level=PUBLIC
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="使用xml方法配置">使用XML方法配置&lt;/h3>
 &lt;p>如果要通过 XML 配置响应的QoS相关的参数，可以进行如下配置：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span>
@@ -7306,6 +7381,7 @@ Pixiu 的整体设计遵守以下原则：&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:parameter&lt;/span> key=&lt;span style="color:#2aa198">&amp;#34;qos-enable&amp;#34;&lt;/span> value=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:parameter&lt;/span> key=&lt;span style="color:#2aa198">&amp;#34;qos-accept-foreign-ip&amp;#34;&lt;/span> value=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:parameter&lt;/span> key=&lt;span style="color:#2aa198">&amp;#34;qos-accept-foreign-ip-whitelist&amp;#34;&lt;/span> value=&lt;span style="color:#2aa198">&amp;#34;123.12.10.13,132.12.10.13/24&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:parameter&lt;/span> key=&lt;span style="color:#2aa198">&amp;#34;qos-anonymous-access-permission-level&amp;#34;&lt;/span> value=&lt;span style="color:#2aa198">&amp;#34;NONE&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:parameter&lt;/span> key=&lt;span style="color:#2aa198">&amp;#34;qos-port&amp;#34;&lt;/span> value=&lt;span style="color:#2aa198">&amp;#34;33333&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;/dubbo:application&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:registry&lt;/span> address=&lt;span style="color:#2aa198">&amp;#34;multicast://224.5.6.7:1234&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
@@ -7319,6 +7395,7 @@ Pixiu 的整体设计遵守以下原则：&lt;/p>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.qos-port=33333
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.qos-accept-foreign-ip=false
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.qos-accept-foreign-ip-whitelist=123.12.10.13, 132.12.10.13/24
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.application.qos-anonymous-access-permission-level=NONE
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs3-V2: RPC 协议 Triple&amp;Dubbo 基准测试</title><link>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/performance/rpc-benchmarking/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/performance/rpc-benchmarking/</guid><description>
 &lt;ul>
 &lt;li>Dubbo3 的 _Dubbo协议 _实现与 Dubbo2 版本在性能上基本持平。&lt;/li>

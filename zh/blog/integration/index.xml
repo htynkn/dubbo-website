@@ -1886,7 +1886,7 @@ dubbo2.7.3默认开启qos功能，导致一些混部在物理机的dubbo服务�
 &lt;li>&lt;a href="https://github.com/apache/dubbo">https://github.com/apache/dubbo&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;h2 id="spring-boot应用">Spring Boot应用&lt;/h2>
-&lt;p>Demo地址： &lt;a href="https://github.com/dubbo/dubbo-samples/tree/master/dubbo-samples-spring-boot-hystrix">https://github.com/dubbo/dubbo-samples/tree/master/dubbo-samples-spring-boot-hystrix&lt;/a>&lt;/p>
+&lt;p>Demo地址： &lt;a href="https://github.com/dubbo/dubbo-samples/tree/master/4-governance/dubbo-samples-spring-boot-hystrix">https://github.com/dubbo/dubbo-samples/tree/master/4-governance/dubbo-samples-spring-boot-hystrix&lt;/a>&lt;/p>
 &lt;h3 id="生成dubbo集成spring-boot的应用">生成dubbo集成spring boot的应用&lt;/h3>
 &lt;p>对于不熟悉dubbo 集成spring boot应用的同学，可以在这里直接生成dubbo + spring boot的工程： &lt;a href="http://start.dubbo.io/">http://start.dubbo.io/&lt;/a>&lt;/p>
 &lt;h3 id="配置spring-cloud-starter-netflix-hystrix">配置spring-cloud-starter-netflix-hystrix&lt;/h3>
@@ -1928,7 +1928,7 @@ dubbo2.7.3默认开启qos功能，导致一些混部在物理机的dubbo服务�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>通过上面的配置，很简单地就完成了Spring Boot里Dubbo + Hystrix的集成。&lt;/p>
 &lt;h2 id="传统spring-annotation应用">传统Spring Annotation应用&lt;/h2>
-&lt;p>Demo地址： &lt;a href="https://github.com/dubbo/dubbo-samples/tree/master/dubbo-samples-spring-hystrix">https://github.com/dubbo/dubbo-samples/tree/master/dubbo-samples-spring-hystrix&lt;/a>&lt;/p>
+&lt;p>Demo地址： &lt;a href="https://github.com/dubbo/dubbo-samples/tree/master/4-governance/dubbo-samples-spring-hystrix">https://github.com/dubbo/dubbo-samples/tree/master/4-governance/dubbo-samples-spring-hystrix&lt;/a>&lt;/p>
 &lt;p>传统spring annotation应用的配置其实也很简单，和spring boot应用不同的是：&lt;/p>
 &lt;ol>
 &lt;li>显式配置Spring AOP支持：&lt;code>@EnableAspectJAutoProxy&lt;/code>&lt;/li>
@@ -2319,7 +2319,7 @@ dubbo2.7.3默认开启qos功能，导致一些混部在物理机的dubbo服务�
 &lt;p>三级目录有两个子节点，分别是 &lt;code>providers&lt;/code> 和 &lt;code>consumers&lt;/code>，表示该服务的提供者和消费者。&lt;/p>
 &lt;p>四级目录记录了与该服务相关的每一个应用实例的 URL 信息，在 &lt;code>providers&lt;/code> 下的表示该服务的所有提供者，而在 &lt;code>consumers&lt;/code> 下的表示该服务的所有消费者。举例说明，&lt;code>com.foo.BarService&lt;/code> 的服务提供者在启动时将自己的 URL 信息注册到 &lt;code>/dubbo/com.foo.BarService/providers&lt;/code> 下；同样的，服务消费者将自己的信息注册到相应的 &lt;code>consumers&lt;/code> 下，同时，服务消费者会订阅其所对应的 &lt;code>providers&lt;/code> 节点，以便能够感知到服务提供方地址列表的变化。&lt;/p>
 &lt;h3 id="准备示例代码">准备示例代码&lt;/h3>
-&lt;p>本文的代码可以在 &lt;a href="https://github.com/dubbo/dubbo-samples/tree/master/dubbo-samples-zookeeper">https://github.com/dubbo/dubbo-samples/tree/master/dubbo-samples-zookeeper&lt;/a> 中找到。&lt;/p>
+&lt;p>本文的代码可以在 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/3-extensions/registry/dubbo-samples-zookeeper">https://github.com/apache/dubbo-samples/tree/master/3-extensions/registry/dubbo-samples-zookeeper&lt;/a> 中找到。&lt;/p>
 &lt;h4 id="1-接口定义">1. 接口定义&lt;/h4>
 &lt;p>定义一个简单的 &lt;code>GreetingService&lt;/code> 接口，里面只有一个简单的方法 &lt;code>sayHello&lt;/code> 向调用者问好。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">GreetingService&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
