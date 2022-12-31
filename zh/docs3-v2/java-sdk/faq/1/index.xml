@@ -148,21 +148,25 @@
 &lt;blockquote>
 &lt;p>另请参阅 &lt;a href="https://github.com/apache/dubbo">Dubbo 社区&lt;/a>&lt;/p>
 &lt;/blockquote></description></item><item><title>Docs3-V2: 1-16 - 存在不支持的类别</title><link>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/16/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/16/</guid><description>
-&lt;h2 id="可能的原因">可能的原因&lt;/h2>
-&lt;p>当注册中心的发生变化时，会 notify 对应的 listener。在 notify 的时候如果 category 非法，则会产生 1-16 错误。&lt;/p>
-&lt;h2 id="排查和解决步骤">排查和解决步骤&lt;/h2>
+&lt;h3 id="可能的原因">可能的原因&lt;/h3>
+&lt;p>当注册中心的发生变化时，会 notify 对应的 listener。在 notify 的时候如果 category 非法，则会产生存在不支持的类别。&lt;/p>
+&lt;h3 id="排查和解决步骤">排查和解决步骤&lt;/h3>
 &lt;p>该错误为 Dubbo 内部错误，如果您遇到可以在 github 创建 Issue 并提供错误信息以及复现步骤，我们将协助您解决问题。&lt;/p>
-&lt;h2 id="dubbo社区">Dubbo社区&lt;/h2>
-&lt;p>&lt;a href="https://github.com/apache/dubbo">github&lt;/a>&lt;/p>
-&lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 1-17 - metadata Server 失效</title><link>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/17/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/17/</guid><description>
-&lt;h2 id="可能的原因">可能的原因&lt;/h2>
-&lt;p>可能是metadata的相关参数配置出现问题，特别是 &lt;code>metadataServiceProtocol&lt;/code> 和 &lt;code>metadataServicePort&lt;/code>.&lt;/p>
-&lt;h2 id="排查和解决步骤">排查和解决步骤&lt;/h2>
-&lt;p>1.查看是否和 1-18 错误同时出现，如果同时出现优先尝试解决 1-18
-2.排查 &lt;code>metadataServicePort&lt;/code> 端口号是否存在冲突问题。Provider 和 Consumer 所配置端口同时存在冲突，会产生 1-17 错误。&lt;/p>
-&lt;h2 id="另请参阅">另请参阅&lt;/h2>
-&lt;p>&lt;a href="../../../reference-manual/config/properties">配置项参考手册&lt;/a>&lt;/p>
-&lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 1-18 - 未提供 metadata service 端口</title><link>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/18/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/18/</guid><description>
+&lt;blockquote>
+&lt;p>另请参阅
+&lt;a href="https://github.com/apache/dubbo">Dubbo社区&lt;/a>&lt;/p>
+&lt;/blockquote></description></item><item><title>Docs3-V2: 1-17 - metadata Server 失效</title><link>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/17/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/17/</guid><description>
+&lt;h3 id="可能的原因">可能的原因&lt;/h3>
+&lt;p>可能是 metadata 的相关参数配置出现问题，特别是 &lt;code>metadataServiceProtocol&lt;/code> 和 &lt;code>metadataServicePort&lt;/code>.&lt;/p>
+&lt;h3 id="排查和解决步骤">排查和解决步骤&lt;/h3>
+&lt;ol>
+&lt;li>查看是否和未提供 metadata service 端口同时出现，如果同时出现优先尝试解决未提供 metadata service 端口。&lt;strong>(1-18 FAQ)&lt;/strong>&lt;/li>
+&lt;li>排查 &lt;code>metadataServicePort&lt;/code> 端口号是否存在冲突问题。Provider 和 Consumer 所配置端口同时存在冲突，会产生 metadata Server 失效。&lt;/li>
+&lt;/ol>
+&lt;blockquote>
+&lt;p>另请参阅
+&lt;a href="../../../reference-manual/config/properties">配置项参考手册&lt;/a>&lt;/p>
+&lt;/blockquote></description></item><item><title>Docs3-V2: 1-18 - 未提供 metadata service 端口</title><link>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/18/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/18/</guid><description>
 &lt;h2 id="可能的原因">可能的原因&lt;/h2>
 &lt;p>可能是由于&lt;code>metadataType&lt;/code>为 local 模式，且 &lt;code>metadataServicePort&lt;/code> 配置出错。&lt;/p>
 &lt;h2 id="排查和解决步骤">排查和解决步骤&lt;/h2>
@@ -199,35 +203,6 @@
 &lt;p>K8S url 配置错误，无法正常访问。&lt;/p>
 &lt;h2 id="排查和解决步骤">排查和解决步骤&lt;/h2>
 &lt;p>检查K8S url 配置信息，确保端口映射也可正常访问。&lt;/p>
-&lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 1-23 - 通过url无法下载文件</title><link>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/23/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/23/</guid><description>
-&lt;h2 id="可能的原因">可能的原因&lt;/h2>
-&lt;ol>
-&lt;li>url映射文件不存在。&lt;/li>
-&lt;li>url无法连接。&lt;/li>
-&lt;/ol>
-&lt;h2 id="排查和解决步骤">排查和解决步骤&lt;/h2>
-&lt;ol>
-&lt;li>检查url映射文件是否存在。&lt;/li>
-&lt;li>通过浏览器或其他工具，能否正常访问。&lt;/li>
-&lt;/ol>
-&lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 1-24 - ZK 启动异常</title><link>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/24/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/24/</guid><description>
-&lt;h2 id="可能的原因">可能的原因&lt;/h2>
-&lt;ol>
-&lt;li>zk 的服务端版本与 客户端版本存在不兼容问题，无法进行连接。&lt;/li>
-&lt;li>zk 服务未正常启动或防火墙等原因不能对外提供服务。&lt;/li>
-&lt;/ol>
-&lt;h2 id="排查和解决步骤">排查和解决步骤&lt;/h2>
-&lt;ol>
-&lt;li>确认客户端版本与服务端版本一致。&lt;/li>
-&lt;li>zk 能够正常启动或对外能够提供正常服务。&lt;/li>
-&lt;/ol>
-&lt;p>可通过一些第三方的工具或者&lt;code>jstack [PID] &amp;gt; jstack.log&lt;/code> 分析堆栈信息，进行定位。&lt;/p>
-&lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 1-25 - ZK 销毁异常</title><link>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/25/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/25/</guid><description>
-&lt;h2 id="可能的原因">可能的原因&lt;/h2>
-&lt;p>当前实例已销毁完成。
-网络或已断开。&lt;/p>
-&lt;h2 id="排查和解决步骤">排查和解决步骤&lt;/h2>
-&lt;p>可通过一些第三方的工具或者&lt;code>jstack [PID] &amp;gt; jstack.log&lt;/code> 分析堆栈信息，进行定位。&lt;/p>
 &lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 1-26 - xDS 证书生成失败</title><link>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/26/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/26/</guid><description>
 &lt;h2 id="可能的原因">可能的原因&lt;/h2>
 &lt;p>系统可能不支持算法&lt;code>secp256r1&lt;/code> 和 &lt;code>RSA&lt;/code> 生成证书。&lt;/p>
@@ -316,9 +291,9 @@
 &lt;li>根据堆栈提醒ZNode 信息进行判断，是否可清理当前节点。&lt;/li>
 &lt;/ol>
 &lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 1-36 - 未知异常</title><link>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/36/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/36/</guid><description>
-&lt;h2 id="可能的原因">可能的原因&lt;/h2>
-&lt;h2 id="排查和解决步骤">排查和解决步骤&lt;/h2>
-&lt;p>可通过一些第三方的工具或者&lt;code>jstack [PID] &amp;gt; jstack.log&lt;/code> 分析堆栈信息，进行定位。&lt;/p>
+&lt;h2 id="重要提醒">重要提醒&lt;/h2>
+&lt;p>该错误码的意义已经调整。对于 Dubbo 3.1.4、3.2.0-beta.3 及其之前的版本的该错误码的出错，请参考错误码 &lt;a href="https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/faq/99/0/">99-0&lt;/a>。&lt;/p>
+&lt;p>（该错误码目前空缺）&lt;/p>
 &lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 1-37 - Nacos 异常</title><link>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/37/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/37/</guid><description>
 &lt;h2 id="可能的原因">可能的原因&lt;/h2>
 &lt;p>Nacos配置信息未正确配置。&lt;/p>
@@ -342,5 +317,21 @@
 &lt;ol>
 &lt;li>检查网络通信是否正常，可使用一些简单的 cmd 命令进行检测，如 &lt;code>ping&lt;/code> 等。&lt;/li>
 &lt;li>通过第三方工具进行连接，以及内容的查看。&lt;/li>
+&lt;/ol>
+&lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 1-40 - 路由等待时间过长</title><link>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/40/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/40/</guid><description>
+&lt;h2 id="可能的原因">可能的原因&lt;/h2>
+&lt;p>路由计算的时间过长，导致地址通知无法等待到一个合适的时间进行地址更新。&lt;/p>
+&lt;h2 id="排查和解决步骤">排查和解决步骤&lt;/h2>
+&lt;ol>
+&lt;li>检查应用 QPS，如果 QPS 非常高，这个是预期的日志&lt;/li>
+&lt;li>检查自定义路由的实现，排查是否有异常实现，例如死锁、死循环等&lt;/li>
+&lt;li>可通过一些第三方的工具或者&lt;code>jstack [PID] &amp;gt; jstack.log&lt;/code> 分析堆栈信息，进行定位。&lt;/li>
+&lt;/ol>
+&lt;p style="margin-top: 3rem;"> &lt;/p></description></item><item><title>Docs3-V2: 1-41 - Istio 异常</title><link>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/41/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/faq/1/41/</guid><description>
+&lt;h2 id="可能的原因">可能的原因&lt;/h2>
+&lt;p>获取 istio 的配置文件失败&lt;/p>
+&lt;h2 id="排查和解决步骤">排查和解决步骤&lt;/h2>
+&lt;ol>
+&lt;li>检查应用是否部署在 Kubernetes Pod 环境中，目前暂不支持 VM 部署&lt;/li>
 &lt;/ol>
 &lt;p style="margin-top: 3rem;"> &lt;/p></description></item></channel></rss>
