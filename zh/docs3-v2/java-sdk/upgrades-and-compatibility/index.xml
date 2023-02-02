@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – 升级和兼容性</title><link>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/</link><description>Recent content in 升级和兼容性 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs3-V2: 2.x 升级至 3.x 操作指南</title><link>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/2.x-to-3.x-compatibility-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/2.x-to-3.x-compatibility-guide/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – 升级和兼容性</title><link>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/</link><description>Recent content in 升级和兼容性 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs3-V2: 2.x 升级至 3.x</title><link>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/2.x-to-3.x-compatibility-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/2.x-to-3.x-compatibility-guide/</guid><description>
 &lt;h2 id="升级到-dubbo-3x-的收益">升级到 Dubbo 3.X 的收益&lt;/h2>
 &lt;p>Dubbo3 依旧保持了 2.x 的经典架构，以解决微服务进程间通信为主要职责，通过丰富的服务治理（如地址发现、流量管理等）能力来更好的管控微服务集群；Dubbo3 对原有框架的升级是全面的，体现在核心 Dubbo 特性的几乎每个环节，通过升级实现了稳定性、性能、伸缩性、易用性的全面提升。&lt;/p>
 &lt;p>&lt;img src="https://cn.dubbo.apache.org/imgs/v3/concepts/architecture-1.png" alt="architecture-1">&lt;/p>
@@ -85,7 +85,331 @@
 &lt;/ul>
 &lt;h2 id="注意事项">注意事项&lt;/h2>
 &lt;h3 id="1-应用级服务发现">1. 应用级服务发现&lt;/h3>
-&lt;p>由于 Dubbo 2.7 的应用级服务发现模型存在设计上的问题，在 Dubbo 3.x 中做了大量格式上的修改，所以 2.7.x 和 3.x 的应用级服务发现可能存在无法互相订阅调用的可能性。虽然 Dubbo 会剔除识别不了的实例，但是从稳定性的角度出发，如果您在 2.7.x 中开启了应用级服务发现特性（在 2.7.x 中非默认注册），我们建议先在 2.7.x 中关闭，待升级到 3.x 之后再开启。&lt;/p></description></item><item><title>Docs3-V2: Dubbo 协议迁移至 Triple 协议指南</title><link>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/migration-triple/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/migration-triple/</guid><description>
+&lt;p>由于 Dubbo 2.7 的应用级服务发现模型存在设计上的问题，在 Dubbo 3.x 中做了大量格式上的修改，所以 2.7.x 和 3.x 的应用级服务发现可能存在无法互相订阅调用的可能性。虽然 Dubbo 会剔除识别不了的实例，但是从稳定性的角度出发，如果您在 2.7.x 中开启了应用级服务发现特性（在 2.7.x 中非默认注册），我们建议先在 2.7.x 中关闭，待升级到 3.x 之后再开启。&lt;/p></description></item><item><title>Docs3-V2: 3.0 升级至 3.1</title><link>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/3.0-to-3.1-compatibility-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/3.0-to-3.1-compatibility-guide/</guid><description>
+&lt;h2 id="功能修改点">功能修改点&lt;/h2>
+&lt;h3 id="1-nacos-group-对齐应用级服务发现">1. Nacos Group 对齐（应用级服务发现）&lt;/h3>
+&lt;p>在 Dubbo 2.7.x 中，配置在 Nacos Registry URL 上的 group 值是对齐 Nacos 注册中心中的 group 分组的。（group 可以当成类似 namespace 的软隔离）&lt;/p>
+&lt;p>在 Dubbo 3.0.x 中，配置在 Nacos Registry URL 上的 group 默认不使用，全部使用 DEFAULT_GROUP。（group 不再提供隔离功能）&lt;/p>
+&lt;p>在 Dubbo 3.1.x 中，配置在 Nacos Registry URL 上的 group 值将会重新对齐 Nacos 注册中心中的 group 分组的。&lt;/p>
+&lt;p>注意事项：&lt;/p>
+&lt;ol>
+&lt;li>请检查注册中心 URL 上是否已经配置了 group 属性，如果是的话需要检查服务端和消费端的 group 是否都一致，如果不一致请修改为一致&lt;/li>
+&lt;li>如果不希望 group 重新对齐到 Nacos 注册中心中的 group 分组，可以配置 &lt;code>dubbo.nacos-service-discovery.use-default-group=false&lt;/code> 全局属性值忽略该功能&lt;/li>
+&lt;/ol></description></item><item><title>Docs3-V2: 3.1 升级至 3.2</title><link>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/3.1-to-3.2-compatibility-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/3.1-to-3.2-compatibility-guide/</guid><description>
+&lt;h1 id="功能修改点">功能修改点&lt;/h1>
+&lt;h2 id="1-传递依赖变更">1. 传递依赖变更&lt;/h2>
+&lt;ul>
+&lt;li>Dubbo 3.2.0 版本开始默认不再在 &lt;code>dubbo-all&lt;/code> 中 shade &lt;code>hessian-lite&lt;/code> 的代码，而是使用传递依赖传递。如果你的应用中不需要使用 &lt;code>hessian-lite&lt;/code>，可以将 &lt;code>hessian-lite&lt;/code> 从依赖中移除。&lt;/li>
+&lt;li>Dubbo 3.2.0 版本开始在 &lt;code>dubbo-all&lt;/code> 中不再传递 &lt;code>gson&lt;/code>、&lt;code>fastjson&lt;/code> 依赖，如果你的应用中需要使用 &lt;code>gson&lt;/code>、&lt;code>fastjson&lt;/code>，请手动将 &lt;code>gson&lt;/code>、&lt;code>fastjson&lt;/code> 依赖添加到应用中。&lt;/li>
+&lt;li>Dubbo 3.2.0 版本在 &lt;code>dubbo-all&lt;/code> 中传递 &lt;code>fastjson2&lt;/code> 依赖。&lt;/li>
+&lt;/ul>
+&lt;h2 id="2-默认序列化切换">2. 默认序列化切换&lt;/h2>
+&lt;ul>
+&lt;li>Dubbo 3.2.0 版本开始默认序列化方式从 &lt;code>hessian2&lt;/code> 切换为 &lt;code>fastjson2&lt;/code>，对于升级到 3.2.0 的应用，Dubbo 会自动尝试采用 &lt;code>fastjson2&lt;/code> 进行序列化。&lt;/li>
+&lt;/ul>
+&lt;h4 id="faq">FAQ&lt;/h4>
+&lt;h4 id="q1会不会影响和低版本的-dubbo-互通">Q1：会不会影响和低版本的 Dubbo 互通？&lt;/h4>
+&lt;p>不会。与低版本互通仍使用 &lt;code>hessian-lite&lt;/code>。原理可参考&lt;a href="https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/serialization-upgrade/">序列化协议升级指南&lt;/a>一文。&lt;/p>
+&lt;h4 id="q2为什么要切换默认序列化方式">Q2：为什么要切换默认序列化方式？&lt;/h4>
+&lt;p>&lt;code>fastjson2&lt;/code> 是一款高性能的序列化框架，性能优于 &lt;code>hessian2&lt;/code>，原生支持 JDK17、Native 等，以及完全向前兼容 &lt;code>hessian2&lt;/code> 所有功能。
+由于 &lt;code>hessian-lite&lt;/code> 在未来维护难度越来越大，我们决定将默认序列化方式从 &lt;code>hessian2&lt;/code> 切换为 &lt;code>fastjson2&lt;/code>。&lt;/p>
+&lt;h4 id="q3和原生的-json-是什么关系">Q3：和原生的 JSON 是什么关系？&lt;/h4>
+&lt;p>Dubbo 中使用 &lt;code>fastjson2&lt;/code> 的 JSONB 格式，而不是原生的 JSON 格式。JSONB 格式和JSON格式对应，能完全表示JSON，是一种二进制格式。
+具体协议格式可以参考：&lt;a href="https://github.com/alibaba/fastjson2/wiki/jsonb_format_cn">JSONB 格式&lt;/a>&lt;/p>
+&lt;h4 id="q4如果我不想使用-fastjson2怎么办">Q4：如果我不想使用 &lt;code>fastjson2&lt;/code>，怎么办？&lt;/h4>
+&lt;p>如果你不想使用 &lt;code>fastjson2&lt;/code>，可以配置 &lt;code>prefer-serialization&lt;/code> 为 &lt;code>hessian2&lt;/code> 覆盖默认配置。（如 &lt;code>dubbo.provider.prefer-serialization=fastjson2,hessian2&lt;/code>） 如果没有特殊的需求，我们不建议仍继续使用 &lt;code>hessian2&lt;/code>。&lt;/p>
+&lt;h2 id="3-默认内部序列化工具切换">3. 默认内部序列化工具切换&lt;/h2>
+&lt;ul>
+&lt;li>Dubbo 3.2.0 版本开始默认&lt;strong>内部&lt;/strong>序列化工具从 &lt;code>fastjson&lt;/code> 切换为 &lt;code>fastjson2&lt;/code>。&lt;/li>
+&lt;/ul>
+&lt;h4 id="faq-1">FAQ&lt;/h4>
+&lt;h4 id="q1会不会影响-rpc-请求流量">Q1：会不会影响 RPC 请求流量？&lt;/h4>
+&lt;p>不会。内部序列化工具为 Dubbo 内部解析参数时使用，非 RPC 传输序列化协议。&lt;/p>
+&lt;h4 id="q2为什么要切换默认内部序列化工具">Q2：为什么要切换默认内部序列化工具？&lt;/h4>
+&lt;p>Dubbo 3.2.0 版本开始默认传递依赖不再传递 &lt;code>fastjson&lt;/code> 和 &lt;code>gson&lt;/code>。出于兼容性考虑，默认内部序列化工具切换为 &lt;code>fastjson2&lt;/code>。&lt;/p>
+&lt;h4 id="q3如果我的环境中没有-fastjson2怎么办">Q3：如果我的环境中没有 &lt;code>fastjson2&lt;/code>，怎么办？&lt;/h4>
+&lt;p>Dubbo 支持多种序列化框架自动切换，如果你的环境中没有 &lt;code>fastjson2&lt;/code>，Dubbo 会自动尝试切换到 &lt;code>fastsjon&lt;/code> 或 &lt;code>gson&lt;/code>。&lt;/p>
+&lt;h4 id="q4我想指定-dubbo-内部序列化工具怎么办">Q4：我想指定 Dubbo 内部序列化工具，怎么办？&lt;/h4>
+&lt;p>可以配置 &lt;code>dubbo.json-framework.prefer&lt;/code> 参数，如 &lt;code>-Ddubbo.json-framework.prefer=gson&lt;/code>。&lt;/p>
+&lt;h2 id="4-triple-协议支持传递自定义异常">4. Triple 协议支持传递自定义异常&lt;/h2>
+&lt;ul>
+&lt;li>Dubbo 3.2.0 版本开始 Triple 协议支持回传自定义异常，而不是只能回传 &lt;code>RpcException&lt;/code>。如果服务接口会抛出异常的，在 Dubbo 3.2.0 版本以后将默认按照 Dubbo 协议一样回传自定义异常对象。&lt;/li>
+&lt;/ul>
+&lt;h2 id="5-默认关闭推空保护">5. 默认关闭推空保护&lt;/h2>
+&lt;ul>
+&lt;li>Dubbo 3.2.0 版本开始默认关闭推空保护，即使注册中心推送空地址，Dubbo 也将不会保留最后一批 provider 信息。
+如果需要开启推空保护，可以配置 &lt;code>dubbo.application.enable-empty-protection&lt;/code> 为 &lt;code>true&lt;/code>。&lt;/li>
+&lt;/ul>
+&lt;h4 id="faq-2">FAQ&lt;/h4>
+&lt;h4 id="q1关闭推空保护对我有什么影响">Q1：关闭推空保护对我有什么影响？&lt;/h4>
+&lt;p>在绝大部分场景下没有影响。
+推空保护的目的是在注册中心出现故障并且主动推送空地址的时候，Dubbo 保留最后一批 provider 信息，以保证服务可用。
+但是在大多数注册中心出现故障的时候，注册中心也不会推送空地址，只有一些特殊情况才会出现。
+但如果开启推空保护，将对 Dubbo 的 Fallback 逻辑、心跳逻辑等造成较大的影响，给开发使用 Dubbo 带来困扰。&lt;/p>
+&lt;h4 id="q2我想开启推空保护怎么办">Q2：我想开启推空保护，怎么办？&lt;/h4>
+&lt;p>如果在生产上为了高可用，需要开启推空保护，可以配置 &lt;code>dubbo.application.enable-empty-protection&lt;/code> 为 &lt;code>true&lt;/code>。
+目前已知开启推空保护会导致服务端应用从 &lt;code>2.6.x&lt;/code>、&lt;code>2.7.x&lt;/code> 等仅支持接口级服务发现的版本升级到 &lt;code>3.x&lt;/code> 之后回滚到原来版本出现异常，极端场景下会导致服务调用失败。
+此外，开启推空保护后在服务端地址真的为空的时候出现较多的心跳异常、日志异常等。&lt;/p></description></item><item><title>Docs3-V2: 应用级服务发现</title><link>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/service-discovery/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/service-discovery/</guid><description/></item><item><title>Docs3-V2: 序列化协议升级</title><link>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/serialization-upgrade/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/serialization-upgrade/</guid><description>
+&lt;p>在 3.1.0 版本中，Dubbo 默认支持的序列化协议新增对 Fastjson2 的支持。部分用户可能会考虑在现有的系统中对序列化协议进行升级，但服务端和客户端版本的差异可能导致客户端并不支持服务端的序列化协议。而在 3.2.0 版本中 Dubbo 的服务端引入新的配置&lt;code>prefer-serialization&lt;/code>，该特性可以完美解决服务端序列化升级过程中可能带来的风险。&lt;/p>
+&lt;h3 id="最佳实践">最佳实践&lt;/h3>
+&lt;p>序列化协议升级，需要分两步走：&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>首先需要推动服务端的序列化协议升级，同时在服务端的暴露配置中需要添加&lt;code>prefer-serialization&lt;/code>配置。比如：升级前的序列化协议是 hessian2，升级之后的序列化协议是 Fastjson2 那么在服务端的暴露配置中就应该添加如下所示的配置&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>dubbo.provider.prefer-serialization=fastjson2,hessian2
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.provider.serialization=hessian2
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>&lt;strong>其次，客户端需要升级至和服务端相同版本&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;h3 id="实现原理">实现原理&lt;/h3>
+&lt;p>dubbo 客户端序列化协议是根据服务端的注册配置来选择的（即服务端的&lt;code>serialization&lt;/code>配置）。在请求阶段 dubbo 会把客户端的序列化协议组装到请求头上，服务端在进行反序列化时会根据请求头来确定反序列化协议。&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>所以，如果服务端和客户端的版本不一致就可能会出现客户端序列化不了的情况。&lt;/strong> 为了解决这个情况，3.2.0 在客户端序列化的时候会优先使用&lt;code>prefer-serialization&lt;/code>配置的协议，如果不支持&lt;code>prefer-serialization&lt;/code>相关的协议，才会使用&lt;code>serialization&lt;/code>配置的协议。（可以把&lt;code>serialization&lt;/code>理解为一个兜底的配置）&lt;/li>
+&lt;/ul></description></item><item><title>Docs3-V2: Protobuf 与 Interface</title><link>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/protobufinterface/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/protobufinterface/</guid><description>
+&lt;p>本文对比了Protobuf和Interface这2种IDL的差异，帮助Dubbo协议开发者了解Protobuf，为后续转到Triple协议和Grpc协议做铺垫。&lt;/p>
+&lt;h2 id="1-数据类型">1. 数据类型&lt;/h2>
+&lt;h3 id="11-基本类型">1.1. 基本类型&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>ptoto类型&lt;/th>
+&lt;th>java类型&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>double&lt;/td>
+&lt;td>double&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>float&lt;/td>
+&lt;td>float&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>int32&lt;/td>
+&lt;td>int&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>int64&lt;/td>
+&lt;td>long&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>uint32&lt;/td>
+&lt;td>int[注]&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>uint64&lt;/td>
+&lt;td>long[注]&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>sint32&lt;/td>
+&lt;td>int&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>sint64&lt;/td>
+&lt;td>long&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>fixed32&lt;/td>
+&lt;td>int[注]&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>fixed64&lt;/td>
+&lt;td>long[注]&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>sfixed32&lt;/td>
+&lt;td>int&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>sfixed64&lt;/td>
+&lt;td>long&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>bool&lt;/td>
+&lt;td>boolean&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>string&lt;/td>
+&lt;td>String&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>bytes&lt;/td>
+&lt;td>ByteString&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;blockquote>
+&lt;p>[注]在Java中，无符号的32位和64位整数使用它们的有符号对数来表示，顶部位只存储在符号位中。&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="2-复合类型">2. 复合类型&lt;/h2>
+&lt;h3 id="21-枚举">2.1. 枚举&lt;/h3>
+&lt;ul>
+&lt;li>原始pb代码&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>enum TrafficLightColor {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> TRAFFIC_LIGHT_COLOR_INVALID = 0;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> TRAFFIC_LIGHT_COLOR_UNSET = 1;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> TRAFFIC_LIGHT_COLOR_GREEN = 2;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> TRAFFIC_LIGHT_COLOR_YELLOW = 3;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> TRAFFIC_LIGHT_COLOR_RED = 4;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>生成的java代码&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://cn.dubbo.apache.org/imgs/docs/advanced/protobufinterface/124234531-b96c2c80-db46-11eb-8155-a77dbe059f07.png" alt="image">&lt;/p>
+&lt;blockquote>
+&lt;p>枚举是常量，因此采用大写&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="22-数组">2.2. 数组&lt;/h3>
+&lt;ul>
+&lt;li>原始pb代码&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>message VipIDToRidReq &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> repeated uint32 vipID &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">1&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>生成的java代码&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://cn.dubbo.apache.org/imgs/docs/advanced/protobufinterface/124234564-c4bf5800-db46-11eb-94fc-a056af6089cb.png" alt="image">&lt;/p>
+&lt;blockquote>
+&lt;p>底层实际上是1个ArrayList&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="23-集合">2.3. 集合&lt;/h3>
+&lt;p>PB不支持无序、不重复的集合，只能 &lt;code>借用数组实现&lt;/code>，需要 &lt;code>自行去重&lt;/code>。&lt;/p>
+&lt;h3 id="24-字典">2.4. 字典&lt;/h3>
+&lt;ul>
+&lt;li>原始pb代码&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>message BatchOnlineRes &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> map&lt;span style="color:#719e07">&amp;lt;&lt;/span>uint32&lt;span style="color:#719e07">,&lt;/span> uint32&lt;span style="color:#719e07">&amp;gt;&lt;/span> onlineMap &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">1&lt;/span>&lt;span style="color:#719e07">;&lt;/span>&lt;span style="color:#586e75">//在线状态
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>生成的java代码&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://cn.dubbo.apache.org/imgs/docs/advanced/protobufinterface/124234654-e4568080-db46-11eb-9700-b30022ebee21.png" alt="image">&lt;/p>
+&lt;h3 id="25-嵌套">2.5. 嵌套&lt;/h3>
+&lt;ul>
+&lt;li>原始pb代码&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>message BatchAnchorInfoRes &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> map&lt;span style="color:#719e07">&amp;lt;&lt;/span>uint32&lt;span style="color:#719e07">,&lt;/span> AnchorInfo&lt;span style="color:#719e07">&amp;gt;&lt;/span> list &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">1&lt;/span>&lt;span style="color:#719e07">;&lt;/span> &lt;span style="color:#586e75">//用户信息map列表
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">/*
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">* 对应接口的功能: 批量或单个获取用户信息
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">*/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>message AnchorInfo &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> uint32 ownerUid &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">1&lt;/span> &lt;span style="color:#719e07">[&lt;/span>json_name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">&amp;#34;uid&amp;#34;&lt;/span>&lt;span style="color:#719e07">];&lt;/span> &lt;span style="color:#586e75">//用户id
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> string nickName &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">2&lt;/span> &lt;span style="color:#719e07">[&lt;/span>json_name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">&amp;#34;nn&amp;#34;&lt;/span>&lt;span style="color:#719e07">];&lt;/span> &lt;span style="color:#586e75">//用户昵称
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> string smallAvatar &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">3&lt;/span> &lt;span style="color:#719e07">[&lt;/span>json_name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">&amp;#34;savt&amp;#34;&lt;/span>&lt;span style="color:#719e07">];&lt;/span> &lt;span style="color:#586e75">//用户头像全路径-小
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> string middleAvatar &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">4&lt;/span> &lt;span style="color:#719e07">[&lt;/span>json_name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">&amp;#34;mavt&amp;#34;&lt;/span>&lt;span style="color:#719e07">];&lt;/span> &lt;span style="color:#586e75">//用户头像全路径-中
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> string bigAvatar &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">5&lt;/span> &lt;span style="color:#719e07">[&lt;/span>json_name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">&amp;#34;bavt&amp;#34;&lt;/span>&lt;span style="color:#719e07">];&lt;/span> &lt;span style="color:#586e75">//用户头像全路径-大
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> string avatar &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">6&lt;/span> &lt;span style="color:#719e07">[&lt;/span>json_name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">&amp;#34;avt&amp;#34;&lt;/span>&lt;span style="color:#719e07">];&lt;/span> &lt;span style="color:#586e75">//用户头像
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>生成的java代码&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://cn.dubbo.apache.org/imgs/docs/advanced/protobufinterface/124234723-f89a7d80-db46-11eb-82d0-a8aee5322098.png" alt="image">&lt;/p>
+&lt;h2 id="3-字段默认值">3. 字段默认值&lt;/h2>
+&lt;ul>
+&lt;li>对于字符串，默认值为空字符串。&lt;/li>
+&lt;li>对于字节，默认值为空字节。&lt;/li>
+&lt;li>对于bools，默认值为false。&lt;/li>
+&lt;li>对于数字类型，默认值为零。&lt;/li>
+&lt;li>对于枚举，默认值为第一个定义的枚举值，它必须为0。&lt;/li>
+&lt;li>对于消息字段，未设置字段。 它的确切值是语言相关的。 有关详细信息，请参阅生成的代码指南。&lt;/li>
+&lt;/ul>
+&lt;h2 id="4-整体结构">4. 整体结构&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Feature&lt;/th>
+&lt;th>Java Interface&lt;/th>
+&lt;th>Protobuf&lt;/th>
+&lt;th>备注&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>方法重载&lt;/td>
+&lt;td>√&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>泛型/模板化&lt;/td>
+&lt;td>√&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>方法继承&lt;/td>
+&lt;td>√&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>嵌套定义&lt;/td>
+&lt;td>√&lt;/td>
+&lt;td>部分支持&lt;/td>
+&lt;td>PB仅支持message和enum嵌套&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>import文件&lt;/td>
+&lt;td>√&lt;/td>
+&lt;td>√&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>字段为null&lt;/td>
+&lt;td>√&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>多个入参&lt;/td>
+&lt;td>√&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>PB仅支持单入参&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>0个入参&lt;/td>
+&lt;td>√&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>PB必须有入参&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>0个出参&lt;/td>
+&lt;td>√&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>PB必须有出参&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>入参/出参为抽象类&lt;/td>
+&lt;td>√&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>PB的入参/出参必须为具象类&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>入参/出参为接口&lt;/td>
+&lt;td>√&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>PB的入参/出参必须为具象类&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>入参/出参为基础类型&lt;/td>
+&lt;td>√&lt;/td>
+&lt;td>×&lt;/td>
+&lt;td>PB的入参/出参必须为结构体&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="5-社区资料">5. 社区资料&lt;/h2>
+&lt;ul>
+&lt;li>社区主页地址：https://developers.google.cn/protocol-buffers/&lt;/li>
+&lt;li>社区开源地址：https://github.com/google/protobuf&lt;/li>
+&lt;li>相关jar的maven：https://search.maven.org/search?q=com.google.protobuf&lt;/li>
+&lt;/ul></description></item><item><title>Docs3-V2: Dubbo 协议迁移至 Triple 协议</title><link>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/migration-triple/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/migration-triple/</guid><description>
 &lt;h2 id="triple-介绍">Triple 介绍&lt;/h2>
 &lt;p>&lt;code>Triple&lt;/code> 协议的格式和原理请参阅 &lt;a href="https://cn.dubbo.apache.org/zh/docs/concepts/rpc-protocol/">RPC 通信协议&lt;/a>&lt;/p>
 &lt;p>根据 Triple 设计的目标，&lt;code>Triple&lt;/code> 协议有以下优势:&lt;/p>
@@ -372,327 +696,4 @@ Grpc 使用 &lt;code>compiler&lt;/code> 将编写的 &lt;code>proto&lt;/code> �
 &lt;li>&amp;hellip;&lt;/li>
 &lt;/ul>
 &lt;p>&lt;code>stub&lt;/code> 用一种统一的使用方式帮我们屏蔽了不同调用方式的细节。不过目前 &lt;code>Dubbo3&lt;/code> 暂时只支持传统定义接口并进行调用的使用方式。&lt;/p>
-&lt;p>在不久的未来，&lt;code>Triple&lt;/code> 也将实现各种常用的 &lt;code>Stub&lt;/code>，让用户写一份&lt;code>proto&lt;/code>文件，通过 &lt;code>comipler&lt;/code> 可以在任意场景方便的使用，请拭目以待。&lt;/p></description></item><item><title>Docs3-V2: 序列化协议升级指南</title><link>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/serialization-upgrade/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/serialization-upgrade/</guid><description>
-&lt;p>在 3.1.0 版本中，Dubbo 默认支持的序列化协议新增对 Fastjson2 的支持。部分用户可能会考虑在现有的系统中对序列化协议进行升级，但服务端和客户端版本的差异可能导致客户端并不支持服务端的序列化协议。而在 3.2.0 版本中 Dubbo 的服务端引入新的配置&lt;code>prefer-serialization&lt;/code>，该特性可以完美解决服务端序列化升级过程中可能带来的风险。&lt;/p>
-&lt;h3 id="最佳实践">最佳实践&lt;/h3>
-&lt;p>序列化协议升级，需要分两步走：&lt;/p>
-&lt;ul>
-&lt;li>&lt;strong>首先需要推动服务端的序列化协议升级，同时在服务端的暴露配置中需要添加&lt;code>prefer-serialization&lt;/code>配置。比如：升级前的序列化协议是 hessian2，升级之后的序列化协议是 Fastjson2 那么在服务端的暴露配置中就应该添加如下所示的配置&lt;/strong>&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>dubbo.provider.prefer-serialization=fastjson2,hessian2
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.provider.serialization=hessian2
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>&lt;strong>其次，客户端需要升级至和服务端相同版本&lt;/strong>&lt;/li>
-&lt;/ul>
-&lt;h3 id="实现原理">实现原理&lt;/h3>
-&lt;p>dubbo 客户端序列化协议是根据服务端的注册配置来选择的（即服务端的&lt;code>serialization&lt;/code>配置）。在请求阶段 dubbo 会把客户端的序列化协议组装到请求头上，服务端在进行反序列化时会根据请求头来确定反序列化协议。&lt;/p>
-&lt;ul>
-&lt;li>&lt;strong>所以，如果服务端和客户端的版本不一致就可能会出现客户端序列化不了的情况。&lt;/strong> 为了解决这个情况，3.2.0 在客户端序列化的时候会优先使用&lt;code>prefer-serialization&lt;/code>配置的协议，如果不支持&lt;code>prefer-serialization&lt;/code>相关的协议，才会使用&lt;code>serialization&lt;/code>配置的协议。（可以把&lt;code>serialization&lt;/code>理解为一个兜底的配置）&lt;/li>
-&lt;/ul></description></item><item><title>Docs3-V2: 应用级服务发现</title><link>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/service-discovery/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/service-discovery/</guid><description/></item><item><title>Docs3-V2: Protobuf与Interface对比</title><link>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/protobufinterface/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/protobufinterface/</guid><description>
-&lt;h2 id="1-数据类型">1. 数据类型&lt;/h2>
-&lt;h3 id="11-基本类型">1.1. 基本类型&lt;/h3>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>ptoto类型&lt;/th>
-&lt;th>java类型&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>double&lt;/td>
-&lt;td>double&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>float&lt;/td>
-&lt;td>float&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>int32&lt;/td>
-&lt;td>int&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>int64&lt;/td>
-&lt;td>long&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>uint32&lt;/td>
-&lt;td>int[注]&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>uint64&lt;/td>
-&lt;td>long[注]&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>sint32&lt;/td>
-&lt;td>int&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>sint64&lt;/td>
-&lt;td>long&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>fixed32&lt;/td>
-&lt;td>int[注]&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>fixed64&lt;/td>
-&lt;td>long[注]&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>sfixed32&lt;/td>
-&lt;td>int&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>sfixed64&lt;/td>
-&lt;td>long&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>bool&lt;/td>
-&lt;td>boolean&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>string&lt;/td>
-&lt;td>String&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>bytes&lt;/td>
-&lt;td>ByteString&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;blockquote>
-&lt;p>[注]在Java中，无符号的32位和64位整数使用它们的有符号对数来表示，顶部位只存储在符号位中。&lt;/p>
-&lt;/blockquote>
-&lt;h2 id="2-复合类型">2. 复合类型&lt;/h2>
-&lt;h3 id="21-枚举">2.1. 枚举&lt;/h3>
-&lt;ul>
-&lt;li>原始pb代码&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>enum TrafficLightColor {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> TRAFFIC_LIGHT_COLOR_INVALID = 0;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> TRAFFIC_LIGHT_COLOR_UNSET = 1;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> TRAFFIC_LIGHT_COLOR_GREEN = 2;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> TRAFFIC_LIGHT_COLOR_YELLOW = 3;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> TRAFFIC_LIGHT_COLOR_RED = 4;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>生成的java代码&lt;/li>
-&lt;/ul>
-&lt;p>&lt;img src="https://cn.dubbo.apache.org/imgs/docs/advanced/protobufinterface/124234531-b96c2c80-db46-11eb-8155-a77dbe059f07.png" alt="image">&lt;/p>
-&lt;blockquote>
-&lt;p>枚举是常量，因此采用大写&lt;/p>
-&lt;/blockquote>
-&lt;h3 id="22-数组">2.2. 数组&lt;/h3>
-&lt;ul>
-&lt;li>原始pb代码&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>message VipIDToRidReq &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> repeated uint32 vipID &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">1&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>生成的java代码&lt;/li>
-&lt;/ul>
-&lt;p>&lt;img src="https://cn.dubbo.apache.org/imgs/docs/advanced/protobufinterface/124234564-c4bf5800-db46-11eb-94fc-a056af6089cb.png" alt="image">&lt;/p>
-&lt;blockquote>
-&lt;p>底层实际上是1个ArrayList&lt;/p>
-&lt;/blockquote>
-&lt;h3 id="23-集合">2.3. 集合&lt;/h3>
-&lt;p>PB不支持无序、不重复的集合，只能 &lt;code>借用数组实现&lt;/code>，需要 &lt;code>自行去重&lt;/code>。&lt;/p>
-&lt;h3 id="24-字典">2.4. 字典&lt;/h3>
-&lt;ul>
-&lt;li>原始pb代码&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>message BatchOnlineRes &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> map&lt;span style="color:#719e07">&amp;lt;&lt;/span>uint32&lt;span style="color:#719e07">,&lt;/span> uint32&lt;span style="color:#719e07">&amp;gt;&lt;/span> onlineMap &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">1&lt;/span>&lt;span style="color:#719e07">;&lt;/span>&lt;span style="color:#586e75">//在线状态
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>生成的java代码&lt;/li>
-&lt;/ul>
-&lt;p>&lt;img src="https://cn.dubbo.apache.org/imgs/docs/advanced/protobufinterface/124234654-e4568080-db46-11eb-9700-b30022ebee21.png" alt="image">&lt;/p>
-&lt;h3 id="25-嵌套">2.5. 嵌套&lt;/h3>
-&lt;ul>
-&lt;li>原始pb代码&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>message BatchAnchorInfoRes &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> map&lt;span style="color:#719e07">&amp;lt;&lt;/span>uint32&lt;span style="color:#719e07">,&lt;/span> AnchorInfo&lt;span style="color:#719e07">&amp;gt;&lt;/span> list &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">1&lt;/span>&lt;span style="color:#719e07">;&lt;/span> &lt;span style="color:#586e75">//用户信息map列表
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">/*
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">* 对应接口的功能: 批量或单个获取用户信息
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">*/&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>message AnchorInfo &lt;span style="color:#719e07">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> uint32 ownerUid &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">1&lt;/span> &lt;span style="color:#719e07">[&lt;/span>json_name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">&amp;#34;uid&amp;#34;&lt;/span>&lt;span style="color:#719e07">];&lt;/span> &lt;span style="color:#586e75">//用户id
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> string nickName &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">2&lt;/span> &lt;span style="color:#719e07">[&lt;/span>json_name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">&amp;#34;nn&amp;#34;&lt;/span>&lt;span style="color:#719e07">];&lt;/span> &lt;span style="color:#586e75">//用户昵称
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> string smallAvatar &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">3&lt;/span> &lt;span style="color:#719e07">[&lt;/span>json_name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">&amp;#34;savt&amp;#34;&lt;/span>&lt;span style="color:#719e07">];&lt;/span> &lt;span style="color:#586e75">//用户头像全路径-小
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> string middleAvatar &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">4&lt;/span> &lt;span style="color:#719e07">[&lt;/span>json_name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">&amp;#34;mavt&amp;#34;&lt;/span>&lt;span style="color:#719e07">];&lt;/span> &lt;span style="color:#586e75">//用户头像全路径-中
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> string bigAvatar &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">5&lt;/span> &lt;span style="color:#719e07">[&lt;/span>json_name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">&amp;#34;bavt&amp;#34;&lt;/span>&lt;span style="color:#719e07">];&lt;/span> &lt;span style="color:#586e75">//用户头像全路径-大
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> string avatar &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">6&lt;/span> &lt;span style="color:#719e07">[&lt;/span>json_name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">&amp;#34;avt&amp;#34;&lt;/span>&lt;span style="color:#719e07">];&lt;/span> &lt;span style="color:#586e75">//用户头像
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>生成的java代码&lt;/li>
-&lt;/ul>
-&lt;p>&lt;img src="https://cn.dubbo.apache.org/imgs/docs/advanced/protobufinterface/124234723-f89a7d80-db46-11eb-82d0-a8aee5322098.png" alt="image">&lt;/p>
-&lt;h2 id="3-字段默认值">3. 字段默认值&lt;/h2>
-&lt;ul>
-&lt;li>对于字符串，默认值为空字符串。&lt;/li>
-&lt;li>对于字节，默认值为空字节。&lt;/li>
-&lt;li>对于bools，默认值为false。&lt;/li>
-&lt;li>对于数字类型，默认值为零。&lt;/li>
-&lt;li>对于枚举，默认值为第一个定义的枚举值，它必须为0。&lt;/li>
-&lt;li>对于消息字段，未设置字段。 它的确切值是语言相关的。 有关详细信息，请参阅生成的代码指南。&lt;/li>
-&lt;/ul>
-&lt;h2 id="4-整体结构">4. 整体结构&lt;/h2>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Feature&lt;/th>
-&lt;th>Java Interface&lt;/th>
-&lt;th>Protobuf&lt;/th>
-&lt;th>备注&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>方法重载&lt;/td>
-&lt;td>√&lt;/td>
-&lt;td>×&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>泛型/模板化&lt;/td>
-&lt;td>√&lt;/td>
-&lt;td>×&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>方法继承&lt;/td>
-&lt;td>√&lt;/td>
-&lt;td>×&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>嵌套定义&lt;/td>
-&lt;td>√&lt;/td>
-&lt;td>部分支持&lt;/td>
-&lt;td>PB仅支持message和enum嵌套&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>import文件&lt;/td>
-&lt;td>√&lt;/td>
-&lt;td>√&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>字段为null&lt;/td>
-&lt;td>√&lt;/td>
-&lt;td>×&lt;/td>
-&lt;td>&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>多个入参&lt;/td>
-&lt;td>√&lt;/td>
-&lt;td>×&lt;/td>
-&lt;td>PB仅支持单入参&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>0个入参&lt;/td>
-&lt;td>√&lt;/td>
-&lt;td>×&lt;/td>
-&lt;td>PB必须有入参&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>0个出参&lt;/td>
-&lt;td>√&lt;/td>
-&lt;td>×&lt;/td>
-&lt;td>PB必须有出参&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>入参/出参为抽象类&lt;/td>
-&lt;td>√&lt;/td>
-&lt;td>×&lt;/td>
-&lt;td>PB的入参/出参必须为具象类&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>入参/出参为接口&lt;/td>
-&lt;td>√&lt;/td>
-&lt;td>×&lt;/td>
-&lt;td>PB的入参/出参必须为具象类&lt;/td>
-&lt;/tr>
-&lt;tr>
-&lt;td>入参/出参为基础类型&lt;/td>
-&lt;td>√&lt;/td>
-&lt;td>×&lt;/td>
-&lt;td>PB的入参/出参必须为结构体&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
-&lt;h2 id="5-社区资料">5. 社区资料&lt;/h2>
-&lt;ul>
-&lt;li>社区主页地址：https://developers.google.cn/protocol-buffers/&lt;/li>
-&lt;li>社区开源地址：https://github.com/google/protobuf&lt;/li>
-&lt;li>相关jar的maven：https://search.maven.org/search?q=com.google.protobuf&lt;/li>
-&lt;/ul></description></item><item><title>Docs3-V2: 3.0 升级至 3.1 操作指南</title><link>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/3.0-to-3.1-compatibility-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/3.0-to-3.1-compatibility-guide/</guid><description>
-&lt;h2 id="功能修改点">功能修改点&lt;/h2>
-&lt;h3 id="1-nacos-group-对齐应用级服务发现">1. Nacos Group 对齐（应用级服务发现）&lt;/h3>
-&lt;p>在 Dubbo 2.7.x 中，配置在 Nacos Registry URL 上的 group 值是对齐 Nacos 注册中心中的 group 分组的。（group 可以当成类似 namespace 的软隔离）&lt;/p>
-&lt;p>在 Dubbo 3.0.x 中，配置在 Nacos Registry URL 上的 group 默认不使用，全部使用 DEFAULT_GROUP。（group 不再提供隔离功能）&lt;/p>
-&lt;p>在 Dubbo 3.1.x 中，配置在 Nacos Registry URL 上的 group 值将会重新对齐 Nacos 注册中心中的 group 分组的。&lt;/p>
-&lt;p>注意事项：&lt;/p>
-&lt;ol>
-&lt;li>请检查注册中心 URL 上是否已经配置了 group 属性，如果是的话需要检查服务端和消费端的 group 是否都一致，如果不一致请修改为一致&lt;/li>
-&lt;li>如果不希望 group 重新对齐到 Nacos 注册中心中的 group 分组，可以配置 &lt;code>dubbo.nacos-service-discovery.use-default-group=false&lt;/code> 全局属性值忽略该功能&lt;/li>
-&lt;/ol></description></item><item><title>Docs3-V2: 3.1 升级至 3.2 操作指南</title><link>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/3.1-to-3.2-compatibility-guide/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/3.1-to-3.2-compatibility-guide/</guid><description>
-&lt;h1 id="功能修改点">功能修改点&lt;/h1>
-&lt;h2 id="1-传递依赖变更">1. 传递依赖变更&lt;/h2>
-&lt;ul>
-&lt;li>Dubbo 3.2.0 版本开始默认不再在 &lt;code>dubbo-all&lt;/code> 中 shade &lt;code>hessian-lite&lt;/code> 的代码，而是使用传递依赖传递。如果你的应用中不需要使用 &lt;code>hessian-lite&lt;/code>，可以将 &lt;code>hessian-lite&lt;/code> 从依赖中移除。&lt;/li>
-&lt;li>Dubbo 3.2.0 版本开始在 &lt;code>dubbo-all&lt;/code> 中不再传递 &lt;code>gson&lt;/code>、&lt;code>fastjson&lt;/code> 依赖，如果你的应用中需要使用 &lt;code>gson&lt;/code>、&lt;code>fastjson&lt;/code>，请手动将 &lt;code>gson&lt;/code>、&lt;code>fastjson&lt;/code> 依赖添加到应用中。&lt;/li>
-&lt;li>Dubbo 3.2.0 版本在 &lt;code>dubbo-all&lt;/code> 中传递 &lt;code>fastjson2&lt;/code> 依赖。&lt;/li>
-&lt;/ul>
-&lt;h2 id="2-默认序列化切换">2. 默认序列化切换&lt;/h2>
-&lt;ul>
-&lt;li>Dubbo 3.2.0 版本开始默认序列化方式从 &lt;code>hessian2&lt;/code> 切换为 &lt;code>fastjson2&lt;/code>，对于升级到 3.2.0 的应用，Dubbo 会自动尝试采用 &lt;code>fastjson2&lt;/code> 进行序列化。&lt;/li>
-&lt;/ul>
-&lt;h4 id="faq">FAQ&lt;/h4>
-&lt;h4 id="q1会不会影响和低版本的-dubbo-互通">Q1：会不会影响和低版本的 Dubbo 互通？&lt;/h4>
-&lt;p>不会。与低版本互通仍使用 &lt;code>hessian-lite&lt;/code>。原理可参考&lt;a href="https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/upgrades-and-compatibility/serialization-upgrade/">序列化协议升级指南&lt;/a>一文。&lt;/p>
-&lt;h4 id="q2为什么要切换默认序列化方式">Q2：为什么要切换默认序列化方式？&lt;/h4>
-&lt;p>&lt;code>fastjson2&lt;/code> 是一款高性能的序列化框架，性能优于 &lt;code>hessian2&lt;/code>，原生支持 JDK17、Native 等，以及完全向前兼容 &lt;code>hessian2&lt;/code> 所有功能。
-由于 &lt;code>hessian-lite&lt;/code> 在未来维护难度越来越大，我们决定将默认序列化方式从 &lt;code>hessian2&lt;/code> 切换为 &lt;code>fastjson2&lt;/code>。&lt;/p>
-&lt;h4 id="q3和原生的-json-是什么关系">Q3：和原生的 JSON 是什么关系？&lt;/h4>
-&lt;p>Dubbo 中使用 &lt;code>fastjson2&lt;/code> 的 JSONB 格式，而不是原生的 JSON 格式。JSONB 格式和JSON格式对应，能完全表示JSON，是一种二进制格式。
-具体协议格式可以参考：&lt;a href="https://github.com/alibaba/fastjson2/wiki/jsonb_format_cn">JSONB 格式&lt;/a>&lt;/p>
-&lt;h4 id="q4如果我不想使用-fastjson2怎么办">Q4：如果我不想使用 &lt;code>fastjson2&lt;/code>，怎么办？&lt;/h4>
-&lt;p>如果你不想使用 &lt;code>fastjson2&lt;/code>，可以配置 &lt;code>prefer-serialization&lt;/code> 为 &lt;code>hessian2&lt;/code> 覆盖默认配置。（如 &lt;code>dubbo.provider.prefer-serialization=fastjson2,hessian2&lt;/code>） 如果没有特殊的需求，我们不建议仍继续使用 &lt;code>hessian2&lt;/code>。&lt;/p>
-&lt;h2 id="3-默认内部序列化工具切换">3. 默认内部序列化工具切换&lt;/h2>
-&lt;ul>
-&lt;li>Dubbo 3.2.0 版本开始默认&lt;strong>内部&lt;/strong>序列化工具从 &lt;code>fastjson&lt;/code> 切换为 &lt;code>fastjson2&lt;/code>。&lt;/li>
-&lt;/ul>
-&lt;h4 id="faq-1">FAQ&lt;/h4>
-&lt;h4 id="q1会不会影响-rpc-请求流量">Q1：会不会影响 RPC 请求流量？&lt;/h4>
-&lt;p>不会。内部序列化工具为 Dubbo 内部解析参数时使用，非 RPC 传输序列化协议。&lt;/p>
-&lt;h4 id="q2为什么要切换默认内部序列化工具">Q2：为什么要切换默认内部序列化工具？&lt;/h4>
-&lt;p>Dubbo 3.2.0 版本开始默认传递依赖不再传递 &lt;code>fastjson&lt;/code> 和 &lt;code>gson&lt;/code>。出于兼容性考虑，默认内部序列化工具切换为 &lt;code>fastjson2&lt;/code>。&lt;/p>
-&lt;h4 id="q3如果我的环境中没有-fastjson2怎么办">Q3：如果我的环境中没有 &lt;code>fastjson2&lt;/code>，怎么办？&lt;/h4>
-&lt;p>Dubbo 支持多种序列化框架自动切换，如果你的环境中没有 &lt;code>fastjson2&lt;/code>，Dubbo 会自动尝试切换到 &lt;code>fastsjon&lt;/code> 或 &lt;code>gson&lt;/code>。&lt;/p>
-&lt;h4 id="q4我想指定-dubbo-内部序列化工具怎么办">Q4：我想指定 Dubbo 内部序列化工具，怎么办？&lt;/h4>
-&lt;p>可以配置 &lt;code>dubbo.json-framework.prefer&lt;/code> 参数，如 &lt;code>-Ddubbo.json-framework.prefer=gson&lt;/code>。&lt;/p>
-&lt;h2 id="4-triple-协议支持传递自定义异常">4. Triple 协议支持传递自定义异常&lt;/h2>
-&lt;ul>
-&lt;li>Dubbo 3.2.0 版本开始 Triple 协议支持回传自定义异常，而不是只能回传 &lt;code>RpcException&lt;/code>。如果服务接口会抛出异常的，在 Dubbo 3.2.0 版本以后将默认按照 Dubbo 协议一样回传自定义异常对象。&lt;/li>
-&lt;/ul>
-&lt;h2 id="5-默认关闭推空保护">5. 默认关闭推空保护&lt;/h2>
-&lt;ul>
-&lt;li>Dubbo 3.2.0 版本开始默认关闭推空保护，即使注册中心推送空地址，Dubbo 也将不会保留最后一批 provider 信息。
-如果需要开启推空保护，可以配置 &lt;code>dubbo.application.enable-empty-protection&lt;/code> 为 &lt;code>true&lt;/code>。&lt;/li>
-&lt;/ul>
-&lt;h4 id="faq-2">FAQ&lt;/h4>
-&lt;h4 id="q1关闭推空保护对我有什么影响">Q1：关闭推空保护对我有什么影响？&lt;/h4>
-&lt;p>在绝大部分场景下没有影响。
-推空保护的目的是在注册中心出现故障并且主动推送空地址的时候，Dubbo 保留最后一批 provider 信息，以保证服务可用。
-但是在大多数注册中心出现故障的时候，注册中心也不会推送空地址，只有一些特殊情况才会出现。
-但如果开启推空保护，将对 Dubbo 的 Fallback 逻辑、心跳逻辑等造成较大的影响，给开发使用 Dubbo 带来困扰。&lt;/p>
-&lt;h4 id="q2我想开启推空保护怎么办">Q2：我想开启推空保护，怎么办？&lt;/h4>
-&lt;p>如果在生产上为了高可用，需要开启推空保护，可以配置 &lt;code>dubbo.application.enable-empty-protection&lt;/code> 为 &lt;code>true&lt;/code>。
-目前已知开启推空保护会导致服务端应用从 &lt;code>2.6.x&lt;/code>、&lt;code>2.7.x&lt;/code> 等仅支持接口级服务发现的版本升级到 &lt;code>3.x&lt;/code> 之后回滚到原来版本出现异常，极端场景下会导致服务调用失败。
-此外，开启推空保护后在服务端地址真的为空的时候出现较多的心跳异常、日志异常等。&lt;/p></description></item></channel></rss>
+&lt;p>在不久的未来，&lt;code>Triple&lt;/code> 也将实现各种常用的 &lt;code>Stub&lt;/code>，让用户写一份&lt;code>proto&lt;/code>文件，通过 &lt;code>comipler&lt;/code> 可以在任意场景方便的使用，请拭目以待。&lt;/p></description></item></channel></rss>
