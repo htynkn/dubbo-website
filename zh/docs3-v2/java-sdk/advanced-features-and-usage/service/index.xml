@@ -31,10 +31,13 @@ Dubbo协议支持，以及Qos协议支持。这些协议的识别都是由一个
 &lt;/ul>
 &lt;h2 id="使用方式">使用方式&lt;/h2>
 &lt;p>在同一主机上部署多个服务或需要通过负载均衡器访问多个服务。&lt;/p>
-&lt;h2 id="参考用例">参考用例&lt;/h2>
-&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/3-extensions/protocol/dubbo-samples-port-unification">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-port-unification&lt;/a>&lt;/p>
-&lt;h2 id="配置方式">配置方式&lt;/h2>
+&lt;blockquote>
+&lt;p>参考用例
+&lt;a href="https://github.com/apache/dubbo-samples/tree/master/3-extensions/protocol/dubbo-samples-port-unification">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-port-unification&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
 &lt;p>关于Dubbo支持的配置方式，可以参考&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/config/">配置说明&lt;/a>&lt;/p>
+&lt;/blockquote>
 &lt;h3 id="服务多协议导出">服务多协议导出&lt;/h3>
 &lt;p>ext-protocol参数支持配置多个不同的协议，协议之间通过&amp;quot;,&amp;ldquo;进行分隔。&lt;/p>
 &lt;h4 id="xml-配置">xml 配置&lt;/h4>
@@ -67,7 +70,6 @@ Dubbo协议支持，以及Qos协议支持。这些协议的识别都是由一个
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>完成Qos模块的导入之后，相关的配置项可参考&lt;a href="https://dubbo.apache.org/zh/docs3-v2/java-sdk/reference-manual/qos/overview/">Qos操作手册&lt;/a>进行配置。&lt;/p>
 &lt;p>默认情况下，基于端口复用的Qos服务在模块导入后是启动的。&lt;/p>
-&lt;h2 id="使用方式-1">使用方式&lt;/h2>
 &lt;h3 id="qos使用">Qos使用&lt;/h3>
 &lt;p>将Qos协议接入到端口复用的场景下，需要在建立连接之后，客户端先向服务端发送消息，对比将Qos协议通过单个端口提供服务，端口复用版的Qos协议在处理telnet连接的情况下需要用户执行一些操作，完成协议识别（二选一）。&lt;/p>
 &lt;ol>
@@ -516,11 +518,12 @@ Dubbo协议支持，以及Qos协议支持。这些协议的识别都是由一个
 &lt;h2 id="特性说明">特性说明&lt;/h2>
 &lt;p>此特性基于 Triple 协议和 Project Reactor 实现，&lt;code>3.1.0&lt;/code> 版本以上支持。用户仅需编写 IDL 文件，并指定 protobuf 插件的相应 Generator，即可生成并使用支持响应式API的 Stub 代码。&lt;/p>
 &lt;p>有四种调用模式，分别是 OneToOne、OneToMany、ManyToOne、ManyToMany，分别对应 Unary调用、服务端流、客户端流、双向流。在 Reactor 的实现中，One 对应 Mono，Many 对应 Flux。&lt;/p>
-&lt;h4 id="背景">背景&lt;/h4>
 &lt;p>Reactive Stream 提供了一套标准的异步流处理 API， 在能够让应用写出事件驱动的程序的同时，也通过 BackPressure 的方式保证了节点的稳定。Triple 协议在通信协议层面为 Dubbo 框架增加了流式场景的支持，在此基础上能够实现上层包括大文件传输和推送机制的业务需求。&lt;/p>
 &lt;p>Dubbo + Reactive Stream Stub 的组合模式可以给用户带来最方便的流式使用方式以及全链路异步性能提升。&lt;/p>
-&lt;h2 id="参考用例">参考用例&lt;/h2>
-&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/3-extensions/protocol/dubbo-samples-triple-reactor">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple-reactor&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>参考用例
+&lt;a href="https://github.com/apache/dubbo-samples/tree/master/3-extensions/protocol/dubbo-samples-triple-reactor">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-triple-reactor&lt;/a>&lt;/p>
+&lt;/blockquote>
 &lt;h2 id="使用场景">使用场景&lt;/h2>
 &lt;p>系统需要处理大量并发请求而不会使任何服务器过载。大量用户提供实时数据的系统，希望确保系统能够处理负载而不会崩溃或变慢。&lt;/p>
 &lt;h2 id="使用方式">使用方式&lt;/h2>
@@ -726,8 +729,10 @@ Dubbo协议支持，以及Qos协议支持。这些协议的识别都是由一个
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="使用场景">使用场景&lt;/h2>
 &lt;p>服务端在向外提供接口服务时，解决各种接口参数校验问题。&lt;/p>
-&lt;h2 id="参考用例">参考用例&lt;/h2>
-&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/2-advanced/dubbo-samples-validation">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-validation&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>参考用例
+&lt;a href="https://github.com/apache/dubbo-samples/tree/master/2-advanced/dubbo-samples-validation">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-validation&lt;/a>&lt;/p>
+&lt;/blockquote>
 &lt;h2 id="使用方式">使用方式&lt;/h2>
 &lt;h3 id="参数标注示例">参数标注示例&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> java.io.Serializable&lt;span style="color:#719e07">;&lt;/span>
@@ -869,8 +874,10 @@ Dubbo协议支持，以及Qos协议支持。这些协议的识别都是由一个
 &lt;p>同一个接口针对不同的业务场景、不同的使用需求或者不同的功能模块等场景，可使用服务分组来区分不同的实现方式。同时，这些不同实现所提供的服务是可并存的，也支持互相调用。&lt;/p>
 &lt;h2 id="使用场景">使用场景&lt;/h2>
 &lt;p>当一个接口有多种实现时，可以用 group 区分。&lt;/p>
-&lt;h2 id="参考用例">参考用例&lt;/h2>
-&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/2-advanced/dubbo-samples-group">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-group&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>参考用例
+&lt;a href="https://github.com/apache/dubbo-samples/tree/master/2-advanced/dubbo-samples-group">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-group&lt;/a>&lt;/p>
+&lt;/blockquote>
 &lt;h2 id="使用方式">使用方式&lt;/h2>
 &lt;h3 id="注解配置">注解配置&lt;/h3>
 &lt;h4 id="服务提供端注解配置">服务提供端(注解配置)&lt;/h4>
@@ -979,6 +986,7 @@ Dubbo协议支持，以及Qos协议支持。这些协议的识别都是由一个
 &lt;blockquote>
 &lt;p>总是 &lt;strong>只调&lt;/strong> 一个可用组的实现&lt;/p>
 &lt;/blockquote></description></item><item><title>Docs3-V2: 集群容错</title><link>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/fault-tolerent-strategy/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh/docs3-v2/java-sdk/advanced-features-and-usage/service/fault-tolerent-strategy/</guid><description>
+&lt;h2 id="特性说明">特性说明&lt;/h2>
 &lt;p>在集群调用失败时，Dubbo 提供了多种容错方案，缺省为 failover 重试。&lt;/p>
 &lt;p>&lt;img src="https://cn.dubbo.apache.org/imgs/user/cluster.jpg" alt="cluster">&lt;/p>
 &lt;p>各节点关系：&lt;/p>
@@ -989,8 +997,14 @@ Dubbo协议支持，以及Qos协议支持。这些协议的识别都是由一个
 &lt;li>&lt;code>Router&lt;/code> 负责从多个 &lt;code>Invoker&lt;/code> 中按路由规则选出子集，比如读写分离，应用隔离等&lt;/li>
 &lt;li>&lt;code>LoadBalance&lt;/code> 负责从多个 &lt;code>Invoker&lt;/code> 中选出具体的一个用于本次调用，选的过程包含了负载均衡算法，调用失败后，需要重选&lt;/li>
 &lt;/ul>
-&lt;h2 id="集群容错模式">集群容错模式&lt;/h2>
-&lt;p>可以自行扩展集群容错策略，参见：&lt;a href="../../../reference-manual/spi/description/cluster/">集群扩展&lt;/a>&lt;/p>
+&lt;p>通过使用服务注册表和负载平衡，可以提高集群提供的容错能力，服务注册表用于存储有关可用服务及其位置的信息，负载平衡用于确保请求均匀分布在集群中的所有服务器上，如果一台服务器发生故障，负载将转移到其他可用服务器。&lt;/p>
+&lt;p>配置监视集群中服务器运行状况的运行状况检查，如果服务器未通过运行状况检查，则可以将其从集群中删除，并将负载转移到其余服务器，确保集群正常运行，并且用户可以使用应用程序。&lt;/p>
+&lt;h2 id="使用场景">使用场景&lt;/h2>
+&lt;p>多个服务器部署同一集群中，运行同一应用程序，如果一台服务器出现故障，其他服务器将接管负载，确保应用程序对用户仍然可用。&lt;/p>
+&lt;blockquote>
+&lt;p>可以自行扩展集群容错策略 &lt;a href="../../../reference-manual/spi/description/cluster/">集群扩展&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="使用方式">使用方式&lt;/h2>
 &lt;h3 id="failover-cluster">Failover Cluster&lt;/h3>
 &lt;p>失败自动切换，当出现失败，重试其它服务器。通常用于读操作，但重试会带来更长延迟。可通过 &lt;code>retries=&amp;quot;2&amp;quot;&lt;/code> 来设置重试次数(不含第一次)。&lt;/p>
 &lt;p>重试次数配置如下：&lt;/p>
@@ -1051,7 +1065,7 @@ broadcast.fail.percent 只是控制的当失败后是否继续调用其他节点
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
 &lt;li>缺省值：选择一个可用的注册中心&lt;/li>
 &lt;/ol>
-&lt;h2 id="集群模式配置">集群模式配置&lt;/h2>
+&lt;h3 id="集群模式示例">集群模式示例&lt;/h3>
 &lt;p>按照以下示例在服务提供方和消费方配置集群模式&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> cluster=&lt;span style="color:#2aa198">&amp;#34;failsafe&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或&lt;/p>
@@ -1118,10 +1132,12 @@ broadcast.fail.percent 只是控制的当失败后是否继续调用其他节点
 &lt;p>从 2.7.0 开始，Dubbo 的所有异步编程接口开始以 &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html">CompletableFuture&lt;/a> 为基础&lt;/p>
 &lt;p>基于 NIO 的非阻塞实现并行调用，客户端不需要启动多线程即可完成并行调用多个远程服务，相对多线程开销较小。&lt;/p>
 &lt;p>&lt;img src="https://cn.dubbo.apache.org/imgs/user/future.jpg" alt="/user-guide/images/future.jpg">&lt;/p>
-&lt;h2 id="参考用例">参考用例&lt;/h2>
-&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/tree/master/2-advanced/dubbo-samples-async">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-async&lt;/a>&lt;/p>
 &lt;h2 id="使用场景">使用场景&lt;/h2>
 &lt;p>将用户请求内容发送到目标请求，当目标请求遇到高流量或需要长时间处理，异步调用功能将允许立即向用户返回响应，同时目标请求继续后台处理请求，当目标请求返回结果时，将内容显示给用户。&lt;/p>
+&lt;blockquote>
+&lt;p>参考用例
+&lt;a href="https://github.com/apache/dubbo-samples/tree/master/2-advanced/dubbo-samples-async">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-async&lt;/a>&lt;/p>
+&lt;/blockquote>
 &lt;h2 id="使用方式">使用方式&lt;/h2>
 &lt;h3 id="使用-completablefuture-签名的接口">使用 CompletableFuture 签名的接口&lt;/h3>
 &lt;p>需要服务提供者事先定义 CompletableFuture 签名的服务，接口定义指南如下：&lt;/p>
