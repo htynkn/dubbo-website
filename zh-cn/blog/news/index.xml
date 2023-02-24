@@ -637,7 +637,104 @@
 &lt;p>v1.7.0 之前嵌套map无法正确解析，主要原因是对应的map对象被当做一个数据类型却未被自动加到类引用列表中，而嵌套map类信息是同一类型的引用，去类引用列表找，找不到就报错了。 解决这个问题的方法就是遇到map类对象，也将其加入到类引用列表中即可。 问题详细参考 &lt;a href="https://github.com/apache/dubbo-go-hessian2/issues/119">#119&lt;/a>.&lt;/p>
 &lt;h3 id="34-fix-fields-name-mismatch-in-duration-class-234httpsgithubcomapachedubbo-go-hessian2pull234">3.4 fix fields name mismatch in Duration class. &lt;a href="https://github.com/apache/dubbo-go-hessian2/pull/234">#234&lt;/a>&lt;/h3>
 &lt;p>这个 PR 解决了Duration对象中字段错误定义，原来是&amp;quot;second/nano&amp;quot;， 应该是&amp;quot;seconds/nanos&amp;quot;。&lt;/p>
-&lt;p>同时改善了测试验证数据。之前使用0作为int字段的测试数据，这是不准确的，因为int类型默认值就是0.&lt;/p></description></item><item><title>Blog: Dubbo 在 Proxyless Mesh 模式下的探索与改进</title><link>https://dubbo.apache.org/zh-cn/blog/2023/02/02/dubbo-%E5%9C%A8-proxyless-mesh-%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E6%8E%A2%E7%B4%A2%E4%B8%8E%E6%94%B9%E8%BF%9B/</link><pubDate>Thu, 02 Feb 2023 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/blog/2023/02/02/dubbo-%E5%9C%A8-proxyless-mesh-%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E6%8E%A2%E7%B4%A2%E4%B8%8E%E6%94%B9%E8%BF%9B/</guid><description>
+&lt;p>同时改善了测试验证数据。之前使用0作为int字段的测试数据，这是不准确的，因为int类型默认值就是0.&lt;/p></description></item><item><title>Blog: 2022 年度总结与 2023 新年规划</title><link>https://dubbo.apache.org/zh-cn/blog/2023/02/23/2022-%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93%E4%B8%8E-2023-%E6%96%B0%E5%B9%B4%E8%A7%84%E5%88%92/</link><pubDate>Thu, 23 Feb 2023 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/blog/2023/02/23/2022-%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93%E4%B8%8E-2023-%E6%96%B0%E5%B9%B4%E8%A7%84%E5%88%92/</guid><description>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/2023/2/roadmap/2023-roadmap.jpg" alt="dubbo-introduction">&lt;/p>
+&lt;h2 id="2022-年度总结">2022 年度总结&lt;/h2>
+&lt;h3 id="1-dubbo-开源-12-周年">1 Dubbo 开源 12 周年&lt;/h3>
+&lt;p>50k+ star，30k fork，1000+ Contributor&lt;/p>
+&lt;h3 id="2-dubbo3-里程碑">2 Dubbo3 里程碑&lt;/h3>
+&lt;h3 id="实现规模化生产检验">实现规模化生产检验&lt;/h3>
+&lt;p>阿里巴巴核心微服务集群实现从 HSF 到 Dubbo3 的全面升级，顺利支撑双十一、双十二万亿级服务调用&lt;/p>
+&lt;h3 id="发力多语言生态">发力多语言生态&lt;/h3>
+&lt;h4 id="具备生产可用条件">具备生产可用条件&lt;/h4>
+&lt;p>Java、Go&lt;/p>
+&lt;h4 id="从孵化走向成熟">从孵化走向成熟&lt;/h4>
+&lt;p>Rust、Node.js、Python&lt;/p>
+&lt;h3 id="3-核心技术">3 核心技术&lt;/h3>
+&lt;p>应用级服务发现
+HTTP/2 协议
+流量管控升级
+可观测性
+自适应负载均衡
+Proxyless Mesh
+Spring Boot3 &amp;amp; Spring6&lt;/p>
+&lt;h3 id="4-新晋-committerspmc">4 新晋 Committers&amp;amp;PMC&lt;/h3>
+&lt;p>本年度社区共发展 Committer 13 位，PMC 4 位&lt;/p>
+&lt;h2 id="2023-新年规划">2023 新年规划&lt;/h2>
+&lt;ul>
+&lt;li>官网与文档体验全面提升&lt;/li>
+&lt;li>Go、Node.js、Rust 等多语言体系建设&lt;/li>
+&lt;li>全面提升整体可观测性&lt;/li>
+&lt;li>Dubbo Admin 一站式服务运维管控平台&lt;/li>
+&lt;li>Dubbo Mesh 走向成熟&lt;/li>
+&lt;li>提升 HTTP 开发体验，补全 Web 互通&lt;/li>
+&lt;li>打造 gRPC over Dubbo 最佳实践&lt;/li>
+&lt;li>完善的认证鉴权体系&lt;/li>
+&lt;/ul></description></item><item><title>Blog: 一文帮你快速了解 Dubbo 核心能力</title><link>https://dubbo.apache.org/zh-cn/blog/2023/02/23/%E4%B8%80%E6%96%87%E5%B8%AE%E4%BD%A0%E5%BF%AB%E9%80%9F%E4%BA%86%E8%A7%A3-dubbo-%E6%A0%B8%E5%BF%83%E8%83%BD%E5%8A%9B/</link><pubDate>Thu, 23 Feb 2023 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/blog/2023/02/23/%E4%B8%80%E6%96%87%E5%B8%AE%E4%BD%A0%E5%BF%AB%E9%80%9F%E4%BA%86%E8%A7%A3-dubbo-%E6%A0%B8%E5%BF%83%E8%83%BD%E5%8A%9B/</guid><description>
+&lt;h2 id="dubbo-简介">Dubbo 简介&lt;/h2>
+&lt;h3 id="一句话定义">一句话定义&lt;/h3>
+&lt;p>Apache Dubbo 是一款微服务开发框架，它帮助解决微服务开发中的通信问题，同时为构建企业级微服务的提供服务治理能力，Dubbo 不绑定编程语言，我们的目标是为所有主流语言提供对等的微服务开发体验。
+&lt;img src="https://dubbo.apache.org/imgs/blog/2023/2/introduction/1-overview.jpg" alt="overview">&lt;/p>
+&lt;h3 id="基本架构">基本架构&lt;/h3>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/2023/2/introduction/2-arc.jpg" alt="overview">&lt;/p>
+&lt;p>Dubbo 从架构图上分为数据面和控制面。在数据面，使用 Dubbo 开发的微服务进程间基于 RPC 协议通信。DubboAdmin 控制面作为服务治理的抽象入口，由一系列可选的服务治理组件构成，负责 Dubbo集群的服务发现、流量管控策略、可视化监测。&lt;/p>
+&lt;h3 id="行业应用">行业应用&lt;/h3>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/2023/2/introduction/3-usecase.jpg" alt="overview">&lt;/p>
+&lt;p>Dubbo 设计用于解决阿里巴巴内部大规模 微服务集群实践难题，当前已被广泛应用于几乎所有行业的微服务实践中。&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/2023/2/introduction/4-usecase-alibaba.jpg" alt="overview">&lt;/p>
+&lt;p>以阿里巴巴为例，在 2021 年，阿里巴巴基于内部多年 HSF 框架实践积累，面向云原生架构设计了下一代微服务框架 Dubbo3，用于解决性能、治理升级、服务网格等一系列问题；截止目前，阿里巴巴已全面完成从 HSF到 Dubbo3 的迁移，核心业务都跑在开源 Dubbo3 之上。&lt;/p>
+&lt;h2 id="dubbo-到底提供了哪些核心能力">Dubbo 到底提供了哪些核心能力？&lt;/h2>
+&lt;h3 id="提供微服务抽象与框架">提供微服务抽象与框架&lt;/h3>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/2023/2/introduction/5-framework.jpg" alt="overview">&lt;/p>
+&lt;p>首先，Dubbo 作为服务开发框架解决了业务应用中微服务定义、暴露、通信与治理的问题，为业务应用开发定义了一套微服务编程范式。
+具体来说，Dubbo 为业务应用提供了微服务开发API、RPC 协议、服务治理三大核心能力，让开发者真正的专注业务逻辑开发。&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/2023/2/introduction/6-extensibility.jpg" alt="overview">&lt;/p>
+&lt;p>Dubbo 不是应用框架的替代者，它可以很好的工作在每种语言的主流编程框架之上，以 Java 为例，Dubbo 可以很好的与 Spring 协作，并在此基础上提供服务定义、微服务编程、服务发现、负载均衡、流量管控等能力。&lt;/p>
+&lt;h3 id="提供灵活的通信协议切换能力">提供灵活的通信协议切换能力&lt;/h3>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/2023/2/introduction/8-extensibility.jpg" alt="overview">&lt;/p>
+&lt;p>在通信方面，Dubbo 区别于其他 RPC 框架的是它不绑定特定协议，你可以在底层选用 HTTP./2、TCP、gRPC、REST、Hessian 等任意通信协议，同时享受统一的 API、以及对等的服务治理能力。&lt;/p>
+&lt;h3 id="一切皆可扩展">一切皆可扩展&lt;/h3>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/2023/2/introduction/9-ecosystem.jpg" alt="overview">&lt;/p>
+&lt;p>Dubbo 的另一个优势在于其可扩展性设计，从流量管控、协议编码、诊断调优、再到服务治理，你都可以去扩展，满足企业级微服务开发与运维的所有诉求。&lt;/p>
+&lt;h3 id="丰富的生态">丰富的生态&lt;/h3>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/2023/2/introduction/10-mesh.jpg" alt="overview">&lt;/p>
+&lt;p>基于扩展能力 Dubbo 官方提供了丰富的生态适配，涵盖了所有主流的开源微服务组件。&lt;/p>
+&lt;h3 id="服务网格">服务网格&lt;/h3>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/2023/2/introduction/11-initializer.jpg" alt="overview">&lt;/p>
+&lt;p>对于服务网格架构，Dubbo也可以轻松接入原生 Istio 体系；
+在数据面支持与 Envoy 部署的 Proxy 模式，也支持无 Envoy 的 Proxyless 模式，提供更灵活的数据面选择。&lt;/p>
+&lt;h2 id="构建企业级dubbo-微服务有多简单你只需要-4-步">构建企业级Dubbo 微服务有多简单？你只需要 4 步&lt;/h2>
+&lt;p>我们以 Java 微服务开发为例。&lt;/p>
+&lt;h3 id="第一步">第一步&lt;/h3>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/2023/2/introduction/12-interface.jpg" alt="overview">&lt;/p>
+&lt;p>使用官方脚手架快速创建项目模板，只需要选择依赖的版本、组件，点击 “获取代码” 即可&lt;/p>
+&lt;h3 id="第二步">第二步&lt;/h3>
+&lt;p>将模板项目导入 IDE 开发环境。
+定义 Java 接口作为 Dubbo 服务。
+&lt;img src="https://dubbo.apache.org/imgs/blog/2023/2/introduction/13-impl.jpg" alt="overview">&lt;/p>
+&lt;p>开发 Dubbo 服务端，实现接口并完成业务逻辑编码，通过一条简单的注解配置完成服务发布。
+&lt;img src="https://dubbo.apache.org/imgs/blog/2023/2/introduction/14-reference.jpg" alt="overview">&lt;/p>
+&lt;p>开发Dubbo 客户端，通过注解声明 Dubbo 服务，然后就可以发起远程方法调用了。至此，开发工作完成。&lt;/p>
+&lt;h3 id="第三步">第三步&lt;/h3>
+&lt;p>进入部署环节，我们选择 Kubernetes 作为部署环境。&lt;/p>
+&lt;p>首先，通过一条命令安装 dubbo-admin 等服务治理组件，安装成功之后，我们查看部署状态。接下来，开始部署业务应用，随后查看确认直到应用已经正常启动
+&lt;img src="https://dubbo.apache.org/imgs/blog/2023/2/introduction/15-deploy.jpg" alt="overview">&lt;/p>
+&lt;p>然后，我们就可以打开 Admin 控制台查看服务部署与调用情况了。这里是 Dubbo Admin 控制台的页面显示效果，可以看到刚才启动的 Dubbo 服务部署状态；除此之外，Admin 还提供了更详细的流量监控监测，点击服务统计，可进入监控页面&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/2023/2/introduction/16-admin.jpg" alt="overview">&lt;/p>
+&lt;p>你可以在此了解Dubbo 集群的详细运行状态，包括每个应用对外服务和调用服务的情况，QpS、成功率等，还可以查看每个实例的资源健康状况。&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/2023/2/introduction/17-grafana1.jpg" alt="overview">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/2023/2/introduction/18-grafana2.jpg" alt="overview">&lt;/p>
+&lt;h3 id="第四步">第四步&lt;/h3>
+&lt;p>进行流量管控。当应用已经平稳运行后，进一步控制流量的访问行为，包括实现金丝雀发布、全链路灰度、动态调整超时时间、调整权重、按比例流量分发、参数路由等。控制台提供了可视化的流量治理规则操作入口，在这里可以直接下发流量规则。&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/2023/2/introduction/19-gray.jpg" alt="overview">&lt;/p>
+&lt;p>以一个线上环境的灰度隔离示例，通过 Dubbo 流量管控机制，我们可以给每个应用的一部分机器打上 gray 标签，接下来，对于入口为 gray 的流量，就可以控制确保它只在有 gray 标记的 Dubbo 实例内流转，实现了全链路的逻辑隔离效果，
+对于隔离多套开发环境、线上灰度测试等场景都非常有用。&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/2023/2/introduction/20-region.jpg" alt="overview">&lt;/p>
+&lt;p>对于同区域优先调用的场景，这里有两个应用做了多区域部署，紫色是杭州区域、蓝色是北京区域，部署在橙色区域的应用会优先访问同区域的应用，以此降低访问延迟，蓝色区域部署的服务亦是如此。&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/2023/2/introduction/21-region.jpg%C3%9F" alt="overview">&lt;/p>
+&lt;p>当应用在同区域区域部署的实例不可用时，调用会自动跨区域切换到其他可用区，确保整体可用性。&lt;/p>
+&lt;h2 id="总结">总结&lt;/h2>
+&lt;p>接下来，请开始你的Dubbo 之旅吧。&lt;/p></description></item><item><title>Blog: Dubbo 在 Proxyless Mesh 模式下的探索与改进</title><link>https://dubbo.apache.org/zh-cn/blog/2023/02/02/dubbo-%E5%9C%A8-proxyless-mesh-%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E6%8E%A2%E7%B4%A2%E4%B8%8E%E6%94%B9%E8%BF%9B/</link><pubDate>Thu, 02 Feb 2023 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/blog/2023/02/02/dubbo-%E5%9C%A8-proxyless-mesh-%E6%A8%A1%E5%BC%8F%E4%B8%8B%E7%9A%84%E6%8E%A2%E7%B4%A2%E4%B8%8E%E6%94%B9%E8%BF%9B/</guid><description>
 &lt;h2 id="一背景">一、背景&lt;/h2>
 &lt;p>随着 Docker 和 Kubernetes 的出现，一个庞大的单体应用可以被拆分成多个独立部署的微服务，并被打包运行于对应的容器中。不同应用之间相互通信，以共同完成某一功能模块。微服务架构与容器化部署带来的好处是显而易见的，它降低了服务间的耦合性，利于开发和维护，能更有效地利用计算资源。当然，微服务架构也存在相应的缺点：&lt;/p>
 &lt;ul>
@@ -983,16 +1080,16 @@ Dubbo 社区是国内最早开始对 Proxyless Service Mesh 模式进行探索�
 &lt;p>在 v1.5 版本之前，k8s 注册中心的实现是通过直接使用 &lt;a href="https://github.com/kubernetes/client-go">k8s client&lt;/a> 中Pod对象的 List&amp;amp;&amp;amp;Watch 接口。在本次迭代中引入了 k8s informer。这样做的原因在于两点，首先一定的程度上来讲 dubbo-go 的 k8s 注册中心也是一个 k8s controller，使用 informer 的模式更加 k8s native。更重要的是社区计划后续向 CRD+Operator 的模式演进，informer 模式是对后续的演进的探索。除了这个铺垫之外，本次迭代还对跨 namespace 的服务发现做了支持。再有就是为了减少对 kube-apiserver List&amp;amp;&amp;amp;Watch 的压力，对 provider 和 consumer 的行为进行了区分，provider 不再进行 Watch 而仅对 kube-apiserver 进行写操作。&lt;/p>
 &lt;h1 id="优化路由模型">优化路由模型&lt;/h1>
 &lt;p>在 1.5 版本之前，Router 模型中属性是包含：优先级与路由属性，Router Chain 只包含路由属性。从中能识别出其实 Router Chain 也是一种特殊 Router。1.5 版本之后，使 Router 更抽象，分离出其优先级属性，新增 Priority Router、Chain 继承 Router 使其变为特殊的 Router，使关系上看起来更加清晰。如下图：&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/1.5/router.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/1.5/router.png" alt="img">&lt;/p>
 &lt;h1 id="回顾与展望">回顾与展望&lt;/h1>
 &lt;p>Dubbo-go 处于一个比较稳定成熟的状态。目前新版本正处于往云原生方向的尝试，应用服务维度注册是首先推出的功能，这是一个和之前模型完全不一样的新注册模型。该版本是我们朝云原生迈进新一步的关键版本。除此之外，包含在该版本也有一些之前提到的优化。&lt;/p>
 &lt;p>下一个版本 v1.5.1，虽然仍是以兼容 Dubbo 2.7.x 为主要任务，但在分布式能力的增强上，也是我们关注的重点。&lt;/p>
 &lt;p>在&lt;strong>分布式事务&lt;/strong>方面，有一个重要的基于 Seata 扩展实现。通过增加过滤器，在服务端接收 xid 并结合 seata-golang&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup> 达到支持分布式事务的目的。 从而使 Dubbo-go 在分布式场景下，让用户有更多的选择，能适应更多的个性化场景。&lt;/p>
 &lt;p>与此同时，在&lt;strong>传输链路安全性&lt;/strong>上，TLS 安全传输链路是该版本重要功能之一。通过提供统一入口，未来能引入更多的与传输链路安全性相关的功能，适应用户不一样的使用场景。&lt;/p>
 &lt;p>&lt;strong>注册中心模型&lt;/strong>上，支持多注册中心集群负载均衡。业务部署假设是双注册中心（图 1 ），从原来双注册中心中所有 Provider 一起选址。优化成选址时的多了一层注册中心集群间的负载均衡（图 2 ）。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/1.5/multi-registry.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/1.5/multi-registry.png" alt="img">&lt;/p>
 &lt;p>（图 1 ）&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/1.5/loadbalance.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/1.5/loadbalance.png" alt="img">&lt;/p>
 &lt;p>（图 2 ）&lt;/p>
 &lt;p>以前的 dubbo-go RPC 层直接复用了 getty 框架 的 RPC[&lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>(https://github.com/AlexStocks/getty/tree/feature/rpc)]，未能实现协议和应用通信地址的隔离。阿里中间件展图同学重构了 dubbo-go RPC 层，实现了连接复用：可以实现 consumer 与 provider 端的同一个 TCP 连接上进行多协议通信。相关 PR 业已合并，会在 dubbo-go v1.5.1 中发布。&lt;/p>
 &lt;p>目前下一个版本正在紧锣密鼓的开发中，具体规划及任务清单&lt;sup id="fnref:3">&lt;a href="#fn:3" class="footnote-ref" role="doc-noteref">3&lt;/a>&lt;/sup> ，都已经在 Github 上体现。&lt;/p>
@@ -1041,7 +1138,7 @@ Dubbo 社区是国内最早开始对 Proxyless Service Mesh 模式进行探索�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>同时，就像 json 编码中通过 immediately 可以在序列化中忽略该字段，同理，通过 hessian:&amp;quot;-&amp;quot; 用户也可以让冗余字段不参与 hessian 序列化。&lt;/p>
 &lt;p>对应pr &lt;a href="https://github.com/apache/dubbo-go-hessian2/pull/154">#154&lt;/a>，作者 &lt;a href="https://github.com/micln">micln&lt;/a>&lt;/p></description></item><item><title>Blog: 都已经十岁的 Apache Dubbo，还能再乘风破浪吗？</title><link>https://dubbo.apache.org/zh-cn/blog/2021/01/14/%E9%83%BD%E5%B7%B2%E7%BB%8F%E5%8D%81%E5%B2%81%E7%9A%84-apache-dubbo%E8%BF%98%E8%83%BD%E5%86%8D%E4%B9%98%E9%A3%8E%E7%A0%B4%E6%B5%AA%E5%90%97/</link><pubDate>Thu, 14 Jan 2021 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/blog/2021/01/14/%E9%83%BD%E5%B7%B2%E7%BB%8F%E5%8D%81%E5%B2%81%E7%9A%84-apache-dubbo%E8%BF%98%E8%83%BD%E5%86%8D%E4%B9%98%E9%A3%8E%E7%A0%B4%E6%B5%AA%E5%90%97/</guid><description>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/10years/dubbo-home.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/10years/dubbo-home.png" alt="img">&lt;/p>
 &lt;p>纵观中国开源历史，你真的没法找到第二个像 Dubbo 一样自带争议和讨论热度的开源项目。&lt;/p>
 &lt;p>一方面，2011 年，它的开源填补了当时生产环境使用的 RPC 框架的空白，一发布就被广泛采用；另一方面，它经历了停止维护、重启维护后捐献给 Apache 基金会、接着又以顶级项目的身份毕业。&lt;/p>
 &lt;p>面对多疑的开发者，在云原生时代，Apache Dubbo 将如何延续当前光芒？&lt;/p>
@@ -1072,12 +1169,12 @@ Dubbo 社区是国内最早开始对 Proxyless Service Mesh 模式进行探索�
 &lt;li>2.5.x 版本从 2019 年初开始已宣布 EOF，只做安全修复；而到了下半年已经完全停止了维护。&lt;/li>
 &lt;/ul>
 &lt;p>下面通过一个简要分层模块图，回顾过去一段时间 Dubbo 的技术架构演进，从编程模型、服务治理、传输协议、性能优化等角度切入：&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/10years/dubbo-layer.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/10years/dubbo-layer.png" alt="img">&lt;/p>
 &lt;p>以上很多功能都已被各大厂商落地，用于解决具体的业务问题。我们也期待，接下来这些厂商带来更多关于 Dubbo 实践经验的深度总结。&lt;/p>
 &lt;h3 id="dubbo-go-发展的第五年正与-dubbo-齐头并进">Dubbo-go 发展的第五年，正与 Dubbo 齐头并进&lt;/h3>
 &lt;p>除 Dubbo Java 之外，Dubbo 周边也发展出了很多优秀的子项目（子社区），其中包括 Dubbo-spring-boot-project、Dubbo-go 等，这里先着重介绍 Dubbo-go 子社区。&lt;/p>
 &lt;p>Dubbo-go 项目最早由于雨在 2016 年 5 月构建，同年 9 月发布并开源，如下时间轴图清晰记录了 Dubbo-go 的前世今生。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/10years/dubbo-go-events.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/10years/dubbo-go-events.png" alt="img">&lt;/p>
 &lt;p>秉承 &amp;ldquo;bridge the gap between Java and Go&amp;rdquo; 天然使命的 Dubbo-go，已经进入第五个年头，也走出了自己独特的发展路径：&lt;/p>
 &lt;ul>
 &lt;li>当前的 v1.4.0 版本已对齐 2.6.x 版本，即将发布的版本将与 v2.7.x【对标 v2.7.5】对齐，而后将会发布对标 Dubbo 3.x 的 v1.6.0版本；&lt;/li>
@@ -1134,7 +1231,7 @@ Dubbo 社区是国内最早开始对 Proxyless Service Mesh 模式进行探索�
 &lt;p>面向接口一直以来都是 Dubbo 框架的优势。一方面它的易用性，为开发者屏蔽了远程调用的存在；另一方面面向接口的地址发现、服务治理带来了更强大的能力，使得整个 Dubbo 治理体系非常强大与灵活。&lt;/p>
 &lt;p>既然面向接口有如此多的好处，那为什么我们还要探索面向应用的服务治理模式呢？&lt;/p>
 &lt;p>听起来似乎有些矛盾。其实到底是面向接口，还是面向应用，只是从不同的角度看 Dubbo。我们所聊的“面向接口 -&amp;gt; 面向应用”的改造，主要体现在服务注册、发现层面：&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/10years/dubbo-triangle.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/10years/dubbo-triangle.png" alt="img">&lt;/p>
 &lt;p>而我们说的面向应用的新模型，主要对第 2 点，即注册中心的数据组织转变为 “面向应用/实例” 粒度。这为我们解决两个问题：&lt;/p>
 &lt;ul>
 &lt;li>在服务发现层面与 Kubernetes Service 等微服务模型对齐；&lt;/li>
@@ -1176,7 +1273,7 @@ Dubbo 社区是国内最早开始对 Proxyless Service Mesh 模式进行探索�
 &lt;p>最后一个令人心动的改进是，我们支持了 REST 协议。&lt;/p>
 &lt;h2 id="1-k8s-注册中心">1. K8s 注册中心&lt;/h2>
 &lt;p>dubbo-go 注册中心的本质为K/V型的数据存储。当前版本实现了以 Endpoint 为维度在 k8s API Server 进行服务注册和发现的方案【下文简称 Endpoint 方案】，架构图如下。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/1.4/k8s.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/1.4/k8s.png" alt="img">&lt;/p>
 &lt;p>Endpoint 方案，首先将每个 dubbo-go 进程自身服务信息序列化后，通过 Kubernetes 提供的 Patch 的接口写入在自身 Pod 对象的 Annotation 中。其次，通过 Kubernetes 的 Watch 接口观察集群中本 Namespace 内带有某些固定lable [见上图] Pod 的Annotation 信息的更新，处理服务健康检查、服务上下线等情况并实时更新本地缓存。整体流程仅使用 Kubernetes 原生 API 完成将 Kubernetes 作为注册中心的功能特性。&lt;/p>
 &lt;p>这个方案非常简洁，不需要实现额外的第三方模块，也不需要对 Dubbo 业务作出改动，仅仅把 k8s 当做部署平台，依赖其容器管理能力，没有使用其 label selector 和 service 等服务治理特性。如果站在 k8s Operator 的角度来看，Operator 方案的优点即 Endpoint 方案的缺点，Endpoint 方案无法使用 k8s 的健康检查能力，亦没有使用 k8s service 的事件监听能力，每个 consumer 冗余监听一些不必要监听的事件，当 Endpoint 过多时会加大 API Server 的网络压力。&lt;/p>
 &lt;p>目前 dubbo-go 社区其实已经有了 operator 版本注册中心的技术方案， 后续版本【计划版本是 v1.6】的 dubbo-go 会给出其实现。相比当前实现，operator 方案开发和线上维护成本当然上升很多。二者如同硬币的两面，社区会让两种方式会共存，以满足不同 level 的使用者。&lt;/p>
@@ -1185,14 +1282,14 @@ Dubbo 社区是国内最早开始对 Proxyless Service Mesh 模式进行探索�
 &lt;h2 id="2-tracing-和-metric">2. tracing 和 metric&lt;/h2>
 &lt;p>可观测性是微服务重要的一环，也是我们1.4版本着力支持的部分。在1.4版本中，我们主要在 tracing 和 metric 两个方向提供了支持。&lt;/p>
 &lt;p>为了支持 tracing 和 metric，关键的一点是支持context在整个调用过程中传递。为此我们解决了context跨端传递的问题。目前用户可以在接口中声明 context 并且设置值，dubbo-go 在底层完成 context 内容从 client 传递到 server 的任务。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/1.4/context.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/1.4/context.png" alt="img">&lt;/p>
 &lt;p>在 metric 方面，dubbo-go 开始支持 Prometheus 采集数据了。目前支持 Prometheus中 的 Histogram 和 Summary。用户也可以通过扩展 Reporter 接口来自定义数据采集。&lt;/p>
 &lt;p>在 tracing 方面，目前 dubbo-go 的设计是采用 opentracing 作为统一的 API，在该 API 的基础上，通过在 client 和 server 之中传递 context，从而将整个链路串起来。用户可以采用任何支持 opentracing API 的监控框架来作为实现，例如 zipkin，jaeger 等。&lt;/p>
 &lt;h2 id="3-rest协议支持">3. rest协议支持&lt;/h2>
 &lt;p>Dubbo 生态的应用与其他生态的应用互联互通，一直是 dubbo-go 社区追求的目标。dubbo-go v1.3 版本已经实现了 dubbo-go 与 grpc 生态应用的互联互通，若想与其他生态如 Spring 生态互联互通，借助 rest 协议无疑是一个很好的技术手段。&lt;/p>
 &lt;p>Rest 协议是一个很强大并且社区呼声很高的特性，它能够有效解决 open API，前端通信，异构系统通信等问题。比如，如果你的公司里面有一些陈年代码是通过 http 接口来提供服务的，那么使用我们的 rest 协议就可以无缝集成了。&lt;/p>
 &lt;p>通过在 dubbo-go 中发布 RESTful 的接口的应用可以调用任意的 RESTful 的接口，也可以被任何客户端以 http 的形式调用，框架图如下：&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/1.4/rest.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/1.4/rest.png" alt="img">&lt;/p>
 &lt;p>在设计过程中，考虑到不同的公司内部使用的 web 框架并不相同，所以我们允许用户扩展自己 rest server （ web 框架在 dubbo-go的封装）的实现，当然，与 rest server 相关的，诸如 filter 等，都可以在自己的 rest server 实现内部扩展。&lt;/p>
 &lt;h2 id="4-路由功能增强">4. 路由功能增强&lt;/h2>
 &lt;p>路由规则在发起一次 RPC 调用前起到过滤目标服务器地址的作用，过滤后的地址列表，将作为消费端最终发起 RPC 调用的备选地址。v1.4 版本的 dubbo-go 实现了 Condition Router 和 Health Instance First Router，将在后面版本中陆续给出诸如 Tag Router 等剩余 Router 的实现。&lt;/p>
@@ -1229,12 +1326,12 @@ Dubbo 社区是国内最早开始对 Proxyless Service Mesh 模式进行探索�
 &lt;p>目前，上述四个特性已被某 Go 版本的 sidecar 集成到其商业版本中提供商业服务。&lt;/p>
 &lt;h2 id="6-nacos-配置中心">6. Nacos 配置中心&lt;/h2>
 &lt;p>配置中心是现代微服务架构里面的核心组件，现在 dubbo-go 提供了对配置中心的支持。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/1.4/config-center.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/1.4/config-center.png" alt="img">&lt;/p>
 &lt;p>Nacos 作为一个易于构建云原生应用的动态服务发现、配置管理和服务管理平台，在该版本终于作为配置中心而得到了支持。&lt;/p>
 &lt;p>参考范例&lt;sup id="fnref:3">&lt;a href="#fn:3" class="footnote-ref" role="doc-noteref">3&lt;/a>&lt;/sup>.&lt;/p>
 &lt;h2 id="7-接口级签名认证">7. 接口级签名认证&lt;/h2>
 &lt;p>Dubbo 鉴权认证是为了避免敏感接口被匿名用户调用而在 SDK 层面提供的额外保障。用户可以在接口级别进行定义是否允许匿名调用，并对调用方进行验签操作，对于验签不通过的消费端，禁止调用。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/1.4/acl.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/1.4/acl.png" alt="img">&lt;/p>
 &lt;p>如上图，总体实现基于 AK/SK 机制，应用通过 HTTPS 通信，启动时向鉴权服务拉取，定期更新。且允许用户自定义获取 AK/SK 的源，在 RPC 层面保障安全性。&lt;/p>
 &lt;h2 id="8-回顾与展望">8. 回顾与展望&lt;/h2>
 &lt;p>目前 dubbo-go 已经到了一个比较稳定成熟的状态。在接下来的版本里面，我们将集中精力在云原生上。下一个版本，我们将首先实现应用维度的服务注册，这是一个和现有注册模型完全不同的新的注册模型。也是我们朝着云原生努力的一个关键版本。&lt;/p>
@@ -1261,44 +1358,44 @@ Dubbo 社区是国内最早开始对 Proxyless Service Mesh 模式进行探索�
 &lt;p>Dubbo 是阿里于 2011 年开源的一款高性能 RPC 框架，在 Java 生态中具有不小的影响力。2019年5月21日，Dubbo 从 Apache 软件基金会毕业，成为 Apache 顶级项目。目前，毕业后的 Dubbo 项目的生态中已经正式官宣引入了 Go 语言，发布了 Dubbogo 项目。本文即是对 Dubbogo 这一项目的完整回顾与真实展望。由蚂蚁金服中间件技术专家于雨和携程基础中台研发部工程师方银城合作完成。&lt;/p>
 &lt;h2 id="一-dubbogo-整体框架">一 Dubbogo 整体框架&lt;/h2>
 &lt;p>先介绍一下 dubbogo 的缘起，先看下面这幅图：&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p1.jpeg" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p1.jpeg" alt="img">&lt;/p>
 &lt;p>最右边的 service0 和 service1 是 Dubbo 的服务端，左边的 gateway 是网关，HTTP 请求从网关进来，必须转化成 Dubbo 的协议才能到后面的服务，所以中间加了一层proxy 完成相关功能。基本上每个 service 都需要一个 proxy 去转化协议和请求，所以这个时候 dubbogo 的项目需求就出来了。最初的实现就是以 Dubbo 的 Go 版本作为目标，实现与 Java 版本 Dubbo 的互调。&lt;/p>
 &lt;h3 id="dubbogo-目标">Dubbogo 目标&lt;/h3>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p2.jpeg" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p2.jpeg" alt="img">&lt;/p>
 &lt;p>然后这个图是 dubbogo 的现在达到的目标：用一份 Go 客户端的代码能够在没有任何代理和其他中间件的情况下直接调用其他语言端，主要是Java 服务端的服务和 Go 服务端的服务，而 Go 作为服务端的时候，Java 客户端也可以直接调用 Go 服务端的服务。&lt;/p>
 &lt;h3 id="dubbogo-发展历程">Dubbogo 发展历程&lt;/h3>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p3.jpeg" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p3.jpeg" alt="img">&lt;/p>
 &lt;p>下面介绍 dubbogo 的整个发展历程，在2016年8月份的时候是于雨构建了 dubbogo 项目，那个时候的 dubbogo 只支持通过 jsonrpc 2.0 协议 进行 HTTP 通信，到 2018 年2 月份支持 hessian2 协议进行 TCP 通信，到 2018 年 5 月项目被 dubbo 官方关注后开始从零重构，于雨 2018 年 8 月份初步重构出一个 0.1 版本。由于我们携程这边的一些需求，2019 年初我和我的同事何鑫铭也开始参与了 dubbogo 项目的重构，同时和于雨一起开始组建社区，在 2019 年 6 月份的时候 dubbogo1.0 版本上线，这个版本的重构是参照了 Dubbo 的整体设计，主体功能都在这个版本里面有呈现，同期该项目进入了 Apache 组织。今年 8 月份由社区同学望哥负责的 Dubbo-go-hessian2 的项目也进了 Apache 组织。到目前为止我们社区有些工作已经和 dubbo 齐头并进，例如对 grpc 和 k8s 的支持，相关代码正在 review 中，年底发布的 v1.3 版本会包含 grpc 支持。预计到2020年，也是明年的目标，希望项目能以全新姿态融入云原生时代。&lt;/p>
 &lt;h3 id="dubbogo-整体设计">Dubbogo 整体设计&lt;/h3>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p4.jpeg" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p4.jpeg" alt="img">&lt;/p>
 &lt;p>这个图大家是不是看着很熟悉，是 Dubbo 的整个分层设计图，但是少了 Dubbo 里面的很多东西，因为我们是借鉴了 Dubbo 的分层设计和易拓展性的思想，但是由于 Go 语言和 Java 语言的本质差别决定了我们项目设计不可能完全照搬它，有一些东西就给它简化了，特别是协议层这一块。比如说 Dubbo 里面 SPI 的拓展，在 Go 里面我们是借用了 Go 的非侵入式接口的方式去实现的，由于 Go 禁止 package 循环引用，所以 dubbogo 在代码的分包分层上面也是有严格的规定，这正好跟它的易拓展性的特性结合了起来。&lt;/p>
 &lt;p>关于代理部分，因为 Java 有动态代理，Go 的反射就没有 Java 的反射那么强大，所以我们这边代理的实现方式也跟它是不一样的。&lt;/p>
 &lt;h3 id="dubbogo-能力大图">Dubbogo 能力大图&lt;/h3>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p5.jpeg" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p5.jpeg" alt="img">&lt;/p>
 &lt;p>上面的图是我们当前 dubbogo 项目实现的能力大图，最上层是当前实现的一些注册中心有 zk、etcd、nacos、consul，现在与 k8s 关联的功能正在开发中。配置中心目前是支持 Apollo 和 zookeeper。左边是消费端，消费端这边实现的是有 cluster 的，策略上基本上实现了 dubbo 支持的所有策略。然后还有负载均衡策略，fillter 主要是有一个 tps 的限流还有泛化调用，这两个后面会讲到。编码层现在就是 jsonrpc 2.0 和 hessian2，protobuf v3 正在加紧 review 中。目前社区正在开发中的支持，包括 trace、grpc、k8s注册中心，以及对 restful 的支持。&lt;/p>
 &lt;h3 id="关键项目">关键项目&lt;/h3>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p6.jpeg" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p6.jpeg" alt="img">&lt;/p>
 &lt;p>目前 dubbogo 项目整体由 4 个组成部分。第一个是 getty，一个异步网络 IO 库，是实现 tcp 通信协议最坚实的基础；第二个是 dubbo-go-hessian2，这个是与当前 java hessian2 高度兼容的项目；第三个是 gost，是 dubbogo 的 基础库；最后是 dubbogo 的示例库，目前已经迁移到 &lt;a href="https://github.com/apache/dubbo-samples">https://github.com/apache/dubbo-samples&lt;/a>，和 Java 示例合并了。这些都是当前 dubbogo 主要的组成项目。&lt;/p>
 &lt;h2 id="二-协议实现">二 协议实现&lt;/h2>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p7.jpeg" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p7.jpeg" alt="img">&lt;/p>
 &lt;p>接下来讲一些具体的实现和部分的功能，上图是 dubbo-go-hessian2 实现，列出来是一些主要的功能列表，第一个是 Java 的 JDK Exceptions 的实现，里面实现了 40 多种的 Java JDK 主要的异常，可以与 Java 的 hessian2 版本互相解编码的支持，支持自动扩展自己实现 exceptions，或者是不常见的 Exceptions；第二个是支持字段名的联名，Go 可序列化的字段是大写字母开头，但是 Java 默认是小写开头的，所以有编码的字段名不一致的问题，这就有别名识别和支持自定义命名。&lt;/p>
 &lt;p>go-hessian2 还支持 Java 的 bigdecimal、Date、Time、基本类型的包装类型、Generic Invocation、Dubbo Attachements，甚至支持 emoji 表情。&lt;/p>
 &lt;p>go-hessian2 里面如果要解码和编码用户自定义类型，用户需要自己把它注册进去，前提是支持 go-hessian2 的 POJO interface，才能跟 JAVA 对应类互相解编码。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p8.jpeg" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p8.jpeg" alt="img">&lt;/p>
 &lt;p>上面是 go-hessian2 的类型对应表，需要特别点出的是 int，go 这边的 int 类型在不同字长系统下是有不同的大小，可能是 32 位也可能 64位的，而 Java 的 int 是 32 位的，所以我们以 go 语言的 int32 类型对应 Java int 类型。&lt;/p>
 &lt;p>刚才提到了 Java 的 Class 和 go struct 的对应。上图有一个 go-hessian2 的 POJO 接口定义，每个 Java class 对应到 go struct，则 struct 需要给出 Java ClassName。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p9.jpeg" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p9.jpeg" alt="img">&lt;/p>
 &lt;p>你也可以加 hessian 标签，解析的时候会把这个字段名用别名写进去，实现自定义 fieldName。默认情况下，go-hessian2 中会自动把 struct field 首字母变成小写作为其 fieldName。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p10.jpeg" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p10.jpeg" alt="img">&lt;/p>
 &lt;p>泛化引用，是 dubbogo 里面比较重要的功能。社区一位同学需要基于 dubbogo 实现网关，收集外部的请求，然后通过泛化引用的形式调用其他 Dubbo 服务，最后自己动手把它实现了。使用时，首先需要在项目里内置一个 GenericService 服务，调用Load，然后就像正常的调用服务一样直接调用，跟 Java 是类似的，Go 客户端可以不知道 Java 的接口定义和类定义，把方法名、参数类型、参数数组以一个 map 的形式传输到 Java 服务端，Java 服务端收到请求后进行识别，把它转换成 POJO 类。&lt;/p>
 &lt;p>以上是 go-hessian2 一些细节。上文讲到的泛化引用，是把网关作为整个内网 Dubbo 服务的公共消费端，使用的时候只需要知道请求的方法、参数类别，然后就能够调用 Dubbo 的服务。后面主要分享三部分内容：首先是网络引擎、底层网络库这块；其次是服务治理方面的内容，其中包含以 k8s 作为注册中心的一个初步的解决方案；第三部分是互联互通，主要是和 grpc 打通。最后给出一个展望，包含 dubbogo 社区明年的工作内容。&lt;/p>
 &lt;h2 id="三-网络引擎">三 网络引擎&lt;/h2>
 &lt;p>dubbogo 的网络引擎里面分为三层， 如下图所示：&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p11.jpeg" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p11.jpeg" alt="img">&lt;/p>
 &lt;p>最底层 streaming 处理二进制流，第二层 codec层，进行协议的序列化和反序列化，第三层是 Eventlistener，提供应用使用接口。streaming 层能支持 websocket、TCP、UDP 三种网络通讯协议，这层具有一定的灵活性，今年年初上海有一个同学今年把 KCP 也加进去了，当时说要开源贡献出来，我还在期待中。codec 层可以适用不同协议，用户自定义即可。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p12.jpeg" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p12.jpeg" alt="img">&lt;/p>
 &lt;p>EventListener 对上层暴露了 4 个回调接口。第一个是 OnOpen，网络连接初建成功时被调用，应用层如果判定其为正常连接，则可以把连接 session 存储下来，如果用户判断当前连接过多则返回一个非空的 error，则这个连接会被 dubbogo 关闭。其次是 OnError 事件，当网络连接出错，就会回调到这个接口，在 dubbogo 关闭这个连接之前允许用户做相应处理，如把网络连接 session 从应用层的 session 池中删除。第三个是 OnCron，处理定时任务，如心跳，dubbogo 针对 websocket 协议在底层直接把心跳热任务处理了，针对 tcp 和 udp 协议需要用户在这个回调函数中自己实现。第四个接口是 OnMessage，用作处理一个完整的网络包。可以看到整个回调接口风格跟 websocket 的接口很像。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p13.jpeg" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p13.jpeg" alt="img">&lt;/p>
 &lt;h3 id="协程池">协程池&lt;/h3>
 &lt;p>dubbogo 的 goroutine pool 里有 worker channel 【数量为 M】和逻辑处理 goroutine 【数量为 N】和网络任务【网络包】三种角色，网络解包后把把包按照某种规则放入某个 worker pool，然后逻辑处理 goroutine 从 channel 中读取数据包并执行逻辑处理，其目的是是为了把网络 I/O 与逻辑处理分开。不同的 goroutine pool 设计中，有的 N 大小会变化，有的不变，分别可称之为可伸缩 goroutine pool 和不可伸缩 goroutine pool，可伸缩 goroutine pool 可以对机器资源的使用不可预计。dubbogo 采用了不可伸缩 goroutine pool，其考量是限定其网络资源使用的上限。&lt;/p>
 &lt;p>另外，dubbogo 的 goroutine pool 不考虑收包后的处理顺序。譬如，dubbogo 服务端收到了 A 和 B 两个网络包，dubbogo 有可能先处理网络包 B，后处理网络包 A。如果客户端的每次请求都是独立的，没有前后顺序关系，则带有不考虑网络包处理顺序是没有问题的。如果有强顺序要求，譬如上层用户关注 A 和 B 请求处理的前后顺序，则可以把 A 和 B 两个请求合并为一个请求，或者把 dubbogo 的 goroutine pool 特性关闭。&lt;/p>
@@ -1308,7 +1405,7 @@ Dubbo 社区是国内最早开始对 Proxyless Service Mesh 模式进行探索�
 &lt;p>比较均衡的效果就是 M 和 N 都大于 1，dubbogo 的的 goroutine pool 模型中 M 和 N 的取值可以自行配置，其效果是每个 channel 被 N/M 个 goroutine 消费，这种模型类似于 kafka 的 consumer group，其优点是兼顾处理效率和锁压力平衡，可以做到总体层面的任务处理均衡。&lt;/p>
 &lt;h3 id="优化改进">优化改进&lt;/h3>
 &lt;p>优化改进主要从三个方面入手， 如下图所示：&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p14.jpeg" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p14.jpeg" alt="img">&lt;/p>
 &lt;ol>
 &lt;li>内存池。goroutine pool 是管理对 CPU 资源的分配，内存池就是管理内存资源的分配。我个人反对纯粹为了炫技没有目的地写内存池，其实 Go 的内存管理这块目前优化的很好了。Go 语言初始版本的内存管理使用了谷歌自家的 tcmalloc 库，这个库把应用释放的内存自己先缓存住，待失效期后才释放，那这样造成的结果是什么呢？就是早期的 Go 程序的内存成本很高。假设程序一个 sidecar 程序的资源限制是内存2G，CPU 核数是 2 核，用这样一个内存管理库，内存用完不释放给操作系统，那么没人敢用这个项目，当然最新的 Go 内存管理器是经过完全重构的，虽然也区分不同大小 span 的内存在 P 级别和全局级别进行缓存，但是基本上不用考虑这种内存膨胀不可控的问题了。那么什么情况下使用内存池呢？你确定你的业务有一些对象是频繁的复用则可以尝试使用。 目前大部分内存池技术底层依赖的底座都是 sync.Pool，自己写一个也不难。而且 Go 1.13 之后的 sync.Pool 已经可以做到跨 GC span 不释放缓存对象，非常之好。&lt;/li>
 &lt;li>定时器。Go 语言早期定时器因为整体使用一把大锁的缘故效率极差，当然最新的就相当好了，通过每个 CPU 核下一个定时器的方法【类似于分片锁】分散了竞争压力，但是很多情况下还是有竞争压力，如果对时间精度要求不高个人建议在自己的应用中自己写一个简单的时间轮实现一个定时器，释放 CPU 压力。&lt;/li>
@@ -1321,26 +1418,26 @@ Dubbo 社区是国内最早开始对 Proxyless Service Mesh 模式进行探索�
 &lt;h3 id="限流算法">限流算法&lt;/h3>
 &lt;p>限流算法首先需要考虑限流的对象，dubbogo 需要考虑 interface 和 method。其次是限流方法，首先需要考虑的是单机限流还是集群限流，单机限流算法很多，譬如常用的固定窗口算法和滑动窗口算法，以及更进一步的自适应限流。限流时一个重要问题就是限流参数是很难配的，譬如线上服务到底需要使用多少机器资源合理，限流窗口的时间窗口时长应该多长合适，其 qps 值设置多少合适呢？这都是 dubbogo 需要解决的问题。先进如谷歌的 BBR 算法，可以在当前的网络环境恶化前不断尝试改进相关参数，直到尝试出一段时间内的最佳参数。还有一些业务形态下的限流，如针对会员和非会员分别设计不同的限流链路。&lt;/p>
 &lt;p>Dubbo 的限流接口源码如下：&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p15.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p15.png" alt="img">&lt;/p>
 &lt;p>这个接口抽象是非常漂亮的，第一个是限流 url，第二个服务调用。下面是 Dubbo 的固定窗口限流源码：&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p16.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p16.png" alt="img">&lt;/p>
 &lt;p>上面的代码很明显，&amp;ldquo;private final&amp;rdquo; 决定了 Dubbo 使用者只能使用期给定的固定窗口限流限算法，无法扩展。&lt;/p>
 &lt;p>以下是 dubbogo 的限流接口：&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p17.jpeg" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p17.jpeg" alt="img">&lt;/p>
 &lt;p>TpsLimiter 是限流对象，TpsLimitStrategy 是限流算法，RejectedExecutionHandle 是限流动作。&lt;/p>
 &lt;p>接下来是一个固定窗口算法实现：&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p18.jpeg" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p18.jpeg" alt="img">&lt;/p>
 &lt;p>上图是 dubbogo 的固定窗口算法实现，其非线程安全，大家看一下代码就可以了，不推荐大家用。下图是 dubbogo 的滑动窗口算法实现：&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p19.jpeg" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p19.jpeg" alt="img">&lt;/p>
 &lt;p>其基本原理是用一个队列存储一段时间内的请求，然后根据队列长度判定即可。&lt;/p>
 &lt;p>不管是固定窗口还是滑动窗口，其判定算法简单，麻烦的是其参数设置，如下图：&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p20.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p20.png" alt="img">&lt;/p>
 &lt;p>固定窗口时长精度很难控制。比如说限流一秒 QPS 值 1000，前 100 毫秒来了一千个请求，然后判定算法把请求放过了，而其后 900 毫秒 任何请求都无法处理。一般的处理方法是把时间粒度更精细一些，dubbogo 的时间窗口最小单位是一毫秒，则用户可以把时间窗口设定为 100 毫秒，总体来说一段时间内是很平稳的。下面这个图是我们社区的 commiter 邓明写完博客发出来，行业大佬微信评论如下：&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p21.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p21.png" alt="img">&lt;/p>
 &lt;p>图中第一个问题是 qps 和 tps 每个请求成本不同，这个问题怎么处理呢？个人觉得这是一个分级限流问题，在同一个服务下针对不同的请求做不同的分级处理。第二个问题 ”配置了 qps 1000，但是请求过来是10万你还是死“，这个就需要更上层的运维能力进行应对，譬如判定为恶意流量攻击就应该在网关层拦截掉，如果是服务能力不行就扩容。&lt;/p>
 &lt;p>针对分级限流，dubbogo 目前尚无法在同一个进程内完成，这需要 dubbogo 的配置中心更完善以后进行处理，用户可以通过搭建不同的服务链路处理之。譬如会员/非会员分级，同一个服务针对不同的会员等级搭建相应的链路，在网关层就判定一个 userID 是否是会员，然后发送不同的链路。&lt;/p>
 &lt;p>dubbogo 的单机熔断是基于 hystrix-go 实现的，其判定参数有最大并发请求数、超时时间、错误率；其次是保护窗口，是熔断时长，熔断多久后进行服务恢复；第三个是保护性动作，就是在保护时间窗口之内执行什么样的动作，具体实现用户自定义。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p22.jpeg" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p22.jpeg" alt="img">&lt;/p>
 &lt;h3 id="优雅退出">优雅退出&lt;/h3>
 &lt;p>优雅退出也是邓明同学的大作，可以在网络上搜到相关博客。实现优雅退出的步骤有：&lt;/p>
 &lt;ol>
@@ -1349,19 +1446,19 @@ Dubbo 社区是国内最早开始对 Proxyless Service Mesh 模式进行探索�
 &lt;li>节点处理完所有接收到的请求并且返回响应后，释放作为服务端相关的组件和资源；&lt;/li>
 &lt;li>节点释放作为客户端的组件和资源。&lt;/li>
 &lt;/ol>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p23.jpeg" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p23.jpeg" alt="img">&lt;/p>
 &lt;p>所以每一步基本上都要给程序一定的时间进行等待，所以等的时间窗口是多少呢？dubbogo 默认每个步骤大概花2秒，总体一个时间窗口是10秒。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p24.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p24.png" alt="img">&lt;/p>
 &lt;p>基本上在别的 RPC 框架里面，可能不太常见到这种处理。&lt;/p>
 &lt;h2 id="五-dubbogo-上云">五 Dubbogo 上云&lt;/h2>
 &lt;p>dubbogo 作为微服务框架如何适配 k8s，如何部署？dubbogo 本身是一个 RPC 框架，但是其又有了服务治理能力，这部分能力与 k8s 的部分能力有些重合，不可能为了适配 k8s 就彻底抛弃。目前 Dubbo 官方也没有很好的解决方案供我们参考，所以这里我们 dubbogo 先给出一个简单的常识性的实践方案。下面先分析下 dubbogo 的 interface/service 和 k8s service 两者直接的差别。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p25.jpeg" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p25.jpeg" alt="img">&lt;/p>
 &lt;p>k8s service 是许多具有相同服务能力 pod 资源的聚合，它自己的负载均衡算法以及健康检查等功能。而 Dubbo 里面的 interface/service 仅仅是服务 provider 集合，服务治理能力依赖 dubbo 的 directory、router 和 loadbalace 等额外的功能模块。并且Dubbo 服务区分 group/version，还有 provider、consumer 角色等等。Dubbo interface/service 无法与 k8s service 对标，Dubbo interface/service 和其整体服务治理能力才能对标成 k8s service。二者差异这么大，如何将 dubbo 集成到 k8s 中呢？&lt;/p>
 &lt;p>k8s 提供了 pod/endpoint/service 三层维度的资源。简单的做法，可以通过监听pod/endpoint/service 三层维度资源的事件，作出合理的处理以达到服务治理的目的。目前我们社区成员王翔提交了一个基于监听 pod 事件来实现服务治理的 pr，优点就是不需要引入额外组件，通过监听 k8s 中最细粒度资源 pod 的事件，通过 k8s apiserver 获取 pod 列表，只是通过 apiserver 使用 etcd 的服务注册和服务通知能力，其他继续使用 Dubbo 的服务治理能力。其优点是模型简单，不需要实现额外的模块，几乎不需要对 Dubbo 作出改动，缺点就是其实无法使用 k8s 自己的健康检查能力，需要自己监听很细粒度的 pod 事件来综合处理服务健康、服务上下线等情况，而且还存在没有使用 k8s service 的事件监听能力，每个 consumer 冗余监听一些不必要监听的事件，加大 apiserver 的网络压力。所以其实现目前来看可能还不是最优解，与 k8s 建议的operator 方式也有一定的背离。社区目前还在讨论新方案，寻求 k8s 最优解，大部分人倾向于采用 k8s 社区推荐的 operator 方案，但是其开发和线上维护成本就上升了。后面两种方式会共存，使用者见仁见智。&lt;/p>
 &lt;h2 id="六-互融互通">六 互融互通&lt;/h2>
 &lt;p>关于互融互通，Dubbo 明年有个三个重要目标，其中一个目标是与外面的微服务生态进行互联互通，比如说跟 grpc 互通。目前 dubbo 的 grpc 的解决方案已经开放出来，dubbogo 与 grpc 互通的开发工作也几近完成。&lt;/p>
 &lt;p>下面左边 dubbogo 的代码生成器工具根据 grpc 的 pb 服务定义文件自动生成的适配 dubbogo 的代码，右边是对应的使用示例。不同于 k8s service 的复杂性，grpc 整体仅仅具有 rpc 能力，没有服务治理能力，所以原始的 grpc 就可以很好的嵌入到 dubbogo 里面，grpc server 的 methodhandler 对我们 dubbogo 来说就是 dubbo invoker，grpc 的一些相关的接口直接跟我们的接口嵌套起来，两个生态就对接起来了。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p26.jpeg" alt="">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo-go/gochina/p26.jpeg" alt="img">&lt;/p>
 &lt;h2 id="七-展望未来">七 展望未来&lt;/h2>
 &lt;p>最后就是展望未来，也就是明年的规划。&lt;/p>
 &lt;p>明年我们将会很快实现 dubbo router。社区在 8月份已经实现了 router 功能需要的底层的算法模块，但是当时配置中心下发相关的参数的能力还不是很强，所以没有最终完成。最近服务治理配置刚刚支持了 zookeeper 和 apollo，预计很快就可以将 router 的参数通过配置中心下发的形式支持掉。另外，还有 tracing，我们将会引入社区主流的 tracing 方案，以 opentracing 为标准，去集成 opentracing 开源生态的相关能力。第三个是 kubernetes operator，这个就是刚才说的 K8s 的服务调用，我们会基于 operator 的方案做一版新的基于 k8s 的注册中心实现。最后就是云原生生态的融入，即与 istio 的集成，dubbogo 将会成为 dubbo 在 service mesh 生态中的重要角色。&lt;/p>
