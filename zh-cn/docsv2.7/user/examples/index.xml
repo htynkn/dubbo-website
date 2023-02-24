@@ -1628,7 +1628,9 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;/li>
 &lt;/ol>
 &lt;/div></description></item><item><title>Docsv2.7: 本地伪装</title><link>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/local-mock/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/local-mock/</guid><description>
+&lt;h2 id="背景">背景&lt;/h2>
 &lt;p>本地伪装 &lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup> 通常用于服务降级，比如某验权服务，当服务提供方全部挂掉后，客户端不抛出异常，而是通过 Mock 数据返回授权失败。&lt;/p>
+&lt;h2 id="示例">示例&lt;/h2>
 &lt;p>在 spring 配置文件中按以下方式配置：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> mock=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或&lt;/p>
@@ -1688,13 +1690,15 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;/li>
 &lt;/ol>
 &lt;/div></description></item><item><title>Docsv2.7: 延迟暴露</title><link>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/delay-publish/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/delay-publish/</guid><description>
+&lt;h2 id="背景">背景&lt;/h2>
 &lt;p>如果你的服务需要预热时间，比如初始化缓存，等待相关资源就位等，可以使用 delay 进行延迟暴露。我们在 Dubbo 2.6.5 版本中对服务延迟暴露逻辑进行了细微的调整，将需要延迟暴露（delay &amp;gt; 0）服务的倒计时动作推迟到了 Spring 初始化完成后进行。你在使用 Dubbo 的过程中，并不会感知到此变化，因此请放心使用。&lt;/p>
-&lt;h2 id="dubbo-265-之前版本">Dubbo 2.6.5 之前版本&lt;/h2>
+&lt;h2 id="示例">示例&lt;/h2>
+&lt;h3 id="dubbo-265-之前版本">Dubbo 2.6.5 之前版本&lt;/h3>
 &lt;p>延迟到 Spring 初始化完成后，再暴露服务&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> delay=&lt;span style="color:#2aa198">&amp;#34;-1&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>延迟 5 秒暴露服务&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> delay=&lt;span style="color:#2aa198">&amp;#34;5000&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="dubbo-265-及以后版本">Dubbo 2.6.5 及以后版本&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="dubbo-265-及以后版本">Dubbo 2.6.5 及以后版本&lt;/h3>
 &lt;p>所有服务都将在 Spring 初始化完成后进行暴露，如果你不需要延迟暴露服务，无需配置 delay。&lt;/p>
 &lt;p>延迟 5 秒暴露服务&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> delay=&lt;span style="color:#2aa198">&amp;#34;5000&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
@@ -1728,7 +1732,7 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;/li>
 &lt;/ol>
 &lt;/div></description></item><item><title>Docsv2.7: 并发控制</title><link>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/concurrency-control/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/concurrency-control/</guid><description>
-&lt;h2 id="配置样例">配置样例&lt;/h2>
+&lt;h2 id="示例">示例&lt;/h2>
 &lt;h3 id="样例-1">样例 1&lt;/h3>
 &lt;p>限制 &lt;code>com.foo.BarService&lt;/code> 的每个方法，服务器端并发执行（或占用线程池线程数）不能超过 10 个：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> executes=&lt;span style="color:#2aa198">&amp;#34;10&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
@@ -1758,12 +1762,14 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> loadbalance=&lt;span style="color:#2aa198">&amp;#34;leastactive&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docsv2.7: 连接控制</title><link>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/config-connections/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/config-connections/</guid><description>
-&lt;h2 id="服务端连接控制">服务端连接控制&lt;/h2>
+&lt;h2 id="背景">背景&lt;/h2>
+&lt;h2 id="示例">示例&lt;/h2>
+&lt;h3 id="服务端连接控制">服务端连接控制&lt;/h3>
 &lt;p>限制服务器端接受的连接不能超过 10 个 &lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:provider&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> accepts=&lt;span style="color:#2aa198">&amp;#34;10&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> accepts=&lt;span style="color:#2aa198">&amp;#34;10&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="客户端连接控制">客户端连接控制&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="客户端连接控制">客户端连接控制&lt;/h3>
 &lt;p>限制客户端服务使用连接不能超过 10 个 &lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> connections=&lt;span style="color:#2aa198">&amp;#34;10&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或&lt;/p>
@@ -1780,24 +1786,30 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;/li>
 &lt;/ol>
 &lt;/div></description></item><item><title>Docsv2.7: 延迟连接</title><link>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/lazy-connect/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/lazy-connect/</guid><description>
+&lt;h2 id="背景">背景&lt;/h2>
 &lt;p>延迟连接用于减少长连接数。当有调用发起时，再创建长连接。&lt;/p>
+&lt;h2 id="示例">示例&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> lazy=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
 &lt;div class="alert alert-primary" role="alert">
 &lt;h4 class="alert-heading">提示&lt;/h4>
 该配置只对使用长连接的 dubbo 协议生效。
 &lt;/div></description></item><item><title>Docsv2.7: 粘滞连接</title><link>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/stickiness/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/stickiness/</guid><description>
+&lt;h2 id="背景">背景&lt;/h2>
 &lt;p>粘滞连接用于有状态服务，尽可能让客户端总是向同一提供者发起调用，除非该提供者挂了，再连另一台。&lt;/p>
 &lt;p>粘滞连接将自动开启&lt;a href="../lazy-connect">延迟连接&lt;/a>，以减少长连接数。&lt;/p>
+&lt;h2 id="示例">示例&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;xxxService&amp;#34;&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.xxx.XxxService&amp;#34;&lt;/span> sticky=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Dubbo 支持方法级别的粘滞连接，如果你想进行更细粒度的控制，还可以这样配置。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;xxxService&amp;#34;&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.xxx.XxxService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:method&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;sayHello&amp;#34;&lt;/span> sticky=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dubbo:reference&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docsv2.7: TLS</title><link>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/tls/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/tls/</guid><description>
+&lt;h2 id="背景">背景&lt;/h2>
 &lt;p>2.7.5 版本在传输链路的安全性上做了很多工作，对于内置的 Dubbo Netty Server 和新引入的 gRPC 协议都提供了基于 TLS 的安全链路传输机制。&lt;/p>
 &lt;p>TLS 的配置都有统一的入口，如下所示：&lt;/p>
-&lt;h5 id="provider-端">Provider 端&lt;/h5>
+&lt;h2 id="示例">示例&lt;/h2>
+&lt;h3 id="provider-端">Provider 端&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>SslConfig sslConfig &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> SslConfig&lt;span style="color:#719e07">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sslConfig&lt;span style="color:#719e07">.&lt;/span>setServerKeyCertChainPath&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;path to cert&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sslConfig&lt;span style="color:#719e07">.&lt;/span>setServerPrivateKeyPath&lt;span style="color:#719e07">(&lt;/span>args&lt;span style="color:#719e07">[&lt;/span>&lt;span style="color:#2aa198">1&lt;/span>&lt;span style="color:#719e07">]);&lt;/span>
@@ -1808,7 +1820,7 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ProtocolConfig protocolConfig &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ProtocolConfig&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;dubbo/grpc&amp;#34;&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>protocolConfig&lt;span style="color:#719e07">.&lt;/span>setSslEnabled&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#cb4b16">true&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h5 id="consumer-端">Consumer 端&lt;/h5>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="consumer-端">Consumer 端&lt;/h3>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(!&lt;/span>mutualTls&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> sslConfig&lt;span style="color:#719e07">.&lt;/span>setClientTrustCertCollectionPath&lt;span style="color:#719e07">(&lt;/span>args&lt;span style="color:#719e07">[&lt;/span>&lt;span style="color:#2aa198">0&lt;/span>&lt;span style="color:#719e07">]);&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">else&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
@@ -1823,8 +1835,10 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;p>如果要使用的是 gRPC 协议，在开启 TLS 时会使用到协议协商机制，因此必须使用支持 ALPN 机制的 Provider，推荐使用的是 netty-tcnative，具体可参见 gRPC Java 社区的&lt;a href="https://github.com/grpc/grpc-java/blob/master/SECURITY.md">总结&lt;/a>&lt;/p>
 &lt;/div>
 &lt;p>在服务调用的安全性上，Dubbo 在后续的版本中会持续投入，其中服务发现/调用的鉴权机制预计在接下来的版本中就会和大家见面。&lt;/p></description></item><item><title>Docsv2.7: 令牌验证</title><link>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/token-authorization/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/token-authorization/</guid><description>
+&lt;h2 id="背景">背景&lt;/h2>
 &lt;p>通过令牌验证在注册中心控制权限，以决定要不要下发令牌给消费者，可以防止消费者绕过注册中心访问提供者，另外通过注册中心可灵活改变授权方式，而不需修改或升级提供者&lt;/p>
 &lt;p>&lt;img src="https://cn.dubbo.apache.org/imgs/user/dubbo-token.jpg" alt="/user-guide/images/dubbo-token.jpg">&lt;/p>
+&lt;h2 id="示例">示例&lt;/h2>
 &lt;p>可以全局设置开启令牌验证：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&amp;lt;!--随机token令牌，使用UUID生成--&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:provider&lt;/span> token=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
@@ -1838,13 +1852,15 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&amp;lt;!--固定token令牌，相当于密码--&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> token=&lt;span style="color:#2aa198">&amp;#34;123456&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docsv2.7: 路由规则</title><link>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/routing-rule/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/routing-rule/</guid><description>
+&lt;h2 id="背景">背景&lt;/h2>
 &lt;p>路由规则在发起一次RPC调用前起到过滤目标服务器地址的作用，过滤后的地址列表，将作为消费端最终发起RPC调用的备选地址。&lt;/p>
 &lt;ul>
 &lt;li>条件路由。支持以服务或 Consumer 应用为粒度配置路由规则。&lt;/li>
 &lt;li>标签路由。以 Provider 应用为粒度配置路由规则。&lt;/li>
 &lt;/ul>
 &lt;p>后续我们计划在 2.6.x 版本的基础上继续增强脚本路由功能。&lt;/p>
-&lt;h2 id="条件路由">条件路由&lt;/h2>
+&lt;h2 id="示例">示例&lt;/h2>
+&lt;h3 id="条件路由">条件路由&lt;/h3>
 &lt;p>您可以随时在服务治理控制台 &lt;a href="https://github.com/apache/dubbo-admin">Dubbo-Admin&lt;/a> 写入路由规则&lt;/p>
 &lt;h3 id="简介">简介&lt;/h3>
 &lt;ul>
@@ -2045,6 +2061,8 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;p>&lt;code>2.6.x&lt;/code> 版本以及更早的版本请使用&lt;a href="../routing-rule-deprecated">老版本路由规则&lt;/a>&lt;/p>
 &lt;p>自定义路由参考&lt;a href="https://cn.dubbo.apache.org/zh-cn/docs3-v2/java-sdk/reference-manual/spi/description/router/">路由扩展&lt;/a>&lt;/p>
 &lt;/div></description></item><item><title>Docsv2.7: 旧路由规则</title><link>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/routing-rule-deprecated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/routing-rule-deprecated/</guid><description>
+&lt;h2 id="背景">背景&lt;/h2>
+&lt;h2 id="示例">示例&lt;/h2>
 &lt;p>路由规则 &lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup> 决定一次 dubbo 服务调用的目标服务器，分为条件路由规则和脚本路由规则，并且支持可扩展 &lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>。&lt;/p>
 &lt;h2 id="写入路由规则">写入路由规则&lt;/h2>
 &lt;p>向注册中心写入路由规则的操作通常由监控中心或治理中心的页面完成&lt;/p>
@@ -2093,7 +2111,7 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;li>以星号 &lt;code>*&lt;/code> 结尾，表示通配，如：&lt;code>host != 10.20.*&lt;/code>&lt;/li>
 &lt;li>以美元符 &lt;code>$&lt;/code> 开头，表示引用消费者参数，如：&lt;code>host = $host&lt;/code>&lt;/li>
 &lt;/ul>
-&lt;h3 id="示例">示例：&lt;/h3>
+&lt;h3 id="示例-1">示例：&lt;/h3>
 &lt;ol start="0">
 &lt;li>
 &lt;p>排除预发布机：&lt;/p>
@@ -2209,12 +2227,13 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;/li>
 &lt;/ol>
 &lt;/div></description></item><item><title>Docsv2.7: 配置规则</title><link>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/config-rule/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/config-rule/</guid><description>
+&lt;h2 id="背景">背景&lt;/h2>
 &lt;div class="alert alert-primary" role="alert">
 &lt;h4 class="alert-heading">提示&lt;/h4>
 本文描述的是新版本规则配置，而不是&lt;a href="../config-rule-deprecated">老版本配置规则&lt;/a>
 &lt;/div>
 &lt;p>覆盖规则是 Dubbo 设计的在无需重启应用的情况下，动态调整 RPC 调用行为的一种能力。2.7.0 版本开始，支持从&lt;strong>服务&lt;/strong>和&lt;strong>应用&lt;/strong>两个粒度来调整动态配置。&lt;/p>
-&lt;h2 id="概览">概览&lt;/h2>
+&lt;h2 id="示例">示例&lt;/h2>
 &lt;p>请在服务治理控制台查看或修改覆盖规则。&lt;/p>
 &lt;p>应用粒度&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># 将应用demo（key:demo）在20880端口上提供（side:provider）的所有服务（scope:application）的权重修改为1000（weight:1000）。&lt;/span>
@@ -2317,7 +2336,7 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;p>要修改的属性是哪个。&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;h4 id="示例">示例&lt;/h4>
+&lt;h4 id="示例-1">示例&lt;/h4>
 &lt;ol>
 &lt;li>
 &lt;p>禁用提供者：(通常用于临时踢除某台提供者机器，相似的，禁止消费者访问请使用路由规则)&lt;/p>
@@ -2374,7 +2393,9 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;/ol></description></item><item><title>Docsv2.7: 服务降级</title><link>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/service-downgrade/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/service-downgrade/</guid><description>
+&lt;h2 id="背景">背景&lt;/h2>
 &lt;p>可以通过服务降级功能临时屏蔽某个出错的非关键服务，并定义降级后的返回策略。&lt;/p>
+&lt;h2 id="示例">示例&lt;/h2>
 &lt;p>向注册中心写入动态配置覆盖规则：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>RegistryFactory registryFactory &lt;span style="color:#719e07">=&lt;/span> ExtensionLoader&lt;span style="color:#719e07">.&lt;/span>getExtensionLoader&lt;span style="color:#719e07">(&lt;/span>RegistryFactory&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">).&lt;/span>getAdaptiveExtension&lt;span style="color:#719e07">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Registry registry &lt;span style="color:#719e07">=&lt;/span> registryFactory&lt;span style="color:#719e07">.&lt;/span>getRegistry&lt;span style="color:#719e07">(&lt;/span>URL&lt;span style="color:#719e07">.&lt;/span>valueOf&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;zookeeper://10.20.153.10:2181&amp;#34;&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
@@ -2388,7 +2409,9 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;h4 class="alert-heading">提示&lt;/h4>
 &lt;code>2.2.0&lt;/code> 以上版本支持
 &lt;/div></description></item><item><title>Docsv2.7: 旧配置规则</title><link>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/config-rule-deprecated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/config-rule-deprecated/</guid><description>
+&lt;h2 id="背景">背景&lt;/h2>
 &lt;p>向注册中心写入动态配置覆盖规则。该功能通常由监控中心或治理中心的页面完成。&lt;/p>
+&lt;h2 id="示例">示例&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>RegistryFactory registryFactory &lt;span style="color:#719e07">=&lt;/span> ExtensionLoader&lt;span style="color:#719e07">.&lt;/span>getExtensionLoader&lt;span style="color:#719e07">(&lt;/span>RegistryFactory&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">).&lt;/span>getAdaptiveExtension&lt;span style="color:#719e07">();&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Registry registry &lt;span style="color:#719e07">=&lt;/span> registryFactory&lt;span style="color:#719e07">.&lt;/span>getRegistry&lt;span style="color:#719e07">(&lt;/span>URL&lt;span style="color:#719e07">.&lt;/span>valueOf&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;zookeeper://10.20.153.10:2181&amp;#34;&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>registry&lt;span style="color:#719e07">.&lt;/span>register&lt;span style="color:#719e07">(&lt;/span>URL&lt;span style="color:#719e07">.&lt;/span>valueOf&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;override://0.0.0.0/com.foo.BarService?category=configurators&amp;amp;dynamic=false&amp;amp;application=foo&amp;amp;timeout=1000&amp;#34;&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
@@ -2426,11 +2449,13 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;h4 class="alert-heading">提示&lt;/h4>
 &lt;code>2.2.0&lt;/code> 以上版本支持
 &lt;/div></description></item><item><title>Docsv2.7: 消费端线程池模型</title><link>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/consumer-threadpool/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/consumer-threadpool/</guid><description>
+&lt;h2 id="背景">背景&lt;/h2>
 &lt;p>2.7.5 版本对整个调用链路做了全面的优化，根据压测结果显示，总体 QPS 性能提升将近 30%，同时也减少了调用过程中的内存分配开销。其中一个值得提及的设计点是 2.7.5 引入了 Servicerepository 的概念，在服务注册阶段提前生成 ServiceDescriptor 和 MethodDescriptor，以减少 RPC 调用阶段计算 Service 原信息带来的资源消耗。&lt;/p>
-&lt;h2 id="消费端线程池模型优化">消费端线程池模型优化&lt;/h2>
+&lt;h2 id="示例">示例&lt;/h2>
+&lt;h3 id="消费端线程池模型优化">消费端线程池模型优化&lt;/h3>
 &lt;p>对 2.7.5 版本之前的 Dubbo 应用，尤其是一些消费端应用，当面临需要消费大量服务且并发数比较大的大流量场景时（典型如网关类场景），经常会出现消费端线程数分配过多的问题，具体问题讨论可参见 &lt;a href="https://github.com/apache/dubbo/issues/2013">Need a limited Threadpool in consumer side #2013&lt;/a>&lt;/p>
 &lt;p>改进后的消费端线程池模型，通过复用业务端被阻塞的线程，很好的解决了这个问题。&lt;/p>
-&lt;h4 id="老的线程池模型">老的线程池模型&lt;/h4>
+&lt;h3 id="老的线程池模型">老的线程池模型&lt;/h3>
 &lt;p>&lt;img src="https://cn.dubbo.apache.org/imgs/user/consumer-threadpool0.png" alt="消费端线程池.png">&lt;/p>
 &lt;p>我们重点关注 Consumer 部分：&lt;/p>
 &lt;ol>
@@ -2439,7 +2464,7 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;li>当业务数据返回后，交由独立的 Consumer 端线程池进行反序列化等处理，并调用 future.set 将反序列化后的业务结果置回。&lt;/li>
 &lt;li>业务线程拿到结果直接返回&lt;/li>
 &lt;/ol>
-&lt;p>&lt;strong>2.7.5 版本引入的线程池模型&lt;/strong>&lt;/p>
+&lt;h3 id="275-版本引入的线程池模型">2.7.5 版本引入的线程池模型&lt;/h3>
 &lt;p>&lt;img src="https://cn.dubbo.apache.org/imgs/user/consumer-threadpool1.png" alt="消费端线程池新.png">&lt;/p>
 &lt;ol>
 &lt;li>业务线程发出请求，拿到一个 Future 实例。&lt;/li>
@@ -2454,8 +2479,9 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;li>RPC 调用链路。目前能看到的点包括：进一步减少执行链路的内存分配、在保证协议兼容性的前提下提高协议传输效率、提高 Filter、Router 等计算效率。&lt;/li>
 &lt;li>服务治理链路。进一步减少地址推送、服务治理规则推送等造成的内存、cpu 资源消耗。&lt;/li>
 &lt;/ol></description></item><item><title>Docsv2.7: 优雅停机</title><link>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/graceful-shutdown/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/graceful-shutdown/</guid><description>
+&lt;h2 id="背景">背景&lt;/h2>
 &lt;p>Dubbo 是通过 JDK 的 ShutdownHook 来完成优雅停机的，所以如果用户使用 &lt;code>kill -9 PID&lt;/code> 等强制关闭指令，是不会执行优雅停机的，只有通过 &lt;code>kill PID&lt;/code> 时，才会执行。&lt;/p>
-&lt;h2 id="原理">原理&lt;/h2>
+&lt;h2 id="示例">示例&lt;/h2>
 &lt;p>服务提供方&lt;/p>
 &lt;ul>
 &lt;li>停止时，先标记为不接收新请求，新请求过来时直接报错，让客户端重试其它机器。&lt;/li>
@@ -2466,7 +2492,7 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;li>停止时，不再发起新的调用请求，所有新的调用在客户端即报错。&lt;/li>
 &lt;li>然后，检测有没有请求的响应还没有返回，等待响应返回，除非超时，则强制关闭。&lt;/li>
 &lt;/ul>
-&lt;h2 id="设置方式">设置方式&lt;/h2>
+&lt;h3 id="设置方式">设置方式&lt;/h3>
 &lt;p>设置优雅停机超时时间，缺省超时时间是 10 秒，如果超时则强制关闭。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># dubbo.properties&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.service.shutdown.wait&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">15000&lt;/span>
@@ -2477,13 +2503,15 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;h4 class="alert-heading">建议&lt;/h4>
 使用 tomcat 等容器部署的场景，建议通过扩展 ContextListener 等自行调用以下代码实现优雅停机
 &lt;/div></description></item><item><title>Docsv2.7: 主机绑定</title><link>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/hostname-binding/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh-cn/docsv2.7/user/examples/hostname-binding/</guid><description>
-&lt;h2 id="查找顺序">查找顺序&lt;/h2>
+&lt;h2 id="背景">背景&lt;/h2>
+&lt;h2 id="示例">示例&lt;/h2>
+&lt;h3 id="查找顺序">查找顺序&lt;/h3>
 &lt;p>缺省主机 IP 查找顺序：&lt;/p>
 &lt;ul>
 &lt;li>通过 &lt;code>LocalHost.getLocalHost()&lt;/code> 获取本机地址。&lt;/li>
 &lt;li>如果是 &lt;code>127.*&lt;/code> 等 loopback 地址，则扫描各网卡，获取网卡 IP。&lt;/li>
 &lt;/ul>
-&lt;h2 id="主机配置">主机配置&lt;/h2>
+&lt;h3 id="主机配置">主机配置&lt;/h3>
 &lt;p>注册的地址如果获取不正确，比如需要注册公网地址，可以：&lt;/p>
 &lt;ol>
 &lt;li>
@@ -2499,7 +2527,7 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>dubbo.protocol.host&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">205.182.23.201&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;/ol>
-&lt;h2 id="端口配置">端口配置&lt;/h2>
+&lt;h3 id="端口配置">端口配置&lt;/h3>
 &lt;p>缺省主机端口与协议相关：&lt;/p>
 &lt;table>
 &lt;thead>
@@ -2557,6 +2585,7 @@ Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无
 &lt;li>那在&lt;code>dubbo&lt;/code>中如何指定服务的&lt;code>host&lt;/code>,我们是否可以用hostname或domain代替IP地址作为&lt;code>host&lt;/code>?&lt;/li>
 &lt;li>在使用docker时,有时需要设置端口映射,此时,启动server时绑定的socket和向注册中心注册的socket使用不同的端口号,此时又该如何设置?&lt;/li>
 &lt;/ol>
+&lt;h2 id="示例">示例&lt;/h2>
 &lt;h4 id="dubbo-中不设置-host-时默认-host-是什么">dubbo 中不设置 host 时默认 host 是什么&lt;/h4>
 &lt;p>一般的 dubbo 协议配置如下:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span> ...
