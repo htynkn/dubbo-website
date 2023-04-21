@@ -590,7 +590,7 @@
 &lt;p>配置中心是用户实现动态控制 Dubbo 行为的关键组件，我们在 &lt;a href="../../tasks/traffic-management">流量管控&lt;/a> 任务中下发的所有规则，都是先下发到配置中心保存起来，进而 Dubbo 实例通过监听配置中心的变化，收到路由规则并达到控制流量的行为。&lt;/p>
 &lt;p>Dubbo 官方支持 Zookeeper、Nacos、Etcd、Redis、Apollo 等配置中心实现。&lt;/p>
 &lt;h3 id="metadata-center">Metadata Center&lt;/h3>
-&lt;p>与配置中心相反，从用户视角来看元数据中心是只读的，元数据中心唯一的写入放是 Dubbo 进程实例，Dubbo 实例会在启动之后将一些内部状态（如服务列表、服务配置、服务定义格式等）上报到元数据中心，供一些治理能力作为数据来源，如服务测试、文档管理、服务状态展示等。&lt;/p>
+&lt;p>与配置中心相反，从用户视角来看元数据中心是只读的，元数据中心唯一的写入方是 Dubbo 进程实例，Dubbo 实例会在启动之后将一些内部状态（如服务列表、服务配置、服务定义格式等）上报到元数据中心，供一些治理能力作为数据来源，如服务测试、文档管理、服务状态展示等。&lt;/p>
 &lt;p>Dubbo 官方支持 Zookeeper、Nacos、Etcd、Redis 等元数据中心实现。&lt;/p>
 &lt;h2 id="更多扩展">更多扩展&lt;/h2>
 &lt;p>本文列出了 Dubbo 常用的一些扩展点，但还有大量的扩展点可供灵活定制，并且不同语言 sdk 的扩展定义和配置方式上也存在差异，以下是 Dubbo SDK 的扩展点手册。&lt;/p>
@@ -777,8 +777,8 @@
 &lt;p>Address Synchronization&lt;/p>
 &lt;h3 id="如何解决-dubbo2-协议通信的问题">如何解决 Dubbo2 协议通信的问题？&lt;/h3>
 &lt;p>Aeraki Mesh&lt;/p></description></item><item><title>Overview: 微服务生态</title><link>https://dubbo.apache.org/zh-cn/overview/core-features/ecosystem/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/overview/core-features/ecosystem/</guid><description>
-&lt;script src="https://g.alicdn.com/mamba/assets/0.0.7/mse-arc-ui.min.js">&lt;/script>
-&lt;link rel="stylesheet" href="https://g.alicdn.com/mamba/assets/0.0.7/mse-arc-ui.min.css" />
+&lt;script src="https://g.alicdn.com/mamba/assets/0.0.19/mse-arc-ui.min.js">&lt;/script>
+&lt;link rel="stylesheet" href="https://g.alicdn.com/mamba/assets/0.0.19/mse-arc-ui.min.css" />
 &lt;p>Dubbo 社区和众多优秀的开源项目一起围绕 Dubbo 建立了丰富的微服务生态支持，这让开发者从选型 Dubbo 作为开发框架的第一天，就无需担心后续的服务治理诉求，Dubbo 对每一个常见问题均提供了生产级的解决方案。&lt;/p>
 &lt;p>基于 Dubbo 灵活的可扩展性，Dubbo 微服务集群不会绑定任何特定组件实现、不绑定单一通信协议。&lt;/p>
 &lt;section id="section-1" style="">
