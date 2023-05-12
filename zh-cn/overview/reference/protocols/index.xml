@@ -11,8 +11,8 @@
 &lt;li>完全兼容基于 HTTP/2 的 gRPC 协议，因此 Dubbo Triple 协议实现可以 100% 与 gRPC 体系互调互通。&lt;/li>
 &lt;li>仅依赖标准的、被广泛使用的 HTTP 特性，以便在实现层面可以直接依赖官方的标准 HTTP 网络库。&lt;/li>
 &lt;/ul>
-&lt;p>当与 Protocol Buffers 一起使用时，Dubbo Triple 协议实现支持 unary、client-streaming、server-streaming 和 bi-streaming RPC，可以支持二进制 Protobuf、JSON 两种数据 payload。其中，除了双向流需要 HTTP/2，其他 RPC 类型都支持 HTTP/1.1。Triple 协议不使用 HTTP trailers，因此可以与任何网络基础设施配合使用。&lt;/p>
-&lt;p>Unary RPC使用 application/proto 和 application/json 内容类型，看起来类似于精简的 REST 方言。大多数请求都是 POST，路径是从 Protobuf 模式派生的，请求和响应主体是有效的 Protobuf 或 JSON（没有 gRPC 风格的二进制框架），响应具有有意义的 HTTP 状态代码。&lt;/p>
+&lt;p>当与 Protocol Buffers 一起使用时，Dubbo Triple 协议实现支持 unary、client-streaming、server-streaming 和 bi-streaming RPC，可以支持二进制 Protobuf、JSON 两种数据 payload。Triple 协议不使用 HTTP trailers，因此可以与任何网络基础设施配合使用。&lt;/p>
+&lt;p>Unary RPC使用 application/grpc+proto 和 application/json 内容类型，看起来类似于精简的 REST 方言。大多数请求都是 POST，路径是从 Protobuf 模式派生的，请求和响应主体是有效的 Protobuf 或 JSON（没有 gRPC 风格的二进制框架），响应具有有意义的 HTTP 状态代码。&lt;/p>
 &lt;p>请参考以下文档编写详细的 Triple Specification。&lt;/p>
 &lt;ul>
 &lt;li>&lt;a href="https://connect.build/docs/protocol/">参考文档1&lt;/a>&lt;/li>
@@ -171,16 +171,17 @@
 &lt;ul>
 &lt;li>Request&lt;/li>
 &lt;/ul>
-&lt;p>相对于原生的http协议dubbo http 请求增加version和group两个header用于确定服务的唯一
-且是必传header,如果使用dubbo http的RestClient这两个header将会默认通过attachment传递
-为区别于其他的header，attachment将会增加#rest#前缀，因此通过其他形式的http client调用
-dubbo http服务需要传递 #rest#version 和 #rest#group 两个header&lt;/p>
+&lt;p>相对于原生的http协议dubbo http 请求增加version和group两个header用于确定服务的唯一,
+如果provider一端没有声明group和version,http请求时就不需要传递这连个header,反之必须要传递目标
+服务的group和version, 如果使用dubbo http的RestClient这两个header将会默认通过attachment传递
+为区别于其他的header，attachment将会增加rest-service-前缀，因此通过其他形式的http client调用
+dubbo http服务需要传递 rest-service-version 和 rest-service-group 两个header&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>POST /test/path HTTP/1.1
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Host: localhost:8080
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Content-type: application/json
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Accept: text/html
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#rest#version: 1.0.0
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>#rest#group: dubbo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rest-service-version: 1.0.0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rest-service-group: dubbo
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{&amp;#34;name&amp;#34;:&amp;#34;dubbo&amp;#34;,&amp;#34;age&amp;#34;:10,&amp;#34;address&amp;#34;:&amp;#34;hangzhou&amp;#34;}
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
@@ -606,7 +607,39 @@ JaxRs注解使用的时候我们要求service 类上必须使用@Path注解，�
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>
 &lt;p>跨语言调用&lt;/p>
-&lt;/li>
+&lt;p>python&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>import requests
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> url = &amp;#39;http://localhost:8888/services/curl&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> headers = {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#39;rest-service-group&amp;#39;: &amp;#39;test&amp;#39;,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#39;rest-service-version&amp;#39;: &amp;#39;1.0.0&amp;#39;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>response = requests.get(url, headers=headers)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>go&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span> import (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#34;fmt&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;#34;net/http&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> )
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> func main() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> url := &amp;#34;http://localhost:8888/services/curl&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> req, err := http.NewRequest(&amp;#34;GET&amp;#34;, url, nil)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> if err != nil {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fmt.Println(&amp;#34;Error creating request:&amp;#34;, err)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> return
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> req.Header.Set(&amp;#34;rest-service-group&amp;#34;, &amp;#34;test&amp;#34;)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> req.Header.Set(&amp;#34;rest-service-version&amp;#34;, &amp;#34;1.0.0&amp;#34;)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> client := &amp;amp;http.Client{}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> resp, err := client.Do(req)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> if err != nil {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fmt.Println(&amp;#34;Error sending request:&amp;#34;, err)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> return
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> defer resp.Body.Close()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>多协议发布&lt;/p>
 &lt;ul>
