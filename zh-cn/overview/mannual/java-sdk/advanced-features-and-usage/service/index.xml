@@ -416,7 +416,9 @@ Dubbo协议支持，以及Qos协议支持。这些协议的识别都是由一个
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>运行 seata-server,成功后,运行自己的服务 dubbo provider&amp;amp;consumer&lt;/p>
 &lt;h3 id="第八步高可用-seata-server-搭建">&lt;strong>第八步高可用 Seata-server 搭建&lt;/strong>&lt;/h3>
 &lt;p>由于 seata-server 支持计算与存储分离模式,并支持暴露服务地址至多种注册中心,仅需按照第六步配置完毕后水平扩展即可&lt;/p>
-&lt;p>详情请访问:https://seata.io/&lt;/p></description></item><item><title>Overview: 分组聚合</title><link>https://cn.dubbo.apache.org/zh-cn/overview/mannual/java-sdk/advanced-features-and-usage/service/group-merger/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh-cn/overview/mannual/java-sdk/advanced-features-and-usage/service/group-merger/</guid><description>
+&lt;blockquote>
+&lt;p>详情请访问: &lt;a href="https://seata.io/">seata官网&lt;/a>&lt;/p>
+&lt;/blockquote></description></item><item><title>Overview: 分组聚合</title><link>https://cn.dubbo.apache.org/zh-cn/overview/mannual/java-sdk/advanced-features-and-usage/service/group-merger/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh-cn/overview/mannual/java-sdk/advanced-features-and-usage/service/group-merger/</guid><description>
 &lt;h2 id="特性说明">特性说明&lt;/h2>
 &lt;p>通过分组对结果进行聚合并返回聚合后的结果，比如菜单服务，用 group 区分同一接口的多种实现，现在消费方需从每种 group 中调用一次并返回结果，对结果进行合并之后返回，这样就可以实现聚合菜单项。&lt;/p>
 &lt;p>相关代码可以参考 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/2-advanced/dubbo-samples-merge">dubbo 项目中的示例&lt;/a>&lt;/p>
@@ -447,8 +449,11 @@ Dubbo协议支持，以及Qos协议支持。这些协议的识别都是由一个
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.xxx.MenuService&amp;#34;&lt;/span> group=&lt;span style="color:#2aa198">&amp;#34;*&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:method&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;getMenuItems&amp;#34;&lt;/span> merger=&lt;span style="color:#2aa198">&amp;#34;.addAll&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dubbo:reference&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="提示">提示：&lt;/h4>
-&lt;p>从 &lt;code>2.1.0&lt;/code> 版本开始支持&lt;/p></description></item><item><title>Overview: 服务分版本</title><link>https://cn.dubbo.apache.org/zh-cn/overview/mannual/java-sdk/advanced-features-and-usage/service/multi-versions/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh-cn/overview/mannual/java-sdk/advanced-features-and-usage/service/multi-versions/</guid><description>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
+&lt;div class="alert alert-primary" role="alert">
+&lt;h4 class="alert-heading">提示&lt;/h4>
+&lt;code>2.1.0&lt;/code> 开始支持
+&lt;/div></description></item><item><title>Overview: 服务分版本</title><link>https://cn.dubbo.apache.org/zh-cn/overview/mannual/java-sdk/advanced-features-and-usage/service/multi-versions/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh-cn/overview/mannual/java-sdk/advanced-features-and-usage/service/multi-versions/</guid><description>
 &lt;h2 id="特性说明">特性说明&lt;/h2>
 &lt;p>&lt;strong>按照以下的步骤进行版本迁移&lt;/strong>&lt;/p>
 &lt;ol>
@@ -1121,14 +1126,14 @@ broadcast.fail.percent 只是控制的当失败后是否继续调用其他节点
 &lt;/li>
 &lt;/ul>
 &lt;p>以服务方法的维度设置规则，设置返回模拟数据，动态启用/禁用规则&lt;/p>
-&lt;blockquote>
-&lt;p>注意事项&lt;/p>
-&lt;/blockquote>
+&lt;div class="alert alert-primary" role="alert">
+&lt;h4 class="alert-heading">注意事项&lt;/h4>
 &lt;p>Dubbo 启动时会检查配置，当 mock 属性值配置有误时会启动失败，可根据错误提示信息进行排查&lt;/p>
 &lt;ul>
 &lt;li>配置格式错误，如 &lt;code>return+null&lt;/code> 会报错，被当做 mock 类型处理，&lt;code>return&lt;/code> 后面可省略不写或者跟空格后再跟返回值&lt;/li>
 &lt;li>类型找不到错误，如自定义 mock 类、throw 自定义异常，请检查类型是否存在或是否有拼写错误&lt;/li>
-&lt;/ul></description></item><item><title>Overview: 异步调用</title><link>https://cn.dubbo.apache.org/zh-cn/overview/mannual/java-sdk/advanced-features-and-usage/service/async-call/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh-cn/overview/mannual/java-sdk/advanced-features-and-usage/service/async-call/</guid><description>
+&lt;/ul>
+&lt;/div></description></item><item><title>Overview: 异步调用</title><link>https://cn.dubbo.apache.org/zh-cn/overview/mannual/java-sdk/advanced-features-and-usage/service/async-call/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh-cn/overview/mannual/java-sdk/advanced-features-and-usage/service/async-call/</guid><description>
 &lt;h2 id="特性说明">特性说明&lt;/h2>
 &lt;h4 id="背景">背景&lt;/h4>
 &lt;p>从 2.7.0 开始，Dubbo 的所有异步编程接口开始以 &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html">CompletableFuture&lt;/a> 为基础&lt;/p>
@@ -1536,9 +1541,8 @@ broadcast.fail.percent 只是控制的当失败后是否继续调用其他节点
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;version&amp;gt;&lt;/span>${dubbo.version}&lt;span style="color:#268bd2">&amp;lt;/version&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>从服务元数据中也可以比较容易构建泛化调用对象。&lt;/p>
-&lt;blockquote>
-&lt;p>注意事项&lt;/p>
-&lt;/blockquote>
+&lt;div class="alert alert-primary" role="alert">
+&lt;h4 class="alert-heading">注意事项&lt;/h4>
 &lt;ol>
 &lt;li>
 &lt;p>如果参数为基本类型或者 Date,List,Map 等，则不需要转换，直接调用。&lt;/p>
@@ -1547,6 +1551,7 @@ broadcast.fail.percent 只是控制的当失败后是否继续调用其他节点
 &lt;p>如果参数为其他 POJO，则使用 Map 代替。&lt;/p>
 &lt;/li>
 &lt;/ol>
+&lt;/div>
 &lt;p>如：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">Student&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> String name&lt;span style="color:#719e07">;&lt;/span>
@@ -2244,7 +2249,7 @@ key 为服务名，value 为服务提供者 url，此配置优先级最高，&lt
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">});&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Overview: 本地伪装</title><link>https://cn.dubbo.apache.org/zh-cn/overview/mannual/java-sdk/advanced-features-and-usage/service/local-mock/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh-cn/overview/mannual/java-sdk/advanced-features-and-usage/service/local-mock/</guid><description>
 &lt;h2 id="特性说明">特性说明&lt;/h2>
-&lt;p>在 Dubbo3 中有一种机制可以实现轻量级的服务降级，也就是本地伪装 &lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>。&lt;/p>
+&lt;p>在 Dubbo3 中有一种机制可以实现轻量级的服务降级，也就是本地伪装 [^1]。&lt;/p>
 &lt;h2 id="使用场景">使用场景&lt;/h2>
 &lt;p>本地伪装常被用于服务降级。比如某验权服务，当服务提供方全部挂掉后，假如此时服务消费方发起了一次远程调用，那么本次调用将会失败并抛出一个 &lt;code>RpcException&lt;/code> 异常。&lt;/p>
 &lt;p>为了避免出现这种直接抛出异常的情况出现，那么客户端就可以利用本地伪装来提供 Mock 数据返回授权失败。&lt;/p>
@@ -2254,7 +2259,7 @@ key 为服务名，value 为服务提供者 url，此配置优先级最高，&lt
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> mock=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> mock=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarServiceMock&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在工程中提供 Mock 实现 &lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>：&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在工程中提供 Mock 实现 [^2]：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">package&lt;/span> com.foo&lt;span style="color:#719e07">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">BarServiceMock&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> BarService &lt;span style="color:#719e07">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> String &lt;span style="color:#268bd2">sayHello&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String name&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
@@ -2265,7 +2270,7 @@ key 为服务名，value 为服务提供者 url，此配置优先级最高，&lt
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="使用-return-关键字-mock-返回值">使用 return 关键字 Mock 返回值&lt;/h3>
 &lt;p>使用 &lt;code>return&lt;/code> 来返回一个字符串表示的对象，作为 Mock 的返回值。合法的字符串可以是：&lt;/p>
 &lt;ul>
-&lt;li>&lt;em>empty&lt;/em>：代表空，返回基本类型的默认值、集合类的空值、自定义实体类的空对象 &lt;sup id="fnref:3">&lt;a href="#fn:3" class="footnote-ref" role="doc-noteref">3&lt;/a>&lt;/sup>&lt;/li>
+&lt;li>&lt;em>empty&lt;/em>：代表空，返回基本类型的默认值、集合类的空值、自定义实体类的空对象 [^3]&lt;/li>
 &lt;li>&lt;em>null&lt;/em>：返回 &lt;code>null&lt;/code>&lt;/li>
 &lt;li>&lt;em>true&lt;/em>：返回 &lt;code>true&lt;/code>&lt;/li>
 &lt;li>&lt;em>false&lt;/em>：返回 &lt;code>false&lt;/code>&lt;/li>
@@ -2292,7 +2297,7 @@ key 为服务名，value 为服务提供者 url，此配置优先级最高，&lt
 &lt;p>当调用出错时，抛出一个默认的 RPCException:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> mock=&lt;span style="color:#2aa198">&amp;#34;throw&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>当调用出错时，抛出指定的 Exception &lt;sup id="fnref:4">&lt;a href="#fn:4" class="footnote-ref" role="doc-noteref">4&lt;/a>&lt;/sup>：&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>当调用出错时，抛出指定的 Exception [^4]：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span> mock=&lt;span style="color:#2aa198">&amp;#34;throw com.foo.MockException&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="使用-force-和-fail-关键字来配置-mock-的行为">使用 force 和 fail 关键字来配置 Mock 的行为&lt;/h3>
@@ -2324,25 +2329,9 @@ key 为服务名，value 为服务提供者 url，此配置优先级最高，&lt
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;demoService&amp;#34;&lt;/span> check=&lt;span style="color:#2aa198">&amp;#34;false&amp;#34;&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;com.foo.BarService&amp;#34;&lt;/span>&lt;span style="color:#268bd2">&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dubbo:parameter&lt;/span> key=&lt;span style="color:#2aa198">&amp;#34;sayHello.mock&amp;#34;&lt;/span> value=&lt;span style="color:#2aa198">&amp;#34;force:return fake&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dubbo:reference&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>注意事项&lt;/p>
-&lt;/blockquote>
-&lt;div class="footnotes" role="doc-endnotes">
-&lt;hr>
-&lt;ol>
-&lt;li id="fn:1">
-&lt;p>Mock 是 Stub 的一个子集，便于服务提供方在客户端执行容错逻辑，因经常需要在出现 RpcException (比如网络失败，超时等)时进行容错，而在出现业务异常(比如登录用户名密码错误)时不需要容错，如果用 Stub，可能就需要捕获并依赖 RpcException 类，而用 Mock 就可以不依赖 RpcException，因为它的约定就是只有出现 RpcException 时才执行。&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
-&lt;/li>
-&lt;li id="fn:2">
-&lt;p>在 interface 旁放一个 Mock 实现，它实现 BarService 接口，并有一个无参构造函数。同时，如果没有在配置文件中显式指定 Mock 类的时候，那么需要保证 Mock 类的全限定类名是 &lt;code>原全限定类名+Mock&lt;/code> 的形式，例如 &lt;code>com.foo.BarServiceMock&lt;/code>，否则将会 Mock 失败。&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
-&lt;/li>
-&lt;li id="fn:3">
-&lt;p>如果返回值是一个实体类，那么此时返回的将会是一个属性都为默认值的空对象而不是 &lt;code>null&lt;/code>。&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
-&lt;/li>
-&lt;li id="fn:4">
-&lt;p>自定义异常必须拥有一个入参为 &lt;code>String&lt;/code> 的构造函数，该构造函数将用于接受异常信息。&amp;#160;&lt;a href="#fnref:4" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
-&lt;/li>
-&lt;/ol>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
+&lt;div class="alert alert-primary" role="alert">
+&lt;h4 class="alert-heading">注意事项&lt;/h4>
 &lt;/div></description></item><item><title>Overview: 多注册中心</title><link>https://cn.dubbo.apache.org/zh-cn/overview/mannual/java-sdk/advanced-features-and-usage/service/multi-registry/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh-cn/overview/mannual/java-sdk/advanced-features-and-usage/service/multi-registry/</guid><description>
 &lt;h2 id="特性说明">特性说明&lt;/h2>
 &lt;p>Dubbo 支持同一服务向多注册中心同时注册，或者不同服务分别注册到不同的注册中心上去，甚至可以同时引用注册在不同注册中心上的同名服务。另外，注册中心是支持自定义扩展的 &lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>。&lt;/p>
@@ -2619,8 +2608,11 @@ echo 测试是验证 Dubbo 服务基本功能的一种简单有效的方法，�
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>或&lt;/strong>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> injvm=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> ...&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> injvm=&lt;span style="color:#2aa198">&amp;#34;true&amp;#34;&lt;/span> ...&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="注意">注意：&lt;/h4>
-&lt;p>&lt;strong>Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无需进行任何配置即可进行本地引用，如果不希望服务进行远程暴露，只需要在 provider 将 protocol 设置成 injvm 即可。&lt;/strong>&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
+&lt;div class="alert alert-warning" role="alert">
+&lt;h4 class="alert-heading">注意&lt;/h4>
+&lt;strong>Dubbo 从 &lt;code>2.2.0&lt;/code> 每个服务默认都会在本地暴露，无需进行任何配置即可进行本地引用，如果不希望服务进行远程暴露，只需要在 provider 将 protocol 设置成 injvm 即可。&lt;/strong>
+&lt;/div>
 &lt;h3 id="自动暴露">自动暴露&lt;/h3>
 &lt;p>从 &lt;code>2.2.0&lt;/code> 开始，每个服务默认都会在本地暴露。在引用服务的时候，默认优先引用本地服务。如果希望引用远程服务可以使用一下配置强制引用远程服务。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:reference&lt;/span> ... scope=&lt;span style="color:#2aa198">&amp;#34;remote&amp;#34;&lt;/span> &lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
