@@ -650,7 +650,7 @@ Consumer应用引入服务Mock依赖，添加JVM启动参数-Denable.dubbo.admin
 &lt;p>Dubbo 的扩展能力非常灵活，在自身功能的实现上无处不在。&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/concepts/extension-use.png" alt="//imgs/v3/concepts/extension-use.png">&lt;/p>
 &lt;p>Dubbo 扩展能力使得 Dubbo 项目很方便的切分成一个一个的子模块，实现热插拔特性。用户完全可以基于自身需求，替换 Dubbo 原生实现，来满足自身业务需求。&lt;/p>
-&lt;h2 id="使用场景">使用场景&lt;/h2>
+&lt;h2 id="dubbo-扩展的使用场景">Dubbo 扩展的使用场景&lt;/h2>
 &lt;ul>
 &lt;li>如果你需要自定义负载均衡策略，你可以使用 Dubbo 扩展能力。&lt;/li>
 &lt;li>如果你需要实现自定义的注册中心，你可以使用 Dubbo 扩展能力。&lt;/li>
@@ -6353,7 +6353,94 @@ consumer端同样执行编译，在consumer的target下也会生成二进制文�
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>以正常方式启动，在项目的resources下建立文件夹META-INF.native-image，把在本地目录中生成的文件粘进去：&lt;/p>
 &lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/dubbo3.0-graalvm-support/resources.jpg" alt="img">
 （可能会有缺漏没有生成的类信息，需要根据编译或运行时的报错信息手动添加。）&lt;/p>
-&lt;p>&lt;strong>完成以上几步后就可以进行项目的编译了。&lt;/strong>&lt;/p></description></item><item><title>Overview: Pixiu Filter体系介绍</title><link>https://dubbo.apache.org/zh-cn/overview/mannual/dubbo-go-pixiu/dev/filter-extension/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/overview/mannual/dubbo-go-pixiu/dev/filter-extension/</guid><description>
+&lt;p>&lt;strong>完成以上几步后就可以进行项目的编译了。&lt;/strong>&lt;/p></description></item><item><title>Overview: OTlp</title><link>https://dubbo.apache.org/zh-cn/overview/tasks/observability/tracing/otlp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/overview/tasks/observability/tracing/otlp/</guid><description>
+&lt;h2 id="概述">概述&lt;/h2>
+&lt;p>这个案例展示了在 Dubbo 项目中以 OpenTelemetry 作为 Tracer，将 Trace 信息上报到 Otlp Collector，再由 collector 转发至 Zipkin、Jagger。&lt;a href="https://github.com/conghuhu/dubbo-samples/tree/master/4-governance/dubbo-samples-tracing/dubbo-samples-spring-boot-tracing-otel-otlp">代码地址&lt;/a>&lt;/p>
+&lt;p>有三部分组成：&lt;/p>
+&lt;ul>
+&lt;li>dubbo-samples-spring-boot-tracing-otel-oltp-interface&lt;/li>
+&lt;li>dubbo-samples-spring-boot-tracing-otel-oltp-provider&lt;/li>
+&lt;li>dubbo-samples-spring-boot-tracing-otel-oltp-consumer&lt;/li>
+&lt;/ul>
+&lt;h2 id="案例架构图">案例架构图&lt;/h2>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/tasks/observability/tracing/otlp/demo_arch.png" alt="案例架构图">&lt;/p>
+&lt;h2 id="快速开始">快速开始&lt;/h2>
+&lt;h3 id="安装--启动-otlp-collector">安装 &amp;amp; 启动 Otlp Collector&lt;/h3>
+&lt;p>按照 &lt;a href="https://OpenTelemetry.io/docs/collector/getting-started/">OpenTelemetry Collector Quick Start&lt;/a> 去启动 otlp collector.&lt;/p>
+&lt;h3 id="启动-provider">启动 Provider&lt;/h3>
+&lt;p>直接运行&lt;code>org.apache.dubbo.springboot.demo.provider.ProviderApplication&lt;/code> directly from IDE.&lt;/p>
+&lt;h3 id="启动-consumer">启动 Consumer&lt;/h3>
+&lt;p>Start &lt;code>org.apache.dubbo.springboot.demo.consumer.ConsumerApplication&lt;/code> directly from IDE.&lt;/p>
+&lt;h3 id="查看-trace-信息">查看 Trace 信息&lt;/h3>
+&lt;p>在浏览器中打开zipkin看板 &lt;a href="http://localhost:9411/zipkin/">http://localhost:9411/zipkin/&lt;/a> :&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/tasks/observability/tracing/otlp/zipkin_search.png" alt="zipkin.png">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/tasks/observability/tracing/otlp/zipkin_detail.png" alt="zipkin.png">&lt;/p>
+&lt;p>在浏览器中打开Jaeger看板 &lt;a href="http://localhost:16686/search">http://localhost:16686/search&lt;/a> :&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/tasks/observability/tracing/otlp/jaeger_search.png" alt="jaeger_search.png">&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/tasks/observability/tracing/otlp/jaeger_detail.png" alt="jaeger_detail.png">&lt;/p>
+&lt;h2 id="如何在springboot项目中使用">如何在SpringBoot项目中使用&lt;/h2>
+&lt;h3 id="1-在你的项目中添加依赖">1. 在你的项目中添加依赖&lt;/h3>
+&lt;p>对于 SpringBoot 项目，你可以使用&lt;code>dubbo-spring-boot-tracing-otel-otlp-starter&lt;/code> ：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&amp;lt;!-- OpenTelemetry as Tracer, Otlp as exporter --&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.dubbo&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo-spring-boot-tracing-otel-otlp-starter&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-配置">2. 配置&lt;/h3>
+&lt;h4 id="applicationyml">application.yml&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">dubbo&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">tracing&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">enabled&lt;/span>: &lt;span style="color:#cb4b16">true&lt;/span> &lt;span style="color:#586e75"># default is false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">sampling&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">probability&lt;/span>: &lt;span style="color:#2aa198">0.5&lt;/span> &lt;span style="color:#586e75"># sampling rate, default is 0.1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">propagation&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">type&lt;/span>: W3C &lt;span style="color:#586e75"># W3C/B3 default is W3C&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">tracing-exporter&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">otlp-config&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">endpoint&lt;/span>: http://localhost:4317
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">timeout&lt;/span>: 10s &lt;span style="color:#586e75"># default is 10s&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">compression-method&lt;/span>: none &lt;span style="color:#586e75"># none/gzip The method used to compress payloads, default is &amp;#34;none&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">headers&lt;/span>: &lt;span style="color:#586e75"># customized added headers, default is empty&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">auth&lt;/span>: admin
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># tracing info output to logging&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">logging&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">level&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">root&lt;/span>: info
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">pattern&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">console&lt;/span>: &lt;span style="color:#2aa198">&amp;#39;[%d{dd/MM/yy HH:mm:ss:SSS z}] %t %5p %c{2} [%X{traceId:-}, %X{spanId:-}]: %m%n&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="如何基于dubbo-api使用">如何基于Dubbo API使用&lt;/h2>
+&lt;h3 id="1-在你的项目中添加依赖-1">1. 在你的项目中添加依赖&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">&amp;lt;!-- 必选，dubbo-tracing核心依赖 --&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.dubbo&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo-tracing&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">&amp;lt;!-- Opentelemetry as Tracer --&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>io.micrometer&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>micrometer-tracing-bridge-otel&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">&amp;lt;!-- OTlp as exporter --&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>io.opentelemetry&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>opentelemetry-exporter-otlp&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2-配置-1">2. 配置&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>TracingConfig tracingConfig &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> TracingConfig&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// 开启dubbo tracing
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>tracingConfig&lt;span style="color:#719e07">.&lt;/span>setEnabled&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#cb4b16">true&lt;/span>&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// 设置采样率
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>tracingConfig&lt;span style="color:#719e07">.&lt;/span>setSampling&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">new&lt;/span> SamplingConfig&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">1.0f&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// 设置Propagation，默认为W3C，可选W3C/B3
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>tracingConfig&lt;span style="color:#719e07">.&lt;/span>setPropagation&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">new&lt;/span> PropagationConfig&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;W3C&amp;#34;&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// 设置trace上报
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>ExporterConfig exporterConfig &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ExporterConfig&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// 设置将trace上报到Zipkin
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>exporterConfig&lt;span style="color:#719e07">.&lt;/span>setZipkin&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">new&lt;/span> ExporterConfig&lt;span style="color:#719e07">.&lt;/span>OtlpConfig&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;http://localhost:4317&amp;#34;&lt;/span>&lt;span style="color:#719e07">,&lt;/span> Duration&lt;span style="color:#719e07">.&lt;/span>ofSeconds&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">10&lt;/span>&lt;span style="color:#719e07">),&lt;/span> &lt;span style="color:#2aa198">&amp;#34;none&amp;#34;&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>tracingConfig&lt;span style="color:#719e07">.&lt;/span>setExporter&lt;span style="color:#719e07">(&lt;/span>exporterConfig&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Overview: Pixiu Filter体系介绍</title><link>https://dubbo.apache.org/zh-cn/overview/mannual/dubbo-go-pixiu/dev/filter-extension/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/overview/mannual/dubbo-go-pixiu/dev/filter-extension/</guid><description>
 &lt;h2 id="怎样编写一个filter">&lt;strong>怎样编写一个Filter&lt;/strong>&lt;/h2>
 &lt;p>&lt;code>更详细的信息，请移步Blog《谈谈Pixiu的Filter》&lt;/code>&lt;/p>
 &lt;p>我们来尝试写一个简单的Filter，这个Filter将会有简单的配置，在Decode阶段把请求的Body Log出来，并翻转后作为Mock的返回值。最后在Encode阶段根据配置把返回值Log出来。&lt;/p>
@@ -6454,21 +6541,4 @@ consumer端同样执行编译，在consumer的target下也会生成二进制文�
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>日志&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>2022-02-19T20:20:11.900+0800 INFO demo/demo.go:62 request body: eiv al tse’c
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2022-02-19T20:20:11.900+0800 INFO demo/demo.go:71 : eiv al tse’c
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Overview: Pixiu 是什么</title><link>https://dubbo.apache.org/zh-cn/overview/mannual/dubbo-go-pixiu/overview/what-is-pixiu/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/overview/mannual/dubbo-go-pixiu/overview/what-is-pixiu/</guid><description>
-&lt;h3 id="pixiu-说明">Pixiu 说明&lt;/h3>
-&lt;p>Pixiu 是一款开源的 Dubbo 生态的 API 网关和 接入 dubbo 集群的语言解决方案。作为 API 网关形态， Pixiu 能接收外界的网络请求，将其转换为 dubbo 等协议请求，转发给背后集群；作为 Sidecar，Pixiu 期望可以代替代理服务注册到 Dubbo 集群，让多语言服务接入 Dubbo 集群提供更快捷的解决方案。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/pixiu/overview/pixiu-overview.png" alt="image">&lt;/p>
-&lt;h3 id="api-网关">API 网关&lt;/h3>
-&lt;p>作为一款网关产品，Pixiu 帮助用户轻松创建、发布、维护、监控和保护任意规模的 API ，接受和处理成千上万个并发 API 调用，包括流量管理、 CORS 支持、授权和访问控制、限制、监控，以及 API 版本管理。除此以外，作为 Dubbo 的衍生产品，Pixiu 可以帮助 Dubbo 用户进行协议转换，实现跨系统、跨协议的服务能力互通。
-Pixiu 的整体设计遵守以下原则：&lt;/p>
-&lt;ul>
-&lt;li>High performance: 高吞吐量以及毫秒级的延时。&lt;/li>
-&lt;li>可扩展: 通过 go-plugin，用户可以根据自己的需求延展 Pixiu 的功能。&lt;/li>
-&lt;li>简单可用: 用户通过少量配置，即可上线。&lt;/li>
-&lt;/ul>
-&lt;h3 id="sidecar-模式">Sidecar 模式&lt;/h3>
-&lt;p>目前最为主流的接入 dubbo 集群的方式当然是集成语言对应的 sdk，但是如图的左侧部分。但是对于dubbo来讲，它的多语言支持能力不足，目前较为成熟的只有 java 版本和 go 版本，当然 js 版本 和 python 版本也在努力追赶中.其次，就是使用sdk的通用问题，比如代码耦合度高，版本升级困难，服务发现，服务路由和负载均衡策略不易整体调控等。&lt;/p>
-&lt;p>所以 mesh 话或者 sidecar 的方案，也就是 service mesh 在16年时被提出。将服务发现，服务路由和负载均衡等逻辑放在 sidecar，服务使用轻量级 sdk 与之进行交互。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/pixiu/overview/pixiu-sidecar.png" alt="img">&lt;/p>
-&lt;p>对于接入 dubbo 的多语言解决方案。首推的当然是 pixiu 作为 sidecar 和 服务进行同时部署。pixiu提供 服务发现，流量治理，路由能力，协议转换能力和通讯能力。如图的左侧部分，使用sidecar的服务可以和原生使用 dubbo 框架的服务组成集群，无感的进行相互调用。
-另外一种方案是 pixiu 只单单作为代理，将服务注册到dubbo集群中，如图右侧部分，这种方案部署和运维较为简单，比如适合中小规模的集群。&lt;/p></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

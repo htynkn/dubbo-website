@@ -6,11 +6,13 @@
 &lt;li>当用户调用 &lt;code>refer()&lt;/code> 所返回的 &lt;code>Invoker&lt;/code> 对象的 &lt;code>invoke()&lt;/code> 方法时，协议需相应执行同 URL 远端 &lt;code>export()&lt;/code> 传入的 &lt;code>Invoker&lt;/code> 对象的 &lt;code>invoke()&lt;/code> 方法。&lt;/li>
 &lt;li>其中，&lt;code>refer()&lt;/code> 返回的 &lt;code>Invoker&lt;/code> 由协议实现，协议通常需要在此 &lt;code>Invoker&lt;/code> 中发送远程请求，&lt;code>export()&lt;/code> 传入的 &lt;code>Invoker&lt;/code> 由框架实现并传入，协议不需要关心。&lt;/li>
 &lt;/ul>
-&lt;p>注意：&lt;/p>
+&lt;div class="alert alert-primary" role="alert">
+&lt;h4 class="alert-heading">注意&lt;/h4>
 &lt;ul>
 &lt;li>协议不关心业务接口的透明代理，以 &lt;code>Invoker&lt;/code> 为中心，由外层将 &lt;code>Invoker&lt;/code> 转换为业务接口。&lt;/li>
 &lt;li>协议不一定要是 TCP 网络通讯，比如通过共享文件，IPC 进程间通讯等。&lt;/li>
 &lt;/ul>
+&lt;/div>
 &lt;h2 id="扩展接口">扩展接口&lt;/h2>
 &lt;ul>
 &lt;li>&lt;code>org.apache.dubbo.rpc.Protocol&lt;/code>&lt;/li>
@@ -1460,7 +1462,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>META-INF/dubbo/org.apache.dubbo.remoting.telnet.TelnetHandler：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>xxx&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">com.xxx.XxxTelnetHandler&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="用法">用法&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="命令用法">命令用法&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>telnet 127.0.0.1 &lt;span style="color:#2aa198">20880&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo&amp;gt; xxx args
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Overview: 状态检查扩展</title><link>https://dubbo.apache.org/zh-cn/overview/mannual/java-sdk/reference-manual/spi/description/status-checker/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/overview/mannual/java-sdk/reference-manual/spi/description/status-checker/</guid><description>
@@ -1743,7 +1745,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>META-INF/dubbo/org.apache.dubbo.qos.permission.PermissionChecker：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>qosPermissionChecker&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">com.xxx.XxxPermissionChecker&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Overview: 扩展点开发指南</title><link>https://dubbo.apache.org/zh-cn/overview/mannual/java-sdk/reference-manual/spi/description/dubbo-spi/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/overview/mannual/java-sdk/reference-manual/spi/description/dubbo-spi/</guid><description>
-&lt;h2 id="1简介">1.简介&lt;/h2>
+&lt;h2 id="1-dubbo-spi-扩展简介">1. Dubbo SPI 扩展简介&lt;/h2>
 &lt;p>SPI 全称为 Service Provider Interface，是一种服务发现机制。SPI 的本质是将接口实现类的全限定名配置在文件中，并由服务加载器读取配置文件，加载实现类。这样可以在运行时，动态为接口替换实现类。正因此特性，我们可以很容易的通过 SPI 机制为我们的程序提供拓展功能。SPI 机制在第三方框架中也有所应用，比如 Dubbo 就是通过 SPI 机制加载所有的组件。不过，Dubbo 并未使用 Java 原生的 SPI 机制，而是对其进行了增强，使其能够更好的满足需求。在 Dubbo 中，SPI 是一个非常重要的模块。基于 SPI，我们可以很容易的对 Dubbo 进行拓展。
 Dubbo 中，SPI 主要有两种用法，一种是加载固定的扩展类，另一种是加载自适应扩展类。这两种方式会在下面详细的介绍。
 需要特别注意的是: 在 Dubbo 中，基于 SPI 扩展加载的类是单例的。&lt;/p>
@@ -1847,7 +1849,7 @@ Dubbo 中，SPI 主要有两种用法，一种是加载固定的扩展类，另�
 &lt;li>初始化拓展对象&lt;/li>
 &lt;/ol>
 &lt;p>以上步骤中，第一个步骤是加载拓展类的关键，第三和第四个步骤是 Dubbo IOC 与 AOP 的具体实现。在接下来的章节中，将会重点分析 getExtensionClasses 方法的逻辑，以及简单介绍 Dubbo IOC 的具体实现。&lt;/p>
-&lt;h3 id="211-获取所有的拓展类">2.1.1 获取所有的拓展类&lt;/h3>
+&lt;h4 id="211-获取所有的拓展类">2.1.1 获取所有的拓展类&lt;/h4>
 &lt;p>我们在通过名称获取拓展类之前，首先需要根据配置文件解析出拓展项名称到拓展类的映射关系表（Map&amp;lt;名称, 拓展类&amp;gt;），之后再根据拓展项名称从映射关系表中取出相应的拓展类即可。相关过程的代码分析如下：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">private&lt;/span> Map&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">,&lt;/span> Class&lt;span style="color:#719e07">&amp;lt;?&amp;gt;&amp;gt;&lt;/span> getExtensionClasses&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// 从缓存中获取已加载的拓展类
@@ -2004,7 +2006,7 @@ Dubbo 中，SPI 主要有两种用法，一种是加载固定的扩展类，另�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如上，loadClass 方法操作了不同的缓存，比如 cachedAdaptiveClass、cachedWrapperClasses 和 cachedNames 等等。除此之外，该方法没有其他什么逻辑了。&lt;/p>
 &lt;p>到此，关于缓存类加载的过程就分析完了。整个过程没什么特别复杂的地方，大家按部就班的分析即可，不懂的地方可以调试一下。接下来，我们来聊聊 Dubbo IOC 方面的内容。&lt;/p>
-&lt;h3 id="212-dubbo-ioc">2.1.2 Dubbo IOC&lt;/h3>
+&lt;h4 id="212-dubbo-ioc">2.1.2 Dubbo IOC&lt;/h4>
 &lt;p>Dubbo IOC 是通过 setter 方法注入依赖。Dubbo 首先会通过反射获取到实例的所有方法，然后再遍历方法列表，检测方法名是否具有 setter 方法特征。若有，则通过 ObjectFactory 获取依赖对象，最后通过反射调用 setter 方法将依赖设置到目标对象中。整个过程对应的代码如下：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">private&lt;/span> T &lt;span style="color:#268bd2">injectExtension&lt;/span>&lt;span style="color:#719e07">(&lt;/span>T instance&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -2143,7 +2145,7 @@ Dubbo 中，SPI 主要有两种用法，一种是加载固定的扩展类，另�
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">return&lt;/span> compiler&lt;span style="color:#719e07">.&lt;/span>compile&lt;span style="color:#719e07">(&lt;/span>code&lt;span style="color:#719e07">,&lt;/span> classLoader&lt;span style="color:#719e07">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>createAdaptiveExtensionClass 方法用于生成自适应拓展类，该方法首先会生成自适应拓展类的源码，然后通过 Compiler 实例（Dubbo 默认使用 javassist 作为编译器）编译源码，得到代理类 Class 实例。接下来，我们把重点放在代理类代码生成的逻辑上，其他逻辑大家自行分析。&lt;/p>
-&lt;h3 id="221-自适应拓展类代码生成">2.2.1 自适应拓展类代码生成&lt;/h3>
+&lt;h4 id="221-自适应拓展类代码生成">2.2.1 自适应拓展类代码生成&lt;/h4>
 &lt;p>AdaptiveClassCodeGenerator#generate 方法生成扩展类代码&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> String &lt;span style="color:#268bd2">generate&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// 如果该接口中没有方法被 @Adaptive 注解修饰，直接抛出异常
@@ -2229,7 +2231,7 @@ Dubbo 中，SPI 主要有两种用法，一种是加载固定的扩展类，另�
 2.为方法生成代码的时候，参数列表上要有 URL(或参数对象中有 URL)
 3.使用 ExtensionLoader.getExtension 获取扩展
 4.执行对应的方法&lt;/p>
-&lt;h3 id="223-附一个动态生成代码后的例子">2.2.3 附一个动态生成代码后的例子&lt;/h3>
+&lt;h4 id="223-附一个动态生成代码后的例子">2.2.3 附一个动态生成代码后的例子&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">package&lt;/span> org.apache.dubbo.common.extension.adaptive&lt;span style="color:#719e07">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">import&lt;/span> org.apache.dubbo.common.extension.ExtensionLoader&lt;span style="color:#719e07">;&lt;/span>
@@ -2259,9 +2261,9 @@ Dubbo 中，SPI 主要有两种用法，一种是加载固定的扩展类，另�
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">return&lt;/span> extension&lt;span style="color:#719e07">.&lt;/span>echo&lt;span style="color:#719e07">(&lt;/span>arg0&lt;span style="color:#719e07">,&lt;/span> arg1&lt;span style="color:#719e07">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="3spi-扩展示例">3.SPI 扩展示例&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="3-dubbo-spi-扩展示例">3. Dubbo SPI 扩展示例&lt;/h2>
 &lt;h3 id="31--加载固定扩展类">3.1 加载固定扩展类&lt;/h3>
-&lt;h3 id="311-编写-spi-接口及实现类">3.1.1 编写 SPI 接口及实现类&lt;/h3>
+&lt;h4 id="311-编写-spi-接口及实现类">3.1.1 编写 SPI 接口及实现类&lt;/h4>
 &lt;p>不管是 Java SPI，还是 Dubbo 中实现的 SPI，都需要编写接口。不过 Dubbo 中的接口需要被 @SPI 注解修饰。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@SPI&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">DemoSpi&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
@@ -2288,7 +2290,7 @@ Dubbo 中，SPI 主要有两种用法，一种是加载固定的扩展类，另�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="32-加载自适应扩展类">3.2 加载自适应扩展类&lt;/h3>
 &lt;p>这个以 Protocol 为例进行说明&lt;/p>
-&lt;h3 id="321-protocol-接口抽取部分核心方法">3.2.1 Protocol 接口(抽取部分核心方法)&lt;/h3>
+&lt;h4 id="321-protocol-接口抽取部分核心方法">3.2.1 Protocol 接口(抽取部分核心方法)&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@SPI&lt;/span>&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span>&lt;span style="color:#719e07">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">Protocol&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Adaptive&lt;/span>
@@ -2311,11 +2313,11 @@ Dubbo 中，SPI 主要有两种用法，一种是加载固定的扩展类，另�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> exporter&lt;span style="color:#719e07">;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="322-将实现类放在特定目录下">3.2.2 将实现类放在特定目录下&lt;/h3>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="322-将实现类放在特定目录下">3.2.2 将实现类放在特定目录下&lt;/h4>
 &lt;p>在 dubbo 中，该配置路径 META-INF/dubbo/internal/org.apache.dubbo.rpc.Protocol&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>dubbo=org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>需要说明一点的是，在 dubbo 中，并不是直接使用 DubboProtocol 的，而是使用的是其包装类。&lt;/p>
-&lt;h3 id="323-使用">3.2.3 使用&lt;/h3>
+&lt;h4 id="323-使用">3.2.3 使用&lt;/h4>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">DubboAdaptiveTest&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Test&lt;/span>
