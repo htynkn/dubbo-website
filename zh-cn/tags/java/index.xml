@@ -681,7 +681,284 @@ dubbo-metrics 指标模块旨在将 dubbo 内部零散的 Metrics 相关类综�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>当接收到事件时，直方图指标收集器会先计算当前调用花费的时间，然后为计时器（Time）添加一条响应时间记录。&lt;/p></description></item><item><title>Blog: 3-指标监听注册梳理</title><link>https://dubbo.apache.org/zh-cn/blog/2023/04/28/3-%E6%8C%87%E6%A0%87%E7%9B%91%E5%90%AC%E6%B3%A8%E5%86%8C%E6%A2%B3%E7%90%86/</link><pubDate>Fri, 28 Apr 2023 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/blog/2023/04/28/3-%E6%8C%87%E6%A0%87%E7%9B%91%E5%90%AC%E6%B3%A8%E5%86%8C%E6%A2%B3%E7%90%86/</guid><description>
-&lt;p>连载中，敬请期待&amp;hellip;&lt;/p></description></item><item><title>Blog: 4-指标转换与导出</title><link>https://dubbo.apache.org/zh-cn/blog/2023/04/28/4-%E6%8C%87%E6%A0%87%E8%BD%AC%E6%8D%A2%E4%B8%8E%E5%AF%BC%E5%87%BA/</link><pubDate>Fri, 28 Apr 2023 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/blog/2023/04/28/4-%E6%8C%87%E6%A0%87%E8%BD%AC%E6%8D%A2%E4%B8%8E%E5%AF%BC%E5%87%BA/</guid><description>
+&lt;h2 id="三指标监听注册梳理">三、指标监听注册梳理&lt;/h2>
+&lt;p>在前一章中，我们了解了不同收集器中的指标样本是如何被监听器添加进去的。接下来，我们将归纳指标监听器 的创建位置，及它们对应统计的指标。&lt;/p>
+&lt;p>通过之前的分析，我们已经知道指标 注册事件多播器（RegistryMetricsEventMulticaster）中定义了并绑定了服务注册相关的指标。这种绑定操作同样存在于其它几个简单指标事件多播器（SimpleMetricsEventMulticaster）的几个实现中。&lt;/p>
+&lt;h3 id="转发器注册">转发器注册&lt;/h3>
+&lt;p>&lt;strong>RegistrySubDispatcher （服务注册指标转发器）注册了服务注册相关指标：&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>应用级实例注册成功/失败/总数计数 （APPLICATION_REGISTER_&amp;hellip;)&lt;/li>
+&lt;li>应用级服务接口订阅成功/失败/总数计数 （APPLICATION_SUBSCRIBE_&amp;hellip;)&lt;/li>
+&lt;li>服务级注册成功/失败/总数计数 （SERVICE_REGISTER_&amp;hellip;）&lt;/li>
+&lt;li>特殊的 APPLICATION_NOTIFY_FINISH 和 APPLICATION_DIRECTORY_POST （应用服务目录变化次数）&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>MetadataSubDispatcher（元数据指标转发器）注册应用元数据相关指标&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>应用推送元数据相关计数 （APPLICATION_PUSH_&amp;hellip;)&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>应用订阅元数据相关计数 （APPLICAITON_SUBSCRIBE_&amp;hellip;）&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>服务订阅元数据相关计数 （SERVICE_SUBSCRIBE_&amp;hellip;）&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>ConfigCenterSubDispatcher (配置中心指标转发器) 注册配置中心配置更新次数指标&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>配置中心推送新配置次数 （CONFIGCENTER_METRIC_TOTAL）&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>DefaultSubDispatcher (默认转发器) 注册核心RPC调用次数指标&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>请求次数 （METRIC_REQUESTS）&lt;/li>
+&lt;li>请求成功次数（METRIC_REQUESTS_SUCCEED）&lt;/li>
+&lt;li>请求失败次数（METRIC_REQUEST_BUSINESS_FAILED）&lt;/li>
+&lt;/ul>
+&lt;p>&lt;strong>MetricsDispatcher&lt;/strong>&lt;/p>
+&lt;p>MetricsDispatcher 较为特殊，它负责 ApplicationModel 下所有 MetricsCollector（前文中提到的指标收集器） 的初始化注册工作，并将它们添加到自己的监听器列表中。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">MetricsDispatcher&lt;/span> &lt;span style="color:#268bd2">extends&lt;/span> SimpleMetricsEventMulticaster &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@SuppressWarnings&lt;/span>&lt;span style="color:#719e07">({&lt;/span>&lt;span style="color:#2aa198">&amp;#34;rawtypes&amp;#34;&lt;/span>&lt;span style="color:#719e07">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">MetricsDispatcher&lt;/span>&lt;span style="color:#719e07">(&lt;/span>ApplicationModel applicationModel&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ScopeBeanFactory beanFactory &lt;span style="color:#719e07">=&lt;/span> applicationModel&lt;span style="color:#719e07">.&lt;/span>getBeanFactory&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ExtensionLoader&lt;span style="color:#719e07">&amp;lt;&lt;/span>MetricsCollector&lt;span style="color:#719e07">&amp;gt;&lt;/span> extensionLoader &lt;span style="color:#719e07">=&lt;/span> applicationModel&lt;span style="color:#719e07">.&lt;/span>getExtensionLoader&lt;span style="color:#719e07">(&lt;/span>MetricsCollector&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>extensionLoader &lt;span style="color:#719e07">!=&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span>&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> List&lt;span style="color:#719e07">&amp;lt;&lt;/span>MetricsCollector&lt;span style="color:#719e07">&amp;gt;&lt;/span> customizeCollectors &lt;span style="color:#719e07">=&lt;/span> extensionLoader
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">.&lt;/span>getActivateExtensions&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">for&lt;/span> &lt;span style="color:#719e07">(&lt;/span>MetricsCollector customizeCollector &lt;span style="color:#719e07">:&lt;/span> customizeCollectors&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> beanFactory&lt;span style="color:#719e07">.&lt;/span>registerBean&lt;span style="color:#719e07">(&lt;/span>customizeCollector&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> customizeCollectors&lt;span style="color:#719e07">.&lt;/span>forEach&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">this&lt;/span>&lt;span style="color:#719e07">::&lt;/span>addListener&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>需要注意，以上几个实现均继承自 SimpleMetricsEventMulticaster，因此它们都具有注册监听、转发事件的能力。它们将自己注册到对应领域的指标 Collector 中，并在收到指标事件时转发到自己注册的监听器中。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">//SimpleMetricsEventMulticaster
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">addListener&lt;/span>&lt;span style="color:#719e07">(&lt;/span>MetricsListener&lt;span style="color:#719e07">&amp;lt;?&amp;gt;&lt;/span> listener&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> listeners&lt;span style="color:#719e07">.&lt;/span>add&lt;span style="color:#719e07">(&lt;/span>listener&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">publishEvent&lt;/span>&lt;span style="color:#719e07">(&lt;/span>MetricsEvent event&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>event &lt;span style="color:#719e07">instanceof&lt;/span> EmptyEvent&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>validateIfApplicationConfigExist&lt;span style="color:#719e07">(&lt;/span>event&lt;span style="color:#719e07">))&lt;/span> &lt;span style="color:#719e07">return&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">for&lt;/span> &lt;span style="color:#719e07">(&lt;/span>MetricsListener listener &lt;span style="color:#719e07">:&lt;/span> listeners&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>listener&lt;span style="color:#719e07">.&lt;/span>isSupport&lt;span style="color:#719e07">(&lt;/span>event&lt;span style="color:#719e07">))&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> listener&lt;span style="color:#719e07">.&lt;/span>onEvent&lt;span style="color:#719e07">(&lt;/span>event&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">//...
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>SubDispatcher 和 Collector 之间的对应关系：&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>MetadataSubDispatcher -&amp;gt; MetadataMetricsCollector 元数据指标事件&lt;/li>
+&lt;li>RegistrySubDispatcher -&amp;gt; RegistryMetricsCollector 服务注册指标事件&lt;/li>
+&lt;li>ConfigCenterSubDispatcher -&amp;gt; ConfigCenterMetricsCollector 配置中心指标事件&lt;/li>
+&lt;li>MetricsDispatcher 由 MetricsEventBus 通过 BeanFactory 加载。它是所有事件转发的入口。&lt;/li>
+&lt;/ul>
+&lt;h3 id="事件触发">事件触发&lt;/h3>
+&lt;p>剩下的问题就是这些监听器是如何被触发的。&lt;/p>
+&lt;p>可以发现三大中心的指标转发器都是在它们对应的Collector中创建的：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">ConfigCenterMetricsCollector&lt;/span>&lt;span style="color:#719e07">(&lt;/span>ApplicationModel applicationModel&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">super&lt;/span>&lt;span style="color:#719e07">.&lt;/span>setEventMulticaster&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">new&lt;/span> ConfigCenterMetricsDispatcher&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">this&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">MetadataMetricsCollector&lt;/span>&lt;span style="color:#719e07">(&lt;/span>ApplicationModel applicationModel&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">super&lt;/span>&lt;span style="color:#719e07">.&lt;/span>setEventMulticaster&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">new&lt;/span> MetadataMetricsEventMulticaster&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">this&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">RegistryMetricsCollector&lt;/span>&lt;span style="color:#719e07">(&lt;/span>ApplicationModel applicationModel&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">super&lt;/span>&lt;span style="color:#719e07">.&lt;/span>setEventMulticaster&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">new&lt;/span> RegistryMetricsEventMulticaster&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">this&lt;/span>&lt;span style="color:#719e07">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这意味这想要通过它们发布事件，需要通过它们对应的 &lt;code>Collector&lt;/code> 来访问。&lt;/p>
+&lt;p>如前文所述， MetricsDispatcher 在初始化时会尝试获取并加载所有 MetricsCollector 的SPI拓展，&lt;/p>
+&lt;p>三大中心的MetricsCollector （Metadata/Registry/ConfigCenter）也会在这里被初始化，并添加为 MetricsDispatcher 的监听器：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">MetricsDispatcher&lt;/span>&lt;span style="color:#719e07">(&lt;/span>ApplicationModel applicationModel&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ExtensionLoader&lt;span style="color:#719e07">&amp;lt;&lt;/span>MetricsCollector&lt;span style="color:#719e07">&amp;gt;&lt;/span> extensionLoader &lt;span style="color:#719e07">=&lt;/span> applicationModel&lt;span style="color:#719e07">.&lt;/span>getExtensionLoader&lt;span style="color:#719e07">(&lt;/span>MetricsCollector&lt;span style="color:#719e07">.&lt;/span>class&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">for&lt;/span> &lt;span style="color:#719e07">(&lt;/span>MetricsCollector customizeCollector &lt;span style="color:#719e07">:&lt;/span> customizeCollectors&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> beanFactory&lt;span style="color:#719e07">.&lt;/span>registerBean&lt;span style="color:#719e07">(&lt;/span>customizeCollector&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> customizeCollectors&lt;span style="color:#719e07">.&lt;/span>forEach&lt;span style="color:#719e07">(&lt;/span>&lt;span style="color:#719e07">this&lt;/span>&lt;span style="color:#719e07">::&lt;/span>addListener&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>对于 MetricsDispatcher，它由 MetricsEventBus 创建。而 MetricsEventBus 自身作为指标相关消息的总线，会接收所有指标消息，并将它们转发给监听者。&lt;/p>
+&lt;p>MetricsEvenetBus 提供了三个方法来发布指标事件：&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>publish(MetricsEvent event)&lt;/code> ，将事件发布给所有订阅者，只发布一次且不关心事件处理结果&lt;/li>
+&lt;li>&lt;code>post(MetricsEvent event, Supplier&amp;lt;T&amp;gt; targetSupplier)&lt;/code> ，将事件发布给所有订阅者，并根据是否产生异常判断事件成功或失败，调用 MetricsDispatcher 发布对应的事件。&lt;/li>
+&lt;li>&lt;code>post(MetricsEvent event, Supplier&amp;lt;T&amp;gt; targetSupplier, Function&amp;lt;T, Boolean&amp;gt; trFunction)&lt;/code> ，额外的 trFunction 可用于通过业务结果判断事件成功或失败。 &lt;code>targetSupplier&lt;/code> 为业务操作函数，泛型T为业务结果类型。&lt;/li>
+&lt;/ul>
+&lt;p>这三个方法均会通过 MetricsDispatcher 来转发事件。&lt;/p>
+&lt;p>在之前的分析中，我们知道 MetricsDispatcher 创建了所有 MetricsCollector 拓展，并将它们注册为自己的监听者。&lt;/p>
+&lt;p>因此，当 MetricsEventBus 接收到发布的信息时，它会将信息转发到所有 MetricsCollector 中。对于 CombMetricsCollector 的实现，它们又会调用自己创建的 MetricsEventMulticaster 再次转发消息，到具体指标的监听器。&lt;/p>
+&lt;p>之后，这些监听器就会根据自己的逻辑修改Collector中的指标计数。&lt;/p>
+&lt;p>&lt;img src="https://dubbo.apache.org/imgs/blog/metrics-source-blog/metris-event-dispatch-full.png" alt="image-20230629160012950">&lt;/p>
+&lt;h3 id="事件发布">事件发布&lt;/h3>
+&lt;p>接下来，我们将寻找指标事件发布的源头。&lt;/p>
+&lt;p>通过前文的分析，我们知道 MetricsEventBus 是所有指标事件发布的入口。具体来说，它有以下的用法：&lt;/p>
+&lt;ul>
+&lt;li>AbstractDirectory&lt;/li>
+&lt;li>ServiceConfig&lt;/li>
+&lt;li>DefaultApplicationDeployer&lt;/li>
+&lt;li>ApolloDynamicConfiguration&lt;/li>
+&lt;li>NacosDynamicConfiguration&lt;/li>
+&lt;li>ZookeeperDataListener&lt;/li>
+&lt;li>AbstractMetadataReport&lt;/li>
+&lt;/ul>
+&lt;p>我们将逐个分析每个用法。&lt;/p>
+&lt;p>&lt;strong>AbstractDirectory&lt;/strong>&lt;/p>
+&lt;p>AbstractDirectory 在修改 Invoker 状态相关的操作完成后都会通过 MetricsEventBus 发布 refreshDirectoryEvent（服务目录更新事件，类型为 RegistryEvent ），将当前目录中各种状态 Invoker 实例的最新数量作为附件添加到 RegistryEvent 中。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">//AbstractDirectory
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">recoverDisabledInvoker&lt;/span>&lt;span style="color:#719e07">(&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> invoker&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> MetricsEventBus&lt;span style="color:#719e07">.&lt;/span>publish&lt;span style="color:#719e07">(&lt;/span>RegistryEvent&lt;span style="color:#719e07">.&lt;/span>refreshDirectoryEvent&lt;span style="color:#719e07">(&lt;/span>applicationModel&lt;span style="color:#719e07">,&lt;/span> getSummary&lt;span style="color:#719e07">()));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">protected&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">setInvokers&lt;/span>&lt;span style="color:#719e07">(&lt;/span>BitList&lt;span style="color:#719e07">&amp;lt;&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span> invokers&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> MetricsEventBus&lt;span style="color:#719e07">.&lt;/span>publish&lt;span style="color:#719e07">(&lt;/span>RegistryEvent&lt;span style="color:#719e07">.&lt;/span>refreshDirectoryEvent&lt;span style="color:#719e07">(&lt;/span>applicationModel&lt;span style="color:#719e07">,&lt;/span> getSummary&lt;span style="color:#719e07">()));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">protected&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">setInvokers&lt;/span>&lt;span style="color:#719e07">(&lt;/span>BitList&lt;span style="color:#719e07">&amp;lt;&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span> invokers&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> MetricsEventBus&lt;span style="color:#719e07">.&lt;/span>publish&lt;span style="color:#719e07">(&lt;/span>RegistryEvent&lt;span style="color:#719e07">.&lt;/span>refreshDirectoryEvent&lt;span style="color:#719e07">(&lt;/span>applicationModel&lt;span style="color:#719e07">,&lt;/span> getSummary&lt;span style="color:#719e07">()));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> Map&lt;span style="color:#719e07">&amp;lt;&lt;/span>MetricsKey&lt;span style="color:#719e07">,&lt;/span> Map&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">,&lt;/span> Integer&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span> &lt;span style="color:#268bd2">getSummary&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Map&lt;span style="color:#719e07">&amp;lt;&lt;/span>MetricsKey&lt;span style="color:#719e07">,&lt;/span> Map&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">,&lt;/span> Integer&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span> summaryMap &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> HashMap&lt;span style="color:#719e07">&amp;lt;&amp;gt;();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">//目录中可用的Invoker数量
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> summaryMap&lt;span style="color:#719e07">.&lt;/span>put&lt;span style="color:#719e07">(&lt;/span>MetricsKey&lt;span style="color:#719e07">.&lt;/span>DIRECTORY_METRIC_NUM_VALID&lt;span style="color:#719e07">,&lt;/span> groupByServiceKey&lt;span style="color:#719e07">(&lt;/span>getValidInvokers&lt;span style="color:#719e07">()));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">//目录中不可用的Invoker数量
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> summaryMap&lt;span style="color:#719e07">.&lt;/span>put&lt;span style="color:#719e07">(&lt;/span>MetricsKey&lt;span style="color:#719e07">.&lt;/span>DIRECTORY_METRIC_NUM_DISABLE&lt;span style="color:#719e07">,&lt;/span> groupByServiceKey&lt;span style="color:#719e07">(&lt;/span>getDisabledInvokers&lt;span style="color:#719e07">()));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">//目录中等待重连的Invoker数量
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> summaryMap&lt;span style="color:#719e07">.&lt;/span>put&lt;span style="color:#719e07">(&lt;/span>MetricsKey&lt;span style="color:#719e07">.&lt;/span>DIRECTORY_METRIC_NUM_TO_RECONNECT&lt;span style="color:#719e07">,&lt;/span> groupByServiceKey&lt;span style="color:#719e07">(&lt;/span>getInvokersToReconnect&lt;span style="color:#719e07">()));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> summaryMap&lt;span style="color:#719e07">.&lt;/span>put&lt;span style="color:#719e07">(&lt;/span>MetricsKey&lt;span style="color:#719e07">.&lt;/span>DIRECTORY_METRIC_NUM_ALL&lt;span style="color:#719e07">,&lt;/span> groupByServiceKey&lt;span style="color:#719e07">(&lt;/span>getInvokers&lt;span style="color:#719e07">()));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> summaryMap&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">...&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>该事件最终会由 RegistryMetricsCollector 中的 RegistryMetricsDispatcher 转发到关系该事件的监听器中。&lt;strong>事件和监听器之间通过 MetricsKey匹配&lt;/strong> 。&lt;/p>
+&lt;p>最终，MetricsKey 为 &lt;code>**DIRECTORY_METRIC_NUM_VALID**&lt;/code> 的监听器会处理这个事件，并更新 Collector中的计数。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">//DIRECTORY_METRIC_NUM_VALID 对应的 Listener。
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>MetricsCat APPLICATION_DIRECTORY_POST &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> MetricsCat&lt;span style="color:#719e07">(&lt;/span>MetricsKey&lt;span style="color:#719e07">.&lt;/span>DIRECTORY_METRIC_NUM_VALID&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#719e07">(&lt;/span>key&lt;span style="color:#719e07">,&lt;/span> placeType&lt;span style="color:#719e07">,&lt;/span> collector&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">-&amp;gt;&lt;/span> AbstractMetricsListener&lt;span style="color:#719e07">.&lt;/span>onEvent&lt;span style="color:#719e07">(&lt;/span>key&lt;span style="color:#719e07">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> event &lt;span style="color:#719e07">-&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Map&lt;span style="color:#719e07">&amp;lt;&lt;/span>MetricsKey&lt;span style="color:#719e07">,&lt;/span> Map&lt;span style="color:#719e07">&amp;lt;&lt;/span>String&lt;span style="color:#719e07">,&lt;/span> Integer&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span> summaryMap &lt;span style="color:#719e07">=&lt;/span> event&lt;span style="color:#719e07">.&lt;/span>getAttachmentValue&lt;span style="color:#719e07">(&lt;/span>ATTACHMENT_DIRECTORY_MAP&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> summaryMap&lt;span style="color:#719e07">.&lt;/span>forEach&lt;span style="color:#719e07">((&lt;/span>metricsKey&lt;span style="color:#719e07">,&lt;/span> map&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">-&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> map&lt;span style="color:#719e07">.&lt;/span>forEach&lt;span style="color:#719e07">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">(&lt;/span>k&lt;span style="color:#719e07">,&lt;/span> v&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">-&amp;gt;&lt;/span> collector&lt;span style="color:#719e07">.&lt;/span>setNum&lt;span style="color:#719e07">(&lt;/span>metricsKey&lt;span style="color:#719e07">,&lt;/span> event&lt;span style="color:#719e07">.&lt;/span>appName&lt;span style="color:#719e07">(),&lt;/span> k&lt;span style="color:#719e07">,&lt;/span> v&lt;span style="color:#719e07">)));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">));&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这样，服务目录中不同状态 Invoker 的计数就通过 RegistryMetricsCollector 更新到了 ServiceStatComposite 中。&lt;/p>
+&lt;p>&lt;strong>ServiceConfig&lt;/strong>&lt;/p>
+&lt;p>当通过 ServiceConfig 导出、注册一个服务时，它会发布一个服务导出事件。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">//ServiceConfig
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#268bd2">protected&lt;/span> &lt;span style="color:#268bd2">synchronized&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">doExport&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> doExportUrls&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> exported&lt;span style="color:#719e07">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">doExportUrls&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> MetricsEventBus&lt;span style="color:#719e07">.&lt;/span>post&lt;span style="color:#719e07">(&lt;/span>RegistryEvent&lt;span style="color:#719e07">.&lt;/span>toRsEvent&lt;span style="color:#719e07">(&lt;/span>module&lt;span style="color:#719e07">.&lt;/span>getApplicationModel&lt;span style="color:#719e07">(),&lt;/span> getUniqueServiceName&lt;span style="color:#719e07">(),&lt;/span> protocols&lt;span style="color:#719e07">.&lt;/span>size&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">*&lt;/span> registryURLs&lt;span style="color:#719e07">.&lt;/span>size&lt;span style="color:#719e07">()),&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">//该函数会被同步执行，如果抛出异常则触发 MetricsEvent 的 onError方法，否则触发 onFinish
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> &lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">-&amp;gt;&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">for&lt;/span> &lt;span style="color:#719e07">(&lt;/span>ProtocolConfig protocolConfig &lt;span style="color:#719e07">:&lt;/span> protocols&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> String pathKey &lt;span style="color:#719e07">=&lt;/span> URL&lt;span style="color:#719e07">.&lt;/span>buildKey&lt;span style="color:#719e07">(&lt;/span>getContextPath&lt;span style="color:#719e07">(&lt;/span>protocolConfig&lt;span style="color:#719e07">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">.&lt;/span>map&lt;span style="color:#719e07">(&lt;/span>p &lt;span style="color:#719e07">-&amp;gt;&lt;/span> p &lt;span style="color:#719e07">+&lt;/span> &lt;span style="color:#2aa198">&amp;#34;/&amp;#34;&lt;/span> &lt;span style="color:#719e07">+&lt;/span> path&lt;span style="color:#719e07">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">.&lt;/span>orElse&lt;span style="color:#719e07">(&lt;/span>path&lt;span style="color:#719e07">),&lt;/span> group&lt;span style="color:#719e07">,&lt;/span> version&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(!&lt;/span>serverService&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> repository&lt;span style="color:#719e07">.&lt;/span>registerService&lt;span style="color:#719e07">(&lt;/span>pathKey&lt;span style="color:#719e07">,&lt;/span> interfaceClass&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> doExportUrlsFor1Protocol&lt;span style="color:#719e07">(&lt;/span>protocolConfig&lt;span style="color:#719e07">,&lt;/span> registryURLs&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#cb4b16">null&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> providerModel&lt;span style="color:#719e07">.&lt;/span>setServiceUrls&lt;span style="color:#719e07">(&lt;/span>urls&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>事件发布时，该事件会被转发到 RegistryMetricsCollector，触发对应的 Listener 增加 &lt;strong>SERVICE_REGISTER_METRIC_REQUESTS&lt;/strong> （当前服务级注册请求总数）的计数，然后执行定义的 provider 函数。根据是否抛出异常，之后执行 onError 方法 或 onFinish 方法，增加 &lt;strong>SERVICE_REGISTER_METRIC_REQUESTS_FAILED&lt;/strong> （当前服务级注册请求失败总数）或&lt;strong>SERVICE_REGISTER_METRIC_REQUESTS_SUCCEED&lt;/strong> （当前服务级注册请求成功总数） 的计数。&lt;/p>
+&lt;p>&lt;strong>DefaultApplicationDeployer&lt;/strong>&lt;/p>
+&lt;p>它在应用部署过程中，初始化配置中心时，发布配置发生改变的事件。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">startConfigCenter&lt;/span>&lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> compositeDynamicConfiguration&lt;span style="color:#719e07">.&lt;/span>addConfiguration&lt;span style="color:#719e07">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> prepareEnvironment&lt;span style="color:#719e07">(&lt;/span>configCenter&lt;span style="color:#719e07">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">private&lt;/span> DynamicConfiguration &lt;span style="color:#268bd2">prepareEnvironment&lt;/span>&lt;span style="color:#719e07">(&lt;/span>ConfigCenterConfig configCenter&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// Add metrics
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> MetricsEventBus&lt;span style="color:#719e07">.&lt;/span>publish&lt;span style="color:#719e07">(&lt;/span>ConfigCenterEvent&lt;span style="color:#719e07">.&lt;/span>toChangeEvent&lt;span style="color:#719e07">(&lt;/span>applicationModel&lt;span style="color:#719e07">,&lt;/span> configCenter&lt;span style="color:#719e07">.&lt;/span>getConfigFile&lt;span style="color:#719e07">(),&lt;/span> configCenter&lt;span style="color:#719e07">.&lt;/span>getGroup&lt;span style="color:#719e07">(),&lt;/span>configCenter&lt;span style="color:#719e07">.&lt;/span>getProtocol&lt;span style="color:#719e07">(),&lt;/span> ConfigChangeType&lt;span style="color:#719e07">.&lt;/span>ADDED&lt;span style="color:#719e07">.&lt;/span>name&lt;span style="color:#719e07">(),&lt;/span> configMap&lt;span style="color:#719e07">.&lt;/span>size&lt;span style="color:#719e07">()));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> &lt;span style="color:#719e07">(&lt;/span>isNotEmpty&lt;span style="color:#719e07">(&lt;/span>appGroup&lt;span style="color:#719e07">))&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> MetricsEventBus&lt;span style="color:#719e07">.&lt;/span>publish&lt;span style="color:#719e07">(&lt;/span>ConfigCenterEvent&lt;span style="color:#719e07">.&lt;/span>toChangeEvent&lt;span style="color:#719e07">(&lt;/span>applicationModel&lt;span style="color:#719e07">,&lt;/span> appConfigFile&lt;span style="color:#719e07">,&lt;/span> appGroup&lt;span style="color:#719e07">,&lt;/span> configCenter&lt;span style="color:#719e07">.&lt;/span>getProtocol&lt;span style="color:#719e07">(),&lt;/span> ConfigChangeType&lt;span style="color:#719e07">.&lt;/span>ADDED&lt;span style="color:#719e07">.&lt;/span>name&lt;span style="color:#719e07">(),&lt;/span> appConfigMap&lt;span style="color:#719e07">.&lt;/span>size&lt;span style="color:#719e07">()));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在 &lt;code>prepareEnvironment&lt;/code> 方法中，会按配置中心设置的组（group）和当前应用程序的名称作为组名发布两次事件。该事件会被转发到 ConfigCenterMetricsCollector，增加 &lt;strong>CONFIGCENTER_METRIC_TOTAL&lt;/strong> （配置中心配置变化次数）的计数。&lt;/p>
+&lt;p>&lt;strong>ApolloDynamicConfiguration&lt;/strong>&lt;/p>
+&lt;p>动态配置功能的 Apollo 配置中心实现。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">//ApolloDynamicConfiguration
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#268bd2">@Override&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">onChange&lt;/span>&lt;span style="color:#719e07">(&lt;/span>com&lt;span style="color:#719e07">.&lt;/span>ctrip&lt;span style="color:#719e07">.&lt;/span>framework&lt;span style="color:#719e07">.&lt;/span>apollo&lt;span style="color:#719e07">.&lt;/span>model&lt;span style="color:#719e07">.&lt;/span>ConfigChangeEvent changeEvent&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> MetricsEventBus&lt;span style="color:#719e07">.&lt;/span>publish&lt;span style="color:#719e07">(&lt;/span>ConfigCenterEvent&lt;span style="color:#719e07">.&lt;/span>toChangeEvent&lt;span style="color:#719e07">(&lt;/span>applicationModel&lt;span style="color:#719e07">,&lt;/span> event&lt;span style="color:#719e07">.&lt;/span>getKey&lt;span style="color:#719e07">(),&lt;/span> event&lt;span style="color:#719e07">.&lt;/span>getGroup&lt;span style="color:#719e07">(),&lt;/span>ConfigCenterEvent&lt;span style="color:#719e07">.&lt;/span>APOLLO_PROTOCOL&lt;span style="color:#719e07">,&lt;/span> ConfigChangeType&lt;span style="color:#719e07">.&lt;/span>ADDED&lt;span style="color:#719e07">.&lt;/span>name&lt;span style="color:#719e07">(),&lt;/span> SELF_INCREMENT_SIZE&lt;span style="color:#719e07">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>当Apollo配置中心的配置发生变化时，它的 &lt;code>onChange&lt;/code> 方法会被触发，并在最后发布一个 ConfigCenterEvent。该事件最终转发到ConfigCenterMetricsCollector 中，同样增加 **CONFIGCENTER_METRIC_TOTAL **的计数。&lt;/p>
+&lt;p>&lt;strong>NacosDynamicConfiguration&lt;/strong>&lt;/p>
+&lt;p>动态配置功能的 Nacos 配置中心实现。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">//NacosDynamicConfiguration
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#268bd2">@Override&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">innerReceive&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String dataId&lt;span style="color:#719e07">,&lt;/span> String group&lt;span style="color:#719e07">,&lt;/span> String configInfo&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> MetricsEventBus&lt;span style="color:#719e07">.&lt;/span>publish&lt;span style="color:#719e07">(&lt;/span>ConfigCenterEvent&lt;span style="color:#719e07">.&lt;/span>toChangeEvent&lt;span style="color:#719e07">(&lt;/span>applicationModel&lt;span style="color:#719e07">,&lt;/span> event&lt;span style="color:#719e07">.&lt;/span>getKey&lt;span style="color:#719e07">(),&lt;/span> event&lt;span style="color:#719e07">.&lt;/span>getGroup&lt;span style="color:#719e07">(),&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ConfigCenterEvent&lt;span style="color:#719e07">.&lt;/span>NACOS_PROTOCOL&lt;span style="color:#719e07">,&lt;/span> ConfigChangeType&lt;span style="color:#719e07">.&lt;/span>ADDED&lt;span style="color:#719e07">.&lt;/span>name&lt;span style="color:#719e07">(),&lt;/span> SELF_INCREMENT_SIZE&lt;span style="color:#719e07">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>当Nacos配置中心的配置发生变化时，它的 &lt;code>innerReceive&lt;/code> 方法被触发，发布一个 ConfigCenterEvent。它的处理流程和 ApolloDynamicConfiguration 一致，最终增加 **CONFIGCENTER_METRIC_TOTAL **的计数。&lt;/p>
+&lt;p>&lt;strong>ZookeeperDataListener&lt;/strong>&lt;/p>
+&lt;p>动态配置功能的 Zookeeper 实现。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">//ZookeeperDataListener
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#268bd2">@Override&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">dataChanged&lt;/span>&lt;span style="color:#719e07">(&lt;/span>String path&lt;span style="color:#719e07">,&lt;/span> Object value&lt;span style="color:#719e07">,&lt;/span> EventType eventType&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> MetricsEventBus&lt;span style="color:#719e07">.&lt;/span>publish&lt;span style="color:#719e07">(&lt;/span>ConfigCenterEvent&lt;span style="color:#719e07">.&lt;/span>toChangeEvent&lt;span style="color:#719e07">(&lt;/span>applicationModel&lt;span style="color:#719e07">,&lt;/span> configChangeEvent&lt;span style="color:#719e07">.&lt;/span>getKey&lt;span style="color:#719e07">(),&lt;/span> configChangeEvent&lt;span style="color:#719e07">.&lt;/span>getGroup&lt;span style="color:#719e07">(),&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ConfigCenterEvent&lt;span style="color:#719e07">.&lt;/span>ZK_PROTOCOL&lt;span style="color:#719e07">,&lt;/span> ConfigChangeType&lt;span style="color:#719e07">.&lt;/span>ADDED&lt;span style="color:#719e07">.&lt;/span>name&lt;span style="color:#719e07">(),&lt;/span> SELF_INCREMENT_SIZE&lt;span style="color:#719e07">));&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在指标收集层面，它的行为和前文中两个配置中心一致，此处不详细展开三个配置中心具体实现的异同。&lt;/p>
+&lt;p>&lt;strong>AbstractMetadataReport&lt;/strong>&lt;/p>
+&lt;p>元数据报告接口的抽象实现。它的三个实现 （NacosMetadataReport、RedisMetadataReport、ZookeeperMetadataReport）均使用它的指标事件逻辑。&lt;/p>
+&lt;p>当订阅新服务并获取它的元数据时，它会发布一个 MetadataEvent 触发相关指标的修改。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">private&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">storeProviderMetadataTask&lt;/span>&lt;span style="color:#719e07">(&lt;/span>MetadataIdentifier providerMetadataIdentifier&lt;span style="color:#719e07">,&lt;/span> ServiceDefinition serviceDefinition&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> MetricsEventBus&lt;span style="color:#719e07">.&lt;/span>post&lt;span style="color:#719e07">(&lt;/span>metadataEvent&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#719e07">()&lt;/span> &lt;span style="color:#719e07">-&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#dc322f">boolean&lt;/span> result &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#cb4b16">true&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">try&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> doStoreProviderMetadata&lt;span style="color:#719e07">(&lt;/span>providerMetadataIdentifier&lt;span style="color:#719e07">,&lt;/span> data&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> saveProperties&lt;span style="color:#719e07">(&lt;/span>providerMetadataIdentifier&lt;span style="color:#719e07">,&lt;/span> data&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#cb4b16">true&lt;/span>&lt;span style="color:#719e07">,&lt;/span> &lt;span style="color:#719e07">!&lt;/span>syncReport&lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">catch&lt;/span> &lt;span style="color:#719e07">(&lt;/span>Exception e&lt;span style="color:#719e07">)&lt;/span> &lt;span style="color:#719e07">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> result &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#cb4b16">false&lt;/span>&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> result&lt;span style="color:#719e07">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">},&lt;/span> aBoolean &lt;span style="color:#719e07">-&amp;gt;&lt;/span> aBoolean
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在前文中，我们提到 MetricsEventBus.post 的第二个参数是实际要进行的业务操作，第三个参数则是根据业务操作返回值判断操作是否成功的逻辑。&lt;/p>
+&lt;p>此处的业务操作是尝试存储目标服务的元数据。执行操作之前，会先发布事件，最终增加 &lt;strong>STORE_PROVIDER_METADATA&lt;/strong> （尝试存储服务元数据次数）的计数。如果产生异常，会增加 &lt;strong>STORE_PROVIDER_METADATA_ERROR&lt;/strong> （存储服务元数据失败） 的计数，否则增加&lt;strong>STORE_PROVIDER_METADATA_SUCCEED&lt;/strong>（存储服务元数据成功） 的计数。&lt;/p></description></item><item><title>Blog: 4-指标转换与导出</title><link>https://dubbo.apache.org/zh-cn/blog/2023/04/28/4-%E6%8C%87%E6%A0%87%E8%BD%AC%E6%8D%A2%E4%B8%8E%E5%AF%BC%E5%87%BA/</link><pubDate>Fri, 28 Apr 2023 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/blog/2023/04/28/4-%E6%8C%87%E6%A0%87%E8%BD%AC%E6%8D%A2%E4%B8%8E%E5%AF%BC%E5%87%BA/</guid><description>
 &lt;h2 id="四指标转换与导出">四、指标转换与导出&lt;/h2>
 &lt;p>本章主要梳理指标收集完成后，向外部收集器导出的流程。&lt;/p>
 &lt;p>通过之前的分析，我们知道不同类型指标的收集分别由各个 Collector 实现进行。它们底层的 MetricsCollector 接口定义了指标导出的操作。&lt;/p>
@@ -13244,7 +13521,7 @@ Dubbo这边有没有集合文档展示和测试功能,能不用写文档就能�
 &lt;h2 id="示例">示例&lt;/h2>
 &lt;h3 id="示例-1使用-dubbo-开发-grpc-服务">示例 1，使用 Dubbo 开发 gRPC 服务&lt;/h3>
 &lt;p>&lt;a href="https://grpc.io/">gRPC&lt;/a> 是 Google 开源的构建在 HTTP/2 之上的一个 PRC 通信协议。Dubbo 依赖其灵活的协议扩展机制，增加了对 gRPC (HTTP/2) 协议的支持。&lt;/p>
-&lt;p>目前的支持限定在 Dubbo Java 语言版本，后续 Go 语言或其他语言版本将会以类似方式提供支持。下面，通过一个&lt;a href="https://github.com/apache/dubbo-samples/tree/master/3-extensions/protocol/dubbo-samples-grpc">简单的示例&lt;/a>来演示如何在 Dubbo 中使用 gRPC 协议通信。&lt;/p>
+&lt;p>目前的支持限定在 Dubbo Java 语言版本，后续 Go 语言或其他语言版本将会以类似方式提供支持。下面，通过一个&lt;a href="https://github.com/apache/dubbo-samples/tree/master/99-integration/dubbo-samples-grpc">简单的示例&lt;/a>来演示如何在 Dubbo 中使用 gRPC 协议通信。&lt;/p>
 &lt;h4 id="1-定义服务-idl">1. 定义服务 IDL&lt;/h4>
 &lt;p>首先，通过标准的 Protobuf 协议定义服务如下：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>syntax = &lt;span style="color:#2aa198">&amp;#34;proto3&amp;#34;&lt;/span>;
@@ -13561,7 +13838,7 @@ Dubbo这边有没有集合文档展示和测试功能,能不用写文档就能�
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;/execution&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;/executions&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/plugin&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>注意，这里与 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/3-extensions/protocol/dubbo-samples-grpc">Dubbo 对 gRPC&lt;/a> 支持部分的区别在于：
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>注意，这里与 &lt;a href="https://github.com/apache/dubbo-samples/tree/master/99-integration/dubbo-samples-grpc">Dubbo 对 gRPC&lt;/a> 支持部分的区别在于：
 &lt;code> &amp;lt;pluginParameter&amp;gt;dubbo&amp;lt;/pluginParameter&amp;gt;&lt;/code>&lt;/p>
 &lt;ol start="2">
 &lt;li>
