@@ -3060,7 +3060,7 @@ HTTP 协议与 dubbo 协议之间的映射关系。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#b58900">export&lt;/span> &lt;span style="color:#268bd2">ARCH&lt;/span>&lt;span style="color:#719e07">=&lt;/span>mac
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#b58900">export&lt;/span> &lt;span style="color:#268bd2">ENV&lt;/span>&lt;span style="color:#719e07">=&lt;/span>dev
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#b58900">cd&lt;/span> helloworld/dubbo/go-server
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sh ./assembly/&lt;span style="color:#268bd2">$ARCH&lt;/span>/$ENV.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sh ./assembly/&lt;span style="color:#268bd2">$ARCH&lt;/span>/&lt;span style="color:#268bd2">$ENV&lt;/span>.sh
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#b58900">cd&lt;/span> ./target/linux/user_info_server-0.3.1-20190517-0930-release
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sh ./bin/load.sh start
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>打开另一个终端运行客户端&lt;/p>
