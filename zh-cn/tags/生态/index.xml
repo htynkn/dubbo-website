@@ -948,7 +948,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">case&lt;/span> p.work &lt;span style="color:#719e07">&amp;lt;-&lt;/span> t:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">case&lt;/span> p.sem &lt;span style="color:#719e07">&amp;lt;-&lt;/span> &lt;span style="color:#268bd2">struct&lt;/span>{}{}:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> p.wg.&lt;span style="color:#268bd2">Add&lt;/span>(&lt;span style="color:#2aa198">1&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">go&lt;/span> p.&lt;span style="color:#268bd2">worker&lt;/span>(t)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">go&lt;/span> p.worker(t)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">default&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">goSafely&lt;/span>(t)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
