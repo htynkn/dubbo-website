@@ -430,7 +430,7 @@
 </span></span><span style=display:flex><span>  <span style=color:#719e07>case</span> p.work <span style=color:#719e07>&lt;-</span> t:
 </span></span><span style=display:flex><span>  <span style=color:#719e07>case</span> p.sem <span style=color:#719e07>&lt;-</span> <span style=color:#268bd2>struct</span>{}{}:
 </span></span><span style=display:flex><span>    p.wg.<span style=color:#268bd2>Add</span>(<span style=color:#2aa198>1</span>)
-</span></span><span style=display:flex><span>    <span style=color:#719e07>go</span> p.worker(t)
+</span></span><span style=display:flex><span>    <span style=color:#719e07>go</span> p.<span style=color:#268bd2>worker</span>(t)
 </span></span><span style=display:flex><span>  <span style=color:#719e07>default</span>:
 </span></span><span style=display:flex><span>    <span style=color:#268bd2>goSafely</span>(t)
 </span></span><span style=display:flex><span>  }
