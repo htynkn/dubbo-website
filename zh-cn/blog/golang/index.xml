@@ -4369,7 +4369,7 @@ group 。又或者我采集到的机器自身的数据，可以将其归类到 s
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> impl.queue.&lt;span style="color:#268bd2">Remove&lt;/span>(timestamp)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> timestamp = impl.queue.&lt;span style="color:#268bd2">Front&lt;/span>()
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> impl.queue.&lt;span style="color:#268bd2">Len&lt;/span>() &amp;lt; impl.rate {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> if impl.queue.&lt;span style="color:#268bd2">Len&lt;/span>() &amp;lt; impl.rate {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> impl.queue.&lt;span style="color:#268bd2">PushBack&lt;/span>(current)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">return&lt;/span> &lt;span style="color:#cb4b16">true&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
