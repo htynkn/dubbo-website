@@ -404,7 +404,7 @@
 </span></span><span style=display:flex><span>  <span style=color:#268bd2>f</span>()
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p><code>pkg</code> 参数传递到了一个匿名方法，这个方法最终放入了 <code>taskPool</code>。这个方法很关键，在我后来写 seata-golang 代码的时候，就遇到了一个坑，这个坑后面分析。</p><p>接着我们看一下 taskPool 的定义：</p><div class=highlight><pre tabindex=0 style=color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#586e75>// NewTaskPoolSimple build a simple task pool
-</span></span></span><span style=display:flex><span><span style=color:#586e75></span><span style=color:#268bd2>func</span> <span style=color:#268bd2>NewTaskPoolSimple</span>(size int) GenericTaskPool {
+</span></span></span><span style=display:flex><span><span style=color:#586e75></span><span style=color:#268bd2>func</span> <span style=color:#268bd2>NewTaskPoolSimple</span>(size <span style=color:#dc322f>int</span>) GenericTaskPool {
 </span></span><span style=display:flex><span>  <span style=color:#719e07>if</span> size &lt; <span style=color:#2aa198>1</span> {
 </span></span><span style=display:flex><span>    size = runtime.<span style=color:#268bd2>NumCPU</span>() <span style=color:#719e07>*</span> <span style=color:#2aa198>100</span>
 </span></span><span style=display:flex><span>  }

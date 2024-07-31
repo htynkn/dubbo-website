@@ -921,7 +921,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>pkg&lt;/code> 参数传递到了一个匿名方法，这个方法最终放入了 &lt;code>taskPool&lt;/code>。这个方法很关键，在我后来写 seata-golang 代码的时候，就遇到了一个坑，这个坑后面分析。&lt;/p>
 &lt;p>接着我们看一下 taskPool 的定义：&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// NewTaskPoolSimple build a simple task pool
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#268bd2">func&lt;/span> &lt;span style="color:#268bd2">NewTaskPoolSimple&lt;/span>(size int) GenericTaskPool {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#268bd2">func&lt;/span> &lt;span style="color:#268bd2">NewTaskPoolSimple&lt;/span>(size &lt;span style="color:#dc322f">int&lt;/span>) GenericTaskPool {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> size &amp;lt; &lt;span style="color:#2aa198">1&lt;/span> {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> size = runtime.&lt;span style="color:#268bd2">NumCPU&lt;/span>() &lt;span style="color:#719e07">*&lt;/span> &lt;span style="color:#2aa198">100&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
