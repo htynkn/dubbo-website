@@ -1,5 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – New Releases</title><link>https://cn.dubbo.apache.org/en/blog/releases/</link><description>Recent content in New Releases on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>en</language><atom:link href="https://cn.dubbo.apache.org/en/blog/releases/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: 2.7.14 Release Note</title><link>https://cn.dubbo.apache.org/en/blog/2021/09/20/2.7.14-release-note/</link><pubDate>Mon, 20 Sep 2021 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/en/blog/2021/09/20/2.7.14-release-note/</guid><description>
-&lt;h2 id="change-lists">Change Lists&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>New Releases on Apache Dubbo</title><link>https://cn.dubbo.apache.org/en/blog/releases/</link><description>Recent content in New Releases on Apache Dubbo</description><generator>Hugo</generator><language>en</language><atom:link href="https://cn.dubbo.apache.org/en/blog/releases/index.xml" rel="self" type="application/rss+xml"/><item><title>2.7.14 Release Note</title><link>https://cn.dubbo.apache.org/en/blog/2021/09/20/2.7.14-release-note/</link><pubDate>Mon, 20 Sep 2021 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/en/blog/2021/09/20/2.7.14-release-note/</guid><description>&lt;h2 id="change-lists">Change Lists&lt;/h2>
 &lt;ul>
 &lt;li>add Dynamic Configuration Override Support For ServiceDiscovery. (#8389)&lt;/li>
 &lt;li>fix mock parameters doesn&amp;rsquo;t work when it contain &amp;lsquo;:&amp;rsquo; or &amp;lsquo;=&amp;rsquo;. (#8379)&lt;/li>
@@ -25,16 +24,14 @@
 &lt;li>commons_io: 2.6 -&amp;gt; 2.7&lt;/li>
 &lt;li>curator: 5.0.0 -&amp;gt; 5.1.0&lt;/li>
 &lt;li>hessian_lite: 3.2.8 -&amp;gt; 3.2.11&lt;/li>
-&lt;/ul></description></item><item><title>Blog: 3.0.2.1 Release Note</title><link>https://cn.dubbo.apache.org/en/blog/2021/08/23/3.0.2.1-release-note/</link><pubDate>Mon, 23 Aug 2021 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/en/blog/2021/08/23/3.0.2.1-release-note/</guid><description>
-&lt;p>This is a bugfix version of 3.0.2.
+&lt;/ul></description></item><item><title>3.0.2.1 Release Note</title><link>https://cn.dubbo.apache.org/en/blog/2021/08/23/3.0.2.1-release-note/</link><pubDate>Mon, 23 Aug 2021 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/en/blog/2021/08/23/3.0.2.1-release-note/</guid><description>&lt;p>This is a bugfix version of 3.0.2.
 Exactly the same as version 3.0.2, except for the following changes.&lt;/p>
 &lt;h2 id="bugfix">Bugfix&lt;/h2>
 &lt;ul>
 &lt;li>Fix nacos group inviable in consumer side (#8533)&lt;/li>
 &lt;li>Fix NPE on serialization checking when request timed out (#8547)&lt;/li>
 &lt;li>Compact with dubbo-all without farbic-io (#8546)&lt;/li>
-&lt;/ul></description></item><item><title>Blog: 3.0.2 Release Note</title><link>https://cn.dubbo.apache.org/en/blog/2021/08/18/3.0.2-release-note/</link><pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/en/blog/2021/08/18/3.0.2-release-note/</guid><description>
-&lt;h2 id="features">Features&lt;/h2>
+&lt;/ul></description></item><item><title>3.0.2 Release Note</title><link>https://cn.dubbo.apache.org/en/blog/2021/08/18/3.0.2-release-note/</link><pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/en/blog/2021/08/18/3.0.2-release-note/</guid><description>&lt;h2 id="features">Features&lt;/h2>
 &lt;ul>
 &lt;li>improve generic service with @DubboService annotation.&lt;/li>
 &lt;li>metadata report config support xml to config protocol and port.&lt;/li>
@@ -103,62 +100,7 @@ Exactly the same as version 3.0.2, except for the following changes.&lt;/p>
 &lt;li>compatible with adaptive extensions when ApplicationModel is null.&lt;/li>
 &lt;/ul>
 &lt;h2 id="code-improvement">Code Improvement&lt;/h2>
-&lt;p>Thanks for these contribution to improve stability of Apache Dubbo.&lt;/p>
-&lt;p>&lt;a href="https://github.com/apache/dubbo/pull/8111">#8111&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8147">#8147&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8164">#8164&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8177">#8177&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8180">#8180&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8161">#8161&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8183">#8183&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8205">#8205&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8173">#8173&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8219">#8219&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8228">#8228&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8232">#8232&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8230">#8230&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8236">#8236&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8260">#8260&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8262">#8262&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8252">#8252&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8246">#8246&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8208">#8208&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8278">#8278&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8267">#8267&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8277">#8277&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8291">#8291&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8296">#8296&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8302">#8302&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8175">#8175&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8319">#8319&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8309">#8309&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8336">#8336&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8332">#8332&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8328">#8328&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8355">#8355&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8396">#8396&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8401">#8401&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8395">#8395&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8415">#8415&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8406">#8406&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8411">#8411&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8418">#8418&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8439">#8439&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8404">#8404&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8443">#8443&lt;/a>&lt;/p>
-&lt;h2 id="dependency-changes">Dependency Changes&lt;/h2>
-&lt;ul>
-&lt;li>remove dependency: org.eclipse.collections:eclipse-collections&lt;/li>
-&lt;li>remove dependency: com.google.guava:guava&lt;/li>
-&lt;li>jetty: 9.4.11.v20180605 -&amp;gt; 9.4.43.v20210629&lt;/li>
-&lt;li>apollo client: 1.1.1 -&amp;gt; 1.8.0&lt;/li>
-&lt;li>snakeyaml: 1.20 -&amp;gt; 1.29&lt;/li>
-&lt;li>tomcat embed: 8.5.31 -&amp;gt; 8.5.69&lt;/li>
-&lt;li>nacos client: 2.0.0 -&amp;gt; 2.0.2&lt;/li>
-&lt;li>swagger: 1.5.19 -&amp;gt; 1.5.24&lt;/li>
-&lt;li>hessian_lite: 3.2.8 -&amp;gt; 3.2.11&lt;/li>
-&lt;/ul></description></item><item><title>Blog: 3.0.1 Release Note</title><link>https://cn.dubbo.apache.org/en/blog/2021/07/02/3.0.1-release-note/</link><pubDate>Fri, 02 Jul 2021 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/en/blog/2021/07/02/3.0.1-release-note/</guid><description>
-&lt;h2 id="optimization">Optimization&lt;/h2>
+&lt;p>Thanks for these contribution to improve stability of Apache Dubbo.&lt;/p></description></item><item><title>3.0.1 Release Note</title><link>https://cn.dubbo.apache.org/en/blog/2021/07/02/3.0.1-release-note/</link><pubDate>Fri, 02 Jul 2021 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/en/blog/2021/07/02/3.0.1-release-note/</guid><description>&lt;h2 id="optimization">Optimization&lt;/h2>
 &lt;ul>
 &lt;li>Refactor NameMapping to Metadata, Support application field in MigrationRule&lt;/li>
 &lt;li>Add cache for scan result&lt;/li>
@@ -181,16 +123,11 @@ Exactly the same as version 3.0.2, except for the following changes.&lt;/p>
 &lt;li>Fix customizer not changed&lt;/li>
 &lt;/ul>
 &lt;h2 id="code-improvement">Code Improvement&lt;/h2>
-&lt;p>Thanks for these contribution to improve stability of Apache Dubbo.&lt;/p>
-&lt;p>&lt;a href="https://github.com/apache/dubbo/pull/8043">#8043&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8044">#8044&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8048">#8048&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8071">#8071&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8119">#8119&lt;/a>,
-&lt;a href="https://github.com/apache/dubbo/pull/8132">#8132&lt;/a>&lt;/p></description></item><item><title>Blog: Past Releases</title><link>https://cn.dubbo.apache.org/en/blog/2020/05/18/past-releases/</link><pubDate>Mon, 18 May 2020 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/en/blog/2020/05/18/past-releases/</guid><description>
-&lt;div class="pageinfo pageinfo-primary">
+&lt;p>Thanks for these contribution to improve stability of Apache Dubbo.&lt;/p></description></item><item><title>Past Releases</title><link>https://cn.dubbo.apache.org/en/blog/2020/05/18/past-releases/</link><pubDate>Mon, 18 May 2020 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/en/blog/2020/05/18/past-releases/</guid><description>&lt;div class="pageinfo pageinfo-primary">
 &lt;p>This document is no longer maintained. You are currently viewing a snapshot version. If you want to see the latest version of the documentation, see &lt;a href="https://cn.dubbo.apache.org/en/release/">Latest Version&lt;/a>.&lt;/p>
+
 &lt;/div>
+
 &lt;h2 id="verification">Verification&lt;/h2>
 &lt;p>you can follow these &lt;a href="https://www.apache.org/info/verification">procedures&lt;/a> and the &lt;a href="https://downloads.apache.org/dubbo/KEYS">KEYS&lt;/a> file to verify the download files&lt;/p>
 &lt;h2 id="apache-dubbo">Apache Dubbo&lt;/h2>
@@ -525,52 +462,4 @@ Release Notes: &lt;a href="https://github.com/apache/dubbo/releases">https://git
 &lt;h2 id="dubbo-spring-boot-starter">Dubbo Spring Boot Starter&lt;/h2>
 &lt;blockquote>
 &lt;p>GitHub: &lt;a href="https://github.com/apache/incubator-dubbo-spring-boot-project">https://github.com/apache/incubator-dubbo-spring-boot-project&lt;/a> &lt;br>
-发布说明：https://github.com/apache/incubator-dubbo-spring-boot-project/releases&lt;/p>
-&lt;/blockquote>
-&lt;h3 id="271-2019-04-09">2.7.1 (2019-04-09)&lt;/h3>
-&lt;ul>
-&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/incubator/dubbo/spring-boot-project/2.7.1/apache-dubbo-spring-boot-project-incubating-2.7.1-source-release.zip">source&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/incubator/dubbo/spring-boot-project/2.7.1/apache-dubbo-spring-boot-project-incubating-2.7.1-source-release.zip.asc">asc&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/incubator/dubbo/spring-boot-project/2.7.1/apache-dubbo-spring-boot-project-incubating-2.7.1-source-release.zip.sha512">sha512&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.apache.org/dyn/closer.lua/incubator/dubbo/spring-boot-project/2.7.1/apache-dubbo-spring-boot-project-incubating-2.7.1-bin-release.zip">binary&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/incubator/dubbo/spring-boot-project/2.7.1/apache-dubbo-spring-boot-project-incubating-2.7.1-bin-release.zip.asc">asc&lt;/a> |
-&lt;a href="https://www.apache.org/dyn/closer.lua/incubator/dubbo/spring-boot-project/2.7.1/apache-dubbo-spring-boot-project-incubating-2.7.1-bin-release.zip.sha512">sha512&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="270-2019-02-14">2.7.0 (2019-02-14)&lt;/h3>
-&lt;ul>
-&lt;li>&lt;a href="https://archive.apache.org/dist/incubator/dubbo/spring-boot-project/2.7.0/apache-dubbo-spring-boot-project-incubating-2.7.0-source-release.zip">source&lt;/a> |
-&lt;a href="https://archive.apache.org/dist/incubator/dubbo/spring-boot-project/2.7.0/apache-dubbo-spring-boot-project-incubating-2.7.0-source-release.zip.asc">asc&lt;/a> |
-&lt;a href="https://archive.apache.org/dist/incubator/dubbo/spring-boot-project/2.7.0/apache-dubbo-spring-boot-project-incubating-2.7.0-source-release.zip.sha512">sha512&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://archive.apache.org/dist/incubator/dubbo/spring-boot-project/2.7.0/apache-dubbo-spring-boot-project-incubating-2.7.0-bin-release.zip">binary&lt;/a> |
-&lt;a href="https://archive.apache.org/dist/incubator/dubbo/spring-boot-project/2.7.0/apache-dubbo-spring-boot-project-incubating-2.7.0-bin-release.zip.asc">asc&lt;/a> |
-&lt;a href="https://archive.apache.org/dist/incubator/dubbo/spring-boot-project/2.7.0/apache-dubbo-spring-boot-project-incubating-2.7.0-bin-release.zip.sha512">sha512&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="021-2019-01-27">0.2.1 (2019-01-27)&lt;/h3>
-&lt;ul>
-&lt;li>&lt;a href="https://archive.apache.org/dist/incubator/dubbo/spring-boot-project/0.2.1/apache-dubbo-spring-boot-project-incubating-0.2.1-source-release.zip">source&lt;/a> |
-&lt;a href="https://archive.apache.org/dist/incubator/dubbo/spring-boot-project/0.2.1/apache-dubbo-spring-boot-project-incubating-0.2.1-source-release.zip.asc">asc&lt;/a> |
-&lt;a href="https://archive.apache.org/dist/incubator/dubbo/spring-boot-project/0.2.1/apache-dubbo-spring-boot-project-incubating-0.2.1-source-release.zip.sha512">sha512&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://archive.apache.org/dist/incubator/dubbo/spring-boot-project/0.2.1/apache-dubbo-spring-boot-project-incubating-0.2.1-bin-release.zip">binary&lt;/a> |
-&lt;a href="https://archive.apache.org/dist/incubator/dubbo/spring-boot-project/0.2.1/apache-dubbo-spring-boot-project-incubating-0.2.1-bin-release.zip.asc">asc&lt;/a> |
-&lt;a href="https://archive.apache.org/dist/incubator/dubbo/spring-boot-project/0.2.1/apache-dubbo-spring-boot-project-incubating-0.2.1-bin-release.zip.sha512">sha512&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h3 id="012-2019-01-27">0.1.2 (2019-01-27)&lt;/h3>
-&lt;ul>
-&lt;li>&lt;a href="https://archive.apache.org/dist/incubator/dubbo/spring-boot-project/0.1.2/apache-dubbo-spring-boot-project-incubating-0.1.2-source-release.zip">source&lt;/a> |
-&lt;a href="https://archive.apache.org/dist/incubator/dubbo/spring-boot-project/0.1.2/apache-dubbo-spring-boot-project-incubating-0.1.2-source-release.zip.asc">asc&lt;/a> |
-&lt;a href="https://archive.apache.org/dist/incubator/dubbo/spring-boot-project/0.1.2/apache-dubbo-spring-boot-project-incubating-0.1.2-source-release.zip.sha512">sha512&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://archive.apache.org/dist/incubator/dubbo/spring-boot-project/0.1.2/apache-dubbo-spring-boot-project-incubating-0.1.2-bin-release.zip">binary&lt;/a> |
-&lt;a href="https://archive.apache.org/dist/incubator/dubbo/spring-boot-project/0.1.2/apache-dubbo-spring-boot-project-incubating-0.1.2-bin-release.zip.asc">asc&lt;/a> |
-&lt;a href="https://archive.apache.org/dist/incubator/dubbo/spring-boot-project/0.1.2/apache-dubbo-spring-boot-project-incubating-0.1.2-bin-release.zip.sha512">sha512&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;h2 id="dubbo-admin">Dubbo Admin&lt;/h2>
-&lt;blockquote>
-&lt;p>GitHub: &lt;a href="https://github.com/apache/incubator-dubbo-admin">https://github.com/apache/incubator-dubbo-admin&lt;/a> &lt;br>
-Release Notes: &lt;a href="https://github.com/apache/incubator-dubbo-admin/releases">https://github.com/apache/incubator-dubbo-admin/releases&lt;/a>&lt;/p>
-&lt;/blockquote>
-&lt;h3 id="01-2019-02-15">0.1 (2019-02-15)&lt;/h3>
-&lt;ul>
-&lt;li>&lt;a href="https://archive.apache.org/dist/incubator/dubbo/dubbo-ops/0.1/apache-dubbo-ops-incubating-0.1-source-release.zip">source&lt;/a> |
-&lt;a href="https://archive.apache.org/dist/incubator/dubbo/dubbo-ops/0.1/apache-dubbo-ops-incubating-0.1-source-release.zip.asc">asc&lt;/a> |
-&lt;a href="https://archive.apache.org/dist/incubator/dubbo/dubbo-ops/0.1/apache-dubbo-ops-incubating-0.1-source-release.zip.sha512">sha512&lt;/a>&lt;/li>
-&lt;/ul></description></item></channel></rss>
+发布说明：https://github.com/apache/incubator-dubbo-spring-boot-project/releases&lt;/p></description></item></channel></rss>

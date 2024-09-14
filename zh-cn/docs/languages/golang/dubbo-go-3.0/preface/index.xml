@@ -1,9 +1,10 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – 简介</title><link>https://cn.dubbo.apache.org/zh-cn/docs/languages/golang/dubbo-go-3.0/preface/</link><description>Recent content in 简介 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><atom:link href="https://cn.dubbo.apache.org/zh-cn/docs/languages/golang/dubbo-go-3.0/preface/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: dubbo-go 3.0 新特性</title><link>https://cn.dubbo.apache.org/zh-cn/docs/languages/golang/dubbo-go-3.0/preface/3.0_feature/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh-cn/docs/languages/golang/dubbo-go-3.0/preface/3.0_feature/</guid><description>
-&lt;div class="pageinfo pageinfo-primary">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>简介 on Apache Dubbo</title><link>https://cn.dubbo.apache.org/zh-cn/docs/languages/golang/dubbo-go-3.0/preface/</link><description>Recent content in 简介 on Apache Dubbo</description><generator>Hugo</generator><language>zh-cn</language><atom:link href="https://cn.dubbo.apache.org/zh-cn/docs/languages/golang/dubbo-go-3.0/preface/index.xml" rel="self" type="application/rss+xml"/><item><title>dubbo-go 3.0 新特性</title><link>https://cn.dubbo.apache.org/zh-cn/docs/languages/golang/dubbo-go-3.0/preface/3.0_feature/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh-cn/docs/languages/golang/dubbo-go-3.0/preface/3.0_feature/</guid><description>&lt;div class="pageinfo pageinfo-primary">
 &lt;p>此文档已经不再维护。您当前查看的是快照版本。如果想要查看最新版本的文档，请参阅&lt;a href="https://cn.dubbo.apache.org/zh-cn/overview/mannual/golang-sdk/preface/3.0_feature/">最新版本&lt;/a>。&lt;/p>
+
 &lt;/div>
+
 &lt;h1 id="dubbo-go-30-新特性介绍">Dubbo-go 3.0 新特性介绍&lt;/h1>
-&lt;p>&lt;img src="https://shields.io/github/stars/apache/dubbo-go?style=dark" alt="star">&lt;/p>
+&lt;p>&lt;img alt="star" src="https://shields.io/github/stars/apache/dubbo-go?style=dark">&lt;/p>
 &lt;h2 id="1-triple-协议">1. Triple 协议&lt;/h2>
 &lt;h3 id="11-概述">1.1 概述&lt;/h3>
 &lt;ul>
@@ -35,19 +36,20 @@
 &lt;p>经过服务自省后，客户端正式向对应实例发起调用。这样做最明显的好处是减少了注册中心的数据量，即注册中心只保存了应用级别的数据。&lt;/p>
 &lt;p>用户在使用 Dubbo-go 3.0的应用级服务发现能力时，可以仿照示例，直接在配置文件中配置服务自省模式和元数据中心信息，引入依赖，开启应用级别服务发现。&lt;/p>
 &lt;h3 id="22-应用级服务发现介绍文章">2.2 应用级服务发现介绍文章&lt;/h3>
-&lt;p>&lt;a href="https://baijiahao.baidu.com/s?id=1669266413887039723&amp;amp;wfr=spider&amp;amp;for=pc">应用级服务发现解析&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://baijiahao.baidu.com/s?id=1669266413887039723&amp;wfr=spider&amp;for=pc">应用级服务发现解析&lt;/a>&lt;/p>
 &lt;h2 id="3-mesh-路由由规则">3. Mesh 路由由规则&lt;/h2>
 &lt;p>用户可定义路由文件：&lt;/p>
 &lt;p>virtual_service.yaml&lt;/p>
 &lt;p>以及 dist_rule.yml&lt;/p>
 &lt;p>框架可根据路由文件针对特定的请求进行流量转发。&lt;/p>
 &lt;h2 id="4-相关文章">4. 相关文章&lt;/h2>
-&lt;p>阿里云官方介绍文章：&lt;a href="https://developer.aliyun.com/article/770964?utm_content=g_1000175535">《Dubbo 3.0 - 开启下一代云原生微服务》&lt;/a>&lt;/p></description></item><item><title>Docs: 架构</title><link>https://cn.dubbo.apache.org/zh-cn/docs/languages/golang/dubbo-go-3.0/preface/architecture/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh-cn/docs/languages/golang/dubbo-go-3.0/preface/architecture/</guid><description>
-&lt;div class="pageinfo pageinfo-primary">
+&lt;p>阿里云官方介绍文章：&lt;a href="https://developer.aliyun.com/article/770964?utm_content=g_1000175535">《Dubbo 3.0 - 开启下一代云原生微服务》&lt;/a>&lt;/p></description></item><item><title>架构</title><link>https://cn.dubbo.apache.org/zh-cn/docs/languages/golang/dubbo-go-3.0/preface/architecture/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://cn.dubbo.apache.org/zh-cn/docs/languages/golang/dubbo-go-3.0/preface/architecture/</guid><description>&lt;div class="pageinfo pageinfo-primary">
 &lt;p>此文档已经不再维护。您当前查看的是快照版本。如果想要查看最新版本的文档，请参阅&lt;a href="https://cn.dubbo.apache.org/zh-cn/overview/mannual/golang-sdk/preface/design/architecture/">最新版本&lt;/a>。&lt;/p>
+
 &lt;/div>
+
 &lt;h1 id="架构">架构&lt;/h1>
-&lt;p>&lt;img src="https://cn.dubbo.apache.org/imgs/golang/dubbo-go-architecture.png" alt="architecture">&lt;/p>
+&lt;p>&lt;img alt="architecture" src="https://cn.dubbo.apache.org/imgs/golang/dubbo-go-architecture.png">&lt;/p>
 &lt;h4 id="节点说明">节点说明&lt;/h4>
 &lt;ul>
 &lt;li>&lt;code>Registry&lt;/code> : dubbo-go中负责服务注册与发现的注册中心&lt;/li>
