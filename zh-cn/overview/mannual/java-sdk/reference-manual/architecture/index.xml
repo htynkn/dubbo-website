@@ -1,6 +1,73 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – 源码架构</title><link>https://dubbo.apache.org/zh-cn/overview/mannual/java-sdk/reference-manual/architecture/</link><description>Recent content in 源码架构 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><atom:link href="https://dubbo.apache.org/zh-cn/overview/mannual/java-sdk/reference-manual/architecture/index.xml" rel="self" type="application/rss+xml"/><item><title>Overview: 代码架构</title><link>https://dubbo.apache.org/zh-cn/overview/mannual/java-sdk/reference-manual/architecture/code-architecture/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/overview/mannual/java-sdk/reference-manual/architecture/code-architecture/</guid><description>
-&lt;h2 id="整体设计">整体设计&lt;/h2>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/dev/dubbo-framework.jpg" alt="/dev-guide/images/dubbo-framework.jpg">&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>源码架构 on Apache Dubbo</title><link>https://dubbo.apache.org/zh-cn/overview/mannual/java-sdk/reference-manual/architecture/</link><description>Recent content in 源码架构 on Apache Dubbo</description><generator>Hugo</generator><language>zh-cn</language><atom:link href="https://dubbo.apache.org/zh-cn/overview/mannual/java-sdk/reference-manual/architecture/index.xml" rel="self" type="application/rss+xml"/><item><title>单端口多协议实现原理解析</title><link>https://dubbo.apache.org/zh-cn/overview/mannual/java-sdk/reference-manual/architecture/multi-protocol/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/overview/mannual/java-sdk/reference-manual/architecture/multi-protocol/</guid><description>&lt;p>通过对protocol进行配置，dubbo3可以支持端口的协议复用。
+比如使用Triple协议启动端口复用后，可以在相同的端口上为服务增加
+Dubbo协议支持，以及Qos协议支持。这些协议的识别都是由一个统一的端口复用
+服务器进行处理的，可以用于服务的协议迁移，并且可以节约端口以及相关的资源，减少运维的复杂性。&lt;/p>
+&lt;p>&lt;img alt="pu-server-image1" src="https://dubbo.apache.org/imgs/blog/pu-server/pu-server-flow.png">&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>在服务的创建阶段，通过从Config层获取到服务导出的协议配置从而创建不同的Protocol对象进行导出。在导出的过程
+中，如果不是第一次创建端口复用的Server，那么Exchanger会将Protcol层传递的数据保存到Server，用于后续处理该协议类型的消息。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>当客户端的消息传递过来后，首先会通过Server传递给ProtocolDetector，如果完成了识别，那么就会标记该客户端为对应的协议。并通过WireProtocol配置对应的处理逻辑，最后交给ChannelOperator完成底层的IO框架和对应的Dubbo框架的处理逻辑的绑定。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>以上的协议识别完成之后，Channel已经确定了如何处理远程的客户端消息，通过对应的ServerPipeline进行处理即可（在处理的过程中也会根据配置信息决定消息的处理线程）。&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="使用场景">使用场景&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>最常用的是用于服务发现。这允许应用程序通过网络发现服务，然后使用同一端口与它们通信，有助于降低网络通信的复杂性，并使其更易于管理。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>可以用于负载平衡。这允许应用程序在多个远程服务或服务集群之间平衡负载，有助于提高服务的可扩展性、可靠性和可用性。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>可以用于服务监控。这允许应用程序监视远程服务的运行状况，并在服务出现故障或变得不可用时发出警报，有助于确保服务的可用性并减少停机时间。&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>参考用例
+&lt;a href="https://github.com/apache/dubbo-samples/tree/master/3-extensions/protocol/dubbo-samples-port-unification">https://github.com/apache/dubbo-samples/tree/master/dubbo-samples-port-unification&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="使用方式">使用方式&lt;/h2>
+&lt;p>在同一主机上部署多个服务或需要通过负载均衡器访问多个服务。&lt;/p>
+&lt;blockquote>
+&lt;p>关于Dubbo支持的配置方式 &lt;a href="https://dubbo.apache.org/zh-cn/overview/mannual/java-sdk/reference-manual/config/">配置说明&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="服务多协议导出">服务多协议导出&lt;/h3>
+&lt;p>ext-protocol参数支持配置多个不同的协议，协议之间通过&amp;quot;,&amp;ldquo;进行分隔。&lt;/p>
+&lt;h4 id="xml-配置">xml 配置&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:protocol&lt;/span> name=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span> port=&lt;span style="color:#2aa198">&amp;#34;-1&amp;#34;&lt;/span> ext-protocol=&lt;span style="color:#2aa198">&amp;#34;tri,&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;bean&lt;/span> id=&lt;span style="color:#2aa198">&amp;#34;greetingService&amp;#34;&lt;/span> class=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.demo.provider.GreetingServiceImpl&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dubbo:service&lt;/span> delay=&lt;span style="color:#2aa198">&amp;#34;5000&amp;#34;&lt;/span> version=&lt;span style="color:#2aa198">&amp;#34;1.0.0&amp;#34;&lt;/span> group=&lt;span style="color:#2aa198">&amp;#34;greeting&amp;#34;&lt;/span> timeout=&lt;span style="color:#2aa198">&amp;#34;5000&amp;#34;&lt;/span> interface=&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.demo.GreetingService&amp;#34;&lt;/span> ref=&lt;span style="color:#2aa198">&amp;#34;greetingService&amp;#34;&lt;/span> protocol=&lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span>&lt;span style="color:#268bd2">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="api-配置">API 配置&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>ProtocolConfig config &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">new&lt;/span> ProtocolConfig(CommonConstants.TRIPLE, &lt;span style="color:#719e07">-&lt;/span>1);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>config.setExtProtocol(CommonConstants.DUBBO&lt;span style="color:#719e07">+&lt;/span>&lt;span style="color:#2aa198">&amp;#34;,&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="yaml-配置">yaml 配置&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">dubbo&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">application&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">name&lt;/span>: dubbo-springboot-demo-provider
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">protocol&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">name&lt;/span>: tri
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">port&lt;/span>: -&lt;span style="color:#2aa198">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">ext-protocol&lt;/span>: dubbo,
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="properties-配置">properties 配置&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>dubbo.protocol.name&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">tri&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.ext-protocol&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">dubbo,&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo.protocol.port&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">20880&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="qos接入">Qos接入&lt;/h3>
+&lt;h4 id="qos模块导入">Qos模块导入&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;groupId&amp;gt;&lt;/span>org.apache.dubbo&lt;span style="color:#268bd2">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">&amp;lt;artifactId&amp;gt;&lt;/span>dubbo-qos&lt;span style="color:#268bd2">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>完成Qos模块的导入之后，相关的配置项可参考&lt;a href="https://dubbo.apache.org/zh-cn/overview/mannual/java-sdk/reference-manual/qos/overview/">Qos操作手册&lt;/a>进行配置。&lt;/p></description></item><item><title>代码架构</title><link>https://dubbo.apache.org/zh-cn/overview/mannual/java-sdk/reference-manual/architecture/code-architecture/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/overview/mannual/java-sdk/reference-manual/architecture/code-architecture/</guid><description>&lt;h2 id="整体设计">整体设计&lt;/h2>
+&lt;p>&lt;img alt="/dev-guide/images/dubbo-framework.jpg" src="https://dubbo.apache.org/imgs/dev/dubbo-framework.jpg">&lt;/p>
 &lt;p>图例说明：&lt;/p>
 &lt;ul>
 &lt;li>图中左边淡蓝背景的为服务消费方使用的接口，右边淡绿色背景的为服务提供方使用的接口，位于中轴线上的为双方都用到的接口。&lt;/li>
@@ -30,56 +97,7 @@
 &lt;li>Registry 和 Monitor 实际上不算一层，而是一个独立的节点，只是为了全局概览，用层的方式画在一起。&lt;/li>
 &lt;/ul>
 &lt;h2 id="模块分包">模块分包&lt;/h2>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/dev/dubbo-modules.jpg" alt="/dev-guide/images/dubbo-modules.jpg">&lt;/p>
-&lt;p>模块说明：&lt;/p>
-&lt;ul>
-&lt;li>&lt;strong>dubbo-common 公共逻辑模块&lt;/strong>：包括 Util 类和通用模型。&lt;/li>
-&lt;li>&lt;strong>dubbo-remoting 远程通讯模块&lt;/strong>：相当于 Dubbo 协议的实现，如果 RPC 用 RMI协议则不需要使用此包。&lt;/li>
-&lt;li>&lt;strong>dubbo-rpc 远程调用模块&lt;/strong>：抽象各种协议，以及动态代理，只包含一对一的调用，不关心集群的管理。&lt;/li>
-&lt;li>&lt;strong>dubbo-cluster 集群模块&lt;/strong>：将多个服务提供方伪装为一个提供方，包括：负载均衡, 容错，路由等，集群的地址列表可以是静态配置的，也可以是由注册中心下发。&lt;/li>
-&lt;li>&lt;strong>dubbo-registry 注册中心模块&lt;/strong>：基于注册中心下发地址的集群方式，以及对各种注册中心的抽象。&lt;/li>
-&lt;li>&lt;strong>dubbo-monitor 监控模块&lt;/strong>：统计服务调用次数，调用时间的，调用链跟踪的服务。&lt;/li>
-&lt;li>&lt;strong>dubbo-config 配置模块&lt;/strong>：是 Dubbo 对外的 API，用户通过 Config 使用Dubbo，隐藏 Dubbo 所有细节。&lt;/li>
-&lt;li>&lt;strong>dubbo-container 容器模块&lt;/strong>：是一个 Standlone 的容器，以简单的 Main 加载 Spring 启动，因为服务通常不需要 Tomcat/JBoss 等 Web 容器的特性，没必要用 Web 容器去加载服务。&lt;/li>
-&lt;/ul>
-&lt;p>整体上按照分层结构进行分包，与分层的不同点在于：&lt;/p>
-&lt;ul>
-&lt;li>Container 为服务容器，用于部署运行服务，没有在层中画出。&lt;/li>
-&lt;li>Protocol 层和 Proxy 层都放在 rpc 模块中，这两层是 rpc 的核心，在不需要集群也就是只有一个提供者时，可以只使用这两层完成 rpc 调用。&lt;/li>
-&lt;li>Transport 层和 Exchange 层都放在 remoting 模块中，为 rpc 调用的通讯基础。&lt;/li>
-&lt;li>Serialize 层放在 common 模块中，以便更大程度复用。&lt;/li>
-&lt;/ul>
-&lt;h2 id="依赖关系">依赖关系&lt;/h2>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/dev/dubbo-relation.jpg" alt="/dev-guide/images/dubbo-relation.jpg">&lt;/p>
-&lt;p>图例说明：&lt;/p>
-&lt;ul>
-&lt;li>图中小方块 Protocol, Cluster, Proxy, Service, Container, Registry, Monitor 代表层或模块，蓝色的表示与业务有交互，绿色的表示只对 Dubbo 内部交互。&lt;/li>
-&lt;li>图中背景方块 Consumer, Provider, Registry, Monitor 代表部署逻辑拓扑节点。&lt;/li>
-&lt;li>图中蓝色虚线为初始化时调用，红色虚线为运行时异步调用，红色实线为运行时同步调用。&lt;/li>
-&lt;li>图中只包含 RPC 的层，不包含 Remoting 的层，Remoting 整体都隐含在 Protocol 中。&lt;/li>
-&lt;/ul>
-&lt;h2 id="调用链">调用链&lt;/h2>
-&lt;p>展开总设计图的红色调用链，如下：&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/dev/dubbo-extension.jpg" alt="/dev-guide/images/dubbo-extension.jpg">&lt;/p>
-&lt;h2 id="暴露服务时序">暴露服务时序&lt;/h2>
-&lt;p>展开总设计图右边服务提供方暴露服务的蓝色初始化链，时序图如下：&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/dev/dubbo-export.jpg" alt="/dev-guide/images/dubbo-export.jpg">&lt;/p>
-&lt;h2 id="引用服务时序">引用服务时序&lt;/h2>
-&lt;p>展开总设计图左边服务消费方引用服务的绿色初始化链，时序图如下：&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/dev/dubbo-refer.jpg" alt="/dev-guide/images/dubbo-refer.jpg">&lt;/p>
-&lt;h2 id="领域模型">领域模型&lt;/h2>
-&lt;p>在 Dubbo 的核心领域模型中：&lt;/p>
-&lt;ul>
-&lt;li>Protocol 是服务域，它是 Invoker 暴露和引用的主功能入口，它负责 Invoker 的生命周期管理。&lt;/li>
-&lt;li>Invoker 是实体域，它是 Dubbo 的核心模型，其它模型都向它靠拢，或转换成它，它代表一个可执行体，可向它发起 invoke 调用，它有可能是一个本地的实现，也可能是一个远程的实现，也可能一个集群实现。&lt;/li>
-&lt;li>Invocation 是会话域，它持有调用过程中的变量，比如方法名，参数等。&lt;/li>
-&lt;/ul>
-&lt;h2 id="基本设计原则">基本设计原则&lt;/h2>
-&lt;ul>
-&lt;li>采用 Microkernel + Plugin 模式，Microkernel 只负责组装 Plugin，Dubbo 自身的功能也是通过扩展点实现的，也就是 Dubbo 的所有功能点都可被用户自定义扩展所替换。&lt;/li>
-&lt;li>采用 URL 作为配置信息的统一格式，所有扩展点都通过传递 URL 携带配置信息。&lt;/li>
-&lt;/ul></description></item><item><title>Overview: 服务调用扩展点</title><link>https://dubbo.apache.org/zh-cn/overview/mannual/java-sdk/reference-manual/architecture/service-invocation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/overview/mannual/java-sdk/reference-manual/architecture/service-invocation/</guid><description>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/concepts/invoke-arch.jpg" alt="dubbo-architucture">&lt;/p>
+&lt;p>&lt;img alt="/dev-guide/images/dubbo-modules.jpg" src="https://dubbo.apache.org/imgs/dev/dubbo-modules.jpg">&lt;/p></description></item><item><title>服务调用扩展点</title><link>https://dubbo.apache.org/zh-cn/overview/mannual/java-sdk/reference-manual/architecture/service-invocation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/overview/mannual/java-sdk/reference-manual/architecture/service-invocation/</guid><description>&lt;p>&lt;img alt="dubbo-architucture" src="https://dubbo.apache.org/imgs/v3/concepts/invoke-arch.jpg">&lt;/p>
 &lt;p>如上图所示，从服务调用的角度来看，Dubbo 在链路中提供了丰富的扩展点，覆盖了负载均衡方式、选址前后的拦截器、服务端处理拦截器等。
 简单来说 Dubbo 发起远程调用的时候，主要工作流程可以分为消费端和服务端两个部分。&lt;/p>
 &lt;p>消费端的工作流程如下：&lt;/p>
@@ -105,92 +123,36 @@
 &lt;/ul>
 &lt;h2 id="filter拦截器">Filter（拦截器）&lt;/h2>
 &lt;p>拦截器可以实现服务提供方和服务消费方调用过程拦截，Dubbo 本身的大多功能均基于此扩展点实现，每次远程方法执行，该拦截都会被执行，请注意对性能的影响。
-其中在消费端侧，&lt;code>ClusterFilter&lt;/code> 用于选址前的拦截和 &lt;code>Filter&lt;/code> 用于选址后的拦截。如无特殊需要使用 &lt;code>ClusterFilter&lt;/code> 进行扩展拦截，以提高性能。&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/v3/concepts/filter-arch.jpg" alt="filter-architucture">&lt;/p>
-&lt;p>在 Dubbo 3 中，&lt;code>Filter&lt;/code> 和 &lt;code>ClusterFilter&lt;/code> 的接口签名被统一抽象到 &lt;code>BaseFilter&lt;/code> 中，开发者可以分别实现 &lt;code>Filter&lt;/code> 或 &lt;code>ClusterFilter&lt;/code> 的接口来实现自己的拦截器。
-如果需要拦截返回状态，可以直接实现 &lt;code>BaseFilter.Listener&lt;/code> 的接口，Dubbo 将自动识别，并进行调用。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">package&lt;/span> org.apache.dubbo.rpc;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">BaseFilter&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Result &lt;span style="color:#268bd2">invoke&lt;/span>(Invoker&lt;span style="color:#719e07">&amp;lt;?&amp;gt;&lt;/span> invoker, Invocation invocation) &lt;span style="color:#268bd2">throws&lt;/span> RpcException;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">Listener&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">onResponse&lt;/span>(Result appResponse, Invoker&lt;span style="color:#719e07">&amp;lt;?&amp;gt;&lt;/span> invoker, Invocation invocation);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">onError&lt;/span>(Throwable t, Invoker&lt;span style="color:#719e07">&amp;lt;?&amp;gt;&lt;/span> invoker, Invocation invocation);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+其中在消费端侧，&lt;code>ClusterFilter&lt;/code> 用于选址前的拦截和 &lt;code>Filter&lt;/code> 用于选址后的拦截。如无特殊需要使用 &lt;code>ClusterFilter&lt;/code> 进行扩展拦截，以提高性能。&lt;/p></description></item><item><title>扩展点开发指南</title><link>https://dubbo.apache.org/zh-cn/overview/mannual/java-sdk/reference-manual/architecture/dubbo-spi/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/overview/mannual/java-sdk/reference-manual/architecture/dubbo-spi/</guid><description>&lt;h2 id="1-dubbo-spi-扩展简介">1. Dubbo SPI 扩展简介&lt;/h2>
+&lt;p>Dubbo 中的扩展机制与 &lt;a href="https://www.baeldung.com/java-spi" target="_blank">JDK 标准的 SPI 扩展点&lt;/a> 原理类似。Dubbo 对其做了一定的改造与加强：&lt;/p>
+&lt;ul>
+&lt;li>JDK 标准的 SPI 会一次性实例化扩展点所有实现，如果有扩展实现初始化很耗时，但如果没用上也加载，会很浪费资源。&lt;/li>
+&lt;li>如果扩展点加载失败，JDK SPI 没给出详细信息，不方便定位问题，Dubbo SPI 在失败时记录真正的失败原因，并打印出来&lt;/li>
+&lt;li>增加 &lt;a href="https://dubbo.apache.org/zh-cn/overview/mannual/java-sdk/reference-manual/architecture/dubbo-spi/#23-ioc-机制">IOC&lt;/a>、&lt;a href="https://dubbo.apache.org/zh-cn/overview/mannual/java-sdk/reference-manual/architecture/dubbo-spi/#24-aop-机制">AOP&lt;/a> 能力&lt;/li>
+&lt;li>增加排序能力&lt;/li>
+&lt;li>增加条件激活能力&lt;/li>
+&lt;li>提供了一系列更灵活的 API，如&lt;a href="https://dubbo.apache.org/zh-cn/#21-按名称获取指定扩展类">获取所有 SPI 扩展实现&lt;/a>、&lt;a href="https://dubbo.apache.org/zh-cn/#211-获取所有拓展类">根据名称查询某个扩展实现&lt;/a>、根据类型查询扩展实现、查询匹配条件的扩展实现等。&lt;/li>
+&lt;/ul>
+&lt;h3 id="11-spi定义">1.1 SPI定义&lt;/h3>
+&lt;p>Dubbo 中的 SPI 插件是标准的 Java Interface 定义，并且必须包含 &lt;code>@org.apache.dubbo.common.extension.SPI&lt;/code> 注解：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@SPI&lt;/span>(value &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#2aa198">&amp;#34;dubbo&amp;#34;&lt;/span>, scope &lt;span style="color:#719e07">=&lt;/span> ExtensionScope.FRAMEWORK)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">Protocol&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#586e75">// ...&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">package&lt;/span> org.apache.dubbo.rpc;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>@SPI&lt;/code> 注解的定义如下：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@Documented&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@Retention&lt;/span>(RetentionPolicy.RUNTIME)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@Target&lt;/span>({ElementType.TYPE})
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">@interface&lt;/span> SPI {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * default extension name
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> String &lt;span style="color:#268bd2">value&lt;/span>() &lt;span style="color:#719e07">default&lt;/span> &lt;span style="color:#2aa198">&amp;#34;&amp;#34;&lt;/span>;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@SPI&lt;/span>(scope &lt;span style="color:#719e07">=&lt;/span> ExtensionScope.MODULE)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">Filter&lt;/span> &lt;span style="color:#268bd2">extends&lt;/span> BaseFilter {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">/**
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> * scope of SPI, default value is application scope.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ExtensionScope &lt;span style="color:#268bd2">scope&lt;/span>() &lt;span style="color:#719e07">default&lt;/span> ExtensionScope.APPLICATION;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">package&lt;/span> org.apache.dubbo.rpc.cluster.filter;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@SPI&lt;/span>(scope &lt;span style="color:#719e07">=&lt;/span> ExtensionScope.MODULE)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">ClusterFilter&lt;/span> &lt;span style="color:#268bd2">extends&lt;/span> BaseFilter {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>特别的，如果需要在 Consumer 侧生效 &lt;code>Filter&lt;/code> 或 &lt;code>ClusterFilter&lt;/code>，需要增加 &lt;code>@Activate&lt;/code> 注解，并且需要指定 &lt;code>group&lt;/code> 的值为 &lt;code>consumer&lt;/code>。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@Activate&lt;/span>(group &lt;span style="color:#719e07">=&lt;/span> CommonConstants.CONSUMER)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果需要在 Provider 侧生效 &lt;code>Filter&lt;/code> 或 &lt;code>ClusterFilter&lt;/code>，需要增加 &lt;code>@Activate&lt;/code> 注解，并且需要指定 &lt;code>group&lt;/code> 的值为 &lt;code>provider&lt;/code>。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">@Activate&lt;/span>(group &lt;span style="color:#719e07">=&lt;/span> CommonConstants.PROVIDER)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>&lt;a href="https://dubbo.apache.org/zh-cn/overview/mannual/java-sdk/reference-manual/spi/description/filter/">调用拦截扩展方式&lt;/a>&lt;/p>
-&lt;/blockquote>
-&lt;h2 id="router路由选址">Router（路由选址）&lt;/h2>
-&lt;p>路由选址提供从多个服务提供方中选择&lt;strong>一批&lt;/strong>满足条件的目标提供方进行调用的能力。
-Dubbo 的路由主要需要实现 3 个接口，分别是负责每次调用筛选的 &lt;code>route&lt;/code> 方法，负责地址推送后缓存的 &lt;code>notify&lt;/code> 方法，以及销毁路由的 &lt;code>stop&lt;/code> 方法。
-在 Dubbo 3 中推荐实现 &lt;code>StateRouter&lt;/code> 接口，能够提供高性能的路由选址方式。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">package&lt;/span> org.apache.dubbo.rpc.cluster.router.state;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">StateRouter&lt;/span>&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> BitList&lt;span style="color:#719e07">&amp;lt;&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span> &lt;span style="color:#268bd2">route&lt;/span>(BitList&lt;span style="color:#719e07">&amp;lt;&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span> invokers, URL url, Invocation invocation,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#dc322f">boolean&lt;/span> needToPrintMessage, Holder&lt;span style="color:#719e07">&amp;lt;&lt;/span>RouterSnapshotNode&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span> nodeHolder) &lt;span style="color:#268bd2">throws&lt;/span> RpcException;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">notify&lt;/span>(BitList&lt;span style="color:#719e07">&amp;lt;&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span> invokers);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">stop&lt;/span>();
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">package&lt;/span> org.apache.dubbo.rpc.cluster;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">Router&lt;/span> &lt;span style="color:#268bd2">extends&lt;/span> Comparable&lt;span style="color:#719e07">&amp;lt;&lt;/span>Router&lt;span style="color:#719e07">&amp;gt;&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">@Deprecated&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> List&lt;span style="color:#719e07">&amp;lt;&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span> &lt;span style="color:#268bd2">route&lt;/span>(List&lt;span style="color:#719e07">&amp;lt;&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span> invokers, URL url, Invocation invocation) &lt;span style="color:#268bd2">throws&lt;/span> RpcException;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> RouterResult&lt;span style="color:#719e07">&amp;lt;&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span> &lt;span style="color:#268bd2">route&lt;/span>(List&lt;span style="color:#719e07">&amp;lt;&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span> invokers, URL url, Invocation invocation,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#dc322f">boolean&lt;/span> needToPrintMessage) &lt;span style="color:#268bd2">throws&lt;/span> RpcException;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">notify&lt;/span>(List&lt;span style="color:#719e07">&amp;lt;&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span> invokers);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#dc322f">void&lt;/span> &lt;span style="color:#268bd2">stop&lt;/span>();
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>&lt;a href="https://dubbo.apache.org/zh-cn/overview/mannual/java-sdk/reference-manual/spi/description/router/">路由选址扩展方式&lt;/a>&lt;/p>
-&lt;/blockquote>
-&lt;h2 id="cluster集群规则">Cluster（集群规则）&lt;/h2>
-&lt;p>集群规则提供在有多个服务提供方时进行结果聚合、容错等能力。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">package&lt;/span> org.apache.dubbo.rpc.cluster.support;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">abstract&lt;/span> &lt;span style="color:#268bd2">class&lt;/span> &lt;span style="color:#268bd2">AbstractClusterInvoker&lt;/span>&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">implements&lt;/span> ClusterInvoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">protected&lt;/span> &lt;span style="color:#268bd2">abstract&lt;/span> Result &lt;span style="color:#268bd2">doInvoke&lt;/span>(Invocation invocation, List&lt;span style="color:#719e07">&amp;lt;&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span> invokers,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> LoadBalance loadbalance) &lt;span style="color:#268bd2">throws&lt;/span> RpcException;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>&lt;a href="https://dubbo.apache.org/zh-cn/overview/mannual/java-sdk/reference-manual/spi/description/cluster/">集群规则扩展方式&lt;/a>&lt;/p>
-&lt;/blockquote>
-&lt;h2 id="loadbalance负载均衡">LoadBalance（负载均衡）&lt;/h2>
-&lt;p>负载均衡提供从多个服务提供方中选择&lt;strong>一个&lt;/strong>目标提供方进行调用的能力。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">package&lt;/span> org.apache.dubbo.rpc.cluster;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">public&lt;/span> &lt;span style="color:#268bd2">interface&lt;/span> &lt;span style="color:#268bd2">LoadBalance&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&lt;/span> &lt;span style="color:#268bd2">select&lt;/span>(List&lt;span style="color:#719e07">&amp;lt;&lt;/span>Invoker&lt;span style="color:#719e07">&amp;lt;&lt;/span>T&lt;span style="color:#719e07">&amp;gt;&amp;gt;&lt;/span> invokers, URL url, Invocation invocation) &lt;span style="color:#268bd2">throws&lt;/span> RpcException;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>&lt;a href="https://dubbo.apache.org/zh-cn/overview/mannual/java-sdk/reference-manual/spi/description/filter/">调用拦截扩展方式&lt;/a>&lt;/p>
-&lt;/blockquote></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="12-spi加载流程">1.2 SPI加载流程&lt;/h3>
+&lt;p>Dubbo 加载扩展的整个流程如下：&lt;/p></description></item></channel></rss>

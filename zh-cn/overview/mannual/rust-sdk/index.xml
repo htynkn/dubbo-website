@@ -1,5 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Apache Dubbo – Rust SDK 手册</title><link>https://dubbo.apache.org/zh-cn/overview/mannual/rust-sdk/</link><description>Recent content in Rust SDK 手册 on Apache Dubbo</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><atom:link href="https://dubbo.apache.org/zh-cn/overview/mannual/rust-sdk/index.xml" rel="self" type="application/rss+xml"/><item><title>Overview: 快速开始</title><link>https://dubbo.apache.org/zh-cn/overview/mannual/rust-sdk/quick-start/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/overview/mannual/rust-sdk/quick-start/</guid><description>
-&lt;p>请在此查看完整 &lt;a href="https://github.com/apache/dubbo-rust/tree/main/examples/greeter">示例&lt;/a>。&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Rust SDK 手册 on Apache Dubbo</title><link>https://dubbo.apache.org/zh-cn/overview/mannual/rust-sdk/</link><description>Recent content in Rust SDK 手册 on Apache Dubbo</description><generator>Hugo</generator><language>zh-cn</language><atom:link href="https://dubbo.apache.org/zh-cn/overview/mannual/rust-sdk/index.xml" rel="self" type="application/rss+xml"/><item><title>快速开始</title><link>https://dubbo.apache.org/zh-cn/overview/mannual/rust-sdk/quick-start/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/overview/mannual/rust-sdk/quick-start/</guid><description>&lt;p>请在此查看完整 &lt;a href="https://github.com/apache/dubbo-rust/tree/main/examples/greeter">示例&lt;/a>。&lt;/p>
 &lt;h2 id="1-前置条件">1 前置条件&lt;/h2>
 &lt;ul>
 &lt;li>安装 &lt;a href="https://rustup.rs/">Rust&lt;/a> 开发环境&lt;/li>
@@ -60,119 +59,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>[build-dependencies]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dubbo-build = &lt;span style="color:#2aa198">&amp;#34;0.1.0&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="4-配置-dubbo-build-编译-idl">4 配置 dubbo-build 编译 IDL&lt;/h2>
-&lt;p>在项目根目录创建 (not /src)，创建 &lt;code>build.rs&lt;/code> 文件并添加以下内容：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rust" data-lang="rust">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// ./build.rs
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">fn&lt;/span> &lt;span style="color:#268bd2">main&lt;/span>() {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dubbo_build::prost::configure()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .compile(&lt;span style="color:#719e07">&amp;amp;&lt;/span>[&lt;span style="color:#2aa198">&amp;#34;proto/greeter.proto&amp;#34;&lt;/span>], &lt;span style="color:#719e07">&amp;amp;&lt;/span>[&lt;span style="color:#2aa198">&amp;#34;proto/&amp;#34;&lt;/span>])
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .unwrap();
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这样配置之后，编译项目就可以生成 Dubbo Stub 相关代码，路径一般在&lt;code>./target/debug/build/example-greeter-&amp;lt;id&amp;gt;/out/org.apache.dubbo.sample.tri.rs&lt;/code>。&lt;/p>
-&lt;h2 id="5-编写-dubbo-业务代码">5 编写 Dubbo 业务代码&lt;/h2>
-&lt;h3 id="51-编写-dubbo-server">5.1 编写 Dubbo Server&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rust" data-lang="rust">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// ./src/greeter/server.rs
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">use&lt;/span> &lt;span style="color:#719e07">..&lt;/span>.
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">#[tokio::main]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">async&lt;/span> &lt;span style="color:#719e07">fn&lt;/span> &lt;span style="color:#268bd2">main&lt;/span>() {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> register_server(GreeterServerImpl {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name: &lt;span style="color:#2aa198">&amp;#34;greeter&amp;#34;&lt;/span>.to_string(),
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> });
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#586e75">// Dubbo::new().start().await;
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> Dubbo::new()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .with_config({
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">let&lt;/span> r &lt;span style="color:#719e07">=&lt;/span> RootConfig::new();
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">match&lt;/span> r.load() {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">Ok&lt;/span>(config) &lt;span style="color:#719e07">=&amp;gt;&lt;/span> config,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">Err&lt;/span>(_err) &lt;span style="color:#719e07">=&amp;gt;&lt;/span> panic!(&lt;span style="color:#2aa198">&amp;#34;err: &lt;/span>&lt;span style="color:#2aa198">{:?}&lt;/span>&lt;span style="color:#2aa198">&amp;#34;&lt;/span>, _err), &lt;span style="color:#586e75">// response was droped
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> })
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .start()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .&lt;span style="color:#719e07">await&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">#[allow(dead_code)]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">#[derive(Default, Clone)]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">struct&lt;/span> &lt;span style="color:#268bd2">GreeterServerImpl&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name: &lt;span style="color:#b58900">String&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// #[async_trait]
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">#[async_trait]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">impl&lt;/span> Greeter &lt;span style="color:#719e07">for&lt;/span> GreeterServerImpl {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">async&lt;/span> &lt;span style="color:#719e07">fn&lt;/span> &lt;span style="color:#268bd2">greet&lt;/span>(
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">&amp;amp;&lt;/span>&lt;span style="color:#268bd2">self&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> request: &lt;span style="color:#268bd2">Request&lt;/span>&lt;span style="color:#719e07">&amp;lt;&lt;/span>GreeterRequest&lt;span style="color:#719e07">&amp;gt;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ) -&amp;gt; &lt;span style="color:#b58900">Result&lt;/span>&lt;span style="color:#719e07">&amp;lt;&lt;/span>Response&lt;span style="color:#719e07">&amp;lt;&lt;/span>GreeterReply&lt;span style="color:#719e07">&amp;gt;&lt;/span>, dubbo::status::Status&lt;span style="color:#719e07">&amp;gt;&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println!(&lt;span style="color:#2aa198">&amp;#34;GreeterServer::greet &lt;/span>&lt;span style="color:#2aa198">{:?}&lt;/span>&lt;span style="color:#2aa198">&amp;#34;&lt;/span>, request.metadata);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">Ok&lt;/span>(Response::new(GreeterReply {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> message: &lt;span style="color:#2aa198">&amp;#34;hello, dubbo-rust&amp;#34;&lt;/span>.to_string(),
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }))
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="52-配置dubboyaml">5.2 配置dubbo.yaml&lt;/h3>
-&lt;p>dubbo.yaml指示server端的配置，包括暴露的服务列表、协议配置、监听配置等。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># ./dubbo.yaml&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">name&lt;/span>: dubbo
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">service&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">org.apache.dubbo.sample.tri.Greeter&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">version&lt;/span>: &lt;span style="color:#2aa198">1.0.0&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">group&lt;/span>: test
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">protocol&lt;/span>: triple
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">registry&lt;/span>: &lt;span style="color:#2aa198">&amp;#39;&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">serializer&lt;/span>: json
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">protocol_configs&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">triple&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">ip&lt;/span>: &lt;span style="color:#2aa198">0.0.0.0&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">port&lt;/span>: &lt;span style="color:#2aa198">&amp;#39;8888&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">name&lt;/span>: triple
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">protocols&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">triple&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">ip&lt;/span>: &lt;span style="color:#2aa198">0.0.0.0&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">port&lt;/span>: &lt;span style="color:#2aa198">&amp;#39;8888&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">name&lt;/span>: triple
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="53-编写-dubbo-client">5.3 编写 Dubbo Client&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rust" data-lang="rust">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// ./src/greeter/client.rs
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">&lt;/span>&lt;span style="color:#719e07">use&lt;/span> &lt;span style="color:#719e07">..&lt;/span>.
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">#[tokio::main]&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#719e07">async&lt;/span> &lt;span style="color:#719e07">fn&lt;/span> &lt;span style="color:#268bd2">main&lt;/span>() {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">let&lt;/span> &lt;span style="color:#719e07">mut&lt;/span> cli &lt;span style="color:#719e07">=&lt;/span> GreeterClient::new().with_uri(&lt;span style="color:#2aa198">&amp;#34;http://127.0.0.1:8888&amp;#34;&lt;/span>.to_string());
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println!(&lt;span style="color:#2aa198">&amp;#34;# unary call&amp;#34;&lt;/span>);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">let&lt;/span> resp &lt;span style="color:#719e07">=&lt;/span> cli
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .greet(Request::new(GreeterRequest {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name: &lt;span style="color:#2aa198">&amp;#34;message from client&amp;#34;&lt;/span>.to_string(),
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }))
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .&lt;span style="color:#719e07">await&lt;/span>;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">let&lt;/span> resp &lt;span style="color:#719e07">=&lt;/span> &lt;span style="color:#719e07">match&lt;/span> resp {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">Ok&lt;/span>(resp) &lt;span style="color:#719e07">=&amp;gt;&lt;/span> resp,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b58900">Err&lt;/span>(err) &lt;span style="color:#719e07">=&amp;gt;&lt;/span> &lt;span style="color:#719e07">return&lt;/span> println!(&lt;span style="color:#2aa198">&amp;#34;&lt;/span>&lt;span style="color:#2aa198">{:?}&lt;/span>&lt;span style="color:#2aa198">&amp;#34;&lt;/span>, err),
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> };
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">let&lt;/span> (_parts, body) &lt;span style="color:#719e07">=&lt;/span> resp.into_parts();
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> println!(&lt;span style="color:#2aa198">&amp;#34;Response: &lt;/span>&lt;span style="color:#2aa198">{:?}&lt;/span>&lt;span style="color:#2aa198">&amp;#34;&lt;/span>, body);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="6-运行并总结">6 运行并总结&lt;/h2>
-&lt;ol>
-&lt;li>编译&lt;/li>
-&lt;/ol>
-&lt;p>执行&lt;code>cargo build&lt;/code>来编译server和client。&lt;/p>
-&lt;ol start="2">
-&lt;li>运行server&lt;/li>
-&lt;/ol>
-&lt;p>执行&lt;code>./target/debug/greeter-server&lt;/code>来运行server，如上文dubbo.yaml所配置，server会监听8888端口，并以triple协议提供RPC服务：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>$ ./target/debug/greeter-server
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2022-09-28T23:33:28.104577Z INFO dubbo::framework: url: Some&lt;span style="color:#719e07">(&lt;/span>Url &lt;span style="color:#719e07">{&lt;/span> uri: &lt;span style="color:#2aa198">&amp;#34;triple://0.0.0.0:8888/org.apache.dubbo.sample.tri.Greeter&amp;#34;&lt;/span>, protocol: &lt;span style="color:#2aa198">&amp;#34;triple&amp;#34;&lt;/span>, location: &lt;span style="color:#2aa198">&amp;#34;0.0.0.0:8888&amp;#34;&lt;/span>, ip: &lt;span style="color:#2aa198">&amp;#34;0.0.0.0&amp;#34;&lt;/span>, port: &lt;span style="color:#2aa198">&amp;#34;8888&amp;#34;&lt;/span>, service_key: &lt;span style="color:#719e07">[&lt;/span>&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.sample.tri.Greeter&amp;#34;&lt;/span>&lt;span style="color:#719e07">]&lt;/span>, params: &lt;span style="color:#719e07">{}&lt;/span> &lt;span style="color:#719e07">})&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
-&lt;li>运行client，验证调用是否成功&lt;/li>
-&lt;/ol>
-&lt;p>执行&lt;code>./target/debug/greeter-client&lt;/code>来运行client，调用&lt;code>triple://127.0.0.1:8888/org.apache.dubbo.sample.tri.Greeter&lt;/code>下的各种方法：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>$ ./target/debug/greeter-client
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Response: GreeterReply &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;hello, dubbo-rust&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Overview: Rust和Java互相调用</title><link>https://dubbo.apache.org/zh-cn/overview/mannual/rust-sdk/java-interoperability/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/overview/mannual/rust-sdk/java-interoperability/</guid><description>
-&lt;h2 id="1-前置条件">1 前置条件&lt;/h2>
+&lt;p>在项目根目录创建 (not /src)，创建 &lt;code>build.rs&lt;/code> 文件并添加以下内容：&lt;/p></description></item><item><title>Rust和Java互相调用</title><link>https://dubbo.apache.org/zh-cn/overview/mannual/rust-sdk/java-interoperability/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/overview/mannual/rust-sdk/java-interoperability/</guid><description>&lt;h2 id="1-前置条件">1 前置条件&lt;/h2>
 &lt;ul>
 &lt;li>安装 &lt;a href="https://rustup.rs/">Rust&lt;/a> 开发环境&lt;/li>
 &lt;li>安装 &lt;a href="https://grpc.io/docs/protoc-installation/">protoc&lt;/a> 工具&lt;/li>
@@ -194,38 +81,10 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Dubbo triple stub server started, &lt;span style="color:#268bd2">port&lt;/span>&lt;span style="color:#719e07">=&lt;/span>&lt;span style="color:#2aa198">8888&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;a href="https://github.com/apache/dubbo-samples/blob/master/3-extensions/protocol/dubbo-samples-triple/src/main/proto/greeter.proto">Java 侧的接口定义&lt;/a>&lt;/p>
 &lt;h2 id="3-运行-rust-版本的-dubbo-consumer">3 运行 Rust 版本的 Dubbo consumer&lt;/h2>
-&lt;p>Rust 版本的 Dubbo consumer 示例源码见&lt;a href="https://github.com/apache/dubbo-rust/tree/main/examples/greeter">https://github.com/apache/dubbo-rust/tree/main/examples/greeter&lt;/a>。&lt;/p>
-&lt;p>Clone 源代码、编译构建，并运行 consumer：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>$ &lt;span style="color:#586e75"># clone 源代码&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ git clone https://github.com/apache/dubbo-rust.git
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ &lt;span style="color:#b58900">cd&lt;/span> dubbo-rust/examples/greeter/
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ &lt;span style="color:#586e75"># 构建&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ cargo build
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ &lt;span style="color:#586e75"># 运行 consumer，调用provider&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ../../target/debug/greeter-client
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># unary call&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Response: GreeterReply &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;hello, dubbo-rust&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># client stream&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>client streaming, Response: GreeterReply &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;hello client streaming&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># bi stream&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>parts: Metadata &lt;span style="color:#719e07">{&lt;/span> inner: &lt;span style="color:#719e07">{&lt;/span>&lt;span style="color:#2aa198">&amp;#34;content-type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;application/grpc&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;date&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;Wed, 28 Sep 2022 23:54:56 GMT&amp;#34;&lt;/span>&lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reply: GreeterReply &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;server reply: \&amp;#34;msg1 from client\&amp;#34;&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reply: GreeterReply &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;server reply: \&amp;#34;msg2 from client\&amp;#34;&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reply: GreeterReply &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;server reply: \&amp;#34;msg3 from client\&amp;#34;&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>trailer: Some&lt;span style="color:#719e07">(&lt;/span>Metadata &lt;span style="color:#719e07">{&lt;/span> inner: &lt;span style="color:#719e07">{&lt;/span>&lt;span style="color:#2aa198">&amp;#34;grpc-message&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;poll trailer successfully.&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;grpc-accept-encoding&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;gzip,identity&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;content-type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;application/grpc&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;grpc-status&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;0&amp;#34;&lt;/span>&lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">})&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># server stream&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>parts: Metadata &lt;span style="color:#719e07">{&lt;/span> inner: &lt;span style="color:#719e07">{&lt;/span>&lt;span style="color:#2aa198">&amp;#34;content-type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;application/grpc&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;date&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;Wed, 28 Sep 2022 23:54:56 GMT&amp;#34;&lt;/span>&lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reply: GreeterReply &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;msg1 from server&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reply: GreeterReply &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;msg2 from server&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reply: GreeterReply &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;msg3 from server&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>trailer: Some&lt;span style="color:#719e07">(&lt;/span>Metadata &lt;span style="color:#719e07">{&lt;/span> inner: &lt;span style="color:#719e07">{&lt;/span>&lt;span style="color:#2aa198">&amp;#34;content-type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;application/grpc&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;grpc-message&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;poll trailer successfully.&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;grpc-accept-encoding&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;gzip,identity&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;grpc-status&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;0&amp;#34;&lt;/span>&lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">})&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;a href="https://github.com/apache/dubbo-rust/blob/main/examples/greeter/proto/greeter.proto">Rust侧的接口定义&lt;/a>&lt;/p></description></item><item><title>Overview: 服务发现</title><link>https://dubbo.apache.org/zh-cn/overview/mannual/rust-sdk/service-discovery/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/overview/mannual/rust-sdk/service-discovery/</guid><description>
-&lt;h2 id="dubbo-rust服务发现简介">Dubbo Rust服务发现简介&lt;/h2>
+&lt;p>Rust 版本的 Dubbo consumer 示例源码见&lt;a href="https://github.com/apache/dubbo-rust/tree/main/examples/greeter">https://github.com/apache/dubbo-rust/tree/main/examples/greeter&lt;/a>。&lt;/p></description></item><item><title>服务发现</title><link>https://dubbo.apache.org/zh-cn/overview/mannual/rust-sdk/service-discovery/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/overview/mannual/rust-sdk/service-discovery/</guid><description>&lt;h2 id="dubbo-rust服务发现简介">Dubbo Rust服务发现简介&lt;/h2>
 &lt;p>Dubbo Rust提供的是一种 Client-Based 的服务发现机制，依赖第三方注册中心组件来协调服务发现过程，支持的注册中心： Nacos、Zookeeper&lt;/p>
 &lt;p>以下是 Dubbo Rust服务发现机制的基本工作原理图：&lt;/p>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/rust/dubbo-rust-service-discovery.png" alt="service-discovery">&lt;/p>
+&lt;p>&lt;img alt="service-discovery" src="https://dubbo.apache.org/imgs/rust/dubbo-rust-service-discovery.png">&lt;/p>
 &lt;p>服务发现包含提供者、消费者和注册中心三个参与角色，其中，Dubbo 提供者实例注册 URL 地址到注册中心，注册中心负责对数据进行聚合，Dubbo 消费者从注册中心读取地址列表并订阅变更，每当地址列表发生变化，注册中心将最新的列表通知到所有订阅的消费者实例。&lt;/p>
 &lt;ul>
 &lt;li>Dubbo Rust注册中心以服务粒度聚合实例数据，消费者按消费需求精准订阅。&lt;/li>
@@ -242,57 +101,23 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> register_server(GreeterServerImpl {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> name: &lt;span style="color:#2aa198">&amp;#34;greeter&amp;#34;&lt;/span>&lt;span style="color:#719e07">.&lt;/span>to_string(),
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> });
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">//&lt;/span>创建注册中心
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> let zkr &lt;span style="color:#719e07">=&lt;/span> ZookeeperRegistry::default();
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> let r &lt;span style="color:#719e07">=&lt;/span> RootConfig::new();
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> let r &lt;span style="color:#719e07">=&lt;/span> match r&lt;span style="color:#719e07">.&lt;/span>load() {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Ok(config) &lt;span style="color:#719e07">=&amp;gt;&lt;/span> config,
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Err(_err) &lt;span style="color:#719e07">=&amp;gt;&lt;/span> panic&lt;span style="color:#719e07">!&lt;/span>(&lt;span style="color:#2aa198">&amp;#34;err: {:?}&amp;#34;&lt;/span>, _err), &lt;span style="color:#719e07">//&lt;/span> response was droped
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> };
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> 
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">//&lt;/span>启动Dubbo框架
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> let mut f &lt;span style="color:#719e07">=&lt;/span> Dubbo::new()
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">.&lt;/span>with_config(r)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">//&lt;/span>将创建出的注册中心绑定Dubbo框架
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">.&lt;/span>add_registry(&lt;span style="color:#2aa198">&amp;#34;zookeeper&amp;#34;&lt;/span>, Box::new(zkr));
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> f&lt;span style="color:#719e07">.&lt;/span>start()&lt;span style="color:#719e07">.&lt;/span>await;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>对于上述过程，可以通过修改创建注册中心的步骤来更改所使用的注册中心&lt;/p>
-&lt;p>客户端：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span style="display:flex;">&lt;span> let mut builder &lt;span style="color:#719e07">=&lt;/span> ClientBuilder::new();
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">//&lt;/span>通过env获取注册中心地址
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">if&lt;/span> let Ok(zk_servers) &lt;span style="color:#719e07">=&lt;/span> env::&lt;span style="color:#719e07">var&lt;/span>(&lt;span style="color:#2aa198">&amp;#34;ZOOKEEPER_SERVERS&amp;#34;&lt;/span>) {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">//&lt;/span>创建注册中心
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> let zkr &lt;span style="color:#719e07">=&lt;/span> ZookeeperRegistry::new(&lt;span style="color:#719e07">&amp;amp;&lt;/span>zk_servers);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">//&lt;/span>绑定注册中心
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> let directory &lt;span style="color:#719e07">=&lt;/span> RegistryDirectory::new(Box::new(zkr));
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> builder &lt;span style="color:#719e07">=&lt;/span> builder&lt;span style="color:#719e07">.&lt;/span>with_directory(Box::new(directory));
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#719e07">else&lt;/span> &lt;span style="color:#719e07">if&lt;/span> let Ok(nacos_url_str) &lt;span style="color:#719e07">=&lt;/span> env::&lt;span style="color:#719e07">var&lt;/span>(&lt;span style="color:#2aa198">&amp;#34;NACOS_URL&amp;#34;&lt;/span>) {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">//&lt;/span> NACOS_URL&lt;span style="color:#719e07">=&lt;/span>nacos:&lt;span style="color:#719e07">//&lt;/span>mse&lt;span style="color:#719e07">-&lt;/span>&lt;span style="color:#2aa198">96&lt;/span>efa264&lt;span style="color:#719e07">-&lt;/span>p&lt;span style="color:#719e07">.&lt;/span>nacos&lt;span style="color:#719e07">-&lt;/span>ans&lt;span style="color:#719e07">.&lt;/span>mse&lt;span style="color:#719e07">.&lt;/span>aliyuncs&lt;span style="color:#719e07">.&lt;/span>com
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">//&lt;/span>创建注册中心
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> let nacos_url &lt;span style="color:#719e07">=&lt;/span> Url::from_url(&lt;span style="color:#719e07">&amp;amp;&lt;/span>nacos_url_str)&lt;span style="color:#719e07">.&lt;/span>unwrap();
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> let registry &lt;span style="color:#719e07">=&lt;/span> NacosRegistry::new(nacos_url);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#719e07">//&lt;/span>绑定注册中心
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> let directory &lt;span style="color:#719e07">=&lt;/span> RegistryDirectory::new(Box::new(registry));
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> builder &lt;span style="color:#719e07">=&lt;/span> builder&lt;span style="color:#719e07">.&lt;/span>with_directory(Box::new(directory));
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> } &lt;span style="color:#719e07">else&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> builder &lt;span style="color:#719e07">=&lt;/span> builder&lt;span style="color:#719e07">.&lt;/span>with_host(&lt;span style="color:#2aa198">&amp;#34;http://127.0.0.1:8888&amp;#34;&lt;/span>);
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> let mut cli &lt;span style="color:#719e07">=&lt;/span> GreeterClient::new(builder);
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>创建Nacos注册中心：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>//通过Url创建注册中心实例
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>let nacos_url = Url::from_url(&amp;#34;127.0.0.1:1221&amp;#34;).unwrap();
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>let registry = NacosRegistry::new(nacos_url);
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>创建Zookeeper注册中心：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>//直接创建Zookeeper注册中心
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>let zkr = ZookeeperRegistry::new(&amp;#34;127.0.0.1:1221&amp;#34;);
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>//使用default方法创建Zookeeper注册中心会默认使用环境变量中的值ZOOKEEPER_SERVERS
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>let zkr = ZookeeperRegistry::default();
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Overview: 服务路由规则</title><link>https://dubbo.apache.org/zh-cn/overview/mannual/rust-sdk/router-module/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/overview/mannual/rust-sdk/router-module/</guid><description>
-&lt;h2 id="条件路由">条件路由&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>对于上述过程，可以通过修改创建注册中心的步骤来更改所使用的注册中心&lt;/p></description></item><item><title>服务路由规则</title><link>https://dubbo.apache.org/zh-cn/overview/mannual/rust-sdk/router-module/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/overview/mannual/rust-sdk/router-module/</guid><description>&lt;h2 id="条件路由">条件路由&lt;/h2>
 &lt;p>使用模式与 &lt;a href="https://dubbo.apache.org/zh/overview/core-features/traffic/condition-rule/">条件路由文档&lt;/a> 中的模式类似，但配置格式略有不同，以下是条件路由规则示例。&lt;/p>
 &lt;p>基于以下示例规则，所有 &lt;code>org.apache.dubbo.sample.tri.Greeter&lt;/code> 服务 &lt;code>greet&lt;/code>
 方法的调用都将被转发到有 &lt;code>port=8888&lt;/code> 标记的地址子集&lt;/p>
@@ -334,78 +159,7 @@ dubbo rust目前还没有实现对于&lt;strong>应用粒度&lt;/strong>的区�
 &lt;li>整数值范围，如：port = 80~8080&lt;/li>
 &lt;/ul>
 &lt;h2 id="标签路由">标签路由&lt;/h2>
-&lt;p>使用模式与 &lt;a href="https://dubbo.apache.org/zh/overview/core-features/traffic/tag-rule/">标签路由文档&lt;/a>中的模式类似，但配置格式略有不同，以下是标签路由规则示例&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">configVersion&lt;/span>: v1.0
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">force&lt;/span>: &lt;span style="color:#cb4b16">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">enabled&lt;/span>: &lt;span style="color:#cb4b16">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">key&lt;/span>: application
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">tags&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">name&lt;/span>: local
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">match&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">key&lt;/span>: ip
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">value&lt;/span>: &lt;span style="color:#2aa198">127.0.0.1&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在此配置中，所有ip=127.0.0.1的服务提供者/消费者均会被打上local的标签&lt;/p>
-&lt;h2 id="动态配置">动态配置&lt;/h2>
-&lt;h3 id="动态下发配置-简介">动态下发配置 简介&lt;/h3>
-&lt;p>动态下发配置使用 Nacos 作为配置中心实现，需要在项目的 application.yaml 配置文件中对 Nacos 进行配置,若不进行配置则使用本地路由配置。&lt;/p>
-&lt;h3 id="使用方式">使用方式：&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">nacos&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">addr&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;127.0.0.1:8848&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">namespace&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;namespace-name&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">app&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;app-name&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">enable_auth&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">auth_username&lt;/span>: username
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">auth_password&lt;/span>: password
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>app：路由配置项在Nacos中所处的app
-namespace：配置信息在Nacos所处的namespace
-addr：Nacos服务地址
-enable_auth：可选配置项，若启用了Nacos的认证功能，则需要配置此项，auth_username对应帐号，auth_password对应密钥&lt;/p>
-&lt;h4 id="配置条件路由">配置条件路由&lt;/h4>
-&lt;p>在nacos中创建条件路由配置项时，
-app和namespace为配置nacos时所填写的信息;
-group：固定为condition;
-name：需要和 服务名称 保持一致;&lt;/p>
-&lt;h4 id="配置标签路由">配置标签路由&lt;/h4>
-&lt;p>在nacos中创建标签路由配置项时，&lt;/p>
-&lt;p>app：配置nacos时所填写的app;
-namespace：配置nacos时所填写的namespace;
-group：固定为tag;
-name：固定为application;&lt;/p>
-&lt;h4 id="注意事项">注意事项&lt;/h4>
-&lt;p>dubbo rust目前还没有实现对于&lt;strong>应用&lt;/strong>的区分，无法区分服务来自哪个应用；
-故对于应用级别的配置项，默认对所有服务生效
-因此对于标签路由和条件路由，都仅能配置一条应用级别的配置，配置名称（name）指定为application&lt;/p>
-&lt;h4 id="例">例：&lt;/h4>
-&lt;p>&lt;img src="https://dubbo.apache.org/imgs/rust/router-example/nacos-example.png" alt="nacos-example.png">&lt;/p>
-&lt;h4 id="对应的配置项">对应的配置项：&lt;/h4>
-&lt;p>&lt;em>服务级别的条件路由配置：&lt;/em>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">configVersion&lt;/span>: v1.0
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">scope&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;service&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">force&lt;/span>: &lt;span style="color:#cb4b16">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">enabled&lt;/span>: &lt;span style="color:#cb4b16">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">key&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.sample.tri.Greeter&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">conditions&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - method=greet =&amp;gt; ip=127.*
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;em>标签路由配置：&lt;/em>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">configVersion&lt;/span>: v1.0
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">force&lt;/span>: &lt;span style="color:#cb4b16">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">enabled&lt;/span>: &lt;span style="color:#cb4b16">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">key&lt;/span>: shop-detail
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">tags&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">name&lt;/span>: local
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">match&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#268bd2">key&lt;/span>: ip
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#268bd2">value&lt;/span>: &lt;span style="color:#2aa198">127.0.0.1&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;em>应用级别的条件路由配置：&lt;/em>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">configVersion&lt;/span>: v1.0
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">scope&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;application&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">force&lt;/span>: &lt;span style="color:#cb4b16">false&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">enabled&lt;/span>: &lt;span style="color:#cb4b16">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">key&lt;/span>: application
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#268bd2">conditions&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - ip=127.0.0.1 =&amp;gt; port=8000~8888
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Overview: Streaming 通信模型</title><link>https://dubbo.apache.org/zh-cn/overview/mannual/rust-sdk/streaming/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/overview/mannual/rust-sdk/streaming/</guid><description>
-&lt;p>本文重点讲解 Dubbo Rust Streaming 通信模式，请先查看 &lt;a href="../quick-start">Quick Start&lt;/a> 了解 Dubbo Rust 基本使用，在此查看本文的&lt;a href="https://github.com/apache/dubbo-rust/tree/main/examples/greeter">完整示例&lt;/a>。&lt;/p>
+&lt;p>使用模式与 &lt;a href="https://dubbo.apache.org/zh/overview/core-features/traffic/tag-rule/">标签路由文档&lt;/a>中的模式类似，但配置格式略有不同，以下是标签路由规则示例&lt;/p></description></item><item><title>Streaming 通信模型</title><link>https://dubbo.apache.org/zh-cn/overview/mannual/rust-sdk/streaming/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/overview/mannual/rust-sdk/streaming/</guid><description>&lt;p>本文重点讲解 Dubbo Rust Streaming 通信模式，请先查看 &lt;a href="../quick-start">Quick Start&lt;/a> 了解 Dubbo Rust 基本使用，在此查看本文的&lt;a href="https://github.com/apache/dubbo-rust/tree/main/examples/greeter">完整示例&lt;/a>。&lt;/p>
 &lt;h2 id="1-idl-中增加-streaming-模型定义">1 IDL 中增加 Streaming 模型定义&lt;/h2>
 &lt;p>完整 Greeter 服务定义如下，包含一个 Unary、Client stream、Server stream、Bidirectional stream 模型的 Dubbo 服务。&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-protobuf" data-lang="protobuf">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75">// ./proto/greeter.proto
@@ -728,36 +482,7 @@ name：固定为application;&lt;/p>
 &lt;ol>
 &lt;li>编译&lt;/li>
 &lt;/ol>
-&lt;p>执行&lt;code>cargo build&lt;/code>来编译server和client。&lt;/p>
-&lt;ol start="2">
-&lt;li>运行server&lt;/li>
-&lt;/ol>
-&lt;p>执行&lt;code>./target/debug/greeter-server&lt;/code>来运行server，如上文dubbo.yaml所配置，server会监听8888端口，并以triple协议提供RPC服务：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>$ ./target/debug/greeter-server
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2022-09-28T23:33:28.104577Z INFO dubbo::framework: url: Some&lt;span style="color:#719e07">(&lt;/span>Url &lt;span style="color:#719e07">{&lt;/span> uri: &lt;span style="color:#2aa198">&amp;#34;triple://0.0.0.0:8888/org.apache.dubbo.sample.tri.Greeter&amp;#34;&lt;/span>, protocol: &lt;span style="color:#2aa198">&amp;#34;triple&amp;#34;&lt;/span>, location: &lt;span style="color:#2aa198">&amp;#34;0.0.0.0:8888&amp;#34;&lt;/span>, ip: &lt;span style="color:#2aa198">&amp;#34;0.0.0.0&amp;#34;&lt;/span>, port: &lt;span style="color:#2aa198">&amp;#34;8888&amp;#34;&lt;/span>, service_key: &lt;span style="color:#719e07">[&lt;/span>&lt;span style="color:#2aa198">&amp;#34;org.apache.dubbo.sample.tri.Greeter&amp;#34;&lt;/span>&lt;span style="color:#719e07">]&lt;/span>, params: &lt;span style="color:#719e07">{}&lt;/span> &lt;span style="color:#719e07">})&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
-&lt;li>运行client，可以看到 Streaming 通信效果&lt;/li>
-&lt;/ol>
-&lt;p>执行&lt;code>./target/debug/greeter-client&lt;/code>来运行client，调用&lt;code>triple://127.0.0.1:8888/org.apache.dubbo.sample.tri.Greeter&lt;/code>下的各种方法：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>$ ./target/debug/greeter-client
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># unary call&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Response: GreeterReply &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;hello, dubbo-rust&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># client stream&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>client streaming, Response: GreeterReply &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;hello client streaming&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># bi stream&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>parts: Metadata &lt;span style="color:#719e07">{&lt;/span> inner: &lt;span style="color:#719e07">{&lt;/span>&lt;span style="color:#2aa198">&amp;#34;content-type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;application/grpc&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;date&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;Wed, 28 Sep 2022 23:34:20 GMT&amp;#34;&lt;/span>&lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reply: GreeterReply &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;server reply: \&amp;#34;msg1 from client\&amp;#34;&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reply: GreeterReply &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;server reply: \&amp;#34;msg2 from client\&amp;#34;&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reply: GreeterReply &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;server reply: \&amp;#34;msg3 from client\&amp;#34;&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>trailer: Some&lt;span style="color:#719e07">(&lt;/span>Metadata &lt;span style="color:#719e07">{&lt;/span> inner: &lt;span style="color:#719e07">{&lt;/span>&lt;span style="color:#2aa198">&amp;#34;content-type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;application/grpc&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;grpc-status&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;0&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;grpc-message&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;poll trailer successfully.&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;grpc-accept-encoding&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;gzip,identity&amp;#34;&lt;/span>&lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">})&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#586e75"># server stream&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>parts: Metadata &lt;span style="color:#719e07">{&lt;/span> inner: &lt;span style="color:#719e07">{&lt;/span>&lt;span style="color:#2aa198">&amp;#34;content-type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;application/grpc&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;date&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;Wed, 28 Sep 2022 23:34:20 GMT&amp;#34;&lt;/span>&lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reply: GreeterReply &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;msg1 from server&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reply: GreeterReply &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;msg2 from server&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reply: GreeterReply &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;msg3 from server&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>trailer: Some&lt;span style="color:#719e07">(&lt;/span>Metadata &lt;span style="color:#719e07">{&lt;/span> inner: &lt;span style="color:#719e07">{&lt;/span>&lt;span style="color:#2aa198">&amp;#34;content-type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;application/grpc&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;grpc-status&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;0&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;grpc-message&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;poll trailer successfully.&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;grpc-accept-encoding&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;gzip,identity&amp;#34;&lt;/span>&lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">})&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Overview: 使用Unix套接字连接器通信</title><link>https://dubbo.apache.org/zh-cn/overview/mannual/rust-sdk/unix-transport/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/overview/mannual/rust-sdk/unix-transport/</guid><description>
-&lt;p>本文重点讲解 Dubbo Rust Triple 协议使用Unix 套接，请先查看 &lt;a href="../quick-start">Quick Start&lt;/a> 了解 Dubbo Rust 基本使用，在此查看本文的&lt;a href="https://github.com/apache/dubbo-rust/tree/main/examples/greeter">完整示例&lt;/a>。&lt;/p>
+&lt;p>执行&lt;code>cargo build&lt;/code>来编译server和client。&lt;/p></description></item><item><title>使用Unix套接字连接器通信</title><link>https://dubbo.apache.org/zh-cn/overview/mannual/rust-sdk/unix-transport/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://dubbo.apache.org/zh-cn/overview/mannual/rust-sdk/unix-transport/</guid><description>&lt;p>本文重点讲解 Dubbo Rust Triple 协议使用Unix 套接，请先查看 &lt;a href="../quick-start">Quick Start&lt;/a> 了解 Dubbo Rust 基本使用，在此查看本文的&lt;a href="https://github.com/apache/dubbo-rust/tree/main/examples/greeter">完整示例&lt;/a>。&lt;/p>
 &lt;h2 id="1-使用-unix-套接字连接器-说明">1 使用 Unix 套接字连接器 说明&lt;/h2>
 &lt;blockquote>
 &lt;p>#[cfg(any(target_os = &amp;ldquo;macos&amp;rdquo;, target_os=&amp;ldquo;unix&amp;rdquo;))] 当操作系统符合cfg配置时，unix 模块会被编译使用，否则无法使用&lt;/p>
@@ -780,32 +505,4 @@ name：固定为application;&lt;/p>
 &lt;ol>
 &lt;li>编译&lt;/li>
 &lt;/ol>
-&lt;p>执行&lt;code>cargo build&lt;/code>来编译server和client。&lt;/p>
-&lt;ol start="2">
-&lt;li>运行server&lt;/li>
-&lt;/ol>
-&lt;p>执行&lt;code>cargo run --bin echo-server&lt;/code>来运行server，如上文dubbo.yaml所配置，server会监听8888端口，并以triple协议提供RPC服务：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>$ cargo run --bin echo-server
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-01-19T08:36:25.663138Z INFO dubbo::triple::server::builder: server starting. addr: Some&lt;span style="color:#719e07">(&lt;/span>127.0.0.1:8888&lt;span style="color:#719e07">)&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
-&lt;li>运行client，可以看到 Unix 通信效果&lt;/li>
-&lt;/ol>
-&lt;p>执行&lt;code>cargo run --bin echo-client&lt;/code>来运行client，调用&lt;code>triple://127.0.0.1:8888/org.apache.dubbo.sample.tri.Greeter&lt;/code>下的各种方法：&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>$ cargo run --bin echo-client
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-01-19T08:38:52.516792Z INFO dubbo::triple::transport::connector::unix_connector: host is ip address: &lt;span style="color:#2aa198">&amp;#34;127.0.0.1&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Response: EchoResponse &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;hello, dubbo-rust&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-01-19T08:38:52.526697Z INFO dubbo::triple::transport::connector::unix_connector: host is ip address: &lt;span style="color:#2aa198">&amp;#34;127.0.0.1&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>client streaming, Response: EchoResponse &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;hello client streaming&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-01-19T08:38:52.539439Z INFO dubbo::triple::transport::connector::unix_connector: host is ip address: &lt;span style="color:#2aa198">&amp;#34;127.0.0.1&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>parts: Metadata &lt;span style="color:#719e07">{&lt;/span> inner: &lt;span style="color:#719e07">{&lt;/span>&lt;span style="color:#2aa198">&amp;#34;content-type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;application/grpc&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;date&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;Thu, 19 Jan 2023 08:38:52 GMT&amp;#34;&lt;/span>&lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reply: EchoResponse &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;server reply: \&amp;#34;msg1 from client\&amp;#34;&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reply: EchoResponse &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;server reply: \&amp;#34;msg2 from client\&amp;#34;&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reply: EchoResponse &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;server reply: \&amp;#34;msg3 from client\&amp;#34;&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>trailer: Some&lt;span style="color:#719e07">(&lt;/span>Metadata &lt;span style="color:#719e07">{&lt;/span> inner: &lt;span style="color:#719e07">{&lt;/span>&lt;span style="color:#2aa198">&amp;#34;grpc-accept-encoding&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;gzip,identity&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;grpc-status&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;0&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;grpc-message&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;poll trailer successfully.&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;content-type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;application/grpc&amp;#34;&lt;/span>&lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">})&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2023-01-19T08:38:52.645035Z INFO dubbo::triple::transport::connector::unix_connector: host is ip address: &lt;span style="color:#2aa198">&amp;#34;127.0.0.1&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>parts: Metadata &lt;span style="color:#719e07">{&lt;/span> inner: &lt;span style="color:#719e07">{&lt;/span>&lt;span style="color:#2aa198">&amp;#34;content-type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;application/grpc&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;date&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;Thu, 19 Jan 2023 08:38:52 GMT&amp;#34;&lt;/span>&lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reply: EchoResponse &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;msg1 from server&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reply: EchoResponse &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;msg2 from server&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>reply: EchoResponse &lt;span style="color:#719e07">{&lt;/span> message: &lt;span style="color:#2aa198">&amp;#34;msg3 from server&amp;#34;&lt;/span> &lt;span style="color:#719e07">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>trailer: Some&lt;span style="color:#719e07">(&lt;/span>Metadata &lt;span style="color:#719e07">{&lt;/span> inner: &lt;span style="color:#719e07">{&lt;/span>&lt;span style="color:#2aa198">&amp;#34;grpc-status&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;0&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;content-type&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;application/grpc&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;grpc-message&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;poll trailer successfully.&amp;#34;&lt;/span>, &lt;span style="color:#2aa198">&amp;#34;grpc-accept-encoding&amp;#34;&lt;/span>: &lt;span style="color:#2aa198">&amp;#34;gzip,identity&amp;#34;&lt;/span>&lt;span style="color:#719e07">}&lt;/span> &lt;span style="color:#719e07">})&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+&lt;p>执行&lt;code>cargo build&lt;/code>来编译server和client。&lt;/p></description></item></channel></rss>
